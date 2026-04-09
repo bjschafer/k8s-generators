@@ -26,10 +26,12 @@ export interface EsoValuesSchema {
       [k: string]: unknown;
     };
     extraEnv?: unknown[];
+    extraInitContainers?: unknown[];
     extraVolumeMounts?: unknown[];
     extraVolumes?: unknown[];
-    fullnameOverride?: string;
+    hostAliases?: unknown[];
     hostNetwork?: boolean;
+    hostUsers?: boolean | null;
     image?: {
       flavour?: string;
       pullPolicy?: string;
@@ -58,7 +60,6 @@ export interface EsoValuesSchema {
       };
       [k: string]: unknown;
     };
-    nameOverride?: string;
     nodeSelector?: {
       [k: string]: unknown;
     };
@@ -68,6 +69,7 @@ export interface EsoValuesSchema {
     podDisruptionBudget?: {
       enabled?: boolean;
       minAvailable?: number | string;
+      nameOverride?: string;
       [k: string]: unknown;
     };
     podLabels?: {
@@ -121,6 +123,15 @@ export interface EsoValuesSchema {
       name?: string;
       [k: string]: unknown;
     };
+    startupProbe?: {
+      enabled?: boolean;
+      port?: string;
+      useReadinessProbePort?: boolean;
+      [k: string]: unknown;
+    };
+    strategy?: {
+      [k: string]: unknown;
+    };
     tolerations?: unknown[];
     topologySpreadConstraints?: unknown[];
     [k: string]: unknown;
@@ -143,6 +154,8 @@ export interface EsoValuesSchema {
     createClusterPushSecret?: boolean;
     createClusterSecretStore?: boolean;
     createPushSecret?: boolean;
+    createSecretStore?: boolean;
+    unsafeServeV1Beta1?: boolean;
     [k: string]: unknown;
   };
   createOperator?: boolean;
@@ -153,16 +166,23 @@ export interface EsoValuesSchema {
     [k: string]: unknown;
   };
   dnsPolicy?: string;
+  enableHTTP2?: boolean;
   extendedMetricLabels?: boolean;
   extraArgs?: {
     [k: string]: unknown;
   };
   extraContainers?: unknown[];
   extraEnv?: unknown[];
+  extraInitContainers?: unknown[];
   extraObjects?: unknown[];
   extraVolumeMounts?: unknown[];
   extraVolumes?: unknown[];
   fullnameOverride?: string;
+  genericTargets?: {
+    enabled?: boolean;
+    resources?: unknown[];
+    [k: string]: unknown;
+  };
   global?: {
     affinity?: {
       [k: string]: unknown;
@@ -174,9 +194,18 @@ export interface EsoValuesSchema {
       };
       [k: string]: unknown;
     };
+    hostAliases?: unknown[];
+    imagePullSecrets?: unknown[];
     nodeSelector?: {
       [k: string]: unknown;
     };
+    podAnnotations?: {
+      [k: string]: unknown;
+    };
+    podLabels?: {
+      [k: string]: unknown;
+    };
+    repository?: string;
     tolerations?: unknown[];
     topologySpreadConstraints?: unknown[];
     [k: string]: unknown;
@@ -186,11 +215,16 @@ export interface EsoValuesSchema {
       [k: string]: unknown;
     };
     enabled?: boolean;
+    extraLabels?: {
+      [k: string]: unknown;
+    };
     sidecarLabel?: string;
     sidecarLabelValue?: string;
     [k: string]: unknown;
   };
+  hostAliases?: unknown[];
   hostNetwork?: boolean;
+  hostUsers?: boolean | null;
   image?: {
     flavour?: string;
     pullPolicy?: string;
@@ -201,6 +235,25 @@ export interface EsoValuesSchema {
   imagePullSecrets?: unknown[];
   installCRDs?: boolean;
   leaderElect?: boolean;
+  livenessProbe?: {
+    enabled?: boolean;
+    spec?: {
+      address?: string;
+      failureThreshold?: number;
+      httpGet?: {
+        path?: string;
+        port?: string | number;
+        [k: string]: unknown;
+      };
+      initialDelaySeconds?: number;
+      periodSeconds?: number;
+      port?: number;
+      successThreshold?: number;
+      timeoutSeconds?: number;
+      [k: string]: unknown;
+    };
+    [k: string]: unknown;
+  };
   log?: {
     level?: string;
     timeEncoding?: string;
@@ -209,6 +262,13 @@ export interface EsoValuesSchema {
   metrics?: {
     listen?: {
       port?: number;
+      secure?: {
+        certDir?: string;
+        certFile?: string;
+        enabled?: boolean;
+        keyFile?: string;
+        [k: string]: unknown;
+      };
       [k: string]: unknown;
     };
     service?: {
@@ -233,6 +293,7 @@ export interface EsoValuesSchema {
   podDisruptionBudget?: {
     enabled?: boolean;
     minAvailable?: number | string;
+    nameOverride?: string;
     [k: string]: unknown;
   };
   podLabels?: {
@@ -247,15 +308,34 @@ export interface EsoValuesSchema {
   };
   priorityClassName?: string;
   processClusterExternalSecret?: boolean;
+  processClusterGenerator?: boolean;
   processClusterPushSecret?: boolean;
   processClusterStore?: boolean;
   processPushSecret?: boolean;
+  processSecretStore?: boolean;
   rbac?: {
     aggregateToEdit?: boolean;
     aggregateToView?: boolean;
     create?: boolean;
     servicebindings?: {
       create?: boolean;
+      [k: string]: unknown;
+    };
+    [k: string]: unknown;
+  };
+  readinessProbe?: {
+    enabled?: boolean;
+    spec?: {
+      failureThreshold?: number;
+      httpGet?: {
+        path?: string;
+        port?: string | number;
+        [k: string]: unknown;
+      };
+      initialDelaySeconds?: number;
+      periodSeconds?: number;
+      successThreshold?: number;
+      timeoutSeconds?: number;
       [k: string]: unknown;
     };
     [k: string]: unknown;
@@ -310,9 +390,14 @@ export interface EsoValuesSchema {
     metricRelabelings?: unknown[];
     namespace?: string;
     relabelings?: unknown[];
+    renderMode?: "skipIfMissing" | "failIfMissing" | "alwaysRender";
     scrapeTimeout?: string;
     [k: string]: unknown;
   };
+  strategy?: {
+    [k: string]: unknown;
+  };
+  systemAuthDelegator?: boolean;
   tolerations?: unknown[];
   topologySpreadConstraints?: unknown[];
   webhook?: {
@@ -338,8 +423,12 @@ export interface EsoValuesSchema {
           name?: string;
           [k: string]: unknown;
         };
+        privateKey?: {
+          [k: string]: unknown;
+        };
         renewBefore?: string;
         revisionHistoryLimit?: number;
+        signatureAlgorithm?: string;
         [k: string]: unknown;
       };
       enabled?: boolean;
@@ -353,11 +442,13 @@ export interface EsoValuesSchema {
       [k: string]: unknown;
     };
     extraEnv?: unknown[];
+    extraInitContainers?: unknown[];
     extraVolumeMounts?: unknown[];
     extraVolumes?: unknown[];
     failurePolicy?: string;
-    fullnameOverride?: string;
+    hostAliases?: unknown[];
     hostNetwork?: boolean;
+    hostUsers?: boolean | null;
     image?: {
       flavour?: string;
       pullPolicy?: string;
@@ -387,7 +478,6 @@ export interface EsoValuesSchema {
       };
       [k: string]: unknown;
     };
-    nameOverride?: string;
     nodeSelector?: {
       [k: string]: unknown;
     };
@@ -397,6 +487,7 @@ export interface EsoValuesSchema {
     podDisruptionBudget?: {
       enabled?: boolean;
       minAvailable?: number | string;
+      nameOverride?: string;
       [k: string]: unknown;
     };
     podLabels?: {
@@ -408,10 +499,6 @@ export interface EsoValuesSchema {
     };
     port?: number;
     priorityClassName?: string;
-    rbac?: {
-      create?: boolean;
-      [k: string]: unknown;
-    };
     readinessProbe?: {
       address?: string;
       port?: number;
@@ -463,6 +550,9 @@ export interface EsoValuesSchema {
         [k: string]: unknown;
       };
       name?: string;
+      [k: string]: unknown;
+    };
+    strategy?: {
       [k: string]: unknown;
     };
     tolerations?: unknown[];
