@@ -6,6 +6,8 @@ Avoid adding new dependencies without getting confirmation from me first.
 
 Do not create new documentation files or update the readme without getting confirmation from me first.
 
+This is all managed via GitOps, *do not* manually apply manifests.
+
 # Structure
 
 - Shared code is in `lib/`. Try to keep things DRY and store things likely to be reused here.
@@ -16,7 +18,7 @@ Do not create new documentation files or update the readme without getting confi
 - I have some tooling in `tools/` to help with downloading CRDs for apps that need them.
 - We use mise to handle any build scripts as well as required tooling
 
-# Building
+## Building
 
 - You can test changes by invoking `mise run build`.
 - Ensure files are formatted properly according to eslint rules. `mise run fmt` and `mise run lint` can be helpful here.

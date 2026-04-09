@@ -131,6 +131,11 @@ class ProdPostgres extends Chart {
           parameters: {
             max_slot_wal_keep_size: "1GB",
             max_connections: "200",
+            // minimal-trixie image has no locales installed; must use C
+            lc_messages: "C",
+            lc_monetary: "C",
+            lc_numeric: "C",
+            lc_time: "C",
           },
         },
         plugins: [
