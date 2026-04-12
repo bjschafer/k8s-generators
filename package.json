@@ -19,7 +19,7 @@
         "@types/node": "^25.6.0",
         "cdk8s-cli": "^2.206.3",
         "json-schema-to-typescript": "^15.0.4",
-        "oxfmt": "^0.42.0",
+        "oxfmt": "^0.44.0",
         "oxlint": "^1.59.0",
         "typescript": "^6.0.2"
     }
