@@ -7,8 +7,8 @@
     "private": true,
     "scripts": {},
     "dependencies": {
-        "cdk8s": "^2.70.53",
-        "cdk8s-plus-33": "^2.4.40",
+        "cdk8s": "^2.70.54",
+        "cdk8s-plus-34": "^2.0.3",
         "constructs": "^10.6.0",
         "js-yaml": "4.1.1",
         "tsheredoc": "^1.0.1",
@@ -16,11 +16,11 @@
     },
     "devDependencies": {
         "@types/js-yaml": "^4.0.9",
-        "@types/node": "^25.5.0",
-        "cdk8s-cli": "^2.205.3",
+        "@types/node": "^25.6.0",
+        "cdk8s-cli": "^2.206.3",
         "json-schema-to-typescript": "^15.0.4",
         "oxfmt": "^0.42.0",
-        "oxlint": "^1.57.0",
+        "oxlint": "^1.59.0",
         "typescript": "^6.0.2"
     }
 }
