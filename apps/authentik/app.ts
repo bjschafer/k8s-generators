@@ -137,16 +137,12 @@ const commonEnv: Record<string, EnvValue> = {
   AUTHENTIK_ERROR_REPORTING__ENABLED: EnvValue.fromValue("false"),
   AUTHENTIK_ERROR_REPORTING__ENVIRONMENT: EnvValue.fromValue("k8s"),
   AUTHENTIK_ERROR_REPORTING__SEND_PII: EnvValue.fromValue("false"),
-  AUTHENTIK_EVENTS__CONTEXT_PROCESSORS__GEOIP: EnvValue.fromValue(
-    "/geoip/GeoLite2-City.mmdb",
-  ),
+  AUTHENTIK_EVENTS__CONTEXT_PROCESSORS__GEOIP: EnvValue.fromValue("/geoip/GeoLite2-City.mmdb"),
   AUTHENTIK_LOG_LEVEL: EnvValue.fromValue("info"),
   AUTHENTIK_OUTPOSTS__CONTAINER_IMAGE_BASE: EnvValue.fromValue(
     "ghcr.io/goauthentik/%(type)s:%(version)s",
   ),
-  AUTHENTIK_POSTGRESQL__HOST: EnvValue.fromValue(
-    "prod.postgres.svc.cluster.local",
-  ),
+  AUTHENTIK_POSTGRESQL__HOST: EnvValue.fromValue("prod.postgres.svc.cluster.local"),
   AUTHENTIK_POSTGRESQL__NAME: EnvValue.fromValue("authentik"),
   AUTHENTIK_POSTGRESQL__PORT: EnvValue.fromValue("5432"),
   AUTHENTIK_POSTGRESQL__USER: EnvValue.fromValue("authentik"),

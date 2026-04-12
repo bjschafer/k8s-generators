@@ -20,11 +20,7 @@ import {
   Volume,
 } from "cdk8s-plus-33";
 import { StorageClass } from "./volume";
-import {
-  DEFAULT_SECURITY_CONTEXT,
-  GET_SERVICE_URL,
-  LSIO_ENVVALUE,
-} from "./consts";
+import { DEFAULT_SECURITY_CONTEXT, GET_SERVICE_URL, LSIO_ENVVALUE } from "./consts";
 import { NFSConcreteVolume } from "./nfs";
 import { VmServiceScrape } from "../imports/operator.victoriametrics.com";
 

@@ -92,6 +92,5 @@ export class MysqlInstance extends Chart {
         key: "MARIADB_ROOT_PASSWORD",
       }),
     );
-
   }
 }

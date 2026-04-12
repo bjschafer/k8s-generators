@@ -159,9 +159,7 @@ new AppPlus(app, name, {
     }),
     TZ: EnvValue.fromValue("America/Chicago"),
     PORT: EnvValue.fromValue(port.toString()),
-    AUTH_ISSUER: EnvValue.fromValue(
-      "https://login.cmdcentral.xyz/application/o/book-club/",
-    ),
+    AUTH_ISSUER: EnvValue.fromValue("https://login.cmdcentral.xyz/application/o/book-club/"),
     ADMIN_EMAILS: EnvValue.fromValue("braxton@cmdcentral.xyz"),
     CF_ACCESS_AUD: EnvValue.fromValue(
       "aa6ef39240529f174bf2d2ea388eed6a1881778e1bbda9be478b70ec37894efb",

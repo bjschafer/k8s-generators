@@ -95,9 +95,7 @@ new AppPlus(app, `${name}-app`, {
     // Use a valid FQDN so Message-ID headers aren't rejected by Cloudflare
     POSTFIX_myhostname: EnvValue.fromValue("smtp.cmdcentral.net"),
     // Strip Received and Message-ID headers at the outgoing SMTP stage (before Cloudflare sees them)
-    POSTFIX_smtp_header_checks: EnvValue.fromValue(
-      "regexp:/etc/postfix/header_checks",
-    ),
+    POSTFIX_smtp_header_checks: EnvValue.fromValue("regexp:/etc/postfix/header_checks"),
   },
 });
 
