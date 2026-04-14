@@ -48,9 +48,14 @@ description = "Run tests"
 depends = ["install"]
 run = "bun x jest --passWithNoTests"
 
+[tasks.typecheck]
+description = "Type-check TypeScript files"
+depends = ["install"]
+run = "bun x tsc --noEmit"
+
 [tasks.check]
 description = "Format, lint, and test"
-depends = ["fmt", "lint", "test", "validate-alerts"]
+depends = ["fmt", "lint", "test", "validate-alerts", "typecheck"]
 
 [tasks.schemas]
 description = "Generate TypeScript types from JSON schemas"
