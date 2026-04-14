@@ -74,7 +74,7 @@ export class KlipperExporter extends Chart {
       spec: {
         jobName: "klipper",
         vmProberSpec: {
-          url: `${app.Service.name}.${namespace}.svc.cluster.local:${port}`,
+          url: `${app.Service!.name}.${namespace}.svc.cluster.local:${port}`,
           path: "/probe",
         },
         params: {
@@ -96,7 +96,7 @@ export class KlipperExporter extends Chart {
               },
               {
                 targetLabel: "__address__",
-                replacement: `${app.Service.name}:${port}`,
+                replacement: `${app.Service!.name}:${port}`,
                 action: "replace",
               },
             ],

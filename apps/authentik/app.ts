@@ -194,7 +194,7 @@ const server = new AppPlus(app, "authentik-server", {
 });
 
 // Update service ports to match the original configuration
-server.Service.metadata.addAnnotation(
+server.Service!.metadata.addAnnotation(
   "service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol",
   "true",
 );

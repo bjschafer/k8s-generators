@@ -67,10 +67,10 @@ const valkey = new Valkey(app, "valkey", {
 
 const commonEnv: Record<string, EnvValue> = {
   IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue("http://immich-machine-learning:3003"),
-  REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service.name),
+  REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service!.name),
   REDIS_PORT: EnvValue.fromValue("6379"),
   REDIS_PASSWORD: EnvValue.fromSecretValue({
-    secret: valkey.secret,
+    secret: valkey.secret!,
     key: "valkey-password",
   }),
   DB_DATABASE_NAME: EnvValue.fromValue("immich"),
