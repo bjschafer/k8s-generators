@@ -3,6 +3,6 @@ kustomize:
   - ghcr.io/paperless-ngx/paperless-ngx:latest@sha256:b89f83345532cfba72690185257eb6c4f92fc2a782332a42abe19c07b7a6595f
   - stilliard/pure-ftpd:latest@sha256:41c9aaded1fd06053c500d28415613ca7605ecc39a3e1c2ec4f0a279bd78f253
   - docker.io/apache/tika:latest@sha256:2a565f1ea1290bdcb74a7d35957d16a989ed44ef98790dcdcc28121d728fa583
-  - gotenberg/gotenberg:8.30.1
+  - gotenberg/gotenberg:8.31.0
   - ghcr.io/valkey-io/valkey:8.1.6
   - clusterzx/paperless-ai:latest@sha256:2b65888163fd59716f1c8285b31c5bd0b30c9c3c192c42b516688e3887d4ba60
