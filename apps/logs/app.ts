@@ -1,10 +1,18 @@
 import { App, Chart, Helm } from "cdk8s";
 import { basename } from "path";
-import { CLUSTER_ISSUER, DEFAULT_APP_PROPS, EXTERNAL_DNS_ANNOTATION_KEY } from "../../lib/consts";
+import {
+  CLUSTER_ISSUER,
+  DEFAULT_APP_PROPS,
+  EXTERNAL_DNS_ANNOTATION_KEY,
+} from "../../lib/consts";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Construct } from "constructs";
 import { StorageClass } from "../../lib/volume";
-import { VmAlert, VmPodScrape, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
+import {
+  VmAlert,
+  VmPodScrape,
+  VmServiceScrape,
+} from "../../imports/operator.victoriametrics.com";
 import { IntOrString, KubeService } from "../../imports/k8s";
 import { LOGS_RULE } from "../../lib/monitoring/alerts";
 import { addAlerts } from "./alerts";
@@ -12,7 +20,7 @@ import { addAlerts } from "./alerts";
 export const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "0.11.31";
+const version = "0.12.3";
 
 NewArgoApp(name, {
   sync_policy: {
@@ -29,7 +37,8 @@ NewArgoApp(name, {
 class VMLogs extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
-    const hostname = "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428";
+    const hostname =
+      "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428";
 
     new Helm(this, "vmlogs", {
       chart: "victoria-logs-single",
