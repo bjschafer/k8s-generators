@@ -4,13 +4,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
   labels:
-    app: victoria-metrics-k8s-stack-grafana
+    app.kubernetes.io/component: grafana
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
-    app.kubernetes.io/version: v1.139.0
+    app.kubernetes.io/version: v1.142.0
     grafana_dashboard: "1"
-    helm.sh/chart: victoria-metrics-k8s-stack-0.72.6
+    helm.sh/chart: victoria-metrics-k8s-stack-0.76.0
   name: metrics-victoria-metrics-k8s-stack-kubernetes-kubelet
   namespace: metrics
 data:

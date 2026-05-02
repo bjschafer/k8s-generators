@@ -3,12 +3,12 @@ kind: VMRule
 metadata:
   labels:
     alerts.cmdcentral.xyz/kind: metrics
-    app: victoria-metrics-k8s-stack
+    app.kubernetes.io/component: vmalert
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
-    app.kubernetes.io/version: v0.28.1
-    helm.sh/chart: victoria-metrics-k8s-stack-0.72.6
+    app.kubernetes.io/version: v0.32.0
+    helm.sh/chart: victoria-metrics-k8s-stack-0.76.0
   name: metrics-victoria-metrics-k8s-stack-k8s.rules.containermemorylimits
   namespace: metrics
 spec:
