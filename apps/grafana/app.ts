@@ -45,10 +45,10 @@ class Grafana extends Chart {
         resources: {
           requests: {
             cpu: "100m",
-            memory: "256Mi",
+            memory: "384Mi",
           },
           limits: {
-            memory: "384Mi",
+            memory: "512Mi",
           },
         },
         persistence: {
