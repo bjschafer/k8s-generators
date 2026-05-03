@@ -38,7 +38,7 @@ new HelmApp(app, "stack", {
         },
       },
       extraArgs: {
-        "controller.disableReconcileFor": "PrometheusRule,ScrapeConfig",
+        "controller.disableReconcileFor": "PrometheusRule,ScrapeConfig,ServiceMonitor,PodMonitor,AlertmanagerConfig,Probe",
       },
     },
     defaultDashboards: {
