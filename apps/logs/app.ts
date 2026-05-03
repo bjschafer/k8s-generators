@@ -203,7 +203,7 @@ class VMLogs extends Chart {
       spec: {
         selector: {
           matchLabels: {
-            app: "server",
+            "app.kubernetes.io/component": "server",
             "app.kubernetes.io/name": "victoria-logs-single",
           },
         },

@@ -8,5 +8,5 @@ spec:
     - port: http
   selector:
     matchLabels:
-      app: server
+      app.kubernetes.io/component: server
       app.kubernetes.io/name: victoria-logs-single
