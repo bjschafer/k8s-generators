@@ -37,6 +37,9 @@ new HelmApp(app, "stack", {
           },
         },
       },
+      extraArgs: {
+        "controller.disableReconcileFor": "PrometheusRule,ScrapeConfig",
+      },
     },
     defaultDashboards: {
       defaultTimezone: "america/chicago",

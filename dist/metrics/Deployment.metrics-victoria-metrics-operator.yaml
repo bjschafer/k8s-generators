@@ -34,6 +34,7 @@ spec:
             - --leader-elect
             - --health-probe-bind-address=:8081
             - --webhook.enable=true
+            - --controller.disableReconcileFor=PrometheusRule,ScrapeConfig
           env:
             - name: POD_NAME
               valueFrom:
