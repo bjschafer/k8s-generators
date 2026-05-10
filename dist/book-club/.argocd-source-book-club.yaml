@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - registry.cmdcentral.xyz/cmdcentral/book-club:main@sha256:6ae24c435ec67c766daece8cf835b11fc55670917e38b0dc4d10cdc0455da713
