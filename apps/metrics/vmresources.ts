@@ -196,10 +196,7 @@ export class VmResources extends Chart {
       },
     });
 
-    const am_hosts = [
-      "metrics-alerts.cmdcentral.xyz",
-      "alertmanager.cmdcentral.xyz",
-    ];
+    const am_hosts = ["metrics-alerts.cmdcentral.xyz", "alertmanager.cmdcentral.xyz"];
     new KubeIngress(this, "alertmanager-ingress", {
       metadata: {
         name: "alertmanager",
@@ -257,11 +254,11 @@ export class VmResources extends Chart {
         },
         resources: {
           limits: {
-            cpu: VmSingleSpecResourcesLimits.fromString("1000m"),
+            cpu: VmSingleSpecResourcesLimits.fromString("2000m"),
             memory: VmSingleSpecResourcesLimits.fromString("3Gi"),
           },
           requests: {
-            cpu: VmSingleSpecResourcesRequests.fromString("1000m"),
+            cpu: VmSingleSpecResourcesRequests.fromString("2000m"),
             memory: VmSingleSpecResourcesRequests.fromString("3Gi"),
           },
         },
@@ -282,22 +279,20 @@ export class VmResources extends Chart {
             host: hostname,
             http: {
               paths: [
-                ...["/", "/api/v1", "/api/v2"].map(
-                  (path: string): HttpIngressPath => {
-                    return {
-                      path: path,
-                      pathType: "Prefix",
-                      backend: {
-                        service: {
-                          name: "vmsingle-metrics",
-                          port: {
-                            name: "http",
-                          },
+                ...["/", "/api/v1", "/api/v2"].map((path: string): HttpIngressPath => {
+                  return {
+                    path: path,
+                    pathType: "Prefix",
+                    backend: {
+                      service: {
+                        name: "vmsingle-metrics",
+                        port: {
+                          name: "http",
                         },
                       },
-                    };
-                  },
-                ),
+                    },
+                  };
+                }),
                 {
                   path: "/vmalert",
                   pathType: "Prefix",
