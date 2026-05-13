@@ -5,6 +5,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { KlipperExporter } from "./klipper";
 import { ProxmoxExporter } from "./proxmox";
+import { StatsdExporter } from "./statsd-exporter";
 import { UnifiExporter } from "./unifi";
 
 export const namespace = basename(__dirname);
@@ -25,6 +26,10 @@ NewArgoApp(name, {
         strategy: "digest",
       },
       {
+        image: "prom/statsd-exporter",
+        strategy: "digest",
+      },
+      {
         image: "ghcr.io/unpoller/unpoller",
         strategy: "digest",
       },
@@ -34,6 +39,7 @@ NewArgoApp(name, {
 
 new KlipperExporter(app, "klipper");
 new ProxmoxExporter(app, "proxmox");
+new StatsdExporter(app, "statsd-exporter");
 new UnifiExporter(app, "unifi");
 
 app.synth();

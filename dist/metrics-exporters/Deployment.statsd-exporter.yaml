@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: statsd-exporter
+  name: statsd-exporter
+  namespace: metrics-exporters
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: statsd-exporter-app-app-deployment-c855b713
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: statsd-exporter
+        cdk8s.io/metadata.addr: statsd-exporter-app-app-deployment-c855b713
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - --statsd.parse-influxdb-tags=true
+          image: prom/statsd-exporter
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 9102
+          name: statsd-exporter
+          ports:
+            - containerPort: 9102
+              name: metrics
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 9102
+          resources:
+            limits:
+              cpu: 200m
+              memory: 64Mi
+            requests:
+              cpu: 50m
+              memory: 32Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30

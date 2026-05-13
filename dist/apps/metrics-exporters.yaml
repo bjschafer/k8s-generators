@@ -39,6 +39,10 @@ spec:
           commonUpdateSettings:
             updateStrategy: digest
           imageName: prompve/prometheus-pve-exporter:latest
+        - alias: statsd-exporter
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: prom/statsd-exporter:latest
         - alias: unpoller
           commonUpdateSettings:
             updateStrategy: digest

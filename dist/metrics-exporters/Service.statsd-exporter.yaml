@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: statsd-exporter
+  namespace: metrics-exporters
+spec:
+  externalIPs: []
+  ports:
+    - name: metrics
+      port: 9102
+      targetPort: 9102
+  selector:
+    cdk8s.io/metadata.addr: statsd-exporter-app-app-deployment-c855b713
+  type: ClusterIP

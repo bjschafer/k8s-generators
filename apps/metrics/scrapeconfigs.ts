@@ -58,6 +58,24 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
+    new VmServiceScrape(this, "statsd-exporter", {
+      metadata: {
+        name: "statsd-exporter",
+        namespace: namespace,
+      },
+      spec: {
+        namespaceSelector: {
+          matchNames: ["metrics-exporters"],
+        },
+        endpoints: [{ port: "metrics" }],
+        selector: {
+          matchLabels: {
+            "app.kubernetes.io/name": "statsd-exporter",
+          },
+        },
+      },
+    });
+
     new VmScrapeConfig(this, "ceph", {
       metadata: {
         name: "ceph",
