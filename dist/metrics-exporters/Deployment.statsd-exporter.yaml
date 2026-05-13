@@ -28,7 +28,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - args:
-            - --statsd.parse-influxdb-tags=true
+            - --statsd.parse-influxdb-tags
           image: prom/statsd-exporter
           imagePullPolicy: Always
           livenessProbe:

@@ -18,7 +18,7 @@ export class StatsdExporter extends Chart {
       namespace,
       image: "prom/statsd-exporter",
       // InfluxDB-flavored tags are what versitygw emits (comma-separated key=value)
-      args: ["--statsd.parse-influxdb-tags=true"],
+      args: ["--statsd.parse-influxdb-tags"],
       disableIngress: true,
       ports: [{ name: "metrics", number: metricsPort }],
       resources: {
