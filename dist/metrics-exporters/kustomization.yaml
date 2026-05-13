@@ -15,4 +15,5 @@ resources:
   - VMProbe.klipper-exporter.yaml
   - VMProbe.proxmox-exporter.yaml
   - VMServiceScrape.klipper-exporter-self.yaml
+  - VMServiceScrape.statsd-exporter.yaml
   - VMServiceScrape.unifi-exporter.yaml

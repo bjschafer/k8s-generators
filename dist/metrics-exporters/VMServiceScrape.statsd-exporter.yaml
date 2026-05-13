@@ -1,0 +1,14 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: statsd-exporter
+  namespace: metrics-exporters
+spec:
+  endpoints:
+    - port: metrics
+  namespaceSelector:
+    matchNames:
+      - metrics-exporters
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: statsd-exporter
