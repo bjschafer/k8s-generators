@@ -2,15 +2,12 @@ import { Chart, Size } from "cdk8s";
 import { Cpu, Protocol, Service, ServiceType } from "cdk8s-plus-33";
 import { Construct } from "constructs";
 import { AppPlus } from "../../lib/app-plus";
-import { METALLB_IP_ANNOTATION_KEY } from "../../lib/consts";
+import { EXTERNAL_DNS_ANNOTATION_KEY } from "../../lib/consts";
 import { namespace } from "./app";
 
 const name = "statsd-exporter";
 const metricsPort = 9102;
 const statsdPort = 9125;
-
-// 10.0.10.80-99 pool; .80/.82/.84 are taken — verify .85 is free before deploying
-const STATSD_LB_IP = "10.0.10.85";
 
 export class StatsdExporter extends Chart {
   constructor(scope: Construct, id: string) {
@@ -37,7 +34,7 @@ export class StatsdExporter extends Chart {
         name: `${name}-lb`,
         namespace,
         annotations: {
-          [METALLB_IP_ANNOTATION_KEY]: STATSD_LB_IP,
+          [EXTERNAL_DNS_ANNOTATION_KEY]: "statsd.cmdcentral.xyz",
         },
       },
       type: ServiceType.LOAD_BALANCER,
