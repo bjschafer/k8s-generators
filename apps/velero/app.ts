@@ -216,6 +216,25 @@ class Velero extends Chart {
       },
     });
 
+    new BackupStorageLocation(this, "versitygw", {
+      metadata: {
+        name: "versitygw",
+        namespace: namespace,
+      },
+      spec: {
+        config: {
+          region: "us-east-1",
+          s3ForcePathStyle: "true",
+          s3Url: "https://s3.cmdcentral.xyz",
+          profile: "versitygw",
+        },
+        objectStorage: {
+          bucket: "velero",
+        },
+        provider: "aws",
+      },
+    });
+
     new VolumeSnapshotLocation(this, "vsl", {
       metadata: {
         name: "default",

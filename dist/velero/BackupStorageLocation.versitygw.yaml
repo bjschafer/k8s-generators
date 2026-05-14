@@ -1,0 +1,14 @@
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: versitygw
+  namespace: velero
+spec:
+  config:
+    profile: versitygw
+    region: us-east-1
+    s3ForcePathStyle: "true"
+    s3Url: https://s3.cmdcentral.xyz
+  objectStorage:
+    bucket: velero
+  provider: aws
