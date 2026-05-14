@@ -51,14 +51,6 @@ spec:
                   fieldPath: metadata.namespace
             - name: LD_LIBRARY_PATH
               value: /plugins
-            - name: AWS_SHARED_CREDENTIALS_FILE
-              value: /credentials/cloud
-            - name: GOOGLE_APPLICATION_CREDENTIALS
-              value: /credentials/cloud
-            - name: AZURE_CREDENTIALS_FILE
-              value: /credentials/cloud
-            - name: ALIBABA_CLOUD_CREDENTIALS_FILE
-              value: /credentials/cloud
           image: docker.io/velero/velero:v1.18.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -95,8 +87,6 @@ spec:
           volumeMounts:
             - mountPath: /plugins
               name: plugins
-            - mountPath: /credentials
-              name: cloud-credentials
             - mountPath: /scratch
               name: scratch
       dnsPolicy: ClusterFirst
@@ -110,9 +100,6 @@ spec:
       serviceAccountName: velero-server
       terminationGracePeriodSeconds: 3600
       volumes:
-        - name: cloud-credentials
-          secret:
-            secretName: cloud-credentials
         - emptyDir: {}
           name: plugins
         - emptyDir: {}

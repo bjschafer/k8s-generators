@@ -9,6 +9,9 @@ spec:
     region: us-east-1
     s3ForcePathStyle: "true"
     s3Url: https://s3.cmdcentral.xyz
+  credential:
+    key: config
+    name: s3-creds
   objectStorage:
     bucket: velero
   provider: aws

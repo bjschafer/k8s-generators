@@ -82,8 +82,7 @@ class Velero extends Chart {
           defaultVolumesToFsBackup: false, // only backup annotated stuffs
         },
         credentials: {
-          useSecret: true,
-          existingSecret: "cloud-credentials",
+          useSecret: false,
         },
         deployNodeAgent: true,
         nodeAgent: {
@@ -213,6 +212,10 @@ class Velero extends Chart {
           bucket: "velero",
         },
         provider: "aws",
+        credential: {
+          name: creds.secretName,
+          key: "config",
+        },
       },
     });
 
@@ -232,6 +235,10 @@ class Velero extends Chart {
           bucket: "velero",
         },
         provider: "aws",
+        credential: {
+          name: creds.secretName,
+          key: "config",
+        },
       },
     });
 

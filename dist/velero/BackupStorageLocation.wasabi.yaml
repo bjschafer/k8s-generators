@@ -9,6 +9,9 @@ spec:
     region: us-east-1
     s3ForcePathStyle: "true"
     s3Url: http://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.rclone.svc.cluster.local:8042
+  credential:
+    key: config
+    name: s3-creds
   objectStorage:
     bucket: velero
   provider: aws
