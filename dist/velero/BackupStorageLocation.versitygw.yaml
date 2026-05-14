@@ -12,6 +12,7 @@ spec:
   credential:
     key: config
     name: s3-creds
+  default: true
   objectStorage:
     bucket: velero
   provider: aws
