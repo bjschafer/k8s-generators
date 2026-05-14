@@ -1,7 +1,6 @@
 import { Chart, Size } from "cdk8s";
 import { Cpu, Protocol, Service, ServiceType } from "cdk8s-plus-33";
 import { Construct } from "constructs";
-import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";
 import { EXTERNAL_DNS_ANNOTATION_KEY } from "../../lib/consts";
 import { namespace } from "./app";
@@ -18,6 +17,7 @@ export class StatsdExporter extends Chart {
       name,
       namespace,
       image: "prom/statsd-exporter",
+      labels: { "app.kubernetes.io/name": name },
       // InfluxDB-flavored tags are what versitygw emits (comma-separated key=value)
       args: ["--statsd.parse-influxdb-tags"],
       disableIngress: true,
@@ -25,18 +25,6 @@ export class StatsdExporter extends Chart {
       resources: {
         cpu: { request: Cpu.millis(50), limit: Cpu.millis(200) },
         memory: { request: Size.mebibytes(32), limit: Size.mebibytes(64) },
-      },
-    });
-
-    new VmServiceScrape(this, "scrape", {
-      metadata: {
-        name,
-        namespace,
-      },
-      spec: {
-        namespaceSelector: { matchNames: [namespace] },
-        selector: { matchLabels: { "app.kubernetes.io/name": name } },
-        endpoints: [{ port: "metrics" }],
       },
     });
 

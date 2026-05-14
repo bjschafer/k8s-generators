@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app.kubernetes.io/name: statsd-exporter
   name: statsd-exporter
   namespace: metrics-exporters
 spec:
