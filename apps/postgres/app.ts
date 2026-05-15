@@ -205,7 +205,7 @@ class ProdPostgres extends Chart {
       spec: {
         retentionPolicy: "30d",
         configuration: {
-          endpointUrl: "https://garage.cmdcentral.xyz",
+          endpointUrl: "https://s3.cmdcentral.xyz",
           destinationPath: "s3://postgres/k8s/prod-pg17",
           s3Credentials: {
             accessKeyId: {
@@ -424,7 +424,7 @@ class VectorPostgres extends Chart {
       spec: {
         retentionPolicy: "30d",
         configuration: {
-          endpointUrl: "https://garage.cmdcentral.xyz",
+          endpointUrl: "https://s3.cmdcentral.xyz",
           destinationPath: `s3://postgres/k8s/${name}`,
           data: {
             compression: ObjectStoreSpecConfigurationDataCompression.GZIP,

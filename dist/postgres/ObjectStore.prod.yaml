@@ -8,7 +8,7 @@ spec:
     data:
       compression: gzip
     destinationPath: s3://postgres/k8s/prod-pg17
-    endpointURL: https://garage.cmdcentral.xyz
+    endpointURL: https://s3.cmdcentral.xyz
     s3Credentials:
       accessKeyId:
         key: ACCESS_KEY_ID
