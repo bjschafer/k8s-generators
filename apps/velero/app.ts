@@ -93,6 +93,7 @@ class Velero extends Chart {
           dnsPolicy: "ClusterFirst",
           // node-agent-config limits concurrent data uploads per node to avoid
           // overwhelming Garage's LMDB under concurrent write load
+          // node-agent-config limits concurrent data uploads per node
           extraArgs: ["--node-agent-configmap=node-agent-config"],
           resources: {
             requests: {
@@ -119,8 +120,6 @@ class Velero extends Chart {
       data: {
         "load-concurrency": JSON.stringify({
           loadConcurrency: {
-            // Limit concurrent data uploads per node to 3 to avoid overwhelming
-            // Garage's LMDB write path when many PVCs are backed up simultaneously.
             globalConfig: 3,
           },
         }),
@@ -260,7 +259,7 @@ class Velero extends Chart {
       csiSnapshotTimeout: "0s",
       includedNamespaces: ["*"],
       snapshotMoveData: true,
-      storageLocation: "garage",
+      storageLocation: "versitygw",
     };
 
     const offsiteNamespaces = [
