@@ -48,6 +48,8 @@ spec:
               value: Cmdcentral Login
             - name: RUN_MIGRATIONS
               value: "1"
+            - name: INTEGRATION_ALLOW_PRIVATE_NETWORKS
+              value: "1"
           envFrom:
             - secretRef:
                 name: db-creds
