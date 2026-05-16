@@ -9,7 +9,9 @@
     "typescript/no-explicit-any": "off",
     "typescript/no-non-null-assertion": "off",
     // CDK8s constructs register in the app tree via constructor side effects
-    "no-new": "off"
+    "no-new": "off",
+    // CDK8s uses _toKube as an internal API for serialization
+    "no-underscore-dangle": ["error", { "allow": ["_toKube"] }]
   },
   "env": {
     "builtin": true,
