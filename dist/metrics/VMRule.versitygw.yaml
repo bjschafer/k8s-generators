@@ -1,0 +1,48 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: metrics
+  name: versitygw
+  namespace: metrics
+spec:
+  groups:
+    - name: versitygw
+      rules:
+        - alert: VersityGWDown
+          annotations:
+            summary: VersityGW metrics pipeline is down (statsd-exporter scrape failing)
+          expr: up{job="statsd-exporter", namespace="metrics-exporters"} == 0
+          for: 5m
+          labels:
+            namespace: metrics
+            priority: "1"
+            push_notify: "true"
+        - alert: VersityGWServerErrors
+          annotations:
+            description: 5xx responses from s3.cmdcentral.xyz sustained for 5m. Check VersityGW logs on vmhost03.
+            summary: VersityGW S3 server error rate exceeds 1% ({{ $value | humanizePercentage }})
+          expr: |
+            sum(rate(caddy_http_request_duration_seconds_count{job="vmhost-caddy", host="s3.cmdcentral.xyz", code=~"5.."}[5m]))
+            /
+            sum(rate(caddy_http_request_duration_seconds_count{job="vmhost-caddy", host="s3.cmdcentral.xyz"}[5m]))
+            > 0.01
+          for: 5m
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"
+        - alert: VersityGWHighLatency
+          annotations:
+            description: S3 requests through Caddy on vmhost03 are extremely slow. Check disk and network.
+            summary: VersityGW S3 p99 latency is above 10s ({{ $value | humanizeDuration }})
+          expr: |
+            histogram_quantile(0.99,
+              sum by (le) (
+                rate(caddy_http_request_duration_seconds_bucket{job="vmhost-caddy", host="s3.cmdcentral.xyz"}[5m])
+              )
+            ) > 10
+          for: 10m
+          labels:
+            namespace: metrics
+            priority: "0"

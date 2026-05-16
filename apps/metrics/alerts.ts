@@ -996,6 +996,63 @@ export function addAlerts(scope: Construct, id: string): void {
     ],
   });
 
+  new Alert(scope, `${id}-versitygw`, {
+    name: "versitygw",
+    namespace: namespace,
+    rules: [
+      {
+        alert: "VersityGWDown",
+        expr: `up{job="statsd-exporter", namespace="metrics-exporters"} == 0`,
+        for: "5m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "VersityGW metrics pipeline is down (statsd-exporter scrape failing)",
+        },
+      },
+      {
+        alert: "VersityGWServerErrors",
+        expr: heredoc`
+          sum(rate(caddy_http_request_duration_seconds_count{job="vmhost-caddy", host="s3.cmdcentral.xyz", code=~"5.."}[5m]))
+          /
+          sum(rate(caddy_http_request_duration_seconds_count{job="vmhost-caddy", host="s3.cmdcentral.xyz"}[5m]))
+          > 0.01
+          `,
+        for: "5m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "VersityGW S3 server error rate exceeds 1% ({{ $value | humanizePercentage }})",
+          description:
+            "5xx responses from s3.cmdcentral.xyz sustained for 5m. Check VersityGW logs on vmhost03.",
+        },
+      },
+      {
+        alert: "VersityGWHighLatency",
+        expr: heredoc`
+          histogram_quantile(0.99,
+            sum by (le) (
+              rate(caddy_http_request_duration_seconds_bucket{job="vmhost-caddy", host="s3.cmdcentral.xyz"}[5m])
+            )
+          ) > 10
+          `,
+        for: "10m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+        },
+        annotations: {
+          summary: "VersityGW S3 p99 latency is above 10s ({{ $value | humanizeDuration }})",
+          description:
+            "S3 requests through Caddy on vmhost03 are extremely slow. Check disk and network.",
+        },
+      },
+    ],
+  });
+
   new Alert(scope, `${id}-zfs`, {
     name: "zfs",
     namespace: namespace,
