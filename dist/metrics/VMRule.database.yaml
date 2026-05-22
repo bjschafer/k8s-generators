@@ -48,8 +48,20 @@ spec:
         - alert: CNPGBackupFailed
           annotations:
             summary: CNPG backup failed for cluster {{ $labels.job }}
-          expr: max by(job) (cnpg_collector_last_failed_backup_timestamp) > (time() - 86400)
+          expr: |
+            max by(job) (barman_cloud_cloudnative_pg_io_last_failed_backup_timestamp)
+            > on(job)
+            max by(job) (barman_cloud_cloudnative_pg_io_last_available_backup_timestamp)
           for: 5m
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"
+        - alert: CNPGBackupStale
+          annotations:
+            summary: CNPG backup stale for cluster {{ $labels.job }} (no success in 25h)
+          expr: time() - max by(job) (barman_cloud_cloudnative_pg_io_last_available_backup_timestamp) > 90000
+          for: 1h
           labels:
             namespace: metrics
             priority: "0"

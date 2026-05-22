@@ -225,12 +225,18 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "CNPGBackupFailed",
-        // Compare absolute timestamp instead of increase() to avoid false fires
-        // when pods restart or switchover resets the gauge to 0 then back to the
-        // historical failure value.  max by(job) deduplicates replica pods so we
-        // get one alert per cluster.  $labels.cluster doesn't exist on this
-        // metric; the cluster name is carried in the job label.
-        expr: "max by(job) (cnpg_collector_last_failed_backup_timestamp) > (time() - 86400)",
+        // Use the barman plugin's own metrics rather than the CNPG collector's
+        // last_failed_backup_timestamp.  The collector metric fires for any
+        // failure in the past 24h, so a transient scheduling blip during a node
+        // restart sticks around all day.  The barman metric only records failures
+        // that made it past the k8s exec stage and into the actual barman
+        // invocation, and it clears immediately when a new successful backup
+        // completes because last_failed < last_available.
+        expr: heredoc`
+          max by(job) (barman_cloud_cloudnative_pg_io_last_failed_backup_timestamp)
+          > on(job)
+          max by(job) (barman_cloud_cloudnative_pg_io_last_available_backup_timestamp)
+          `,
         for: "5m",
         labels: {
           priority: PRIORITY.NORMAL,
@@ -238,6 +244,21 @@ export function addAlerts(scope: Construct, id: string): void {
         },
         annotations: {
           summary: "CNPG backup failed for cluster {{ $labels.job }}",
+        },
+      },
+      {
+        alert: "CNPGBackupStale",
+        // Catch the case where backups stop running entirely (e.g. schedule
+        // deleted, plugin broken) rather than just failing.  Time threshold is
+        // 25h since we run nightly backups at 01:00/01:30.
+        expr: "time() - max by(job) (barman_cloud_cloudnative_pg_io_last_available_backup_timestamp) > 90000",
+        for: "1h",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "CNPG backup stale for cluster {{ $labels.job }} (no success in 25h)",
         },
       },
     ],
