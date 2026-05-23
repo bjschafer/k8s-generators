@@ -75,7 +75,7 @@ spec:
                 secretKeyRef:
                   key: AUTHENTIK_POSTGRESQL__PASSWORD
                   name: creds
-          image: ghcr.io/goauthentik/server:2026.2.0
+          image: ghcr.io/goauthentik/server:2026.5.0
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
