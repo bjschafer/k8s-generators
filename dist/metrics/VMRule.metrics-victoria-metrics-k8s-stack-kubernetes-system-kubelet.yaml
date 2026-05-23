@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
-    app.kubernetes.io/version: v0.32.0
-    helm.sh/chart: victoria-metrics-k8s-stack-0.76.0
+    app.kubernetes.io/version: v0.32.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.79.1
   name: metrics-victoria-metrics-k8s-stack-kubernetes-system-kubelet
   namespace: metrics
 spec:
@@ -135,6 +135,15 @@ spec:
             runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletservercertificaterenewalerrors
             summary: Kubelet has failed to renew its server certificate.
           expr: increase(kubelet_server_expiration_renew_errors[5m]) > 0
+          for: 15m
+          labels:
+            severity: warning
+        - alert: KubeletInstanceUnreachable
+          annotations:
+            description: A Kubelet instance has been unreachable for more than 15 minutes.
+            runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeletinstanceunreachable
+            summary: Kubelet instance is unreachable.
+          expr: up{job="kubelet",metrics_path="/metrics"} == 0
           for: 15m
           labels:
             severity: warning

@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.69.0
-    helm.sh/chart: victoria-metrics-operator-0.62.1
+    app.kubernetes.io/version: v0.70.1
+    helm.sh/chart: victoria-metrics-operator-0.63.1
   name: metrics-victoria-metrics-operator-admission
 webhooks:
   - admissionReviewVersions:
@@ -20,7 +20,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1-vlagent
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vlagents.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -47,7 +47,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1-vlcluster
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vlclusters.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -74,7 +74,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vlogs
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vlogs.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -101,7 +101,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1-vlsingle
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vlsingles.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -128,7 +128,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmagent
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmagents.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -155,7 +155,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmalertmanagerconfig
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmalertmanagerconfigs.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -182,7 +182,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmalertmanager
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmalertmanagers.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -209,7 +209,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmalert
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmalerts.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -236,7 +236,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1-vmanomaly
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmanomalies.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -263,7 +263,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1-vmanomalyconfig
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmanomalyconfigs.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -290,7 +290,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmauth
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmauths.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -317,7 +317,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmcluster
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmclusters.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -344,7 +344,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1alpha1-vmdistributed
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmdistributed.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -371,7 +371,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmnodescrape
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmnodescrapes.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -398,7 +398,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmpodscrape
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmpodscrapes.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -425,7 +425,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmprobe
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmprobes.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -452,7 +452,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmrule
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmrules.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -479,7 +479,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmscrapeconfig
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmscrapeconfigs.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -506,7 +506,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmservicescrape
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmservicescrapes.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -533,7 +533,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmsingle
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmsingles.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -560,7 +560,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmstaticscrape
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmstaticscrapes.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -587,7 +587,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1beta1-vmuser
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vmusers.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -614,7 +614,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1-vtcluster
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vtclusters.operator.victoriametrics.com
     objectSelector:
       matchExpressions:
@@ -641,7 +641,7 @@ webhooks:
         namespace: metrics
         path: /validate-operator-victoriametrics-com-v1-vtsingle
         port: 9443
-    failurePolicy: Fail
+    failurePolicy: Ignore
     name: vtsingles.operator.victoriametrics.com
     objectSelector:
       matchExpressions:

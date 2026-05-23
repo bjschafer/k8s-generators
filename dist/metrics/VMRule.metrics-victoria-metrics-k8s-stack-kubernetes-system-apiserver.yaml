@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
-    app.kubernetes.io/version: v0.32.0
-    helm.sh/chart: victoria-metrics-k8s-stack-0.76.0
+    app.kubernetes.io/version: v0.32.1
+    helm.sh/chart: victoria-metrics-k8s-stack-0.79.1
   name: metrics-victoria-metrics-k8s-stack-kubernetes-system-apiserver
   namespace: metrics
 spec:
@@ -61,6 +61,15 @@ spec:
           for: 15m
           labels:
             severity: critical
+        - alert: KubeAPIInstanceUnreachable
+          annotations:
+            description: A KubeAPI instance has been unreachable for more than 15 minutes.
+            runbook_url: https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubeapiinstanceunreachable
+            summary: KubeAPI instance is unreachable.
+          expr: up{job="apiserver"} == 0
+          for: 15m
+          labels:
+            severity: warning
         - alert: KubeAPITerminatedRequests
           annotations:
             description: The kubernetes apiserver has terminated {{ $value | humanizePercentage }} of its incoming requests on cluster {{ $labels.cluster }}.
