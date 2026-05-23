@@ -23,6 +23,7 @@ spec:
   template:
     metadata:
       labels:
+        app: ftpserver
         app.kubernetes.io/name: ftpserver
         cdk8s.io/metadata.addr: ftpserver-ftpserver-deployment-c81a5fa1
     spec:

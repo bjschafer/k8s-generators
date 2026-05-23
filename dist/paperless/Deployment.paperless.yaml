@@ -21,8 +21,10 @@ spec:
   template:
     metadata:
       labels:
+        app: paperless
         app.kubernetes.io/name: paperless
         cdk8s.io/metadata.addr: paperless-web-paperless-web-deployment-c8ac15e0
+        component: web
     spec:
       automountServiceAccountToken: false
       containers:

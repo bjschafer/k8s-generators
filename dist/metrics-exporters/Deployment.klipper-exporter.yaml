@@ -23,6 +23,7 @@ spec:
   template:
     metadata:
       labels:
+        app: klipper-exporter
         app.kubernetes.io/name: klipper-exporter
         cdk8s.io/metadata.addr: klipper-klipper-app-klipper-app-deployment-c87f6dde
     spec:

@@ -24,8 +24,10 @@ spec:
   template:
     metadata:
       labels:
+        app: paperless
         app.kubernetes.io/name: tika
         cdk8s.io/metadata.addr: tika-tika-deployment-c88b096a
+        component: tika
     spec:
       automountServiceAccountToken: false
       containers:

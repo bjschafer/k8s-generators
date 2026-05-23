@@ -23,7 +23,8 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: authentik-worker
+        app.kubernetes.io/component: worker
+        app.kubernetes.io/name: authentik
         cdk8s.io/metadata.addr: authentik-worker-authentik-worker-deployment-c845a6ad
     spec:
       automountServiceAccountToken: true

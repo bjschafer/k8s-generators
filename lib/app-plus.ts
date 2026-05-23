@@ -161,6 +161,7 @@ export class AppPlus extends Chart {
       podMetadata: {
         labels: {
           "app.kubernetes.io/name": props.name,
+          ...props.labels,
         },
       },
       securityContext: DEFAULT_SECURITY_CONTEXT,

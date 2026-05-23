@@ -23,6 +23,7 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/instance: atuin
         app.kubernetes.io/name: atuin
         cdk8s.io/metadata.addr: atuin-atuin-deployment-c8aa6d7f
     spec:

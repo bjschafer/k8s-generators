@@ -25,6 +25,7 @@ spec:
   template:
     metadata:
       labels:
+        app: proxmox-exporter
         app.kubernetes.io/name: proxmox-exporter
         cdk8s.io/metadata.addr: proxmox-proxmox-app-proxmox-app-deployment-c8596826
     spec:

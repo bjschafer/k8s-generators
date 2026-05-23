@@ -20,6 +20,7 @@ spec:
   template:
     metadata:
       labels:
+        app: paperless-ai
         app.kubernetes.io/name: paperless-ai
         cdk8s.io/metadata.addr: paperless-ai-paperless-ai-deployment-c88aa187
     spec:

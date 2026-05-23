@@ -23,7 +23,8 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: authentik-server
+        app.kubernetes.io/component: server
+        app.kubernetes.io/name: authentik
         cdk8s.io/metadata.addr: authentik-server-authentik-server-deployment-c8cc40e6
     spec:
       automountServiceAccountToken: true

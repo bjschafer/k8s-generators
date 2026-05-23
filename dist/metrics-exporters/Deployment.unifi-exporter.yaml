@@ -25,6 +25,7 @@ spec:
   template:
     metadata:
       labels:
+        app: unifi-exporter
         app.kubernetes.io/name: unifi-exporter
         cdk8s.io/metadata.addr: unifi-unifi-app-unifi-app-deployment-c85aea89
     spec:

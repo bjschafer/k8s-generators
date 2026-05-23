@@ -24,8 +24,10 @@ spec:
   template:
     metadata:
       labels:
+        app: paperless
         app.kubernetes.io/name: gotenberg
         cdk8s.io/metadata.addr: gotenberg-gotenberg-deployment-c8b9f228
+        component: gotenberg
     spec:
       automountServiceAccountToken: false
       containers:
