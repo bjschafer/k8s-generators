@@ -148,7 +148,7 @@ class Paperless extends Chart {
         ACTIVATE_TITLE: "yes",
         ACTIVATE_CUSTOM_FIELDS: "no",
         CUSTOM_FIELDS: '{"custom_fields":[]}',
-        DISABLE_AUTOMATIC_PROCESSING: "yes",
+        DISABLE_AUTOMATIC_PROCESSING: "no",
         RESTRICT_TO_EXISTING_TAGS: "yes",
         RESTRICT_TO_EXISTING_CORRESPONDENTS: "no",
         RESTRICT_TO_EXISTING_DOCUMENT_TYPES: "yes",
