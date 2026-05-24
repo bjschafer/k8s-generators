@@ -105,11 +105,11 @@ class ProdPostgres extends Chart {
         resources: {
           requests: {
             cpu: Quantity.fromString("1"),
-            memory: Quantity.fromString("1Gi"),
+            memory: Quantity.fromString("2Gi"),
           },
           limits: {
             cpu: Quantity.fromString("1"),
-            memory: Quantity.fromString("1Gi"),
+            memory: Quantity.fromString("2Gi"),
           },
         },
         inheritedMetadata: {

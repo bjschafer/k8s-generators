@@ -77,10 +77,10 @@ spec:
   resources:
     limits:
       cpu: "1"
-      memory: 1Gi
+      memory: 2Gi
     requests:
       cpu: "1"
-      memory: 1Gi
+      memory: 2Gi
   storage:
     size: 15Gi
     storageClass: ceph-rbd
