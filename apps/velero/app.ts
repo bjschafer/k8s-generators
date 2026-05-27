@@ -171,28 +171,6 @@ class Velero extends Chart {
       },
     });
 
-    new BackupStorageLocation(this, "garage", {
-      metadata: {
-        name: "garage",
-        namespace: namespace,
-      },
-      spec: {
-        config: {
-          region: "us-east-1",
-          s3ForcePathStyle: "true",
-          s3Url: "https://garage.cmdcentral.xyz",
-        },
-        objectStorage: {
-          bucket: "velero",
-        },
-        provider: "aws",
-        credential: {
-          name: creds.secretName,
-          key: "config",
-        },
-      },
-    });
-
     new BackupStorageLocation(this, "wasabi", {
       metadata: {
         name: "wasabi",
