@@ -814,7 +814,7 @@
           "type": "prometheus",
           "uid": "fe6cssq0m2v40d"
         },
-        "description": "Actual write bytes/s per PVC, derived from RBD block device stats joined to PVC labels via CSI filesystem mount paths. Requires node-exporter to expose kubelet plugin mounts \u2014 panels will populate after the next node-exporter rollout.",
+        "description": "Actual write bytes/s per RBD block device per node \u2014 each rbd# corresponds to one PVC. Captures all writes including overwrites, unlike fill rate. Cross-reference with PVC Fill % (left) to identify which named PVC maps to an active device.",
         "fieldConfig": {
           "defaults": {
             "custom": {
@@ -855,12 +855,12 @@
               "type": "prometheus",
               "uid": "fe6cssq0m2v40d"
             },
-            "expr": "rbd:pvc_write_bytes:rate5m",
-            "legendFormat": "{{namespace}}/{{persistentvolumeclaim}}",
+            "expr": "max by(instance, device) (rate(node_disk_written_bytes_total{device=~\"rbd[0-9]+\", job=\"node-exporter\"}[5m]))",
+            "legendFormat": "{{instance}} \u2014 {{device}}",
             "refId": "A"
           }
         ],
-        "title": "PVC Write Throughput",
+        "title": "RBD Volume Write Throughput",
         "type": "timeseries"
       },
       {
