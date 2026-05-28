@@ -3,4 +3,4 @@ kustomize:
   - ghcr.io/scross01/prometheus-klipper-exporter:latest@sha256:bcdf9067764d94c8109565e90cf43ee9292109f9e2348af8c61bb740fa3985d4
   - prompve/prometheus-pve-exporter:latest@sha256:78a58df7a31c9fbee94962cd06422672668529de6421892df9aed4b6cee0757f
   - ghcr.io/unpoller/unpoller:latest@sha256:bf7bdcc59fcdaa4699687007aa3ec24ddb3c9d9521f392d8c7aa2bea1bdb781a
-  - prom/statsd-exporter:latest@sha256:632f705804922d50c1c95ba8ff9c8c0cc18d4bbb0cc265dc4f9ae708271c95b3
+  - prom/statsd-exporter:latest@sha256:378cb79c4ac7d6941e5ed71b1f3cd6f4707cf42c72c104ffe81fa4d9026ef659
