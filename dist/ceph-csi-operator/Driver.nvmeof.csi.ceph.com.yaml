@@ -1,7 +1,7 @@
 apiVersion: csi.ceph.io/v1
 kind: Driver
 metadata:
-  name: rbd.csi.ceph.com
+  name: nvmeof.csi.ceph.com
   namespace: ceph
 spec:
   attachRequired: true
@@ -10,7 +10,7 @@ spec:
     hostNetwork: false
     privileged: false
     replicas: 1
-    serviceAccountName: rbd-csi-ceph-com-ctrlplugin-sa
+    serviceAccountName: nvmeof-csi-ceph-com-ctrlplugin-sa
     tolerations: []
     volumes: []
   deployCsiAddons: false
@@ -28,7 +28,7 @@ spec:
     verbosity: 0
   nodePlugin:
     imagePullPolicy: IfNotPresent
-    serviceAccountName: rbd-csi-ceph-com-nodeplugin-sa
+    serviceAccountName: nvmeof-csi-ceph-com-nodeplugin-sa
     tolerations: []
     volumes: []
-  snapshotPolicy: volumeSnapshot
+  snapshotPolicy: none

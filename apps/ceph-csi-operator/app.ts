@@ -1,4 +1,4 @@
-import { App, Chart } from "cdk8s";
+import { ApiObject, App, Chart } from "cdk8s";
 import { Construct } from "constructs";
 import { NewArgoApp, ArgoAppSource, ENABLE_SERVERSIDE_APPLY } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
@@ -9,6 +9,10 @@ import {
   VolumeSnapshotClass,
   VolumeSnapshotClassDeletionPolicy,
 } from "../../imports/snapshot.storage.k8s.io";
+import {
+  VmPodScrape,
+  VmPodScrapeSpecPodMetricsEndpointsTargetPort,
+} from "../../imports/operator.victoriametrics.com";
 
 const name = "ceph-csi-operator";
 const namespace = "ceph";
@@ -27,7 +31,7 @@ const clusterID = "e708730c-9bbe-4567-a37d-6386f6800180";
 new HelmApp(app, "operator", {
   chart: "ceph-csi-operator",
   repo: "https://ceph.github.io/ceph-csi-operator/",
-  version: "0.5.0",
+  version: "1.0.1",
   releaseName: "ceph-csi-operator",
   namespace,
   values: {
@@ -35,21 +39,23 @@ new HelmApp(app, "operator", {
       manager: {
         image: {
           repository: "quay.io/cephcsi/ceph-csi-operator",
-          tag: "v0.5.0",
+          tag: "v1.0.1",
         },
       },
     },
   },
 });
 
-// 2. Driver CRs: OperatorConfig, CephConnection, ClientProfile, Driver (rbd + cephfs)
+// 2. Driver CRs: CephConnection, ClientProfile, Driver (rbd + cephfs)
+// operatorConfig.create=false so we manage OperatorConfig directly (liveness port not exposed via chart values)
 new HelmApp(app, "drivers", {
   chart: "ceph-csi-drivers",
   repo: "https://ceph.github.io/ceph-csi-operator/",
-  version: "0.5.0",
+  version: "1.0.1",
   releaseName: "ceph-csi-drivers",
   namespace,
   values: {
+    operatorConfig: { create: false },
     cephConnections: [
       {
         name: "ceph",
@@ -144,6 +150,73 @@ class CephConfig extends Chart {
         "csi.storage.k8s.io/snapshotter-secret-namespace": namespace,
       },
       deletionPolicy: VolumeSnapshotClassDeletionPolicy.DELETE,
+    });
+
+    new ApiObject(this, "operator-config", {
+      apiVersion: "csi.ceph.io/v1",
+      kind: "OperatorConfig",
+      metadata: { name: "ceph-csi-operator-config", namespace },
+      spec: {
+        driverSpecDefaults: {
+          attachRequired: true,
+          cephFsClientType: "kernel",
+          controllerPlugin: {
+            affinity: {},
+            deploymentStrategy: {},
+            hostNetwork: false,
+            imagePullPolicy: "IfNotPresent",
+            privileged: false,
+            replicas: 1,
+            tolerations: [],
+            volumes: [],
+          },
+          deployCsiAddons: false,
+          fsGroupPolicy: "File",
+          fuseMountOptions: {},
+          generateOMapInfo: false,
+          grpcTimeout: 30,
+          kernelMountOptions: {},
+          liveness: { metricsPort: 9080 },
+          log: {
+            rotation: { maxFiles: 7, maxLogSize: "10Gi", periodicity: "daily" },
+            verbosity: 0,
+          },
+          nodePlugin: {
+            affinity: {},
+            annotations: {},
+            imagePullPolicy: "IfNotPresent",
+            kubeletDirPath: "/var/lib/kubelet",
+            labels: {},
+            tolerations: [],
+            volumes: [],
+          },
+          snapshotPolicy: "none",
+        },
+      },
+    });
+
+    new VmPodScrape(this, "csi-liveness", {
+      metadata: { name: "ceph-csi-liveness", namespace },
+      spec: {
+        namespaceSelector: { matchNames: [namespace] },
+        podMetricsEndpoints: [
+          {
+            targetPort: VmPodScrapeSpecPodMetricsEndpointsTargetPort.fromNumber(9080),
+          },
+        ],
+        selector: {
+          matchExpressions: [
+            {
+              key: "app",
+              operator: "In",
+              values: [
+                "rbd.csi.ceph.com-nodeplugin",
+                "cephfs.csi.ceph.com-nodeplugin",
+              ],
+            },
+          ],
+        },
+      },
     });
   }
 }

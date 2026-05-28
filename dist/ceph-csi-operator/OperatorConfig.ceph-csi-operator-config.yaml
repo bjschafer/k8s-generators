@@ -2,6 +2,7 @@ apiVersion: csi.ceph.io/v1
 kind: OperatorConfig
 metadata:
   name: ceph-csi-operator-config
+  namespace: ceph
 spec:
   driverSpecDefaults:
     attachRequired: true
@@ -16,12 +17,13 @@ spec:
       tolerations: []
       volumes: []
     deployCsiAddons: false
-    enableMetadata: false
     fsGroupPolicy: File
     fuseMountOptions: {}
     generateOMapInfo: false
     grpcTimeout: 30
     kernelMountOptions: {}
+    liveness:
+      metricsPort: 9080
     log:
       rotation:
         maxFiles: 7

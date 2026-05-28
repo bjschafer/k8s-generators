@@ -7,7 +7,6 @@ spec:
   attachRequired: true
   cephFsClientType: kernel
   controllerPlugin:
-    deploymentStrategy: {}
     hostNetwork: false
     privileged: false
     replicas: 1
@@ -15,7 +14,7 @@ spec:
     tolerations: []
     volumes: []
   deployCsiAddons: false
-  enableMetadata: false
+  enableFencing: false
   fsGroupPolicy: None
   fuseMountOptions: {}
   generateOMapInfo: false
@@ -28,10 +27,7 @@ spec:
       periodicity: daily
     verbosity: 0
   nodePlugin:
-    affinity: {}
-    annotations: {}
     imagePullPolicy: IfNotPresent
-    labels: {}
     serviceAccountName: cephfs-csi-ceph-com-nodeplugin-sa
     tolerations: []
     volumes: []
