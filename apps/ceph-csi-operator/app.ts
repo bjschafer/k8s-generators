@@ -9,10 +9,6 @@ import {
   VolumeSnapshotClass,
   VolumeSnapshotClassDeletionPolicy,
 } from "../../imports/snapshot.storage.k8s.io";
-import {
-  VmPodScrape,
-  VmPodScrapeSpecPodMetricsEndpointsTargetPort,
-} from "../../imports/operator.victoriametrics.com";
 
 const name = "ceph-csi-operator";
 const namespace = "ceph";
@@ -73,6 +69,7 @@ new HelmApp(app, "drivers", {
       rbd: { enabled: true, snapshotPolicy: "volumeSnapshot" },
       cephfs: { enabled: true, snapshotPolicy: "volumeSnapshot" },
       nfs: { enabled: false },
+      nvmeof: { enabled: false },
     },
   },
 });
@@ -176,7 +173,6 @@ class CephConfig extends Chart {
           generateOMapInfo: false,
           grpcTimeout: 30,
           kernelMountOptions: {},
-          liveness: { metricsPort: 9080 },
           log: {
             rotation: { maxFiles: 7, maxLogSize: "10Gi", periodicity: "daily" },
             verbosity: 0,
@@ -195,29 +191,6 @@ class CephConfig extends Chart {
       },
     });
 
-    new VmPodScrape(this, "csi-liveness", {
-      metadata: { name: "ceph-csi-liveness", namespace },
-      spec: {
-        namespaceSelector: { matchNames: [namespace] },
-        podMetricsEndpoints: [
-          {
-            targetPort: VmPodScrapeSpecPodMetricsEndpointsTargetPort.fromNumber(9080),
-          },
-        ],
-        selector: {
-          matchExpressions: [
-            {
-              key: "app",
-              operator: "In",
-              values: [
-                "rbd.csi.ceph.com-nodeplugin",
-                "cephfs.csi.ceph.com-nodeplugin",
-              ],
-            },
-          ],
-        },
-      },
-    });
   }
 }
 
