@@ -48,7 +48,13 @@ spec:
               value: "true"
             - name: MICROBIN_HIGHLIGHTSYNTAX
               value: "true"
+            - name: MICROBIN_EDITABLE
+              value: "true"
+            - name: MICROBIN_ETERNAL_PASTA
+              value: "true"
             - name: MICROBIN_PRIVATE
+              value: "true"
+            - name: MICROBIN_SHOW_READ_STATS
               value: "true"
             - name: MICROBIN_PUBLIC_PATH
               value: https://paste.cmdcentral.xyz/
