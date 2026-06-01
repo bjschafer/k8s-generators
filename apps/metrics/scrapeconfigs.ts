@@ -14,6 +14,26 @@ export class ScrapeConfigs extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
+    new VmServiceScrape(this, "cert-manager", {
+      metadata: {
+        name: "cert-manager",
+        namespace: namespace,
+      },
+      spec: {
+        namespaceSelector: {
+          matchNames: ["cert-manager"],
+        },
+        endpoints: [{ port: "tcp-prometheus-servicemonitor" }],
+        selector: {
+          matchLabels: {
+            "app.kubernetes.io/component": "controller",
+            "app.kubernetes.io/instance": "cert-manager",
+            "app.kubernetes.io/name": "cert-manager",
+          },
+        },
+      },
+    });
+
     new VmServiceScrape(this, "node-exporter", {
       metadata: {
         name: "node-exporter",
