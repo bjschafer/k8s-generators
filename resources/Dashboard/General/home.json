@@ -1,0 +1,1888 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/message": "Restored from version 87"
+    },
+    "labels": {},
+    "name": "Kh5xuVz4k",
+    "namespace": "default"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Home",
+        "tooltip": "",
+        "type": "link",
+        "url": "https://home.cmdcentral.xyz/"
+      }
+    ],
+    "panels": [
+      {
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "includeVars": false,
+          "keepTime": false,
+          "maxItems": 10,
+          "query": "",
+          "showFolderNames": true,
+          "showHeadings": false,
+          "showRecentlyViewed": false,
+          "showSearch": false,
+          "showStarred": true,
+          "tags": []
+        },
+        "pluginVersion": "12.1.0",
+        "title": "Dashboards",
+        "type": "dashlist"
+      },
+      {
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 4,
+        "libraryPanel": {
+          "name": "Internet Traffic",
+          "uid": "L7lPX4z4k"
+        },
+        "title": "Internet Traffic",
+        "type": "library-panel-ref"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 7
+        },
+        "id": 8,
+        "panels": [],
+        "title": "Quick Metrics",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "max": 810675077120,
+            "min": 0,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "orange",
+                  "value": 15
+                },
+                {
+                  "color": "green",
+                  "value": 35
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 0,
+          "y": 8
+        },
+        "id": 37,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-metrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "sum(memory_memtotal{object=\"nodes\"}) - sum(memory_memused{object=\"nodes\"})",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Proxmox Cluster Memory",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-metrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "links": [],
+            "mappings": [
+              {
+                "id": 0,
+                "options": {
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 0
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 0.1
+                },
+                {
+                  "color": "rgba(50, 172, 45, 0.97)",
+                  "value": 0.3
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 3,
+          "y": 8
+        },
+        "id": 42,
+        "interval": "1m",
+        "maxDataPoints": 100,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "editorMode": "code",
+            "expr": "(\n  ceph_cluster_total_bytes{cluster=~\"ceph\"}\n    -\n  ceph_cluster_total_used_bytes{cluster=~\"ceph\"}\n)\n  /\nceph_cluster_total_bytes{cluster=~\"ceph\"}",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A",
+            "step": 300
+          }
+        ],
+        "title": "Ceph Available Capacity",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "max": 100000000000000,
+            "min": 0,
+            "thresholds": {
+              "mode": "percentage",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": 0
+                },
+                {
+                  "color": "yellow",
+                  "value": 5
+                },
+                {
+                  "color": "green",
+                  "value": 20
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 6,
+          "y": 8
+        },
+        "id": 11,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "sum(node_filesystem_size_bytes{job=\"vmhost\",instance=\"vmhost03.cmdcentral.xyz:9100\",device=~\"warp\"})",
+            "hide": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Disk free - warp",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 0.5
+                },
+                {
+                  "color": "red",
+                  "value": 0.75
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 9,
+          "y": 8
+        },
+        "id": 17,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "nut_load{instance=\"infra2.cmdcentral.xyz:3493\"}",
+            "legendFormat": "{{ups}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "UPS Load",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-metrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "normal"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "fieldMinMax": false,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "iops"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 13,
+          "y": 8
+        },
+        "id": 43,
+        "options": {
+          "legend": {
+            "calcs": [
+              "mean",
+              "lastNotNull",
+              "max",
+              "min"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "desc"
+          }
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": "$datasource",
+            "editorMode": "code",
+            "expr": "sum(irate(ceph_osd_op_w{cluster=~\"ceph\", }[$__rate_interval]))",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "Write",
+            "range": true,
+            "refId": "A",
+            "step": 300
+          },
+          {
+            "datasource": "$datasource",
+            "editorMode": "code",
+            "expr": "sum(irate(ceph_osd_op_r{cluster=~\"ceph\", }[$__rate_interval]))",
+            "format": "time_series",
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "Read",
+            "range": true,
+            "refId": "B",
+            "step": 300
+          }
+        ],
+        "title": "Ceph Aggregate IOPS",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 2,
+          "x": 19,
+          "y": 8
+        },
+        "id": 13,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "sum(unpoller_device_stations{name!=\"Gateway\"})",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "WiFi Clients",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 10
+                },
+                {
+                  "color": "red",
+                  "value": 12
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 21,
+          "y": 8
+        },
+        "id": 35,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "node_hwmon_temp_celsius{instance=\"infra2.cmdcentral.xyz:9100\",chip=\"w1_bus_master1_28_030a979463f8\"} - ignoring(chip) node_hwmon_temp_celsius{instance=\"infra2.cmdcentral.xyz:9100\",chip=\"w1_bus_master1_28_030f97943496\"} ",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Rack Temperature Differential",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "Busy state of all CPU cores together",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(50, 172, 45, 0.97)",
+                  "value": 0
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 85
+                },
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 0,
+          "y": 12
+        },
+        "id": 6,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto",
+          "text": {}
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "(((count(count(node_cpu_seconds_total{job=\"vmhost\",instance=\"vmhost01.cmdcentral.xyz:9100\"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',job=\"vmhost\",instance=\"vmhost01.cmdcentral.xyz:9100\"}[5m])))) * 100) / count(count(node_cpu_seconds_total{job=\"vmhost\",instance=\"vmhost01.cmdcentral.xyz:9100\"}) by (cpu))",
+            "hide": false,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "range": true,
+            "refId": "A",
+            "step": 900
+          }
+        ],
+        "title": "CPU (vmhost01)",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "Busy state of all CPU cores together",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(50, 172, 45, 0.97)",
+                  "value": 0
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 85
+                },
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 3,
+          "y": 12
+        },
+        "id": 45,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto",
+          "text": {}
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "(((count(count(node_cpu_seconds_total{job=\"vmhost\",instance=\"vmhost02.cmdcentral.xyz:9100\"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',job=\"vmhost\",instance=\"vmhost02.cmdcentral.xyz:9100\"}[5m])))) * 100) / count(count(node_cpu_seconds_total{job=\"vmhost\",instance=\"vmhost02.cmdcentral.xyz:9100\"}) by (cpu))",
+            "hide": false,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "range": true,
+            "refId": "A",
+            "step": 900
+          }
+        ],
+        "title": "CPU (vmhost02)",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "Busy state of all CPU cores together",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(50, 172, 45, 0.97)",
+                  "value": 0
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 85
+                },
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 6,
+          "y": 12
+        },
+        "id": 9,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto",
+          "text": {}
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "(((count(count(node_cpu_seconds_total{job=\"vmhost\",instance=\"vmhost03.cmdcentral.xyz:9100\"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',job=\"vmhost\",instance=\"vmhost03.cmdcentral.xyz:9100\"}[5m])))) * 100) / count(count(node_cpu_seconds_total{job=\"vmhost\",instance=\"vmhost03.cmdcentral.xyz:9100\"}) by (cpu))",
+            "hide": false,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "range": true,
+            "refId": "A",
+            "step": 900
+          }
+        ],
+        "title": "CPU (vmhost03)",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "Total rack power consumption through UPSes",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 2000
+                },
+                {
+                  "color": "red",
+                  "value": 2500
+                }
+              ]
+            },
+            "unit": "watt"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 9,
+          "y": 12
+        },
+        "id": 26,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "inverted",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": true,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "0": "(",
+            "1": "\n",
+            "10": "s",
+            "100": "s",
+            "101": "i",
+            "102": "d",
+            "103": "e",
+            "104": ")",
+            "105": " ",
+            "106": "w",
+            "107": "i",
+            "108": "t",
+            "109": "h",
+            "11": "u",
+            "110": "o",
+            "111": "u",
+            "112": "t",
+            "113": "(",
+            "114": "u",
+            "115": "p",
+            "116": "s",
+            "117": ")",
+            "118": "\n",
+            "119": " ",
+            "12": "m",
+            "120": " ",
+            "121": ")",
+            "122": "\n",
+            "123": " ",
+            "124": " ",
+            "125": " ",
+            "126": " ",
+            "127": "+",
+            "128": "\n",
+            "129": " ",
+            "13": "(",
+            "130": " ",
+            "131": "s",
+            "132": "u",
+            "133": "m",
+            "134": "(",
+            "135": "u",
+            "136": "p",
+            "137": "s",
+            "138": ":",
+            "139": "p",
+            "14": "u",
+            "140": "o",
+            "141": "w",
+            "142": "e",
+            "143": "r",
+            "144": "_",
+            "145": "u",
+            "146": "s",
+            "147": "a",
+            "148": "g",
+            "149": "e",
+            "15": "p",
+            "150": "_",
+            "151": "w",
+            "152": "a",
+            "153": "t",
+            "154": "t",
+            "155": "s",
+            "156": ":",
+            "157": "b",
+            "158": "_",
+            "159": "s",
+            "16": "s",
+            "160": "i",
+            "161": "d",
+            "162": "e",
+            "163": ")",
+            "164": " ",
+            "165": "w",
+            "166": "i",
+            "167": "t",
+            "168": "h",
+            "169": "o",
+            "17": ":",
+            "170": "u",
+            "171": "t",
+            "172": "(",
+            "173": "u",
+            "174": "p",
+            "175": "s",
+            "176": ")",
+            "177": "\n",
+            "178": ")",
+            "179": "\n",
+            "18": "p",
+            "180": " ",
+            "181": " ",
+            "182": "+",
+            "183": "\n",
+            "184": "s",
+            "185": "u",
+            "186": "m",
+            "187": "(",
+            "188": "u",
+            "189": "p",
+            "19": "o",
+            "190": "s",
+            "191": ":",
+            "192": "p",
+            "193": "o",
+            "194": "w",
+            "195": "e",
+            "196": "r",
+            "197": "_",
+            "198": "u",
+            "199": "s",
+            "2": " ",
+            "20": "w",
+            "200": "a",
+            "201": "g",
+            "202": "e",
+            "203": "_",
+            "204": "w",
+            "205": "a",
+            "206": "t",
+            "207": "t",
+            "208": "s",
+            "209": ":",
+            "21": "e",
+            "210": "n",
+            "211": "e",
+            "212": "t",
+            "213": "w",
+            "214": "o",
+            "215": "r",
+            "216": "k",
+            "217": ")",
+            "218": " ",
+            "219": "w",
+            "22": "r",
+            "220": "i",
+            "221": "t",
+            "222": "h",
+            "223": "o",
+            "224": "u",
+            "225": "t",
+            "226": "(",
+            "227": "u",
+            "228": "p",
+            "229": "s",
+            "23": "_",
+            "230": ")",
+            "24": "u",
+            "25": "s",
+            "26": "a",
+            "27": "g",
+            "28": "e",
+            "29": "_",
+            "3": " ",
+            "30": "w",
+            "31": "a",
+            "32": "t",
+            "33": "t",
+            "34": "s",
+            "35": ":",
+            "36": "r",
+            "37": "a",
+            "38": "c",
+            "39": "k",
+            "4": "(",
+            "40": "m",
+            "41": "o",
+            "42": "u",
+            "43": "n",
+            "44": "t",
+            "45": ")",
+            "46": " ",
+            "47": "w",
+            "48": "i",
+            "49": "t",
+            "5": "\n",
+            "50": "h",
+            "51": "o",
+            "52": "u",
+            "53": "t",
+            "54": "(",
+            "55": "u",
+            "56": "p",
+            "57": "s",
+            "58": ")",
+            "59": "\n",
+            "6": " ",
+            "60": " ",
+            "61": " ",
+            "62": " ",
+            "63": " ",
+            "64": " ",
+            "65": " ",
+            "66": "+",
+            "67": "\n",
+            "68": " ",
+            "69": " ",
+            "7": " ",
+            "70": " ",
+            "71": " ",
+            "72": "s",
+            "73": "u",
+            "74": "m",
+            "75": "(",
+            "76": "u",
+            "77": "p",
+            "78": "s",
+            "79": ":",
+            "8": " ",
+            "80": "p",
+            "81": "o",
+            "82": "w",
+            "83": "e",
+            "84": "r",
+            "85": "_",
+            "86": "u",
+            "87": "s",
+            "88": "a",
+            "89": "g",
+            "9": " ",
+            "90": "e",
+            "91": "_",
+            "92": "w",
+            "93": "a",
+            "94": "t",
+            "95": "t",
+            "96": "s",
+            "97": ":",
+            "98": "a",
+            "99": "_",
+            "editorMode": "code",
+            "expr": "sum(ups:power_usage_watts:a_side) without(ups)\n  +\nsum(ups:power_usage_watts:b_side) without(ups)",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Power consumption",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "Visualize how many clients are connected to which radios/APs.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "decimals": 0,
+            "links": [
+              {
+                "title": "UAP dashboard",
+                "url": "https://grafana.cmdcentral.xyz/d/g5wFWqxZk/unifi-poller-uap-insights-prometheus?orgId=1\u0026refresh=1m"
+              }
+            ],
+            "mappings": [],
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 5,
+          "x": 19,
+          "y": 12
+        },
+        "id": 15,
+        "links": [
+          {
+            "title": "UAP dashboard",
+            "url": "https://grafana.cmdcentral.xyz/d/g5wFWqxZk/unifi-poller-uap-insights-prometheus?orgId=1\u0026refresh=1m"
+          }
+        ],
+        "maxDataPoints": 3,
+        "options": {
+          "displayLabels": [
+            "percent"
+          ],
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "values": [
+              "percent"
+            ]
+          },
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "count by (radio_desc) (unpoller_client_uptime_seconds{site_name=\"Default (default)\",radio_desc!=\"\"})",
+            "legendFormat": "{{radio_desc}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Clients / AP Radio",
+        "type": "piechart"
+      },
+      {
+        "description": "",
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 6,
+          "x": 13,
+          "y": 15
+        },
+        "id": 39,
+        "options": {
+          "alertInstanceLabelFilter": "{alertname!=\"Watchdog\"}",
+          "alertName": "",
+          "dashboardAlerts": false,
+          "groupBy": [],
+          "groupMode": "default",
+          "maxItems": 20,
+          "showInactiveAlerts": false,
+          "sortOrder": 3,
+          "stateFilter": {
+            "error": true,
+            "firing": true,
+            "noData": false,
+            "normal": false,
+            "pending": false,
+            "recovering": true
+          },
+          "viewMode": "list"
+        },
+        "pluginVersion": "12.1.0",
+        "title": "Firing Alerts",
+        "type": "alertlist"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "Non available RAM memory",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 0,
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(50, 172, 45, 0.97)",
+                  "value": 0
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 80
+                },
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 0,
+          "y": 16
+        },
+        "id": 28,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"vmhost01.cmdcentral.xyz:9100\"} * 100) / node_memory_MemTotal_bytes{instance=\"vmhost01.cmdcentral.xyz:9100\"})",
+            "format": "time_series",
+            "hide": false,
+            "intervalFactor": 1,
+            "range": true,
+            "refId": "B",
+            "step": 240
+          }
+        ],
+        "title": "Memory (vmhost01)",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "Non available RAM memory",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 0,
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(50, 172, 45, 0.97)",
+                  "value": 0
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 80
+                },
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 3,
+          "y": 16
+        },
+        "id": 44,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"vmhost02.cmdcentral.xyz:9100\"} * 100) / node_memory_MemTotal_bytes{instance=\"vmhost02.cmdcentral.xyz:9100\"})",
+            "format": "time_series",
+            "hide": false,
+            "intervalFactor": 1,
+            "range": true,
+            "refId": "B",
+            "step": 240
+          }
+        ],
+        "title": "Memory (vmhost02)",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "Non available RAM memory",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 0,
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(50, 172, 45, 0.97)",
+                  "value": 0
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 80
+                },
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 6,
+          "y": 16
+        },
+        "id": 40,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"vmhost03.cmdcentral.xyz:9100\"} * 100) / node_memory_MemTotal_bytes{instance=\"vmhost03.cmdcentral.xyz:9100\"})",
+            "format": "time_series",
+            "hide": false,
+            "intervalFactor": 1,
+            "range": true,
+            "refId": "B",
+            "step": 240
+          }
+        ],
+        "title": "Memory (vmhost03)",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 19,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 2,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 90
+                },
+                {
+                  "color": "red",
+                  "value": 98
+                }
+              ]
+            },
+            "unit": "fahrenheit"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{chip=\"w1_bus_master1_28_030a979463f8\",instance=\"infra2.cmdcentral.xyz:9100\",job=\"infra\",prometheus=\"metrics/metrics\",sensor=\"temp1\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Rack"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{chip=\"w1_bus_master1_28_030f97943496\",instance=\"infra2.cmdcentral.xyz:9100\",job=\"infra\",prometheus=\"metrics/metrics\",sensor=\"temp1\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Ambient"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{domain=\"sensor\",entity=\"sensor.upstairs_temperature\",friendly_name=\"Upstairs Temperature\",instance=\"home-assistant.hass.svc.cluster.local:8123\",job=\"hass\",prometheus=\"metrics/metrics\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Upstairs Thermostat"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "{domain=\"sensor\",entity=\"sensor.downstairs_temperature\",friendly_name=\"Downstairs Temperature\",instance=\"home-assistant.hass.svc.cluster.local:8123\",job=\"hass\",prometheus=\"metrics/metrics\"}"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Downstairs Sensor"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 4,
+          "x": 9,
+          "y": 16
+        },
+        "id": 33,
+        "options": {
+          "legend": {
+            "calcs": [
+              "min",
+              "max",
+              "mean"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "(1.8 * node_hwmon_temp_celsius{instance=\"infra2.cmdcentral.xyz:9100\",chip=~\"w1_bus.*\"}) + 32",
+            "legendFormat": "",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "(1.8 * hass_sensor_temperature_celsius{entity=~\"sensor.(up|down)stairs_temperature\"} ) + 32",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Rack Thermals",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": 0
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 60
+                },
+                {
+                  "color": "red",
+                  "value": 70
+                }
+              ]
+            },
+            "unit": "celsius"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 5,
+          "x": 19,
+          "y": 18
+        },
+        "id": 31,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "editorMode": "code",
+            "expr": "max(label_replace(node_hwmon_temp_celsius{job!=\"printers\"}, \"friendly\", \"$1\", \"instance\", \"([^\\\\.]*)(.cmdcentral.xyz:9100)?\")) by (friendly)",
+            "interval": "",
+            "legendFormat": "{{friendly}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Node temperatures",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-logs-datasource",
+          "uid": "fe9j59s06pc74c"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 9,
+          "x": 0,
+          "y": 20
+        },
+        "id": 38,
+        "options": {
+          "dedupStrategy": "exact",
+          "enableInfiniteScrolling": false,
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": false,
+          "sortOrder": "Descending",
+          "wrapLogMessage": true
+        },
+        "pluginVersion": "12.1.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-logs-datasource",
+              "uid": "fe9j59s06pc74c"
+            },
+            "editorMode": "code",
+            "expr": "kubernetes.pod_namespace: \"argocd\" AND kubernetes.pod_labels.app.kubernetes.io/name:=\"argocd-image-updater\" AND \"Successfully updated image\" | extract_regexp `.* to '(?P\u003cimage\u003e[^:@]+)(?::(?P\u003ctag\u003e[^@]+))?(?:@(?P\u003cdigest\u003esha256:[^']+))` from _msg | format \"\u003cimage\u003e updated to \u003ctag\u003e at \u003cdigest\u003e\"",
+            "queryType": "instant",
+            "refId": "A"
+          }
+        ],
+        "title": "Recent Image Autoupdates",
+        "type": "logs"
+      }
+    ],
+    "preload": false,
+    "refresh": "1m",
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Home"
+  }
+}

@@ -1,0 +1,1147 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "f4625833-7678-4586-90b8-7a5dbecc3476"
+    },
+    "labels": {},
+    "name": "80-PUnWMk",
+    "namespace": "default"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "victoriametrics-datasource",
+            "uid": "fe6cssq0m2v40d"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Example dashboard for HON95's Prometheus NUT Exporter.",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "text": "Unknown"
+                  },
+                  "1": {
+                    "text": "Online"
+                  },
+                  "2": {
+                    "text": "On battery"
+                  },
+                  "3": {
+                    "text": "Low battery"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red"
+                },
+                {
+                  "color": "green",
+                  "value": 1
+                },
+                {
+                  "color": "orange",
+                  "value": 2
+                },
+                {
+                  "color": "red",
+                  "value": 3
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 0,
+          "y": 0
+        },
+        "id": 13,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "nut_status{ups=~\"${ups:pipe}\"}",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Status",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                }
+              ]
+            },
+            "unit": "volt"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 6,
+          "y": 0
+        },
+        "id": 15,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "nut_input_voltage_volts{ups=~\"${ups:pipe}\"}",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Input Voltage",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "decimals": 0,
+            "mappings": [],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 0.5
+                },
+                {
+                  "color": "red",
+                  "value": 0.75
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 10,
+          "y": 0
+        },
+        "id": 17,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "nut_load{ups=~\"${ups:pipe}\"}",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Load",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red"
+                },
+                {
+                  "color": "orange",
+                  "value": 300
+                },
+                {
+                  "color": "green",
+                  "value": 600
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 14,
+          "y": 0
+        },
+        "id": 16,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "nut_battery_runtime_seconds{ups=~\"${ups:pipe}\"}",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Runtime",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "text": "Unknown"
+                  },
+                  "1": {
+                    "text": "Beeper enabled"
+                  },
+                  "2": {
+                    "text": "Beeper disabled"
+                  },
+                  "3": {
+                    "text": "Beeper muted"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red"
+                },
+                {
+                  "color": "green",
+                  "value": 1
+                },
+                {
+                  "color": "red",
+                  "value": 2
+                },
+                {
+                  "color": "orange",
+                  "value": 3
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 18,
+          "y": 0
+        },
+        "id": 14,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "nut_beeper_status{ups=~\"${ups:pipe}\"}",
+            "instant": true,
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Beeper Status",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 0,
+            "links": [],
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 4
+        },
+        "id": 5,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "100 * avg_over_time(nut_battery_charge{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Battery Charge [$smoothing_interval]",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 4
+        },
+        "id": 7,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "avg_over_time(nut_battery_runtime_seconds{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Runtime [$smoothing_interval]",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 10
+        },
+        "id": 6,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "avg_over_time(nut_load{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Load [$smoothing_interval]",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 1,
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "volt"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 10
+        },
+        "id": 10,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "avg_over_time(nut_battery_voltage_volts{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Battery Voltage [$smoothing_interval]",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 1,
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "volt"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 9,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "avg_over_time(nut_input_voltage_volts{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Input Voltage [$smoothing_interval]",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "victoriametrics-datasource",
+          "uid": "fe6cssq0m2v40d"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 1,
+            "links": [],
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "volt"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "id": 11,
+        "options": {
+          "alertThreshold": true,
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-datasource",
+              "uid": "fe6cssq0m2v40d"
+            },
+            "exemplar": true,
+            "expr": "avg_over_time(nut_output_voltage_volts{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "interval": "",
+            "legendFormat": "{{ups}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Output Voltage [$smoothing_interval]",
+        "type": "timeseries"
+      }
+    ],
+    "preload": false,
+    "refresh": "10s",
+    "schemaVersion": 41,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": [
+              "network"
+            ],
+            "value": [
+              "network"
+            ]
+          },
+          "datasource": {
+            "type": "victoriametrics-datasource",
+            "uid": "fe6cssq0m2v40d"
+          },
+          "definition": "label_values(nut_ups_info,ups)",
+          "includeAll": true,
+          "label": "UPS",
+          "multi": true,
+          "name": "ups",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(nut_ups_info,ups)",
+            "refId": "VariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "sort": 2,
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "15m",
+            "value": "15m"
+          },
+          "includeAll": false,
+          "label": "Smoothing",
+          "name": "smoothing_interval",
+          "options": [
+            {
+              "selected": false,
+              "text": "1m",
+              "value": "1m"
+            },
+            {
+              "selected": false,
+              "text": "5m",
+              "value": "5m"
+            },
+            {
+              "selected": true,
+              "text": "15m",
+              "value": "15m"
+            },
+            {
+              "selected": false,
+              "text": "1h",
+              "value": "1h"
+            },
+            {
+              "selected": false,
+              "text": "1d",
+              "value": "1d"
+            },
+            {
+              "selected": false,
+              "text": "1w",
+              "value": "1w"
+            }
+          ],
+          "query": "1m,5m,15m,1h,1d,1w",
+          "type": "custom"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-5m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Prometheus NUT Exporter"
+  }
+}

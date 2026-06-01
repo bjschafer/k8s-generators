@@ -174,15 +174,23 @@ class Grafana extends Chart {
 
   private loadDashboards(ns: string) {
     const dashboardsDir = join(dirname(dirname(__dirname)), "resources", "Dashboard");
-    const files = readdirSync(dashboardsDir, { withFileTypes: true });
+    this.loadDashboardsFromDir(dashboardsDir, ns);
+  }
 
-    for (const entry of files) {
+  private loadDashboardsFromDir(dir: string, ns: string) {
+    const entries = readdirSync(dir, { withFileTypes: true });
+
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        this.loadDashboardsFromDir(join(dir, entry.name), ns);
+        continue;
+      }
       if (!entry.name.endsWith(".json")) continue;
 
-      const raw = JSON.parse(readFileSync(join(dashboardsDir, entry.name), "utf-8"));
+      const raw = JSON.parse(readFileSync(join(dir, entry.name), "utf-8"));
       // grafanactl wraps dashboards in apiVersion/kind/spec — extract the inner spec
       const dashboardJson = raw.spec ?? raw;
-      const uid = basename(entry.name, ".json");
+      const uid: string = dashboardJson.uid ?? raw.metadata?.name ?? basename(entry.name, ".json");
 
       new ConfigMap(this, `dashboard-${uid}`, {
         metadata: {

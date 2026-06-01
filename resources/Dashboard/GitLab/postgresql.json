@@ -1,0 +1,967 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "ae87ajai1bsw0a"
+    },
+    "labels": {},
+    "name": "c_LJgXfmk",
+    "namespace": "default"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#d44a3a",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 0.8
+                },
+                {
+                  "color": "#299c46",
+                  "value": 0.9
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "avg_over_time(pg_up{job=\"postgres\",instance=~\"$instance\"}[$__interval]) or avg_over_time(up{job=\"postgres\",instance=~\"$instance\"}[$__interval]) ",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Availability",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#d44a3a",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 60
+                },
+                {
+                  "color": "#299c46",
+                  "value": 3600
+                }
+              ]
+            },
+            "unit": "dtdurations"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 4,
+          "y": 0
+        },
+        "id": 10,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "avg(time() - pg_postmaster_start_time_seconds{instance=~\"$instance\"})",
+            "format": "time_series",
+            "instant": true,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Postmaster Uptime",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 8,
+          "y": 0
+        },
+        "id": 8,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum by (mode) (\n  avg_over_time(pg_locks_count{instance=~\"$instance\",datname=\"gitlabhq_production\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "30s",
+            "intervalFactor": 1,
+            "legendFormat": "{{mode}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Locks",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ops"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Last Week"
+              },
+              "properties": [
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      10
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 16,
+          "y": 0
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_slow_queries{instance=~\"$instance\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Current",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_slow_queries{instance=~\"$instance\"}[$__interval] offset 1w)\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Last Week",
+            "refId": "B"
+          }
+        ],
+        "title": "Slow Queries",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "decimals": 1,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 0.8
+                },
+                {
+                  "color": "#d44a3a",
+                  "value": 0.9
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 0,
+          "y": 4
+        },
+        "id": 13,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(avg_over_time(pg_stat_activity_count{instance=~\"$instance\",state=\"active\"}[$__interval])) /\nsum(pg_settings_max_connections{instance=~\"$instance\"})",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Active Connections",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 0.8
+                },
+                {
+                  "color": "#d44a3a",
+                  "value": 0.9
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 4,
+          "y": 4
+        },
+        "id": 12,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(avg_over_time(pg_stat_activity_count{instance=~\"$instance\"}[$__interval])) /\nsum(pg_settings_max_connections{instance=~\"$instance\"})",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Connections",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 0,
+          "y": 8
+        },
+        "id": 15,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_stat_database_xact_commit{instance=~\"$instance\",datname=\"gitlabhq_production\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Commit",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_stat_database_xact_rollback{instance=~\"$instance\",datname=\"gitlabhq_production\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Rollback",
+            "refId": "B"
+          }
+        ],
+        "title": "Transactions",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 8,
+          "y": 8
+        },
+        "id": 17,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_stat_database_blks_hit{instance=~\"$instance\",datname=\"gitlabhq_production\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Cache Hits",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_stat_database_blks_read{instance=~\"$instance\",datname=\"gitlabhq_production\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Reads",
+            "refId": "A"
+          }
+        ],
+        "title": "Block IO",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "fe6cssq0m2v40d"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 16,
+          "y": 8
+        },
+        "id": 6,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.4.0",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_stat_database_tup_fetched{instance=~\"$instance\",datname=\"gitlabhq_production\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Fetched",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_stat_database_tup_deleted{instance=~\"$instance\",datname=\"gitlabhq_production\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Deleted",
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_stat_database_tup_inserted{instance=~\"$instance\",datname=\"gitlabhq_production\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Inserted",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "uid": "fe6cssq0m2v40d"
+            },
+            "expr": "sum(\n  rate(pg_stat_database_tup_updated{instance=~\"$instance\",datname=\"gitlabhq_production\"}[$__interval])\n)",
+            "format": "time_series",
+            "interval": "1m",
+            "intervalFactor": 1,
+            "legendFormat": "Updated",
+            "refId": "D"
+          }
+        ],
+        "title": "Tuple Stats",
+        "type": "timeseries"
+      }
+    ],
+    "preload": false,
+    "refresh": "1m",
+    "schemaVersion": 40,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": "fe6cssq0m2v40d",
+          "definition": "label_values(up{job=\"gitlab-postgres\"},instance)",
+          "includeAll": true,
+          "name": "instance",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(up{job=\"gitlab-postgres\"},instance)",
+            "refId": "VariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "PostgreSQL",
+    "weekStart": ""
+  }
+}

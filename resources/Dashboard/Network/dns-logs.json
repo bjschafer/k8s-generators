@@ -1,0 +1,111 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "XEOgZ1EMz"
+    },
+    "labels": {},
+    "name": "cebru82ry248wf",
+    "namespace": "default"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "victoriametrics-logs-datasource",
+          "uid": "fe9j59s06pc74c"
+        },
+        "fieldConfig": {
+          "defaults": {},
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 13,
+          "w": 22,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "dedupStrategy": "exact",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": true,
+          "showTime": false,
+          "sortOrder": "Descending",
+          "wrapLogMessage": true
+        },
+        "pluginVersion": "11.4.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "victoriametrics-logs-datasource",
+              "uid": "fe9j59s06pc74c"
+            },
+            "editorMode": "code",
+            "expr": "{hostname=~\"infra.*\",unit=\"pdns-recursor.service\"} ${hostname} | extract \"qname=\u003cqname\u003e, remote=\u003cremote\u003e, qtype=\u003cqtype\u003e\"",
+            "legendFormat": "",
+            "queryType": "instant",
+            "refId": "A"
+          }
+        ],
+        "title": "Logs",
+        "type": "logs"
+      }
+    ],
+    "preload": false,
+    "schemaVersion": 40,
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": ".su",
+            "value": ".su"
+          },
+          "description": "Hostname or fragment",
+          "name": "hostname",
+          "options": [
+            {
+              "selected": true,
+              "text": ".su",
+              "value": ".su"
+            }
+          ],
+          "query": "",
+          "type": "textbox"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "DNS Logs",
+    "weekStart": ""
+  }
+}

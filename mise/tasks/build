@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #MISE description="Synthesize all apps"
 #MISE depends=["install"]
-#MISE sources=["apps/**/*.ts", "lib/**/*.ts", "imports/**/*.ts", "package.json", "bun.lockb"]
+#MISE sources=["apps/**/*.ts", "lib/**/*.ts", "imports/**/*.ts", "package.json", "bun.lockb", "resources/**/*.json"]
 #MISE outputs=["dist/**/*.yaml"]
 
 set -euo pipefail

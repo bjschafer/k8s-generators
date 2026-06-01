@@ -1,0 +1,801 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "annotations": {
+      "grafana.app/folder": "fegpv93evb0u8a"
+    },
+    "labels": {},
+    "name": "y0KGL0iZz",
+    "namespace": "default"
+  },
+  "spec": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "showIn": 0,
+          "tags": [],
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [
+      {
+        "asDropdown": true,
+        "icon": "external link",
+        "includeVars": true,
+        "keepTime": true,
+        "tags": [],
+        "targetBlank": false,
+        "title": "Browse Dashboards",
+        "tooltip": "",
+        "type": "dashboards",
+        "url": ""
+      }
+    ],
+    "panels": [
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 4,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "count(sum by (hostname) (ceph_osd_metadata{cluster=~\"$cluster\", }))",
+            "format": "time_series",
+            "instant": true,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "OSD Hosts",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "description": "Average CPU busy across all hosts (OSD, RGW, MON etc) within the cluster",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 4,
+          "x": 4,
+          "y": 0
+        },
+        "id": 3,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "avg(1 - (\n  avg by(instance) (\n    rate(node_cpu_seconds_total{mode='idle',instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}[$__rate_interval]) or\n    rate(node_cpu{mode='idle',instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}[$__rate_interval])\n  )\n))\n",
+            "format": "time_series",
+            "instant": true,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "AVG CPU Busy",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "description": "Average Memory Usage across all hosts in the cluster (excludes buffer/cache usage)",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 1,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percentunit"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 4,
+          "x": 8,
+          "y": 0
+        },
+        "id": 4,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "avg ((\n  (\n    node_memory_MemTotal{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n    node_memory_MemTotal_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}\n  ) - ((\n    node_memory_MemFree{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n    node_memory_MemFree_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}) +\n    (\n      node_memory_Cached{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n      node_memory_Cached_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}\n    ) + (\n      node_memory_Buffers{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n      node_memory_Buffers_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}\n    ) + (\n      node_memory_Slab{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n      node_memory_Slab_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}\n    )\n  )\n) / (\n  node_memory_MemTotal{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"} or\n   node_memory_MemTotal_bytes{instance=~\"($osd_hosts|$rgw_hosts|$mon_hosts|$mds_hosts).*\"}\n))\n",
+            "format": "time_series",
+            "instant": true,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "AVG RAM Utilization",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "description": "IOPS Load at the device as reported by the OS on all OSD hosts",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 4,
+          "x": 12,
+          "y": 0
+        },
+        "id": 5,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "sum ((\n  rate(node_disk_reads_completed{instance=~\"($osd_hosts).*\"}[$__rate_interval]) or\n  rate(node_disk_reads_completed_total{instance=~\"($osd_hosts).*\"}[$__rate_interval])\n) + (\n  rate(node_disk_writes_completed{instance=~\"($osd_hosts).*\"}[$__rate_interval]) or\n  rate(node_disk_writes_completed_total{instance=~\"($osd_hosts).*\"}[$__rate_interval])\n))\n",
+            "format": "time_series",
+            "instant": true,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Physical IOPS",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "description": "Average Disk utilization for all OSD data devices (i.e. excludes journal/WAL)",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 4,
+          "x": 16,
+          "y": 0
+        },
+        "id": 6,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "avg (\n  label_replace(\n    (rate(node_disk_io_time_ms[$__rate_interval]) / 10 ) or\n      (rate(node_disk_io_time_seconds_total[$__rate_interval]) * 100),\n    \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  ) * on(instance, device) group_left(ceph_daemon) label_replace(\n    label_replace(\n      ceph_disk_occupation_human{instance=~\"($osd_hosts).*\", cluster=~\"$cluster\", },\n      \"device\", \"$1\", \"device\", \"/dev/(.*)\"\n    ), \"instance\", \"$1\", \"instance\", \"([^.:]*).*\"\n  )\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "AVG Disk Utilization",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "description": "Total send/receive network load across all hosts in the ceph cluster",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "bytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 4,
+          "x": 20,
+          "y": 0
+        },
+        "id": 7,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "sum (\n  (\n    rate(node_network_receive_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!=\"lo\"}[$__rate_interval]) or\n    rate(node_network_receive_bytes_total{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!=\"lo\"}[$__rate_interval])\n  ) unless on (device, instance)\n  label_replace((node_bonding_slaves \u003e 0), \"device\", \"$1\", \"master\", \"(.+)\")\n) +\nsum (\n  (\n    rate(node_network_transmit_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!=\"lo\"}[$__rate_interval]) or\n    rate(node_network_transmit_bytes_total{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!=\"lo\"}[$__rate_interval])\n  ) unless on (device, instance)\n  label_replace((node_bonding_slaves \u003e 0), \"device\", \"$1\", \"master\", \"(.+)\")\n)\n",
+            "format": "time_series",
+            "instant": true,
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Load",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 8,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 0,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 5
+        },
+        "id": 8,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "topk(10,\n  100 * (\n    1 - (\n      avg by(instance) (\n        rate(node_cpu_seconds_total{mode='idle',instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}[$__rate_interval]) or\n        rate(node_cpu{mode='idle',instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\"}[$__rate_interval])\n      )\n    )\n  )\n)\n",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "title": "CPU Busy - Top 10 Hosts",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "uid": "$datasource"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 8,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 0,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 5
+        },
+        "id": 9,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.5.2",
+        "targets": [
+          {
+            "datasource": {
+              "uid": "$datasource"
+            },
+            "expr": "topk(10, (sum by(instance) (\n  (\n    rate(node_network_receive_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!=\"lo\"}[$__rate_interval]) or\n    rate(node_network_receive_bytes_total{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!=\"lo\"}[$__rate_interval])\n  ) +\n  (\n    rate(node_network_transmit_bytes{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!=\"lo\"}[$__rate_interval]) or\n    rate(node_network_transmit_bytes_total{instance=~\"($osd_hosts|$mon_hosts|$mds_hosts|$rgw_hosts).*\",device!=\"lo\"}[$__rate_interval])\n  ) unless on (device, instance)\n    label_replace((node_bonding_slaves \u003e 0), \"device\", \"$1\", \"master\", \"(.+)\"))\n))\n",
+            "format": "time_series",
+            "intervalFactor": 1,
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Load - Top 10 Hosts",
+        "type": "timeseries"
+      }
+    ],
+    "preload": false,
+    "refresh": "30s",
+    "schemaVersion": 40,
+    "tags": [
+      "ceph-mixin"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": "metrics",
+            "value": "fe6cssq0m2v40d"
+          },
+          "label": "Data Source",
+          "name": "datasource",
+          "options": [],
+          "query": "victoriametrics-metrics-datasource",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
+        {
+          "current": {
+            "text": "",
+            "value": ""
+          },
+          "datasource": "$datasource",
+          "includeAll": false,
+          "label": "cluster",
+          "name": "cluster",
+          "options": [],
+          "query": "label_values(ceph_health_status, cluster)",
+          "refresh": 1,
+          "regex": "(.*)",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": "$datasource",
+          "includeAll": true,
+          "name": "osd_hosts",
+          "options": [],
+          "query": "label_values(ceph_osd_metadata{cluster=~\"$cluster\", }, hostname)",
+          "refresh": 1,
+          "regex": "([^.]*).*",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": "$datasource",
+          "includeAll": true,
+          "name": "mon_hosts",
+          "options": [],
+          "query": "label_values(ceph_mon_metadata{cluster=~\"$cluster\", }, hostname)",
+          "refresh": 1,
+          "regex": "mon.(.*)",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "",
+            "value": ""
+          },
+          "datasource": "$datasource",
+          "includeAll": true,
+          "name": "mds_hosts",
+          "options": [],
+          "query": "label_values(ceph_mds_inodes{hostname, cluster=~\"$cluster\", })",
+          "refresh": 1,
+          "regex": "mds.(.*)",
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "text": "",
+            "value": ""
+          },
+          "datasource": "$datasource",
+          "includeAll": true,
+          "name": "rgw_hosts",
+          "options": [],
+          "query": "label_values(ceph_rgw_metadata{hostname, cluster=~\"$cluster\", })",
+          "refresh": 1,
+          "regex": "rgw.(.*)",
+          "sort": 1,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Host Overview",
+    "weekStart": ""
+  }
+}
