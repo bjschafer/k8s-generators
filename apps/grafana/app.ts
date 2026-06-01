@@ -193,12 +193,15 @@ class Grafana extends Chart {
       // grafanactl wraps dashboards in apiVersion/kind/spec — extract the inner spec
       const dashboardJson = raw.spec ?? raw;
       const uid: string = dashboardJson.uid ?? raw.metadata?.name ?? basename(entry.name, ".json");
+      // ConfigMap names must be RFC 1123: lowercase alphanumeric and hyphens only
+      const safeName = uid.toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
 
       new ConfigMap(this, `dashboard-${uid}`, {
         metadata: {
-          name: `grafana-dashboard-${uid}`,
+          name: `grafana-dashboard-${safeName}`,
           namespace: ns,
           labels: { grafana_dashboard: "1" },
+          annotations: { "argocd.argoproj.io/sync-options": "ServerSideApply=true" },
         },
         data: { [`${uid}.json`]: JSON.stringify(dashboardJson) },
       });
