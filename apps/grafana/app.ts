@@ -1,8 +1,10 @@
 import { App, Chart, Helm } from "cdk8s";
-import { basename } from "path";
+import { basename, join, dirname } from "path";
+import { readdirSync, readFileSync } from "fs";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { Construct } from "constructs";
+import { ConfigMap } from "cdk8s-plus-33";
 import {
   VmServiceScrape,
   VmServiceScrapeSpecEndpointsScheme,
@@ -142,6 +144,8 @@ class Grafana extends Chart {
       },
     });
 
+    this.loadDashboards(namespace);
+
     new VmServiceScrape(this, "servicescrape", {
       metadata: {
         name: name,
@@ -166,6 +170,29 @@ class Grafana extends Chart {
         ],
       },
     });
+  }
+
+  private loadDashboards(ns: string) {
+    const dashboardsDir = join(dirname(dirname(__dirname)), "resources", "Dashboard");
+    const files = readdirSync(dashboardsDir, { withFileTypes: true });
+
+    for (const entry of files) {
+      if (!entry.name.endsWith(".json")) continue;
+
+      const raw = JSON.parse(readFileSync(join(dashboardsDir, entry.name), "utf-8"));
+      // grafanactl wraps dashboards in apiVersion/kind/spec — extract the inner spec
+      const dashboardJson = raw.spec ?? raw;
+      const uid = basename(entry.name, ".json");
+
+      new ConfigMap(this, `dashboard-${uid}`, {
+        metadata: {
+          name: `grafana-dashboard-${uid}`,
+          namespace: ns,
+          labels: { grafana_dashboard: "1" },
+        },
+        data: { [`${uid}.json`]: JSON.stringify(dashboardJson) },
+      });
+    }
   }
 }
 
