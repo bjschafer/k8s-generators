@@ -40,6 +40,8 @@ spec:
               value: /tmp/dashboards
             - name: RESOURCE
               value: both
+            - name: FOLDER_ANNOTATION
+              value: k8s-sidecar-target-directory
             - name: REQ_URL
               value: http://localhost:3000/api/admin/provisioning/dashboards/reload
             - name: REQ_METHOD

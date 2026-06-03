@@ -129,6 +129,7 @@ class Grafana extends Chart {
         sidecar: {
           dashboards: {
             enabled: true,
+            folderAnnotation: "k8s-sidecar-target-directory",
             provider: {
               allowUiUpdates: true,
               foldersFromFilesStructure: true,
@@ -174,15 +175,15 @@ class Grafana extends Chart {
 
   private loadDashboards(ns: string) {
     const dashboardsDir = join(dirname(dirname(__dirname)), "resources", "Dashboard");
-    this.loadDashboardsFromDir(dashboardsDir, ns);
+    this.loadDashboardsFromDir(dashboardsDir, dashboardsDir, ns);
   }
 
-  private loadDashboardsFromDir(dir: string, ns: string) {
+  private loadDashboardsFromDir(rootDir: string, dir: string, ns: string) {
     const entries = readdirSync(dir, { withFileTypes: true });
 
     for (const entry of entries) {
       if (entry.isDirectory()) {
-        this.loadDashboardsFromDir(join(dir, entry.name), ns);
+        this.loadDashboardsFromDir(rootDir, join(dir, entry.name), ns);
         continue;
       }
       if (!entry.name.endsWith(".json")) continue;
@@ -193,15 +194,26 @@ class Grafana extends Chart {
       // grafanactl wraps dashboards in apiVersion/kind/spec — extract the inner spec
       const dashboardJson = raw.spec ?? raw;
       const uid: string = dashboardJson.uid ?? raw.metadata?.name ?? basename(entry.name, ".json");
+      // Inject uid so Grafana can upsert existing dashboards rather than creating duplicates
+      dashboardJson.uid = uid;
       // ConfigMap names must be RFC 1123: lowercase alphanumeric and hyphens only
       const safeName = uid.toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
+
+      // Derive the Grafana folder from the top-level directory relative to the dashboards root
+      const relPath = dir.slice(rootDir.length).replace(/^[/\\]/, "");
+      const folder = relPath.split(/[/\\]/)[0] ?? "";
+
+      const annotations: Record<string, string> = {
+        "argocd.argoproj.io/sync-options": "ServerSideApply=true",
+      };
+      if (folder) annotations["k8s-sidecar-target-directory"] = folder;
 
       new ConfigMap(this, `dashboard-${uid}`, {
         metadata: {
           name: `grafana-dashboard-${safeName}`,
           namespace: ns,
           labels: { grafana_dashboard: "1" },
-          annotations: { "argocd.argoproj.io/sync-options": "ServerSideApply=true" },
+          annotations,
         },
         data: { [`${uid}.json`]: JSON.stringify(dashboardJson) },
       });
