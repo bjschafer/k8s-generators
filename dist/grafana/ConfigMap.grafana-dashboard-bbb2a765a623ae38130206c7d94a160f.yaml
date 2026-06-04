@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: ServerSideApply=true
-    k8s-sidecar-target-directory: Networking
+    k8s-sidecar-target-directory: K8S/Networking
   labels:
     grafana_dashboard: "1"
   name: grafana-dashboard-bbb2a765a623ae38130206c7d94a160f

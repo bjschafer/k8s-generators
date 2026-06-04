@@ -199,10 +199,9 @@ class Grafana extends Chart {
       // ConfigMap names must be RFC 1123: lowercase alphanumeric and hyphens only
       const safeName = uid.toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
 
-      // Derive the Grafana folder from the top-level directory relative to the dashboards root.
+      // Derive the Grafana folder from the full path relative to the dashboards root.
       // "General" is a convention for root-level dashboards (no folder).
-      const relPath = dir.slice(rootDir.length).replace(/^[/\\]/, "");
-      const folder = relPath.split(/[/\\]/)[0] ?? "";
+      const folder = dir.slice(rootDir.length).replace(/^[/\\]/, "").replace(/\\/g, "/");
 
       const annotations: Record<string, string> = {
         "argocd.argoproj.io/sync-options": "ServerSideApply=true",
