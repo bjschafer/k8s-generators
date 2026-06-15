@@ -640,8 +640,10 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "KubernetesPodCrashLooping",
-        expr: "increase(kube_pod_container_status_restarts_total[1m]) > 3",
-        for: "15m",
+        // Use a 15m window so accumulated restarts remain visible even at max CrashLoopBackOff
+        // backoff (~5 min/restart), where a 1m window drops below the threshold.
+        expr: "increase(kube_pod_container_status_restarts_total[15m]) > 3",
+        for: "5m",
         labels: {
           priority: PRIORITY.NORMAL,
           push_notify: "true",

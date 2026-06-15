@@ -136,8 +136,8 @@ spec:
                 VALUE = {{ $value }}
                 LABELS = {{ $labels }}
             summary: Kubernetes pod crash looping (instance {{ $labels.instance }})
-          expr: increase(kube_pod_container_status_restarts_total[1m]) > 3
-          for: 15m
+          expr: increase(kube_pod_container_status_restarts_total[15m]) > 3
+          for: 5m
           labels:
             namespace: metrics
             priority: "0"

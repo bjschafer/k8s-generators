@@ -1,5 +1,5 @@
-import { App, Size } from "cdk8s";
-import { Cpu, EnvValue } from "cdk8s-plus-33";
+import { App, Chart, Size } from "cdk8s";
+import { Cpu, EnvValue, Secret } from "cdk8s-plus-33";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
@@ -7,6 +7,11 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { BitwardenSecret } from "../../lib/secrets";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
+import {
+  ExternalSecret,
+  ExternalSecretSpecDataFromSourceRefGeneratorRefKind,
+} from "../../imports/external-secrets.io";
+import { Password } from "../../imports/generators.external-secrets.io";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -38,6 +43,35 @@ const secrets = new BitwardenSecret(app, "secrets", {
     HBOX_OIDC_CLIENT_SECRET: "1d512c7f-865f-4f81-a3b2-b3cf00063f49",
   },
 });
+
+// Generate a stable pepper for API key signing. Value is unimportant but must be
+// at least 32 bytes and stable (refreshInterval: "0" = generate once, never rotate).
+const pepperSecretName = "api-key-pepper";
+const pepperGeneratorName = "api-key-pepper-generator";
+const pepperChart = new Chart(app, "pepper");
+new Password(pepperChart, "gen", {
+  metadata: { name: pepperGeneratorName, namespace: namespace },
+  spec: { length: 48, digits: 10, symbols: 0, noUpper: false, allowRepeat: true },
+});
+new ExternalSecret(pepperChart, "secret", {
+  metadata: { name: pepperSecretName, namespace: namespace },
+  spec: {
+    refreshInterval: "0",
+    dataFrom: [
+      {
+        sourceRef: {
+          generatorRef: {
+            apiVersion: "generators.external-secrets.io/v1alpha1",
+            kind: ExternalSecretSpecDataFromSourceRefGeneratorRefKind.PASSWORD,
+            name: pepperGeneratorName,
+          },
+        },
+      },
+    ],
+    target: { name: pepperSecretName },
+  },
+});
+const pepperSecret = Secret.fromSecretName(app, "pepper-ref", pepperSecretName);
 
 new AppPlus(app, name, {
   name: name,
@@ -80,6 +114,7 @@ new AppPlus(app, name, {
     HBOX_OIDC_AUTO_REDIRECT: EnvValue.fromValue("true"),
     HBOX_OPTIONS_ALLOW_LOCAL_LOGIN: EnvValue.fromValue("false"),
     HBOX_OIDC_BUTTON_TEXT: EnvValue.fromValue("Cmdcentral Login"),
+    HBOX_AUTH_API_KEY_PEPPER: EnvValue.fromSecretValue({ secret: pepperSecret, key: "password" }),
     ...secrets.toEnvValues(),
   },
   volumes: [
