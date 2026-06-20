@@ -28,7 +28,7 @@ spec:
             - --provider=webhook
             - --webhook-provider-url=http://localhost:8888
             - --txt-owner-id=prod-k8s-unifi
-          image: registry.k8s.io/external-dns/external-dns:v0.20.0
+          image: registry.k8s.io/external-dns/external-dns:v0.21.0
           imagePullPolicy: Always
           name: external-dns
           resources:
@@ -46,14 +46,12 @@ spec:
         - env:
             - name: UNIFI_HOST
               value: https://10.0.10.1
-            - name: UNIFI_USER
-              value: external-dns
             - name: UNIFI_SKIP_TLS_VERIFY
               value: "true"
-            - name: UNIFI_PASS
+            - name: UNIFI_API_KEY
               valueFrom:
                 secretKeyRef:
-                  key: UNIFI_PASS
+                  key: UNIFI_API_KEY
                   name: external-dns-unifi
           image: ghcr.io/home-operations/external-dns-unifi-webhook:latest
           imagePullPolicy: Always

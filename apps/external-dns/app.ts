@@ -19,7 +19,7 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const EXTERNAL_DNS_IMAGE = "registry.k8s.io/external-dns/external-dns:v0.20.0";
+const EXTERNAL_DNS_IMAGE = "registry.k8s.io/external-dns/external-dns:v0.21.0";
 const UNIFI_WEBHOOK_IMAGE =
   "ghcr.io/home-operations/external-dns-unifi-webhook:latest";
 
@@ -140,7 +140,7 @@ const unifiSecret = new BitwardenSecret(app, "unifi-secret", {
   name: "external-dns-unifi",
   namespace,
   data: {
-    UNIFI_PASS: "4011a6c5-0cd3-4a5f-9b96-b46f002528dc",
+    UNIFI_API_KEY: "4011a6c5-0cd3-4a5f-9b96-b46f002528dc",
   },
 });
 
@@ -186,7 +186,6 @@ class ExternalDnsUnifi extends Chart {
       securityContext: DEFAULT_SECURITY_CONTEXT,
       envVariables: {
         UNIFI_HOST: EnvValue.fromValue("https://10.0.10.1"),
-        UNIFI_USER: EnvValue.fromValue("external-dns"),
         UNIFI_SKIP_TLS_VERIFY: EnvValue.fromValue("true"),
         ...unifiSecret.toEnvValues(),
       },
