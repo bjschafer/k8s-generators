@@ -20,7 +20,8 @@ const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
 const EXTERNAL_DNS_IMAGE = "registry.k8s.io/external-dns/external-dns:v0.20.0";
-const UNIFI_WEBHOOK_IMAGE = "ghcr.io/home-operations/external-dns-unifi-webhook:latest";
+const UNIFI_WEBHOOK_IMAGE =
+  "ghcr.io/home-operations/external-dns-unifi-webhook:latest";
 
 const COMMON_ARGS = [
   "--source=service",
@@ -101,7 +102,7 @@ const pdnsSecret = new BitwardenSecret(app, "pdns-secret", {
   name: "external-dns-pdns",
   namespace,
   data: {
-    "api-key": "REPLACE_WITH_BITWARDEN_UUID",
+    "api-key": "0b0d8193-640e-4b27-a093-b46f002363eb",
   },
 });
 
@@ -139,7 +140,7 @@ const unifiSecret = new BitwardenSecret(app, "unifi-secret", {
   name: "external-dns-unifi",
   namespace,
   data: {
-    UNIFI_PASS: "REPLACE_WITH_BITWARDEN_UUID",
+    UNIFI_PASS: "4011a6c5-0cd3-4a5f-9b96-b46f002528dc",
   },
 });
 
@@ -147,7 +148,11 @@ class ExternalDnsUnifi extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const saRef = ServiceAccount.fromServiceAccountName(this, "sa", "external-dns");
+    const saRef = ServiceAccount.fromServiceAccountName(
+      this,
+      "sa",
+      "external-dns",
+    );
 
     const deploy = new Deployment(this, "deployment", {
       metadata: { name: "external-dns-unifi", namespace },
