@@ -46,13 +46,10 @@ spec:
         - env:
             - name: UNIFI_HOST
               value: https://10.0.10.1
+            - name: UNIFI_USER
+              value: external-dns
             - name: UNIFI_SKIP_TLS_VERIFY
               value: "true"
-            - name: UNIFI_USER
-              valueFrom:
-                secretKeyRef:
-                  key: UNIFI_USER
-                  name: external-dns-unifi
             - name: UNIFI_PASS
               valueFrom:
                 secretKeyRef:

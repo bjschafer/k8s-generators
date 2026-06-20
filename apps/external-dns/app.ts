@@ -139,7 +139,6 @@ const unifiSecret = new BitwardenSecret(app, "unifi-secret", {
   name: "external-dns-unifi",
   namespace,
   data: {
-    UNIFI_USER: "REPLACE_WITH_BITWARDEN_UUID",
     UNIFI_PASS: "REPLACE_WITH_BITWARDEN_UUID",
   },
 });
@@ -181,6 +180,7 @@ class ExternalDnsUnifi extends Chart {
       securityContext: DEFAULT_SECURITY_CONTEXT,
       envVariables: {
         UNIFI_HOST: EnvValue.fromValue("https://10.0.10.1"),
+        UNIFI_USER: EnvValue.fromValue("external-dns"),
         UNIFI_SKIP_TLS_VERIFY: EnvValue.fromValue("true"),
         ...unifiSecret.toEnvValues(),
       },
