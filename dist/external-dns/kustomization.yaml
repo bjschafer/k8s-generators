@@ -1,0 +1,8 @@
+resources:
+  - ClusterRole.external-dns.yaml
+  - ClusterRoleBinding.external-dns-viewer.yaml
+  - Deployment.external-dns-pdns.yaml
+  - Deployment.external-dns-unifi.yaml
+  - ExternalSecret.external-dns-pdns.yaml
+  - ExternalSecret.external-dns-unifi.yaml
+  - ServiceAccount.external-dns.yaml

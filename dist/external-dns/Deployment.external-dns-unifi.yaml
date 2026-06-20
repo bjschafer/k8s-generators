@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns-unifi
+  namespace: external-dns
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: unifi-deployment-c8fcc8bc
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        cdk8s.io/metadata.addr: unifi-deployment-c8fcc8bc
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - --source=service
+            - --source=ingress
+            - --source=traefik-proxy
+            - --interval=30s
+            - --provider=webhook
+            - --webhook-provider-url=http://localhost:8888
+            - --txt-owner-id=prod-k8s-unifi
+          image: registry.k8s.io/external-dns/external-dns:v0.20.0
+          imagePullPolicy: Always
+          name: external-dns
+          resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 25m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+        - env:
+            - name: UNIFI_HOST
+              value: https://10.0.10.1
+            - name: UNIFI_SKIP_TLS_VERIFY
+              value: "true"
+            - name: UNIFI_USER
+              valueFrom:
+                secretKeyRef:
+                  key: UNIFI_USER
+                  name: external-dns-unifi
+            - name: UNIFI_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: UNIFI_PASS
+                  name: external-dns-unifi
+          image: ghcr.io/home-operations/external-dns-unifi-webhook:latest
+          imagePullPolicy: Always
+          name: unifi-webhook
+          ports:
+            - containerPort: 8888
+              name: webhook
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi
+            requests:
+              cpu: 25m
+              memory: 32Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      serviceAccountName: external-dns
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
