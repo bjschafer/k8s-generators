@@ -160,6 +160,7 @@ class ExternalDnsUnifi extends Chart {
       strategy: DeploymentStrategy.recreate(),
       securityContext: DEFAULT_SECURITY_CONTEXT,
       serviceAccount: saRef,
+      automountServiceAccountToken: true,
       containers: [
         {
           name: "external-dns",

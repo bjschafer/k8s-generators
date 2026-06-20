@@ -18,7 +18,7 @@ spec:
       labels:
         cdk8s.io/metadata.addr: unifi-deployment-c8fcc8bc
     spec:
-      automountServiceAccountToken: false
+      automountServiceAccountToken: true
       containers:
         - args:
             - --source=service
