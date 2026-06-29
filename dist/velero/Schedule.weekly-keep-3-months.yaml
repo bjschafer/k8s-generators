@@ -9,6 +9,7 @@ spec:
     csiSnapshotTimeout: 0s
     includedNamespaces:
       - "*"
+    itemOperationTimeout: 6h0m0s
     snapshotMoveData: true
     storageLocation: versitygw
     ttl: 2232h0m0s

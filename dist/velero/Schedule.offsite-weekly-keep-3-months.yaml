@@ -18,6 +18,7 @@ spec:
       - paperless
       - rclone
       - spoolman
+    itemOperationTimeout: 6h0m0s
     snapshotMoveData: true
     storageLocation: wasabi
     ttl: 2232h0m0s

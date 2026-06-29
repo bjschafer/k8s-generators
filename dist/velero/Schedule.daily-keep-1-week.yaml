@@ -4,11 +4,12 @@ metadata:
   name: daily-keep-1-week
   namespace: velero
 spec:
-  schedule: 0 4 * * *
+  schedule: 0 6 * * *
   template:
     csiSnapshotTimeout: 0s
     includedNamespaces:
       - "*"
+    itemOperationTimeout: 6h0m0s
     snapshotMoveData: true
     storageLocation: versitygw
     ttl: 168h0m0s
