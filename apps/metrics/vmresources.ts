@@ -174,7 +174,21 @@ export class VmResources extends Chart {
         ],
         route: {
           receiver: "blackhole",
+          // default 4h repeat_interval is too chatty for anything that stays firing for a
+          // while; once a day is plenty unless a route below overrides it
+          repeatInterval: "24h",
           routes: [
+            // the weekly backup is too bandwidth-heavy to kick off manually during the day,
+            // so a daily nudge just gets ignored until the next scheduled run fixes it anyway -
+            // only remind roughly as often as the schedule itself runs
+            {
+              receiver: "pushover",
+              matchers: ['alertname="VeleroBackupStaleWeekly"'],
+              // nested `routes` entries are passed through untyped, so this must be the raw
+              // snake_case alertmanager config key, not the camelCase `repeatInterval`. The CRD
+              // schema's duration pattern doesn't accept a "d" suffix, so 7d is spelled as 168h.
+              repeat_interval: "168h",
+            },
             // either explicitly requesting push notifications, or setting PRIORITY.HIGH or PRIORITY.NORMAL will get pushover notifications
             {
               receiver: "pushover",

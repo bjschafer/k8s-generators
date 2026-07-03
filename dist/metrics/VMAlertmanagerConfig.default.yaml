@@ -42,7 +42,12 @@ spec:
     - name: blackhole
   route:
     receiver: blackhole
+    repeat_interval: 24h
     routes:
+      - matchers:
+          - alertname="VeleroBackupStaleWeekly"
+        receiver: pushover
+        repeat_interval: 168h
       - matchers:
           - push_notify="true"
         receiver: pushover
