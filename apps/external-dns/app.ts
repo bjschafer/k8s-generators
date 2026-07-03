@@ -1,11 +1,5 @@
 import { App, Chart, Size } from "cdk8s";
-import {
-  Cpu,
-  Deployment,
-  DeploymentStrategy,
-  EnvValue,
-  ServiceAccount,
-} from "cdk8s-plus-33";
+import { Cpu, Deployment, DeploymentStrategy, EnvValue, ServiceAccount } from "cdk8s-plus-33";
 import { Construct } from "constructs";
 import { KubeClusterRole, KubeClusterRoleBinding } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
@@ -20,8 +14,7 @@ const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
 const EXTERNAL_DNS_IMAGE = "registry.k8s.io/external-dns/external-dns:v0.21.0";
-const UNIFI_WEBHOOK_IMAGE =
-  "ghcr.io/home-operations/external-dns-unifi-webhook:latest";
+const UNIFI_WEBHOOK_IMAGE = "ghcr.io/home-operations/external-dns-unifi-webhook:latest";
 
 const COMMON_ARGS = [
   "--source=service",
@@ -148,11 +141,7 @@ class ExternalDnsUnifi extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const saRef = ServiceAccount.fromServiceAccountName(
-      this,
-      "sa",
-      "external-dns",
-    );
+    const saRef = ServiceAccount.fromServiceAccountName(this, "sa", "external-dns");
 
     const deploy = new Deployment(this, "deployment", {
       metadata: { name: "external-dns-unifi", namespace },

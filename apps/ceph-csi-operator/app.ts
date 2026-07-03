@@ -190,7 +190,6 @@ class CephConfig extends Chart {
         },
       },
     });
-
   }
 }
 

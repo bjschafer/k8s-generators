@@ -63,8 +63,7 @@ class Grafana extends Chart {
         env: {
           TZ: "America/Chicago",
           GF_DATABASE_TYPE: "postgres",
-          GF_DATABASE_HOST:
-            "prod-pg17-pooler-rw.postgres.svc.cluster.local:5432",
+          GF_DATABASE_HOST: "prod-pg17-pooler-rw.postgres.svc.cluster.local:5432",
           GF_DATABASE_NAME: "grafana",
           GF_DATABASE_USER: "grafana",
           GF_DATABASE_SSL_MODE: "require",
@@ -85,23 +84,20 @@ class Grafana extends Chart {
         },
         "grafana.ini": {
           auth: {
-            signout_redirect_url:
-              "https://login.cmdcentral.xyz/application/o/grafana/end-session/",
+            signout_redirect_url: "https://login.cmdcentral.xyz/application/o/grafana/end-session/",
             oauth_auto_login: true,
             oauth_allow_insecure_email_lookup: true,
           },
           "auth.generic_oauth": {
             enabled: true,
             client_id: "$__file{/etc/secrets/auth_cmdcentral_oauth/client_id}",
-            client_secret:
-              "$__file{/etc/secrets/auth_cmdcentral_oauth/client_secret}",
+            client_secret: "$__file{/etc/secrets/auth_cmdcentral_oauth/client_secret}",
             name: "Cmdcentral Login",
             scopes: "openid email profile",
             auth_url: "https://login.cmdcentral.xyz/application/o/authorize/",
             token_url: "https://login.cmdcentral.xyz/application/o/token/",
             api_url: "https://login.cmdcentral.xyz/application/o/userinfo/",
-            role_attribute_path:
-              "contains(groups[*], 'wheel') && 'Admin' || 'Viewer'",
+            role_attribute_path: "contains(groups[*], 'wheel') && 'Admin' || 'Viewer'",
           },
           "auth.proxy": {
             enabled: true,
@@ -197,11 +193,17 @@ class Grafana extends Chart {
       // Inject uid so Grafana can upsert existing dashboards rather than creating duplicates
       dashboardJson.uid = uid;
       // ConfigMap names must be RFC 1123: lowercase alphanumeric and hyphens only
-      const safeName = uid.toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
+      const safeName = uid
+        .toLowerCase()
+        .replace(/[^a-z0-9-]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 
       // Derive the Grafana folder from the full path relative to the dashboards root.
       // "General" is a convention for root-level dashboards (no folder).
-      const folder = dir.slice(rootDir.length).replace(/^[/\\]/, "").replace(/\\/g, "/");
+      const folder = dir
+        .slice(rootDir.length)
+        .replace(/^[/\\]/, "")
+        .replace(/\\/g, "/");
 
       const annotations: Record<string, string> = {
         "argocd.argoproj.io/sync-options": "ServerSideApply=true",
