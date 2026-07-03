@@ -14,6 +14,7 @@ import {
   ClusterSpec,
   ClusterSpecBootstrapInitdbImportType,
   ClusterSpecManagedRoles,
+  Database,
   ImageCatalog,
   Pooler,
   PoolerSpecPgbouncerPoolMode,
@@ -225,21 +226,13 @@ class ProdPostgres extends Chart {
           resources: {
             requests: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                  "512Mi",
-                ),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "1",
-              ),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
             },
             limits: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                  "512Mi",
-                ),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "1",
-              ),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
             },
           },
         },
@@ -308,12 +301,7 @@ export interface ImportProps {
 }
 
 class VectorPostgres extends Chart {
-  constructor(
-    scope: Construct,
-    id: string,
-    name: string,
-    importProps?: ImportProps,
-  ) {
+  constructor(scope: Construct, id: string, name: string, importProps?: ImportProps) {
     super(scope, id);
 
     const imageBase = "ghcr.io/tensorchord/cloudnative-vectorchord";
@@ -336,45 +324,37 @@ class VectorPostgres extends Chart {
       },
     });
 
-    const importConfig:
-      | Pick<ClusterSpec, "externalClusters" | "bootstrap">
-      | undefined = importProps
-      ? {
-          externalClusters: [
-            {
-              name: importProps.sourceClusterName,
-              connectionParameters: {
-                host: `${importProps.sourceClusterName}-r.${importProps.sourceClusterNamespace}.svc.cluster.local`,
-                user: "postgres",
-                sslmode: "require",
-              },
-              password: {
-                name: `${importProps.sourceClusterName}-superuser`,
-                key: "password",
-              },
-            },
-          ],
-          bootstrap: {
-            initdb: {
-              import: {
-                type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
-                databases: importProps.databases,
-                roles: importProps.roles,
-                source: {
-                  externalCluster: importProps.sourceClusterName,
+    const importConfig: Pick<ClusterSpec, "externalClusters" | "bootstrap"> | undefined =
+      importProps
+        ? {
+            externalClusters: [
+              {
+                name: importProps.sourceClusterName,
+                connectionParameters: {
+                  host: `${importProps.sourceClusterName}-r.${importProps.sourceClusterNamespace}.svc.cluster.local`,
+                  user: "postgres",
+                  sslmode: "require",
+                },
+                password: {
+                  name: `${importProps.sourceClusterName}-superuser`,
+                  key: "password",
                 },
               },
-              postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
+            ],
+            bootstrap: {
+              initdb: {
+                import: {
+                  type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
+                  databases: importProps.databases,
+                  roles: importProps.roles,
+                  source: {
+                    externalCluster: importProps.sourceClusterName,
+                  },
+                },
+              },
             },
-          },
-        }
-      : {
-          bootstrap: {
-            initdb: {
-              postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
-            },
-          },
-        };
+          }
+        : undefined;
 
     new Cluster(this, name, {
       metadata: {
@@ -430,6 +410,24 @@ class VectorPostgres extends Chart {
       },
     });
 
+    // Declaratively manages the vchord extension version inside the immich
+    // database, since immich's own role doesn't own it (vchord requires
+    // superuser to install/alter, so ownership can't be handed to immich) and
+    // the operator reconciles this continuously - unlike postInitSql, which
+    // only ever runs once against the `postgres` maintenance database.
+    new Database(this, "immich-database", {
+      metadata: {
+        namespace: namespace,
+        name: "immich",
+      },
+      spec: {
+        name: "immich",
+        owner: "immich",
+        cluster: { name },
+        extensions: [{ name: "vector" }, { name: "vchord" }],
+      },
+    });
+
     new ObjectStore(this, "object-store", {
       metadata: {
         name: name,
@@ -458,21 +456,13 @@ class VectorPostgres extends Chart {
           resources: {
             requests: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                  "512Mi",
-                ),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "1",
-              ),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
             },
             limits: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                  "512Mi",
-                ),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
-                "1",
-              ),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
             },
           },
         },

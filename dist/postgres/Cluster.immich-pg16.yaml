@@ -4,10 +4,6 @@ metadata:
   name: immich-pg16
   namespace: postgres
 spec:
-  bootstrap:
-    initdb:
-      postInitSQL:
-        - CREATE EXTENSION IF NOT EXISTS vchord CASCADE;
   enableSuperuserAccess: true
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
