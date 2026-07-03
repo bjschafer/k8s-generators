@@ -34,11 +34,11 @@ spec:
         - alias: immich-machine-learning
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: ghcr.io/immich-app/immich-machine-learning:v2.x.x
+          imageName: ghcr.io/immich-app/immich-machine-learning:v3.x.x
         - alias: immich-server
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: ghcr.io/immich-app/immich-server:v2.x.x
+          imageName: ghcr.io/immich-app/immich-server:v3.x.x
       namePattern: immich
   namespace: argocd
   writeBackConfig:

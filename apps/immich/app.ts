@@ -1,5 +1,11 @@
 import { App, Duration, Size } from "cdk8s";
-import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe, Volume } from "cdk8s-plus-33";
+import {
+  Cpu,
+  EnvValue,
+  PersistentVolumeAccessMode,
+  Probe,
+  Volume,
+} from "cdk8s-plus-33";
 import { basename } from "path";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
@@ -16,7 +22,7 @@ import { StorageClass } from "../../lib/volume";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "v2.x.x";
+const version = "v3.x.x";
 
 const images = {
   MACHINE_LEARNING: "ghcr.io/immich-app/immich-machine-learning",
@@ -66,7 +72,9 @@ const valkey = new Valkey(app, "valkey", {
 });
 
 const commonEnv: Record<string, EnvValue> = {
-  IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue("http://immich-machine-learning:3003"),
+  IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue(
+    "http://immich-machine-learning:3003",
+  ),
   REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service!.name),
   REDIS_PORT: EnvValue.fromValue("6379"),
   REDIS_PASSWORD: EnvValue.fromSecretValue({
