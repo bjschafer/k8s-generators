@@ -1449,10 +1449,20 @@ export interface BackupStorageLocationSpecObjectStorage {
 
   /**
    * CACert defines a CA bundle to use when verifying TLS connections to the provider.
+   * Deprecated: Use CACertRef instead.
    *
    * @schema BackupStorageLocationSpecObjectStorage#caCert
    */
   readonly caCert?: string;
+
+  /**
+   * CACertRef is a reference to a Secret containing the CA certificate bundle to use
+   * when verifying TLS connections to the provider. The Secret must be in the same
+   * namespace as the BackupStorageLocation.
+   *
+   * @schema BackupStorageLocationSpecObjectStorage#caCertRef
+   */
+  readonly caCertRef?: BackupStorageLocationSpecObjectStorageCaCertRef;
 
   /**
    * Prefix is the path inside a bucket to use for Velero storage. Optional.
@@ -1471,7 +1481,58 @@ export function toJson_BackupStorageLocationSpecObjectStorage(obj: BackupStorage
   const result = {
     'bucket': obj.bucket,
     'caCert': obj.caCert,
+    'caCertRef': toJson_BackupStorageLocationSpecObjectStorageCaCertRef(obj.caCertRef),
     'prefix': obj.prefix,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * CACertRef is a reference to a Secret containing the CA certificate bundle to use
+ * when verifying TLS connections to the provider. The Secret must be in the same
+ * namespace as the BackupStorageLocation.
+ *
+ * @schema BackupStorageLocationSpecObjectStorageCaCertRef
+ */
+export interface BackupStorageLocationSpecObjectStorageCaCertRef {
+  /**
+   * The key of the secret to select from.  Must be a valid secret key.
+   *
+   * @schema BackupStorageLocationSpecObjectStorageCaCertRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema BackupStorageLocationSpecObjectStorageCaCertRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Specify whether the Secret or its key must be defined
+   *
+   * @schema BackupStorageLocationSpecObjectStorageCaCertRef#optional
+   */
+  readonly optional?: boolean;
+}
+
+/**
+ * Converts an object of type 'BackupStorageLocationSpecObjectStorageCaCertRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackupStorageLocationSpecObjectStorageCaCertRef(obj: BackupStorageLocationSpecObjectStorageCaCertRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'optional': obj.optional,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -1627,6 +1688,13 @@ export interface DataDownloadSpec {
   readonly snapshotId: string;
 
   /**
+   * SnapshotSize is the logical size in Bytes of the snapshot.
+   *
+   * @schema DataDownloadSpec#snapshotSize
+   */
+  readonly snapshotSize?: number;
+
+  /**
    * SourceNamespace is the original namespace where the volume is backed up from.
    * It may be different from SourcePVC's namespace if namespace is remapped during restore.
    *
@@ -1656,6 +1724,7 @@ export function toJson_DataDownloadSpec(obj: DataDownloadSpec | undefined): Reco
     'nodeOS': obj.nodeOs,
     'operationTimeout': obj.operationTimeout,
     'snapshotID': obj.snapshotId,
+    'snapshotSize': obj.snapshotSize,
     'sourceNamespace': obj.sourceNamespace,
     'targetVolume': toJson_DataDownloadSpecTargetVolume(obj.targetVolume),
   };
@@ -2680,6 +2749,13 @@ export interface PodVolumeRestoreSpec {
   readonly snapshotId: string;
 
   /**
+   * SnapshotSize is the logical size in Bytes of the snapshot.
+   *
+   * @schema PodVolumeRestoreSpec#snapshotSize
+   */
+  readonly snapshotSize?: number;
+
+  /**
    * SourceNamespace is the original namespace for namaspace mapping.
    *
    * @schema PodVolumeRestoreSpec#sourceNamespace
@@ -2721,6 +2797,7 @@ export function toJson_PodVolumeRestoreSpec(obj: PodVolumeRestoreSpec | undefine
     'pod': toJson_PodVolumeRestoreSpecPod(obj.pod),
     'repoIdentifier': obj.repoIdentifier,
     'snapshotID': obj.snapshotId,
+    'snapshotSize': obj.snapshotSize,
     'sourceNamespace': obj.sourceNamespace,
     'uploaderSettings': ((obj.uploaderSettings) === undefined) ? undefined : (Object.entries(obj.uploaderSettings).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'uploaderType': obj.uploaderType,

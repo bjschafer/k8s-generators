@@ -648,6 +648,16 @@ export interface ClusterSpec {
   readonly podSecurityContext?: ClusterSpecPodSecurityContext;
 
   /**
+   * PodSelectorRefs defines named pod label selectors that can be referenced
+   * in pg_hba rules using the ${podselector:NAME} syntax in the address field.
+   * The operator resolves matching pod IPs and the instance manager expands
+   * pg_hba lines accordingly. Only pods in the Cluster's own namespace are considered.
+   *
+   * @schema ClusterSpec#podSelectorRefs
+   */
+  readonly podSelectorRefs?: ClusterSpecPodSelectorRefs[];
+
+  /**
    * The GID of the `postgres` user inside the image, defaults to `26`
    *
    * @schema ClusterSpec#postgresGID
@@ -667,6 +677,16 @@ export interface ClusterSpec {
    * @schema ClusterSpec#postgresql
    */
   readonly postgresql?: ClusterSpecPostgresql;
+
+  /**
+   * Configuration of the Kubernetes `Lease` used to coordinate safe primary
+   * election within the cluster. When omitted, the operator applies built-in
+   * defaults; tune these values only if you understand the consequences for
+   * failover timing.
+   *
+   * @schema ClusterSpec#primaryLease
+   */
+  readonly primaryLease?: ClusterSpecPrimaryLease;
 
   /**
    * Method to follow to upgrade the primary server during a rolling
@@ -765,6 +785,18 @@ export interface ClusterSpec {
    * @schema ClusterSpec#securityContext
    */
   readonly securityContext?: ClusterSpecSecurityContext;
+
+  /**
+   * Name of an existing ServiceAccount in the same namespace to use for the cluster.
+   * When specified, the operator will not create a new ServiceAccount
+   * but will use the provided one. This is useful for sharing a single
+   * ServiceAccount across multiple clusters (e.g., for cloud IAM configurations).
+   * If not specified, a ServiceAccount will be created with the cluster name.
+   * Mutually exclusive with ServiceAccountTemplate.
+   *
+   * @schema ClusterSpec#serviceAccountName
+   */
+  readonly serviceAccountName?: string;
 
   /**
    * Configure the generation of the service account
@@ -884,9 +916,11 @@ export function toJson_ClusterSpec(obj: ClusterSpec | undefined): Record<string,
     'nodeMaintenanceWindow': toJson_ClusterSpecNodeMaintenanceWindow(obj.nodeMaintenanceWindow),
     'plugins': obj.plugins?.map(y => toJson_ClusterSpecPlugins(y)),
     'podSecurityContext': toJson_ClusterSpecPodSecurityContext(obj.podSecurityContext),
+    'podSelectorRefs': obj.podSelectorRefs?.map(y => toJson_ClusterSpecPodSelectorRefs(y)),
     'postgresGID': obj.postgresGid,
     'postgresUID': obj.postgresUid,
     'postgresql': toJson_ClusterSpecPostgresql(obj.postgresql),
+    'primaryLease': toJson_ClusterSpecPrimaryLease(obj.primaryLease),
     'primaryUpdateMethod': obj.primaryUpdateMethod,
     'primaryUpdateStrategy': obj.primaryUpdateStrategy,
     'priorityClassName': obj.priorityClassName,
@@ -898,6 +932,7 @@ export function toJson_ClusterSpec(obj: ClusterSpec | undefined): Record<string,
     'schedulerName': obj.schedulerName,
     'seccompProfile': toJson_ClusterSpecSeccompProfile(obj.seccompProfile),
     'securityContext': toJson_ClusterSpecSecurityContext(obj.securityContext),
+    'serviceAccountName': obj.serviceAccountName,
     'serviceAccountTemplate': toJson_ClusterSpecServiceAccountTemplate(obj.serviceAccountTemplate),
     'smartShutdownTimeout': obj.smartShutdownTimeout,
     'startDelay': obj.startDelay,
@@ -2042,6 +2077,47 @@ export function toJson_ClusterSpecPodSecurityContext(obj: ClusterSpecPodSecurity
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * PodSelectorRef defines a named pod label selector for use in pg_hba rules.
+ * Pods matching the selector in the Cluster's namespace will have their IPs
+ * resolved and made available for pg_hba address expansion via the
+ * `${podselector:NAME}` syntax.
+ *
+ * @schema ClusterSpecPodSelectorRefs
+ */
+export interface ClusterSpecPodSelectorRefs {
+  /**
+   * Name is the identifier used to reference this selector in pg_hba rules
+   * via the ${podselector:NAME} syntax in the address field.
+   *
+   * @schema ClusterSpecPodSelectorRefs#name
+   */
+  readonly name: string;
+
+  /**
+   * Selector is a label selector that identifies the pods whose IPs
+   * should be resolved. Only pods in the Cluster's namespace are considered.
+   *
+   * @schema ClusterSpecPodSelectorRefs#selector
+   */
+  readonly selector: ClusterSpecPodSelectorRefsSelector;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPodSelectorRefs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPodSelectorRefs(obj: ClusterSpecPodSelectorRefs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'selector': toJson_ClusterSpecPodSelectorRefsSelector(obj.selector),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Configuration of the PostgreSQL server
  *
  * @schema ClusterSpecPostgresql
@@ -2081,7 +2157,9 @@ export interface ClusterSpecPostgresql {
 
   /**
    * PostgreSQL Host Based Authentication rules (lines to be appended
-   * to the pg_hba.conf file)
+   * to the pg_hba.conf file).
+   * Use the ${podselector:NAME} syntax to reference a pod selector;
+   * the rule will be expanded for each Pod IP matching that selector.
    *
    * @schema ClusterSpecPostgresql#pg_hba
    */
@@ -2144,6 +2222,76 @@ export function toJson_ClusterSpecPostgresql(obj: ClusterSpecPostgresql | undefi
     'shared_preload_libraries': obj.sharedPreloadLibraries?.map(y => y),
     'syncReplicaElectionConstraint': toJson_ClusterSpecPostgresqlSyncReplicaElectionConstraint(obj.syncReplicaElectionConstraint),
     'synchronous': toJson_ClusterSpecPostgresqlSynchronous(obj.synchronous),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Configuration of the Kubernetes `Lease` used to coordinate safe primary
+ * election within the cluster. When omitted, the operator applies built-in
+ * defaults; tune these values only if you understand the consequences for
+ * failover timing.
+ *
+ * @schema ClusterSpecPrimaryLease
+ */
+export interface ClusterSpecPrimaryLease {
+  /**
+   * How long, in seconds, the primary lease is considered valid before it
+   * expires and another instance may acquire it. It must be greater than
+   * `renewDeadlineSeconds`.
+   * Defaults to 15.
+   *
+   * @default 15.
+   * @schema ClusterSpecPrimaryLease#leaseDurationSeconds
+   */
+  readonly leaseDurationSeconds?: number;
+
+  /**
+   * The TTL, in seconds, written when the primary explicitly releases the
+   * lease on a clean shutdown, allowing a replica to promote without waiting
+   * for the full lease duration to expire.
+   * Defaults to 1.
+   *
+   * @default 1.
+   * @schema ClusterSpecPrimaryLease#releasedLeaseDurationSeconds
+   */
+  readonly releasedLeaseDurationSeconds?: number;
+
+  /**
+   * How long, in seconds, the current primary keeps retrying to renew the
+   * lease before giving up and stopping. It must be smaller than
+   * `leaseDurationSeconds`.
+   * Defaults to 10.
+   *
+   * @default 10.
+   * @schema ClusterSpecPrimaryLease#renewDeadlineSeconds
+   */
+  readonly renewDeadlineSeconds?: number;
+
+  /**
+   * How frequently, in seconds, a non-holder instance retries acquiring or
+   * renewing the lease.
+   * Defaults to 2.
+   *
+   * @default 2.
+   * @schema ClusterSpecPrimaryLease#retryPeriodSeconds
+   */
+  readonly retryPeriodSeconds?: number;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPrimaryLease' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPrimaryLease(obj: ClusterSpecPrimaryLease | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'leaseDurationSeconds': obj.leaseDurationSeconds,
+    'releasedLeaseDurationSeconds': obj.releasedLeaseDurationSeconds,
+    'renewDeadlineSeconds': obj.renewDeadlineSeconds,
+    'retryPeriodSeconds': obj.retryPeriodSeconds,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -2549,7 +2697,6 @@ export interface ClusterSpecSecurityContext {
    * procMount denotes the type of proc mount to use for the containers.
    * The default value is Default which uses the container runtime defaults for
    * readonly paths and masked paths.
-   * This requires the ProcMountType feature flag to be enabled.
    * Note that this field cannot be set when spec.os.name is windows.
    *
    * @schema ClusterSpecSecurityContext#procMount
@@ -4565,6 +4712,8 @@ export interface ClusterSpecManagedRoles {
   /**
    * List of one or more existing roles to which this role will be
    * immediately added as a new member. Default empty.
+   * Changes to the list are applied to an existing role through
+   * `GRANT` and `REVOKE` statements, not only at role creation.
    *
    * @schema ClusterSpecManagedRoles#inRoles
    */
@@ -4572,7 +4721,7 @@ export interface ClusterSpecManagedRoles {
 
   /**
    * Whether a role "inherits" the privileges of roles it is a member of.
-   * Defaults is `true`.
+   * Default is `true`.
    *
    * @default true`.
    * @schema ClusterSpecManagedRoles#inherit
@@ -4598,8 +4747,10 @@ export interface ClusterSpecManagedRoles {
   readonly name: string;
 
   /**
-   * Secret containing the password of the role (if present)
-   * If null, the password will be ignored unless DisablePassword is set
+   * Secret containing the password of the role (if present).
+   * If null, the password will be ignored unless DisablePassword is set.
+   * When set, the secret must follow the `kubernetes.io/basic-auth` format
+   * and contain both a `username` and a `password` field.
    *
    * @schema ClusterSpecManagedRoles#passwordSecret
    */
@@ -5247,6 +5398,45 @@ export function toJson_ClusterSpecPodSecurityContextWindowsOptions(obj: ClusterS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Selector is a label selector that identifies the pods whose IPs
+ * should be resolved. Only pods in the Cluster's namespace are considered.
+ *
+ * @schema ClusterSpecPodSelectorRefsSelector
+ */
+export interface ClusterSpecPodSelectorRefsSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema ClusterSpecPodSelectorRefsSelector#matchExpressions
+   */
+  readonly matchExpressions?: ClusterSpecPodSelectorRefsSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema ClusterSpecPodSelectorRefsSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPodSelectorRefsSelector' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPodSelectorRefsSelector(obj: ClusterSpecPodSelectorRefsSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_ClusterSpecPodSelectorRefsSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * ExtensionConfiguration is the configuration used to add
  * PostgreSQL extensions to the Cluster.
  *
@@ -5254,12 +5444,31 @@ export function toJson_ClusterSpecPodSecurityContextWindowsOptions(obj: ClusterS
  */
 export interface ClusterSpecPostgresqlExtensions {
   /**
+   * A list of directories within the image to be appended to the
+   * PostgreSQL process's `PATH` environment variable.
+   *
+   * @schema ClusterSpecPostgresqlExtensions#bin_path
+   */
+  readonly binPath?: string[];
+
+  /**
    * The list of directories inside the image which should be added to dynamic_library_path.
    * If not defined, defaults to "/lib".
    *
    * @schema ClusterSpecPostgresqlExtensions#dynamic_library_path
    */
   readonly dynamicLibraryPath?: string[];
+
+  /**
+   * Env is a list of custom environment variables to be set in the
+   * PostgreSQL process for this extension. It is the responsibility of the
+   * cluster administrator to ensure the variables are correct for the
+   * specific extension. Note that changes to these variables require
+   * a manual cluster restart to take effect.
+   *
+   * @schema ClusterSpecPostgresqlExtensions#env
+   */
+  readonly env?: ClusterSpecPostgresqlExtensionsEnv[];
 
   /**
    * The list of directories inside the image which should be added to extension_control_path.
@@ -5270,11 +5479,11 @@ export interface ClusterSpecPostgresqlExtensions {
   readonly extensionControlPath?: string[];
 
   /**
-   * The image containing the extension, required
+   * The image containing the extension.
    *
    * @schema ClusterSpecPostgresqlExtensions#image
    */
-  readonly image: ClusterSpecPostgresqlExtensionsImage;
+  readonly image?: ClusterSpecPostgresqlExtensionsImage;
 
   /**
    * The list of directories inside the image which should be added to ld_library_path.
@@ -5284,7 +5493,9 @@ export interface ClusterSpecPostgresqlExtensions {
   readonly ldLibraryPath?: string[];
 
   /**
-   * The name of the extension, required
+   * The name of the extension, required. The limit of 59 characters
+   * leaves room for the prefix the operator adds when deriving the
+   * extension's Kubernetes Volume name (capped at 63 characters).
    *
    * @schema ClusterSpecPostgresqlExtensions#name
    */
@@ -5298,7 +5509,9 @@ export interface ClusterSpecPostgresqlExtensions {
 export function toJson_ClusterSpecPostgresqlExtensions(obj: ClusterSpecPostgresqlExtensions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'bin_path': obj.binPath?.map(y => y),
     'dynamic_library_path': obj.dynamicLibraryPath?.map(y => y),
+    'env': obj.env?.map(y => toJson_ClusterSpecPostgresqlExtensionsEnv(y)),
     'extension_control_path': obj.extensionControlPath?.map(y => y),
     'image': toJson_ClusterSpecPostgresqlExtensionsImage(obj.image),
     'ld_library_path': obj.ldLibraryPath?.map(y => y),
@@ -7231,7 +7444,7 @@ export interface ClusterSpecBackupBarmanObjectStoreData {
   /**
    * Compress a backup file (a tar file per tablespace) while streaming it
    * to the object store. Available options are empty string (no
-   * compression, default), `gzip`, `bzip2`, and `snappy`.
+   * compression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.
    *
    * @schema ClusterSpecBackupBarmanObjectStoreData#compression
    */
@@ -8603,7 +8816,7 @@ export interface ClusterSpecExternalClustersBarmanObjectStoreData {
   /**
    * Compress a backup file (a tar file per tablespace) while streaming it
    * to the object store. Available options are empty string (no
-   * compression, default), `gzip`, `bzip2`, and `snappy`.
+   * compression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.
    *
    * @schema ClusterSpecExternalClustersBarmanObjectStoreData#compression
    */
@@ -8901,8 +9114,10 @@ export enum ClusterSpecManagedRolesEnsure {
 }
 
 /**
- * Secret containing the password of the role (if present)
- * If null, the password will be ignored unless DisablePassword is set
+ * Secret containing the password of the role (if present).
+ * If null, the password will be ignored unless DisablePassword is set.
+ * When set, the secret must follow the `kubernetes.io/basic-auth` format
+ * and contain both a `username` and a `password` field.
  *
  * @schema ClusterSpecManagedRolesPasswordSecret
  */
@@ -9061,7 +9276,101 @@ export enum ClusterSpecMonitoringPodMonitorRelabelingsAction {
 }
 
 /**
- * The image containing the extension, required
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema ClusterSpecPodSelectorRefsSelectorMatchExpressions
+ */
+export interface ClusterSpecPodSelectorRefsSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema ClusterSpecPodSelectorRefsSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema ClusterSpecPodSelectorRefsSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema ClusterSpecPodSelectorRefsSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPodSelectorRefsSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPodSelectorRefsSelectorMatchExpressions(obj: ClusterSpecPodSelectorRefsSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ExtensionEnvVar defines an environment variable for a specific extension
+ * image volume.
+ *
+ * @schema ClusterSpecPostgresqlExtensionsEnv
+ */
+export interface ClusterSpecPostgresqlExtensionsEnv {
+  /**
+   * Name of the environment variable to be injected into the
+   * PostgreSQL process.
+   *
+   * @schema ClusterSpecPostgresqlExtensionsEnv#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of the environment variable. CloudNativePG performs a direct
+   * replacement of this value, with support for placeholder expansion.
+   * The ${`image_root`} placeholder resolves to the absolute mount path
+   * of the extension's volume (e.g., `/extensions/my-extension`). This
+   * is particularly useful for allowing applications or libraries to
+   * locate specific directories within the mounted image.
+   * Unrecognized placeholders are rejected. To include a literal ${...}
+   * in the value, escape it as $${...}.
+   *
+   * @schema ClusterSpecPostgresqlExtensionsEnv#value
+   */
+  readonly value: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSpecPostgresqlExtensionsEnv' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSpecPostgresqlExtensionsEnv(obj: ClusterSpecPostgresqlExtensionsEnv | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The image containing the extension.
  *
  * @schema ClusterSpecPostgresqlExtensionsImage
  */
@@ -10972,7 +11281,7 @@ export function toJson_ClusterSpecBackupBarmanObjectStoreAzureCredentialsStorage
 /**
  * Compress a backup file (a tar file per tablespace) while streaming it
  * to the object store. Available options are empty string (no
- * compression, default), `gzip`, `bzip2`, and `snappy`.
+ * compression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.
  *
  * @schema ClusterSpecBackupBarmanObjectStoreDataCompression
  */
@@ -10981,6 +11290,8 @@ export enum ClusterSpecBackupBarmanObjectStoreDataCompression {
   BZIP2 = "bzip2",
   /** gzip */
   GZIP = "gzip",
+  /** lz4 */
+  LZ4 = "lz4",
   /** snappy */
   SNAPPY = "snappy",
 }
@@ -12034,7 +12345,7 @@ export function toJson_ClusterSpecExternalClustersBarmanObjectStoreAzureCredenti
 /**
  * Compress a backup file (a tar file per tablespace) while streaming it
  * to the object store. Available options are empty string (no
- * compression, default), `gzip`, `bzip2`, and `snappy`.
+ * compression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.
  *
  * @schema ClusterSpecExternalClustersBarmanObjectStoreDataCompression
  */
@@ -12043,6 +12354,8 @@ export enum ClusterSpecExternalClustersBarmanObjectStoreDataCompression {
   BZIP2 = "bzip2",
   /** gzip */
   GZIP = "gzip",
+  /** lz4 */
+  LZ4 = "lz4",
   /** snappy */
   SNAPPY = "snappy",
 }
@@ -14685,6 +14998,14 @@ export function toJson_ClusterImageCatalogProps(obj: ClusterImageCatalogProps | 
  */
 export interface ClusterImageCatalogSpec {
   /**
+   * ComponentImages is a list of named images for components other than PostgreSQL
+   * (e.g. pgbouncer). Keys must be unique within a catalog.
+   *
+   * @schema ClusterImageCatalogSpec#componentImages
+   */
+  readonly componentImages?: ClusterImageCatalogSpecComponentImages[];
+
+  /**
    * List of CatalogImages available in the catalog
    *
    * @schema ClusterImageCatalogSpec#images
@@ -14699,7 +15020,44 @@ export interface ClusterImageCatalogSpec {
 export function toJson_ClusterImageCatalogSpec(obj: ClusterImageCatalogSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'componentImages': obj.componentImages?.map(y => toJson_ClusterImageCatalogSpecComponentImages(y)),
     'images': obj.images?.map(y => toJson_ClusterImageCatalogSpecImages(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * CatalogComponentImage is a named image entry for a non-PostgreSQL component.
+ *
+ * @schema ClusterImageCatalogSpecComponentImages
+ */
+export interface ClusterImageCatalogSpecComponentImages {
+  /**
+   * Image is the container image reference.
+   *
+   * @schema ClusterImageCatalogSpecComponentImages#image
+   */
+  readonly image: string;
+
+  /**
+   * Key is the unique identifier for this image within the catalog.
+   *
+   * @schema ClusterImageCatalogSpecComponentImages#key
+   */
+  readonly key: string;
+}
+
+/**
+ * Converts an object of type 'ClusterImageCatalogSpecComponentImages' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterImageCatalogSpecComponentImages(obj: ClusterImageCatalogSpecComponentImages | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'image': obj.image,
+    'key': obj.key,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -14712,6 +15070,13 @@ export function toJson_ClusterImageCatalogSpec(obj: ClusterImageCatalogSpec | un
  * @schema ClusterImageCatalogSpecImages
  */
 export interface ClusterImageCatalogSpecImages {
+  /**
+   * The configuration of the extensions to be added
+   *
+   * @schema ClusterImageCatalogSpecImages#extensions
+   */
+  readonly extensions?: ClusterImageCatalogSpecImagesExtensions[];
+
   /**
    * The image reference
    *
@@ -14734,8 +15099,186 @@ export interface ClusterImageCatalogSpecImages {
 export function toJson_ClusterImageCatalogSpecImages(obj: ClusterImageCatalogSpecImages | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'extensions': obj.extensions?.map(y => toJson_ClusterImageCatalogSpecImagesExtensions(y)),
     'image': obj.image,
     'major': obj.major,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ExtensionConfiguration is the configuration used to add
+ * PostgreSQL extensions to the Cluster.
+ *
+ * @schema ClusterImageCatalogSpecImagesExtensions
+ */
+export interface ClusterImageCatalogSpecImagesExtensions {
+  /**
+   * A list of directories within the image to be appended to the
+   * PostgreSQL process's `PATH` environment variable.
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensions#bin_path
+   */
+  readonly binPath?: string[];
+
+  /**
+   * The list of directories inside the image which should be added to dynamic_library_path.
+   * If not defined, defaults to "/lib".
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensions#dynamic_library_path
+   */
+  readonly dynamicLibraryPath?: string[];
+
+  /**
+   * Env is a list of custom environment variables to be set in the
+   * PostgreSQL process for this extension. It is the responsibility of the
+   * cluster administrator to ensure the variables are correct for the
+   * specific extension. Note that changes to these variables require
+   * a manual cluster restart to take effect.
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensions#env
+   */
+  readonly env?: ClusterImageCatalogSpecImagesExtensionsEnv[];
+
+  /**
+   * The list of directories inside the image which should be added to extension_control_path.
+   * If not defined, defaults to "/share".
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensions#extension_control_path
+   */
+  readonly extensionControlPath?: string[];
+
+  /**
+   * The image containing the extension.
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensions#image
+   */
+  readonly image?: ClusterImageCatalogSpecImagesExtensionsImage;
+
+  /**
+   * The list of directories inside the image which should be added to ld_library_path.
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensions#ld_library_path
+   */
+  readonly ldLibraryPath?: string[];
+
+  /**
+   * The name of the extension, required. The limit of 59 characters
+   * leaves room for the prefix the operator adds when deriving the
+   * extension's Kubernetes Volume name (capped at 63 characters).
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensions#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'ClusterImageCatalogSpecImagesExtensions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterImageCatalogSpecImagesExtensions(obj: ClusterImageCatalogSpecImagesExtensions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'bin_path': obj.binPath?.map(y => y),
+    'dynamic_library_path': obj.dynamicLibraryPath?.map(y => y),
+    'env': obj.env?.map(y => toJson_ClusterImageCatalogSpecImagesExtensionsEnv(y)),
+    'extension_control_path': obj.extensionControlPath?.map(y => y),
+    'image': toJson_ClusterImageCatalogSpecImagesExtensionsImage(obj.image),
+    'ld_library_path': obj.ldLibraryPath?.map(y => y),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ExtensionEnvVar defines an environment variable for a specific extension
+ * image volume.
+ *
+ * @schema ClusterImageCatalogSpecImagesExtensionsEnv
+ */
+export interface ClusterImageCatalogSpecImagesExtensionsEnv {
+  /**
+   * Name of the environment variable to be injected into the
+   * PostgreSQL process.
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensionsEnv#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of the environment variable. CloudNativePG performs a direct
+   * replacement of this value, with support for placeholder expansion.
+   * The ${`image_root`} placeholder resolves to the absolute mount path
+   * of the extension's volume (e.g., `/extensions/my-extension`). This
+   * is particularly useful for allowing applications or libraries to
+   * locate specific directories within the mounted image.
+   * Unrecognized placeholders are rejected. To include a literal ${...}
+   * in the value, escape it as $${...}.
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensionsEnv#value
+   */
+  readonly value: string;
+}
+
+/**
+ * Converts an object of type 'ClusterImageCatalogSpecImagesExtensionsEnv' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterImageCatalogSpecImagesExtensionsEnv(obj: ClusterImageCatalogSpecImagesExtensionsEnv | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The image containing the extension.
+ *
+ * @schema ClusterImageCatalogSpecImagesExtensionsImage
+ */
+export interface ClusterImageCatalogSpecImagesExtensionsImage {
+  /**
+   * Policy for pulling OCI objects. Possible values are:
+   * Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.
+   * Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.
+   * IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.
+   * Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
+   *
+   * @default Always if :latest tag is specified, or IfNotPresent otherwise.
+   * @schema ClusterImageCatalogSpecImagesExtensionsImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Required: Image or artifact reference to be used.
+   * Behaves in the same way as pod.spec.containers[*].image.
+   * Pull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets.
+   * More info: https://kubernetes.io/docs/concepts/containers/images
+   * This field is optional to allow higher level config management to default or override
+   * container images in workload controllers like Deployments and StatefulSets.
+   *
+   * @schema ClusterImageCatalogSpecImagesExtensionsImage#reference
+   */
+  readonly reference?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterImageCatalogSpecImagesExtensionsImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterImageCatalogSpecImagesExtensionsImage(obj: ClusterImageCatalogSpecImagesExtensionsImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'reference': obj.reference,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -15663,6 +16206,416 @@ export enum DatabaseSpecServersUsageType {
 
 
 /**
+ * DatabaseRole is the Schema for the databaseroles API
+ *
+ * @schema DatabaseRole
+ */
+export class DatabaseRole extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "DatabaseRole"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'postgresql.cnpg.io/v1',
+    kind: 'DatabaseRole',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "DatabaseRole".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: DatabaseRoleProps): any {
+    return {
+      ...DatabaseRole.GVK,
+      ...toJson_DatabaseRoleProps(props),
+    };
+  }
+
+  /**
+   * Defines a "DatabaseRole" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: DatabaseRoleProps) {
+    super(scope, id, {
+      ...DatabaseRole.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public override toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...DatabaseRole.GVK,
+      ...toJson_DatabaseRoleProps(resolved),
+    };
+  }
+}
+
+/**
+ * DatabaseRole is the Schema for the databaseroles API
+ *
+ * @schema DatabaseRole
+ */
+export interface DatabaseRoleProps {
+  /**
+   * @schema DatabaseRole#metadata
+   */
+  readonly metadata: ApiObjectMetadata;
+
+  /**
+   * Specification of the desired DatabaseRole.
+   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+   *
+   * @schema DatabaseRole#spec
+   */
+  readonly spec: DatabaseRoleSpec;
+}
+
+/**
+ * Converts an object of type 'DatabaseRoleProps' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseRoleProps(obj: DatabaseRoleProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_DatabaseRoleSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Specification of the desired DatabaseRole.
+ * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+ *
+ * @schema DatabaseRoleSpec
+ */
+export interface DatabaseRoleSpec {
+  /**
+   * Whether a role bypasses every row-level security (RLS) policy.
+   * Default is `false`.
+   *
+   * @default false`.
+   * @schema DatabaseRoleSpec#bypassrls
+   */
+  readonly bypassrls?: boolean;
+
+  /**
+   * ClientCertificate configures the operator to generate and renew a TLS client
+   * certificate for this role, signed by the cluster's client CA. The certificate
+   * is stored in a Secret named `<databaserole-name>-client-cert`.
+   * Requires login to be true.
+   *
+   * @schema DatabaseRoleSpec#clientCertificate
+   */
+  readonly clientCertificate?: DatabaseRoleSpecClientCertificate;
+
+  /**
+   * The corresponding cluster
+   *
+   * @schema DatabaseRoleSpec#cluster
+   */
+  readonly cluster: DatabaseRoleSpecCluster;
+
+  /**
+   * Description of the role
+   *
+   * @schema DatabaseRoleSpec#comment
+   */
+  readonly comment?: string;
+
+  /**
+   * If the role can log in, this specifies how many concurrent
+   * connections the role can make. `-1` (the default) means no limit.
+   *
+   * @schema DatabaseRoleSpec#connectionLimit
+   */
+  readonly connectionLimit?: number;
+
+  /**
+   * When set to `true`, the role being defined will be allowed to create
+   * new databases. Specifying `false` (default) will deny a role the
+   * ability to create databases.
+   *
+   * @schema DatabaseRoleSpec#createdb
+   */
+  readonly createdb?: boolean;
+
+  /**
+   * Whether the role will be permitted to create, alter, drop, comment
+   * on, change the security label for, and grant or revoke membership in
+   * other roles. Default is `false`.
+   *
+   * @default false`.
+   * @schema DatabaseRoleSpec#createrole
+   */
+  readonly createrole?: boolean;
+
+  /**
+   * The policy for end-of-life maintenance of this role
+   *
+   * @schema DatabaseRoleSpec#databaseRoleReclaimPolicy
+   */
+  readonly databaseRoleReclaimPolicy?: DatabaseRoleSpecDatabaseRoleReclaimPolicy;
+
+  /**
+   * DisablePassword indicates that a role's password should be set to NULL in Postgres
+   *
+   * @schema DatabaseRoleSpec#disablePassword
+   */
+  readonly disablePassword?: boolean;
+
+  /**
+   * Ensure the role is `present` or `absent` - defaults to "present"
+   *
+   * @schema DatabaseRoleSpec#ensure
+   */
+  readonly ensure?: DatabaseRoleSpecEnsure;
+
+  /**
+   * List of one or more existing roles to which this role will be
+   * immediately added as a new member. Default empty.
+   * Changes to the list are applied to an existing role through
+   * `GRANT` and `REVOKE` statements, not only at role creation.
+   *
+   * @schema DatabaseRoleSpec#inRoles
+   */
+  readonly inRoles?: string[];
+
+  /**
+   * Whether a role "inherits" the privileges of roles it is a member of.
+   * Default is `true`.
+   *
+   * @default true`.
+   * @schema DatabaseRoleSpec#inherit
+   */
+  readonly inherit?: boolean;
+
+  /**
+   * Whether the role is allowed to log in. A role having the `login`
+   * attribute can be thought of as a user. Roles without this attribute
+   * are useful for managing database privileges, but are not users in
+   * the usual sense of the word. Default is `false`.
+   *
+   * @default false`.
+   * @schema DatabaseRoleSpec#login
+   */
+  readonly login?: boolean;
+
+  /**
+   * Name of the role
+   *
+   * @schema DatabaseRoleSpec#name
+   */
+  readonly name: string;
+
+  /**
+   * Secret containing the password of the role (if present).
+   * If null, the password will be ignored unless DisablePassword is set.
+   * When set, the secret must follow the `kubernetes.io/basic-auth` format
+   * and contain both a `username` and a `password` field.
+   *
+   * @schema DatabaseRoleSpec#passwordSecret
+   */
+  readonly passwordSecret?: DatabaseRoleSpecPasswordSecret;
+
+  /**
+   * Whether a role is a replication role. A role must have this
+   * attribute (or be a superuser) in order to be able to connect to the
+   * server in replication mode (physical or logical replication) and in
+   * order to be able to create or drop replication slots. A role having
+   * the `replication` attribute is a very highly privileged role, and
+   * should only be used on roles actually used for replication. Default
+   * is `false`.
+   *
+   * @default false`.
+   * @schema DatabaseRoleSpec#replication
+   */
+  readonly replication?: boolean;
+
+  /**
+   * Whether the role is a `superuser` who can override all access
+   * restrictions within the database - superuser status is dangerous and
+   * should be used only when really needed. You must yourself be a
+   * superuser to create a new superuser. Defaults is `false`.
+   *
+   * @default false`.
+   * @schema DatabaseRoleSpec#superuser
+   */
+  readonly superuser?: boolean;
+
+  /**
+   * Date and time after which the role's password is no longer valid.
+   * When omitted, the password will never expire (default).
+   *
+   * @schema DatabaseRoleSpec#validUntil
+   */
+  readonly validUntil?: Date;
+}
+
+/**
+ * Converts an object of type 'DatabaseRoleSpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseRoleSpec(obj: DatabaseRoleSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'bypassrls': obj.bypassrls,
+    'clientCertificate': toJson_DatabaseRoleSpecClientCertificate(obj.clientCertificate),
+    'cluster': toJson_DatabaseRoleSpecCluster(obj.cluster),
+    'comment': obj.comment,
+    'connectionLimit': obj.connectionLimit,
+    'createdb': obj.createdb,
+    'createrole': obj.createrole,
+    'databaseRoleReclaimPolicy': obj.databaseRoleReclaimPolicy,
+    'disablePassword': obj.disablePassword,
+    'ensure': obj.ensure,
+    'inRoles': obj.inRoles?.map(y => y),
+    'inherit': obj.inherit,
+    'login': obj.login,
+    'name': obj.name,
+    'passwordSecret': toJson_DatabaseRoleSpecPasswordSecret(obj.passwordSecret),
+    'replication': obj.replication,
+    'superuser': obj.superuser,
+    'validUntil': obj.validUntil?.toISOString(),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ClientCertificate configures the operator to generate and renew a TLS client
+ * certificate for this role, signed by the cluster's client CA. The certificate
+ * is stored in a Secret named `<databaserole-name>-client-cert`.
+ * Requires login to be true.
+ *
+ * @schema DatabaseRoleSpecClientCertificate
+ */
+export interface DatabaseRoleSpecClientCertificate {
+  /**
+   * Enabled turns on client certificate issuance for this role. When true,
+   * the role must have login enabled. Defaults to true when the block is present.
+   *
+   * @default true when the block is present.
+   * @schema DatabaseRoleSpecClientCertificate#enabled
+   */
+  readonly enabled?: boolean;
+}
+
+/**
+ * Converts an object of type 'DatabaseRoleSpecClientCertificate' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseRoleSpecClientCertificate(obj: DatabaseRoleSpecClientCertificate | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'enabled': obj.enabled,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The corresponding cluster
+ *
+ * @schema DatabaseRoleSpecCluster
+ */
+export interface DatabaseRoleSpecCluster {
+  /**
+   * Name of the referent.
+   * This field is effectively required, but due to backwards compatibility is
+   * allowed to be empty. Instances of this type with an empty value here are
+   * almost certainly wrong.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema DatabaseRoleSpecCluster#name
+   */
+  readonly name?: string;
+}
+
+/**
+ * Converts an object of type 'DatabaseRoleSpecCluster' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseRoleSpecCluster(obj: DatabaseRoleSpecCluster | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The policy for end-of-life maintenance of this role
+ *
+ * @schema DatabaseRoleSpecDatabaseRoleReclaimPolicy
+ */
+export enum DatabaseRoleSpecDatabaseRoleReclaimPolicy {
+  /** delete */
+  DELETE = "delete",
+  /** retain */
+  RETAIN = "retain",
+}
+
+/**
+ * Ensure the role is `present` or `absent` - defaults to "present"
+ *
+ * @schema DatabaseRoleSpecEnsure
+ */
+export enum DatabaseRoleSpecEnsure {
+  /** present */
+  PRESENT = "present",
+  /** absent */
+  ABSENT = "absent",
+}
+
+/**
+ * Secret containing the password of the role (if present).
+ * If null, the password will be ignored unless DisablePassword is set.
+ * When set, the secret must follow the `kubernetes.io/basic-auth` format
+ * and contain both a `username` and a `password` field.
+ *
+ * @schema DatabaseRoleSpecPasswordSecret
+ */
+export interface DatabaseRoleSpecPasswordSecret {
+  /**
+   * Name of the referent.
+   *
+   * @schema DatabaseRoleSpecPasswordSecret#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'DatabaseRoleSpecPasswordSecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_DatabaseRoleSpecPasswordSecret(obj: DatabaseRoleSpecPasswordSecret | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+
+/**
  * FailoverQuorum contains the information about the current failover
 quorum status of a PG cluster. It is updated by the instance manager
 of the primary node and reset to zero by the operator to trigger
@@ -15846,6 +16799,14 @@ export function toJson_ImageCatalogProps(obj: ImageCatalogProps | undefined): Re
  */
 export interface ImageCatalogSpec {
   /**
+   * ComponentImages is a list of named images for components other than PostgreSQL
+   * (e.g. pgbouncer). Keys must be unique within a catalog.
+   *
+   * @schema ImageCatalogSpec#componentImages
+   */
+  readonly componentImages?: ImageCatalogSpecComponentImages[];
+
+  /**
    * List of CatalogImages available in the catalog
    *
    * @schema ImageCatalogSpec#images
@@ -15860,7 +16821,44 @@ export interface ImageCatalogSpec {
 export function toJson_ImageCatalogSpec(obj: ImageCatalogSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'componentImages': obj.componentImages?.map(y => toJson_ImageCatalogSpecComponentImages(y)),
     'images': obj.images?.map(y => toJson_ImageCatalogSpecImages(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * CatalogComponentImage is a named image entry for a non-PostgreSQL component.
+ *
+ * @schema ImageCatalogSpecComponentImages
+ */
+export interface ImageCatalogSpecComponentImages {
+  /**
+   * Image is the container image reference.
+   *
+   * @schema ImageCatalogSpecComponentImages#image
+   */
+  readonly image: string;
+
+  /**
+   * Key is the unique identifier for this image within the catalog.
+   *
+   * @schema ImageCatalogSpecComponentImages#key
+   */
+  readonly key: string;
+}
+
+/**
+ * Converts an object of type 'ImageCatalogSpecComponentImages' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ImageCatalogSpecComponentImages(obj: ImageCatalogSpecComponentImages | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'image': obj.image,
+    'key': obj.key,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -15873,6 +16871,13 @@ export function toJson_ImageCatalogSpec(obj: ImageCatalogSpec | undefined): Reco
  * @schema ImageCatalogSpecImages
  */
 export interface ImageCatalogSpecImages {
+  /**
+   * The configuration of the extensions to be added
+   *
+   * @schema ImageCatalogSpecImages#extensions
+   */
+  readonly extensions?: ImageCatalogSpecImagesExtensions[];
+
   /**
    * The image reference
    *
@@ -15895,8 +16900,186 @@ export interface ImageCatalogSpecImages {
 export function toJson_ImageCatalogSpecImages(obj: ImageCatalogSpecImages | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'extensions': obj.extensions?.map(y => toJson_ImageCatalogSpecImagesExtensions(y)),
     'image': obj.image,
     'major': obj.major,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ExtensionConfiguration is the configuration used to add
+ * PostgreSQL extensions to the Cluster.
+ *
+ * @schema ImageCatalogSpecImagesExtensions
+ */
+export interface ImageCatalogSpecImagesExtensions {
+  /**
+   * A list of directories within the image to be appended to the
+   * PostgreSQL process's `PATH` environment variable.
+   *
+   * @schema ImageCatalogSpecImagesExtensions#bin_path
+   */
+  readonly binPath?: string[];
+
+  /**
+   * The list of directories inside the image which should be added to dynamic_library_path.
+   * If not defined, defaults to "/lib".
+   *
+   * @schema ImageCatalogSpecImagesExtensions#dynamic_library_path
+   */
+  readonly dynamicLibraryPath?: string[];
+
+  /**
+   * Env is a list of custom environment variables to be set in the
+   * PostgreSQL process for this extension. It is the responsibility of the
+   * cluster administrator to ensure the variables are correct for the
+   * specific extension. Note that changes to these variables require
+   * a manual cluster restart to take effect.
+   *
+   * @schema ImageCatalogSpecImagesExtensions#env
+   */
+  readonly env?: ImageCatalogSpecImagesExtensionsEnv[];
+
+  /**
+   * The list of directories inside the image which should be added to extension_control_path.
+   * If not defined, defaults to "/share".
+   *
+   * @schema ImageCatalogSpecImagesExtensions#extension_control_path
+   */
+  readonly extensionControlPath?: string[];
+
+  /**
+   * The image containing the extension.
+   *
+   * @schema ImageCatalogSpecImagesExtensions#image
+   */
+  readonly image?: ImageCatalogSpecImagesExtensionsImage;
+
+  /**
+   * The list of directories inside the image which should be added to ld_library_path.
+   *
+   * @schema ImageCatalogSpecImagesExtensions#ld_library_path
+   */
+  readonly ldLibraryPath?: string[];
+
+  /**
+   * The name of the extension, required. The limit of 59 characters
+   * leaves room for the prefix the operator adds when deriving the
+   * extension's Kubernetes Volume name (capped at 63 characters).
+   *
+   * @schema ImageCatalogSpecImagesExtensions#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'ImageCatalogSpecImagesExtensions' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ImageCatalogSpecImagesExtensions(obj: ImageCatalogSpecImagesExtensions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'bin_path': obj.binPath?.map(y => y),
+    'dynamic_library_path': obj.dynamicLibraryPath?.map(y => y),
+    'env': obj.env?.map(y => toJson_ImageCatalogSpecImagesExtensionsEnv(y)),
+    'extension_control_path': obj.extensionControlPath?.map(y => y),
+    'image': toJson_ImageCatalogSpecImagesExtensionsImage(obj.image),
+    'ld_library_path': obj.ldLibraryPath?.map(y => y),
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ExtensionEnvVar defines an environment variable for a specific extension
+ * image volume.
+ *
+ * @schema ImageCatalogSpecImagesExtensionsEnv
+ */
+export interface ImageCatalogSpecImagesExtensionsEnv {
+  /**
+   * Name of the environment variable to be injected into the
+   * PostgreSQL process.
+   *
+   * @schema ImageCatalogSpecImagesExtensionsEnv#name
+   */
+  readonly name: string;
+
+  /**
+   * Value of the environment variable. CloudNativePG performs a direct
+   * replacement of this value, with support for placeholder expansion.
+   * The ${`image_root`} placeholder resolves to the absolute mount path
+   * of the extension's volume (e.g., `/extensions/my-extension`). This
+   * is particularly useful for allowing applications or libraries to
+   * locate specific directories within the mounted image.
+   * Unrecognized placeholders are rejected. To include a literal ${...}
+   * in the value, escape it as $${...}.
+   *
+   * @schema ImageCatalogSpecImagesExtensionsEnv#value
+   */
+  readonly value: string;
+}
+
+/**
+ * Converts an object of type 'ImageCatalogSpecImagesExtensionsEnv' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ImageCatalogSpecImagesExtensionsEnv(obj: ImageCatalogSpecImagesExtensionsEnv | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'value': obj.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The image containing the extension.
+ *
+ * @schema ImageCatalogSpecImagesExtensionsImage
+ */
+export interface ImageCatalogSpecImagesExtensionsImage {
+  /**
+   * Policy for pulling OCI objects. Possible values are:
+   * Always: the kubelet always attempts to pull the reference. Container creation will fail If the pull fails.
+   * Never: the kubelet never pulls the reference and only uses a local image or artifact. Container creation will fail if the reference isn't present.
+   * IfNotPresent: the kubelet pulls if the reference isn't already present on disk. Container creation will fail if the reference isn't present and the pull fails.
+   * Defaults to Always if :latest tag is specified, or IfNotPresent otherwise.
+   *
+   * @default Always if :latest tag is specified, or IfNotPresent otherwise.
+   * @schema ImageCatalogSpecImagesExtensionsImage#pullPolicy
+   */
+  readonly pullPolicy?: string;
+
+  /**
+   * Required: Image or artifact reference to be used.
+   * Behaves in the same way as pod.spec.containers[*].image.
+   * Pull secrets will be assembled in the same way as for the container image by looking up node credentials, SA image pull secrets, and pod spec image pull secrets.
+   * More info: https://kubernetes.io/docs/concepts/containers/images
+   * This field is optional to allow higher level config management to default or override
+   * container images in workload controllers like Deployments and StatefulSets.
+   *
+   * @schema ImageCatalogSpecImagesExtensionsImage#reference
+   */
+  readonly reference?: string;
+}
+
+/**
+ * Converts an object of type 'ImageCatalogSpecImagesExtensionsImage' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ImageCatalogSpecImagesExtensionsImage(obj: ImageCatalogSpecImagesExtensionsImage | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'pullPolicy': obj.pullPolicy,
+    'reference': obj.reference,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -16025,9 +17208,6 @@ export interface PoolerSpec {
   /**
    * The configuration of the monitoring infrastructure of this pooler.
    *
-   * Deprecated: This feature will be removed in an upcoming release. If
-   * you need this functionality, you can create a PodMonitor manually.
-   *
    * @schema PoolerSpec#monitoring
    */
   readonly monitoring?: PoolerSpecMonitoring;
@@ -16038,6 +17218,17 @@ export interface PoolerSpec {
    * @schema PoolerSpec#pgbouncer
    */
   readonly pgbouncer: PoolerSpecPgbouncer;
+
+  /**
+   * Name of an existing ServiceAccount in the same namespace to use for the pooler.
+   * When specified, the operator will not create a new ServiceAccount
+   * but will use the provided one. This is useful for sharing a single
+   * ServiceAccount across multiple poolers (e.g., for cloud IAM configurations).
+   * If not specified, a ServiceAccount will be created with the pooler name.
+   *
+   * @schema PoolerSpec#serviceAccountName
+   */
+  readonly serviceAccountName?: string;
 
   /**
    * Template for the Service to be created
@@ -16073,6 +17264,7 @@ export function toJson_PoolerSpec(obj: PoolerSpec | undefined): Record<string, a
     'instances': obj.instances,
     'monitoring': toJson_PoolerSpecMonitoring(obj.monitoring),
     'pgbouncer': toJson_PoolerSpecPgbouncer(obj.pgbouncer),
+    'serviceAccountName': obj.serviceAccountName,
     'serviceTemplate': toJson_PoolerSpecServiceTemplate(obj.serviceTemplate),
     'template': toJson_PoolerSpecTemplate(obj.template),
     'type': obj.type,
@@ -16152,14 +17344,14 @@ export function toJson_PoolerSpecDeploymentStrategy(obj: PoolerSpecDeploymentStr
 /**
  * The configuration of the monitoring infrastructure of this pooler.
  *
- * Deprecated: This feature will be removed in an upcoming release. If
- * you need this functionality, you can create a PodMonitor manually.
- *
  * @schema PoolerSpecMonitoring
  */
 export interface PoolerSpecMonitoring {
   /**
    * Enable or disable the `PodMonitor`
+   *
+   * Deprecated: This feature will be removed in an upcoming release. If
+   * you need this functionality, you can create a PodMonitor manually.
    *
    * @schema PoolerSpecMonitoring#enablePodMonitor
    */
@@ -16168,6 +17360,9 @@ export interface PoolerSpecMonitoring {
   /**
    * The list of metric relabelings for the `PodMonitor`. Applied to samples before ingestion.
    *
+   * Deprecated: This feature will be removed in an upcoming release. If
+   * you need this functionality, you can create a PodMonitor manually.
+   *
    * @schema PoolerSpecMonitoring#podMonitorMetricRelabelings
    */
   readonly podMonitorMetricRelabelings?: PoolerSpecMonitoringPodMonitorMetricRelabelings[];
@@ -16175,9 +17370,20 @@ export interface PoolerSpecMonitoring {
   /**
    * The list of relabelings for the `PodMonitor`. Applied to samples before scraping.
    *
+   * Deprecated: This feature will be removed in an upcoming release. If
+   * you need this functionality, you can create a PodMonitor manually.
+   *
    * @schema PoolerSpecMonitoring#podMonitorRelabelings
    */
   readonly podMonitorRelabelings?: PoolerSpecMonitoringPodMonitorRelabelings[];
+
+  /**
+   * Configure TLS communication for the metrics endpoint.
+   * Changing tls.enabled option will force a rollout of all instances.
+   *
+   * @schema PoolerSpecMonitoring#tls
+   */
+  readonly tls?: PoolerSpecMonitoringTls;
 }
 
 /**
@@ -16190,6 +17396,7 @@ export function toJson_PoolerSpecMonitoring(obj: PoolerSpecMonitoring | undefine
     'enablePodMonitor': obj.enablePodMonitor,
     'podMonitorMetricRelabelings': obj.podMonitorMetricRelabelings?.map(y => toJson_PoolerSpecMonitoringPodMonitorMetricRelabelings(y)),
     'podMonitorRelabelings': obj.podMonitorRelabelings?.map(y => toJson_PoolerSpecMonitoringPodMonitorRelabelings(y)),
+    'tls': toJson_PoolerSpecMonitoringTls(obj.tls),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -16239,6 +17446,23 @@ export interface PoolerSpecPgbouncer {
    * @schema PoolerSpecPgbouncer#clientTLSSecret
    */
   readonly clientTlsSecret?: PoolerSpecPgbouncerClientTlsSecret;
+
+  /**
+   * Image is the pgbouncer container image to use. When set, it takes
+   * precedence over ImageCatalogRef and the operator default, but is
+   * overridden by an explicit image set in the pod template.
+   *
+   * @schema PoolerSpecPgbouncer#image
+   */
+  readonly image?: string;
+
+  /**
+   * ImageCatalogRef points to an entry in an ImageCatalog or ClusterImageCatalog.
+   * Mutually exclusive with Image.
+   *
+   * @schema PoolerSpecPgbouncer#imageCatalogRef
+   */
+  readonly imageCatalogRef?: PoolerSpecPgbouncerImageCatalogRef;
 
   /**
    * Additional parameters to be passed to PgBouncer - please check
@@ -16302,6 +17526,8 @@ export function toJson_PoolerSpecPgbouncer(obj: PoolerSpecPgbouncer | undefined)
     'authQuerySecret': toJson_PoolerSpecPgbouncerAuthQuerySecret(obj.authQuerySecret),
     'clientCASecret': toJson_PoolerSpecPgbouncerClientCaSecret(obj.clientCaSecret),
     'clientTLSSecret': toJson_PoolerSpecPgbouncerClientTlsSecret(obj.clientTlsSecret),
+    'image': obj.image,
+    'imageCatalogRef': toJson_PoolerSpecPgbouncerImageCatalogRef(obj.imageCatalogRef),
     'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
     'paused': obj.paused,
     'pg_hba': obj.pgHba?.map(y => y),
@@ -16655,6 +17881,36 @@ export function toJson_PoolerSpecMonitoringPodMonitorRelabelings(obj: PoolerSpec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Configure TLS communication for the metrics endpoint.
+ * Changing tls.enabled option will force a rollout of all instances.
+ *
+ * @schema PoolerSpecMonitoringTls
+ */
+export interface PoolerSpecMonitoringTls {
+  /**
+   * Enable TLS for the monitoring endpoint.
+   * Changing this option will force a rollout of all instances.
+   *
+   * @schema PoolerSpecMonitoringTls#enabled
+   */
+  readonly enabled?: boolean;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecMonitoringTls' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecMonitoringTls(obj: PoolerSpecMonitoringTls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'enabled': obj.enabled,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * The credentials of the user that need to be used for the authentication
  * query. In case it is specified, also an AuthQuery
  * (e.g. "SELECT usename, passwd FROM pg_catalog.pg_shadow WHERE usename=$1")
@@ -16738,6 +17994,61 @@ export interface PoolerSpecPgbouncerClientTlsSecret {
 export function toJson_PoolerSpecPgbouncerClientTlsSecret(obj: PoolerSpecPgbouncerClientTlsSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ImageCatalogRef points to an entry in an ImageCatalog or ClusterImageCatalog.
+ * Mutually exclusive with Image.
+ *
+ * @schema PoolerSpecPgbouncerImageCatalogRef
+ */
+export interface PoolerSpecPgbouncerImageCatalogRef {
+  /**
+   * APIGroup is the group for the resource being referenced.
+   * If APIGroup is not specified, the specified Kind must be in the core API group.
+   * For any other third-party types, APIGroup is required.
+   *
+   * @schema PoolerSpecPgbouncerImageCatalogRef#apiGroup
+   */
+  readonly apiGroup?: string;
+
+  /**
+   * Key identifies the entry within the catalog's componentImages list.
+   *
+   * @schema PoolerSpecPgbouncerImageCatalogRef#key
+   */
+  readonly key: string;
+
+  /**
+   * Kind is the type of resource being referenced
+   *
+   * @schema PoolerSpecPgbouncerImageCatalogRef#kind
+   */
+  readonly kind: string;
+
+  /**
+   * Name is the name of resource being referenced
+   *
+   * @schema PoolerSpecPgbouncerImageCatalogRef#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecPgbouncerImageCatalogRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecPgbouncerImageCatalogRef(obj: PoolerSpecPgbouncerImageCatalogRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiGroup': obj.apiGroup,
+    'key': obj.key,
+    'kind': obj.kind,
     'name': obj.name,
   };
   // filter undefined values
@@ -17383,7 +18694,6 @@ export interface PoolerSpecTemplateSpec {
    * When set to false, a new userns is created for the pod. Setting false is useful for
    * mitigating container breakout vulnerabilities even allowing users to run their
    * containers as root without actually having root privileges on the host.
-   * This field is alpha-level and is only honored by servers that enable the UserNamespacesSupport feature.
    *
    * @default true.
    * @schema PoolerSpecTemplateSpec#hostUsers
@@ -17628,6 +18938,24 @@ export interface PoolerSpecTemplateSpec {
   readonly schedulingGates?: PoolerSpecTemplateSpecSchedulingGates[];
 
   /**
+   * SchedulingGroup provides a reference to the immediate scheduling runtime
+   * grouping object that this Pod belongs to.
+   * This field is used by the scheduler to identify the group and apply the
+   * correct group scheduling policies. The association with a group also
+   * impacts other lifecycle aspects of a Pod that are relevant in a wider context
+   * of scheduling like preemption, resource attachment, etc. If not specified,
+   * the Pod is treated as a single unit in all of these aspects.
+   * The group object referenced by this field may not exist at the time the
+   * Pod is created.
+   * This field is immutable, but a group object with the same name may be
+   * recreated with different policies. Doing this during pod scheduling
+   * may result in the placement not conforming to the expected policies.
+   *
+   * @schema PoolerSpecTemplateSpec#schedulingGroup
+   */
+  readonly schedulingGroup?: PoolerSpecTemplateSpecSchedulingGroup;
+
+  /**
    * SecurityContext holds pod-level security attributes and common container settings.
    * Optional: Defaults to empty.  See type description for default values of each field.
    *
@@ -17722,19 +19050,6 @@ export interface PoolerSpecTemplateSpec {
    * @schema PoolerSpecTemplateSpec#volumes
    */
   readonly volumes?: PoolerSpecTemplateSpecVolumes[];
-
-  /**
-   * WorkloadRef provides a reference to the Workload object that this Pod belongs to.
-   * This field is used by the scheduler to identify the PodGroup and apply the
-   * correct group scheduling policies. The Workload object referenced
-   * by this field may not exist at the time the Pod is created.
-   * This field is immutable, but a Workload object with the same name
-   * may be recreated with different policies. Doing this during pod scheduling
-   * may result in the placement not conforming to the expected policies.
-   *
-   * @schema PoolerSpecTemplateSpec#workloadRef
-   */
-  readonly workloadRef?: PoolerSpecTemplateSpecWorkloadRef;
 }
 
 /**
@@ -17775,6 +19090,7 @@ export function toJson_PoolerSpecTemplateSpec(obj: PoolerSpecTemplateSpec | unde
     'runtimeClassName': obj.runtimeClassName,
     'schedulerName': obj.schedulerName,
     'schedulingGates': obj.schedulingGates?.map(y => toJson_PoolerSpecTemplateSpecSchedulingGates(y)),
+    'schedulingGroup': toJson_PoolerSpecTemplateSpecSchedulingGroup(obj.schedulingGroup),
     'securityContext': toJson_PoolerSpecTemplateSpecSecurityContext(obj.securityContext),
     'serviceAccount': obj.serviceAccount,
     'serviceAccountName': obj.serviceAccountName,
@@ -17785,7 +19101,6 @@ export function toJson_PoolerSpecTemplateSpec(obj: PoolerSpecTemplateSpec | unde
     'tolerations': obj.tolerations?.map(y => toJson_PoolerSpecTemplateSpecTolerations(y)),
     'topologySpreadConstraints': obj.topologySpreadConstraints?.map(y => toJson_PoolerSpecTemplateSpecTopologySpreadConstraints(y)),
     'volumes': obj.volumes?.map(y => toJson_PoolerSpecTemplateSpecVolumes(y)),
-    'workloadRef': toJson_PoolerSpecTemplateSpecWorkloadRef(obj.workloadRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -19284,6 +20599,14 @@ export function toJson_PoolerSpecTemplateSpecReadinessGates(obj: PoolerSpecTempl
  * It adds a name to it that uniquely identifies the ResourceClaim inside the Pod.
  * Containers that need access to the ResourceClaim reference it with this name.
  *
+ * When the DRAWorkloadResourceClaims feature gate is enabled and this Pod
+ * belongs to a PodGroup, a PodResourceClaim is matched to a
+ * PodGroupResourceClaim if all of their fields are equal (Name,
+ * ResourceClaimName, and ResourceClaimTemplateName). A matched claim references
+ * a single ResourceClaim shared across all Pods in the PodGroup, reserved for
+ * the PodGroup in ResourceClaimStatus.ReservedFor rather than for individual
+ * Pods.
+ *
  * @schema PoolerSpecTemplateSpecResourceClaims
  */
 export interface PoolerSpecTemplateSpecResourceClaims {
@@ -19315,6 +20638,16 @@ export interface PoolerSpecTemplateSpecResourceClaims {
    * will also be deleted. The pod name and resource name, along with a
    * generated component, will be used to form a unique name for the
    * ResourceClaim, which will be recorded in pod.status.resourceClaimStatuses.
+   *
+   * When the DRAWorkloadResourceClaims feature gate is enabled and the pod
+   * belongs to a PodGroup that defines a PodGroupResourceClaim with the same
+   * Name and ResourceClaimTemplateName, this PodResourceClaim resolves to the
+   * ResourceClaim generated for the PodGroup. All pods in the group that
+   * define an equivalent PodResourceClaim matching the
+   * PodGroupResourceClaim's Name and ResourceClaimTemplateName share the same
+   * generated ResourceClaim. ResourceClaims generated for a PodGroup are
+   * owned by the PodGroup and their lifecycles are tied to the PodGroup
+   * instead of any individual pod.
    *
    * This field is immutable and no changes will be made to the
    * corresponding ResourceClaim by the control plane after creating the
@@ -19429,6 +20762,47 @@ export function toJson_PoolerSpecTemplateSpecSchedulingGates(obj: PoolerSpecTemp
   if (obj === undefined) { return undefined; }
   const result = {
     'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SchedulingGroup provides a reference to the immediate scheduling runtime
+ * grouping object that this Pod belongs to.
+ * This field is used by the scheduler to identify the group and apply the
+ * correct group scheduling policies. The association with a group also
+ * impacts other lifecycle aspects of a Pod that are relevant in a wider context
+ * of scheduling like preemption, resource attachment, etc. If not specified,
+ * the Pod is treated as a single unit in all of these aspects.
+ * The group object referenced by this field may not exist at the time the
+ * Pod is created.
+ * This field is immutable, but a group object with the same name may be
+ * recreated with different policies. Doing this during pod scheduling
+ * may result in the placement not conforming to the expected policies.
+ *
+ * @schema PoolerSpecTemplateSpecSchedulingGroup
+ */
+export interface PoolerSpecTemplateSpecSchedulingGroup {
+  /**
+   * PodGroupName specifies the name of the standalone PodGroup object
+   * that represents the runtime instance of this group.
+   * Must be a DNS subdomain.
+   *
+   * @schema PoolerSpecTemplateSpecSchedulingGroup#podGroupName
+   */
+  readonly podGroupName?: string;
+}
+
+/**
+ * Converts an object of type 'PoolerSpecTemplateSpecSchedulingGroup' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_PoolerSpecTemplateSpecSchedulingGroup(obj: PoolerSpecTemplateSpecSchedulingGroup | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'podGroupName': obj.podGroupName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -20064,7 +21438,7 @@ export interface PoolerSpecTemplateSpecVolumes {
    * A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message.
    * The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field.
    * The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images.
-   * The volume will be mounted read-only (ro) and non-executable files (noexec).
+   * The volume will be mounted read-only (ro).
    * Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath) before 1.33.
    * The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.
    *
@@ -20118,8 +21492,7 @@ export interface PoolerSpecTemplateSpecVolumes {
   /**
    * portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
    * Deprecated: PortworxVolume is deprecated. All operations for the in-tree portworxVolume type
-   * are redirected to the pxd.portworx.com CSI driver when the CSIMigrationPortworx feature-gate
-   * is on.
+   * are redirected to the pxd.portworx.com CSI driver.
    *
    * @schema PoolerSpecTemplateSpecVolumes#portworxVolume
    */
@@ -20220,66 +21593,6 @@ export function toJson_PoolerSpecTemplateSpecVolumes(obj: PoolerSpecTemplateSpec
     'secret': toJson_PoolerSpecTemplateSpecVolumesSecret(obj.secret),
     'storageos': toJson_PoolerSpecTemplateSpecVolumesStorageos(obj.storageos),
     'vsphereVolume': toJson_PoolerSpecTemplateSpecVolumesVsphereVolume(obj.vsphereVolume),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * WorkloadRef provides a reference to the Workload object that this Pod belongs to.
- * This field is used by the scheduler to identify the PodGroup and apply the
- * correct group scheduling policies. The Workload object referenced
- * by this field may not exist at the time the Pod is created.
- * This field is immutable, but a Workload object with the same name
- * may be recreated with different policies. Doing this during pod scheduling
- * may result in the placement not conforming to the expected policies.
- *
- * @schema PoolerSpecTemplateSpecWorkloadRef
- */
-export interface PoolerSpecTemplateSpecWorkloadRef {
-  /**
-   * Name defines the name of the Workload object this Pod belongs to.
-   * Workload must be in the same namespace as the Pod.
-   * If it doesn't match any existing Workload, the Pod will remain unschedulable
-   * until a Workload object is created and observed by the kube-scheduler.
-   * It must be a DNS subdomain.
-   *
-   * @schema PoolerSpecTemplateSpecWorkloadRef#name
-   */
-  readonly name: string;
-
-  /**
-   * PodGroup is the name of the PodGroup within the Workload that this Pod
-   * belongs to. If it doesn't match any existing PodGroup within the Workload,
-   * the Pod will remain unschedulable until the Workload object is recreated
-   * and observed by the kube-scheduler. It must be a DNS label.
-   *
-   * @schema PoolerSpecTemplateSpecWorkloadRef#podGroup
-   */
-  readonly podGroup: string;
-
-  /**
-   * PodGroupReplicaKey specifies the replica key of the PodGroup to which this
-   * Pod belongs. It is used to distinguish pods belonging to different replicas
-   * of the same pod group. The pod group policy is applied separately to each replica.
-   * When set, it must be a DNS label.
-   *
-   * @schema PoolerSpecTemplateSpecWorkloadRef#podGroupReplicaKey
-   */
-  readonly podGroupReplicaKey?: string;
-}
-
-/**
- * Converts an object of type 'PoolerSpecTemplateSpecWorkloadRef' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_PoolerSpecTemplateSpecWorkloadRef(obj: PoolerSpecTemplateSpecWorkloadRef | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'name': obj.name,
-    'podGroup': obj.podGroup,
-    'podGroupReplicaKey': obj.podGroupReplicaKey,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -21143,7 +22456,6 @@ export interface PoolerSpecTemplateSpecContainersSecurityContext {
    * procMount denotes the type of proc mount to use for the containers.
    * The default value is Default which uses the container runtime defaults for
    * readonly paths and masked paths.
-   * This requires the ProcMountType feature flag to be enabled.
    * Note that this field cannot be set when spec.os.name is windows.
    *
    * @schema PoolerSpecTemplateSpecContainersSecurityContext#procMount
@@ -22202,7 +23514,6 @@ export interface PoolerSpecTemplateSpecEphemeralContainersSecurityContext {
    * procMount denotes the type of proc mount to use for the containers.
    * The default value is Default which uses the container runtime defaults for
    * readonly paths and masked paths.
-   * This requires the ProcMountType feature flag to be enabled.
    * Note that this field cannot be set when spec.os.name is windows.
    *
    * @schema PoolerSpecTemplateSpecEphemeralContainersSecurityContext#procMount
@@ -23227,7 +24538,6 @@ export interface PoolerSpecTemplateSpecInitContainersSecurityContext {
    * procMount denotes the type of proc mount to use for the containers.
    * The default value is Default which uses the container runtime defaults for
    * readonly paths and masked paths.
-   * This requires the ProcMountType feature flag to be enabled.
    * Note that this field cannot be set when spec.os.name is windows.
    *
    * @schema PoolerSpecTemplateSpecInitContainersSecurityContext#procMount
@@ -24973,7 +26283,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesHostPath(obj: PoolerSpecTemp
  * A failure to resolve or pull the image during pod startup will block containers from starting and may add significant latency. Failures will be retried using normal volume backoff and will be reported on the pod reason and message.
  * The types of objects that may be mounted by this volume are defined by the container runtime implementation on a host machine and at minimum must include all valid types supported by the container image field.
  * The OCI object gets mounted in a single directory (spec.containers[*].volumeMounts.mountPath) by merging the manifest layers in the same way as for container images.
- * The volume will be mounted read-only (ro) and non-executable files (noexec).
+ * The volume will be mounted read-only (ro).
  * Sub path mounts for containers are not supported (spec.containers[*].volumeMounts.subpath) before 1.33.
  * The field spec.securityContext.fsGroupChangePolicy has no effect on this volume type.
  *
@@ -25273,8 +26583,7 @@ export function toJson_PoolerSpecTemplateSpecVolumesPhotonPersistentDisk(obj: Po
 /**
  * portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
  * Deprecated: PortworxVolume is deprecated. All operations for the in-tree portworxVolume type
- * are redirected to the pxd.portworx.com CSI driver when the CSIMigrationPortworx feature-gate
- * is on.
+ * are redirected to the pxd.portworx.com CSI driver.
  *
  * @schema PoolerSpecTemplateSpecVolumesPortworxVolume
  */

@@ -3005,6 +3005,13 @@ export interface ApiAuthSpec {
    * @schema ApiAuthSpec#jwt
    */
   readonly jwt?: ApiAuthSpecJwt;
+
+  /**
+   * LDAP configures LDAP authentication.
+   *
+   * @schema ApiAuthSpec#ldap
+   */
+  readonly ldap?: ApiAuthSpecLdap;
 }
 
 /**
@@ -3017,6 +3024,7 @@ export function toJson_ApiAuthSpec(obj: ApiAuthSpec | undefined): Record<string,
     'apiKey': obj.apiKey,
     'isDefault': obj.isDefault,
     'jwt': toJson_ApiAuthSpecJwt(obj.jwt),
+    'ldap': toJson_ApiAuthSpecLdap(obj.ldap),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3046,6 +3054,7 @@ export interface ApiAuthSpecJwt {
 
   /**
    * JWKSFile contains the JWKS file content for JWT verification.
+   * Mutually exclusive with SigningSecretName, PublicKey, JWKSURL, and TrustedIssuers.
    *
    * @schema ApiAuthSpecJwt#jwksFile
    */
@@ -3053,6 +3062,8 @@ export interface ApiAuthSpecJwt {
 
   /**
    * JWKSURL is the URL to fetch the JWKS for JWT verification.
+   * Mutually exclusive with SigningSecretName, PublicKey, JWKSFile, and TrustedIssuers.
+   * Deprecated: Use TrustedIssuers instead for more flexible JWKS configuration with issuer validation.
    *
    * @schema ApiAuthSpecJwt#jwksUrl
    */
@@ -3060,6 +3071,7 @@ export interface ApiAuthSpecJwt {
 
   /**
    * PublicKey is the PEM-encoded public key for JWT verification.
+   * Mutually exclusive with SigningSecretName, JWKSFile, JWKSURL, and TrustedIssuers.
    *
    * @schema ApiAuthSpecJwt#publicKey
    */
@@ -3068,6 +3080,7 @@ export interface ApiAuthSpecJwt {
   /**
    * SigningSecretName is the name of the Kubernetes Secret containing the signing secret.
    * The secret must be of type Opaque and contain a key named 'value'.
+   * Mutually exclusive with PublicKey, JWKSFile, JWKSURL, and TrustedIssuers.
    *
    * @schema ApiAuthSpecJwt#signingSecretName
    */
@@ -3094,6 +3107,14 @@ export interface ApiAuthSpecJwt {
    * @schema ApiAuthSpecJwt#tokenQueryKey
    */
   readonly tokenQueryKey?: string;
+
+  /**
+   * TrustedIssuers defines multiple JWKS providers with optional issuer validation.
+   * Mutually exclusive with SigningSecretName, PublicKey, JWKSFile, and JWKSURL.
+   *
+   * @schema ApiAuthSpecJwt#trustedIssuers
+   */
+  readonly trustedIssuers?: ApiAuthSpecJwtTrustedIssuers[];
 }
 
 /**
@@ -3112,6 +3133,144 @@ export function toJson_ApiAuthSpecJwt(obj: ApiAuthSpecJwt | undefined): Record<s
     'stripAuthorizationHeader': obj.stripAuthorizationHeader,
     'tokenNameClaim': obj.tokenNameClaim,
     'tokenQueryKey': obj.tokenQueryKey,
+    'trustedIssuers': obj.trustedIssuers?.map(y => toJson_ApiAuthSpecJwtTrustedIssuers(y)),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LDAP configures LDAP authentication.
+ *
+ * @schema ApiAuthSpecLdap
+ */
+export interface ApiAuthSpecLdap {
+  /**
+   * Attribute is the LDAP object attribute used to form a bind DN when sending bind queries.
+   * The bind DN is formed as <Attribute>=<Username>,<BaseDN>.
+   *
+   * @schema ApiAuthSpecLdap#attribute
+   */
+  readonly attribute?: string;
+
+  /**
+   * BaseDN is the base domain name that should be used for bind and search queries.
+   *
+   * @schema ApiAuthSpecLdap#baseDn
+   */
+  readonly baseDn: string;
+
+  /**
+   * BindDN is the domain name to bind to in order to authenticate to the LDAP server when running in search mode.
+   * If empty, an anonymous bind will be done.
+   *
+   * @schema ApiAuthSpecLdap#bindDn
+   */
+  readonly bindDn?: string;
+
+  /**
+   * BindPasswordSecretName is the name of the Kubernetes Secret containing the password for the bind DN.
+   * The secret must contain a key named 'password'.
+   *
+   * @schema ApiAuthSpecLdap#bindPasswordSecretName
+   */
+  readonly bindPasswordSecretName?: string;
+
+  /**
+   * CertificateAuthority is a PEM-encoded certificate to use to establish a connection with the LDAP server if the
+   * connection uses TLS but that the certificate was signed by a custom Certificate Authority.
+   *
+   * @schema ApiAuthSpecLdap#certificateAuthority
+   */
+  readonly certificateAuthority?: string;
+
+  /**
+   * InsecureSkipVerify controls whether the server's certificate chain and host name is verified.
+   *
+   * @schema ApiAuthSpecLdap#insecureSkipVerify
+   */
+  readonly insecureSkipVerify?: boolean;
+
+  /**
+   * SearchFilter is used to filter LDAP search queries.
+   * Example: (&(objectClass=inetOrgPerson)(gidNumber=500)(uid=%s))
+   * %s can be used as a placeholder for the username.
+   *
+   * @schema ApiAuthSpecLdap#searchFilter
+   */
+  readonly searchFilter?: string;
+
+  /**
+   * StartTLS instructs the middleware to issue a StartTLS request when initializing the connection with the LDAP server.
+   *
+   * @schema ApiAuthSpecLdap#startTls
+   */
+  readonly startTls?: boolean;
+
+  /**
+   * URL is the URL of the LDAP server, including the protocol (ldap or ldaps) and the port.
+   *
+   * @schema ApiAuthSpecLdap#url
+   */
+  readonly url: string;
+}
+
+/**
+ * Converts an object of type 'ApiAuthSpecLdap' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApiAuthSpecLdap(obj: ApiAuthSpecLdap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'attribute': obj.attribute,
+    'baseDn': obj.baseDn,
+    'bindDn': obj.bindDn,
+    'bindPasswordSecretName': obj.bindPasswordSecretName,
+    'certificateAuthority': obj.certificateAuthority,
+    'insecureSkipVerify': obj.insecureSkipVerify,
+    'searchFilter': obj.searchFilter,
+    'startTls': obj.startTls,
+    'url': obj.url,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * TrustedIssuer represents a trusted JWT issuer with its associated JWKS endpoint for token verification.
+ *
+ * @schema ApiAuthSpecJwtTrustedIssuers
+ */
+export interface ApiAuthSpecJwtTrustedIssuers {
+  /**
+   * Issuer is the expected value of the "iss" claim.
+   * If specified, tokens must have this exact issuer to be validated against this JWKS.
+   * The issuer value must match exactly, including trailing slashes and URL encoding.
+   * If omitted, this JWKS acts as a fallback for any issuer.
+   *
+   * @schema ApiAuthSpecJwtTrustedIssuers#issuer
+   */
+  readonly issuer?: string;
+
+  /**
+   * JWKSURL is the URL to fetch the JWKS from.
+   *
+   * @schema ApiAuthSpecJwtTrustedIssuers#jwksUrl
+   */
+  readonly jwksUrl: string;
+}
+
+/**
+ * Converts an object of type 'ApiAuthSpecJwtTrustedIssuers' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApiAuthSpecJwtTrustedIssuers(obj: ApiAuthSpecJwtTrustedIssuers | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'issuer': obj.issuer,
+    'jwksUrl': obj.jwksUrl,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -3903,7 +4062,14 @@ export function toJson_ApiPlanSpec(obj: ApiPlanSpec | undefined): Record<string,
  */
 export interface ApiPlanSpecQuota {
   /**
-   * Limit is the maximum number of token in the bucket.
+   * Bucket defines the bucket strategy for the quota.
+   *
+   * @schema ApiPlanSpecQuota#bucket
+   */
+  readonly bucket?: ApiPlanSpecQuotaBucket;
+
+  /**
+   * Limit is the maximum number of requests per sliding Period.
    *
    * @schema ApiPlanSpecQuota#limit
    */
@@ -3924,6 +4090,7 @@ export interface ApiPlanSpecQuota {
 export function toJson_ApiPlanSpecQuota(obj: ApiPlanSpecQuota | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'bucket': obj.bucket,
     'limit': obj.limit,
     'period': obj.period,
   };
@@ -3939,14 +4106,23 @@ export function toJson_ApiPlanSpecQuota(obj: ApiPlanSpecQuota | undefined): Reco
  */
 export interface ApiPlanSpecRateLimit {
   /**
-   * Limit is the maximum number of token in the bucket.
+   * Bucket defines the bucket strategy for the rate limit.
+   *
+   * @schema ApiPlanSpecRateLimit#bucket
+   */
+  readonly bucket?: ApiPlanSpecRateLimitBucket;
+
+  /**
+   * Limit is the number of requests per Period used to calculate the regeneration rate.
+   * Traffic will converge to this rate over time by delaying requests when possible, and dropping them when throttling alone is not enough.
    *
    * @schema ApiPlanSpecRateLimit#limit
    */
   readonly limit: number;
 
   /**
-   * Period is the unit of time for the Limit.
+   * Period is the time unit used to express the rate.
+   * Combined with Limit, it defines the rate at which request capacity regenerates (Limit ÷ Period).
    *
    * @schema ApiPlanSpecRateLimit#period
    */
@@ -3960,6 +4136,7 @@ export interface ApiPlanSpecRateLimit {
 export function toJson_ApiPlanSpecRateLimit(obj: ApiPlanSpecRateLimit | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'bucket': obj.bucket,
     'limit': obj.limit,
     'period': obj.period,
   };
@@ -3967,6 +4144,34 @@ export function toJson_ApiPlanSpecRateLimit(obj: ApiPlanSpecRateLimit | undefine
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Bucket defines the bucket strategy for the quota.
+ *
+ * @schema ApiPlanSpecQuotaBucket
+ */
+export enum ApiPlanSpecQuotaBucket {
+  /** subscription */
+  SUBSCRIPTION = "subscription",
+  /** application-api */
+  APPLICATION_HYPHEN_API = "application-api",
+  /** application */
+  APPLICATION = "application",
+}
+
+/**
+ * Bucket defines the bucket strategy for the rate limit.
+ *
+ * @schema ApiPlanSpecRateLimitBucket
+ */
+export enum ApiPlanSpecRateLimitBucket {
+  /** subscription */
+  SUBSCRIPTION = "subscription",
+  /** application-api */
+  APPLICATION_HYPHEN_API = "application-api",
+  /** application */
+  APPLICATION = "application",
+}
 
 
 /**
@@ -4269,11 +4474,18 @@ export function toJson_ApiPortalAuthProps(obj: ApiPortalAuthProps | undefined): 
  */
 export interface ApiPortalAuthSpec {
   /**
+   * LDAP configures the LDAP authentication.
+   *
+   * @schema ApiPortalAuthSpec#ldap
+   */
+  readonly ldap?: ApiPortalAuthSpecLdap;
+
+  /**
    * OIDC configures the OIDC authentication.
    *
    * @schema ApiPortalAuthSpec#oidc
    */
-  readonly oidc: ApiPortalAuthSpecOidc;
+  readonly oidc?: ApiPortalAuthSpecOidc;
 }
 
 /**
@@ -4283,7 +4495,130 @@ export interface ApiPortalAuthSpec {
 export function toJson_ApiPortalAuthSpec(obj: ApiPortalAuthSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'ldap': toJson_ApiPortalAuthSpecLdap(obj.ldap),
     'oidc': toJson_ApiPortalAuthSpecOidc(obj.oidc),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LDAP configures the LDAP authentication.
+ *
+ * @schema ApiPortalAuthSpecLdap
+ */
+export interface ApiPortalAuthSpecLdap {
+  /**
+   * Attribute is the LDAP object attribute used to form a bind DN when sending bind queries.
+   * The bind DN is formed as <Attribute>=<Username>,<BaseDN>.
+   *
+   * @schema ApiPortalAuthSpecLdap#attribute
+   */
+  readonly attribute?: string;
+
+  /**
+   * Attributes configures LDAP attribute mappings for user attributes.
+   *
+   * @schema ApiPortalAuthSpecLdap#attributes
+   */
+  readonly attributes?: ApiPortalAuthSpecLdapAttributes;
+
+  /**
+   * BaseDN is the base domain name that should be used for bind and search queries.
+   *
+   * @schema ApiPortalAuthSpecLdap#baseDn
+   */
+  readonly baseDn: string;
+
+  /**
+   * BindDN is the domain name to bind to in order to authenticate to the LDAP server when running in search mode.
+   * If empty, an anonymous bind will be done.
+   *
+   * @schema ApiPortalAuthSpecLdap#bindDn
+   */
+  readonly bindDn?: string;
+
+  /**
+   * BindPasswordSecretName is the name of the Kubernetes Secret containing the password for the bind DN.
+   * The secret must contain a key named 'password'.
+   *
+   * @schema ApiPortalAuthSpecLdap#bindPasswordSecretName
+   */
+  readonly bindPasswordSecretName?: string;
+
+  /**
+   * CertificateAuthority is a PEM-encoded certificate to use to establish a connection with the LDAP server if the
+   * connection uses TLS but that the certificate was signed by a custom Certificate Authority.
+   *
+   * @schema ApiPortalAuthSpecLdap#certificateAuthority
+   */
+  readonly certificateAuthority?: string;
+
+  /**
+   * Groups configures group extraction.
+   *
+   * @schema ApiPortalAuthSpecLdap#groups
+   */
+  readonly groups?: ApiPortalAuthSpecLdapGroups;
+
+  /**
+   * InsecureSkipVerify controls whether the server's certificate chain and host name is verified.
+   *
+   * @schema ApiPortalAuthSpecLdap#insecureSkipVerify
+   */
+  readonly insecureSkipVerify?: boolean;
+
+  /**
+   * SearchFilter is used to filter LDAP search queries.
+   * Example: (&(objectClass=inetOrgPerson)(gidNumber=500)(uid=%s))
+   * %s can be used as a placeholder for the username.
+   *
+   * @schema ApiPortalAuthSpecLdap#searchFilter
+   */
+  readonly searchFilter?: string;
+
+  /**
+   * StartTLS instructs the middleware to issue a StartTLS request when initializing the connection with the LDAP server.
+   *
+   * @schema ApiPortalAuthSpecLdap#startTls
+   */
+  readonly startTls?: boolean;
+
+  /**
+   * SyncedAttributes are the user attributes to synchronize with Hub platform.
+   *
+   * @schema ApiPortalAuthSpecLdap#syncedAttributes
+   */
+  readonly syncedAttributes?: ApiPortalAuthSpecLdapSyncedAttributes[];
+
+  /**
+   * URL is the URL of the LDAP server, including the protocol (ldap or ldaps) and the port.
+   *
+   * @schema ApiPortalAuthSpecLdap#url
+   */
+  readonly url: string;
+}
+
+/**
+ * Converts an object of type 'ApiPortalAuthSpecLdap' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApiPortalAuthSpecLdap(obj: ApiPortalAuthSpecLdap | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'attribute': obj.attribute,
+    'attributes': toJson_ApiPortalAuthSpecLdapAttributes(obj.attributes),
+    'baseDn': obj.baseDn,
+    'bindDn': obj.bindDn,
+    'bindPasswordSecretName': obj.bindPasswordSecretName,
+    'certificateAuthority': obj.certificateAuthority,
+    'groups': toJson_ApiPortalAuthSpecLdapGroups(obj.groups),
+    'insecureSkipVerify': obj.insecureSkipVerify,
+    'searchFilter': obj.searchFilter,
+    'startTls': obj.startTls,
+    'syncedAttributes': obj.syncedAttributes?.map(y => y),
+    'url': obj.url,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -4325,8 +4660,7 @@ export interface ApiPortalAuthSpecOidc {
   readonly secretName: string;
 
   /**
-   * SyncedAttributes is a list of additional attributes to sync from the OIDC provider.
-   * Each attribute must correspond to a configured claim field.
+   * SyncedAttributes are the user attributes to synchronize with Hub platform.
    *
    * @schema ApiPortalAuthSpecOidc#syncedAttributes
    */
@@ -4350,6 +4684,112 @@ export function toJson_ApiPortalAuthSpecOidc(obj: ApiPortalAuthSpecOidc | undefi
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Attributes configures LDAP attribute mappings for user attributes.
+ *
+ * @schema ApiPortalAuthSpecLdapAttributes
+ */
+export interface ApiPortalAuthSpecLdapAttributes {
+  /**
+   * Company is the LDAP attribute for user company.
+   *
+   * @schema ApiPortalAuthSpecLdapAttributes#company
+   */
+  readonly company?: string;
+
+  /**
+   * Email is the LDAP attribute for user email.
+   *
+   * @schema ApiPortalAuthSpecLdapAttributes#email
+   */
+  readonly email?: string;
+
+  /**
+   * Firstname is the LDAP attribute for user first name.
+   *
+   * @schema ApiPortalAuthSpecLdapAttributes#firstname
+   */
+  readonly firstname?: string;
+
+  /**
+   * Lastname is the LDAP attribute for user last name.
+   *
+   * @schema ApiPortalAuthSpecLdapAttributes#lastname
+   */
+  readonly lastname?: string;
+
+  /**
+   * UserID is the LDAP attribute for user ID mapping.
+   *
+   * @schema ApiPortalAuthSpecLdapAttributes#userId
+   */
+  readonly userId?: string;
+}
+
+/**
+ * Converts an object of type 'ApiPortalAuthSpecLdapAttributes' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApiPortalAuthSpecLdapAttributes(obj: ApiPortalAuthSpecLdapAttributes | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'company': obj.company,
+    'email': obj.email,
+    'firstname': obj.firstname,
+    'lastname': obj.lastname,
+    'userId': obj.userId,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Groups configures group extraction.
+ *
+ * @schema ApiPortalAuthSpecLdapGroups
+ */
+export interface ApiPortalAuthSpecLdapGroups {
+  /**
+   * MemberOfAttribute is the LDAP attribute containing group memberships (e.g., "memberOf").
+   *
+   * @schema ApiPortalAuthSpecLdapGroups#memberOfAttribute
+   */
+  readonly memberOfAttribute?: string;
+}
+
+/**
+ * Converts an object of type 'ApiPortalAuthSpecLdapGroups' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ApiPortalAuthSpecLdapGroups(obj: ApiPortalAuthSpecLdapGroups | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'memberOfAttribute': obj.memberOfAttribute,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * @schema ApiPortalAuthSpecLdapSyncedAttributes
+ */
+export enum ApiPortalAuthSpecLdapSyncedAttributes {
+  /** groups */
+  GROUPS = "groups",
+  /** userId */
+  USER_ID = "userId",
+  /** firstname */
+  FIRSTNAME = "firstname",
+  /** lastname */
+  LASTNAME = "lastname",
+  /** email */
+  EMAIL = "email",
+  /** company */
+  COMPANY = "company",
+}
 
 /**
  * Claims configures JWT claim mappings for user attributes.
@@ -5326,6 +5766,8 @@ export function toJson_ManagedApplicationSpec(obj: ManagedApplicationSpec | unde
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * APIKey describes an API key used to authenticate the application when calling APIs.
+ *
  * @schema ManagedApplicationSpecApiKeys
  */
 export interface ManagedApplicationSpecApiKeys {

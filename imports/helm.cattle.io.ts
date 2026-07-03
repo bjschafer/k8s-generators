@@ -158,6 +158,17 @@ export interface HelmChartSpec {
   readonly dockerRegistrySecret?: HelmChartSpecDockerRegistrySecret;
 
   /**
+   * Helm storage driver to use for this chart's release metadata.
+   * `secret` stores releases in Kubernetes Secrets (default).
+   * `configmap` stores releases in ConfigMaps.
+   * This field is effectively immutable after the first install; changing the storage backend is not a supported migration path.
+   * Helm CLI environment variable: `HELM_DRIVER`
+   *
+   * @schema HelmChartSpec#driver
+   */
+  readonly driver?: HelmChartSpecDriver;
+
+  /**
    * Configures handling of failed chart installation or upgrades.
    * - `reinstall` will perform a clean uninstall and reinstall of the chart.
    * - `abort` will take no action and leave the chart in a failed state so that the administrator can manually resolve the error.
@@ -235,7 +246,7 @@ export interface HelmChartSpec {
   readonly securityContext?: HelmChartSpecSecurityContext;
 
   /**
-   * Override simple Chart values. These take precedence over options set via valuesContent.
+   * Override simple Chart values. These take precedence over options set via values or valuesContent.
    * Helm CLI positional argument/flag: `--set`, `--set-string`
    *
    * @schema HelmChartSpec#set
@@ -265,6 +276,14 @@ export interface HelmChartSpec {
    * @schema HelmChartSpec#timeout
    */
   readonly timeout?: string;
+
+  /**
+   * Override complex Chart values via structured YAML. Takes precedence over options set via valuesContent.
+   * Helm CLI positional argument/flag: `--values`
+   *
+   * @schema HelmChartSpec#values
+   */
+  readonly values?: any;
 
   /**
    * Override complex Chart values via inline YAML content.
@@ -306,6 +325,7 @@ export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<str
     'chartContent': obj.chartContent,
     'createNamespace': obj.createNamespace,
     'dockerRegistrySecret': toJson_HelmChartSpecDockerRegistrySecret(obj.dockerRegistrySecret),
+    'driver': obj.driver,
     'failurePolicy': obj.failurePolicy,
     'helmVersion': obj.helmVersion,
     'insecureSkipTLSVerify': obj.insecureSkipTlsVerify,
@@ -320,6 +340,7 @@ export function toJson_HelmChartSpec(obj: HelmChartSpec | undefined): Record<str
     'takeOwnership': obj.takeOwnership,
     'targetNamespace': obj.targetNamespace,
     'timeout': obj.timeout,
+    'values': obj.values,
     'valuesContent': obj.valuesContent,
     'valuesSecrets': obj.valuesSecrets?.map(y => toJson_HelmChartSpecValuesSecrets(y)),
     'version': obj.version,
@@ -392,6 +413,22 @@ export function toJson_HelmChartSpecDockerRegistrySecret(obj: HelmChartSpecDocke
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Helm storage driver to use for this chart's release metadata.
+ * `secret` stores releases in Kubernetes Secrets (default).
+ * `configmap` stores releases in ConfigMaps.
+ * This field is effectively immutable after the first install; changing the storage backend is not a supported migration path.
+ * Helm CLI environment variable: `HELM_DRIVER`
+ *
+ * @schema HelmChartSpecDriver
+ */
+export enum HelmChartSpecDriver {
+  /** secret */
+  SECRET = "secret",
+  /** configmap */
+  CONFIGMAP = "configmap",
+}
 
 /**
  * Configures handling of failed chart installation or upgrades.
@@ -1471,6 +1508,14 @@ export interface HelmChartConfigSpec {
   readonly failurePolicy?: HelmChartConfigSpecFailurePolicy;
 
   /**
+   * Override complex Chart values via structured YAML. Takes precedence over options set via valuesContent.
+   * Helm CLI positional argument/flag: `--values`
+   *
+   * @schema HelmChartConfigSpec#values
+   */
+  readonly values?: any;
+
+  /**
    * Override complex Chart values via inline YAML content.
    * Helm CLI positional argument/flag: `--values`
    *
@@ -1495,6 +1540,7 @@ export function toJson_HelmChartConfigSpec(obj: HelmChartConfigSpec | undefined)
   if (obj === undefined) { return undefined; }
   const result = {
     'failurePolicy': obj.failurePolicy,
+    'values': obj.values,
     'valuesContent': obj.valuesContent,
     'valuesSecrets': obj.valuesSecrets?.map(y => toJson_HelmChartConfigSpecValuesSecrets(y)),
   };

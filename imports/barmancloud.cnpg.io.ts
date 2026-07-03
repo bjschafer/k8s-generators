@@ -366,6 +366,14 @@ export interface ObjectStoreSpecConfigurationAzureCredentials {
    * @schema ObjectStoreSpecConfigurationAzureCredentials#storageSasToken
    */
   readonly storageSasToken?: ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken;
+
+  /**
+   * Use the default Azure authentication flow, which includes DefaultAzureCredential.
+   * This allows authentication using environment variables and managed identities.
+   *
+   * @schema ObjectStoreSpecConfigurationAzureCredentials#useDefaultAzureCredentials
+   */
+  readonly useDefaultAzureCredentials?: boolean;
 }
 
 /**
@@ -380,6 +388,7 @@ export function toJson_ObjectStoreSpecConfigurationAzureCredentials(obj: ObjectS
     'storageAccount': toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageAccount(obj.storageAccount),
     'storageKey': toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageKey(obj.storageKey),
     'storageSasToken': toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken(obj.storageSasToken),
+    'useDefaultAzureCredentials': obj.useDefaultAzureCredentials,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -418,7 +427,7 @@ export interface ObjectStoreSpecConfigurationData {
   /**
    * Compress a backup file (a tar file per tablespace) while streaming it
    * to the object store. Available options are empty string (no
-   * compression, default), `gzip`, `bzip2`, and `snappy`.
+   * compression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.
    *
    * @schema ObjectStoreSpecConfigurationData#compression
    */
@@ -452,6 +461,26 @@ export interface ObjectStoreSpecConfigurationData {
    * @schema ObjectStoreSpecConfigurationData#jobs
    */
   readonly jobs?: number;
+
+  /**
+   * Additional arguments that can be appended to the 'barman-cloud-restore'
+   * command-line invocation. These arguments provide flexibility to customize
+   * the data restore process further, according to specific requirements or
+   * configurations.
+   *
+   * Example:
+   * In a scenario where specialized restore options are required, such as setting
+   * a specific read timeout or defining custom behavior, users can use this field
+   * to specify additional command arguments.
+   *
+   * Note:
+   * It's essential to ensure that the provided arguments are valid and supported
+   * by the 'barman-cloud-restore' command, to avoid potential errors or unintended
+   * behavior during execution.
+   *
+   * @schema ObjectStoreSpecConfigurationData#restoreAdditionalCommandArgs
+   */
+  readonly restoreAdditionalCommandArgs?: string[];
 }
 
 /**
@@ -466,6 +495,7 @@ export function toJson_ObjectStoreSpecConfigurationData(obj: ObjectStoreSpecConf
     'encryption': obj.encryption,
     'immediateCheckpoint': obj.immediateCheckpoint,
     'jobs': obj.jobs,
+    'restoreAdditionalCommandArgs': obj.restoreAdditionalCommandArgs?.map(y => y),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -978,7 +1008,7 @@ export function toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageSasTok
 /**
  * Compress a backup file (a tar file per tablespace) while streaming it
  * to the object store. Available options are empty string (no
- * compression, default), `gzip`, `bzip2`, and `snappy`.
+ * compression, default), `gzip`, `bzip2`, `lz4`, and `snappy`.
  *
  * @schema ObjectStoreSpecConfigurationDataCompression
  */
@@ -987,6 +1017,8 @@ export enum ObjectStoreSpecConfigurationDataCompression {
   BZIP2 = "bzip2",
   /** gzip */
   GZIP = "gzip",
+  /** lz4 */
+  LZ4 = "lz4",
   /** snappy */
   SNAPPY = "snappy",
 }

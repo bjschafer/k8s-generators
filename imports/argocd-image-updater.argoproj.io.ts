@@ -103,7 +103,7 @@ export function toJson_ImageUpdaterProps(obj: ImageUpdaterProps | undefined): Re
 export interface ImageUpdaterSpec {
   /**
    * ApplicationRefs indicates the set of applications to be managed.
-   * ApplicationRefs is a list of rules to select Argo CD Applications within the `spec.namespace`.
+   * ApplicationRefs is a list of rules to select Argo CD Applications within the ImageUpdater CR's namespace.
    * Each reference can also provide specific overrides for the global settings defined above.
    *
    * @schema ImageUpdaterSpec#applicationRefs
@@ -121,12 +121,14 @@ export interface ImageUpdaterSpec {
 
   /**
    * Namespace indicates the target namespace of the applications.
-   * This is the namespace where the controller will look for Argo CD Applications
-   * matching the criteria in ApplicationRefs.
+   *
+   * Deprecated: This field is deprecated and will be removed in a future release.
+   * The controller now uses the ImageUpdater CR's namespace (metadata.namespace)
+   * to determine which namespace to search for applications. This field is ignored.
    *
    * @schema ImageUpdaterSpec#namespace
    */
-  readonly namespace: string;
+  readonly namespace?: string;
 
   /**
    * WriteBackConfig provides global default settings for how and where to write back image updates.

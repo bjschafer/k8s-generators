@@ -4,6 +4,1022 @@ import { Construct } from 'constructs';
 
 
 /**
+ * BackendTLSPolicy provides a way to configure how a Gateway
+connects to a Backend via TLS.
+ *
+ * @schema BackendTLSPolicy
+ */
+export class BackendTlsPolicy extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "BackendTLSPolicy"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'gateway.networking.k8s.io/v1',
+    kind: 'BackendTLSPolicy',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "BackendTLSPolicy".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: BackendTlsPolicyProps): any {
+    return {
+      ...BackendTlsPolicy.GVK,
+      ...toJson_BackendTlsPolicyProps(props),
+    };
+  }
+
+  /**
+   * Defines a "BackendTLSPolicy" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: BackendTlsPolicyProps) {
+    super(scope, id, {
+      ...BackendTlsPolicy.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public override toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...BackendTlsPolicy.GVK,
+      ...toJson_BackendTlsPolicyProps(resolved),
+    };
+  }
+}
+
+/**
+ * BackendTLSPolicy provides a way to configure how a Gateway
+ * connects to a Backend via TLS.
+ *
+ * @schema BackendTLSPolicy
+ */
+export interface BackendTlsPolicyProps {
+  /**
+   * @schema BackendTLSPolicy#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * Spec defines the desired state of BackendTLSPolicy.
+   *
+   * @schema BackendTLSPolicy#spec
+   */
+  readonly spec: BackendTlsPolicySpec;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicyProps' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicyProps(obj: BackendTlsPolicyProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_BackendTlsPolicySpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Spec defines the desired state of BackendTLSPolicy.
+ *
+ * @schema BackendTlsPolicySpec
+ */
+export interface BackendTlsPolicySpec {
+  /**
+   * Options are a list of key/value pairs to enable extended TLS
+   * configuration for each implementation. For example, configuring the
+   * minimum TLS version or supported cipher suites.
+   *
+   * A set of common keys MAY be defined by the API in the future. To avoid
+   * any ambiguity, implementation-specific definitions MUST use
+   * domain-prefixed names, such as `example.com/my-custom-option`.
+   * Un-prefixed names are reserved for key names defined by Gateway API.
+   *
+   * Support: Implementation-specific
+   *
+   * @schema BackendTlsPolicySpec#options
+   */
+  readonly options?: { [key: string]: string };
+
+  /**
+   * TargetRefs identifies an API object to apply the policy to.
+   * Only Services have Extended support. Implementations MAY support
+   * additional objects, with Implementation Specific support.
+   * Note that this config applies to the entire referenced resource
+   * by default, but this default may change in the future to provide
+   * a more granular application of the policy.
+   *
+   * TargetRefs must be _distinct_. This means either that:
+   *
+   * * They select different targets. If this is the case, then targetRef
+   * entries are distinct. In terms of fields, this means that the
+   * multi-part key defined by `group`, `kind`, and `name` must
+   * be unique across all targetRef entries in the BackendTLSPolicy.
+   * * They select different sectionNames in the same target.
+   *
+   * When more than one BackendTLSPolicy selects the same target and
+   * sectionName, implementations MUST determine precedence using the
+   * following criteria, continuing on ties:
+   *
+   * * The older policy by creation timestamp takes precedence. For
+   * example, a policy with a creation timestamp of "2021-07-15
+   * 01:02:03" MUST be given precedence over a policy with a
+   * creation timestamp of "2021-07-15 01:02:04".
+   * * The policy appearing first in alphabetical order by {name}.
+   * For example, a policy named `bar` is given precedence over a
+   * policy named `baz`.
+   *
+   * For any BackendTLSPolicy that does not take precedence, the
+   * implementation MUST ensure the `Accepted` Condition is set to
+   * `status: False`, with Reason `Conflicted`.
+   *
+   * Support: Extended for Kubernetes Service
+   *
+   * Support: Implementation-specific for any other resource
+   *
+   * @schema BackendTlsPolicySpec#targetRefs
+   */
+  readonly targetRefs: BackendTlsPolicySpecTargetRefs[];
+
+  /**
+   * Validation contains backend TLS validation configuration.
+   *
+   * @schema BackendTlsPolicySpec#validation
+   */
+  readonly validation: BackendTlsPolicySpecValidation;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicySpec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicySpec(obj: BackendTlsPolicySpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'options': ((obj.options) === undefined) ? undefined : (Object.entries(obj.options).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'targetRefs': obj.targetRefs?.map(y => toJson_BackendTlsPolicySpecTargetRefs(y)),
+    'validation': toJson_BackendTlsPolicySpecValidation(obj.validation),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalPolicyTargetReferenceWithSectionName identifies an API object to apply a
+ * direct policy to. This should be used as part of Policy resources that can
+ * target single resources. For more information on how this policy attachment
+ * mode works, and a sample Policy resource, refer to the policy attachment
+ * documentation for Gateway API.
+ *
+ * Note: This should only be used for direct policy attachment when references
+ * to SectionName are actually needed. In all other cases,
+ * LocalPolicyTargetReference should be used.
+ *
+ * @schema BackendTlsPolicySpecTargetRefs
+ */
+export interface BackendTlsPolicySpecTargetRefs {
+  /**
+   * Group is the group of the target resource.
+   *
+   * @schema BackendTlsPolicySpecTargetRefs#group
+   */
+  readonly group: string;
+
+  /**
+   * Kind is kind of the target resource.
+   *
+   * @schema BackendTlsPolicySpecTargetRefs#kind
+   */
+  readonly kind: string;
+
+  /**
+   * Name is the name of the target resource.
+   *
+   * @schema BackendTlsPolicySpecTargetRefs#name
+   */
+  readonly name: string;
+
+  /**
+   * SectionName is the name of a section within the target resource. When
+   * unspecified, this targetRef targets the entire resource. In the following
+   * resources, SectionName is interpreted as the following:
+   *
+   * * Gateway: Listener name
+   * * HTTPRoute: HTTPRouteRule name
+   * * Service: Port name
+   *
+   * If a SectionName is specified, but does not exist on the targeted object,
+   * the Policy must fail to attach, and the policy implementation should record
+   * a `ResolvedRefs` or similar Condition in the Policy's status.
+   *
+   * @schema BackendTlsPolicySpecTargetRefs#sectionName
+   */
+  readonly sectionName?: string;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicySpecTargetRefs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicySpecTargetRefs(obj: BackendTlsPolicySpecTargetRefs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'group': obj.group,
+    'kind': obj.kind,
+    'name': obj.name,
+    'sectionName': obj.sectionName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Validation contains backend TLS validation configuration.
+ *
+ * @schema BackendTlsPolicySpecValidation
+ */
+export interface BackendTlsPolicySpecValidation {
+  /**
+   * CACertificateRefs contains one or more references to Kubernetes objects that
+   * contain a PEM-encoded TLS CA certificate bundle, which is used to
+   * validate a TLS handshake between the Gateway and backend Pod.
+   *
+   * If CACertificateRefs is empty or unspecified, then WellKnownCACertificates must be
+   * specified. Only one of CACertificateRefs or WellKnownCACertificates may be specified,
+   * not both. If CACertificateRefs is empty or unspecified, the configuration for
+   * WellKnownCACertificates MUST be honored instead if supported by the implementation.
+   *
+   * A CACertificateRef is invalid if:
+   *
+   * * It refers to a resource that cannot be resolved (e.g., the referenced resource
+   * does not exist) or is misconfigured (e.g., a ConfigMap does not contain a key
+   * named `ca.crt`). In this case, the Reason must be set to `InvalidCACertificateRef`
+   * and the Message of the Condition must indicate which reference is invalid and why.
+   *
+   * * It refers to an unknown or unsupported kind of resource. In this case, the Reason
+   * must be set to `InvalidKind` and the Message of the Condition must explain which
+   * kind of resource is unknown or unsupported.
+   *
+   * * It refers to a resource in another namespace. This may change in future
+   * spec updates.
+   *
+   * Implementations MAY choose to perform further validation of the certificate
+   * content (e.g., checking expiry or enforcing specific formats). In such cases,
+   * an implementation-specific Reason and Message must be set for the invalid reference.
+   *
+   * In all cases, the implementation MUST ensure the `ResolvedRefs` Condition on
+   * the BackendTLSPolicy is set to `status: False`, with a Reason and Message
+   * that indicate the cause of the error. Connections using an invalid
+   * CACertificateRef MUST fail, and the client MUST receive an HTTP 5xx error
+   * response. If ALL CACertificateRefs are invalid, the implementation MUST also
+   * ensure the `Accepted` Condition on the BackendTLSPolicy is set to
+   * `status: False`, with a Reason `NoValidCACertificate`.
+   *
+   * A single CACertificateRef to a Kubernetes ConfigMap kind has "Core" support.
+   * Implementations MAY choose to support attaching multiple certificates to
+   * a backend, but this behavior is implementation-specific.
+   *
+   * Support: Core - An optional single reference to a Kubernetes ConfigMap,
+   * with the CA certificate in a key named `ca.crt`.
+   *
+   * Support: Implementation-specific - More than one reference, other kinds
+   * of resources, or a single reference that includes multiple certificates.
+   *
+   * @schema BackendTlsPolicySpecValidation#caCertificateRefs
+   */
+  readonly caCertificateRefs?: BackendTlsPolicySpecValidationCaCertificateRefs[];
+
+  /**
+   * Hostname is used for two purposes in the connection between Gateways and
+   * backends:
+   *
+   * 1. Hostname MUST be used as the SNI to connect to the backend (RFC 6066).
+   * 2. Hostname MUST be used for authentication and MUST match the certificate
+   * served by the matching backend, unless SubjectAltNames is specified.
+   * 3. If SubjectAltNames are specified, Hostname can be used for certificate selection
+   * but MUST NOT be used for authentication. If you want to use the value
+   * of the Hostname field for authentication, you MUST add it to the SubjectAltNames list.
+   *
+   * Support: Core
+   *
+   * @schema BackendTlsPolicySpecValidation#hostname
+   */
+  readonly hostname: string;
+
+  /**
+   * SubjectAltNames contains one or more Subject Alternative Names.
+   * When specified the certificate served from the backend MUST
+   * have at least one Subject Alternate Name matching one of the specified SubjectAltNames.
+   *
+   * Support: Extended
+   *
+   * @schema BackendTlsPolicySpecValidation#subjectAltNames
+   */
+  readonly subjectAltNames?: BackendTlsPolicySpecValidationSubjectAltNames[];
+
+  /**
+   * WellKnownCACertificates specifies whether system CA certificates may be used in
+   * the TLS handshake between the gateway and backend pod.
+   *
+   * If WellKnownCACertificates is unspecified or empty (""), then CACertificateRefs
+   * must be specified with at least one entry for a valid configuration. Only one of
+   * CACertificateRefs or WellKnownCACertificates may be specified, not both.
+   * If an implementation does not support the WellKnownCACertificates field, or
+   * the supplied value is not recognized, the implementation MUST ensure the
+   * `Accepted` Condition on the BackendTLSPolicy is set to `status: False`, with
+   * a Reason `Invalid`.
+   *
+   * Support: Implementation-specific
+   *
+   * @schema BackendTlsPolicySpecValidation#wellKnownCACertificates
+   */
+  readonly wellKnownCaCertificates?: BackendTlsPolicySpecValidationWellKnownCaCertificates;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicySpecValidation' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicySpecValidation(obj: BackendTlsPolicySpecValidation | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'caCertificateRefs': obj.caCertificateRefs?.map(y => toJson_BackendTlsPolicySpecValidationCaCertificateRefs(y)),
+    'hostname': obj.hostname,
+    'subjectAltNames': obj.subjectAltNames?.map(y => toJson_BackendTlsPolicySpecValidationSubjectAltNames(y)),
+    'wellKnownCACertificates': obj.wellKnownCaCertificates,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference identifies an API object within the namespace of the
+ * referrer.
+ * The API object must be valid in the cluster; the Group and Kind must
+ * be registered in the cluster for this reference to be valid.
+ *
+ * References to objects with invalid Group and Kind are not valid, and must
+ * be rejected by the implementation, with appropriate Conditions set
+ * on the containing object.
+ *
+ * @schema BackendTlsPolicySpecValidationCaCertificateRefs
+ */
+export interface BackendTlsPolicySpecValidationCaCertificateRefs {
+  /**
+   * Group is the group of the referent. For example, "gateway.networking.k8s.io".
+   * When unspecified or empty string, core API group is inferred.
+   *
+   * @schema BackendTlsPolicySpecValidationCaCertificateRefs#group
+   */
+  readonly group: string;
+
+  /**
+   * Kind is kind of the referent. For example "HTTPRoute" or "Service".
+   *
+   * @schema BackendTlsPolicySpecValidationCaCertificateRefs#kind
+   */
+  readonly kind: string;
+
+  /**
+   * Name is the name of the referent.
+   *
+   * @schema BackendTlsPolicySpecValidationCaCertificateRefs#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicySpecValidationCaCertificateRefs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicySpecValidationCaCertificateRefs(obj: BackendTlsPolicySpecValidationCaCertificateRefs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'group': obj.group,
+    'kind': obj.kind,
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SubjectAltName represents Subject Alternative Name.
+ *
+ * @schema BackendTlsPolicySpecValidationSubjectAltNames
+ */
+export interface BackendTlsPolicySpecValidationSubjectAltNames {
+  /**
+   * Hostname contains Subject Alternative Name specified in DNS name format.
+   * Required when Type is set to Hostname, ignored otherwise.
+   *
+   * Support: Core
+   *
+   * @schema BackendTlsPolicySpecValidationSubjectAltNames#hostname
+   */
+  readonly hostname?: string;
+
+  /**
+   * Type determines the format of the Subject Alternative Name. Always required.
+   *
+   * Support: Core
+   *
+   * @schema BackendTlsPolicySpecValidationSubjectAltNames#type
+   */
+  readonly type: BackendTlsPolicySpecValidationSubjectAltNamesType;
+
+  /**
+   * URI contains Subject Alternative Name specified in a full URI format.
+   * It MUST include both a scheme (e.g., "http" or "ftp") and a scheme-specific-part.
+   * Common values include SPIFFE IDs like "spiffe://mycluster.example.com/ns/myns/sa/svc1sa".
+   * Required when Type is set to URI, ignored otherwise.
+   *
+   * Support: Core
+   *
+   * @schema BackendTlsPolicySpecValidationSubjectAltNames#uri
+   */
+  readonly uri?: string;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicySpecValidationSubjectAltNames' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicySpecValidationSubjectAltNames(obj: BackendTlsPolicySpecValidationSubjectAltNames | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'hostname': obj.hostname,
+    'type': obj.type,
+    'uri': obj.uri,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * WellKnownCACertificates specifies whether system CA certificates may be used in
+ * the TLS handshake between the gateway and backend pod.
+ *
+ * If WellKnownCACertificates is unspecified or empty (""), then CACertificateRefs
+ * must be specified with at least one entry for a valid configuration. Only one of
+ * CACertificateRefs or WellKnownCACertificates may be specified, not both.
+ * If an implementation does not support the WellKnownCACertificates field, or
+ * the supplied value is not recognized, the implementation MUST ensure the
+ * `Accepted` Condition on the BackendTLSPolicy is set to `status: False`, with
+ * a Reason `Invalid`.
+ *
+ * Support: Implementation-specific
+ *
+ * @schema BackendTlsPolicySpecValidationWellKnownCaCertificates
+ */
+export enum BackendTlsPolicySpecValidationWellKnownCaCertificates {
+  /** System */
+  SYSTEM = "System",
+}
+
+/**
+ * Type determines the format of the Subject Alternative Name. Always required.
+ *
+ * Support: Core
+ *
+ * @schema BackendTlsPolicySpecValidationSubjectAltNamesType
+ */
+export enum BackendTlsPolicySpecValidationSubjectAltNamesType {
+  /** Hostname */
+  HOSTNAME = "Hostname",
+  /** URI */
+  URI = "URI",
+}
+
+
+/**
+ * BackendTLSPolicy provides a way to configure how a Gateway
+connects to a Backend via TLS.
+ *
+ * @schema BackendTLSPolicyV1Alpha3
+ */
+export class BackendTlsPolicyV1Alpha3 extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "BackendTLSPolicyV1Alpha3"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'gateway.networking.k8s.io/v1alpha3',
+    kind: 'BackendTLSPolicy',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "BackendTLSPolicyV1Alpha3".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: BackendTlsPolicyV1Alpha3Props): any {
+    return {
+      ...BackendTlsPolicyV1Alpha3.GVK,
+      ...toJson_BackendTlsPolicyV1Alpha3Props(props),
+    };
+  }
+
+  /**
+   * Defines a "BackendTLSPolicyV1Alpha3" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: BackendTlsPolicyV1Alpha3Props) {
+    super(scope, id, {
+      ...BackendTlsPolicyV1Alpha3.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public override toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...BackendTlsPolicyV1Alpha3.GVK,
+      ...toJson_BackendTlsPolicyV1Alpha3Props(resolved),
+    };
+  }
+}
+
+/**
+ * BackendTLSPolicy provides a way to configure how a Gateway
+ * connects to a Backend via TLS.
+ *
+ * @schema BackendTLSPolicyV1Alpha3
+ */
+export interface BackendTlsPolicyV1Alpha3Props {
+  /**
+   * @schema BackendTLSPolicyV1Alpha3#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * Spec defines the desired state of BackendTLSPolicy.
+   *
+   * @schema BackendTLSPolicyV1Alpha3#spec
+   */
+  readonly spec: BackendTlsPolicyV1Alpha3Spec;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicyV1Alpha3Props' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicyV1Alpha3Props(obj: BackendTlsPolicyV1Alpha3Props | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_BackendTlsPolicyV1Alpha3Spec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Spec defines the desired state of BackendTLSPolicy.
+ *
+ * @schema BackendTlsPolicyV1Alpha3Spec
+ */
+export interface BackendTlsPolicyV1Alpha3Spec {
+  /**
+   * Options are a list of key/value pairs to enable extended TLS
+   * configuration for each implementation. For example, configuring the
+   * minimum TLS version or supported cipher suites.
+   *
+   * A set of common keys MAY be defined by the API in the future. To avoid
+   * any ambiguity, implementation-specific definitions MUST use
+   * domain-prefixed names, such as `example.com/my-custom-option`.
+   * Un-prefixed names are reserved for key names defined by Gateway API.
+   *
+   * Support: Implementation-specific
+   *
+   * @schema BackendTlsPolicyV1Alpha3Spec#options
+   */
+  readonly options?: { [key: string]: string };
+
+  /**
+   * TargetRefs identifies an API object to apply the policy to.
+   * Only Services have Extended support. Implementations MAY support
+   * additional objects, with Implementation Specific support.
+   * Note that this config applies to the entire referenced resource
+   * by default, but this default may change in the future to provide
+   * a more granular application of the policy.
+   *
+   * TargetRefs must be _distinct_. This means either that:
+   *
+   * * They select different targets. If this is the case, then targetRef
+   * entries are distinct. In terms of fields, this means that the
+   * multi-part key defined by `group`, `kind`, and `name` must
+   * be unique across all targetRef entries in the BackendTLSPolicy.
+   * * They select different sectionNames in the same target.
+   *
+   * When more than one BackendTLSPolicy selects the same target and
+   * sectionName, implementations MUST determine precedence using the
+   * following criteria, continuing on ties:
+   *
+   * * The older policy by creation timestamp takes precedence. For
+   * example, a policy with a creation timestamp of "2021-07-15
+   * 01:02:03" MUST be given precedence over a policy with a
+   * creation timestamp of "2021-07-15 01:02:04".
+   * * The policy appearing first in alphabetical order by {name}.
+   * For example, a policy named `bar` is given precedence over a
+   * policy named `baz`.
+   *
+   * For any BackendTLSPolicy that does not take precedence, the
+   * implementation MUST ensure the `Accepted` Condition is set to
+   * `status: False`, with Reason `Conflicted`.
+   *
+   * Support: Extended for Kubernetes Service
+   *
+   * Support: Implementation-specific for any other resource
+   *
+   * @schema BackendTlsPolicyV1Alpha3Spec#targetRefs
+   */
+  readonly targetRefs: BackendTlsPolicyV1Alpha3SpecTargetRefs[];
+
+  /**
+   * Validation contains backend TLS validation configuration.
+   *
+   * @schema BackendTlsPolicyV1Alpha3Spec#validation
+   */
+  readonly validation: BackendTlsPolicyV1Alpha3SpecValidation;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicyV1Alpha3Spec' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicyV1Alpha3Spec(obj: BackendTlsPolicyV1Alpha3Spec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'options': ((obj.options) === undefined) ? undefined : (Object.entries(obj.options).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'targetRefs': obj.targetRefs?.map(y => toJson_BackendTlsPolicyV1Alpha3SpecTargetRefs(y)),
+    'validation': toJson_BackendTlsPolicyV1Alpha3SpecValidation(obj.validation),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalPolicyTargetReferenceWithSectionName identifies an API object to apply a
+ * direct policy to. This should be used as part of Policy resources that can
+ * target single resources. For more information on how this policy attachment
+ * mode works, and a sample Policy resource, refer to the policy attachment
+ * documentation for Gateway API.
+ *
+ * Note: This should only be used for direct policy attachment when references
+ * to SectionName are actually needed. In all other cases,
+ * LocalPolicyTargetReference should be used.
+ *
+ * @schema BackendTlsPolicyV1Alpha3SpecTargetRefs
+ */
+export interface BackendTlsPolicyV1Alpha3SpecTargetRefs {
+  /**
+   * Group is the group of the target resource.
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecTargetRefs#group
+   */
+  readonly group: string;
+
+  /**
+   * Kind is kind of the target resource.
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecTargetRefs#kind
+   */
+  readonly kind: string;
+
+  /**
+   * Name is the name of the target resource.
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecTargetRefs#name
+   */
+  readonly name: string;
+
+  /**
+   * SectionName is the name of a section within the target resource. When
+   * unspecified, this targetRef targets the entire resource. In the following
+   * resources, SectionName is interpreted as the following:
+   *
+   * * Gateway: Listener name
+   * * HTTPRoute: HTTPRouteRule name
+   * * Service: Port name
+   *
+   * If a SectionName is specified, but does not exist on the targeted object,
+   * the Policy must fail to attach, and the policy implementation should record
+   * a `ResolvedRefs` or similar Condition in the Policy's status.
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecTargetRefs#sectionName
+   */
+  readonly sectionName?: string;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicyV1Alpha3SpecTargetRefs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicyV1Alpha3SpecTargetRefs(obj: BackendTlsPolicyV1Alpha3SpecTargetRefs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'group': obj.group,
+    'kind': obj.kind,
+    'name': obj.name,
+    'sectionName': obj.sectionName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Validation contains backend TLS validation configuration.
+ *
+ * @schema BackendTlsPolicyV1Alpha3SpecValidation
+ */
+export interface BackendTlsPolicyV1Alpha3SpecValidation {
+  /**
+   * CACertificateRefs contains one or more references to Kubernetes objects that
+   * contain a PEM-encoded TLS CA certificate bundle, which is used to
+   * validate a TLS handshake between the Gateway and backend Pod.
+   *
+   * If CACertificateRefs is empty or unspecified, then WellKnownCACertificates must be
+   * specified. Only one of CACertificateRefs or WellKnownCACertificates may be specified,
+   * not both. If CACertificateRefs is empty or unspecified, the configuration for
+   * WellKnownCACertificates MUST be honored instead if supported by the implementation.
+   *
+   * A CACertificateRef is invalid if:
+   *
+   * * It refers to a resource that cannot be resolved (e.g., the referenced resource
+   * does not exist) or is misconfigured (e.g., a ConfigMap does not contain a key
+   * named `ca.crt`). In this case, the Reason must be set to `InvalidCACertificateRef`
+   * and the Message of the Condition must indicate which reference is invalid and why.
+   *
+   * * It refers to an unknown or unsupported kind of resource. In this case, the Reason
+   * must be set to `InvalidKind` and the Message of the Condition must explain which
+   * kind of resource is unknown or unsupported.
+   *
+   * * It refers to a resource in another namespace. This may change in future
+   * spec updates.
+   *
+   * Implementations MAY choose to perform further validation of the certificate
+   * content (e.g., checking expiry or enforcing specific formats). In such cases,
+   * an implementation-specific Reason and Message must be set for the invalid reference.
+   *
+   * In all cases, the implementation MUST ensure the `ResolvedRefs` Condition on
+   * the BackendTLSPolicy is set to `status: False`, with a Reason and Message
+   * that indicate the cause of the error. Connections using an invalid
+   * CACertificateRef MUST fail, and the client MUST receive an HTTP 5xx error
+   * response. If ALL CACertificateRefs are invalid, the implementation MUST also
+   * ensure the `Accepted` Condition on the BackendTLSPolicy is set to
+   * `status: False`, with a Reason `NoValidCACertificate`.
+   *
+   * A single CACertificateRef to a Kubernetes ConfigMap kind has "Core" support.
+   * Implementations MAY choose to support attaching multiple certificates to
+   * a backend, but this behavior is implementation-specific.
+   *
+   * Support: Core - An optional single reference to a Kubernetes ConfigMap,
+   * with the CA certificate in a key named `ca.crt`.
+   *
+   * Support: Implementation-specific - More than one reference, other kinds
+   * of resources, or a single reference that includes multiple certificates.
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidation#caCertificateRefs
+   */
+  readonly caCertificateRefs?: BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs[];
+
+  /**
+   * Hostname is used for two purposes in the connection between Gateways and
+   * backends:
+   *
+   * 1. Hostname MUST be used as the SNI to connect to the backend (RFC 6066).
+   * 2. Hostname MUST be used for authentication and MUST match the certificate
+   * served by the matching backend, unless SubjectAltNames is specified.
+   * 3. If SubjectAltNames are specified, Hostname can be used for certificate selection
+   * but MUST NOT be used for authentication. If you want to use the value
+   * of the Hostname field for authentication, you MUST add it to the SubjectAltNames list.
+   *
+   * Support: Core
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidation#hostname
+   */
+  readonly hostname: string;
+
+  /**
+   * SubjectAltNames contains one or more Subject Alternative Names.
+   * When specified the certificate served from the backend MUST
+   * have at least one Subject Alternate Name matching one of the specified SubjectAltNames.
+   *
+   * Support: Extended
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidation#subjectAltNames
+   */
+  readonly subjectAltNames?: BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames[];
+
+  /**
+   * WellKnownCACertificates specifies whether system CA certificates may be used in
+   * the TLS handshake between the gateway and backend pod.
+   *
+   * If WellKnownCACertificates is unspecified or empty (""), then CACertificateRefs
+   * must be specified with at least one entry for a valid configuration. Only one of
+   * CACertificateRefs or WellKnownCACertificates may be specified, not both.
+   * If an implementation does not support the WellKnownCACertificates field, or
+   * the supplied value is not recognized, the implementation MUST ensure the
+   * `Accepted` Condition on the BackendTLSPolicy is set to `status: False`, with
+   * a Reason `Invalid`.
+   *
+   * Support: Implementation-specific
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidation#wellKnownCACertificates
+   */
+  readonly wellKnownCaCertificates?: BackendTlsPolicyV1Alpha3SpecValidationWellKnownCaCertificates;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicyV1Alpha3SpecValidation' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicyV1Alpha3SpecValidation(obj: BackendTlsPolicyV1Alpha3SpecValidation | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'caCertificateRefs': obj.caCertificateRefs?.map(y => toJson_BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs(y)),
+    'hostname': obj.hostname,
+    'subjectAltNames': obj.subjectAltNames?.map(y => toJson_BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames(y)),
+    'wellKnownCACertificates': obj.wellKnownCaCertificates,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * LocalObjectReference identifies an API object within the namespace of the
+ * referrer.
+ * The API object must be valid in the cluster; the Group and Kind must
+ * be registered in the cluster for this reference to be valid.
+ *
+ * References to objects with invalid Group and Kind are not valid, and must
+ * be rejected by the implementation, with appropriate Conditions set
+ * on the containing object.
+ *
+ * @schema BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs
+ */
+export interface BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs {
+  /**
+   * Group is the group of the referent. For example, "gateway.networking.k8s.io".
+   * When unspecified or empty string, core API group is inferred.
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs#group
+   */
+  readonly group: string;
+
+  /**
+   * Kind is kind of the referent. For example "HTTPRoute" or "Service".
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs#kind
+   */
+  readonly kind: string;
+
+  /**
+   * Name is the name of the referent.
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs#name
+   */
+  readonly name: string;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs(obj: BackendTlsPolicyV1Alpha3SpecValidationCaCertificateRefs | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'group': obj.group,
+    'kind': obj.kind,
+    'name': obj.name,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SubjectAltName represents Subject Alternative Name.
+ *
+ * @schema BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames
+ */
+export interface BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames {
+  /**
+   * Hostname contains Subject Alternative Name specified in DNS name format.
+   * Required when Type is set to Hostname, ignored otherwise.
+   *
+   * Support: Core
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames#hostname
+   */
+  readonly hostname?: string;
+
+  /**
+   * Type determines the format of the Subject Alternative Name. Always required.
+   *
+   * Support: Core
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames#type
+   */
+  readonly type: BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNamesType;
+
+  /**
+   * URI contains Subject Alternative Name specified in a full URI format.
+   * It MUST include both a scheme (e.g., "http" or "ftp") and a scheme-specific-part.
+   * Common values include SPIFFE IDs like "spiffe://mycluster.example.com/ns/myns/sa/svc1sa".
+   * Required when Type is set to URI, ignored otherwise.
+   *
+   * Support: Core
+   *
+   * @schema BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames#uri
+   */
+  readonly uri?: string;
+}
+
+/**
+ * Converts an object of type 'BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames(obj: BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNames | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'hostname': obj.hostname,
+    'type': obj.type,
+    'uri': obj.uri,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * WellKnownCACertificates specifies whether system CA certificates may be used in
+ * the TLS handshake between the gateway and backend pod.
+ *
+ * If WellKnownCACertificates is unspecified or empty (""), then CACertificateRefs
+ * must be specified with at least one entry for a valid configuration. Only one of
+ * CACertificateRefs or WellKnownCACertificates may be specified, not both.
+ * If an implementation does not support the WellKnownCACertificates field, or
+ * the supplied value is not recognized, the implementation MUST ensure the
+ * `Accepted` Condition on the BackendTLSPolicy is set to `status: False`, with
+ * a Reason `Invalid`.
+ *
+ * Support: Implementation-specific
+ *
+ * @schema BackendTlsPolicyV1Alpha3SpecValidationWellKnownCaCertificates
+ */
+export enum BackendTlsPolicyV1Alpha3SpecValidationWellKnownCaCertificates {
+  /** System */
+  SYSTEM = "System",
+}
+
+/**
+ * Type determines the format of the Subject Alternative Name. Always required.
+ *
+ * Support: Core
+ *
+ * @schema BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNamesType
+ */
+export enum BackendTlsPolicyV1Alpha3SpecValidationSubjectAltNamesType {
+  /** Hostname */
+  HOSTNAME = "Hostname",
+  /** URI */
+  URI = "URI",
+}
+
+
+/**
  * Gateway represents an instance of a service-traffic handling infrastructure
 by binding Listeners to a set of IP addresses.
  *
@@ -103,7 +1119,7 @@ export interface GatewaySpec {
    * Addresses requested for this Gateway. This is optional and behavior can
    * depend on the implementation. If a value is set in the spec and the
    * requested address is invalid or unavailable, the implementation MUST
-   * indicate this in the associated entry in GatewayStatus.Addresses.
+   * indicate this in an associated entry in GatewayStatus.Conditions.
    *
    * The Addresses field represents a request for the address(es) on the
    * "outside of the Gateway", that traffic bound for this Gateway will use.
@@ -571,7 +1587,7 @@ export interface GatewaySpecListeners {
    * the Protocol field is "HTTPS" or "TLS". It is invalid to set this field
    * if the Protocol field is "HTTP", "TCP", or "UDP".
    *
-   * The association of SNIs to Certificate defined in GatewayTLSConfig is
+   * The association of SNIs to Certificate defined in ListenerTLSConfig is
    * defined based on the Hostname field for this listener.
    *
    * The GatewayClass MUST use the longest matching SNI out of all
@@ -739,7 +1755,7 @@ export function toJson_GatewaySpecListenersAllowedRoutes(obj: GatewaySpecListene
  * the Protocol field is "HTTPS" or "TLS". It is invalid to set this field
  * if the Protocol field is "HTTP", "TCP", or "UDP".
  *
- * The association of SNIs to Certificate defined in GatewayTLSConfig is
+ * The association of SNIs to Certificate defined in ListenerTLSConfig is
  * defined based on the Hostname field for this listener.
  *
  * The GatewayClass MUST use the longest matching SNI out of all
@@ -1226,7 +2242,7 @@ export interface GatewayV1Beta1Spec {
    * Addresses requested for this Gateway. This is optional and behavior can
    * depend on the implementation. If a value is set in the spec and the
    * requested address is invalid or unavailable, the implementation MUST
-   * indicate this in the associated entry in GatewayStatus.Addresses.
+   * indicate this in an associated entry in GatewayStatus.Conditions.
    *
    * The Addresses field represents a request for the address(es) on the
    * "outside of the Gateway", that traffic bound for this Gateway will use.
@@ -1694,7 +2710,7 @@ export interface GatewayV1Beta1SpecListeners {
    * the Protocol field is "HTTPS" or "TLS". It is invalid to set this field
    * if the Protocol field is "HTTP", "TCP", or "UDP".
    *
-   * The association of SNIs to Certificate defined in GatewayTLSConfig is
+   * The association of SNIs to Certificate defined in ListenerTLSConfig is
    * defined based on the Hostname field for this listener.
    *
    * The GatewayClass MUST use the longest matching SNI out of all
@@ -1862,7 +2878,7 @@ export function toJson_GatewayV1Beta1SpecListenersAllowedRoutes(obj: GatewayV1Be
  * the Protocol field is "HTTPS" or "TLS". It is invalid to set this field
  * if the Protocol field is "HTTP", "TCP", or "UDP".
  *
- * The association of SNIs to Certificate defined in GatewayTLSConfig is
+ * The association of SNIs to Certificate defined in ListenerTLSConfig is
  * defined based on the Hostname field for this listener.
  *
  * The GatewayClass MUST use the longest matching SNI out of all
@@ -2816,7 +3832,7 @@ export class GrpcRoute extends ApiObject {
    *
    * @param props initialization props
    */
-  public static manifest(props: GrpcRouteProps = {}): any {
+  public static manifest(props: GrpcRouteProps): any {
     return {
       ...GrpcRoute.GVK,
       ...toJson_GrpcRouteProps(props),
@@ -2829,7 +3845,7 @@ export class GrpcRoute extends ApiObject {
    * @param id a scope-local name for the object
    * @param props initialization props
    */
-  public constructor(scope: Construct, id: string, props: GrpcRouteProps = {}) {
+  public constructor(scope: Construct, id: string, props: GrpcRouteProps) {
     super(scope, id, {
       ...GrpcRoute.GVK,
       ...props,
@@ -2891,7 +3907,7 @@ export interface GrpcRouteProps {
    *
    * @schema GRPCRoute#spec
    */
-  readonly spec?: GrpcRouteSpec;
+  readonly spec: GrpcRouteSpec;
 }
 
 /**
@@ -3325,6 +4341,15 @@ export interface GrpcRouteSpecRules {
    * @schema GrpcRouteSpecRules#matches
    */
   readonly matches?: GrpcRouteSpecRulesMatches[];
+
+  /**
+   * Name is the name of the route rule. This name MUST be unique within a Route if it is set.
+   *
+   * Support: Extended
+   *
+   * @schema GrpcRouteSpecRules#name
+   */
+  readonly name?: string;
 }
 
 /**
@@ -3337,6 +4362,7 @@ export function toJson_GrpcRouteSpecRules(obj: GrpcRouteSpecRules | undefined): 
     'backendRefs': obj.backendRefs?.map(y => toJson_GrpcRouteSpecRulesBackendRefs(y)),
     'filters': obj.filters?.map(y => toJson_GrpcRouteSpecRulesFilters(y)),
     'matches': obj.matches?.map(y => toJson_GrpcRouteSpecRulesMatches(y)),
+    'name': obj.name,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5768,6 +6794,15 @@ export interface HttpRouteSpecRules {
   readonly matches?: HttpRouteSpecRulesMatches[];
 
   /**
+   * Name is the name of the route rule. This name MUST be unique within a Route if it is set.
+   *
+   * Support: Extended
+   *
+   * @schema HttpRouteSpecRules#name
+   */
+  readonly name?: string;
+
+  /**
    * Timeouts defines the timeouts that can be configured for an HTTP request.
    *
    * Support: Extended
@@ -5787,6 +6822,7 @@ export function toJson_HttpRouteSpecRules(obj: HttpRouteSpecRules | undefined): 
     'backendRefs': obj.backendRefs?.map(y => toJson_HttpRouteSpecRulesBackendRefs(y)),
     'filters': obj.filters?.map(y => toJson_HttpRouteSpecRulesFilters(y)),
     'matches': obj.matches?.map(y => toJson_HttpRouteSpecRulesMatches(y)),
+    'name': obj.name,
     'timeouts': toJson_HttpRouteSpecRulesTimeouts(obj.timeouts),
   };
   // filter undefined values
@@ -9304,6 +10340,15 @@ export interface HttpRouteV1Beta1SpecRules {
   readonly matches?: HttpRouteV1Beta1SpecRulesMatches[];
 
   /**
+   * Name is the name of the route rule. This name MUST be unique within a Route if it is set.
+   *
+   * Support: Extended
+   *
+   * @schema HttpRouteV1Beta1SpecRules#name
+   */
+  readonly name?: string;
+
+  /**
    * Timeouts defines the timeouts that can be configured for an HTTP request.
    *
    * Support: Extended
@@ -9323,6 +10368,7 @@ export function toJson_HttpRouteV1Beta1SpecRules(obj: HttpRouteV1Beta1SpecRules 
     'backendRefs': obj.backendRefs?.map(y => toJson_HttpRouteV1Beta1SpecRulesBackendRefs(y)),
     'filters': obj.filters?.map(y => toJson_HttpRouteV1Beta1SpecRulesFilters(y)),
     'matches': obj.matches?.map(y => toJson_HttpRouteV1Beta1SpecRulesMatches(y)),
+    'name': obj.name,
     'timeouts': toJson_HttpRouteV1Beta1SpecRulesTimeouts(obj.timeouts),
   };
   // filter undefined values

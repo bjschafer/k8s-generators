@@ -122,6 +122,7 @@ export interface ClusterExternalSecretSpec {
 
   /**
    * The labels to select by to find the Namespaces to create the ExternalSecrets in.
+   *
    * Deprecated: Use NamespaceSelectors instead.
    *
    * @schema ClusterExternalSecretSpec#namespaceSelector
@@ -137,6 +138,7 @@ export interface ClusterExternalSecretSpec {
 
   /**
    * Choose namespaces by name. This field is ORed with anything that NamespaceSelectors ends up choosing.
+   *
    * Deprecated: Use NamespaceSelectors instead.
    *
    * @schema ClusterExternalSecretSpec#namespaces
@@ -284,6 +286,7 @@ export function toJson_ClusterExternalSecretSpecExternalSecretSpec(obj: ClusterE
 
 /**
  * The labels to select by to find the Namespaces to create the ExternalSecrets in.
+ *
  * Deprecated: Use NamespaceSelectors instead.
  *
  * @schema ClusterExternalSecretSpecNamespaceSelector
@@ -2176,6 +2179,7 @@ export interface ClusterExternalSecretV1Beta1Spec {
 
   /**
    * Choose namespaces by name. This field is ORed with anything that NamespaceSelectors ends up choosing.
+   *
    * Deprecated: Use NamespaceSelectors instead.
    *
    * @schema ClusterExternalSecretV1Beta1Spec#namespaces
@@ -5248,7 +5252,7 @@ export function toJson_ClusterSecretStoreProps(obj: ClusterSecretStoreProps | un
  */
 export interface ClusterSecretStoreSpec {
   /**
-   * Used to constraint a ClusterSecretStore to specific namespaces. Relevant only to ClusterSecretStore
+   * Used to constrain a ClusterSecretStore to specific namespaces. Relevant only to ClusterSecretStore.
    *
    * @schema ClusterSecretStoreSpec#conditions
    */
@@ -5277,7 +5281,7 @@ export interface ClusterSecretStoreSpec {
   readonly refreshInterval?: number;
 
   /**
-   * Used to configure http retries if failed
+   * Used to configure HTTP retries on failures.
    *
    * @schema ClusterSecretStoreSpec#retrySettings
    */
@@ -5361,13 +5365,6 @@ export interface ClusterSecretStoreSpecProvider {
   readonly akeyless?: ClusterSecretStoreSpecProviderAkeyless;
 
   /**
-   * Alibaba configures this store to sync secrets using Alibaba Cloud provider
-   *
-   * @schema ClusterSecretStoreSpecProvider#alibaba
-   */
-  readonly alibaba?: ClusterSecretStoreSpecProviderAlibaba;
-
-  /**
    * AWS configures this store to sync secrets using AWS Secret Manager provider
    *
    * @schema ClusterSecretStoreSpecProvider#aws
@@ -5380,6 +5377,13 @@ export interface ClusterSecretStoreSpecProvider {
    * @schema ClusterSecretStoreSpecProvider#azurekv
    */
   readonly azurekv?: ClusterSecretStoreSpecProviderAzurekv;
+
+  /**
+   * Barbican configures this store to sync secrets using the OpenStack Barbican provider
+   *
+   * @schema ClusterSecretStoreSpecProvider#barbican
+   */
+  readonly barbican?: ClusterSecretStoreSpecProviderBarbican;
 
   /**
    * Beyondtrust configures this store to sync secrets using Password Safe provider.
@@ -5425,18 +5429,18 @@ export interface ClusterSecretStoreSpecProvider {
   readonly delinea?: ClusterSecretStoreSpecProviderDelinea;
 
   /**
-   * Device42 configures this store to sync secrets using the Device42 provider
-   *
-   * @schema ClusterSecretStoreSpecProvider#device42
-   */
-  readonly device42?: ClusterSecretStoreSpecProviderDevice42;
-
-  /**
    * Doppler configures this store to sync secrets using the Doppler provider
    *
    * @schema ClusterSecretStoreSpecProvider#doppler
    */
   readonly doppler?: ClusterSecretStoreSpecProviderDoppler;
+
+  /**
+   * DVLS configures this store to sync secrets using Devolutions Server provider
+   *
+   * @schema ClusterSecretStoreSpecProvider#dvls
+   */
+  readonly dvls?: ClusterSecretStoreSpecProviderDvls;
 
   /**
    * Fake configures a store with static key/value pairs
@@ -5460,7 +5464,7 @@ export interface ClusterSecretStoreSpecProvider {
   readonly gcpsm?: ClusterSecretStoreSpecProviderGcpsm;
 
   /**
-   * Github configures this store to push GitHub Action secrets using GitHub API provider.
+   * Github configures this store to push GitHub Actions secrets using the GitHub API provider.
    * Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
    *
    * @schema ClusterSecretStoreSpecProvider#github
@@ -5501,6 +5505,13 @@ export interface ClusterSecretStoreSpecProvider {
    * @schema ClusterSecretStoreSpecProvider#kubernetes
    */
   readonly kubernetes?: ClusterSecretStoreSpecProviderKubernetes;
+
+  /**
+   * NebiusMysterybox configures this store to sync secrets using NebiusMysterybox provider
+   *
+   * @schema ClusterSecretStoreSpecProvider#nebiusmysterybox
+   */
+  readonly nebiusmysterybox?: ClusterSecretStoreSpecProviderNebiusmysterybox;
 
   /**
    * Ngrok configures this store to sync secrets using the ngrok provider.
@@ -5567,7 +5578,7 @@ export interface ClusterSecretStoreSpecProvider {
   readonly pulumi?: ClusterSecretStoreSpecProviderPulumi;
 
   /**
-   * Scaleway
+   * Scaleway configures this store to sync secrets using the Scaleway provider.
    *
    * @schema ClusterSecretStoreSpecProvider#scaleway
    */
@@ -5589,7 +5600,7 @@ export interface ClusterSecretStoreSpecProvider {
   readonly senhasegura?: ClusterSecretStoreSpecProviderSenhasegura;
 
   /**
-   * Vault configures this store to sync secrets using Hashi provider
+   * Vault configures this store to sync secrets using the HashiCorp Vault provider.
    *
    * @schema ClusterSecretStoreSpecProvider#vault
    */
@@ -5632,17 +5643,17 @@ export function toJson_ClusterSecretStoreSpecProvider(obj: ClusterSecretStoreSpe
   if (obj === undefined) { return undefined; }
   const result = {
     'akeyless': toJson_ClusterSecretStoreSpecProviderAkeyless(obj.akeyless),
-    'alibaba': toJson_ClusterSecretStoreSpecProviderAlibaba(obj.alibaba),
     'aws': toJson_ClusterSecretStoreSpecProviderAws(obj.aws),
     'azurekv': toJson_ClusterSecretStoreSpecProviderAzurekv(obj.azurekv),
+    'barbican': toJson_ClusterSecretStoreSpecProviderBarbican(obj.barbican),
     'beyondtrust': toJson_ClusterSecretStoreSpecProviderBeyondtrust(obj.beyondtrust),
     'bitwardensecretsmanager': toJson_ClusterSecretStoreSpecProviderBitwardensecretsmanager(obj.bitwardensecretsmanager),
     'chef': toJson_ClusterSecretStoreSpecProviderChef(obj.chef),
     'cloudrusm': toJson_ClusterSecretStoreSpecProviderCloudrusm(obj.cloudrusm),
     'conjur': toJson_ClusterSecretStoreSpecProviderConjur(obj.conjur),
     'delinea': toJson_ClusterSecretStoreSpecProviderDelinea(obj.delinea),
-    'device42': toJson_ClusterSecretStoreSpecProviderDevice42(obj.device42),
     'doppler': toJson_ClusterSecretStoreSpecProviderDoppler(obj.doppler),
+    'dvls': toJson_ClusterSecretStoreSpecProviderDvls(obj.dvls),
     'fake': toJson_ClusterSecretStoreSpecProviderFake(obj.fake),
     'fortanix': toJson_ClusterSecretStoreSpecProviderFortanix(obj.fortanix),
     'gcpsm': toJson_ClusterSecretStoreSpecProviderGcpsm(obj.gcpsm),
@@ -5652,6 +5663,7 @@ export function toJson_ClusterSecretStoreSpecProvider(obj: ClusterSecretStoreSpe
     'infisical': toJson_ClusterSecretStoreSpecProviderInfisical(obj.infisical),
     'keepersecurity': toJson_ClusterSecretStoreSpecProviderKeepersecurity(obj.keepersecurity),
     'kubernetes': toJson_ClusterSecretStoreSpecProviderKubernetes(obj.kubernetes),
+    'nebiusmysterybox': toJson_ClusterSecretStoreSpecProviderNebiusmysterybox(obj.nebiusmysterybox),
     'ngrok': toJson_ClusterSecretStoreSpecProviderNgrok(obj.ngrok),
     'onboardbase': toJson_ClusterSecretStoreSpecProviderOnboardbase(obj.onboardbase),
     'onepassword': toJson_ClusterSecretStoreSpecProviderOnepassword(obj.onepassword),
@@ -5676,7 +5688,7 @@ export function toJson_ClusterSecretStoreSpecProvider(obj: ClusterSecretStoreSpe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Used to configure http retries if failed
+ * Used to configure HTTP retries on failures.
  *
  * @schema ClusterSecretStoreSpecRetrySettings
  */
@@ -5793,42 +5805,6 @@ export function toJson_ClusterSecretStoreSpecProviderAkeyless(obj: ClusterSecret
     'authSecretRef': toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRef(obj.authSecretRef),
     'caBundle': obj.caBundle,
     'caProvider': toJson_ClusterSecretStoreSpecProviderAkeylessCaProvider(obj.caProvider),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Alibaba configures this store to sync secrets using Alibaba Cloud provider
- *
- * @schema ClusterSecretStoreSpecProviderAlibaba
- */
-export interface ClusterSecretStoreSpecProviderAlibaba {
-  /**
-   * AlibabaAuth contains a secretRef for credentials.
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibaba#auth
-   */
-  readonly auth: ClusterSecretStoreSpecProviderAlibabaAuth;
-
-  /**
-   * Alibaba Region to be used for the provider
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibaba#regionID
-   */
-  readonly regionId: string;
-}
-
-/**
- * Converts an object of type 'ClusterSecretStoreSpecProviderAlibaba' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderAlibaba(obj: ClusterSecretStoreSpecProviderAlibaba | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'auth': toJson_ClusterSecretStoreSpecProviderAlibabaAuth(obj.auth),
-    'regionID': obj.regionId,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -5961,8 +5937,11 @@ export interface ClusterSecretStoreSpecProviderAzurekv {
   readonly authType?: ClusterSecretStoreSpecProviderAzurekvAuthType;
 
   /**
-   * CustomCloudConfig defines custom Azure Stack Hub or Azure Stack Edge endpoints.
+   * CustomCloudConfig defines custom Azure endpoints for non-standard clouds.
    * Required when EnvironmentType is AzureStackCloud.
+   * Optional for other environment types - useful for Azure China when using Workload Identity
+   * with AKS, where the OIDC issuer (login.partner.microsoftonline.cn) differs from the
+   * standard China Cloud endpoint (login.chinacloudapi.cn).
    * IMPORTANT: This feature REQUIRES UseAzureSDK to be set to true. Custom cloud
    * configuration is not supported with the legacy go-autorest SDK.
    *
@@ -6036,6 +6015,58 @@ export function toJson_ClusterSecretStoreSpecProviderAzurekv(obj: ClusterSecretS
     'tenantId': obj.tenantId,
     'useAzureSDK': obj.useAzureSdk,
     'vaultUrl': obj.vaultUrl,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Barbican configures this store to sync secrets using the OpenStack Barbican provider
+ *
+ * @schema ClusterSecretStoreSpecProviderBarbican
+ */
+export interface ClusterSecretStoreSpecProviderBarbican {
+  /**
+   * BarbicanAuth contains the authentication information for Barbican.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbican#auth
+   */
+  readonly auth: ClusterSecretStoreSpecProviderBarbicanAuth;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderBarbican#authURL
+   */
+  readonly authUrl?: string;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderBarbican#domainName
+   */
+  readonly domainName?: string;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderBarbican#region
+   */
+  readonly region?: string;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderBarbican#tenantName
+   */
+  readonly tenantName?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderBarbican' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderBarbican(obj: ClusterSecretStoreSpecProviderBarbican | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'auth': toJson_ClusterSecretStoreSpecProviderBarbicanAuth(obj.auth),
+    'authURL': obj.authUrl,
+    'domainName': obj.domainName,
+    'region': obj.region,
+    'tenantName': obj.tenantName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6356,42 +6387,6 @@ export function toJson_ClusterSecretStoreSpecProviderDelinea(obj: ClusterSecretS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Device42 configures this store to sync secrets using the Device42 provider
- *
- * @schema ClusterSecretStoreSpecProviderDevice42
- */
-export interface ClusterSecretStoreSpecProviderDevice42 {
-  /**
-   * Auth configures how secret-manager authenticates with a Device42 instance.
-   *
-   * @schema ClusterSecretStoreSpecProviderDevice42#auth
-   */
-  readonly auth: ClusterSecretStoreSpecProviderDevice42Auth;
-
-  /**
-   * URL configures the Device42 instance URL.
-   *
-   * @schema ClusterSecretStoreSpecProviderDevice42#host
-   */
-  readonly host: string;
-}
-
-/**
- * Converts an object of type 'ClusterSecretStoreSpecProviderDevice42' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderDevice42(obj: ClusterSecretStoreSpecProviderDevice42 | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'auth': toJson_ClusterSecretStoreSpecProviderDevice42Auth(obj.auth),
-    'host': obj.host,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Doppler configures this store to sync secrets using the Doppler provider
  *
  * @schema ClusterSecretStoreSpecProviderDoppler
@@ -6445,6 +6440,52 @@ export function toJson_ClusterSecretStoreSpecProviderDoppler(obj: ClusterSecretS
     'format': obj.format,
     'nameTransformer': obj.nameTransformer,
     'project': obj.project,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * DVLS configures this store to sync secrets using Devolutions Server provider
+ *
+ * @schema ClusterSecretStoreSpecProviderDvls
+ */
+export interface ClusterSecretStoreSpecProviderDvls {
+  /**
+   * Auth defines the authentication method to use.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvls#auth
+   */
+  readonly auth: ClusterSecretStoreSpecProviderDvlsAuth;
+
+  /**
+   * Insecure allows connecting to DVLS over plain HTTP.
+   * This is NOT RECOMMENDED for production use.
+   * Set to true only if you understand the security implications.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvls#insecure
+   */
+  readonly insecure?: boolean;
+
+  /**
+   * ServerURL is the DVLS instance URL (e.g., https://dvls.example.com).
+   *
+   * @schema ClusterSecretStoreSpecProviderDvls#serverUrl
+   */
+  readonly serverUrl: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderDvls' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderDvls(obj: ClusterSecretStoreSpecProviderDvls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'auth': toJson_ClusterSecretStoreSpecProviderDvlsAuth(obj.auth),
+    'insecure': obj.insecure,
+    'serverUrl': obj.serverUrl,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -6579,7 +6620,7 @@ export function toJson_ClusterSecretStoreSpecProviderGcpsm(obj: ClusterSecretSto
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Github configures this store to push GitHub Action secrets using GitHub API provider.
+ * Github configures this store to push GitHub Actions secrets using the GitHub API provider.
  * Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
  *
  * @schema ClusterSecretStoreSpecProviderGithub
@@ -6801,6 +6842,23 @@ export interface ClusterSecretStoreSpecProviderInfisical {
   readonly auth: ClusterSecretStoreSpecProviderInfisicalAuth;
 
   /**
+   * CABundle is a PEM-encoded CA certificate bundle used to validate
+   * the Infisical server's TLS certificate. Mutually exclusive with CAProvider.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisical#caBundle
+   */
+  readonly caBundle?: string;
+
+  /**
+   * CAProvider is a reference to a Secret or ConfigMap that contains a CA certificate.
+   * The certificate is used to validate the Infisical server's TLS certificate.
+   * Mutually exclusive with CABundle.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisical#caProvider
+   */
+  readonly caProvider?: ClusterSecretStoreSpecProviderInfisicalCaProvider;
+
+  /**
    * HostAPI specifies the base URL of the Infisical API. If not provided, it defaults to "https://app.infisical.com/api".
    *
    * @schema ClusterSecretStoreSpecProviderInfisical#hostAPI
@@ -6823,6 +6881,8 @@ export function toJson_ClusterSecretStoreSpecProviderInfisical(obj: ClusterSecre
   if (obj === undefined) { return undefined; }
   const result = {
     'auth': toJson_ClusterSecretStoreSpecProviderInfisicalAuth(obj.auth),
+    'caBundle': obj.caBundle,
+    'caProvider': toJson_ClusterSecretStoreSpecProviderInfisicalCaProvider(obj.caProvider),
     'hostAPI': obj.hostApi,
     'secretsScope': toJson_ClusterSecretStoreSpecProviderInfisicalSecretsScope(obj.secretsScope),
   };
@@ -6912,6 +6972,50 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetes(obj: ClusterSecr
     'authRef': toJson_ClusterSecretStoreSpecProviderKubernetesAuthRef(obj.authRef),
     'remoteNamespace': obj.remoteNamespace,
     'server': toJson_ClusterSecretStoreSpecProviderKubernetesServer(obj.server),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * NebiusMysterybox configures this store to sync secrets using NebiusMysterybox provider
+ *
+ * @schema ClusterSecretStoreSpecProviderNebiusmysterybox
+ */
+export interface ClusterSecretStoreSpecProviderNebiusmysterybox {
+  /**
+   * NebiusMysterybox API endpoint
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysterybox#apiDomain
+   */
+  readonly apiDomain: string;
+
+  /**
+   * Auth defines parameters to authenticate in MysteryBox
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysterybox#auth
+   */
+  readonly auth: ClusterSecretStoreSpecProviderNebiusmysteryboxAuth;
+
+  /**
+   * The provider for the CA bundle to use to validate NebiusMysterybox server certificate.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysterybox#caProvider
+   */
+  readonly caProvider?: ClusterSecretStoreSpecProviderNebiusmysteryboxCaProvider;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNebiusmysterybox' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNebiusmysterybox(obj: ClusterSecretStoreSpecProviderNebiusmysterybox | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiDomain': obj.apiDomain,
+    'auth': toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxAuth(obj.auth),
+    'caProvider': toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxCaProvider(obj.caProvider),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -7072,6 +7176,17 @@ export interface ClusterSecretStoreSpecProviderOnepasswordSdk {
   readonly auth: ClusterSecretStoreSpecProviderOnepasswordSdkAuth;
 
   /**
+   * Cache configures client-side caching for read operations (GetSecret, GetSecretMap).
+   * When enabled, secrets are cached with the specified TTL.
+   * Write operations (PushSecret, DeleteSecret) automatically invalidate relevant cache entries.
+   * If omitted, caching is disabled (default).
+   * cache: {} is a valid option to set.
+   *
+   * @schema ClusterSecretStoreSpecProviderOnepasswordSdk#cache
+   */
+  readonly cache?: ClusterSecretStoreSpecProviderOnepasswordSdkCache;
+
+  /**
    * IntegrationInfo specifies the name and version of the integration built using the 1Password Go SDK.
    * If you don't know which name and version to use, use `DefaultIntegrationName` and `DefaultIntegrationVersion`, respectively.
    *
@@ -7095,6 +7210,7 @@ export function toJson_ClusterSecretStoreSpecProviderOnepasswordSdk(obj: Cluster
   if (obj === undefined) { return undefined; }
   const result = {
     'auth': toJson_ClusterSecretStoreSpecProviderOnepasswordSdkAuth(obj.auth),
+    'cache': toJson_ClusterSecretStoreSpecProviderOnepasswordSdkCache(obj.cache),
     'integrationInfo': toJson_ClusterSecretStoreSpecProviderOnepasswordSdkIntegrationInfo(obj.integrationInfo),
     'vault': obj.vault,
   };
@@ -7365,7 +7481,7 @@ export function toJson_ClusterSecretStoreSpecProviderPulumi(obj: ClusterSecretSt
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Scaleway
+ * Scaleway configures this store to sync secrets using the Scaleway provider.
  *
  * @schema ClusterSecretStoreSpecProviderScaleway
  */
@@ -7550,7 +7666,7 @@ export function toJson_ClusterSecretStoreSpecProviderSenhasegura(obj: ClusterSec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Vault configures this store to sync secrets using Hashi provider
+ * Vault configures this store to sync secrets using the HashiCorp Vault provider.
  *
  * @schema ClusterSecretStoreSpecProviderVault
  */
@@ -8072,42 +8188,6 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessCaProvider(obj: Clu
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * AlibabaAuth contains a secretRef for credentials.
- *
- * @schema ClusterSecretStoreSpecProviderAlibabaAuth
- */
-export interface ClusterSecretStoreSpecProviderAlibabaAuth {
-  /**
-   * AlibabaRRSAAuth authenticates against Alibaba using RRSA.
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuth#rrsa
-   */
-  readonly rrsa?: ClusterSecretStoreSpecProviderAlibabaAuthRrsa;
-
-  /**
-   * AlibabaAuthSecretRef holds secret references for Alibaba credentials.
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuth#secretRef
-   */
-  readonly secretRef?: ClusterSecretStoreSpecProviderAlibabaAuthSecretRef;
-}
-
-/**
- * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuth' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderAlibabaAuth(obj: ClusterSecretStoreSpecProviderAlibabaAuth | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'rrsa': toJson_ClusterSecretStoreSpecProviderAlibabaAuthRrsa(obj.rrsa),
-    'secretRef': toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRef(obj.secretRef),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Auth defines the information necessary to authenticate against AWS
  * if not set aws sdk will infer credentials from your environment
  * see: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials
@@ -8305,8 +8385,11 @@ export enum ClusterSecretStoreSpecProviderAzurekvAuthType {
 }
 
 /**
- * CustomCloudConfig defines custom Azure Stack Hub or Azure Stack Edge endpoints.
+ * CustomCloudConfig defines custom Azure endpoints for non-standard clouds.
  * Required when EnvironmentType is AzureStackCloud.
+ * Optional for other environment types - useful for Azure China when using Workload Identity
+ * with AKS, where the OIDC issuer (login.partner.microsoftonline.cn) differs from the
+ * standard China Cloud endpoint (login.chinacloudapi.cn).
  * IMPORTANT: This feature REQUIRES UseAzureSDK to be set to true. Custom cloud
  * configuration is not supported with the legacy go-autorest SDK.
  *
@@ -8431,6 +8514,42 @@ export function toJson_ClusterSecretStoreSpecProviderAzurekvServiceAccountRef(ob
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * BarbicanAuth contains the authentication information for Barbican.
+ *
+ * @schema ClusterSecretStoreSpecProviderBarbicanAuth
+ */
+export interface ClusterSecretStoreSpecProviderBarbicanAuth {
+  /**
+   * BarbicanProviderPasswordRef defines a reference to a secret containing password for the Barbican provider.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuth#password
+   */
+  readonly password: ClusterSecretStoreSpecProviderBarbicanAuthPassword;
+
+  /**
+   * BarbicanProviderUsernameRef defines a reference to a secret containing username for the Barbican provider.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuth#username
+   */
+  readonly username: ClusterSecretStoreSpecProviderBarbicanAuthUsername;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderBarbicanAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderBarbicanAuth(obj: ClusterSecretStoreSpecProviderBarbicanAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'password': toJson_ClusterSecretStoreSpecProviderBarbicanAuthPassword(obj.password),
+    'username': toJson_ClusterSecretStoreSpecProviderBarbicanAuthUsername(obj.username),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Auth configures how the operator authenticates with Beyondtrust.
  *
  * @schema ClusterSecretStoreSpecProviderBeyondtrustAuth
@@ -8515,6 +8634,13 @@ export interface ClusterSecretStoreSpecProviderBeyondtrustServer {
   readonly clientTimeOutSeconds?: number;
 
   /**
+   * When true, the response includes the decrypted password. When false, the password field is omitted. This option only applies to the SECRET retrieval type. Default: true.
+   *
+   * @schema ClusterSecretStoreSpecProviderBeyondtrustServer#decrypt
+   */
+  readonly decrypt?: boolean;
+
+  /**
    * The secret retrieval type. SECRET = Secrets Safe (credential, text, file). MANAGED_ACCOUNT = Password Safe account associated with a system.
    *
    * @schema ClusterSecretStoreSpecProviderBeyondtrustServer#retrievalType
@@ -8544,6 +8670,7 @@ export function toJson_ClusterSecretStoreSpecProviderBeyondtrustServer(obj: Clus
     'apiUrl': obj.apiUrl,
     'apiVersion': obj.apiVersion,
     'clientTimeOutSeconds': obj.clientTimeOutSeconds,
+    'decrypt': obj.decrypt,
     'retrievalType': obj.retrievalType,
     'separator': obj.separator,
     'verifyCA': obj.verifyCa,
@@ -8855,45 +8982,24 @@ export function toJson_ClusterSecretStoreSpecProviderDelineaClientSecret(obj: Cl
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Auth configures how secret-manager authenticates with a Device42 instance.
- *
- * @schema ClusterSecretStoreSpecProviderDevice42Auth
- */
-export interface ClusterSecretStoreSpecProviderDevice42Auth {
-  /**
-   * Device42SecretRef contains the secret reference for accessing the Device42 instance.
-   *
-   * @schema ClusterSecretStoreSpecProviderDevice42Auth#secretRef
-   */
-  readonly secretRef: ClusterSecretStoreSpecProviderDevice42AuthSecretRef;
-}
-
-/**
- * Converts an object of type 'ClusterSecretStoreSpecProviderDevice42Auth' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderDevice42Auth(obj: ClusterSecretStoreSpecProviderDevice42Auth | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'secretRef': toJson_ClusterSecretStoreSpecProviderDevice42AuthSecretRef(obj.secretRef),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Auth configures how the Operator authenticates with the Doppler API
  *
  * @schema ClusterSecretStoreSpecProviderDopplerAuth
  */
 export interface ClusterSecretStoreSpecProviderDopplerAuth {
   /**
-   * DopplerAuthSecretRef contains the secret reference for accessing the Doppler API.
+   * OIDCConfig authenticates using Kubernetes ServiceAccount tokens via OIDC.
+   *
+   * @schema ClusterSecretStoreSpecProviderDopplerAuth#oidcConfig
+   */
+  readonly oidcConfig?: ClusterSecretStoreSpecProviderDopplerAuthOidcConfig;
+
+  /**
+   * SecretRef authenticates using a Doppler service token stored in a Kubernetes Secret.
    *
    * @schema ClusterSecretStoreSpecProviderDopplerAuth#secretRef
    */
-  readonly secretRef: ClusterSecretStoreSpecProviderDopplerAuthSecretRef;
+  readonly secretRef?: ClusterSecretStoreSpecProviderDopplerAuthSecretRef;
 }
 
 /**
@@ -8903,6 +9009,7 @@ export interface ClusterSecretStoreSpecProviderDopplerAuth {
 export function toJson_ClusterSecretStoreSpecProviderDopplerAuth(obj: ClusterSecretStoreSpecProviderDopplerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'oidcConfig': toJson_ClusterSecretStoreSpecProviderDopplerAuthOidcConfig(obj.oidcConfig),
     'secretRef': toJson_ClusterSecretStoreSpecProviderDopplerAuthSecretRef(obj.secretRef),
   };
   // filter undefined values
@@ -8947,6 +9054,34 @@ export enum ClusterSecretStoreSpecProviderDopplerNameTransformer {
   /** lower-kebab */
   LOWER_HYPHEN_KEBAB = "lower-kebab",
 }
+
+/**
+ * Auth defines the authentication method to use.
+ *
+ * @schema ClusterSecretStoreSpecProviderDvlsAuth
+ */
+export interface ClusterSecretStoreSpecProviderDvlsAuth {
+  /**
+   * SecretRef contains the Application ID and Application Secret for authentication.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvlsAuth#secretRef
+   */
+  readonly secretRef: ClusterSecretStoreSpecProviderDvlsAuthSecretRef;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderDvlsAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderDvlsAuth(obj: ClusterSecretStoreSpecProviderDvlsAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_ClusterSecretStoreSpecProviderDvlsAuthSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * FakeProviderData defines a key-value pair with optional version for the fake provider.
@@ -9305,6 +9440,61 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuth(obj: ClusterS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * CAProvider is a reference to a Secret or ConfigMap that contains a CA certificate.
+ * The certificate is used to validate the Infisical server's TLS certificate.
+ * Mutually exclusive with CABundle.
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalCaProvider
+ */
+export interface ClusterSecretStoreSpecProviderInfisicalCaProvider {
+  /**
+   * The key where the CA certificate can be found in the Secret or ConfigMap.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalCaProvider#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the object located at the provider type.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalCaProvider#name
+   */
+  readonly name: string;
+
+  /**
+   * The namespace the Provider type is in.
+   * Can only be defined when used in a ClusterSecretStore.
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalCaProvider#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * The type of provider to use such as "Secret", or "ConfigMap".
+   *
+   * @schema ClusterSecretStoreSpecProviderInfisicalCaProvider#type
+   */
+  readonly type: ClusterSecretStoreSpecProviderInfisicalCaProviderType;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderInfisicalCaProvider' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderInfisicalCaProvider(obj: ClusterSecretStoreSpecProviderInfisicalCaProvider | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * SecretsScope defines the scope of the secrets within the workspace
  *
  * @schema ClusterSecretStoreSpecProviderInfisicalSecretsScope
@@ -9549,6 +9739,83 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesServer(obj: Clust
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Auth defines parameters to authenticate in MysteryBox
+ *
+ * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuth
+ */
+export interface ClusterSecretStoreSpecProviderNebiusmysteryboxAuth {
+  /**
+   * ServiceAccountCreds references a Kubernetes Secret key that contains a JSON
+   * document with service account credentials used to get an IAM token.
+   *
+   * Expected JSON structure:
+   * {
+   * "subject-credentials": {
+   * "alg": "RS256",
+   * "private-key": "-----BEGIN PRIVATE KEY-----\n<private-key>\n-----END PRIVATE KEY-----\n",
+   * "kid": "<public-key-id>",
+   * "iss": "<issuer-service-account-id>",
+   * "sub": "<subject-service-account-id>"
+   * }
+   * }
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuth#serviceAccountCredsSecretRef
+   */
+  readonly serviceAccountCredsSecretRef?: ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef;
+
+  /**
+   * Token authenticates with Nebius Mysterybox by presenting a token.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuth#tokenSecretRef
+   */
+  readonly tokenSecretRef?: ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNebiusmysteryboxAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxAuth(obj: ClusterSecretStoreSpecProviderNebiusmysteryboxAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'serviceAccountCredsSecretRef': toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef(obj.serviceAccountCredsSecretRef),
+    'tokenSecretRef': toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef(obj.tokenSecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The provider for the CA bundle to use to validate NebiusMysterybox server certificate.
+ *
+ * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxCaProvider
+ */
+export interface ClusterSecretStoreSpecProviderNebiusmysteryboxCaProvider {
+  /**
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxCaProvider#certSecretRef
+   */
+  readonly certSecretRef?: ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNebiusmysteryboxCaProvider' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxCaProvider(obj: ClusterSecretStoreSpecProviderNebiusmysteryboxCaProvider | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'certSecretRef': toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef(obj.certSecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Auth configures how the ngrok provider authenticates with the ngrok API.
  *
  * @schema ClusterSecretStoreSpecProviderNgrokAuth
@@ -9691,6 +9958,48 @@ export function toJson_ClusterSecretStoreSpecProviderOnepasswordSdkAuth(obj: Clu
   if (obj === undefined) { return undefined; }
   const result = {
     'serviceAccountSecretRef': toJson_ClusterSecretStoreSpecProviderOnepasswordSdkAuthServiceAccountSecretRef(obj.serviceAccountSecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Cache configures client-side caching for read operations (GetSecret, GetSecretMap).
+ * When enabled, secrets are cached with the specified TTL.
+ * Write operations (PushSecret, DeleteSecret) automatically invalidate relevant cache entries.
+ * If omitted, caching is disabled (default).
+ * cache: {} is a valid option to set.
+ *
+ * @schema ClusterSecretStoreSpecProviderOnepasswordSdkCache
+ */
+export interface ClusterSecretStoreSpecProviderOnepasswordSdkCache {
+  /**
+   * MaxSize is the maximum number of secrets to cache.
+   * When the cache is full, least-recently-used entries are evicted.
+   *
+   * @schema ClusterSecretStoreSpecProviderOnepasswordSdkCache#maxSize
+   */
+  readonly maxSize?: number;
+
+  /**
+   * TTL is the time-to-live for cached secrets.
+   * Format: duration string (e.g., "5m", "1h", "30s")
+   *
+   * @schema ClusterSecretStoreSpecProviderOnepasswordSdkCache#ttl
+   */
+  readonly ttl?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderOnepasswordSdkCache' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderOnepasswordSdkCache(obj: ClusterSecretStoreSpecProviderOnepasswordSdkCache | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxSize': obj.maxSize,
+    'ttl': obj.ttl,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -10928,86 +11237,6 @@ export enum ClusterSecretStoreSpecProviderAkeylessCaProviderType {
 }
 
 /**
- * AlibabaRRSAAuth authenticates against Alibaba using RRSA.
- *
- * @schema ClusterSecretStoreSpecProviderAlibabaAuthRrsa
- */
-export interface ClusterSecretStoreSpecProviderAlibabaAuthRrsa {
-  /**
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthRrsa#oidcProviderArn
-   */
-  readonly oidcProviderArn: string;
-
-  /**
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthRrsa#oidcTokenFilePath
-   */
-  readonly oidcTokenFilePath: string;
-
-  /**
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthRrsa#roleArn
-   */
-  readonly roleArn: string;
-
-  /**
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthRrsa#sessionName
-   */
-  readonly sessionName: string;
-}
-
-/**
- * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuthRrsa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthRrsa(obj: ClusterSecretStoreSpecProviderAlibabaAuthRrsa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'oidcProviderArn': obj.oidcProviderArn,
-    'oidcTokenFilePath': obj.oidcTokenFilePath,
-    'roleArn': obj.roleArn,
-    'sessionName': obj.sessionName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * AlibabaAuthSecretRef holds secret references for Alibaba credentials.
- *
- * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRef
- */
-export interface ClusterSecretStoreSpecProviderAlibabaAuthSecretRef {
-  /**
-   * The AccessKeyID is used for authentication
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRef#accessKeyIDSecretRef
-   */
-  readonly accessKeyIdSecretRef: ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef;
-
-  /**
-   * The AccessKeySecret is used for authentication
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRef#accessKeySecretSecretRef
-   */
-  readonly accessKeySecretSecretRef: ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef;
-}
-
-/**
- * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuthSecretRef' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRef(obj: ClusterSecretStoreSpecProviderAlibabaAuthSecretRef | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'accessKeyIDSecretRef': toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef(obj.accessKeyIdSecretRef),
-    'accessKeySecretSecretRef': toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef(obj.accessKeySecretSecretRef),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * AWSJWTAuth stores reference to Authenticate against AWS using service account tokens.
  *
  * @schema ClusterSecretStoreSpecProviderAwsAuthJwt
@@ -11260,6 +11489,70 @@ export function toJson_ClusterSecretStoreSpecProviderAzurekvAuthSecretRefTenantI
     'key': obj.key,
     'name': obj.name,
     'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * BarbicanProviderPasswordRef defines a reference to a secret containing password for the Barbican provider.
+ *
+ * @schema ClusterSecretStoreSpecProviderBarbicanAuthPassword
+ */
+export interface ClusterSecretStoreSpecProviderBarbicanAuthPassword {
+  /**
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuthPassword#secretRef
+   */
+  readonly secretRef: ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderBarbicanAuthPassword' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderBarbicanAuthPassword(obj: ClusterSecretStoreSpecProviderBarbicanAuthPassword | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * BarbicanProviderUsernameRef defines a reference to a secret containing username for the Barbican provider.
+ *
+ * @schema ClusterSecretStoreSpecProviderBarbicanAuthUsername
+ */
+export interface ClusterSecretStoreSpecProviderBarbicanAuthUsername {
+  /**
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuthUsername#secretRef
+   */
+  readonly secretRef?: ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef;
+
+  /**
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuthUsername#value
+   */
+  readonly value?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderBarbicanAuthUsername' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderBarbicanAuthUsername(obj: ClusterSecretStoreSpecProviderBarbicanAuthUsername | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef(obj.secretRef),
+    'value': obj.value,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11764,27 +12057,45 @@ export function toJson_ClusterSecretStoreSpecProviderDelineaClientSecretSecretRe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Device42SecretRef contains the secret reference for accessing the Device42 instance.
+ * OIDCConfig authenticates using Kubernetes ServiceAccount tokens via OIDC.
  *
- * @schema ClusterSecretStoreSpecProviderDevice42AuthSecretRef
+ * @schema ClusterSecretStoreSpecProviderDopplerAuthOidcConfig
  */
-export interface ClusterSecretStoreSpecProviderDevice42AuthSecretRef {
+export interface ClusterSecretStoreSpecProviderDopplerAuthOidcConfig {
   /**
-   * Username / Password is used for authentication.
+   * ExpirationSeconds sets the ServiceAccount token validity duration.
+   * Defaults to 10 minutes.
    *
-   * @schema ClusterSecretStoreSpecProviderDevice42AuthSecretRef#credentials
+   * @default 10 minutes.
+   * @schema ClusterSecretStoreSpecProviderDopplerAuthOidcConfig#expirationSeconds
    */
-  readonly credentials?: ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials;
+  readonly expirationSeconds?: number;
+
+  /**
+   * Identity is the Doppler Service Account Identity ID configured for OIDC authentication.
+   *
+   * @schema ClusterSecretStoreSpecProviderDopplerAuthOidcConfig#identity
+   */
+  readonly identity: string;
+
+  /**
+   * ServiceAccountRef specifies the Kubernetes ServiceAccount to use for authentication.
+   *
+   * @schema ClusterSecretStoreSpecProviderDopplerAuthOidcConfig#serviceAccountRef
+   */
+  readonly serviceAccountRef: ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef;
 }
 
 /**
- * Converts an object of type 'ClusterSecretStoreSpecProviderDevice42AuthSecretRef' to JSON representation.
+ * Converts an object of type 'ClusterSecretStoreSpecProviderDopplerAuthOidcConfig' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderDevice42AuthSecretRef(obj: ClusterSecretStoreSpecProviderDevice42AuthSecretRef | undefined): Record<string, any> | undefined {
+export function toJson_ClusterSecretStoreSpecProviderDopplerAuthOidcConfig(obj: ClusterSecretStoreSpecProviderDopplerAuthOidcConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'credentials': toJson_ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials(obj.credentials),
+    'expirationSeconds': obj.expirationSeconds,
+    'identity': obj.identity,
+    'serviceAccountRef': toJson_ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef(obj.serviceAccountRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -11792,7 +12103,7 @@ export function toJson_ClusterSecretStoreSpecProviderDevice42AuthSecretRef(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * DopplerAuthSecretRef contains the secret reference for accessing the Doppler API.
+ * SecretRef authenticates using a Doppler service token stored in a Kubernetes Secret.
  *
  * @schema ClusterSecretStoreSpecProviderDopplerAuthSecretRef
  */
@@ -11815,6 +12126,42 @@ export function toJson_ClusterSecretStoreSpecProviderDopplerAuthSecretRef(obj: C
   if (obj === undefined) { return undefined; }
   const result = {
     'dopplerToken': toJson_ClusterSecretStoreSpecProviderDopplerAuthSecretRefDopplerToken(obj.dopplerToken),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretRef contains the Application ID and Application Secret for authentication.
+ *
+ * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRef
+ */
+export interface ClusterSecretStoreSpecProviderDvlsAuthSecretRef {
+  /**
+   * AppID is the reference to the secret containing the Application ID.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRef#appId
+   */
+  readonly appId: ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId;
+
+  /**
+   * AppSecret is the reference to the secret containing the Application Secret.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRef#appSecret
+   */
+  readonly appSecret: ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderDvlsAuthSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderDvlsAuthSecretRef(obj: ClusterSecretStoreSpecProviderDvlsAuthSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'appId': toJson_ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId(obj.appId),
+    'appSecret': toJson_ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret(obj.appSecret),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -12591,6 +12938,18 @@ export function toJson_ClusterSecretStoreSpecProviderInfisicalAuthUniversalAuthC
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The type of provider to use such as "Secret", or "ConfigMap".
+ *
+ * @schema ClusterSecretStoreSpecProviderInfisicalCaProviderType
+ */
+export enum ClusterSecretStoreSpecProviderInfisicalCaProviderType {
+  /** Secret */
+  SECRET = "Secret",
+  /** ConfigMap */
+  CONFIG_MAP = "ConfigMap",
+}
+
+/**
  * has both clientCert and clientKey as secretKeySelector
  *
  * @schema ClusterSecretStoreSpecProviderKubernetesAuthCert
@@ -12751,6 +13110,157 @@ export function toJson_ClusterSecretStoreSpecProviderKubernetesServerCaProvider(
     'name': obj.name,
     'namespace': obj.namespace,
     'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServiceAccountCreds references a Kubernetes Secret key that contains a JSON
+ * document with service account credentials used to get an IAM token.
+ *
+ * Expected JSON structure:
+ * {
+ * "subject-credentials": {
+ * "alg": "RS256",
+ * "private-key": "-----BEGIN PRIVATE KEY-----\n<private-key>\n-----END PRIVATE KEY-----\n",
+ * "kid": "<public-key-id>",
+ * "iss": "<issuer-service-account-id>",
+ * "sub": "<subject-service-account-id>"
+ * }
+ * }
+ *
+ * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef
+ */
+export interface ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef(obj: ClusterSecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Token authenticates with Nebius Mysterybox by presenting a token.
+ *
+ * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef
+ */
+export interface ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef(obj: ClusterSecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef
+ */
+export interface ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef(obj: ClusterSecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -14690,98 +15200,6 @@ export function toJson_ClusterSecretStoreSpecProviderAkeylessAuthSecretRefSecret
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * The AccessKeyID is used for authentication
- *
- * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef
- */
-export interface ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef {
-  /**
-   * A key in the referenced Secret.
-   * Some instances of this field may be defaulted, in others it may be required.
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#key
-   */
-  readonly key?: string;
-
-  /**
-   * The name of the Secret resource being referred to.
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#name
-   */
-  readonly name?: string;
-
-  /**
-   * The namespace of the Secret resource being referred to.
-   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#namespace
-   */
-  readonly namespace?: string;
-}
-
-/**
- * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef(obj: ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'namespace': obj.namespace,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * The AccessKeySecret is used for authentication
- *
- * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef
- */
-export interface ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef {
-  /**
-   * A key in the referenced Secret.
-   * Some instances of this field may be defaulted, in others it may be required.
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#key
-   */
-  readonly key?: string;
-
-  /**
-   * The name of the Secret resource being referred to.
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#name
-   */
-  readonly name?: string;
-
-  /**
-   * The namespace of the Secret resource being referred to.
-   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
-   *
-   * @schema ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#namespace
-   */
-  readonly namespace?: string;
-}
-
-/**
- * Converts an object of type 'ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef(obj: ClusterSecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'namespace': obj.namespace,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema ClusterSecretStoreSpecProviderAwsAuthJwtServiceAccountRef
@@ -14957,6 +15375,100 @@ export interface ClusterSecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecre
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef(obj: ClusterSecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef
+ */
+export interface ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef(obj: ClusterSecretStoreSpecProviderBarbicanAuthPasswordSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef
+ */
+export interface ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef(obj: ClusterSecretStoreSpecProviderBarbicanAuthUsernameSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -15572,43 +16084,44 @@ export function toJson_ClusterSecretStoreSpecProviderConjurAuthJwtServiceAccount
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Username / Password is used for authentication.
+ * ServiceAccountRef specifies the Kubernetes ServiceAccount to use for authentication.
  *
- * @schema ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials
+ * @schema ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef
  */
-export interface ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials {
+export interface ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef {
   /**
-   * A key in the referenced Secret.
-   * Some instances of this field may be defaulted, in others it may be required.
+   * Audience specifies the `aud` claim for the service account token
+   * If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity
+   * then this audiences will be appended to the list
    *
-   * @schema ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials#key
+   * @schema ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef#audiences
    */
-  readonly key?: string;
+  readonly audiences?: string[];
 
   /**
-   * The name of the Secret resource being referred to.
+   * The name of the ServiceAccount resource being referred to.
    *
-   * @schema ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials#name
+   * @schema ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef#name
    */
-  readonly name?: string;
+  readonly name: string;
 
   /**
-   * The namespace of the Secret resource being referred to.
+   * Namespace of the resource being referred to.
    * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
    *
-   * @schema ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials#namespace
+   * @schema ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef#namespace
    */
   readonly namespace?: string;
 }
 
 /**
- * Converts an object of type 'ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials' to JSON representation.
+ * Converts an object of type 'ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials(obj: ClusterSecretStoreSpecProviderDevice42AuthSecretRefCredentials | undefined): Record<string, any> | undefined {
+export function toJson_ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef(obj: ClusterSecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'key': obj.key,
+    'audiences': obj.audiences?.map(y => y),
     'name': obj.name,
     'namespace': obj.namespace,
   };
@@ -15654,6 +16167,98 @@ export interface ClusterSecretStoreSpecProviderDopplerAuthSecretRefDopplerToken 
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ClusterSecretStoreSpecProviderDopplerAuthSecretRefDopplerToken(obj: ClusterSecretStoreSpecProviderDopplerAuthSecretRefDopplerToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * AppID is the reference to the secret containing the Application ID.
+ *
+ * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId
+ */
+export interface ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId(obj: ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * AppSecret is the reference to the secret containing the Application Secret.
+ *
+ * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret
+ */
+export interface ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret(obj: ClusterSecretStoreSpecProviderDvlsAuthSecretRefAppSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -17902,6 +18507,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAcco
    * Optional audiences field that will be used to request a temporary Kubernetes service
    * account token for the service account referenced by `serviceAccountRef`.
    * Defaults to a single audience `vault` it not specified.
+   *
    * Deprecated: use serviceAccountRef.Audiences instead
    *
    * @default a single audience `vault` it not specified.
@@ -17913,6 +18519,7 @@ export interface ClusterSecretStoreSpecProviderVaultAuthJwtKubernetesServiceAcco
    * Optional expiration time in seconds that will be used to request a temporary
    * Kubernetes service account token for the service account referenced by
    * `serviceAccountRef`.
+   *
    * Deprecated: this will be removed in the future.
    * Defaults to 10 minutes.
    *
@@ -18882,7 +19489,7 @@ export function toJson_ClusterSecretStoreV1Beta1Props(obj: ClusterSecretStoreV1B
  */
 export interface ClusterSecretStoreV1Beta1Spec {
   /**
-   * Used to constraint a ClusterSecretStore to specific namespaces. Relevant only to ClusterSecretStore
+   * Used to constrain a ClusterSecretStore to specific namespaces. Relevant only to ClusterSecretStore.
    *
    * @schema ClusterSecretStoreV1Beta1Spec#conditions
    */
@@ -18911,7 +19518,7 @@ export interface ClusterSecretStoreV1Beta1Spec {
   readonly refreshInterval?: number;
 
   /**
-   * Used to configure http retries if failed
+   * Used to configure HTTP retries on failures.
    *
    * @schema ClusterSecretStoreV1Beta1Spec#retrySettings
    */
@@ -19094,7 +19701,7 @@ export interface ClusterSecretStoreV1Beta1SpecProvider {
   readonly gcpsm?: ClusterSecretStoreV1Beta1SpecProviderGcpsm;
 
   /**
-   * Github configures this store to push Github Action secrets using Github API provider
+   * Github configures this store to push GitHub Actions secrets using the GitHub API provider.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProvider#github
    */
@@ -19185,7 +19792,7 @@ export interface ClusterSecretStoreV1Beta1SpecProvider {
   readonly pulumi?: ClusterSecretStoreV1Beta1SpecProviderPulumi;
 
   /**
-   * Scaleway
+   * Scaleway configures this store to sync secrets using the Scaleway provider.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProvider#scaleway
    */
@@ -19207,7 +19814,7 @@ export interface ClusterSecretStoreV1Beta1SpecProvider {
   readonly senhasegura?: ClusterSecretStoreV1Beta1SpecProviderSenhasegura;
 
   /**
-   * Vault configures this store to sync secrets using Hashi provider
+   * Vault configures this store to sync secrets using the HashiCorp Vault provider.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProvider#vault
    */
@@ -19284,7 +19891,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProvider(obj: ClusterSecretS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Used to configure http retries if failed
+ * Used to configure HTTP retries on failures.
  *
  * @schema ClusterSecretStoreV1Beta1SpecRetrySettings
  */
@@ -20149,7 +20756,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderGcpsm(obj: ClusterSe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Github configures this store to push Github Action secrets using Github API provider
+ * Github configures this store to push GitHub Actions secrets using the GitHub API provider.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderGithub
  */
@@ -20844,7 +21451,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderPulumi(obj: ClusterS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Scaleway
+ * Scaleway configures this store to sync secrets using the Scaleway provider.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderScaleway
  */
@@ -21003,7 +21610,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderSenhasegura(obj: Clu
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Vault configures this store to sync secrets using Hashi provider
+ * Vault configures this store to sync secrets using the HashiCorp Vault provider.
  *
  * @schema ClusterSecretStoreV1Beta1SpecProviderVault
  */
@@ -21845,6 +22452,13 @@ export interface ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer {
   readonly clientTimeOutSeconds?: number;
 
   /**
+   * When true, the response includes the decrypted password. When false, the password field is omitted. This option only applies to the SECRET retrieval type. Default: true.
+   *
+   * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer#decrypt
+   */
+  readonly decrypt?: boolean;
+
+  /**
    * The secret retrieval type. SECRET = Secrets Safe (credential, text, file). MANAGED_ACCOUNT = Password Safe account associated with a system.
    *
    * @schema ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer#retrievalType
@@ -21874,6 +22488,7 @@ export function toJson_ClusterSecretStoreV1Beta1SpecProviderBeyondtrustServer(ob
     'apiUrl': obj.apiUrl,
     'apiVersion': obj.apiVersion,
     'clientTimeOutSeconds': obj.clientTimeOutSeconds,
+    'decrypt': obj.decrypt,
     'retrievalType': obj.retrievalType,
     'separator': obj.separator,
     'verifyCA': obj.verifyCa,
@@ -28816,6 +29431,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServ
    * Optional audiences field that will be used to request a temporary Kubernetes service
    * account token for the service account referenced by `serviceAccountRef`.
    * Defaults to a single audience `vault` it not specified.
+   *
    * Deprecated: use serviceAccountRef.Audiences instead
    *
    * @default a single audience `vault` it not specified.
@@ -28827,6 +29443,7 @@ export interface ClusterSecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServ
    * Optional expiration time in seconds that will be used to request a temporary
    * Kubernetes service account token for the service account referenced by
    * `serviceAccountRef`.
+   *
    * Deprecated: this will be removed in the future.
    * Defaults to 10 minutes.
    *
@@ -33918,7 +34535,7 @@ export function toJson_SecretStoreProps(obj: SecretStoreProps | undefined): Reco
  */
 export interface SecretStoreSpec {
   /**
-   * Used to constraint a ClusterSecretStore to specific namespaces. Relevant only to ClusterSecretStore
+   * Used to constrain a ClusterSecretStore to specific namespaces. Relevant only to ClusterSecretStore.
    *
    * @schema SecretStoreSpec#conditions
    */
@@ -33947,7 +34564,7 @@ export interface SecretStoreSpec {
   readonly refreshInterval?: number;
 
   /**
-   * Used to configure http retries if failed
+   * Used to configure HTTP retries on failures.
    *
    * @schema SecretStoreSpec#retrySettings
    */
@@ -34031,13 +34648,6 @@ export interface SecretStoreSpecProvider {
   readonly akeyless?: SecretStoreSpecProviderAkeyless;
 
   /**
-   * Alibaba configures this store to sync secrets using Alibaba Cloud provider
-   *
-   * @schema SecretStoreSpecProvider#alibaba
-   */
-  readonly alibaba?: SecretStoreSpecProviderAlibaba;
-
-  /**
    * AWS configures this store to sync secrets using AWS Secret Manager provider
    *
    * @schema SecretStoreSpecProvider#aws
@@ -34050,6 +34660,13 @@ export interface SecretStoreSpecProvider {
    * @schema SecretStoreSpecProvider#azurekv
    */
   readonly azurekv?: SecretStoreSpecProviderAzurekv;
+
+  /**
+   * Barbican configures this store to sync secrets using the OpenStack Barbican provider
+   *
+   * @schema SecretStoreSpecProvider#barbican
+   */
+  readonly barbican?: SecretStoreSpecProviderBarbican;
 
   /**
    * Beyondtrust configures this store to sync secrets using Password Safe provider.
@@ -34095,18 +34712,18 @@ export interface SecretStoreSpecProvider {
   readonly delinea?: SecretStoreSpecProviderDelinea;
 
   /**
-   * Device42 configures this store to sync secrets using the Device42 provider
-   *
-   * @schema SecretStoreSpecProvider#device42
-   */
-  readonly device42?: SecretStoreSpecProviderDevice42;
-
-  /**
    * Doppler configures this store to sync secrets using the Doppler provider
    *
    * @schema SecretStoreSpecProvider#doppler
    */
   readonly doppler?: SecretStoreSpecProviderDoppler;
+
+  /**
+   * DVLS configures this store to sync secrets using Devolutions Server provider
+   *
+   * @schema SecretStoreSpecProvider#dvls
+   */
+  readonly dvls?: SecretStoreSpecProviderDvls;
 
   /**
    * Fake configures a store with static key/value pairs
@@ -34130,7 +34747,7 @@ export interface SecretStoreSpecProvider {
   readonly gcpsm?: SecretStoreSpecProviderGcpsm;
 
   /**
-   * Github configures this store to push GitHub Action secrets using GitHub API provider.
+   * Github configures this store to push GitHub Actions secrets using the GitHub API provider.
    * Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
    *
    * @schema SecretStoreSpecProvider#github
@@ -34171,6 +34788,13 @@ export interface SecretStoreSpecProvider {
    * @schema SecretStoreSpecProvider#kubernetes
    */
   readonly kubernetes?: SecretStoreSpecProviderKubernetes;
+
+  /**
+   * NebiusMysterybox configures this store to sync secrets using NebiusMysterybox provider
+   *
+   * @schema SecretStoreSpecProvider#nebiusmysterybox
+   */
+  readonly nebiusmysterybox?: SecretStoreSpecProviderNebiusmysterybox;
 
   /**
    * Ngrok configures this store to sync secrets using the ngrok provider.
@@ -34237,7 +34861,7 @@ export interface SecretStoreSpecProvider {
   readonly pulumi?: SecretStoreSpecProviderPulumi;
 
   /**
-   * Scaleway
+   * Scaleway configures this store to sync secrets using the Scaleway provider.
    *
    * @schema SecretStoreSpecProvider#scaleway
    */
@@ -34259,7 +34883,7 @@ export interface SecretStoreSpecProvider {
   readonly senhasegura?: SecretStoreSpecProviderSenhasegura;
 
   /**
-   * Vault configures this store to sync secrets using Hashi provider
+   * Vault configures this store to sync secrets using the HashiCorp Vault provider.
    *
    * @schema SecretStoreSpecProvider#vault
    */
@@ -34302,17 +34926,17 @@ export function toJson_SecretStoreSpecProvider(obj: SecretStoreSpecProvider | un
   if (obj === undefined) { return undefined; }
   const result = {
     'akeyless': toJson_SecretStoreSpecProviderAkeyless(obj.akeyless),
-    'alibaba': toJson_SecretStoreSpecProviderAlibaba(obj.alibaba),
     'aws': toJson_SecretStoreSpecProviderAws(obj.aws),
     'azurekv': toJson_SecretStoreSpecProviderAzurekv(obj.azurekv),
+    'barbican': toJson_SecretStoreSpecProviderBarbican(obj.barbican),
     'beyondtrust': toJson_SecretStoreSpecProviderBeyondtrust(obj.beyondtrust),
     'bitwardensecretsmanager': toJson_SecretStoreSpecProviderBitwardensecretsmanager(obj.bitwardensecretsmanager),
     'chef': toJson_SecretStoreSpecProviderChef(obj.chef),
     'cloudrusm': toJson_SecretStoreSpecProviderCloudrusm(obj.cloudrusm),
     'conjur': toJson_SecretStoreSpecProviderConjur(obj.conjur),
     'delinea': toJson_SecretStoreSpecProviderDelinea(obj.delinea),
-    'device42': toJson_SecretStoreSpecProviderDevice42(obj.device42),
     'doppler': toJson_SecretStoreSpecProviderDoppler(obj.doppler),
+    'dvls': toJson_SecretStoreSpecProviderDvls(obj.dvls),
     'fake': toJson_SecretStoreSpecProviderFake(obj.fake),
     'fortanix': toJson_SecretStoreSpecProviderFortanix(obj.fortanix),
     'gcpsm': toJson_SecretStoreSpecProviderGcpsm(obj.gcpsm),
@@ -34322,6 +34946,7 @@ export function toJson_SecretStoreSpecProvider(obj: SecretStoreSpecProvider | un
     'infisical': toJson_SecretStoreSpecProviderInfisical(obj.infisical),
     'keepersecurity': toJson_SecretStoreSpecProviderKeepersecurity(obj.keepersecurity),
     'kubernetes': toJson_SecretStoreSpecProviderKubernetes(obj.kubernetes),
+    'nebiusmysterybox': toJson_SecretStoreSpecProviderNebiusmysterybox(obj.nebiusmysterybox),
     'ngrok': toJson_SecretStoreSpecProviderNgrok(obj.ngrok),
     'onboardbase': toJson_SecretStoreSpecProviderOnboardbase(obj.onboardbase),
     'onepassword': toJson_SecretStoreSpecProviderOnepassword(obj.onepassword),
@@ -34346,7 +34971,7 @@ export function toJson_SecretStoreSpecProvider(obj: SecretStoreSpecProvider | un
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Used to configure http retries if failed
+ * Used to configure HTTP retries on failures.
  *
  * @schema SecretStoreSpecRetrySettings
  */
@@ -34463,42 +35088,6 @@ export function toJson_SecretStoreSpecProviderAkeyless(obj: SecretStoreSpecProvi
     'authSecretRef': toJson_SecretStoreSpecProviderAkeylessAuthSecretRef(obj.authSecretRef),
     'caBundle': obj.caBundle,
     'caProvider': toJson_SecretStoreSpecProviderAkeylessCaProvider(obj.caProvider),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * Alibaba configures this store to sync secrets using Alibaba Cloud provider
- *
- * @schema SecretStoreSpecProviderAlibaba
- */
-export interface SecretStoreSpecProviderAlibaba {
-  /**
-   * AlibabaAuth contains a secretRef for credentials.
-   *
-   * @schema SecretStoreSpecProviderAlibaba#auth
-   */
-  readonly auth: SecretStoreSpecProviderAlibabaAuth;
-
-  /**
-   * Alibaba Region to be used for the provider
-   *
-   * @schema SecretStoreSpecProviderAlibaba#regionID
-   */
-  readonly regionId: string;
-}
-
-/**
- * Converts an object of type 'SecretStoreSpecProviderAlibaba' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderAlibaba(obj: SecretStoreSpecProviderAlibaba | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'auth': toJson_SecretStoreSpecProviderAlibabaAuth(obj.auth),
-    'regionID': obj.regionId,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -34631,8 +35220,11 @@ export interface SecretStoreSpecProviderAzurekv {
   readonly authType?: SecretStoreSpecProviderAzurekvAuthType;
 
   /**
-   * CustomCloudConfig defines custom Azure Stack Hub or Azure Stack Edge endpoints.
+   * CustomCloudConfig defines custom Azure endpoints for non-standard clouds.
    * Required when EnvironmentType is AzureStackCloud.
+   * Optional for other environment types - useful for Azure China when using Workload Identity
+   * with AKS, where the OIDC issuer (login.partner.microsoftonline.cn) differs from the
+   * standard China Cloud endpoint (login.chinacloudapi.cn).
    * IMPORTANT: This feature REQUIRES UseAzureSDK to be set to true. Custom cloud
    * configuration is not supported with the legacy go-autorest SDK.
    *
@@ -34706,6 +35298,58 @@ export function toJson_SecretStoreSpecProviderAzurekv(obj: SecretStoreSpecProvid
     'tenantId': obj.tenantId,
     'useAzureSDK': obj.useAzureSdk,
     'vaultUrl': obj.vaultUrl,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Barbican configures this store to sync secrets using the OpenStack Barbican provider
+ *
+ * @schema SecretStoreSpecProviderBarbican
+ */
+export interface SecretStoreSpecProviderBarbican {
+  /**
+   * BarbicanAuth contains the authentication information for Barbican.
+   *
+   * @schema SecretStoreSpecProviderBarbican#auth
+   */
+  readonly auth: SecretStoreSpecProviderBarbicanAuth;
+
+  /**
+   * @schema SecretStoreSpecProviderBarbican#authURL
+   */
+  readonly authUrl?: string;
+
+  /**
+   * @schema SecretStoreSpecProviderBarbican#domainName
+   */
+  readonly domainName?: string;
+
+  /**
+   * @schema SecretStoreSpecProviderBarbican#region
+   */
+  readonly region?: string;
+
+  /**
+   * @schema SecretStoreSpecProviderBarbican#tenantName
+   */
+  readonly tenantName?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderBarbican' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderBarbican(obj: SecretStoreSpecProviderBarbican | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'auth': toJson_SecretStoreSpecProviderBarbicanAuth(obj.auth),
+    'authURL': obj.authUrl,
+    'domainName': obj.domainName,
+    'region': obj.region,
+    'tenantName': obj.tenantName,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -35026,42 +35670,6 @@ export function toJson_SecretStoreSpecProviderDelinea(obj: SecretStoreSpecProvid
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Device42 configures this store to sync secrets using the Device42 provider
- *
- * @schema SecretStoreSpecProviderDevice42
- */
-export interface SecretStoreSpecProviderDevice42 {
-  /**
-   * Auth configures how secret-manager authenticates with a Device42 instance.
-   *
-   * @schema SecretStoreSpecProviderDevice42#auth
-   */
-  readonly auth: SecretStoreSpecProviderDevice42Auth;
-
-  /**
-   * URL configures the Device42 instance URL.
-   *
-   * @schema SecretStoreSpecProviderDevice42#host
-   */
-  readonly host: string;
-}
-
-/**
- * Converts an object of type 'SecretStoreSpecProviderDevice42' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderDevice42(obj: SecretStoreSpecProviderDevice42 | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'auth': toJson_SecretStoreSpecProviderDevice42Auth(obj.auth),
-    'host': obj.host,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Doppler configures this store to sync secrets using the Doppler provider
  *
  * @schema SecretStoreSpecProviderDoppler
@@ -35115,6 +35723,52 @@ export function toJson_SecretStoreSpecProviderDoppler(obj: SecretStoreSpecProvid
     'format': obj.format,
     'nameTransformer': obj.nameTransformer,
     'project': obj.project,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * DVLS configures this store to sync secrets using Devolutions Server provider
+ *
+ * @schema SecretStoreSpecProviderDvls
+ */
+export interface SecretStoreSpecProviderDvls {
+  /**
+   * Auth defines the authentication method to use.
+   *
+   * @schema SecretStoreSpecProviderDvls#auth
+   */
+  readonly auth: SecretStoreSpecProviderDvlsAuth;
+
+  /**
+   * Insecure allows connecting to DVLS over plain HTTP.
+   * This is NOT RECOMMENDED for production use.
+   * Set to true only if you understand the security implications.
+   *
+   * @schema SecretStoreSpecProviderDvls#insecure
+   */
+  readonly insecure?: boolean;
+
+  /**
+   * ServerURL is the DVLS instance URL (e.g., https://dvls.example.com).
+   *
+   * @schema SecretStoreSpecProviderDvls#serverUrl
+   */
+  readonly serverUrl: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderDvls' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderDvls(obj: SecretStoreSpecProviderDvls | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'auth': toJson_SecretStoreSpecProviderDvlsAuth(obj.auth),
+    'insecure': obj.insecure,
+    'serverUrl': obj.serverUrl,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -35249,7 +35903,7 @@ export function toJson_SecretStoreSpecProviderGcpsm(obj: SecretStoreSpecProvider
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Github configures this store to push GitHub Action secrets using GitHub API provider.
+ * Github configures this store to push GitHub Actions secrets using the GitHub API provider.
  * Note: This provider only supports write operations (PushSecret) and cannot fetch secrets from GitHub
  *
  * @schema SecretStoreSpecProviderGithub
@@ -35471,6 +36125,23 @@ export interface SecretStoreSpecProviderInfisical {
   readonly auth: SecretStoreSpecProviderInfisicalAuth;
 
   /**
+   * CABundle is a PEM-encoded CA certificate bundle used to validate
+   * the Infisical server's TLS certificate. Mutually exclusive with CAProvider.
+   *
+   * @schema SecretStoreSpecProviderInfisical#caBundle
+   */
+  readonly caBundle?: string;
+
+  /**
+   * CAProvider is a reference to a Secret or ConfigMap that contains a CA certificate.
+   * The certificate is used to validate the Infisical server's TLS certificate.
+   * Mutually exclusive with CABundle.
+   *
+   * @schema SecretStoreSpecProviderInfisical#caProvider
+   */
+  readonly caProvider?: SecretStoreSpecProviderInfisicalCaProvider;
+
+  /**
    * HostAPI specifies the base URL of the Infisical API. If not provided, it defaults to "https://app.infisical.com/api".
    *
    * @schema SecretStoreSpecProviderInfisical#hostAPI
@@ -35493,6 +36164,8 @@ export function toJson_SecretStoreSpecProviderInfisical(obj: SecretStoreSpecProv
   if (obj === undefined) { return undefined; }
   const result = {
     'auth': toJson_SecretStoreSpecProviderInfisicalAuth(obj.auth),
+    'caBundle': obj.caBundle,
+    'caProvider': toJson_SecretStoreSpecProviderInfisicalCaProvider(obj.caProvider),
     'hostAPI': obj.hostApi,
     'secretsScope': toJson_SecretStoreSpecProviderInfisicalSecretsScope(obj.secretsScope),
   };
@@ -35582,6 +36255,50 @@ export function toJson_SecretStoreSpecProviderKubernetes(obj: SecretStoreSpecPro
     'authRef': toJson_SecretStoreSpecProviderKubernetesAuthRef(obj.authRef),
     'remoteNamespace': obj.remoteNamespace,
     'server': toJson_SecretStoreSpecProviderKubernetesServer(obj.server),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * NebiusMysterybox configures this store to sync secrets using NebiusMysterybox provider
+ *
+ * @schema SecretStoreSpecProviderNebiusmysterybox
+ */
+export interface SecretStoreSpecProviderNebiusmysterybox {
+  /**
+   * NebiusMysterybox API endpoint
+   *
+   * @schema SecretStoreSpecProviderNebiusmysterybox#apiDomain
+   */
+  readonly apiDomain: string;
+
+  /**
+   * Auth defines parameters to authenticate in MysteryBox
+   *
+   * @schema SecretStoreSpecProviderNebiusmysterybox#auth
+   */
+  readonly auth: SecretStoreSpecProviderNebiusmysteryboxAuth;
+
+  /**
+   * The provider for the CA bundle to use to validate NebiusMysterybox server certificate.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysterybox#caProvider
+   */
+  readonly caProvider?: SecretStoreSpecProviderNebiusmysteryboxCaProvider;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNebiusmysterybox' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNebiusmysterybox(obj: SecretStoreSpecProviderNebiusmysterybox | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiDomain': obj.apiDomain,
+    'auth': toJson_SecretStoreSpecProviderNebiusmysteryboxAuth(obj.auth),
+    'caProvider': toJson_SecretStoreSpecProviderNebiusmysteryboxCaProvider(obj.caProvider),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -35742,6 +36459,17 @@ export interface SecretStoreSpecProviderOnepasswordSdk {
   readonly auth: SecretStoreSpecProviderOnepasswordSdkAuth;
 
   /**
+   * Cache configures client-side caching for read operations (GetSecret, GetSecretMap).
+   * When enabled, secrets are cached with the specified TTL.
+   * Write operations (PushSecret, DeleteSecret) automatically invalidate relevant cache entries.
+   * If omitted, caching is disabled (default).
+   * cache: {} is a valid option to set.
+   *
+   * @schema SecretStoreSpecProviderOnepasswordSdk#cache
+   */
+  readonly cache?: SecretStoreSpecProviderOnepasswordSdkCache;
+
+  /**
    * IntegrationInfo specifies the name and version of the integration built using the 1Password Go SDK.
    * If you don't know which name and version to use, use `DefaultIntegrationName` and `DefaultIntegrationVersion`, respectively.
    *
@@ -35765,6 +36493,7 @@ export function toJson_SecretStoreSpecProviderOnepasswordSdk(obj: SecretStoreSpe
   if (obj === undefined) { return undefined; }
   const result = {
     'auth': toJson_SecretStoreSpecProviderOnepasswordSdkAuth(obj.auth),
+    'cache': toJson_SecretStoreSpecProviderOnepasswordSdkCache(obj.cache),
     'integrationInfo': toJson_SecretStoreSpecProviderOnepasswordSdkIntegrationInfo(obj.integrationInfo),
     'vault': obj.vault,
   };
@@ -36035,7 +36764,7 @@ export function toJson_SecretStoreSpecProviderPulumi(obj: SecretStoreSpecProvide
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Scaleway
+ * Scaleway configures this store to sync secrets using the Scaleway provider.
  *
  * @schema SecretStoreSpecProviderScaleway
  */
@@ -36220,7 +36949,7 @@ export function toJson_SecretStoreSpecProviderSenhasegura(obj: SecretStoreSpecPr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Vault configures this store to sync secrets using Hashi provider
+ * Vault configures this store to sync secrets using the HashiCorp Vault provider.
  *
  * @schema SecretStoreSpecProviderVault
  */
@@ -36742,42 +37471,6 @@ export function toJson_SecretStoreSpecProviderAkeylessCaProvider(obj: SecretStor
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * AlibabaAuth contains a secretRef for credentials.
- *
- * @schema SecretStoreSpecProviderAlibabaAuth
- */
-export interface SecretStoreSpecProviderAlibabaAuth {
-  /**
-   * AlibabaRRSAAuth authenticates against Alibaba using RRSA.
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuth#rrsa
-   */
-  readonly rrsa?: SecretStoreSpecProviderAlibabaAuthRrsa;
-
-  /**
-   * AlibabaAuthSecretRef holds secret references for Alibaba credentials.
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuth#secretRef
-   */
-  readonly secretRef?: SecretStoreSpecProviderAlibabaAuthSecretRef;
-}
-
-/**
- * Converts an object of type 'SecretStoreSpecProviderAlibabaAuth' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderAlibabaAuth(obj: SecretStoreSpecProviderAlibabaAuth | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'rrsa': toJson_SecretStoreSpecProviderAlibabaAuthRrsa(obj.rrsa),
-    'secretRef': toJson_SecretStoreSpecProviderAlibabaAuthSecretRef(obj.secretRef),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Auth defines the information necessary to authenticate against AWS
  * if not set aws sdk will infer credentials from your environment
  * see: https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials
@@ -36975,8 +37668,11 @@ export enum SecretStoreSpecProviderAzurekvAuthType {
 }
 
 /**
- * CustomCloudConfig defines custom Azure Stack Hub or Azure Stack Edge endpoints.
+ * CustomCloudConfig defines custom Azure endpoints for non-standard clouds.
  * Required when EnvironmentType is AzureStackCloud.
+ * Optional for other environment types - useful for Azure China when using Workload Identity
+ * with AKS, where the OIDC issuer (login.partner.microsoftonline.cn) differs from the
+ * standard China Cloud endpoint (login.chinacloudapi.cn).
  * IMPORTANT: This feature REQUIRES UseAzureSDK to be set to true. Custom cloud
  * configuration is not supported with the legacy go-autorest SDK.
  *
@@ -37101,6 +37797,42 @@ export function toJson_SecretStoreSpecProviderAzurekvServiceAccountRef(obj: Secr
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * BarbicanAuth contains the authentication information for Barbican.
+ *
+ * @schema SecretStoreSpecProviderBarbicanAuth
+ */
+export interface SecretStoreSpecProviderBarbicanAuth {
+  /**
+   * BarbicanProviderPasswordRef defines a reference to a secret containing password for the Barbican provider.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuth#password
+   */
+  readonly password: SecretStoreSpecProviderBarbicanAuthPassword;
+
+  /**
+   * BarbicanProviderUsernameRef defines a reference to a secret containing username for the Barbican provider.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuth#username
+   */
+  readonly username: SecretStoreSpecProviderBarbicanAuthUsername;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderBarbicanAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderBarbicanAuth(obj: SecretStoreSpecProviderBarbicanAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'password': toJson_SecretStoreSpecProviderBarbicanAuthPassword(obj.password),
+    'username': toJson_SecretStoreSpecProviderBarbicanAuthUsername(obj.username),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Auth configures how the operator authenticates with Beyondtrust.
  *
  * @schema SecretStoreSpecProviderBeyondtrustAuth
@@ -37185,6 +37917,13 @@ export interface SecretStoreSpecProviderBeyondtrustServer {
   readonly clientTimeOutSeconds?: number;
 
   /**
+   * When true, the response includes the decrypted password. When false, the password field is omitted. This option only applies to the SECRET retrieval type. Default: true.
+   *
+   * @schema SecretStoreSpecProviderBeyondtrustServer#decrypt
+   */
+  readonly decrypt?: boolean;
+
+  /**
    * The secret retrieval type. SECRET = Secrets Safe (credential, text, file). MANAGED_ACCOUNT = Password Safe account associated with a system.
    *
    * @schema SecretStoreSpecProviderBeyondtrustServer#retrievalType
@@ -37214,6 +37953,7 @@ export function toJson_SecretStoreSpecProviderBeyondtrustServer(obj: SecretStore
     'apiUrl': obj.apiUrl,
     'apiVersion': obj.apiVersion,
     'clientTimeOutSeconds': obj.clientTimeOutSeconds,
+    'decrypt': obj.decrypt,
     'retrievalType': obj.retrievalType,
     'separator': obj.separator,
     'verifyCA': obj.verifyCa,
@@ -37525,45 +38265,24 @@ export function toJson_SecretStoreSpecProviderDelineaClientSecret(obj: SecretSto
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Auth configures how secret-manager authenticates with a Device42 instance.
- *
- * @schema SecretStoreSpecProviderDevice42Auth
- */
-export interface SecretStoreSpecProviderDevice42Auth {
-  /**
-   * Device42SecretRef contains the secret reference for accessing the Device42 instance.
-   *
-   * @schema SecretStoreSpecProviderDevice42Auth#secretRef
-   */
-  readonly secretRef: SecretStoreSpecProviderDevice42AuthSecretRef;
-}
-
-/**
- * Converts an object of type 'SecretStoreSpecProviderDevice42Auth' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderDevice42Auth(obj: SecretStoreSpecProviderDevice42Auth | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'secretRef': toJson_SecretStoreSpecProviderDevice42AuthSecretRef(obj.secretRef),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * Auth configures how the Operator authenticates with the Doppler API
  *
  * @schema SecretStoreSpecProviderDopplerAuth
  */
 export interface SecretStoreSpecProviderDopplerAuth {
   /**
-   * DopplerAuthSecretRef contains the secret reference for accessing the Doppler API.
+   * OIDCConfig authenticates using Kubernetes ServiceAccount tokens via OIDC.
+   *
+   * @schema SecretStoreSpecProviderDopplerAuth#oidcConfig
+   */
+  readonly oidcConfig?: SecretStoreSpecProviderDopplerAuthOidcConfig;
+
+  /**
+   * SecretRef authenticates using a Doppler service token stored in a Kubernetes Secret.
    *
    * @schema SecretStoreSpecProviderDopplerAuth#secretRef
    */
-  readonly secretRef: SecretStoreSpecProviderDopplerAuthSecretRef;
+  readonly secretRef?: SecretStoreSpecProviderDopplerAuthSecretRef;
 }
 
 /**
@@ -37573,6 +38292,7 @@ export interface SecretStoreSpecProviderDopplerAuth {
 export function toJson_SecretStoreSpecProviderDopplerAuth(obj: SecretStoreSpecProviderDopplerAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'oidcConfig': toJson_SecretStoreSpecProviderDopplerAuthOidcConfig(obj.oidcConfig),
     'secretRef': toJson_SecretStoreSpecProviderDopplerAuthSecretRef(obj.secretRef),
   };
   // filter undefined values
@@ -37617,6 +38337,34 @@ export enum SecretStoreSpecProviderDopplerNameTransformer {
   /** lower-kebab */
   LOWER_HYPHEN_KEBAB = "lower-kebab",
 }
+
+/**
+ * Auth defines the authentication method to use.
+ *
+ * @schema SecretStoreSpecProviderDvlsAuth
+ */
+export interface SecretStoreSpecProviderDvlsAuth {
+  /**
+   * SecretRef contains the Application ID and Application Secret for authentication.
+   *
+   * @schema SecretStoreSpecProviderDvlsAuth#secretRef
+   */
+  readonly secretRef: SecretStoreSpecProviderDvlsAuthSecretRef;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderDvlsAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderDvlsAuth(obj: SecretStoreSpecProviderDvlsAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_SecretStoreSpecProviderDvlsAuthSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * FakeProviderData defines a key-value pair with optional version for the fake provider.
@@ -37975,6 +38723,61 @@ export function toJson_SecretStoreSpecProviderInfisicalAuth(obj: SecretStoreSpec
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * CAProvider is a reference to a Secret or ConfigMap that contains a CA certificate.
+ * The certificate is used to validate the Infisical server's TLS certificate.
+ * Mutually exclusive with CABundle.
+ *
+ * @schema SecretStoreSpecProviderInfisicalCaProvider
+ */
+export interface SecretStoreSpecProviderInfisicalCaProvider {
+  /**
+   * The key where the CA certificate can be found in the Secret or ConfigMap.
+   *
+   * @schema SecretStoreSpecProviderInfisicalCaProvider#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the object located at the provider type.
+   *
+   * @schema SecretStoreSpecProviderInfisicalCaProvider#name
+   */
+  readonly name: string;
+
+  /**
+   * The namespace the Provider type is in.
+   * Can only be defined when used in a ClusterSecretStore.
+   *
+   * @schema SecretStoreSpecProviderInfisicalCaProvider#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * The type of provider to use such as "Secret", or "ConfigMap".
+   *
+   * @schema SecretStoreSpecProviderInfisicalCaProvider#type
+   */
+  readonly type: SecretStoreSpecProviderInfisicalCaProviderType;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderInfisicalCaProvider' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderInfisicalCaProvider(obj: SecretStoreSpecProviderInfisicalCaProvider | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * SecretsScope defines the scope of the secrets within the workspace
  *
  * @schema SecretStoreSpecProviderInfisicalSecretsScope
@@ -38219,6 +39022,83 @@ export function toJson_SecretStoreSpecProviderKubernetesServer(obj: SecretStoreS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * Auth defines parameters to authenticate in MysteryBox
+ *
+ * @schema SecretStoreSpecProviderNebiusmysteryboxAuth
+ */
+export interface SecretStoreSpecProviderNebiusmysteryboxAuth {
+  /**
+   * ServiceAccountCreds references a Kubernetes Secret key that contains a JSON
+   * document with service account credentials used to get an IAM token.
+   *
+   * Expected JSON structure:
+   * {
+   * "subject-credentials": {
+   * "alg": "RS256",
+   * "private-key": "-----BEGIN PRIVATE KEY-----\n<private-key>\n-----END PRIVATE KEY-----\n",
+   * "kid": "<public-key-id>",
+   * "iss": "<issuer-service-account-id>",
+   * "sub": "<subject-service-account-id>"
+   * }
+   * }
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxAuth#serviceAccountCredsSecretRef
+   */
+  readonly serviceAccountCredsSecretRef?: SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef;
+
+  /**
+   * Token authenticates with Nebius Mysterybox by presenting a token.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxAuth#tokenSecretRef
+   */
+  readonly tokenSecretRef?: SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNebiusmysteryboxAuth' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNebiusmysteryboxAuth(obj: SecretStoreSpecProviderNebiusmysteryboxAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'serviceAccountCredsSecretRef': toJson_SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef(obj.serviceAccountCredsSecretRef),
+    'tokenSecretRef': toJson_SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef(obj.tokenSecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * The provider for the CA bundle to use to validate NebiusMysterybox server certificate.
+ *
+ * @schema SecretStoreSpecProviderNebiusmysteryboxCaProvider
+ */
+export interface SecretStoreSpecProviderNebiusmysteryboxCaProvider {
+  /**
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxCaProvider#certSecretRef
+   */
+  readonly certSecretRef?: SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNebiusmysteryboxCaProvider' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNebiusmysteryboxCaProvider(obj: SecretStoreSpecProviderNebiusmysteryboxCaProvider | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'certSecretRef': toJson_SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef(obj.certSecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
  * Auth configures how the ngrok provider authenticates with the ngrok API.
  *
  * @schema SecretStoreSpecProviderNgrokAuth
@@ -38361,6 +39241,48 @@ export function toJson_SecretStoreSpecProviderOnepasswordSdkAuth(obj: SecretStor
   if (obj === undefined) { return undefined; }
   const result = {
     'serviceAccountSecretRef': toJson_SecretStoreSpecProviderOnepasswordSdkAuthServiceAccountSecretRef(obj.serviceAccountSecretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Cache configures client-side caching for read operations (GetSecret, GetSecretMap).
+ * When enabled, secrets are cached with the specified TTL.
+ * Write operations (PushSecret, DeleteSecret) automatically invalidate relevant cache entries.
+ * If omitted, caching is disabled (default).
+ * cache: {} is a valid option to set.
+ *
+ * @schema SecretStoreSpecProviderOnepasswordSdkCache
+ */
+export interface SecretStoreSpecProviderOnepasswordSdkCache {
+  /**
+   * MaxSize is the maximum number of secrets to cache.
+   * When the cache is full, least-recently-used entries are evicted.
+   *
+   * @schema SecretStoreSpecProviderOnepasswordSdkCache#maxSize
+   */
+  readonly maxSize?: number;
+
+  /**
+   * TTL is the time-to-live for cached secrets.
+   * Format: duration string (e.g., "5m", "1h", "30s")
+   *
+   * @schema SecretStoreSpecProviderOnepasswordSdkCache#ttl
+   */
+  readonly ttl?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderOnepasswordSdkCache' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderOnepasswordSdkCache(obj: SecretStoreSpecProviderOnepasswordSdkCache | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxSize': obj.maxSize,
+    'ttl': obj.ttl,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -39598,86 +40520,6 @@ export enum SecretStoreSpecProviderAkeylessCaProviderType {
 }
 
 /**
- * AlibabaRRSAAuth authenticates against Alibaba using RRSA.
- *
- * @schema SecretStoreSpecProviderAlibabaAuthRrsa
- */
-export interface SecretStoreSpecProviderAlibabaAuthRrsa {
-  /**
-   * @schema SecretStoreSpecProviderAlibabaAuthRrsa#oidcProviderArn
-   */
-  readonly oidcProviderArn: string;
-
-  /**
-   * @schema SecretStoreSpecProviderAlibabaAuthRrsa#oidcTokenFilePath
-   */
-  readonly oidcTokenFilePath: string;
-
-  /**
-   * @schema SecretStoreSpecProviderAlibabaAuthRrsa#roleArn
-   */
-  readonly roleArn: string;
-
-  /**
-   * @schema SecretStoreSpecProviderAlibabaAuthRrsa#sessionName
-   */
-  readonly sessionName: string;
-}
-
-/**
- * Converts an object of type 'SecretStoreSpecProviderAlibabaAuthRrsa' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderAlibabaAuthRrsa(obj: SecretStoreSpecProviderAlibabaAuthRrsa | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'oidcProviderArn': obj.oidcProviderArn,
-    'oidcTokenFilePath': obj.oidcTokenFilePath,
-    'roleArn': obj.roleArn,
-    'sessionName': obj.sessionName,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * AlibabaAuthSecretRef holds secret references for Alibaba credentials.
- *
- * @schema SecretStoreSpecProviderAlibabaAuthSecretRef
- */
-export interface SecretStoreSpecProviderAlibabaAuthSecretRef {
-  /**
-   * The AccessKeyID is used for authentication
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuthSecretRef#accessKeyIDSecretRef
-   */
-  readonly accessKeyIdSecretRef: SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef;
-
-  /**
-   * The AccessKeySecret is used for authentication
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuthSecretRef#accessKeySecretSecretRef
-   */
-  readonly accessKeySecretSecretRef: SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef;
-}
-
-/**
- * Converts an object of type 'SecretStoreSpecProviderAlibabaAuthSecretRef' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRef(obj: SecretStoreSpecProviderAlibabaAuthSecretRef | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'accessKeyIDSecretRef': toJson_SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef(obj.accessKeyIdSecretRef),
-    'accessKeySecretSecretRef': toJson_SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef(obj.accessKeySecretSecretRef),
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * AWSJWTAuth stores reference to Authenticate against AWS using service account tokens.
  *
  * @schema SecretStoreSpecProviderAwsAuthJwt
@@ -39930,6 +40772,70 @@ export function toJson_SecretStoreSpecProviderAzurekvAuthSecretRefTenantId(obj: 
     'key': obj.key,
     'name': obj.name,
     'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * BarbicanProviderPasswordRef defines a reference to a secret containing password for the Barbican provider.
+ *
+ * @schema SecretStoreSpecProviderBarbicanAuthPassword
+ */
+export interface SecretStoreSpecProviderBarbicanAuthPassword {
+  /**
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuthPassword#secretRef
+   */
+  readonly secretRef: SecretStoreSpecProviderBarbicanAuthPasswordSecretRef;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderBarbicanAuthPassword' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderBarbicanAuthPassword(obj: SecretStoreSpecProviderBarbicanAuthPassword | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_SecretStoreSpecProviderBarbicanAuthPasswordSecretRef(obj.secretRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * BarbicanProviderUsernameRef defines a reference to a secret containing username for the Barbican provider.
+ *
+ * @schema SecretStoreSpecProviderBarbicanAuthUsername
+ */
+export interface SecretStoreSpecProviderBarbicanAuthUsername {
+  /**
+   * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+   * In some instances, `key` is a required field.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuthUsername#secretRef
+   */
+  readonly secretRef?: SecretStoreSpecProviderBarbicanAuthUsernameSecretRef;
+
+  /**
+   * @schema SecretStoreSpecProviderBarbicanAuthUsername#value
+   */
+  readonly value?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderBarbicanAuthUsername' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderBarbicanAuthUsername(obj: SecretStoreSpecProviderBarbicanAuthUsername | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'secretRef': toJson_SecretStoreSpecProviderBarbicanAuthUsernameSecretRef(obj.secretRef),
+    'value': obj.value,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -40434,27 +41340,45 @@ export function toJson_SecretStoreSpecProviderDelineaClientSecretSecretRef(obj: 
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Device42SecretRef contains the secret reference for accessing the Device42 instance.
+ * OIDCConfig authenticates using Kubernetes ServiceAccount tokens via OIDC.
  *
- * @schema SecretStoreSpecProviderDevice42AuthSecretRef
+ * @schema SecretStoreSpecProviderDopplerAuthOidcConfig
  */
-export interface SecretStoreSpecProviderDevice42AuthSecretRef {
+export interface SecretStoreSpecProviderDopplerAuthOidcConfig {
   /**
-   * Username / Password is used for authentication.
+   * ExpirationSeconds sets the ServiceAccount token validity duration.
+   * Defaults to 10 minutes.
    *
-   * @schema SecretStoreSpecProviderDevice42AuthSecretRef#credentials
+   * @default 10 minutes.
+   * @schema SecretStoreSpecProviderDopplerAuthOidcConfig#expirationSeconds
    */
-  readonly credentials?: SecretStoreSpecProviderDevice42AuthSecretRefCredentials;
+  readonly expirationSeconds?: number;
+
+  /**
+   * Identity is the Doppler Service Account Identity ID configured for OIDC authentication.
+   *
+   * @schema SecretStoreSpecProviderDopplerAuthOidcConfig#identity
+   */
+  readonly identity: string;
+
+  /**
+   * ServiceAccountRef specifies the Kubernetes ServiceAccount to use for authentication.
+   *
+   * @schema SecretStoreSpecProviderDopplerAuthOidcConfig#serviceAccountRef
+   */
+  readonly serviceAccountRef: SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef;
 }
 
 /**
- * Converts an object of type 'SecretStoreSpecProviderDevice42AuthSecretRef' to JSON representation.
+ * Converts an object of type 'SecretStoreSpecProviderDopplerAuthOidcConfig' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderDevice42AuthSecretRef(obj: SecretStoreSpecProviderDevice42AuthSecretRef | undefined): Record<string, any> | undefined {
+export function toJson_SecretStoreSpecProviderDopplerAuthOidcConfig(obj: SecretStoreSpecProviderDopplerAuthOidcConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'credentials': toJson_SecretStoreSpecProviderDevice42AuthSecretRefCredentials(obj.credentials),
+    'expirationSeconds': obj.expirationSeconds,
+    'identity': obj.identity,
+    'serviceAccountRef': toJson_SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef(obj.serviceAccountRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -40462,7 +41386,7 @@ export function toJson_SecretStoreSpecProviderDevice42AuthSecretRef(obj: SecretS
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * DopplerAuthSecretRef contains the secret reference for accessing the Doppler API.
+ * SecretRef authenticates using a Doppler service token stored in a Kubernetes Secret.
  *
  * @schema SecretStoreSpecProviderDopplerAuthSecretRef
  */
@@ -40485,6 +41409,42 @@ export function toJson_SecretStoreSpecProviderDopplerAuthSecretRef(obj: SecretSt
   if (obj === undefined) { return undefined; }
   const result = {
     'dopplerToken': toJson_SecretStoreSpecProviderDopplerAuthSecretRefDopplerToken(obj.dopplerToken),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretRef contains the Application ID and Application Secret for authentication.
+ *
+ * @schema SecretStoreSpecProviderDvlsAuthSecretRef
+ */
+export interface SecretStoreSpecProviderDvlsAuthSecretRef {
+  /**
+   * AppID is the reference to the secret containing the Application ID.
+   *
+   * @schema SecretStoreSpecProviderDvlsAuthSecretRef#appId
+   */
+  readonly appId: SecretStoreSpecProviderDvlsAuthSecretRefAppId;
+
+  /**
+   * AppSecret is the reference to the secret containing the Application Secret.
+   *
+   * @schema SecretStoreSpecProviderDvlsAuthSecretRef#appSecret
+   */
+  readonly appSecret: SecretStoreSpecProviderDvlsAuthSecretRefAppSecret;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderDvlsAuthSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderDvlsAuthSecretRef(obj: SecretStoreSpecProviderDvlsAuthSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'appId': toJson_SecretStoreSpecProviderDvlsAuthSecretRefAppId(obj.appId),
+    'appSecret': toJson_SecretStoreSpecProviderDvlsAuthSecretRefAppSecret(obj.appSecret),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -41261,6 +42221,18 @@ export function toJson_SecretStoreSpecProviderInfisicalAuthUniversalAuthCredenti
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
+ * The type of provider to use such as "Secret", or "ConfigMap".
+ *
+ * @schema SecretStoreSpecProviderInfisicalCaProviderType
+ */
+export enum SecretStoreSpecProviderInfisicalCaProviderType {
+  /** Secret */
+  SECRET = "Secret",
+  /** ConfigMap */
+  CONFIG_MAP = "ConfigMap",
+}
+
+/**
  * has both clientCert and clientKey as secretKeySelector
  *
  * @schema SecretStoreSpecProviderKubernetesAuthCert
@@ -41421,6 +42393,157 @@ export function toJson_SecretStoreSpecProviderKubernetesServerCaProvider(obj: Se
     'name': obj.name,
     'namespace': obj.namespace,
     'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * ServiceAccountCreds references a Kubernetes Secret key that contains a JSON
+ * document with service account credentials used to get an IAM token.
+ *
+ * Expected JSON structure:
+ * {
+ * "subject-credentials": {
+ * "alg": "RS256",
+ * "private-key": "-----BEGIN PRIVATE KEY-----\n<private-key>\n-----END PRIVATE KEY-----\n",
+ * "kid": "<public-key-id>",
+ * "iss": "<issuer-service-account-id>",
+ * "sub": "<subject-service-account-id>"
+ * }
+ * }
+ *
+ * @schema SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef
+ */
+export interface SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef(obj: SecretStoreSpecProviderNebiusmysteryboxAuthServiceAccountCredsSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * Token authenticates with Nebius Mysterybox by presenting a token.
+ *
+ * @schema SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef
+ */
+export interface SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef(obj: SecretStoreSpecProviderNebiusmysteryboxAuthTokenSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef
+ */
+export interface SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef(obj: SecretStoreSpecProviderNebiusmysteryboxCaProviderCertSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
@@ -43360,98 +44483,6 @@ export function toJson_SecretStoreSpecProviderAkeylessAuthSecretRefSecretRefAcce
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * The AccessKeyID is used for authentication
- *
- * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef
- */
-export interface SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef {
-  /**
-   * A key in the referenced Secret.
-   * Some instances of this field may be defaulted, in others it may be required.
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#key
-   */
-  readonly key?: string;
-
-  /**
-   * The name of the Secret resource being referred to.
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#name
-   */
-  readonly name?: string;
-
-  /**
-   * The namespace of the Secret resource being referred to.
-   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef#namespace
-   */
-  readonly namespace?: string;
-}
-
-/**
- * Converts an object of type 'SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef(obj: SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'namespace': obj.namespace,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
- * The AccessKeySecret is used for authentication
- *
- * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef
- */
-export interface SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef {
-  /**
-   * A key in the referenced Secret.
-   * Some instances of this field may be defaulted, in others it may be required.
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#key
-   */
-  readonly key?: string;
-
-  /**
-   * The name of the Secret resource being referred to.
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#name
-   */
-  readonly name?: string;
-
-  /**
-   * The namespace of the Secret resource being referred to.
-   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
-   *
-   * @schema SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef#namespace
-   */
-  readonly namespace?: string;
-}
-
-/**
- * Converts an object of type 'SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef' to JSON representation.
- */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef(obj: SecretStoreSpecProviderAlibabaAuthSecretRefAccessKeySecretSecretRef | undefined): Record<string, any> | undefined {
-  if (obj === undefined) { return undefined; }
-  const result = {
-    'key': obj.key,
-    'name': obj.name,
-    'namespace': obj.namespace,
-  };
-  // filter undefined values
-  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
-}
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-
-/**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
  *
  * @schema SecretStoreSpecProviderAwsAuthJwtServiceAccountRef
@@ -43627,6 +44658,100 @@ export interface SecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef {
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef(obj: SecretStoreSpecProviderAwsAuthSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderBarbicanAuthPasswordSecretRef
+ */
+export interface SecretStoreSpecProviderBarbicanAuthPasswordSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuthPasswordSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuthPasswordSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuthPasswordSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderBarbicanAuthPasswordSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderBarbicanAuthPasswordSecretRef(obj: SecretStoreSpecProviderBarbicanAuthPasswordSecretRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
+ * In some instances, `key` is a required field.
+ *
+ * @schema SecretStoreSpecProviderBarbicanAuthUsernameSecretRef
+ */
+export interface SecretStoreSpecProviderBarbicanAuthUsernameSecretRef {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuthUsernameSecretRef#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuthUsernameSecretRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderBarbicanAuthUsernameSecretRef#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderBarbicanAuthUsernameSecretRef' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderBarbicanAuthUsernameSecretRef(obj: SecretStoreSpecProviderBarbicanAuthUsernameSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -44242,43 +45367,44 @@ export function toJson_SecretStoreSpecProviderConjurAuthJwtServiceAccountRef(obj
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Username / Password is used for authentication.
+ * ServiceAccountRef specifies the Kubernetes ServiceAccount to use for authentication.
  *
- * @schema SecretStoreSpecProviderDevice42AuthSecretRefCredentials
+ * @schema SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef
  */
-export interface SecretStoreSpecProviderDevice42AuthSecretRefCredentials {
+export interface SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef {
   /**
-   * A key in the referenced Secret.
-   * Some instances of this field may be defaulted, in others it may be required.
+   * Audience specifies the `aud` claim for the service account token
+   * If the service account uses a well-known annotation for e.g. IRSA or GCP Workload Identity
+   * then this audiences will be appended to the list
    *
-   * @schema SecretStoreSpecProviderDevice42AuthSecretRefCredentials#key
+   * @schema SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef#audiences
    */
-  readonly key?: string;
+  readonly audiences?: string[];
 
   /**
-   * The name of the Secret resource being referred to.
+   * The name of the ServiceAccount resource being referred to.
    *
-   * @schema SecretStoreSpecProviderDevice42AuthSecretRefCredentials#name
+   * @schema SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef#name
    */
-  readonly name?: string;
+  readonly name: string;
 
   /**
-   * The namespace of the Secret resource being referred to.
+   * Namespace of the resource being referred to.
    * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
    *
-   * @schema SecretStoreSpecProviderDevice42AuthSecretRefCredentials#namespace
+   * @schema SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef#namespace
    */
   readonly namespace?: string;
 }
 
 /**
- * Converts an object of type 'SecretStoreSpecProviderDevice42AuthSecretRefCredentials' to JSON representation.
+ * Converts an object of type 'SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef' to JSON representation.
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
-export function toJson_SecretStoreSpecProviderDevice42AuthSecretRefCredentials(obj: SecretStoreSpecProviderDevice42AuthSecretRefCredentials | undefined): Record<string, any> | undefined {
+export function toJson_SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef(obj: SecretStoreSpecProviderDopplerAuthOidcConfigServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
-    'key': obj.key,
+    'audiences': obj.audiences?.map(y => y),
     'name': obj.name,
     'namespace': obj.namespace,
   };
@@ -44324,6 +45450,98 @@ export interface SecretStoreSpecProviderDopplerAuthSecretRefDopplerToken {
  */
 /* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_SecretStoreSpecProviderDopplerAuthSecretRefDopplerToken(obj: SecretStoreSpecProviderDopplerAuthSecretRefDopplerToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * AppID is the reference to the secret containing the Application ID.
+ *
+ * @schema SecretStoreSpecProviderDvlsAuthSecretRefAppId
+ */
+export interface SecretStoreSpecProviderDvlsAuthSecretRefAppId {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderDvlsAuthSecretRefAppId#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderDvlsAuthSecretRefAppId#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderDvlsAuthSecretRefAppId#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderDvlsAuthSecretRefAppId' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderDvlsAuthSecretRefAppId(obj: SecretStoreSpecProviderDvlsAuthSecretRefAppId | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+
+/**
+ * AppSecret is the reference to the secret containing the Application Secret.
+ *
+ * @schema SecretStoreSpecProviderDvlsAuthSecretRefAppSecret
+ */
+export interface SecretStoreSpecProviderDvlsAuthSecretRefAppSecret {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema SecretStoreSpecProviderDvlsAuthSecretRefAppSecret#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema SecretStoreSpecProviderDvlsAuthSecretRefAppSecret#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema SecretStoreSpecProviderDvlsAuthSecretRefAppSecret#namespace
+   */
+  readonly namespace?: string;
+}
+
+/**
+ * Converts an object of type 'SecretStoreSpecProviderDvlsAuthSecretRefAppSecret' to JSON representation.
+ */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+export function toJson_SecretStoreSpecProviderDvlsAuthSecretRefAppSecret(obj: SecretStoreSpecProviderDvlsAuthSecretRefAppSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'key': obj.key,
@@ -46572,6 +47790,7 @@ export interface SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToke
    * Optional audiences field that will be used to request a temporary Kubernetes service
    * account token for the service account referenced by `serviceAccountRef`.
    * Defaults to a single audience `vault` it not specified.
+   *
    * Deprecated: use serviceAccountRef.Audiences instead
    *
    * @default a single audience `vault` it not specified.
@@ -46583,6 +47802,7 @@ export interface SecretStoreSpecProviderVaultAuthJwtKubernetesServiceAccountToke
    * Optional expiration time in seconds that will be used to request a temporary
    * Kubernetes service account token for the service account referenced by
    * `serviceAccountRef`.
+   *
    * Deprecated: this will be removed in the future.
    * Defaults to 10 minutes.
    *
@@ -47552,7 +48772,7 @@ export function toJson_SecretStoreV1Beta1Props(obj: SecretStoreV1Beta1Props | un
  */
 export interface SecretStoreV1Beta1Spec {
   /**
-   * Used to constraint a ClusterSecretStore to specific namespaces. Relevant only to ClusterSecretStore
+   * Used to constrain a ClusterSecretStore to specific namespaces. Relevant only to ClusterSecretStore.
    *
    * @schema SecretStoreV1Beta1Spec#conditions
    */
@@ -47581,7 +48801,7 @@ export interface SecretStoreV1Beta1Spec {
   readonly refreshInterval?: number;
 
   /**
-   * Used to configure http retries if failed
+   * Used to configure HTTP retries on failures.
    *
    * @schema SecretStoreV1Beta1Spec#retrySettings
    */
@@ -47764,7 +48984,7 @@ export interface SecretStoreV1Beta1SpecProvider {
   readonly gcpsm?: SecretStoreV1Beta1SpecProviderGcpsm;
 
   /**
-   * Github configures this store to push Github Action secrets using Github API provider
+   * Github configures this store to push GitHub Actions secrets using the GitHub API provider.
    *
    * @schema SecretStoreV1Beta1SpecProvider#github
    */
@@ -47855,7 +49075,7 @@ export interface SecretStoreV1Beta1SpecProvider {
   readonly pulumi?: SecretStoreV1Beta1SpecProviderPulumi;
 
   /**
-   * Scaleway
+   * Scaleway configures this store to sync secrets using the Scaleway provider.
    *
    * @schema SecretStoreV1Beta1SpecProvider#scaleway
    */
@@ -47877,7 +49097,7 @@ export interface SecretStoreV1Beta1SpecProvider {
   readonly senhasegura?: SecretStoreV1Beta1SpecProviderSenhasegura;
 
   /**
-   * Vault configures this store to sync secrets using Hashi provider
+   * Vault configures this store to sync secrets using the HashiCorp Vault provider.
    *
    * @schema SecretStoreV1Beta1SpecProvider#vault
    */
@@ -47954,7 +49174,7 @@ export function toJson_SecretStoreV1Beta1SpecProvider(obj: SecretStoreV1Beta1Spe
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Used to configure http retries if failed
+ * Used to configure HTTP retries on failures.
  *
  * @schema SecretStoreV1Beta1SpecRetrySettings
  */
@@ -48819,7 +50039,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderGcpsm(obj: SecretStoreV1Bet
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Github configures this store to push Github Action secrets using Github API provider
+ * Github configures this store to push GitHub Actions secrets using the GitHub API provider.
  *
  * @schema SecretStoreV1Beta1SpecProviderGithub
  */
@@ -49514,7 +50734,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderPulumi(obj: SecretStoreV1Be
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Scaleway
+ * Scaleway configures this store to sync secrets using the Scaleway provider.
  *
  * @schema SecretStoreV1Beta1SpecProviderScaleway
  */
@@ -49673,7 +50893,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderSenhasegura(obj: SecretStor
 /* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
- * Vault configures this store to sync secrets using Hashi provider
+ * Vault configures this store to sync secrets using the HashiCorp Vault provider.
  *
  * @schema SecretStoreV1Beta1SpecProviderVault
  */
@@ -50515,6 +51735,13 @@ export interface SecretStoreV1Beta1SpecProviderBeyondtrustServer {
   readonly clientTimeOutSeconds?: number;
 
   /**
+   * When true, the response includes the decrypted password. When false, the password field is omitted. This option only applies to the SECRET retrieval type. Default: true.
+   *
+   * @schema SecretStoreV1Beta1SpecProviderBeyondtrustServer#decrypt
+   */
+  readonly decrypt?: boolean;
+
+  /**
    * The secret retrieval type. SECRET = Secrets Safe (credential, text, file). MANAGED_ACCOUNT = Password Safe account associated with a system.
    *
    * @schema SecretStoreV1Beta1SpecProviderBeyondtrustServer#retrievalType
@@ -50544,6 +51771,7 @@ export function toJson_SecretStoreV1Beta1SpecProviderBeyondtrustServer(obj: Secr
     'apiUrl': obj.apiUrl,
     'apiVersion': obj.apiVersion,
     'clientTimeOutSeconds': obj.clientTimeOutSeconds,
+    'decrypt': obj.decrypt,
     'retrievalType': obj.retrievalType,
     'separator': obj.separator,
     'verifyCA': obj.verifyCa,
@@ -57486,6 +58714,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAcco
    * Optional audiences field that will be used to request a temporary Kubernetes service
    * account token for the service account referenced by `serviceAccountRef`.
    * Defaults to a single audience `vault` it not specified.
+   *
    * Deprecated: use serviceAccountRef.Audiences instead
    *
    * @default a single audience `vault` it not specified.
@@ -57497,6 +58726,7 @@ export interface SecretStoreV1Beta1SpecProviderVaultAuthJwtKubernetesServiceAcco
    * Optional expiration time in seconds that will be used to request a temporary
    * Kubernetes service account token for the service account referenced by
    * `serviceAccountRef`.
+   *
    * Deprecated: this will be removed in the future.
    * Defaults to 10 minutes.
    *
