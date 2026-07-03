@@ -225,13 +225,21 @@ class ProdPostgres extends Chart {
           resources: {
             requests: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "1",
+              ),
             },
             limits: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "1",
+              ),
             },
           },
         },
@@ -300,7 +308,12 @@ export interface ImportProps {
 }
 
 class VectorPostgres extends Chart {
-  constructor(scope: Construct, id: string, name: string, importProps?: ImportProps) {
+  constructor(
+    scope: Construct,
+    id: string,
+    name: string,
+    importProps?: ImportProps,
+  ) {
     super(scope, id);
 
     const imageBase = "ghcr.io/tensorchord/cloudnative-vectorchord";
@@ -312,55 +325,56 @@ class VectorPostgres extends Chart {
       spec: {
         images: [
           {
-            image: `${imageBase}:16.13-1.1.1`,
+            image: `${imageBase}:16.14-1.1.1`,
             major: 16,
           },
           {
-            image: `${imageBase}:17.9-1.1.1`,
+            image: `${imageBase}:17.10-1.1.1`,
             major: 17,
           },
         ],
       },
     });
 
-    const importConfig: Pick<ClusterSpec, "externalClusters" | "bootstrap"> | undefined =
-      importProps
-        ? {
-            externalClusters: [
-              {
-                name: importProps.sourceClusterName,
-                connectionParameters: {
-                  host: `${importProps.sourceClusterName}-r.${importProps.sourceClusterNamespace}.svc.cluster.local`,
-                  user: "postgres",
-                  sslmode: "require",
-                },
-                password: {
-                  name: `${importProps.sourceClusterName}-superuser`,
-                  key: "password",
-                },
+    const importConfig:
+      | Pick<ClusterSpec, "externalClusters" | "bootstrap">
+      | undefined = importProps
+      ? {
+          externalClusters: [
+            {
+              name: importProps.sourceClusterName,
+              connectionParameters: {
+                host: `${importProps.sourceClusterName}-r.${importProps.sourceClusterNamespace}.svc.cluster.local`,
+                user: "postgres",
+                sslmode: "require",
               },
-            ],
-            bootstrap: {
-              initdb: {
-                import: {
-                  type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
-                  databases: importProps.databases,
-                  roles: importProps.roles,
-                  source: {
-                    externalCluster: importProps.sourceClusterName,
-                  },
-                },
-                postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
+              password: {
+                name: `${importProps.sourceClusterName}-superuser`,
+                key: "password",
               },
             },
-          }
-        : {
-            bootstrap: {
-              initdb: {
-                postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
+          ],
+          bootstrap: {
+            initdb: {
+              import: {
+                type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
+                databases: importProps.databases,
+                roles: importProps.roles,
+                source: {
+                  externalCluster: importProps.sourceClusterName,
+                },
               },
+              postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
             },
-          };
+          },
+        }
+      : {
+          bootstrap: {
+            initdb: {
+              postInitSql: ["CREATE EXTENSION IF NOT EXISTS vchord CASCADE;"],
+            },
+          },
+        };
 
     new Cluster(this, name, {
       metadata: {
@@ -444,13 +458,21 @@ class VectorPostgres extends Chart {
           resources: {
             requests: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "1",
+              ),
             },
             limits: {
               memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                  "512Mi",
+                ),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString(
+                "1",
+              ),
             },
           },
         },
