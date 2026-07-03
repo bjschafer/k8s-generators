@@ -8,9 +8,8 @@ import {
 } from "../../imports/external-secrets.io";
 import { Password } from "../../imports/generators.external-secrets.io";
 import {
-  ClusterSpecManagedRoles,
-  ClusterSpecManagedRolesEnsure,
   Database as CnpgDatabase,
+  DatabaseRole,
   DatabaseSpecEnsure,
 } from "../../imports/postgresql.cnpg.io";
 import { BitwardenSecret } from "../../lib/secrets";
@@ -26,25 +25,34 @@ export interface AppDatabaseSecretResult {
 }
 
 /**
- * Creates managed roles for all configured databases.
- * Call this to register roles with the cluster.
+ * Creates a DatabaseRole CR for each configured database.
+ * Call this in the postgres app to create all roles at once.
+ * Returns a Chart containing all the roles.
  */
-export function createManagedRoles(addRoleCallback: (role: ClusterSpecManagedRoles) => void): void {
-  for (const db of DATABASES) {
-    const role: ClusterSpecManagedRoles = {
-      name: db.name,
-      ensure: ClusterSpecManagedRolesEnsure.PRESENT,
-      login: true,
-      comment: db.comment,
-      ...db.roleConfig,
-      // All databases have password secrets (either from Bitwarden or auto-generated)
-      passwordSecret: {
-        name: `${db.name}-db-credentials`,
-      },
-    };
+export function createDatabaseRoles(scope: Construct, clusterName: string): Chart {
+  const chart = new Chart(scope, "database-roles");
 
-    addRoleCallback(role);
+  for (const db of DATABASES) {
+    new DatabaseRole(chart, `role-${db.name}`, {
+      metadata: {
+        name: db.name,
+        namespace: "postgres",
+      },
+      spec: {
+        cluster: { name: clusterName },
+        name: db.name,
+        login: true,
+        comment: db.comment,
+        ...db.roleConfig,
+        // All databases have password secrets (either from Bitwarden or auto-generated)
+        passwordSecret: {
+          name: `${db.name}-db-credentials`,
+        },
+      },
+    });
   }
+
+  return chart;
 }
 
 /**

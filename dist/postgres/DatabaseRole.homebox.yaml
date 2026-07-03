@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: homebox
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: Homebox database owner
+  login: true
+  name: homebox
+  passwordSecret:
+    name: homebox-db-credentials

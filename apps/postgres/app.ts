@@ -13,7 +13,6 @@ import {
   Cluster,
   ClusterSpec,
   ClusterSpecBootstrapInitdbImportType,
-  ClusterSpecManagedRoles,
   Database,
   ImageCatalog,
   Pooler,
@@ -61,7 +60,6 @@ const barmanPluginName = "barman-cloud.cloudnative-pg.io";
 
 class ProdPostgres extends Chart {
   readonly Cluster: Cluster;
-  private managedRoles: ClusterSpecManagedRoles[] = [];
 
   constructor(scope: Construct, id: string) {
     super(scope, id);
@@ -121,9 +119,6 @@ class ProdPostgres extends Chart {
           storageClass: StorageClass.CEPH_RBD,
         },
         enableSuperuserAccess: true,
-        managed: {
-          roles: this.managedRoles,
-        },
         postgresql: {
           pgHba: [
             "host pdns pdns 10.0.10.0/24 scram-sha-256",
@@ -275,14 +270,6 @@ class ProdPostgres extends Chart {
         ],
       },
     });
-  }
-
-  /**
-   * Register a managed role with this cluster.
-   * Must be called before app.synth().
-   */
-  public addManagedRole(role: ClusterSpecManagedRoles): void {
-    this.managedRoles.push(role);
   }
 
   /**
@@ -514,16 +501,16 @@ export const PROD_CLUSTER = prod_pg_17;
 
 // Import database provisioning functions
 import {
+  createDatabaseRoles,
   createDatabases,
-  createManagedRoles,
   createPostgresSecrets,
 } from "./database-provisioning";
 
 // Create secrets for all database credentials in postgres namespace
 createPostgresSecrets(app);
 
-// Register all managed roles with the cluster
-createManagedRoles(prod_pg_17.addManagedRole.bind(prod_pg_17));
+// Create a DatabaseRole CR for each configured database owner role
+createDatabaseRoles(app, prod_pg_17.clusterName);
 
 // Create all Database CRDs
 createDatabases(app, prod_pg_17.clusterName);

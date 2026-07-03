@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: noms
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: Noms database owner
+  login: true
+  name: noms
+  passwordSecret:
+    name: noms-db-credentials

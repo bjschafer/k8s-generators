@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: book-club
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: Book Club database owner
+  login: true
+  name: book-club
+  passwordSecret:
+    name: book-club-db-credentials

@@ -21,7 +21,7 @@
  * }
  */
 
-import { ClusterSpecManagedRoles } from "../../imports/postgresql.cnpg.io";
+import { DatabaseRoleSpec } from "../../imports/postgresql.cnpg.io";
 
 /**
  * Password generation configuration for auto-generated passwords.
@@ -50,8 +50,8 @@ export interface DatabaseConfig {
   bitwardenPasswordId?: string;
   /** Namespace where the app lives (for creating a copy of credentials there) */
   appNamespace?: string;
-  /** Additional role configuration */
-  roleConfig?: Partial<ClusterSpecManagedRoles>;
+  /** Additional role configuration (DatabaseRole spec fields, minus name/cluster/passwordSecret which are set automatically) */
+  roleConfig?: Partial<Omit<DatabaseRoleSpec, "name" | "cluster" | "passwordSecret">>;
   /** Password generation config when not using Bitwarden. Uses defaults if omitted. */
   passwordGeneration?: PasswordGenerationConfig;
 }

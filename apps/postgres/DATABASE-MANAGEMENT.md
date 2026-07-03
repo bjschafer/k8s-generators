@@ -9,7 +9,7 @@ Database configuration is centralized in two files:
 - **`apps/postgres/database-provisioning.ts`** - Implementation (don't edit)
 
 This ensures:
-- Declarative role management via CNPG
+- Declarative role management via CNPG `DatabaseRole` CRs
 - Automatic Database CRD creation
 - Consistent credential management across namespaces
 
@@ -34,8 +34,8 @@ export const DATABASES: DatabaseConfig[] = [
 ];
 ```
 
-That's it! When you run `make`, it will automatically:
-1. Create the role in the Cluster's `.spec.managed.roles`
+That's it! When you run `mise run build`, it will automatically:
+1. Create a `DatabaseRole` CR for the role
 2. Create a Database CRD in the postgres namespace
 3. Create credentials in the postgres namespace (for CNPG)
 4. Create credentials in your app namespace (if `appNamespace` is set)
@@ -100,15 +100,21 @@ Both secrets sync from the same Bitwarden item, so updating the password in Bitw
 For each database in `DATABASES`, the following are created:
 
 ### In postgres namespace:
-1. **Managed Role** - Added to `Cluster.prod-pg17.yaml`:
+1. **DatabaseRole** - `DatabaseRole.myapp.yaml`:
    ```yaml
-   managed:
-     roles:
-       - name: myapp
-         login: true
-         comment: "MyApp database owner"
-         passwordSecret:
-           name: myapp-db-credentials
+   apiVersion: postgresql.cnpg.io/v1
+   kind: DatabaseRole
+   metadata:
+     name: myapp
+     namespace: postgres
+   spec:
+     cluster:
+       name: prod-pg17
+     name: myapp
+     login: true
+     comment: "MyApp database owner"
+     passwordSecret:
+       name: myapp-db-credentials
    ```
 
 2. **Database CRD** - `Database.myapp.yaml`:
@@ -187,7 +193,9 @@ Add custom role configuration via `roleConfig`:
 
 ## Removing a Database
 
-To remove a database and its role, simply remove it from the `DATABASES` array in `apps/postgres/databases.ts` and run `make`. The resources will be deleted on the next ArgoCD sync.
+To remove a database and its role, simply remove it from the `DATABASES` array in `apps/postgres/databases.ts` and run `mise run build`. ArgoCD prune will delete the `Database` and `DatabaseRole` CRs on the next sync.
+
+By default, `DatabaseRole`'s reclaim policy is `retain`, so the underlying Postgres role is left in place even after the CR is deleted (the `Database` is *not* dropped either way). To have the operator actually run `DROP ROLE` when the CR is removed, set `databaseRoleReclaimPolicy: DatabaseRoleSpecDatabaseRoleReclaimPolicy.DELETE` in that database's `roleConfig` before removing the entry - note the role drop will fail (and retry) if it still owns objects.
 
 Note: You may want to backup the database before removing it!
 
@@ -200,8 +208,9 @@ Note: You may want to backup the database before removing it!
 ## Troubleshooting
 
 ### Role not created
-- Check `dist/postgres/Cluster.prod-pg17.yaml` for the role in `.spec.managed.roles`
-- Ensure you've run `make` after updating `apps/postgres/databases.ts`
+- Check `dist/postgres/DatabaseRole.myapp.yaml` exists
+- Ensure you've run `mise run build` after updating `apps/postgres/databases.ts`
+- Check `kubectl get databaserole -n postgres` and the CR's `.status` for reconciliation errors
 
 ### Database not created
 - Check `dist/postgres/Database.myapp.yaml` exists

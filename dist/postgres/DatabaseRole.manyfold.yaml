@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: manyfold
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: Manyfold database owner
+  login: true
+  name: manyfold
+  passwordSecret:
+    name: manyfold-db-credentials

@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: romm
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: ROMM database owner
+  login: true
+  name: romm
+  passwordSecret:
+    name: romm-db-credentials
