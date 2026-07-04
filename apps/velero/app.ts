@@ -3,7 +3,10 @@ import { Construct } from "constructs";
 import { basename, join } from "path";
 import { KubeConfigMap } from "../../imports/k8s";
 import { SchemaForVeleroHelmChart } from "../../imports/helm-values/velero-values.schema";
-import { VmPodScrape, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
+import {
+  VmPodScrape,
+  VmServiceScrape,
+} from "../../imports/operator.victoriametrics.com";
 import {
   Backup,
   BackupStorageLocation,
@@ -20,8 +23,8 @@ import { AddCRDs } from "../../lib/util";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const chartVersion = "12.0.0";
-const awsVersion = "1.14.0";
+const chartVersion = "12.1.0";
+const awsVersion = "1.14.2";
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -182,7 +185,8 @@ class Velero extends Chart {
           s3ForcePathStyle: "true",
           s3Url:
             "http://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.rclone.svc.cluster.local:8042",
-          publicUrl: "https://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.cmdcentral.xyz",
+          publicUrl:
+            "https://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.cmdcentral.xyz",
         },
         objectStorage: {
           bucket: "velero",

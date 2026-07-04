@@ -5,7 +5,8 @@ metadata:
     app.kubernetes.io/instance: velero
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: velero
-    helm.sh/chart: velero-12.0.0
+    app.kubernetes.io/version: 1.18.1
+    helm.sh/chart: velero-12.1.0
   name: node-agent
   namespace: velero
 spec:
@@ -22,7 +23,8 @@ spec:
         app.kubernetes.io/instance: velero
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: velero
-        helm.sh/chart: velero-12.0.0
+        app.kubernetes.io/version: 1.18.1
+        helm.sh/chart: velero-12.1.0
         name: node-agent
         role: node-agent
     spec:
@@ -46,7 +48,7 @@ spec:
                   fieldPath: spec.nodeName
             - name: VELERO_SCRATCH_DIR
               value: /scratch
-          image: docker.io/velero/velero:v1.18.0
+          image: docker.io/velero/velero:v1.18.1
           imagePullPolicy: IfNotPresent
           name: node-agent
           ports:

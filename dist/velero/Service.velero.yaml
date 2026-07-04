@@ -5,7 +5,8 @@ metadata:
     app.kubernetes.io/instance: velero
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: velero
-    helm.sh/chart: velero-12.0.0
+    app.kubernetes.io/version: 1.18.1
+    helm.sh/chart: velero-12.1.0
   name: velero
   namespace: velero
 spec:

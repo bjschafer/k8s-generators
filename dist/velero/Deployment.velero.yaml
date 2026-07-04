@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: velero
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: velero
-    app.kubernetes.io/version: 1.18.0
+    app.kubernetes.io/version: 1.18.1
     component: velero
-    helm.sh/chart: velero-12.0.0
+    helm.sh/chart: velero-12.1.0
   name: velero
   namespace: velero
 spec:
@@ -28,8 +28,8 @@ spec:
         app.kubernetes.io/instance: velero
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: velero
-        app.kubernetes.io/version: 1.18.0
-        helm.sh/chart: velero-12.0.0
+        app.kubernetes.io/version: 1.18.1
+        helm.sh/chart: velero-12.1.0
         name: velero
     spec:
       automountServiceAccountToken: true
@@ -51,7 +51,7 @@ spec:
                   fieldPath: metadata.namespace
             - name: LD_LIBRARY_PATH
               value: /plugins
-          image: docker.io/velero/velero:v1.18.0
+          image: docker.io/velero/velero:v1.18.1
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
@@ -91,7 +91,7 @@ spec:
               name: scratch
       dnsPolicy: ClusterFirst
       initContainers:
-        - image: velero/velero-plugin-for-aws:v1.14.0
+        - image: velero/velero-plugin-for-aws:v1.14.2
           name: velero-plugin-for-aws
           volumeMounts:
             - mountPath: /target
