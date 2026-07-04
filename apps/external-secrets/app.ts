@@ -3,7 +3,11 @@ import { basename } from "path";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { EsoValuesSchema } from "../../imports/helm-values/eso-values.schema";
-import { Certificate, ClusterIssuer, Issuer } from "../../imports/cert-manager.io";
+import {
+  Certificate,
+  ClusterIssuer,
+  Issuer,
+} from "../../imports/cert-manager.io";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { ENABLE_SERVERSIDE_APPLY, NewArgoApp } from "../../lib/argo";
@@ -16,7 +20,7 @@ import {
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "2.2.0";
+const version = "2.7.0";
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -166,26 +170,28 @@ class EsoConfig extends Chart {
       },
     });
 
-    ["external-secrets", "external-secrets-webhook"].forEach((selector: string) => {
-      new VmServiceScrape(this, selector, {
-        metadata: {
-          name: selector,
-          namespace: namespace,
-        },
-        spec: {
-          selector: {
-            matchLabels: {
-              "app.kubernetes.io/name": selector,
-            },
+    ["external-secrets", "external-secrets-webhook"].forEach(
+      (selector: string) => {
+        new VmServiceScrape(this, selector, {
+          metadata: {
+            name: selector,
+            namespace: namespace,
           },
-          endpoints: [
-            {
-              port: "metrics",
+          spec: {
+            selector: {
+              matchLabels: {
+                "app.kubernetes.io/name": selector,
+              },
             },
-          ],
-        },
-      });
-    });
+            endpoints: [
+              {
+                port: "metrics",
+              },
+            ],
+          },
+        });
+      },
+    );
 
     new ClusterSecretStore(this, "bw-secret-store", {
       metadata: {
