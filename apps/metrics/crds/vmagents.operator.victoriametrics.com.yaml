@@ -2,7 +2,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.20.1
+    controller-gen.kubebuilder.io/version: v0.21.0
   name: vmagents.operator.victoriametrics.com
 spec:
   group: operator.victoriametrics.com
@@ -491,6 +491,8 @@ spec:
                 dnsPolicy:
                   type: string
                 enableKubernetesAPISelectors:
+                  type: boolean
+                enableServiceLinks:
                   type: boolean
                 enforcedNamespaceLabel:
                   type: string
@@ -1351,6 +1353,9 @@ spec:
                   x-kubernetes-map-type: atomic
                 port:
                   type: string
+                preStopSleepSeconds:
+                  format: int32
+                  type: integer
                 priorityClassName:
                   type: string
                 probeNamespaceSelector:
@@ -1639,6 +1644,9 @@ spec:
                         type: object
                       proxyURL:
                         type: string
+                      queues:
+                        format: int32
+                        type: integer
                       sendTimeout:
                         pattern: "[0-9]+(ms|s|m|h)"
                         type: string
