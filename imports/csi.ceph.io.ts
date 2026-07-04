@@ -47,7 +47,7 @@ export class CephConnection extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -74,12 +74,13 @@ export interface CephConnectionProps {
    * @schema CephConnection#spec
    */
   readonly spec?: CephConnectionSpec;
+
 }
 
 /**
  * Converts an object of type 'CephConnectionProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_CephConnectionProps(obj: CephConnectionProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -89,7 +90,7 @@ export function toJson_CephConnectionProps(obj: CephConnectionProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CephConnectionSpec defines the desired state of CephConnection
@@ -113,12 +114,13 @@ export interface CephConnectionSpec {
    * @schema CephConnectionSpec#readAffinity
    */
   readonly readAffinity?: CephConnectionSpecReadAffinity;
+
 }
 
 /**
  * Converts an object of type 'CephConnectionSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_CephConnectionSpec(obj: CephConnectionSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -129,7 +131,7 @@ export function toJson_CephConnectionSpec(obj: CephConnectionSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ReadAffinitySpec capture Ceph CSI read affinity settings
@@ -141,12 +143,13 @@ export interface CephConnectionSpecReadAffinity {
    * @schema CephConnectionSpecReadAffinity#crushLocationLabels
    */
   readonly crushLocationLabels: string[];
+
 }
 
 /**
  * Converts an object of type 'CephConnectionSpecReadAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_CephConnectionSpecReadAffinity(obj: CephConnectionSpecReadAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -155,7 +158,7 @@ export function toJson_CephConnectionSpecReadAffinity(obj: CephConnectionSpecRea
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -202,7 +205,7 @@ export class ClientProfile extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -231,12 +234,13 @@ export interface ClientProfileProps {
    * @schema ClientProfile#spec
    */
   readonly spec?: ClientProfileSpec;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileProps(obj: ClientProfileProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -246,7 +250,7 @@ export function toJson_ClientProfileProps(obj: ClientProfileProps | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClientProfileSpec defines the desired state of Ceph CSI
@@ -291,12 +295,13 @@ export interface ClientProfileSpec {
    * @schema ClientProfileSpec#rbd
    */
   readonly rbd?: ClientProfileSpecRbd;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpec(obj: ClientProfileSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -309,7 +314,7 @@ export function toJson_ClientProfileSpec(obj: ClientProfileSpec | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -328,12 +333,13 @@ export interface ClientProfileSpecCephConnectionRef {
    * @schema ClientProfileSpecCephConnectionRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecCephConnectionRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecCephConnectionRef(obj: ClientProfileSpecCephConnectionRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -342,7 +348,7 @@ export function toJson_ClientProfileSpecCephConnectionRef(obj: ClientProfileSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CephFsConfigSpec defines the desired CephFs configuration
@@ -378,12 +384,13 @@ export interface ClientProfileSpecCephFs {
    * @schema ClientProfileSpecCephFs#subVolumeGroup
    */
   readonly subVolumeGroup?: string;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecCephFs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecCephFs(obj: ClientProfileSpecCephFs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -396,7 +403,7 @@ export function toJson_ClientProfileSpecCephFs(obj: ClientProfileSpecCephFs | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * NvmeofConfigSpec defines the desired NVMe-oF configuration
@@ -417,12 +424,13 @@ export interface ClientProfileSpecNvmeof {
    * @schema ClientProfileSpecNvmeof#radosNamespace
    */
   readonly radosNamespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecNvmeof' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecNvmeof(obj: ClientProfileSpecNvmeof | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -432,7 +440,7 @@ export function toJson_ClientProfileSpecNvmeof(obj: ClientProfileSpecNvmeof | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RbdConfigSpec defines the desired RBD configuration
@@ -453,12 +461,13 @@ export interface ClientProfileSpecRbd {
    * @schema ClientProfileSpecRbd#radosNamespace
    */
   readonly radosNamespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecRbd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecRbd(obj: ClientProfileSpecRbd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -468,7 +477,7 @@ export function toJson_ClientProfileSpecRbd(obj: ClientProfileSpecRbd | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CephCsiSecretsSpec defines the secrets used by the client profile
@@ -485,12 +494,13 @@ export interface ClientProfileSpecCephFsCephCsiSecrets {
    * @schema ClientProfileSpecCephFsCephCsiSecrets#controllerPublishSecret
    */
   readonly controllerPublishSecret?: ClientProfileSpecCephFsCephCsiSecretsControllerPublishSecret;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecCephFsCephCsiSecrets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecCephFsCephCsiSecrets(obj: ClientProfileSpecCephFsCephCsiSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -499,7 +509,7 @@ export function toJson_ClientProfileSpecCephFsCephCsiSecrets(obj: ClientProfileS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CephCsiSecretsSpec defines the secrets used by the client profile
@@ -516,12 +526,13 @@ export interface ClientProfileSpecNvmeofCephCsiSecrets {
    * @schema ClientProfileSpecNvmeofCephCsiSecrets#controllerPublishSecret
    */
   readonly controllerPublishSecret?: ClientProfileSpecNvmeofCephCsiSecretsControllerPublishSecret;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecNvmeofCephCsiSecrets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecNvmeofCephCsiSecrets(obj: ClientProfileSpecNvmeofCephCsiSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -530,7 +541,7 @@ export function toJson_ClientProfileSpecNvmeofCephCsiSecrets(obj: ClientProfileS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CephCsiSecretsSpec defines the secrets used by the client profile
@@ -547,12 +558,13 @@ export interface ClientProfileSpecRbdCephCsiSecrets {
    * @schema ClientProfileSpecRbdCephCsiSecrets#controllerPublishSecret
    */
   readonly controllerPublishSecret?: ClientProfileSpecRbdCephCsiSecretsControllerPublishSecret;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecRbdCephCsiSecrets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecRbdCephCsiSecrets(obj: ClientProfileSpecRbdCephCsiSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -561,7 +573,7 @@ export function toJson_ClientProfileSpecRbdCephCsiSecrets(obj: ClientProfileSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretReference represents a Secret Reference. It has enough information to retrieve secret
@@ -583,12 +595,13 @@ export interface ClientProfileSpecCephFsCephCsiSecretsControllerPublishSecret {
    * @schema ClientProfileSpecCephFsCephCsiSecretsControllerPublishSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecCephFsCephCsiSecretsControllerPublishSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecCephFsCephCsiSecretsControllerPublishSecret(obj: ClientProfileSpecCephFsCephCsiSecretsControllerPublishSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -598,7 +611,7 @@ export function toJson_ClientProfileSpecCephFsCephCsiSecretsControllerPublishSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretReference represents a Secret Reference. It has enough information to retrieve secret
@@ -620,12 +633,13 @@ export interface ClientProfileSpecNvmeofCephCsiSecretsControllerPublishSecret {
    * @schema ClientProfileSpecNvmeofCephCsiSecretsControllerPublishSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecNvmeofCephCsiSecretsControllerPublishSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecNvmeofCephCsiSecretsControllerPublishSecret(obj: ClientProfileSpecNvmeofCephCsiSecretsControllerPublishSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -635,7 +649,7 @@ export function toJson_ClientProfileSpecNvmeofCephCsiSecretsControllerPublishSec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretReference represents a Secret Reference. It has enough information to retrieve secret
@@ -657,12 +671,13 @@ export interface ClientProfileSpecRbdCephCsiSecretsControllerPublishSecret {
    * @schema ClientProfileSpecRbdCephCsiSecretsControllerPublishSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileSpecRbdCephCsiSecretsControllerPublishSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileSpecRbdCephCsiSecretsControllerPublishSecret(obj: ClientProfileSpecRbdCephCsiSecretsControllerPublishSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -672,7 +687,7 @@ export function toJson_ClientProfileSpecRbdCephCsiSecretsControllerPublishSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -719,7 +734,7 @@ export class ClientProfileMapping extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -746,12 +761,13 @@ export interface ClientProfileMappingProps {
    * @schema ClientProfileMapping#spec
    */
   readonly spec?: ClientProfileMappingSpec;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileMappingProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileMappingProps(obj: ClientProfileMappingProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -761,7 +777,7 @@ export function toJson_ClientProfileMappingProps(obj: ClientProfileMappingProps 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClientProfileMappingSpec defines the desired state of ClientProfileMapping
@@ -773,12 +789,13 @@ export interface ClientProfileMappingSpec {
    * @schema ClientProfileMappingSpec#mappings
    */
   readonly mappings: ClientProfileMappingSpecMappings[];
+
 }
 
 /**
  * Converts an object of type 'ClientProfileMappingSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileMappingSpec(obj: ClientProfileMappingSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -787,7 +804,7 @@ export function toJson_ClientProfileMappingSpec(obj: ClientProfileMappingSpec | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * MappingsSpec define a mapping between a local and remote profiles
@@ -809,12 +826,13 @@ export interface ClientProfileMappingSpecMappings {
    * @schema ClientProfileMappingSpecMappings#remoteClientProfile
    */
   readonly remoteClientProfile: string;
+
 }
 
 /**
  * Converts an object of type 'ClientProfileMappingSpecMappings' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClientProfileMappingSpecMappings(obj: ClientProfileMappingSpecMappings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -825,7 +843,7 @@ export function toJson_ClientProfileMappingSpecMappings(obj: ClientProfileMappin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -872,7 +890,7 @@ export class Driver extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -899,12 +917,13 @@ export interface DriverProps {
    * @schema Driver#spec
    */
   readonly spec?: DriverSpec;
+
 }
 
 /**
  * Converts an object of type 'DriverProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverProps(obj: DriverProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -914,7 +933,7 @@ export function toJson_DriverProps(obj: DriverProps | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DriverSpec defines the desired state of Driver
@@ -1072,12 +1091,13 @@ export interface DriverSpec {
    * @schema DriverSpec#snapshotPolicy
    */
   readonly snapshotPolicy?: DriverSpecSnapshotPolicy;
+
 }
 
 /**
  * Converts an object of type 'DriverSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpec(obj: DriverSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1104,7 +1124,7 @@ export function toJson_DriverSpec(obj: DriverSpec | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Select between between cephfs kernel driver and ceph-fuse
@@ -1199,9 +1219,11 @@ export interface DriverSpecControllerPlugin {
   readonly privileged?: boolean;
 
   /**
-   * Set replicas for controller plugin's deployment. Defaults to 2
+   * Set replicas for controller plugin's deployment. Defaults to 2.
+   * On single-node clusters, the operator automatically caps the replica
+   * count to the number of available nodes when this field is not set.
    *
-   * @default 2
+   * @default 2.
    * @schema DriverSpecControllerPlugin#replicas
    */
   readonly replicas?: number;
@@ -1233,12 +1255,13 @@ export interface DriverSpecControllerPlugin {
    * @schema DriverSpecControllerPlugin#volumes
    */
   readonly volumes?: DriverSpecControllerPluginVolumes[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPlugin' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPlugin(obj: DriverSpecControllerPlugin | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1260,7 +1283,7 @@ export function toJson_DriverSpecControllerPlugin(obj: DriverSpecControllerPlugi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Driver's encryption settings
@@ -1275,12 +1298,13 @@ export interface DriverSpecEncryption {
    * @schema DriverSpecEncryption#configMapName
    */
   readonly configMapName: DriverSpecEncryptionConfigMapName;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecEncryption' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecEncryption(obj: DriverSpecEncryption | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1289,7 +1313,7 @@ export function toJson_DriverSpecEncryption(obj: DriverSpecEncryption | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A reference to a ConfigMap resource holding image overwrite for deployed
@@ -1308,12 +1332,13 @@ export interface DriverSpecImageSet {
    * @schema DriverSpecImageSet#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecImageSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecImageSet(obj: DriverSpecImageSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1322,7 +1347,7 @@ export function toJson_DriverSpecImageSet(obj: DriverSpecImageSet | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Leader election setting
@@ -1356,12 +1381,13 @@ export interface DriverSpecLeaderElection {
    * @schema DriverSpecLeaderElection#retryPeriod
    */
   readonly retryPeriod?: number;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecLeaderElection' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecLeaderElection(obj: DriverSpecLeaderElection | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1372,7 +1398,7 @@ export function toJson_DriverSpecLeaderElection(obj: DriverSpecLeaderElection | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Liveness metrics configuration.
@@ -1387,12 +1413,13 @@ export interface DriverSpecLiveness {
    * @schema DriverSpecLiveness#metricsPort
    */
   readonly metricsPort: number;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecLiveness' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecLiveness(obj: DriverSpecLiveness | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1401,7 +1428,7 @@ export function toJson_DriverSpecLiveness(obj: DriverSpecLiveness | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Logging configuration for driver's pods
@@ -1425,12 +1452,13 @@ export interface DriverSpecLog {
    * @schema DriverSpecLog#verbosity
    */
   readonly verbosity?: number;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecLog' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecLog(obj: DriverSpecLog | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1440,7 +1468,7 @@ export function toJson_DriverSpecLog(obj: DriverSpecLog | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Driver's plugin configuration
@@ -1552,12 +1580,13 @@ export interface DriverSpecNodePlugin {
    * @schema DriverSpecNodePlugin#volumes
    */
   readonly volumes?: DriverSpecNodePluginVolumes[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePlugin' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePlugin(obj: DriverSpecNodePlugin | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1579,7 +1608,7 @@ export function toJson_DriverSpecNodePlugin(obj: DriverSpecNodePlugin | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Select a policy for snapshot behavior: none, autodetect, snapshot, sanpshotGroup
@@ -1621,12 +1650,13 @@ export interface DriverSpecControllerPluginAffinity {
    * @schema DriverSpecControllerPluginAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: DriverSpecControllerPluginAffinityPodAntiAffinity;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinity(obj: DriverSpecControllerPluginAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1637,7 +1667,7 @@ export function toJson_DriverSpecControllerPluginAffinity(obj: DriverSpecControl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DeploymentStrategy describes how to replace existing pods with new ones
@@ -1661,12 +1691,13 @@ export interface DriverSpecControllerPluginDeploymentStrategy {
    * @schema DriverSpecControllerPluginDeploymentStrategy#type
    */
   readonly type?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginDeploymentStrategy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginDeploymentStrategy(obj: DriverSpecControllerPluginDeploymentStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1676,7 +1707,7 @@ export function toJson_DriverSpecControllerPluginDeploymentStrategy(obj: DriverS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Resource requirements for controller plugin's containers
@@ -1746,12 +1777,13 @@ export interface DriverSpecControllerPluginResources {
    * @schema DriverSpecControllerPluginResources#snapshotter
    */
   readonly snapshotter?: DriverSpecControllerPluginResourcesSnapshotter;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResources(obj: DriverSpecControllerPluginResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1768,7 +1800,7 @@ export function toJson_DriverSpecControllerPluginResources(obj: DriverSpecContro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -1822,12 +1854,13 @@ export interface DriverSpecControllerPluginTolerations {
    * @schema DriverSpecControllerPluginTolerations#value
    */
   readonly value?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginTolerations' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginTolerations(obj: DriverSpecControllerPluginTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1840,7 +1873,7 @@ export function toJson_DriverSpecControllerPluginTolerations(obj: DriverSpecCont
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginVolumes
@@ -1859,12 +1892,13 @@ export interface DriverSpecControllerPluginVolumes {
    * @schema DriverSpecControllerPluginVolumes#volume
    */
   readonly volume?: DriverSpecControllerPluginVolumesVolume;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumes(obj: DriverSpecControllerPluginVolumes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1874,7 +1908,7 @@ export function toJson_DriverSpecControllerPluginVolumes(obj: DriverSpecControll
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -1893,12 +1927,13 @@ export interface DriverSpecEncryptionConfigMapName {
    * @schema DriverSpecEncryptionConfigMapName#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecEncryptionConfigMapName' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecEncryptionConfigMapName(obj: DriverSpecEncryptionConfigMapName | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1907,7 +1942,7 @@ export function toJson_DriverSpecEncryptionConfigMapName(obj: DriverSpecEncrypti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * log rotation for csi pods
@@ -1946,12 +1981,13 @@ export interface DriverSpecLogRotation {
    * @schema DriverSpecLogRotation#periodicity
    */
   readonly periodicity?: DriverSpecLogRotationPeriodicity;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecLogRotation' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecLogRotation(obj: DriverSpecLogRotation | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1963,7 +1999,7 @@ export function toJson_DriverSpecLogRotation(obj: DriverSpecLogRotation | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Pod's affinity settings
@@ -1991,12 +2027,13 @@ export interface DriverSpecNodePluginAffinity {
    * @schema DriverSpecNodePluginAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: DriverSpecNodePluginAffinityPodAntiAffinity;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinity(obj: DriverSpecNodePluginAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2007,7 +2044,7 @@ export function toJson_DriverSpecNodePluginAffinity(obj: DriverSpecNodePluginAff
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Resource requirements for plugin's containers
@@ -2049,12 +2086,13 @@ export interface DriverSpecNodePluginResources {
    * @schema DriverSpecNodePluginResources#registrar
    */
   readonly registrar?: DriverSpecNodePluginResourcesRegistrar;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResources(obj: DriverSpecNodePluginResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2067,7 +2105,7 @@ export function toJson_DriverSpecNodePluginResources(obj: DriverSpecNodePluginRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -2121,12 +2159,13 @@ export interface DriverSpecNodePluginTolerations {
    * @schema DriverSpecNodePluginTolerations#value
    */
   readonly value?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginTolerations' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginTolerations(obj: DriverSpecNodePluginTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2139,7 +2178,7 @@ export function toJson_DriverSpecNodePluginTolerations(obj: DriverSpecNodePlugin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Topology settings for the plugin pods
@@ -2153,12 +2192,13 @@ export interface DriverSpecNodePluginTopology {
    * @schema DriverSpecNodePluginTopology#domainLabels
    */
   readonly domainLabels: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginTopology' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginTopology(obj: DriverSpecNodePluginTopology | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2167,7 +2207,7 @@ export function toJson_DriverSpecNodePluginTopology(obj: DriverSpecNodePluginTop
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Driver's plugin daemonset update strategy, supported values are OnDelete and RollingUpdate.
@@ -2190,12 +2230,13 @@ export interface DriverSpecNodePluginUpdateStrategy {
    * @schema DriverSpecNodePluginUpdateStrategy#type
    */
   readonly type?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginUpdateStrategy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginUpdateStrategy(obj: DriverSpecNodePluginUpdateStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2205,7 +2246,7 @@ export function toJson_DriverSpecNodePluginUpdateStrategy(obj: DriverSpecNodePlu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecNodePluginVolumes
@@ -2224,12 +2265,13 @@ export interface DriverSpecNodePluginVolumes {
    * @schema DriverSpecNodePluginVolumes#volume
    */
   readonly volume?: DriverSpecNodePluginVolumesVolume;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumes(obj: DriverSpecNodePluginVolumes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2239,7 +2281,7 @@ export function toJson_DriverSpecNodePluginVolumes(obj: DriverSpecNodePluginVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes node affinity scheduling rules for the pod.
@@ -2272,12 +2314,13 @@ export interface DriverSpecControllerPluginAffinityNodeAffinity {
    * @schema DriverSpecControllerPluginAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityNodeAffinity(obj: DriverSpecControllerPluginAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2287,7 +2330,7 @@ export function toJson_DriverSpecControllerPluginAffinityNodeAffinity(obj: Drive
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -2322,12 +2365,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinity {
    * @schema DriverSpecControllerPluginAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinity(obj: DriverSpecControllerPluginAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2337,7 +2381,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinity(obj: Driver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -2372,12 +2416,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinity {
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinity(obj: DriverSpecControllerPluginAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2387,7 +2432,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinity(obj: Dr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Rolling update config params. Present only if DeploymentStrategyType =
@@ -2430,12 +2475,13 @@ export interface DriverSpecControllerPluginDeploymentStrategyRollingUpdate {
    * @schema DriverSpecControllerPluginDeploymentStrategyRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: DriverSpecControllerPluginDeploymentStrategyRollingUpdateMaxUnavailable;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginDeploymentStrategyRollingUpdate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginDeploymentStrategyRollingUpdate(obj: DriverSpecControllerPluginDeploymentStrategyRollingUpdate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2445,7 +2491,7 @@ export function toJson_DriverSpecControllerPluginDeploymentStrategyRollingUpdate
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -2483,12 +2529,13 @@ export interface DriverSpecControllerPluginResourcesAddons {
    * @schema DriverSpecControllerPluginResourcesAddons#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginResourcesAddonsRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesAddons' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesAddons(obj: DriverSpecControllerPluginResourcesAddons | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2499,7 +2546,7 @@ export function toJson_DriverSpecControllerPluginResourcesAddons(obj: DriverSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -2537,12 +2584,13 @@ export interface DriverSpecControllerPluginResourcesAttacher {
    * @schema DriverSpecControllerPluginResourcesAttacher#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginResourcesAttacherRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesAttacher' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesAttacher(obj: DriverSpecControllerPluginResourcesAttacher | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2553,7 +2601,7 @@ export function toJson_DriverSpecControllerPluginResourcesAttacher(obj: DriverSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -2591,12 +2639,13 @@ export interface DriverSpecControllerPluginResourcesLiveness {
    * @schema DriverSpecControllerPluginResourcesLiveness#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginResourcesLivenessRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesLiveness' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesLiveness(obj: DriverSpecControllerPluginResourcesLiveness | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2607,7 +2656,7 @@ export function toJson_DriverSpecControllerPluginResourcesLiveness(obj: DriverSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -2645,12 +2694,13 @@ export interface DriverSpecControllerPluginResourcesLogRotator {
    * @schema DriverSpecControllerPluginResourcesLogRotator#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginResourcesLogRotatorRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesLogRotator' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesLogRotator(obj: DriverSpecControllerPluginResourcesLogRotator | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2661,7 +2711,7 @@ export function toJson_DriverSpecControllerPluginResourcesLogRotator(obj: Driver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -2699,12 +2749,13 @@ export interface DriverSpecControllerPluginResourcesOmapGenerator {
    * @schema DriverSpecControllerPluginResourcesOmapGenerator#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginResourcesOmapGeneratorRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesOmapGenerator' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesOmapGenerator(obj: DriverSpecControllerPluginResourcesOmapGenerator | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2715,7 +2766,7 @@ export function toJson_DriverSpecControllerPluginResourcesOmapGenerator(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -2753,12 +2804,13 @@ export interface DriverSpecControllerPluginResourcesPlugin {
    * @schema DriverSpecControllerPluginResourcesPlugin#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginResourcesPluginRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesPlugin' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesPlugin(obj: DriverSpecControllerPluginResourcesPlugin | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2769,7 +2821,7 @@ export function toJson_DriverSpecControllerPluginResourcesPlugin(obj: DriverSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -2807,12 +2859,13 @@ export interface DriverSpecControllerPluginResourcesProvisioner {
    * @schema DriverSpecControllerPluginResourcesProvisioner#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginResourcesProvisionerRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesProvisioner' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesProvisioner(obj: DriverSpecControllerPluginResourcesProvisioner | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2823,7 +2876,7 @@ export function toJson_DriverSpecControllerPluginResourcesProvisioner(obj: Drive
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -2861,12 +2914,13 @@ export interface DriverSpecControllerPluginResourcesResizer {
    * @schema DriverSpecControllerPluginResourcesResizer#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginResourcesResizerRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesResizer' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesResizer(obj: DriverSpecControllerPluginResourcesResizer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2877,7 +2931,7 @@ export function toJson_DriverSpecControllerPluginResourcesResizer(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -2915,12 +2969,13 @@ export interface DriverSpecControllerPluginResourcesSnapshotter {
    * @schema DriverSpecControllerPluginResourcesSnapshotter#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginResourcesSnapshotterRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesSnapshotter' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesSnapshotter(obj: DriverSpecControllerPluginResourcesSnapshotter | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2931,7 +2986,7 @@ export function toJson_DriverSpecControllerPluginResourcesSnapshotter(obj: Drive
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * VolumeMount describes a mounting of a Volume within a container.
@@ -3016,12 +3071,13 @@ export interface DriverSpecControllerPluginVolumesMount {
    * @schema DriverSpecControllerPluginVolumesMount#subPathExpr
    */
   readonly subPathExpr?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesMount' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesMount(obj: DriverSpecControllerPluginVolumesMount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3036,7 +3092,7 @@ export function toJson_DriverSpecControllerPluginVolumesMount(obj: DriverSpecCon
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Volume represents a named volume in a pod that may be accessed by any container in the pod.
@@ -3342,12 +3398,13 @@ export interface DriverSpecControllerPluginVolumesVolume {
    * @schema DriverSpecControllerPluginVolumesVolume#vsphereVolume
    */
   readonly vsphereVolume?: DriverSpecControllerPluginVolumesVolumeVsphereVolume;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolume(obj: DriverSpecControllerPluginVolumesVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3386,7 +3443,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolume(obj: DriverSpecCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * MaxLogSize is the maximum size of the log file per csi pods
@@ -3451,12 +3508,13 @@ export interface DriverSpecNodePluginAffinityNodeAffinity {
    * @schema DriverSpecNodePluginAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityNodeAffinity(obj: DriverSpecNodePluginAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3466,7 +3524,7 @@ export function toJson_DriverSpecNodePluginAffinityNodeAffinity(obj: DriverSpecN
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -3501,12 +3559,13 @@ export interface DriverSpecNodePluginAffinityPodAffinity {
    * @schema DriverSpecNodePluginAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinity(obj: DriverSpecNodePluginAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3516,7 +3575,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinity(obj: DriverSpecNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -3551,12 +3610,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinity {
    * @schema DriverSpecNodePluginAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinity(obj: DriverSpecNodePluginAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3566,7 +3626,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinity(obj: DriverSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -3604,12 +3664,13 @@ export interface DriverSpecNodePluginResourcesAddons {
    * @schema DriverSpecNodePluginResourcesAddons#requests
    */
   readonly requests?: { [key: string]: DriverSpecNodePluginResourcesAddonsRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesAddons' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesAddons(obj: DriverSpecNodePluginResourcesAddons | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3620,7 +3681,7 @@ export function toJson_DriverSpecNodePluginResourcesAddons(obj: DriverSpecNodePl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -3658,12 +3719,13 @@ export interface DriverSpecNodePluginResourcesLiveness {
    * @schema DriverSpecNodePluginResourcesLiveness#requests
    */
   readonly requests?: { [key: string]: DriverSpecNodePluginResourcesLivenessRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesLiveness' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesLiveness(obj: DriverSpecNodePluginResourcesLiveness | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3674,7 +3736,7 @@ export function toJson_DriverSpecNodePluginResourcesLiveness(obj: DriverSpecNode
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -3712,12 +3774,13 @@ export interface DriverSpecNodePluginResourcesLogRotator {
    * @schema DriverSpecNodePluginResourcesLogRotator#requests
    */
   readonly requests?: { [key: string]: DriverSpecNodePluginResourcesLogRotatorRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesLogRotator' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesLogRotator(obj: DriverSpecNodePluginResourcesLogRotator | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3728,7 +3791,7 @@ export function toJson_DriverSpecNodePluginResourcesLogRotator(obj: DriverSpecNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -3766,12 +3829,13 @@ export interface DriverSpecNodePluginResourcesPlugin {
    * @schema DriverSpecNodePluginResourcesPlugin#requests
    */
   readonly requests?: { [key: string]: DriverSpecNodePluginResourcesPluginRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesPlugin' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesPlugin(obj: DriverSpecNodePluginResourcesPlugin | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3782,7 +3846,7 @@ export function toJson_DriverSpecNodePluginResourcesPlugin(obj: DriverSpecNodePl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -3820,12 +3884,13 @@ export interface DriverSpecNodePluginResourcesRegistrar {
    * @schema DriverSpecNodePluginResourcesRegistrar#requests
    */
   readonly requests?: { [key: string]: DriverSpecNodePluginResourcesRegistrarRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesRegistrar' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesRegistrar(obj: DriverSpecNodePluginResourcesRegistrar | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3836,7 +3901,7 @@ export function toJson_DriverSpecNodePluginResourcesRegistrar(obj: DriverSpecNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Rolling update config params. Present only if type = "RollingUpdate".
@@ -3887,12 +3952,13 @@ export interface DriverSpecNodePluginUpdateStrategyRollingUpdate {
    * @schema DriverSpecNodePluginUpdateStrategyRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: DriverSpecNodePluginUpdateStrategyRollingUpdateMaxUnavailable;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginUpdateStrategyRollingUpdate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginUpdateStrategyRollingUpdate(obj: DriverSpecNodePluginUpdateStrategyRollingUpdate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3902,7 +3968,7 @@ export function toJson_DriverSpecNodePluginUpdateStrategyRollingUpdate(obj: Driv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * VolumeMount describes a mounting of a Volume within a container.
@@ -3987,12 +4053,13 @@ export interface DriverSpecNodePluginVolumesMount {
    * @schema DriverSpecNodePluginVolumesMount#subPathExpr
    */
   readonly subPathExpr?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesMount' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesMount(obj: DriverSpecNodePluginVolumesMount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4007,7 +4074,7 @@ export function toJson_DriverSpecNodePluginVolumesMount(obj: DriverSpecNodePlugi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Volume represents a named volume in a pod that may be accessed by any container in the pod.
@@ -4313,12 +4380,13 @@ export interface DriverSpecNodePluginVolumesVolume {
    * @schema DriverSpecNodePluginVolumesVolume#vsphereVolume
    */
   readonly vsphereVolume?: DriverSpecNodePluginVolumesVolumeVsphereVolume;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolume(obj: DriverSpecNodePluginVolumesVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4357,7 +4425,7 @@ export function toJson_DriverSpecNodePluginVolumesVolume(obj: DriverSpecNodePlug
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -4379,12 +4447,13 @@ export interface DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSc
    * @schema DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4394,7 +4463,7 @@ export function toJson_DriverSpecControllerPluginAffinityNodeAffinityPreferredDu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -4412,12 +4481,13 @@ export interface DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSch
    * @schema DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4426,7 +4496,7 @@ export function toJson_DriverSpecControllerPluginAffinityNodeAffinityRequiredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -4448,12 +4518,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSch
    * @schema DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4463,7 +4534,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -4543,12 +4614,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSche
    * @schema DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4562,7 +4634,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -4584,12 +4656,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDurin
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4599,7 +4672,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -4679,12 +4752,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuring
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4698,7 +4772,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequired
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The maximum number of pods that can be scheduled above the desired number of
@@ -4776,12 +4850,13 @@ export interface DriverSpecControllerPluginResourcesAddonsClaims {
    * @schema DriverSpecControllerPluginResourcesAddonsClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesAddonsClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesAddonsClaims(obj: DriverSpecControllerPluginResourcesAddonsClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4791,7 +4866,7 @@ export function toJson_DriverSpecControllerPluginResourcesAddonsClaims(obj: Driv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginResourcesAddonsLimits
@@ -4844,12 +4919,13 @@ export interface DriverSpecControllerPluginResourcesAttacherClaims {
    * @schema DriverSpecControllerPluginResourcesAttacherClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesAttacherClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesAttacherClaims(obj: DriverSpecControllerPluginResourcesAttacherClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4859,7 +4935,7 @@ export function toJson_DriverSpecControllerPluginResourcesAttacherClaims(obj: Dr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginResourcesAttacherLimits
@@ -4912,12 +4988,13 @@ export interface DriverSpecControllerPluginResourcesLivenessClaims {
    * @schema DriverSpecControllerPluginResourcesLivenessClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesLivenessClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesLivenessClaims(obj: DriverSpecControllerPluginResourcesLivenessClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4927,7 +5004,7 @@ export function toJson_DriverSpecControllerPluginResourcesLivenessClaims(obj: Dr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginResourcesLivenessLimits
@@ -4980,12 +5057,13 @@ export interface DriverSpecControllerPluginResourcesLogRotatorClaims {
    * @schema DriverSpecControllerPluginResourcesLogRotatorClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesLogRotatorClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesLogRotatorClaims(obj: DriverSpecControllerPluginResourcesLogRotatorClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4995,7 +5073,7 @@ export function toJson_DriverSpecControllerPluginResourcesLogRotatorClaims(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginResourcesLogRotatorLimits
@@ -5048,12 +5126,13 @@ export interface DriverSpecControllerPluginResourcesOmapGeneratorClaims {
    * @schema DriverSpecControllerPluginResourcesOmapGeneratorClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesOmapGeneratorClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesOmapGeneratorClaims(obj: DriverSpecControllerPluginResourcesOmapGeneratorClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5063,7 +5142,7 @@ export function toJson_DriverSpecControllerPluginResourcesOmapGeneratorClaims(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginResourcesOmapGeneratorLimits
@@ -5116,12 +5195,13 @@ export interface DriverSpecControllerPluginResourcesPluginClaims {
    * @schema DriverSpecControllerPluginResourcesPluginClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesPluginClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesPluginClaims(obj: DriverSpecControllerPluginResourcesPluginClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5131,7 +5211,7 @@ export function toJson_DriverSpecControllerPluginResourcesPluginClaims(obj: Driv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginResourcesPluginLimits
@@ -5184,12 +5264,13 @@ export interface DriverSpecControllerPluginResourcesProvisionerClaims {
    * @schema DriverSpecControllerPluginResourcesProvisionerClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesProvisionerClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesProvisionerClaims(obj: DriverSpecControllerPluginResourcesProvisionerClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5199,7 +5280,7 @@ export function toJson_DriverSpecControllerPluginResourcesProvisionerClaims(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginResourcesProvisionerLimits
@@ -5252,12 +5333,13 @@ export interface DriverSpecControllerPluginResourcesResizerClaims {
    * @schema DriverSpecControllerPluginResourcesResizerClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesResizerClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesResizerClaims(obj: DriverSpecControllerPluginResourcesResizerClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5267,7 +5349,7 @@ export function toJson_DriverSpecControllerPluginResourcesResizerClaims(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginResourcesResizerLimits
@@ -5320,12 +5402,13 @@ export interface DriverSpecControllerPluginResourcesSnapshotterClaims {
    * @schema DriverSpecControllerPluginResourcesSnapshotterClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginResourcesSnapshotterClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginResourcesSnapshotterClaims(obj: DriverSpecControllerPluginResourcesSnapshotterClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5335,7 +5418,7 @@ export function toJson_DriverSpecControllerPluginResourcesSnapshotterClaims(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginResourcesSnapshotterLimits
@@ -5410,12 +5493,13 @@ export interface DriverSpecControllerPluginVolumesVolumeAwsElasticBlockStore {
    * @schema DriverSpecControllerPluginVolumesVolumeAwsElasticBlockStore#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeAwsElasticBlockStore' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeAwsElasticBlockStore(obj: DriverSpecControllerPluginVolumesVolumeAwsElasticBlockStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5427,7 +5511,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeAwsElasticBlockSto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
@@ -5482,12 +5566,13 @@ export interface DriverSpecControllerPluginVolumesVolumeAzureDisk {
    * @schema DriverSpecControllerPluginVolumesVolumeAzureDisk#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeAzureDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeAzureDisk(obj: DriverSpecControllerPluginVolumesVolumeAzureDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5501,7 +5586,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeAzureDisk(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * azureFile represents an Azure File Service mount on the host and bind mount to the pod.
@@ -5532,12 +5617,13 @@ export interface DriverSpecControllerPluginVolumesVolumeAzureFile {
    * @schema DriverSpecControllerPluginVolumesVolumeAzureFile#shareName
    */
   readonly shareName: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeAzureFile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeAzureFile(obj: DriverSpecControllerPluginVolumesVolumeAzureFile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5548,7 +5634,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeAzureFile(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime.
@@ -5605,12 +5691,13 @@ export interface DriverSpecControllerPluginVolumesVolumeCephfs {
    * @schema DriverSpecControllerPluginVolumesVolumeCephfs#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeCephfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeCephfs(obj: DriverSpecControllerPluginVolumesVolumeCephfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5624,7 +5711,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeCephfs(obj: Driver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * cinder represents a cinder volume attached and mounted on kubelets host machine.
@@ -5669,12 +5756,13 @@ export interface DriverSpecControllerPluginVolumesVolumeCinder {
    * @schema DriverSpecControllerPluginVolumesVolumeCinder#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeCinder' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeCinder(obj: DriverSpecControllerPluginVolumesVolumeCinder | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5686,7 +5774,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeCinder(obj: Driver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * configMap represents a configMap that should populate this volume
@@ -5738,12 +5826,13 @@ export interface DriverSpecControllerPluginVolumesVolumeConfigMap {
    * @schema DriverSpecControllerPluginVolumesVolumeConfigMap#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeConfigMap(obj: DriverSpecControllerPluginVolumesVolumeConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5755,7 +5844,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeConfigMap(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
@@ -5807,12 +5896,13 @@ export interface DriverSpecControllerPluginVolumesVolumeCsi {
    * @schema DriverSpecControllerPluginVolumesVolumeCsi#volumeAttributes
    */
   readonly volumeAttributes?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeCsi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeCsi(obj: DriverSpecControllerPluginVolumesVolumeCsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5825,7 +5915,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeCsi(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * downwardAPI represents downward API about the pod that should populate this volume
@@ -5854,12 +5944,13 @@ export interface DriverSpecControllerPluginVolumesVolumeDownwardApi {
    * @schema DriverSpecControllerPluginVolumesVolumeDownwardApi#items
    */
   readonly items?: DriverSpecControllerPluginVolumesVolumeDownwardApiItems[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeDownwardApi(obj: DriverSpecControllerPluginVolumesVolumeDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5869,7 +5960,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeDownwardApi(obj: D
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * emptyDir represents a temporary directory that shares a pod's lifetime.
@@ -5899,12 +5990,13 @@ export interface DriverSpecControllerPluginVolumesVolumeEmptyDir {
    * @schema DriverSpecControllerPluginVolumesVolumeEmptyDir#sizeLimit
    */
   readonly sizeLimit?: DriverSpecControllerPluginVolumesVolumeEmptyDirSizeLimit;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeEmptyDir' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeEmptyDir(obj: DriverSpecControllerPluginVolumesVolumeEmptyDir | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5914,7 +6006,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeEmptyDir(obj: Driv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ephemeral represents a volume that is handled by a cluster storage driver.
@@ -5971,12 +6063,13 @@ export interface DriverSpecControllerPluginVolumesVolumeEphemeral {
    * @schema DriverSpecControllerPluginVolumesVolumeEphemeral#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeEphemeral' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeral(obj: DriverSpecControllerPluginVolumesVolumeEphemeral | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5985,7 +6078,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeral(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
@@ -6032,12 +6125,13 @@ export interface DriverSpecControllerPluginVolumesVolumeFc {
    * @schema DriverSpecControllerPluginVolumesVolumeFc#wwids
    */
   readonly wwids?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeFc' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeFc(obj: DriverSpecControllerPluginVolumesVolumeFc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6050,7 +6144,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeFc(obj: DriverSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * flexVolume represents a generic volume resource that is
@@ -6101,12 +6195,13 @@ export interface DriverSpecControllerPluginVolumesVolumeFlexVolume {
    * @schema DriverSpecControllerPluginVolumesVolumeFlexVolume#secretRef
    */
   readonly secretRef?: DriverSpecControllerPluginVolumesVolumeFlexVolumeSecretRef;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeFlexVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeFlexVolume(obj: DriverSpecControllerPluginVolumesVolumeFlexVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6119,7 +6214,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeFlexVolume(obj: Dr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running.
@@ -6142,12 +6237,13 @@ export interface DriverSpecControllerPluginVolumesVolumeFlocker {
    * @schema DriverSpecControllerPluginVolumesVolumeFlocker#datasetUUID
    */
   readonly datasetUuid?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeFlocker' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeFlocker(obj: DriverSpecControllerPluginVolumesVolumeFlocker | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6157,7 +6253,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeFlocker(obj: Drive
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * gcePersistentDisk represents a GCE Disk resource that is attached to a
@@ -6207,12 +6303,13 @@ export interface DriverSpecControllerPluginVolumesVolumeGcePersistentDisk {
    * @schema DriverSpecControllerPluginVolumesVolumeGcePersistentDisk#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeGcePersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeGcePersistentDisk(obj: DriverSpecControllerPluginVolumesVolumeGcePersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6224,7 +6321,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeGcePersistentDisk(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * gitRepo represents a git repository at a particular revision.
@@ -6258,12 +6355,13 @@ export interface DriverSpecControllerPluginVolumesVolumeGitRepo {
    * @schema DriverSpecControllerPluginVolumesVolumeGitRepo#revision
    */
   readonly revision?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeGitRepo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeGitRepo(obj: DriverSpecControllerPluginVolumesVolumeGitRepo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6274,7 +6372,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeGitRepo(obj: Drive
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
@@ -6307,12 +6405,13 @@ export interface DriverSpecControllerPluginVolumesVolumeGlusterfs {
    * @schema DriverSpecControllerPluginVolumesVolumeGlusterfs#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeGlusterfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeGlusterfs(obj: DriverSpecControllerPluginVolumesVolumeGlusterfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6323,7 +6422,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeGlusterfs(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * hostPath represents a pre-existing file or directory on the host
@@ -6353,12 +6452,13 @@ export interface DriverSpecControllerPluginVolumesVolumeHostPath {
    * @schema DriverSpecControllerPluginVolumesVolumeHostPath#type
    */
   readonly type?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeHostPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeHostPath(obj: DriverSpecControllerPluginVolumesVolumeHostPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6368,7 +6468,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeHostPath(obj: Driv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine.
@@ -6412,12 +6512,13 @@ export interface DriverSpecControllerPluginVolumesVolumeImage {
    * @schema DriverSpecControllerPluginVolumesVolumeImage#reference
    */
   readonly reference?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeImage' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeImage(obj: DriverSpecControllerPluginVolumesVolumeImage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6427,7 +6528,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeImage(obj: DriverS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * iscsi represents an ISCSI Disk resource that is attached to a
@@ -6524,12 +6625,13 @@ export interface DriverSpecControllerPluginVolumesVolumeIscsi {
    * @schema DriverSpecControllerPluginVolumesVolumeIscsi#targetPortal
    */
   readonly targetPortal: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeIscsi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeIscsi(obj: DriverSpecControllerPluginVolumesVolumeIscsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6548,7 +6650,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeIscsi(obj: DriverS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * nfs represents an NFS mount on the host that shares a pod's lifetime
@@ -6582,12 +6684,13 @@ export interface DriverSpecControllerPluginVolumesVolumeNfs {
    * @schema DriverSpecControllerPluginVolumesVolumeNfs#server
    */
   readonly server: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeNfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeNfs(obj: DriverSpecControllerPluginVolumesVolumeNfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6598,7 +6701,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeNfs(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * persistentVolumeClaimVolumeSource represents a reference to a
@@ -6623,12 +6726,13 @@ export interface DriverSpecControllerPluginVolumesVolumePersistentVolumeClaim {
    * @schema DriverSpecControllerPluginVolumesVolumePersistentVolumeClaim#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumePersistentVolumeClaim' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumePersistentVolumeClaim(obj: DriverSpecControllerPluginVolumesVolumePersistentVolumeClaim | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6638,7 +6742,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumePersistentVolumeCl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine.
@@ -6662,12 +6766,13 @@ export interface DriverSpecControllerPluginVolumesVolumePhotonPersistentDisk {
    * @schema DriverSpecControllerPluginVolumesVolumePhotonPersistentDisk#pdID
    */
   readonly pdId: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumePhotonPersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumePhotonPersistentDisk(obj: DriverSpecControllerPluginVolumesVolumePhotonPersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6677,7 +6782,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumePhotonPersistentDi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
@@ -6711,12 +6816,13 @@ export interface DriverSpecControllerPluginVolumesVolumePortworxVolume {
    * @schema DriverSpecControllerPluginVolumesVolumePortworxVolume#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumePortworxVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumePortworxVolume(obj: DriverSpecControllerPluginVolumesVolumePortworxVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6727,7 +6833,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumePortworxVolume(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * projected items for all in one resources secrets, configmaps, and downward API
@@ -6754,12 +6860,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjected {
    * @schema DriverSpecControllerPluginVolumesVolumeProjected#sources
    */
   readonly sources?: DriverSpecControllerPluginVolumesVolumeProjectedSources[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjected' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjected(obj: DriverSpecControllerPluginVolumesVolumeProjected | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6769,7 +6876,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjected(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * quobyte represents a Quobyte mount on the host that shares a pod's lifetime.
@@ -6828,12 +6935,13 @@ export interface DriverSpecControllerPluginVolumesVolumeQuobyte {
    * @schema DriverSpecControllerPluginVolumesVolumeQuobyte#volume
    */
   readonly volume: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeQuobyte' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeQuobyte(obj: DriverSpecControllerPluginVolumesVolumeQuobyte | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6847,7 +6955,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeQuobyte(obj: Drive
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
@@ -6932,12 +7040,13 @@ export interface DriverSpecControllerPluginVolumesVolumeRbd {
    * @schema DriverSpecControllerPluginVolumesVolumeRbd#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeRbd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeRbd(obj: DriverSpecControllerPluginVolumesVolumeRbd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6953,7 +7062,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeRbd(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
@@ -7041,12 +7150,13 @@ export interface DriverSpecControllerPluginVolumesVolumeScaleIo {
    * @schema DriverSpecControllerPluginVolumesVolumeScaleIo#volumeName
    */
   readonly volumeName?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeScaleIo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeScaleIo(obj: DriverSpecControllerPluginVolumesVolumeScaleIo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7064,7 +7174,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeScaleIo(obj: Drive
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secret represents a secret that should populate this volume.
@@ -7114,12 +7224,13 @@ export interface DriverSpecControllerPluginVolumesVolumeSecret {
    * @schema DriverSpecControllerPluginVolumesVolumeSecret#secretName
    */
   readonly secretName?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeSecret(obj: DriverSpecControllerPluginVolumesVolumeSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7131,7 +7242,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeSecret(obj: Driver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
@@ -7184,12 +7295,13 @@ export interface DriverSpecControllerPluginVolumesVolumeStorageos {
    * @schema DriverSpecControllerPluginVolumesVolumeStorageos#volumeNamespace
    */
   readonly volumeNamespace?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeStorageos' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeStorageos(obj: DriverSpecControllerPluginVolumesVolumeStorageos | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7202,7 +7314,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeStorageos(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine.
@@ -7241,12 +7353,13 @@ export interface DriverSpecControllerPluginVolumesVolumeVsphereVolume {
    * @schema DriverSpecControllerPluginVolumesVolumeVsphereVolume#volumePath
    */
   readonly volumePath: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeVsphereVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeVsphereVolume(obj: DriverSpecControllerPluginVolumesVolumeVsphereVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7258,7 +7371,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeVsphereVolume(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -7280,12 +7393,13 @@ export interface DriverSpecNodePluginAffinityNodeAffinityPreferredDuringScheduli
    * @schema DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7295,7 +7409,7 @@ export function toJson_DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -7313,12 +7427,13 @@ export interface DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7327,7 +7442,7 @@ export function toJson_DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -7349,12 +7464,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7364,7 +7480,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -7444,12 +7560,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityRequiredDuringScheduling
    * @schema DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7463,7 +7580,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSche
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -7485,12 +7602,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSched
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7500,7 +7618,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -7580,12 +7698,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedu
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7599,7 +7718,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuring
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceClaim references one entry in PodSpec.ResourceClaims.
@@ -7624,12 +7743,13 @@ export interface DriverSpecNodePluginResourcesAddonsClaims {
    * @schema DriverSpecNodePluginResourcesAddonsClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesAddonsClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesAddonsClaims(obj: DriverSpecNodePluginResourcesAddonsClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7639,7 +7759,7 @@ export function toJson_DriverSpecNodePluginResourcesAddonsClaims(obj: DriverSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecNodePluginResourcesAddonsLimits
@@ -7692,12 +7812,13 @@ export interface DriverSpecNodePluginResourcesLivenessClaims {
    * @schema DriverSpecNodePluginResourcesLivenessClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesLivenessClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesLivenessClaims(obj: DriverSpecNodePluginResourcesLivenessClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7707,7 +7828,7 @@ export function toJson_DriverSpecNodePluginResourcesLivenessClaims(obj: DriverSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecNodePluginResourcesLivenessLimits
@@ -7760,12 +7881,13 @@ export interface DriverSpecNodePluginResourcesLogRotatorClaims {
    * @schema DriverSpecNodePluginResourcesLogRotatorClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesLogRotatorClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesLogRotatorClaims(obj: DriverSpecNodePluginResourcesLogRotatorClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7775,7 +7897,7 @@ export function toJson_DriverSpecNodePluginResourcesLogRotatorClaims(obj: Driver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecNodePluginResourcesLogRotatorLimits
@@ -7828,12 +7950,13 @@ export interface DriverSpecNodePluginResourcesPluginClaims {
    * @schema DriverSpecNodePluginResourcesPluginClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesPluginClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesPluginClaims(obj: DriverSpecNodePluginResourcesPluginClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7843,7 +7966,7 @@ export function toJson_DriverSpecNodePluginResourcesPluginClaims(obj: DriverSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecNodePluginResourcesPluginLimits
@@ -7896,12 +8019,13 @@ export interface DriverSpecNodePluginResourcesRegistrarClaims {
    * @schema DriverSpecNodePluginResourcesRegistrarClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginResourcesRegistrarClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginResourcesRegistrarClaims(obj: DriverSpecNodePluginResourcesRegistrarClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7911,7 +8035,7 @@ export function toJson_DriverSpecNodePluginResourcesRegistrarClaims(obj: DriverS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecNodePluginResourcesRegistrarLimits
@@ -8048,12 +8172,13 @@ export interface DriverSpecNodePluginVolumesVolumeAwsElasticBlockStore {
    * @schema DriverSpecNodePluginVolumesVolumeAwsElasticBlockStore#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeAwsElasticBlockStore' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeAwsElasticBlockStore(obj: DriverSpecNodePluginVolumesVolumeAwsElasticBlockStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8065,7 +8190,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeAwsElasticBlockStore(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
@@ -8120,12 +8245,13 @@ export interface DriverSpecNodePluginVolumesVolumeAzureDisk {
    * @schema DriverSpecNodePluginVolumesVolumeAzureDisk#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeAzureDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeAzureDisk(obj: DriverSpecNodePluginVolumesVolumeAzureDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8139,7 +8265,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeAzureDisk(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * azureFile represents an Azure File Service mount on the host and bind mount to the pod.
@@ -8170,12 +8296,13 @@ export interface DriverSpecNodePluginVolumesVolumeAzureFile {
    * @schema DriverSpecNodePluginVolumesVolumeAzureFile#shareName
    */
   readonly shareName: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeAzureFile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeAzureFile(obj: DriverSpecNodePluginVolumesVolumeAzureFile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8186,7 +8313,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeAzureFile(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime.
@@ -8243,12 +8370,13 @@ export interface DriverSpecNodePluginVolumesVolumeCephfs {
    * @schema DriverSpecNodePluginVolumesVolumeCephfs#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeCephfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeCephfs(obj: DriverSpecNodePluginVolumesVolumeCephfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8262,7 +8390,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeCephfs(obj: DriverSpecNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * cinder represents a cinder volume attached and mounted on kubelets host machine.
@@ -8307,12 +8435,13 @@ export interface DriverSpecNodePluginVolumesVolumeCinder {
    * @schema DriverSpecNodePluginVolumesVolumeCinder#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeCinder' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeCinder(obj: DriverSpecNodePluginVolumesVolumeCinder | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8324,7 +8453,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeCinder(obj: DriverSpecNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * configMap represents a configMap that should populate this volume
@@ -8376,12 +8505,13 @@ export interface DriverSpecNodePluginVolumesVolumeConfigMap {
    * @schema DriverSpecNodePluginVolumesVolumeConfigMap#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeConfigMap(obj: DriverSpecNodePluginVolumesVolumeConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8393,7 +8523,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeConfigMap(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
@@ -8445,12 +8575,13 @@ export interface DriverSpecNodePluginVolumesVolumeCsi {
    * @schema DriverSpecNodePluginVolumesVolumeCsi#volumeAttributes
    */
   readonly volumeAttributes?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeCsi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeCsi(obj: DriverSpecNodePluginVolumesVolumeCsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8463,7 +8594,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeCsi(obj: DriverSpecNodeP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * downwardAPI represents downward API about the pod that should populate this volume
@@ -8492,12 +8623,13 @@ export interface DriverSpecNodePluginVolumesVolumeDownwardApi {
    * @schema DriverSpecNodePluginVolumesVolumeDownwardApi#items
    */
   readonly items?: DriverSpecNodePluginVolumesVolumeDownwardApiItems[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeDownwardApi(obj: DriverSpecNodePluginVolumesVolumeDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8507,7 +8639,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeDownwardApi(obj: DriverS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * emptyDir represents a temporary directory that shares a pod's lifetime.
@@ -8537,12 +8669,13 @@ export interface DriverSpecNodePluginVolumesVolumeEmptyDir {
    * @schema DriverSpecNodePluginVolumesVolumeEmptyDir#sizeLimit
    */
   readonly sizeLimit?: DriverSpecNodePluginVolumesVolumeEmptyDirSizeLimit;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeEmptyDir' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeEmptyDir(obj: DriverSpecNodePluginVolumesVolumeEmptyDir | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8552,7 +8685,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeEmptyDir(obj: DriverSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ephemeral represents a volume that is handled by a cluster storage driver.
@@ -8609,12 +8742,13 @@ export interface DriverSpecNodePluginVolumesVolumeEphemeral {
    * @schema DriverSpecNodePluginVolumesVolumeEphemeral#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplate;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeEphemeral' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeEphemeral(obj: DriverSpecNodePluginVolumesVolumeEphemeral | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8623,7 +8757,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeEphemeral(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
@@ -8670,12 +8804,13 @@ export interface DriverSpecNodePluginVolumesVolumeFc {
    * @schema DriverSpecNodePluginVolumesVolumeFc#wwids
    */
   readonly wwids?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeFc' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeFc(obj: DriverSpecNodePluginVolumesVolumeFc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8688,7 +8823,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeFc(obj: DriverSpecNodePl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * flexVolume represents a generic volume resource that is
@@ -8739,12 +8874,13 @@ export interface DriverSpecNodePluginVolumesVolumeFlexVolume {
    * @schema DriverSpecNodePluginVolumesVolumeFlexVolume#secretRef
    */
   readonly secretRef?: DriverSpecNodePluginVolumesVolumeFlexVolumeSecretRef;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeFlexVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeFlexVolume(obj: DriverSpecNodePluginVolumesVolumeFlexVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8757,7 +8893,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeFlexVolume(obj: DriverSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running.
@@ -8780,12 +8916,13 @@ export interface DriverSpecNodePluginVolumesVolumeFlocker {
    * @schema DriverSpecNodePluginVolumesVolumeFlocker#datasetUUID
    */
   readonly datasetUuid?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeFlocker' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeFlocker(obj: DriverSpecNodePluginVolumesVolumeFlocker | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8795,7 +8932,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeFlocker(obj: DriverSpecN
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * gcePersistentDisk represents a GCE Disk resource that is attached to a
@@ -8845,12 +8982,13 @@ export interface DriverSpecNodePluginVolumesVolumeGcePersistentDisk {
    * @schema DriverSpecNodePluginVolumesVolumeGcePersistentDisk#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeGcePersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeGcePersistentDisk(obj: DriverSpecNodePluginVolumesVolumeGcePersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8862,7 +9000,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeGcePersistentDisk(obj: D
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * gitRepo represents a git repository at a particular revision.
@@ -8896,12 +9034,13 @@ export interface DriverSpecNodePluginVolumesVolumeGitRepo {
    * @schema DriverSpecNodePluginVolumesVolumeGitRepo#revision
    */
   readonly revision?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeGitRepo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeGitRepo(obj: DriverSpecNodePluginVolumesVolumeGitRepo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8912,7 +9051,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeGitRepo(obj: DriverSpecN
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
@@ -8945,12 +9084,13 @@ export interface DriverSpecNodePluginVolumesVolumeGlusterfs {
    * @schema DriverSpecNodePluginVolumesVolumeGlusterfs#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeGlusterfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeGlusterfs(obj: DriverSpecNodePluginVolumesVolumeGlusterfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8961,7 +9101,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeGlusterfs(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * hostPath represents a pre-existing file or directory on the host
@@ -8991,12 +9131,13 @@ export interface DriverSpecNodePluginVolumesVolumeHostPath {
    * @schema DriverSpecNodePluginVolumesVolumeHostPath#type
    */
   readonly type?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeHostPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeHostPath(obj: DriverSpecNodePluginVolumesVolumeHostPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9006,7 +9147,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeHostPath(obj: DriverSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine.
@@ -9050,12 +9191,13 @@ export interface DriverSpecNodePluginVolumesVolumeImage {
    * @schema DriverSpecNodePluginVolumesVolumeImage#reference
    */
   readonly reference?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeImage' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeImage(obj: DriverSpecNodePluginVolumesVolumeImage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9065,7 +9207,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeImage(obj: DriverSpecNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * iscsi represents an ISCSI Disk resource that is attached to a
@@ -9162,12 +9304,13 @@ export interface DriverSpecNodePluginVolumesVolumeIscsi {
    * @schema DriverSpecNodePluginVolumesVolumeIscsi#targetPortal
    */
   readonly targetPortal: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeIscsi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeIscsi(obj: DriverSpecNodePluginVolumesVolumeIscsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9186,7 +9329,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeIscsi(obj: DriverSpecNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * nfs represents an NFS mount on the host that shares a pod's lifetime
@@ -9220,12 +9363,13 @@ export interface DriverSpecNodePluginVolumesVolumeNfs {
    * @schema DriverSpecNodePluginVolumesVolumeNfs#server
    */
   readonly server: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeNfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeNfs(obj: DriverSpecNodePluginVolumesVolumeNfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9236,7 +9380,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeNfs(obj: DriverSpecNodeP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * persistentVolumeClaimVolumeSource represents a reference to a
@@ -9261,12 +9405,13 @@ export interface DriverSpecNodePluginVolumesVolumePersistentVolumeClaim {
    * @schema DriverSpecNodePluginVolumesVolumePersistentVolumeClaim#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumePersistentVolumeClaim' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumePersistentVolumeClaim(obj: DriverSpecNodePluginVolumesVolumePersistentVolumeClaim | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9276,7 +9421,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumePersistentVolumeClaim(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine.
@@ -9300,12 +9445,13 @@ export interface DriverSpecNodePluginVolumesVolumePhotonPersistentDisk {
    * @schema DriverSpecNodePluginVolumesVolumePhotonPersistentDisk#pdID
    */
   readonly pdId: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumePhotonPersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumePhotonPersistentDisk(obj: DriverSpecNodePluginVolumesVolumePhotonPersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9315,7 +9461,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumePhotonPersistentDisk(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
@@ -9349,12 +9495,13 @@ export interface DriverSpecNodePluginVolumesVolumePortworxVolume {
    * @schema DriverSpecNodePluginVolumesVolumePortworxVolume#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumePortworxVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumePortworxVolume(obj: DriverSpecNodePluginVolumesVolumePortworxVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9365,7 +9512,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumePortworxVolume(obj: Driv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * projected items for all in one resources secrets, configmaps, and downward API
@@ -9392,12 +9539,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjected {
    * @schema DriverSpecNodePluginVolumesVolumeProjected#sources
    */
   readonly sources?: DriverSpecNodePluginVolumesVolumeProjectedSources[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjected' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjected(obj: DriverSpecNodePluginVolumesVolumeProjected | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9407,7 +9555,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjected(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * quobyte represents a Quobyte mount on the host that shares a pod's lifetime.
@@ -9466,12 +9614,13 @@ export interface DriverSpecNodePluginVolumesVolumeQuobyte {
    * @schema DriverSpecNodePluginVolumesVolumeQuobyte#volume
    */
   readonly volume: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeQuobyte' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeQuobyte(obj: DriverSpecNodePluginVolumesVolumeQuobyte | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9485,7 +9634,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeQuobyte(obj: DriverSpecN
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
@@ -9570,12 +9719,13 @@ export interface DriverSpecNodePluginVolumesVolumeRbd {
    * @schema DriverSpecNodePluginVolumesVolumeRbd#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeRbd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeRbd(obj: DriverSpecNodePluginVolumesVolumeRbd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9591,7 +9741,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeRbd(obj: DriverSpecNodeP
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
@@ -9679,12 +9829,13 @@ export interface DriverSpecNodePluginVolumesVolumeScaleIo {
    * @schema DriverSpecNodePluginVolumesVolumeScaleIo#volumeName
    */
   readonly volumeName?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeScaleIo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeScaleIo(obj: DriverSpecNodePluginVolumesVolumeScaleIo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9702,7 +9853,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeScaleIo(obj: DriverSpecN
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secret represents a secret that should populate this volume.
@@ -9752,12 +9903,13 @@ export interface DriverSpecNodePluginVolumesVolumeSecret {
    * @schema DriverSpecNodePluginVolumesVolumeSecret#secretName
    */
   readonly secretName?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeSecret(obj: DriverSpecNodePluginVolumesVolumeSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9769,7 +9921,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeSecret(obj: DriverSpecNo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
@@ -9822,12 +9974,13 @@ export interface DriverSpecNodePluginVolumesVolumeStorageos {
    * @schema DriverSpecNodePluginVolumesVolumeStorageos#volumeNamespace
    */
   readonly volumeNamespace?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeStorageos' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeStorageos(obj: DriverSpecNodePluginVolumesVolumeStorageos | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9840,7 +9993,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeStorageos(obj: DriverSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine.
@@ -9879,12 +10032,13 @@ export interface DriverSpecNodePluginVolumesVolumeVsphereVolume {
    * @schema DriverSpecNodePluginVolumesVolumeVsphereVolume#volumePath
    */
   readonly volumePath: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeVsphereVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeVsphereVolume(obj: DriverSpecNodePluginVolumesVolumeVsphereVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9896,7 +10050,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeVsphereVolume(obj: Drive
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -9917,12 +10071,13 @@ export interface DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSc
    * @schema DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9932,7 +10087,7 @@ export function toJson_DriverSpecControllerPluginAffinityNodeAffinityPreferredDu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -9955,12 +10110,13 @@ export interface DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSch
    * @schema DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9970,7 +10126,7 @@ export function toJson_DriverSpecControllerPluginAffinityNodeAffinityRequiredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -10045,12 +10201,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSch
    * @schema DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10064,7 +10221,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -10088,12 +10245,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSche
    * @schema DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10103,7 +10261,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -10130,12 +10288,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSche
    * @schema DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10145,7 +10304,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -10220,12 +10379,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDurin
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10239,7 +10399,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -10263,12 +10423,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuring
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10278,7 +10439,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequired
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -10305,12 +10466,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuring
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10320,7 +10482,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequired
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty.
@@ -10339,12 +10501,13 @@ export interface DriverSpecControllerPluginVolumesVolumeCephfsSecretRef {
    * @schema DriverSpecControllerPluginVolumesVolumeCephfsSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeCephfsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeCephfsSecretRef(obj: DriverSpecControllerPluginVolumesVolumeCephfsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10353,7 +10516,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeCephfsSecretRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is optional: points to a secret object containing parameters used to connect
@@ -10372,12 +10535,13 @@ export interface DriverSpecControllerPluginVolumesVolumeCinderSecretRef {
    * @schema DriverSpecControllerPluginVolumesVolumeCinderSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeCinderSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeCinderSecretRef(obj: DriverSpecControllerPluginVolumesVolumeCinderSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10386,7 +10550,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeCinderSecretRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -10422,12 +10586,13 @@ export interface DriverSpecControllerPluginVolumesVolumeConfigMapItems {
    * @schema DriverSpecControllerPluginVolumesVolumeConfigMapItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeConfigMapItems(obj: DriverSpecControllerPluginVolumesVolumeConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10438,7 +10603,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeConfigMapItems(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * nodePublishSecretRef is a reference to the secret object containing
@@ -10460,12 +10625,13 @@ export interface DriverSpecControllerPluginVolumesVolumeCsiNodePublishSecretRef 
    * @schema DriverSpecControllerPluginVolumesVolumeCsiNodePublishSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeCsiNodePublishSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeCsiNodePublishSecretRef(obj: DriverSpecControllerPluginVolumesVolumeCsiNodePublishSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10474,7 +10640,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeCsiNodePublishSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -10515,12 +10681,13 @@ export interface DriverSpecControllerPluginVolumesVolumeDownwardApiItems {
    * @schema DriverSpecControllerPluginVolumesVolumeDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: DriverSpecControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeDownwardApiItems(obj: DriverSpecControllerPluginVolumesVolumeDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10532,7 +10699,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeDownwardApiItems(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume.
@@ -10599,12 +10766,13 @@ export interface DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemp
    * @schema DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate#spec
    */
   readonly spec: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate(obj: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10614,7 +10782,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeCla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is Optional: secretRef is reference to the secret object containing
@@ -10636,12 +10804,13 @@ export interface DriverSpecControllerPluginVolumesVolumeFlexVolumeSecretRef {
    * @schema DriverSpecControllerPluginVolumesVolumeFlexVolumeSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeFlexVolumeSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeFlexVolumeSecretRef(obj: DriverSpecControllerPluginVolumesVolumeFlexVolumeSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10650,7 +10819,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeFlexVolumeSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is the CHAP Secret for iSCSI target and initiator authentication
@@ -10668,12 +10837,13 @@ export interface DriverSpecControllerPluginVolumesVolumeIscsiSecretRef {
    * @schema DriverSpecControllerPluginVolumesVolumeIscsiSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeIscsiSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeIscsiSecretRef(obj: DriverSpecControllerPluginVolumesVolumeIscsiSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10682,7 +10852,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeIscsiSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Projection that may be projected along with other supported volume types.
@@ -10777,12 +10947,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSources {
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSources#serviceAccountToken
    */
   readonly serviceAccountToken?: DriverSpecControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSources(obj: DriverSpecControllerPluginVolumesVolumeProjectedSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10796,7 +10967,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSources(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is name of the authentication secret for RBDUser. If provided
@@ -10818,12 +10989,13 @@ export interface DriverSpecControllerPluginVolumesVolumeRbdSecretRef {
    * @schema DriverSpecControllerPluginVolumesVolumeRbdSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeRbdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeRbdSecretRef(obj: DriverSpecControllerPluginVolumesVolumeRbdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10832,7 +11004,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeRbdSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef references to the secret for ScaleIO user and other
@@ -10851,12 +11023,13 @@ export interface DriverSpecControllerPluginVolumesVolumeScaleIoSecretRef {
    * @schema DriverSpecControllerPluginVolumesVolumeScaleIoSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeScaleIoSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeScaleIoSecretRef(obj: DriverSpecControllerPluginVolumesVolumeScaleIoSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10865,7 +11038,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeScaleIoSecretRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -10901,12 +11074,13 @@ export interface DriverSpecControllerPluginVolumesVolumeSecretItems {
    * @schema DriverSpecControllerPluginVolumesVolumeSecretItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeSecretItems(obj: DriverSpecControllerPluginVolumesVolumeSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10917,7 +11091,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeSecretItems(obj: D
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef specifies the secret to use for obtaining the StorageOS API
@@ -10936,12 +11110,13 @@ export interface DriverSpecControllerPluginVolumesVolumeStorageosSecretRef {
    * @schema DriverSpecControllerPluginVolumesVolumeStorageosSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeStorageosSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeStorageosSecretRef(obj: DriverSpecControllerPluginVolumesVolumeStorageosSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10950,7 +11125,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeStorageosSecretRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -10971,12 +11146,13 @@ export interface DriverSpecNodePluginAffinityNodeAffinityPreferredDuringScheduli
    * @schema DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10986,7 +11162,7 @@ export function toJson_DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -11009,12 +11185,13 @@ export interface DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11024,7 +11201,7 @@ export function toJson_DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -11099,12 +11276,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11118,7 +11296,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -11142,12 +11320,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityRequiredDuringScheduling
    * @schema DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11157,7 +11336,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSche
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -11184,12 +11363,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityRequiredDuringScheduling
    * @schema DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11199,7 +11379,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSche
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -11274,12 +11454,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSched
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11293,7 +11474,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -11317,12 +11498,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedu
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11332,7 +11514,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuring
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -11359,12 +11541,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedu
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11374,7 +11557,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuring
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty.
@@ -11393,12 +11576,13 @@ export interface DriverSpecNodePluginVolumesVolumeCephfsSecretRef {
    * @schema DriverSpecNodePluginVolumesVolumeCephfsSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeCephfsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeCephfsSecretRef(obj: DriverSpecNodePluginVolumesVolumeCephfsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11407,7 +11591,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeCephfsSecretRef(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is optional: points to a secret object containing parameters used to connect
@@ -11426,12 +11610,13 @@ export interface DriverSpecNodePluginVolumesVolumeCinderSecretRef {
    * @schema DriverSpecNodePluginVolumesVolumeCinderSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeCinderSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeCinderSecretRef(obj: DriverSpecNodePluginVolumesVolumeCinderSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11440,7 +11625,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeCinderSecretRef(obj: Dri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -11476,12 +11661,13 @@ export interface DriverSpecNodePluginVolumesVolumeConfigMapItems {
    * @schema DriverSpecNodePluginVolumesVolumeConfigMapItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeConfigMapItems(obj: DriverSpecNodePluginVolumesVolumeConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11492,7 +11678,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeConfigMapItems(obj: Driv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * nodePublishSecretRef is a reference to the secret object containing
@@ -11514,12 +11700,13 @@ export interface DriverSpecNodePluginVolumesVolumeCsiNodePublishSecretRef {
    * @schema DriverSpecNodePluginVolumesVolumeCsiNodePublishSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeCsiNodePublishSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeCsiNodePublishSecretRef(obj: DriverSpecNodePluginVolumesVolumeCsiNodePublishSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11528,7 +11715,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeCsiNodePublishSecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -11569,12 +11756,13 @@ export interface DriverSpecNodePluginVolumesVolumeDownwardApiItems {
    * @schema DriverSpecNodePluginVolumesVolumeDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: DriverSpecNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeDownwardApiItems(obj: DriverSpecNodePluginVolumesVolumeDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11586,7 +11774,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeDownwardApiItems(obj: Dr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume.
@@ -11653,12 +11841,13 @@ export interface DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplate {
    * @schema DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplate#spec
    */
   readonly spec: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplate(obj: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11668,7 +11857,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is Optional: secretRef is reference to the secret object containing
@@ -11690,12 +11879,13 @@ export interface DriverSpecNodePluginVolumesVolumeFlexVolumeSecretRef {
    * @schema DriverSpecNodePluginVolumesVolumeFlexVolumeSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeFlexVolumeSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeFlexVolumeSecretRef(obj: DriverSpecNodePluginVolumesVolumeFlexVolumeSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11704,7 +11894,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeFlexVolumeSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is the CHAP Secret for iSCSI target and initiator authentication
@@ -11722,12 +11912,13 @@ export interface DriverSpecNodePluginVolumesVolumeIscsiSecretRef {
    * @schema DriverSpecNodePluginVolumesVolumeIscsiSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeIscsiSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeIscsiSecretRef(obj: DriverSpecNodePluginVolumesVolumeIscsiSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11736,7 +11927,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeIscsiSecretRef(obj: Driv
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Projection that may be projected along with other supported volume types.
@@ -11831,12 +12022,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSources {
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSources#serviceAccountToken
    */
   readonly serviceAccountToken?: DriverSpecNodePluginVolumesVolumeProjectedSourcesServiceAccountToken;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSources(obj: DriverSpecNodePluginVolumesVolumeProjectedSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11850,7 +12042,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSources(obj: Dr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is name of the authentication secret for RBDUser. If provided
@@ -11872,12 +12064,13 @@ export interface DriverSpecNodePluginVolumesVolumeRbdSecretRef {
    * @schema DriverSpecNodePluginVolumesVolumeRbdSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeRbdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeRbdSecretRef(obj: DriverSpecNodePluginVolumesVolumeRbdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11886,7 +12079,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeRbdSecretRef(obj: Driver
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef references to the secret for ScaleIO user and other
@@ -11905,12 +12098,13 @@ export interface DriverSpecNodePluginVolumesVolumeScaleIoSecretRef {
    * @schema DriverSpecNodePluginVolumesVolumeScaleIoSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeScaleIoSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeScaleIoSecretRef(obj: DriverSpecNodePluginVolumesVolumeScaleIoSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11919,7 +12113,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeScaleIoSecretRef(obj: Dr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -11955,12 +12149,13 @@ export interface DriverSpecNodePluginVolumesVolumeSecretItems {
    * @schema DriverSpecNodePluginVolumesVolumeSecretItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeSecretItems(obj: DriverSpecNodePluginVolumesVolumeSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11971,7 +12166,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeSecretItems(obj: DriverS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef specifies the secret to use for obtaining the StorageOS API
@@ -11990,12 +12185,13 @@ export interface DriverSpecNodePluginVolumesVolumeStorageosSecretRef {
    * @schema DriverSpecNodePluginVolumesVolumeStorageosSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeStorageosSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeStorageosSecretRef(obj: DriverSpecNodePluginVolumesVolumeStorageosSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12004,7 +12200,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeStorageosSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -12038,12 +12234,13 @@ export interface DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSc
    * @schema DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12054,7 +12251,7 @@ export function toJson_DriverSpecControllerPluginAffinityNodeAffinityPreferredDu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -12088,12 +12285,13 @@ export interface DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSc
    * @schema DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: DriverSpecControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12104,7 +12302,7 @@ export function toJson_DriverSpecControllerPluginAffinityNodeAffinityPreferredDu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -12138,12 +12336,13 @@ export interface DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSch
    * @schema DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12154,7 +12353,7 @@ export function toJson_DriverSpecControllerPluginAffinityNodeAffinityRequiredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -12188,12 +12387,13 @@ export interface DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSch
    * @schema DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: DriverSpecControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12204,7 +12404,7 @@ export function toJson_DriverSpecControllerPluginAffinityNodeAffinityRequiredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -12228,12 +12428,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSch
    * @schema DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12243,7 +12444,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -12270,12 +12471,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSch
    * @schema DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12285,7 +12487,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -12318,12 +12520,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSche
    * @schema DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12334,7 +12537,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -12367,12 +12570,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSche
    * @schema DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: DriverSpecControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12383,7 +12587,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityRequiredDuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -12407,12 +12611,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDurin
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12422,7 +12627,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -12449,12 +12654,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDurin
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12464,7 +12670,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -12497,12 +12703,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuring
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12513,7 +12720,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequired
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -12546,12 +12753,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuring
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: DriverSpecControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12562,7 +12770,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityRequired
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -12583,12 +12791,13 @@ export interface DriverSpecControllerPluginVolumesVolumeDownwardApiItemsFieldRef
    * @schema DriverSpecControllerPluginVolumesVolumeDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeDownwardApiItemsFieldRef(obj: DriverSpecControllerPluginVolumesVolumeDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12598,7 +12807,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeDownwardApiItemsFi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -12627,12 +12836,13 @@ export interface DriverSpecControllerPluginVolumesVolumeDownwardApiItemsResource
    * @schema DriverSpecControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef(obj: DriverSpecControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12643,7 +12853,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeDownwardApiItemsRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The specification for the PersistentVolumeClaim. The entire content is
@@ -12761,12 +12971,13 @@ export interface DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemp
    * @schema DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec(obj: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12783,7 +12994,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeCla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
@@ -12847,12 +13058,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterT
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundle#signerName
    */
   readonly signerName?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundle' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundle(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12865,7 +13077,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesCl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * configMap information about the configMap data to project
@@ -12903,12 +13115,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMa
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMap#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMap(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12919,7 +13132,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * downwardAPI information about the downwardAPI data to project
@@ -12933,12 +13146,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownward
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApi#items
    */
   readonly items?: DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApi(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12947,7 +13161,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesDo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Projects an auto-rotating credential bundle (private key and certificate
@@ -13087,12 +13301,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesPodCerti
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesPodCertificate#userAnnotations
    */
   readonly userAnnotations?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesPodCertificate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesPodCertificate(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesPodCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13107,7 +13322,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesPo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secret information about the secret data to project
@@ -13145,12 +13360,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecret {
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecret#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecret(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13161,7 +13377,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * serviceAccountToken is information about the serviceAccountToken data to project
@@ -13199,12 +13415,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesServiceA
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13215,7 +13432,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -13249,12 +13466,13 @@ export interface DriverSpecNodePluginAffinityNodeAffinityPreferredDuringScheduli
    * @schema DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13265,7 +13483,7 @@ export function toJson_DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -13299,12 +13517,13 @@ export interface DriverSpecNodePluginAffinityNodeAffinityPreferredDuringScheduli
    * @schema DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13315,7 +13534,7 @@ export function toJson_DriverSpecNodePluginAffinityNodeAffinityPreferredDuringSc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -13349,12 +13568,13 @@ export interface DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13365,7 +13585,7 @@ export function toJson_DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -13399,12 +13619,13 @@ export interface DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13415,7 +13636,7 @@ export function toJson_DriverSpecNodePluginAffinityNodeAffinityRequiredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -13439,12 +13660,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13454,7 +13676,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -13481,12 +13703,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13496,7 +13719,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -13529,12 +13752,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityRequiredDuringScheduling
    * @schema DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13545,7 +13769,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSche
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -13578,12 +13802,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityRequiredDuringScheduling
    * @schema DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: DriverSpecNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13594,7 +13819,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityRequiredDuringSche
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -13618,12 +13843,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSched
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13633,7 +13859,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -13660,12 +13886,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSched
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13675,7 +13902,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -13708,12 +13935,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedu
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13724,7 +13952,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuring
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -13757,12 +13985,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedu
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13773,7 +14002,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityRequiredDuring
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -13794,12 +14023,13 @@ export interface DriverSpecNodePluginVolumesVolumeDownwardApiItemsFieldRef {
    * @schema DriverSpecNodePluginVolumesVolumeDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeDownwardApiItemsFieldRef(obj: DriverSpecNodePluginVolumesVolumeDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13809,7 +14039,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeDownwardApiItemsFieldRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -13838,12 +14068,13 @@ export interface DriverSpecNodePluginVolumesVolumeDownwardApiItemsResourceFieldR
    * @schema DriverSpecNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef(obj: DriverSpecNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13854,7 +14085,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeDownwardApiItemsResource
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The specification for the PersistentVolumeClaim. The entire content is
@@ -13972,12 +14203,13 @@ export interface DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSp
    * @schema DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec(obj: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -13994,7 +14226,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
@@ -14058,12 +14290,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBu
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundle#signerName
    */
   readonly signerName?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundle' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundle(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14076,7 +14309,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * configMap information about the configMap data to project
@@ -14114,12 +14347,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMap {
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMap#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMap(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14130,7 +14364,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * downwardAPI information about the downwardAPI data to project
@@ -14144,12 +14378,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApi {
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApi#items
    */
   readonly items?: DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItems[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApi(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14158,7 +14393,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesDownward
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Projects an auto-rotating credential bundle (private key and certificate
@@ -14298,12 +14533,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesPodCertificate
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesPodCertificate#userAnnotations
    */
   readonly userAnnotations?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesPodCertificate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesPodCertificate(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesPodCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14318,7 +14554,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesPodCerti
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secret information about the secret data to project
@@ -14356,12 +14592,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesSecret {
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesSecret#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesSecret(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14372,7 +14609,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesSecret(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * serviceAccountToken is information about the serviceAccountToken data to project
@@ -14410,12 +14647,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesServiceAccount
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesServiceAccountToken#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesServiceAccountToken(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14426,7 +14664,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesServiceA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -14459,12 +14697,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSch
    * @schema DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14475,7 +14714,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -14508,12 +14747,13 @@ export interface DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSch
    * @schema DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: DriverSpecControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14524,7 +14764,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAffinityPreferredDur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -14557,12 +14797,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDurin
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14573,7 +14814,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -14606,12 +14847,13 @@ export interface DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDurin
    * @schema DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: DriverSpecControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14622,7 +14864,7 @@ export function toJson_DriverSpecControllerPluginAffinityPodAntiAffinityPreferre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
@@ -14675,12 +14917,13 @@ export interface DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemp
    * @schema DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource(obj: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14691,7 +14934,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeCla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -14752,12 +14995,13 @@ export interface DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemp
    * @schema DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef(obj: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14769,7 +15013,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeCla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * resources represents the minimum resources the volume should have.
@@ -14798,12 +15042,13 @@ export interface DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemp
    * @schema DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResourcesRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources(obj: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14813,7 +15058,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeCla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * selector is a label query over volumes to consider for binding.
@@ -14836,12 +15081,13 @@ export interface DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemp
    * @schema DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector(obj: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14851,7 +15097,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeCla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Select all ClusterTrustBundles that match this label selector.  Only has
@@ -14877,12 +15123,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterT
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14892,7 +15139,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesCl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -14928,12 +15175,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMa
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMapItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMapItems(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -14944,7 +15192,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -14985,12 +15233,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownward
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15002,7 +15251,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesDo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -15038,12 +15287,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecretIt
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecretItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecretItems(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15054,7 +15304,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -15087,12 +15337,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15103,7 +15354,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -15136,12 +15387,13 @@ export interface DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulin
    * @schema DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: DriverSpecNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15152,7 +15404,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAffinityPreferredDuringSch
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -15185,12 +15437,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSched
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15201,7 +15454,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -15234,12 +15487,13 @@ export interface DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSched
    * @schema DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: DriverSpecNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15250,7 +15504,7 @@ export function toJson_DriverSpecNodePluginAffinityPodAntiAffinityPreferredDurin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
@@ -15303,12 +15557,13 @@ export interface DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSp
    * @schema DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource(obj: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15319,7 +15574,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -15380,12 +15635,13 @@ export interface DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSp
    * @schema DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef(obj: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15397,7 +15653,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * resources represents the minimum resources the volume should have.
@@ -15426,12 +15682,13 @@ export interface DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSp
    * @schema DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResourcesRequests };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources(obj: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15441,7 +15698,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * selector is a label query over volumes to consider for binding.
@@ -15464,12 +15721,13 @@ export interface DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSp
    * @schema DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector(obj: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15479,7 +15737,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Select all ClusterTrustBundles that match this label selector.  Only has
@@ -15505,12 +15763,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBu
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15520,7 +15779,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -15556,12 +15815,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMapItems
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMapItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMapItems(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15572,7 +15832,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesConfigMa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -15613,12 +15873,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiIte
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItems(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15630,7 +15891,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesDownward
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -15666,12 +15927,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesSecretItems {
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesSecretItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesSecretItems(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15682,7 +15944,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesSecretIt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResourcesLimits
@@ -15743,12 +16005,13 @@ export interface DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemp
    * @schema DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(obj: DriverSpecControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15759,7 +16022,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeEphemeralVolumeCla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -15792,12 +16055,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterT
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15808,7 +16072,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesCl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -15829,12 +16093,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownward
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15844,7 +16109,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesDo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -15873,12 +16138,13 @@ export interface DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownward
    * @schema DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef(obj: DriverSpecControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15889,7 +16155,7 @@ export function toJson_DriverSpecControllerPluginVolumesVolumeProjectedSourcesDo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResourcesLimits
@@ -15950,12 +16216,13 @@ export interface DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSp
    * @schema DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(obj: DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -15966,7 +16233,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeEphemeralVolumeClaimTemp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -15999,12 +16266,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBu
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16015,7 +16283,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesClusterT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -16036,12 +16304,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiIte
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16051,7 +16320,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesDownward
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -16080,12 +16349,13 @@ export interface DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiIte
    * @schema DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef(obj: DriverSpecNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16096,7 +16366,7 @@ export function toJson_DriverSpecNodePluginVolumesVolumeProjectedSourcesDownward
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
@@ -16175,7 +16445,7 @@ export class OperatorConfig extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -16202,12 +16472,13 @@ export interface OperatorConfigProps {
    * @schema OperatorConfig#spec
    */
   readonly spec?: OperatorConfigSpec;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigProps(obj: OperatorConfigProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16217,7 +16488,7 @@ export function toJson_OperatorConfigProps(obj: OperatorConfigProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * OperatorConfigSpec defines the desired state of OperatorConfig
@@ -16238,12 +16509,13 @@ export interface OperatorConfigSpec {
    * @schema OperatorConfigSpec#log
    */
   readonly log?: OperatorConfigSpecLog;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpec(obj: OperatorConfigSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16253,7 +16525,7 @@ export function toJson_OperatorConfigSpec(obj: OperatorConfigSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Allow overwrite of hardcoded defaults for any driver managed by this operator
@@ -16411,12 +16683,13 @@ export interface OperatorConfigSpecDriverSpecDefaults {
    * @schema OperatorConfigSpecDriverSpecDefaults#snapshotPolicy
    */
   readonly snapshotPolicy?: OperatorConfigSpecDriverSpecDefaultsSnapshotPolicy;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaults' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaults(obj: OperatorConfigSpecDriverSpecDefaults | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16443,7 +16716,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaults(obj: OperatorConfigS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * OperatorLogSpec provide log related settings for the operator
@@ -16457,12 +16730,13 @@ export interface OperatorConfigSpecLog {
    * @schema OperatorConfigSpecLog#verbosity
    */
   readonly verbosity?: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecLog' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecLog(obj: OperatorConfigSpecLog | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16471,7 +16745,7 @@ export function toJson_OperatorConfigSpecLog(obj: OperatorConfigSpecLog | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Select between between cephfs kernel driver and ceph-fuse
@@ -16566,9 +16840,11 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPlugin {
   readonly privileged?: boolean;
 
   /**
-   * Set replicas for controller plugin's deployment. Defaults to 2
+   * Set replicas for controller plugin's deployment. Defaults to 2.
+   * On single-node clusters, the operator automatically caps the replica
+   * count to the number of available nodes when this field is not set.
    *
-   * @default 2
+   * @default 2.
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPlugin#replicas
    */
   readonly replicas?: number;
@@ -16600,12 +16876,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPlugin {
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPlugin#volumes
    */
   readonly volumes?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumes[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPlugin' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPlugin(obj: OperatorConfigSpecDriverSpecDefaultsControllerPlugin | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16627,7 +16904,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPlugin(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Driver's encryption settings
@@ -16642,12 +16919,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsEncryption {
    * @schema OperatorConfigSpecDriverSpecDefaultsEncryption#configMapName
    */
   readonly configMapName: OperatorConfigSpecDriverSpecDefaultsEncryptionConfigMapName;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsEncryption' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsEncryption(obj: OperatorConfigSpecDriverSpecDefaultsEncryption | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16656,7 +16934,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsEncryption(obj: Opera
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A reference to a ConfigMap resource holding image overwrite for deployed
@@ -16675,12 +16953,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsImageSet {
    * @schema OperatorConfigSpecDriverSpecDefaultsImageSet#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsImageSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsImageSet(obj: OperatorConfigSpecDriverSpecDefaultsImageSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16689,7 +16968,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsImageSet(obj: Operato
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Leader election setting
@@ -16723,12 +17002,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsLeaderElection {
    * @schema OperatorConfigSpecDriverSpecDefaultsLeaderElection#retryPeriod
    */
   readonly retryPeriod?: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsLeaderElection' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsLeaderElection(obj: OperatorConfigSpecDriverSpecDefaultsLeaderElection | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16739,7 +17019,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsLeaderElection(obj: O
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Liveness metrics configuration.
@@ -16754,12 +17034,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsLiveness {
    * @schema OperatorConfigSpecDriverSpecDefaultsLiveness#metricsPort
    */
   readonly metricsPort: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsLiveness' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsLiveness(obj: OperatorConfigSpecDriverSpecDefaultsLiveness | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16768,7 +17049,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsLiveness(obj: Operato
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Logging configuration for driver's pods
@@ -16792,12 +17073,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsLog {
    * @schema OperatorConfigSpecDriverSpecDefaultsLog#verbosity
    */
   readonly verbosity?: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsLog' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsLog(obj: OperatorConfigSpecDriverSpecDefaultsLog | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16807,7 +17089,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsLog(obj: OperatorConf
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Driver's plugin configuration
@@ -16919,12 +17201,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePlugin {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePlugin#volumes
    */
   readonly volumes?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumes[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePlugin' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePlugin(obj: OperatorConfigSpecDriverSpecDefaultsNodePlugin | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -16946,7 +17229,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePlugin(obj: Opera
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Select a policy for snapshot behavior: none, autodetect, snapshot, sanpshotGroup
@@ -16988,12 +17271,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinity {
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinity;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinity(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17004,7 +17288,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DeploymentStrategy describes how to replace existing pods with new ones
@@ -17028,12 +17312,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentS
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentStrategy#type
    */
   readonly type?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentStrategy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentStrategy(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17043,7 +17328,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginDeplo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Resource requirements for controller plugin's containers
@@ -17113,12 +17398,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResources {
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResources#snapshotter
    */
   readonly snapshotter?: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotter;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResources(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17135,7 +17421,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -17189,12 +17475,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginTolerations
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginTolerations#value
    */
   readonly value?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginTolerations' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginTolerations(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17207,7 +17494,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginToler
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumes
@@ -17226,12 +17513,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumes {
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumes#volume
    */
   readonly volume?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolume;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumes(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17241,7 +17529,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LocalObjectReference contains enough information to let you locate the
@@ -17260,12 +17548,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsEncryptionConfigMapName {
    * @schema OperatorConfigSpecDriverSpecDefaultsEncryptionConfigMapName#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsEncryptionConfigMapName' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsEncryptionConfigMapName(obj: OperatorConfigSpecDriverSpecDefaultsEncryptionConfigMapName | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17274,7 +17563,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsEncryptionConfigMapNa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * log rotation for csi pods
@@ -17313,12 +17602,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsLogRotation {
    * @schema OperatorConfigSpecDriverSpecDefaultsLogRotation#periodicity
    */
   readonly periodicity?: OperatorConfigSpecDriverSpecDefaultsLogRotationPeriodicity;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsLogRotation' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsLogRotation(obj: OperatorConfigSpecDriverSpecDefaultsLogRotation | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17330,7 +17620,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsLogRotation(obj: Oper
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Pod's affinity settings
@@ -17358,12 +17648,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinity {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinity#podAntiAffinity
    */
   readonly podAntiAffinity?: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinity;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinity(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17374,7 +17665,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinity(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Resource requirements for plugin's containers
@@ -17416,12 +17707,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResources {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResources#registrar
    */
   readonly registrar?: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrar;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResources(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17434,7 +17726,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResources(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The pod this Toleration is attached to tolerates any taint that matches
@@ -17488,12 +17780,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginTolerations {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginTolerations#value
    */
   readonly value?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginTolerations' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginTolerations(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginTolerations | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17506,7 +17799,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginTolerations
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Topology settings for the plugin pods
@@ -17520,12 +17813,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginTopology {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginTopology#domainLabels
    */
   readonly domainLabels: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginTopology' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginTopology(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginTopology | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17534,7 +17828,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginTopology(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Driver's plugin daemonset update strategy, supported values are OnDelete and RollingUpdate.
@@ -17557,12 +17851,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategy {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategy#type
    */
   readonly type?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategy(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17572,7 +17867,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrat
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumes
@@ -17591,12 +17886,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumes {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumes#volume
    */
   readonly volume?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolume;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumes(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17606,7 +17902,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumes(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes node affinity scheduling rules for the pod.
@@ -17639,12 +17935,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinity(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17654,7 +17951,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -17689,12 +17986,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinity(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17704,7 +18002,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -17739,12 +18037,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinity(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17754,7 +18053,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Rolling update config params. Present only if DeploymentStrategyType =
@@ -17797,12 +18096,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentS
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentStrategyRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentStrategyRollingUpdateMaxUnavailable;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentStrategyRollingUpdate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentStrategyRollingUpdate(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginDeploymentStrategyRollingUpdate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17812,7 +18112,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginDeplo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -17850,12 +18150,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAd
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddons#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddonsRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddons' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddons(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddons | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17866,7 +18167,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -17904,12 +18205,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAt
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacher#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacherRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacher' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacher(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacher | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17920,7 +18222,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -17958,12 +18260,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLi
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLiveness#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLivenessRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLiveness' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLiveness(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLiveness | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -17974,7 +18277,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -18012,12 +18315,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLo
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotator#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotatorRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotator' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotator(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotator | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18028,7 +18332,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -18066,12 +18370,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOm
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGenerator#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGeneratorRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGenerator' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGenerator(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGenerator | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18082,7 +18387,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -18120,12 +18425,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPl
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPlugin#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPluginRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPlugin' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPlugin(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPlugin | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18136,7 +18442,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -18174,12 +18480,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPr
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisioner#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisionerRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisioner' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisioner(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisioner | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18190,7 +18497,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -18228,12 +18535,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesRe
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizer#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizerRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizer' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizer(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18244,7 +18552,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -18282,12 +18590,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSn
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotter#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotterRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotter' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotter(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotter | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18298,7 +18607,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * VolumeMount describes a mounting of a Volume within a container.
@@ -18383,12 +18692,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesMoun
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesMount#subPathExpr
    */
   readonly subPathExpr?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesMount' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesMount(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesMount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18403,7 +18713,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Volume represents a named volume in a pod that may be accessed by any container in the pod.
@@ -18709,12 +19019,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolume#vsphereVolume
    */
   readonly vsphereVolume?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeVsphereVolume;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolume(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18753,7 +19064,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * MaxLogSize is the maximum size of the log file per csi pods
@@ -18818,12 +19129,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffin
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinity(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18833,7 +19145,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).
@@ -18868,12 +19180,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinity(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18883,7 +19196,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Describes pod anti-affinity scheduling rules (e.g. avoid putting this pod in the same node, zone, etc. as some other pod(s)).
@@ -18918,12 +19231,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinity#requiredDuringSchedulingIgnoredDuringExecution
    */
   readonly requiredDuringSchedulingIgnoredDuringExecution?: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinity(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18933,7 +19247,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -18971,12 +19285,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddons {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddons#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddonsRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddons' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddons(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddons | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -18987,7 +19302,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAd
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -19025,12 +19340,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLiveness
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLiveness#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLivenessRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLiveness' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLiveness(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLiveness | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19041,7 +19357,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -19079,12 +19395,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotat
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotator#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotatorRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotator' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotator(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotator | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19095,7 +19412,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -19133,12 +19450,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPlugin {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPlugin#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPluginRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPlugin' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPlugin(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPlugin | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19149,7 +19467,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceRequirements describes the compute resource requirements.
@@ -19187,12 +19505,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistra
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrar#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrarRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrar' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrar(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrar | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19203,7 +19522,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Rolling update config params. Present only if type = "RollingUpdate".
@@ -19254,12 +19573,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategyRol
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategyRollingUpdate#maxUnavailable
    */
   readonly maxUnavailable?: OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategyRollingUpdateMaxUnavailable;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategyRollingUpdate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategyRollingUpdate(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrategyRollingUpdate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19269,7 +19589,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginUpdateStrat
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * VolumeMount describes a mounting of a Volume within a container.
@@ -19354,12 +19674,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesMount {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesMount#subPathExpr
    */
   readonly subPathExpr?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesMount' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesMount(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesMount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19374,7 +19695,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesMoun
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Volume represents a named volume in a pod that may be accessed by any container in the pod.
@@ -19680,12 +20001,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolume {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolume#vsphereVolume
    */
   readonly vsphereVolume?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeVsphereVolume;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolume(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19724,7 +20046,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -19746,12 +20068,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19761,7 +20084,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -19779,12 +20102,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19793,7 +20117,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -19815,12 +20139,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19830,7 +20155,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -19910,12 +20235,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19929,7 +20255,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -19951,12 +20277,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -19966,7 +20293,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -20046,12 +20373,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20065,7 +20393,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The maximum number of pods that can be scheduled above the desired number of
@@ -20143,12 +20471,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAd
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddonsClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddonsClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddonsClaims(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddonsClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20158,7 +20487,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAddonsLimits
@@ -20211,12 +20540,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAt
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacherClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacherClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacherClaims(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacherClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20226,7 +20556,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesAttacherLimits
@@ -20279,12 +20609,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLi
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLivenessClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLivenessClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLivenessClaims(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLivenessClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20294,7 +20625,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLivenessLimits
@@ -20347,12 +20678,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLo
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotatorClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotatorClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotatorClaims(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotatorClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20362,7 +20694,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesLogRotatorLimits
@@ -20415,12 +20747,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOm
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGeneratorClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGeneratorClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGeneratorClaims(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGeneratorClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20430,7 +20763,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesOmapGeneratorLimits
@@ -20483,12 +20816,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPl
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPluginClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPluginClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPluginClaims(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPluginClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20498,7 +20832,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPluginLimits
@@ -20551,12 +20885,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesPr
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisionerClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisionerClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisionerClaims(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisionerClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20566,7 +20901,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesProvisionerLimits
@@ -20619,12 +20954,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesRe
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizerClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizerClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizerClaims(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizerClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20634,7 +20970,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesResizerLimits
@@ -20687,12 +21023,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSn
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotterClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotterClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotterClaims(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotterClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20702,7 +21039,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginResourcesSnapshotterLimits
@@ -20777,12 +21114,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAwsElasticBlockStore#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAwsElasticBlockStore' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAwsElasticBlockStore(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAwsElasticBlockStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20794,7 +21132,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
@@ -20849,12 +21187,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAzureDisk#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAzureDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAzureDisk(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAzureDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20868,7 +21207,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * azureFile represents an Azure File Service mount on the host and bind mount to the pod.
@@ -20899,12 +21238,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAzureFile#shareName
    */
   readonly shareName: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAzureFile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAzureFile(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeAzureFile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20915,7 +21255,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime.
@@ -20972,12 +21312,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCephfs#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCephfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCephfs(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCephfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -20991,7 +21332,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * cinder represents a cinder volume attached and mounted on kubelets host machine.
@@ -21036,12 +21377,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCinder#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCinder' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCinder(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCinder | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21053,7 +21395,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * configMap represents a configMap that should populate this volume
@@ -21105,12 +21447,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeConfigMap#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeConfigMap(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21122,7 +21465,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
@@ -21174,12 +21517,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCsi#volumeAttributes
    */
   readonly volumeAttributes?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCsi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCsi(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21192,7 +21536,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * downwardAPI represents downward API about the pod that should populate this volume
@@ -21221,12 +21565,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApi#items
    */
   readonly items?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItems[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApi(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21236,7 +21581,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * emptyDir represents a temporary directory that shares a pod's lifetime.
@@ -21266,12 +21611,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEmptyDir#sizeLimit
    */
   readonly sizeLimit?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEmptyDirSizeLimit;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEmptyDir' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEmptyDir(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEmptyDir | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21281,7 +21627,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ephemeral represents a volume that is handled by a cluster storage driver.
@@ -21338,12 +21684,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeral#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeral' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeral(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeral | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21352,7 +21699,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
@@ -21399,12 +21746,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFc#wwids
    */
   readonly wwids?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFc' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFc(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21417,7 +21765,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * flexVolume represents a generic volume resource that is
@@ -21468,12 +21816,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlexVolume#secretRef
    */
   readonly secretRef?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlexVolumeSecretRef;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlexVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlexVolume(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlexVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21486,7 +21835,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running.
@@ -21509,12 +21858,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlocker#datasetUUID
    */
   readonly datasetUuid?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlocker' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlocker(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlocker | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21524,7 +21874,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * gcePersistentDisk represents a GCE Disk resource that is attached to a
@@ -21574,12 +21924,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGcePersistentDisk#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGcePersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGcePersistentDisk(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGcePersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21591,7 +21942,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * gitRepo represents a git repository at a particular revision.
@@ -21625,12 +21976,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGitRepo#revision
    */
   readonly revision?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGitRepo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGitRepo(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGitRepo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21641,7 +21993,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
@@ -21674,12 +22026,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGlusterfs#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGlusterfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGlusterfs(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeGlusterfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21690,7 +22043,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * hostPath represents a pre-existing file or directory on the host
@@ -21720,12 +22073,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeHostPath#type
    */
   readonly type?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeHostPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeHostPath(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeHostPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21735,7 +22089,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine.
@@ -21779,12 +22133,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeImage#reference
    */
   readonly reference?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeImage' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeImage(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeImage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21794,7 +22149,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * iscsi represents an ISCSI Disk resource that is attached to a
@@ -21891,12 +22246,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeIscsi#targetPortal
    */
   readonly targetPortal: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeIscsi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeIscsi(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeIscsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21915,7 +22271,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * nfs represents an NFS mount on the host that shares a pod's lifetime
@@ -21949,12 +22305,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeNfs#server
    */
   readonly server: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeNfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeNfs(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeNfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -21965,7 +22322,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * persistentVolumeClaimVolumeSource represents a reference to a
@@ -21990,12 +22347,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePersistentVolumeClaim#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePersistentVolumeClaim' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePersistentVolumeClaim(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePersistentVolumeClaim | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22005,7 +22363,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine.
@@ -22029,12 +22387,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePhotonPersistentDisk#pdID
    */
   readonly pdId: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePhotonPersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePhotonPersistentDisk(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePhotonPersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22044,7 +22403,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
@@ -22078,12 +22437,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePortworxVolume#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePortworxVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePortworxVolume(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumePortworxVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22094,7 +22454,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * projected items for all in one resources secrets, configmaps, and downward API
@@ -22121,12 +22481,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjected#sources
    */
   readonly sources?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSources[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjected' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjected(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjected | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22136,7 +22497,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * quobyte represents a Quobyte mount on the host that shares a pod's lifetime.
@@ -22195,12 +22556,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeQuobyte#volume
    */
   readonly volume: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeQuobyte' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeQuobyte(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeQuobyte | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22214,7 +22576,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
@@ -22299,12 +22661,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeRbd#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeRbd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeRbd(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeRbd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22320,7 +22683,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
@@ -22408,12 +22771,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeScaleIo#volumeName
    */
   readonly volumeName?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeScaleIo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeScaleIo(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeScaleIo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22431,7 +22795,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secret represents a secret that should populate this volume.
@@ -22481,12 +22845,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeSecret#secretName
    */
   readonly secretName?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeSecret(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22498,7 +22863,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
@@ -22551,12 +22916,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeStorageos#volumeNamespace
    */
   readonly volumeNamespace?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeStorageos' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeStorageos(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeStorageos | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22569,7 +22935,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine.
@@ -22608,12 +22974,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeVsphereVolume#volumePath
    */
   readonly volumePath: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeVsphereVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeVsphereVolume(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeVsphereVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22625,7 +22992,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * An empty preferred scheduling term matches all objects with implicit weight 0
@@ -22647,12 +23014,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffin
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22662,7 +23030,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If the affinity requirements specified by this field are not met at
@@ -22680,12 +23048,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffin
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution#nodeSelectorTerms
    */
   readonly nodeSelectorTerms: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22694,7 +23063,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -22716,12 +23085,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22731,7 +23101,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -22811,12 +23181,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22830,7 +23201,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most preferred node(s)
@@ -22852,12 +23223,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution#weight
    */
   readonly weight: number;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22867,7 +23239,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Defines a set of pods (namely those matching the labelSelector
@@ -22947,12 +23319,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecution | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -22966,7 +23339,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceClaim references one entry in PodSpec.ResourceClaims.
@@ -22991,12 +23364,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddonsCl
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddonsClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddonsClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddonsClaims(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddonsClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23006,7 +23380,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAd
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesAddonsLimits
@@ -23059,12 +23433,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLiveness
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLivenessClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLivenessClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLivenessClaims(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLivenessClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23074,7 +23449,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLivenessLimits
@@ -23127,12 +23502,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotat
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotatorClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotatorClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotatorClaims(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotatorClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23142,7 +23518,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesLogRotatorLimits
@@ -23195,12 +23571,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPluginCl
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPluginClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPluginClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPluginClaims(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPluginClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23210,7 +23587,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesPluginLimits
@@ -23263,12 +23640,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistra
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrarClaims#request
    */
   readonly request?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrarClaims' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrarClaims(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrarClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23278,7 +23656,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginResourcesRegistrarLimits
@@ -23415,12 +23793,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAwsE
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAwsElasticBlockStore#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAwsElasticBlockStore' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAwsElasticBlockStore(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAwsElasticBlockStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23432,7 +23811,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * azureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
@@ -23487,12 +23866,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzur
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzureDisk#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzureDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzureDisk(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzureDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23506,7 +23886,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * azureFile represents an Azure File Service mount on the host and bind mount to the pod.
@@ -23537,12 +23917,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzur
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzureFile#shareName
    */
   readonly shareName: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzureFile' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzureFile(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeAzureFile | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23553,7 +23934,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime.
@@ -23610,12 +23991,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCeph
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCephfs#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCephfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCephfs(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCephfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23629,7 +24011,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * cinder represents a cinder volume attached and mounted on kubelets host machine.
@@ -23674,12 +24056,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCind
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCinder#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCinder' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCinder(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCinder | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23691,7 +24074,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * configMap represents a configMap that should populate this volume
@@ -23743,12 +24126,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConfigMap#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConfigMap(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23760,7 +24144,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * csi (Container Storage Interface) represents ephemeral storage that is handled by certain external CSI drivers.
@@ -23812,12 +24196,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsi 
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsi#volumeAttributes
    */
   readonly volumeAttributes?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsi(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23830,7 +24215,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * downwardAPI represents downward API about the pod that should populate this volume
@@ -23859,12 +24244,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDown
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApi#items
    */
   readonly items?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItems[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApi(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23874,7 +24260,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * emptyDir represents a temporary directory that shares a pod's lifetime.
@@ -23904,12 +24290,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEmpt
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEmptyDir#sizeLimit
    */
   readonly sizeLimit?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEmptyDirSizeLimit;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEmptyDir' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEmptyDir(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEmptyDir | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23919,7 +24306,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ephemeral represents a volume that is handled by a cluster storage driver.
@@ -23976,12 +24363,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphe
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeral#volumeClaimTemplate
    */
   readonly volumeClaimTemplate?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplate;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeral' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeral(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeral | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -23990,7 +24378,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * fc represents a Fibre Channel resource that is attached to a kubelet's host machine and then exposed to the pod.
@@ -24037,12 +24425,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFc {
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFc#wwids
    */
   readonly wwids?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFc' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFc(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFc | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24055,7 +24444,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * flexVolume represents a generic volume resource that is
@@ -24106,12 +24495,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlex
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlexVolume#secretRef
    */
   readonly secretRef?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlexVolumeSecretRef;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlexVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlexVolume(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlexVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24124,7 +24514,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running.
@@ -24147,12 +24537,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFloc
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlocker#datasetUUID
    */
   readonly datasetUuid?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlocker' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlocker(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlocker | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24162,7 +24553,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * gcePersistentDisk represents a GCE Disk resource that is attached to a
@@ -24212,12 +24603,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGceP
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGcePersistentDisk#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGcePersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGcePersistentDisk(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGcePersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24229,7 +24621,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * gitRepo represents a git repository at a particular revision.
@@ -24263,12 +24655,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGitR
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGitRepo#revision
    */
   readonly revision?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGitRepo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGitRepo(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGitRepo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24279,7 +24672,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
@@ -24312,12 +24705,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGlus
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGlusterfs#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGlusterfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGlusterfs(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeGlusterfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24328,7 +24722,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * hostPath represents a pre-existing file or directory on the host
@@ -24358,12 +24752,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeHost
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeHostPath#type
    */
   readonly type?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeHostPath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeHostPath(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeHostPath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24373,7 +24768,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * image represents an OCI object (a container image or artifact) pulled and mounted on the kubelet's host machine.
@@ -24417,12 +24812,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeImag
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeImage#reference
    */
   readonly reference?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeImage' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeImage(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeImage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24432,7 +24828,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * iscsi represents an ISCSI Disk resource that is attached to a
@@ -24529,12 +24925,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscs
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscsi#targetPortal
    */
   readonly targetPortal: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscsi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscsi(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscsi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24553,7 +24950,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * nfs represents an NFS mount on the host that shares a pod's lifetime
@@ -24587,12 +24984,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeNfs 
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeNfs#server
    */
   readonly server: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeNfs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeNfs(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeNfs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24603,7 +25001,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * persistentVolumeClaimVolumeSource represents a reference to a
@@ -24628,12 +25026,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePers
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePersistentVolumeClaim#readOnly
    */
   readonly readOnly?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePersistentVolumeClaim' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePersistentVolumeClaim(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePersistentVolumeClaim | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24643,7 +25042,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * photonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine.
@@ -24667,12 +25066,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePhot
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePhotonPersistentDisk#pdID
    */
   readonly pdId: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePhotonPersistentDisk' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePhotonPersistentDisk(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePhotonPersistentDisk | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24682,7 +25082,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * portworxVolume represents a portworx volume attached and mounted on kubelets host machine.
@@ -24716,12 +25116,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePort
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePortworxVolume#volumeID
    */
   readonly volumeId: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePortworxVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePortworxVolume(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumePortworxVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24732,7 +25133,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * projected items for all in one resources secrets, configmaps, and downward API
@@ -24759,12 +25160,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjected#sources
    */
   readonly sources?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSources[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjected' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjected(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjected | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24774,7 +25176,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * quobyte represents a Quobyte mount on the host that shares a pod's lifetime.
@@ -24833,12 +25235,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeQuob
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeQuobyte#volume
    */
   readonly volume: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeQuobyte' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeQuobyte(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeQuobyte | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24852,7 +25255,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * rbd represents a Rados Block Device mount on the host that shares a pod's lifetime.
@@ -24937,12 +25340,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbd 
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbd#user
    */
   readonly user?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbd' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbd(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbd | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -24958,7 +25362,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * scaleIO represents a ScaleIO persistent volume attached and mounted on Kubernetes nodes.
@@ -25046,12 +25450,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScal
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScaleIo#volumeName
    */
   readonly volumeName?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScaleIo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScaleIo(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScaleIo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25069,7 +25474,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secret represents a secret that should populate this volume.
@@ -25119,12 +25524,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecr
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecret#secretName
    */
   readonly secretName?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecret(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25136,7 +25542,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * storageOS represents a StorageOS volume attached and mounted on Kubernetes nodes.
@@ -25189,12 +25595,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStor
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStorageos#volumeNamespace
    */
   readonly volumeNamespace?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStorageos' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStorageos(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStorageos | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25207,7 +25614,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * vsphereVolume represents a vSphere volume attached and mounted on kubelets host machine.
@@ -25246,12 +25653,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeVsph
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeVsphereVolume#volumePath
    */
   readonly volumePath: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeVsphereVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeVsphereVolume(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeVsphereVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25263,7 +25671,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -25284,12 +25692,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25299,7 +25708,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -25322,12 +25731,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25337,7 +25747,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -25412,12 +25822,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25431,7 +25842,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -25455,12 +25866,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25470,7 +25882,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -25497,12 +25909,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25512,7 +25925,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -25587,12 +26000,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25606,7 +26020,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -25630,12 +26044,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25645,7 +26060,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -25672,12 +26087,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25687,7 +26103,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty.
@@ -25706,12 +26122,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCephfsSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCephfsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCephfsSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCephfsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25720,7 +26137,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is optional: points to a secret object containing parameters used to connect
@@ -25739,12 +26156,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCinderSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCinderSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCinderSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCinderSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25753,7 +26171,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -25789,12 +26207,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeConfigMapItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeConfigMapItems(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25805,7 +26224,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * nodePublishSecretRef is a reference to the secret object containing
@@ -25827,12 +26246,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCsiNodePublishSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCsiNodePublishSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCsiNodePublishSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeCsiNodePublishSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25841,7 +26261,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -25882,12 +26302,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItems(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25899,7 +26320,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume.
@@ -25966,12 +26387,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate#spec
    */
   readonly spec: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -25981,7 +26403,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is Optional: secretRef is reference to the secret object containing
@@ -26003,12 +26425,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlexVolumeSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlexVolumeSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlexVolumeSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeFlexVolumeSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26017,7 +26440,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is the CHAP Secret for iSCSI target and initiator authentication
@@ -26035,12 +26458,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeIscsiSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeIscsiSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeIscsiSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeIscsiSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26049,7 +26473,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Projection that may be projected along with other supported volume types.
@@ -26144,12 +26568,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSources#serviceAccountToken
    */
   readonly serviceAccountToken?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSources(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26163,7 +26588,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is name of the authentication secret for RBDUser. If provided
@@ -26185,12 +26610,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeRbdSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeRbdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeRbdSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeRbdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26199,7 +26625,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef references to the secret for ScaleIO user and other
@@ -26218,12 +26644,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeScaleIoSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeScaleIoSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeScaleIoSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeScaleIoSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26232,7 +26659,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -26268,12 +26695,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeSecretItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeSecretItems(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26284,7 +26712,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef specifies the secret to use for obtaining the StorageOS API
@@ -26303,12 +26731,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeStorageosSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeStorageosSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeStorageosSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeStorageosSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26317,7 +26746,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector term, associated with the corresponding weight.
@@ -26338,12 +26767,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffin
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference#matchFields
    */
   readonly matchFields?: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreference | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26353,7 +26783,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A null or empty node selector term matches no objects. The requirements of
@@ -26376,12 +26806,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffin
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms#matchFields
    */
   readonly matchFields?: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTerms | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26391,7 +26822,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -26466,12 +26897,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26485,7 +26917,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -26509,12 +26941,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26524,7 +26957,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -26551,12 +26984,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26566,7 +27000,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required. A pod affinity term, associated with the corresponding weight.
@@ -26641,12 +27075,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm#topologyKey
    */
   readonly topologyKey: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTerm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26660,7 +27095,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -26684,12 +27119,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26699,7 +27135,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -26726,12 +27162,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26741,7 +27178,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is Optional: SecretRef is reference to the authentication secret for User, default is empty.
@@ -26760,12 +27197,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCeph
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCephfsSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCephfsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCephfsSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCephfsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26774,7 +27212,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is optional: points to a secret object containing parameters used to connect
@@ -26793,12 +27231,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCind
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCinderSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCinderSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCinderSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCinderSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26807,7 +27246,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -26843,12 +27282,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConfigMapItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConfigMapItems(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26859,7 +27299,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * nodePublishSecretRef is a reference to the secret object containing
@@ -26881,12 +27321,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsiN
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsiNodePublishSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsiNodePublishSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsiNodePublishSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeCsiNodePublishSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26895,7 +27336,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -26936,12 +27377,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDown
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItems(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -26953,7 +27395,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * sizeLimit is the total amount of local storage required for this EmptyDir volume.
@@ -27020,12 +27462,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphe
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplate#spec
    */
   readonly spec: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplate(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27035,7 +27478,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is Optional: secretRef is reference to the secret object containing
@@ -27057,12 +27500,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlex
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlexVolumeSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlexVolumeSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlexVolumeSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeFlexVolumeSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27071,7 +27515,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is the CHAP Secret for iSCSI target and initiator authentication
@@ -27089,12 +27533,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscs
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscsiSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscsiSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscsiSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeIscsiSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27103,7 +27548,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Projection that may be projected along with other supported volume types.
@@ -27198,12 +27643,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSources#serviceAccountToken
    */
   readonly serviceAccountToken?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesServiceAccountToken;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSources(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27217,7 +27663,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef is name of the authentication secret for RBDUser. If provided
@@ -27239,12 +27685,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbdS
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbdSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbdSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeRbdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27253,7 +27700,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef references to the secret for ScaleIO user and other
@@ -27272,12 +27719,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScal
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScaleIoSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScaleIoSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScaleIoSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeScaleIoSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27286,7 +27734,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -27322,12 +27770,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecr
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecretItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecretItems(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27338,7 +27787,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secretRef specifies the secret to use for obtaining the StorageOS API
@@ -27357,12 +27806,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStor
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStorageosSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStorageosSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStorageosSecretRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeStorageosSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27371,7 +27821,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -27405,12 +27855,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27421,7 +27872,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -27455,12 +27906,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27471,7 +27923,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -27505,12 +27957,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27521,7 +27974,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -27555,12 +28008,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27571,7 +28025,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -27595,12 +28049,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27610,7 +28065,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -27637,12 +28092,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27652,7 +28108,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -27685,12 +28141,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27701,7 +28158,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -27734,12 +28191,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27750,7 +28208,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -27774,12 +28232,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27789,7 +28248,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -27816,12 +28275,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27831,7 +28291,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -27864,12 +28324,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27880,7 +28341,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -27913,12 +28374,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27929,7 +28391,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -27950,12 +28412,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItemsFieldRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -27965,7 +28428,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -27994,12 +28457,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28010,7 +28474,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The specification for the PersistentVolumeClaim. The entire content is
@@ -28128,12 +28592,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28150,7 +28615,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
@@ -28214,12 +28679,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundle#signerName
    */
   readonly signerName?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundle' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundle(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28232,7 +28698,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * configMap information about the configMap data to project
@@ -28270,12 +28736,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesConfigMap#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesConfigMap(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28286,7 +28753,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * downwardAPI information about the downwardAPI data to project
@@ -28300,12 +28767,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApi#items
    */
   readonly items?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApi(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28314,7 +28782,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Projects an auto-rotating credential bundle (private key and certificate
@@ -28454,12 +28922,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesPodCertificate#userAnnotations
    */
   readonly userAnnotations?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesPodCertificate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesPodCertificate(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesPodCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28474,7 +28943,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secret information about the secret data to project
@@ -28512,12 +28981,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesSecret#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesSecret(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28528,7 +28998,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * serviceAccountToken is information about the serviceAccountToken data to project
@@ -28566,12 +29036,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28582,7 +29053,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -28616,12 +29087,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffin
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28632,7 +29104,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -28666,12 +29138,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffin
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityPreferredDuringSchedulingIgnoredDuringExecutionPreferenceMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28682,7 +29155,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -28716,12 +29189,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffin
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28732,7 +29206,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A node selector requirement is a selector that contains values, a key, and an operator
@@ -28766,12 +29240,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffin
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNodeAffinityRequiredDuringSchedulingIgnoredDuringExecutionNodeSelectorTermsMatchFields | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28782,7 +29257,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityNod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -28806,12 +29281,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28821,7 +29297,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -28848,12 +29324,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28863,7 +29340,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -28896,12 +29373,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28912,7 +29390,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -28945,12 +29423,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -28961,7 +29440,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over a set of resources, in this case pods.
@@ -28985,12 +29464,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29000,7 +29480,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label query over the set of namespaces that the term applies to.
@@ -29027,12 +29507,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29042,7 +29523,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -29075,12 +29556,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29091,7 +29573,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -29124,12 +29606,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityRequiredDuringSchedulingIgnoredDuringExecutionNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29140,7 +29623,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -29161,12 +29644,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDown
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItemsFieldRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29176,7 +29660,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -29205,12 +29689,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDown
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29221,7 +29706,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The specification for the PersistentVolumeClaim. The entire content is
@@ -29339,12 +29824,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphe
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec#volumeName
    */
   readonly volumeName?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29361,7 +29847,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClusterTrustBundle allows a pod to access the `.spec.trustBundle` field
@@ -29425,12 +29911,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundle#signerName
    */
   readonly signerName?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundle' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundle(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundle | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29443,7 +29930,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * configMap information about the configMap data to project
@@ -29481,12 +29968,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesConfigMap#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesConfigMap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesConfigMap(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesConfigMap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29497,7 +29985,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * downwardAPI information about the downwardAPI data to project
@@ -29511,12 +29999,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApi#items
    */
   readonly items?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItems[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApi' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApi(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApi | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29525,7 +30014,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Projects an auto-rotating credential bundle (private key and certificate
@@ -29665,12 +30154,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesPodCertificate#userAnnotations
    */
   readonly userAnnotations?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesPodCertificate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesPodCertificate(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesPodCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29685,7 +30175,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * secret information about the secret data to project
@@ -29723,12 +30213,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesSecret#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesSecret(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29739,7 +30230,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * serviceAccountToken is information about the serviceAccountToken data to project
@@ -29777,12 +30268,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesServiceAccountToken#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesServiceAccountToken(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29793,7 +30285,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -29826,12 +30318,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29842,7 +30335,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -29875,12 +30368,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29891,7 +30385,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -29924,12 +30418,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29940,7 +30435,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -29973,12 +30468,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPod
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -29989,7 +30485,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginAffin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
@@ -30042,12 +30538,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30058,7 +30555,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -30119,12 +30616,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30136,7 +30634,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * resources represents the minimum resources the volume should have.
@@ -30165,12 +30663,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResourcesRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30180,7 +30679,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * selector is a label query over volumes to consider for binding.
@@ -30203,12 +30702,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30218,7 +30718,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Select all ClusterTrustBundles that match this label selector.  Only has
@@ -30244,12 +30744,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30259,7 +30760,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -30295,12 +30796,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesConfigMapItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesConfigMapItems(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30311,7 +30813,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -30352,12 +30854,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30369,7 +30872,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -30405,12 +30908,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesSecretItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesSecretItems(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30421,7 +30925,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -30454,12 +30958,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30470,7 +30975,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -30503,12 +31008,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffini
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30519,7 +31025,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -30552,12 +31058,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30568,7 +31075,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -30601,12 +31108,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAf
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPodAntiAffinityPreferredDuringSchedulingIgnoredDuringExecutionPodAffinityTermNamespaceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30617,7 +31125,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginAffinityPod
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
@@ -30670,12 +31178,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphe
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource#name
    */
   readonly name: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30686,7 +31195,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * dataSourceRef specifies the object from which to populate the volume with data, if a non-empty
@@ -30747,12 +31256,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphe
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecDataSourceRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30764,7 +31274,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * resources represents the minimum resources the volume should have.
@@ -30793,12 +31303,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphe
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources#requests
    */
   readonly requests?: { [key: string]: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResourcesRequests };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30808,7 +31319,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * selector is a label query over volumes to consider for binding.
@@ -30831,12 +31342,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphe
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30846,7 +31358,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Select all ClusterTrustBundles that match this label selector.  Only has
@@ -30872,12 +31384,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30887,7 +31400,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -30923,12 +31436,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesConfigMapItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesConfigMapItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesConfigMapItems(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesConfigMapItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30939,7 +31453,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
@@ -30980,12 +31494,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItems#resourceFieldRef
    */
   readonly resourceFieldRef?: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItems(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -30997,7 +31512,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Maps a string key to a path within a volume.
@@ -31033,12 +31548,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesSecretItems#path
    */
   readonly path: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesSecretItems' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesSecretItems(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesSecretItems | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31049,7 +31565,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResourcesLimits
@@ -31110,12 +31626,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31126,7 +31643,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -31159,12 +31676,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31175,7 +31693,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -31196,12 +31714,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31211,7 +31730,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -31240,12 +31759,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolu
    * @schema OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef(obj: OperatorConfigSpecDriverSpecDefaultsControllerPluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31256,7 +31776,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsControllerPluginVolum
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecResourcesLimits
@@ -31317,12 +31837,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphe
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeEphemeralVolumeClaimTemplateSpecSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31333,7 +31854,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -31366,12 +31887,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesClusterTrustBundleLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31382,7 +31904,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are supported.
@@ -31403,12 +31925,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef#fieldPath
    */
   readonly fieldPath: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31418,7 +31941,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -31447,12 +31970,13 @@ export interface OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProj
    * @schema OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef#resource
    */
   readonly resource: string;
+
 }
 
 /**
  * Converts an object of type 'OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef(obj: OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolumeProjectedSourcesDownwardApiItemsResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -31463,7 +31987,7 @@ export function toJson_OperatorConfigSpecDriverSpecDefaultsNodePluginVolumesVolu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"

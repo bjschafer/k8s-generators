@@ -54,7 +54,7 @@ export class AcrAccessToken extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -90,12 +90,13 @@ export interface AcrAccessTokenProps {
    * @schema ACRAccessToken#spec
    */
   readonly spec?: AcrAccessTokenSpec;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenProps(obj: AcrAccessTokenProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -105,7 +106,7 @@ export function toJson_AcrAccessTokenProps(obj: AcrAccessTokenProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ACRAccessTokenSpec defines how to generate the access token
@@ -161,12 +162,13 @@ export interface AcrAccessTokenSpec {
    * @schema AcrAccessTokenSpec#tenantId
    */
   readonly tenantId?: string;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenSpec(obj: AcrAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -179,7 +181,7 @@ export function toJson_AcrAccessTokenSpec(obj: AcrAccessTokenSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ACRAuth defines the authentication methods for Azure Container Registry.
@@ -207,12 +209,13 @@ export interface AcrAccessTokenSpecAuth {
    * @schema AcrAccessTokenSpecAuth#workloadIdentity
    */
   readonly workloadIdentity?: AcrAccessTokenSpecAuthWorkloadIdentity;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenSpecAuth(obj: AcrAccessTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -223,7 +226,7 @@ export function toJson_AcrAccessTokenSpecAuth(obj: AcrAccessTokenSpecAuth | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * EnvironmentType specifies the Azure cloud environment endpoints to use for
@@ -258,12 +261,13 @@ export interface AcrAccessTokenSpecAuthManagedIdentity {
    * @schema AcrAccessTokenSpecAuthManagedIdentity#identityId
    */
   readonly identityId?: string;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenSpecAuthManagedIdentity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenSpecAuthManagedIdentity(obj: AcrAccessTokenSpecAuthManagedIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -272,7 +276,7 @@ export function toJson_AcrAccessTokenSpecAuthManagedIdentity(obj: AcrAccessToken
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServicePrincipal uses Azure Service Principal credentials to authenticate with Azure.
@@ -287,12 +291,13 @@ export interface AcrAccessTokenSpecAuthServicePrincipal {
    * @schema AcrAccessTokenSpecAuthServicePrincipal#secretRef
    */
   readonly secretRef: AcrAccessTokenSpecAuthServicePrincipalSecretRef;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenSpecAuthServicePrincipal' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenSpecAuthServicePrincipal(obj: AcrAccessTokenSpecAuthServicePrincipal | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -301,7 +306,7 @@ export function toJson_AcrAccessTokenSpecAuthServicePrincipal(obj: AcrAccessToke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * WorkloadIdentity uses Azure Workload Identity to authenticate with Azure.
@@ -316,12 +321,13 @@ export interface AcrAccessTokenSpecAuthWorkloadIdentity {
    * @schema AcrAccessTokenSpecAuthWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef?: AcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenSpecAuthWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenSpecAuthWorkloadIdentity(obj: AcrAccessTokenSpecAuthWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -330,7 +336,7 @@ export function toJson_AcrAccessTokenSpecAuthWorkloadIdentity(obj: AcrAccessToke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AzureACRServicePrincipalAuthSecretRef defines the secret references for Azure Service Principal authentication.
@@ -352,12 +358,13 @@ export interface AcrAccessTokenSpecAuthServicePrincipalSecretRef {
    * @schema AcrAccessTokenSpecAuthServicePrincipalSecretRef#clientSecret
    */
   readonly clientSecret?: AcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenSpecAuthServicePrincipalSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenSpecAuthServicePrincipalSecretRef(obj: AcrAccessTokenSpecAuthServicePrincipalSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -367,7 +374,7 @@ export function toJson_AcrAccessTokenSpecAuthServicePrincipalSecretRef(obj: AcrA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountRef specified the service account
@@ -399,12 +406,13 @@ export interface AcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef {
    * @schema AcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef(obj: AcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -415,7 +423,7 @@ export function toJson_AcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The Azure clientId of the service principle used for authentication.
@@ -445,12 +453,13 @@ export interface AcrAccessTokenSpecAuthServicePrincipalSecretRefClientId {
    * @schema AcrAccessTokenSpecAuthServicePrincipalSecretRefClientId#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenSpecAuthServicePrincipalSecretRefClientId' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenSpecAuthServicePrincipalSecretRefClientId(obj: AcrAccessTokenSpecAuthServicePrincipalSecretRefClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -461,7 +470,7 @@ export function toJson_AcrAccessTokenSpecAuthServicePrincipalSecretRefClientId(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The Azure ClientSecret of the service principle used for authentication.
@@ -491,12 +500,13 @@ export interface AcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret {
    * @schema AcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'AcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret(obj: AcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -507,7 +517,500 @@ export function toJson_AcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+
+/**
+ * BeyondtrustWorkloadCredentialsDynamicSecret represents a generator that requests dynamic credentials from BeyondTrust Workload Credentials.
+This generator calls the BeyondTrust Workload Credentials API to generate fresh, temporary credentials
+(such as AWS STS credentials) each time an ExternalSecret is refreshed.
+Dynamic secret definitions must be created in BeyondTrust Workload Credentials before they can be referenced.
+For complete documentation, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecret
+ */
+export class BeyondtrustWorkloadCredentialsDynamicSecret extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "BeyondtrustWorkloadCredentialsDynamicSecret"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'generators.external-secrets.io/v1alpha1',
+    kind: 'BeyondtrustWorkloadCredentialsDynamicSecret',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "BeyondtrustWorkloadCredentialsDynamicSecret".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: BeyondtrustWorkloadCredentialsDynamicSecretProps = {}): any {
+    return {
+      ...BeyondtrustWorkloadCredentialsDynamicSecret.GVK,
+      ...toJson_BeyondtrustWorkloadCredentialsDynamicSecretProps(props),
+    };
+  }
+
+  /**
+   * Defines a "BeyondtrustWorkloadCredentialsDynamicSecret" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: BeyondtrustWorkloadCredentialsDynamicSecretProps = {}) {
+    super(scope, id, {
+      ...BeyondtrustWorkloadCredentialsDynamicSecret.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...BeyondtrustWorkloadCredentialsDynamicSecret.GVK,
+      ...toJson_BeyondtrustWorkloadCredentialsDynamicSecretProps(resolved),
+    };
+  }
+}
+
+/**
+ * BeyondtrustWorkloadCredentialsDynamicSecret represents a generator that requests dynamic credentials from BeyondTrust Workload Credentials.
+ * This generator calls the BeyondTrust Workload Credentials API to generate fresh, temporary credentials
+ * (such as AWS STS credentials) each time an ExternalSecret is refreshed.
+ * Dynamic secret definitions must be created in BeyondTrust Workload Credentials before they can be referenced.
+ * For complete documentation, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecret
+ */
+export interface BeyondtrustWorkloadCredentialsDynamicSecretProps {
+  /**
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecret#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * BeyondtrustWorkloadCredentialsDynamicSecretSpec defines the desired spec for BeyondtrustWorkloadCredentials dynamic generator.
+   * This generator enables obtaining temporary, short-lived credentials from BeyondTrust Workload Credentials.
+   * For more information, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecret#spec
+   */
+  readonly spec?: BeyondtrustWorkloadCredentialsDynamicSecretSpec;
+
+}
+
+/**
+ * Converts an object of type 'BeyondtrustWorkloadCredentialsDynamicSecretProps' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BeyondtrustWorkloadCredentialsDynamicSecretProps(obj: BeyondtrustWorkloadCredentialsDynamicSecretProps | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * BeyondtrustWorkloadCredentialsDynamicSecretSpec defines the desired spec for BeyondtrustWorkloadCredentials dynamic generator.
+ * This generator enables obtaining temporary, short-lived credentials from BeyondTrust Workload Credentials.
+ * For more information, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpec
+ */
+export interface BeyondtrustWorkloadCredentialsDynamicSecretSpec {
+  /**
+   * Controller selects the controller that should handle this generator.
+   * Leave empty to use the default controller.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpec#controller
+   */
+  readonly controller?: string;
+
+  /**
+   * Provider contains the BeyondtrustWorkloadCredentials provider configuration including authentication,
+   * server connection details, and the folder path to the dynamic secret definition.
+   * The folderPath should point to a dynamic secret definition that has been created in
+   * BeyondTrust Workload Credentials (e.g., "production/aws-temp").
+   * For setup details, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpec#provider
+   */
+  readonly provider: BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider;
+
+  /**
+   * RetrySettings configures exponential backoff for failed API requests.
+   * If not specified, uses the default retry settings.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpec#retrySettings
+   */
+  readonly retrySettings?: BeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings;
+
+}
+
+/**
+ * Converts an object of type 'BeyondtrustWorkloadCredentialsDynamicSecretSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpec(obj: BeyondtrustWorkloadCredentialsDynamicSecretSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'controller': obj.controller,
+    'provider': toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider(obj.provider),
+    'retrySettings': toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings(obj.retrySettings),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Provider contains the BeyondtrustWorkloadCredentials provider configuration including authentication,
+ * server connection details, and the folder path to the dynamic secret definition.
+ * The folderPath should point to a dynamic secret definition that has been created in
+ * BeyondTrust Workload Credentials (e.g., "production/aws-temp").
+ * For setup details, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider
+ */
+export interface BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider {
+  /**
+   * Auth configures how the Operator authenticates with the BeyondTrust Workload Credentials API.
+   * Currently supports API key authentication via Kubernetes secret reference.
+   * For authentication setup, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#authentication
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#auth
+   */
+  readonly auth: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth;
+
+  /**
+   * CABundle is a base64-encoded CA certificate used to validate the BeyondTrust Workload Credentials API TLS certificate.
+   * Use this when your BeyondTrust instance uses a self-signed certificate or internal CA.
+   * If not set, the system's trusted root certificates are used.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#caBundle
+   */
+  readonly caBundle?: string;
+
+  /**
+   * CAProvider points to a Secret or ConfigMap containing a PEM-encoded CA certificate.
+   * This is used to validate the BeyondTrust Workload Credentials API TLS certificate.
+   * Use this as an alternative to CABundle when you want to reference an existing Kubernetes resource.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#caProvider
+   */
+  readonly caProvider?: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider;
+
+  /**
+   * FolderPath specifies the default folder path for secret retrieval.
+   * Secrets will be fetched from this folder unless overridden in the ExternalSecret spec.
+   * Example: "production/database" or "dev/api-keys"
+   * Leave empty to retrieve secrets from the root folder.
+   * For folder organization, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#folders
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#folderPath
+   */
+  readonly folderPath?: string;
+
+  /**
+   * Server configures the BeyondTrust Workload Credentials server connection details.
+   * Includes the API URL and Site ID for your BeyondTrust instance.
+   * For API reference, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#server
+   */
+  readonly server: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer;
+
+}
+
+/**
+ * Converts an object of type 'BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider(obj: BeyondtrustWorkloadCredentialsDynamicSecretSpecProvider | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'auth': toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth(obj.auth),
+    'caBundle': obj.caBundle,
+    'caProvider': toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider(obj.caProvider),
+    'folderPath': obj.folderPath,
+    'server': toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer(obj.server),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * RetrySettings configures exponential backoff for failed API requests.
+ * If not specified, uses the default retry settings.
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings
+ */
+export interface BeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings {
+  /**
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings#maxRetries
+   */
+  readonly maxRetries?: number;
+
+  /**
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings#retryInterval
+   */
+  readonly retryInterval?: string;
+
+}
+
+/**
+ * Converts an object of type 'BeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings(obj: BeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxRetries': obj.maxRetries,
+    'retryInterval': obj.retryInterval,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Auth configures how the Operator authenticates with the BeyondTrust Workload Credentials API.
+ * Currently supports API key authentication via Kubernetes secret reference.
+ * For authentication setup, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#authentication
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth
+ */
+export interface BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth {
+  /**
+   * APIKey configures API token authentication for BeyondTrust Workload Credentials.
+   * The token is retrieved from a Kubernetes secret and used as a Bearer token for API requests.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth#apikey
+   */
+  readonly apikey: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey;
+
+}
+
+/**
+ * Converts an object of type 'BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth(obj: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apikey': toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey(obj.apikey),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * CAProvider points to a Secret or ConfigMap containing a PEM-encoded CA certificate.
+ * This is used to validate the BeyondTrust Workload Credentials API TLS certificate.
+ * Use this as an alternative to CABundle when you want to reference an existing Kubernetes resource.
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider
+ */
+export interface BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider {
+  /**
+   * The key where the CA certificate can be found in the Secret or ConfigMap.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the object located at the provider type.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider#name
+   */
+  readonly name: string;
+
+  /**
+   * The namespace the Provider type is in.
+   * Can only be defined when used in a ClusterSecretStore.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * The type of provider to use such as "Secret", or "ConfigMap".
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider#type
+   */
+  readonly type: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProviderType;
+
+}
+
+/**
+ * Converts an object of type 'BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider(obj: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Server configures the BeyondTrust Workload Credentials server connection details.
+ * Includes the API URL and Site ID for your BeyondTrust instance.
+ * For API reference, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer
+ */
+export interface BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer {
+  /**
+   * APIURL is the base URL of your BeyondTrust Workload Credentials API server.
+   * This should be the full URL to your BeyondTrust instance.
+   * Example: https://api.beyondtrust.io/siie
+   * For more information, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#base-url
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer#apiUrl
+   */
+  readonly apiUrl: string;
+
+  /**
+   * SiteID is your BeyondTrust Workload Credentials site identifier (UUID format).
+   * This identifier is unique to your BeyondTrust Workload Credentials instance.
+   * You can find your Site ID in the BeyondTrust Workload Credentials admin console.
+   * Example: a1b2c3d4-e5f6-4890-abcd-ef1234567890
+   * For more information, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer#siteId
+   */
+  readonly siteId: string;
+
+}
+
+/**
+ * Converts an object of type 'BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer(obj: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiUrl': obj.apiUrl,
+    'siteId': obj.siteId,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * APIKey configures API token authentication for BeyondTrust Workload Credentials.
+ * The token is retrieved from a Kubernetes secret and used as a Bearer token for API requests.
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey
+ */
+export interface BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey {
+  /**
+   * Token references the Kubernetes secret containing the BeyondTrust Workload Credentials API token.
+   * The secret should contain the API key used to authenticate with BeyondTrust Workload Credentials.
+   * Create an API token in your BeyondTrust Workload Credentials console and store it in a Kubernetes secret.
+   * For details on creating API tokens, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#authentication
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey#token
+   */
+  readonly token: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken;
+
+}
+
+/**
+ * Converts an object of type 'BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey(obj: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'token': toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken(obj.token),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The type of provider to use such as "Secret", or "ConfigMap".
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProviderType
+ */
+export enum BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProviderType {
+  /** Secret */
+  SECRET = "Secret",
+  /** ConfigMap */
+  CONFIG_MAP = "ConfigMap",
+}
+
+/**
+ * Token references the Kubernetes secret containing the BeyondTrust Workload Credentials API token.
+ * The secret should contain the API key used to authenticate with BeyondTrust Workload Credentials.
+ * Create an API token in your BeyondTrust Workload Credentials console and store it in a Kubernetes secret.
+ * For details on creating API tokens, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#authentication
+ *
+ * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken
+ */
+export interface BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken(obj: BeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -554,7 +1057,7 @@ export class CloudsmithAccessToken extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -581,12 +1084,13 @@ export interface CloudsmithAccessTokenProps {
    * @schema CloudsmithAccessToken#spec
    */
   readonly spec?: CloudsmithAccessTokenSpec;
+
 }
 
 /**
  * Converts an object of type 'CloudsmithAccessTokenProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_CloudsmithAccessTokenProps(obj: CloudsmithAccessTokenProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -596,7 +1100,7 @@ export function toJson_CloudsmithAccessTokenProps(obj: CloudsmithAccessTokenProp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CloudsmithAccessTokenSpec defines the configuration for generating a Cloudsmith access token using OIDC authentication.
@@ -632,12 +1136,13 @@ export interface CloudsmithAccessTokenSpec {
    * @schema CloudsmithAccessTokenSpec#serviceSlug
    */
   readonly serviceSlug: string;
+
 }
 
 /**
  * Converts an object of type 'CloudsmithAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_CloudsmithAccessTokenSpec(obj: CloudsmithAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -649,7 +1154,7 @@ export function toJson_CloudsmithAccessTokenSpec(obj: CloudsmithAccessTokenSpec 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Name of the service account you are federating with
@@ -680,12 +1185,13 @@ export interface CloudsmithAccessTokenSpecServiceAccountRef {
    * @schema CloudsmithAccessTokenSpecServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'CloudsmithAccessTokenSpecServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_CloudsmithAccessTokenSpecServiceAccountRef(obj: CloudsmithAccessTokenSpecServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -696,7 +1202,7 @@ export function toJson_CloudsmithAccessTokenSpecServiceAccountRef(obj: Cloudsmit
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -743,7 +1249,7 @@ export class ClusterGenerator extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -770,12 +1276,13 @@ export interface ClusterGeneratorProps {
    * @schema ClusterGenerator#spec
    */
   readonly spec?: ClusterGeneratorSpec;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorProps(obj: ClusterGeneratorProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -785,7 +1292,7 @@ export function toJson_ClusterGeneratorProps(obj: ClusterGeneratorProps | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClusterGeneratorSpec defines the desired state of a ClusterGenerator.
@@ -806,12 +1313,13 @@ export interface ClusterGeneratorSpec {
    * @schema ClusterGeneratorSpec#kind
    */
   readonly kind: ClusterGeneratorSpecKind;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpec(obj: ClusterGeneratorSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -821,7 +1329,7 @@ export function toJson_ClusterGeneratorSpec(obj: ClusterGeneratorSpec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Generator the spec for this generator, must match the kind.
@@ -837,6 +1345,15 @@ export interface ClusterGeneratorSpecGenerator {
    * @schema ClusterGeneratorSpecGenerator#acrAccessTokenSpec
    */
   readonly acrAccessTokenSpec?: ClusterGeneratorSpecGeneratorAcrAccessTokenSpec;
+
+  /**
+   * BeyondtrustWorkloadCredentialsDynamicSecretSpec defines the desired spec for BeyondtrustWorkloadCredentials dynamic generator.
+   * This generator enables obtaining temporary, short-lived credentials from BeyondTrust Workload Credentials.
+   * For more information, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+   *
+   * @schema ClusterGeneratorSpecGenerator#beyondtrustWorkloadCredentialsDynamicSecretSpec
+   */
+  readonly beyondtrustWorkloadCredentialsDynamicSecretSpec?: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec;
 
   /**
    * CloudsmithAccessTokenSpec defines the configuration for generating a Cloudsmith access token using OIDC authentication.
@@ -935,16 +1452,18 @@ export interface ClusterGeneratorSpecGenerator {
    * @schema ClusterGeneratorSpecGenerator#webhookSpec
    */
   readonly webhookSpec?: ClusterGeneratorSpecGeneratorWebhookSpec;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGenerator' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGenerator(obj: ClusterGeneratorSpecGenerator | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'acrAccessTokenSpec': toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpec(obj.acrAccessTokenSpec),
+    'beyondtrustWorkloadCredentialsDynamicSecretSpec': toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec(obj.beyondtrustWorkloadCredentialsDynamicSecretSpec),
     'cloudsmithAccessTokenSpec': toJson_ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec(obj.cloudsmithAccessTokenSpec),
     'ecrAuthorizationTokenSpec': toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec(obj.ecrAuthorizationTokenSpec),
     'fakeSpec': toJson_ClusterGeneratorSpecGeneratorFakeSpec(obj.fakeSpec),
@@ -963,7 +1482,7 @@ export function toJson_ClusterGeneratorSpecGenerator(obj: ClusterGeneratorSpecGe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kind the kind of this generator.
@@ -973,6 +1492,8 @@ export function toJson_ClusterGeneratorSpecGenerator(obj: ClusterGeneratorSpecGe
 export enum ClusterGeneratorSpecKind {
   /** ACRAccessToken */
   ACR_ACCESS_TOKEN = "ACRAccessToken",
+  /** BeyondtrustWorkloadCredentialsDynamicSecret */
+  BEYONDTRUST_WORKLOAD_CREDENTIALS_DYNAMIC_SECRET = "BeyondtrustWorkloadCredentialsDynamicSecret",
   /** CloudsmithAccessToken */
   CLOUDSMITH_ACCESS_TOKEN = "CloudsmithAccessToken",
   /** ECRAuthorizationToken */
@@ -999,6 +1520,8 @@ export enum ClusterGeneratorSpecKind {
   WEBHOOK = "Webhook",
   /** Grafana */
   GRAFANA = "Grafana",
+  /** MFA */
+  MFA = "MFA",
 }
 
 /**
@@ -1055,12 +1578,13 @@ export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpec {
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpec#tenantId
    */
   readonly tenantId?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorAcrAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpec(obj: ClusterGeneratorSpecGeneratorAcrAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1073,7 +1597,60 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpec(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * BeyondtrustWorkloadCredentialsDynamicSecretSpec defines the desired spec for BeyondtrustWorkloadCredentials dynamic generator.
+ * This generator enables obtaining temporary, short-lived credentials from BeyondTrust Workload Credentials.
+ * For more information, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+ *
+ * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec
+ */
+export interface ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec {
+  /**
+   * Controller selects the controller that should handle this generator.
+   * Leave empty to use the default controller.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec#controller
+   */
+  readonly controller?: string;
+
+  /**
+   * Provider contains the BeyondtrustWorkloadCredentials provider configuration including authentication,
+   * server connection details, and the folder path to the dynamic secret definition.
+   * The folderPath should point to a dynamic secret definition that has been created in
+   * BeyondTrust Workload Credentials (e.g., "production/aws-temp").
+   * For setup details, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec#provider
+   */
+  readonly provider: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider;
+
+  /**
+   * RetrySettings configures exponential backoff for failed API requests.
+   * If not specified, uses the default retry settings.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec#retrySettings
+   */
+  readonly retrySettings?: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings;
+
+}
+
+/**
+ * Converts an object of type 'ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec(obj: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'controller': obj.controller,
+    'provider': toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider(obj.provider),
+    'retrySettings': toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings(obj.retrySettings),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * CloudsmithAccessTokenSpec defines the configuration for generating a Cloudsmith access token using OIDC authentication.
@@ -1109,12 +1686,13 @@ export interface ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec {
    * @schema ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec#serviceSlug
    */
   readonly serviceSlug: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec(obj: ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1126,7 +1704,7 @@ export function toJson_ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpec(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ECRAuthorizationTokenSpec defines the desired state to generate an AWS ECR authorization token.
@@ -1163,12 +1741,13 @@ export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec {
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec#scope
    */
   readonly scope?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec(obj: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1180,7 +1759,7 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpec(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * FakeSpec contains the static data.
@@ -1203,12 +1782,13 @@ export interface ClusterGeneratorSpecGeneratorFakeSpec {
    * @schema ClusterGeneratorSpecGeneratorFakeSpec#data
    */
   readonly data?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorFakeSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorFakeSpec(obj: ClusterGeneratorSpecGeneratorFakeSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1218,7 +1798,7 @@ export function toJson_ClusterGeneratorSpecGeneratorFakeSpec(obj: ClusterGenerat
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GCRAccessTokenSpec defines the desired state to generate a Google Container Registry access token.
@@ -1239,12 +1819,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpec {
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpec#projectID
    */
   readonly projectId: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpec(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1254,7 +1835,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpec(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GithubAccessTokenSpec defines the desired state to generate a GitHub access token.
@@ -1301,12 +1882,13 @@ export interface ClusterGeneratorSpecGeneratorGithubAccessTokenSpec {
    * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpec#url
    */
   readonly url?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGithubAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGithubAccessTokenSpec(obj: ClusterGeneratorSpecGeneratorGithubAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1320,7 +1902,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGithubAccessTokenSpec(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GrafanaSpec controls the behavior of the grafana generator.
@@ -1350,12 +1932,13 @@ export interface ClusterGeneratorSpecGeneratorGrafanaSpec {
    * @schema ClusterGeneratorSpecGeneratorGrafanaSpec#url
    */
   readonly url: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGrafanaSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpec(obj: ClusterGeneratorSpecGeneratorGrafanaSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1366,7 +1949,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpec(obj: ClusterGene
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * MFASpec controls the behavior of the mfa generator.
@@ -1411,12 +1994,13 @@ export interface ClusterGeneratorSpecGeneratorMfaSpec {
    * @schema ClusterGeneratorSpecGeneratorMfaSpec#when
    */
   readonly when?: Date;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorMfaSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorMfaSpec(obj: ClusterGeneratorSpecGeneratorMfaSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1429,7 +2013,7 @@ export function toJson_ClusterGeneratorSpecGeneratorMfaSpec(obj: ClusterGenerato
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * PasswordSpec controls the behavior of the password generator.
@@ -1505,12 +2089,13 @@ export interface ClusterGeneratorSpecGeneratorPasswordSpec {
    * @schema ClusterGeneratorSpecGeneratorPasswordSpec#symbols
    */
   readonly symbols?: number;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorPasswordSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorPasswordSpec(obj: ClusterGeneratorSpecGeneratorPasswordSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1526,7 +2111,7 @@ export function toJson_ClusterGeneratorSpecGeneratorPasswordSpec(obj: ClusterGen
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * QuayAccessTokenSpec defines the desired state to generate a Quay access token.
@@ -1555,12 +2140,13 @@ export interface ClusterGeneratorSpecGeneratorQuayAccessTokenSpec {
    * @schema ClusterGeneratorSpecGeneratorQuayAccessTokenSpec#url
    */
   readonly url?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorQuayAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorQuayAccessTokenSpec(obj: ClusterGeneratorSpecGeneratorQuayAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1571,7 +2157,7 @@ export function toJson_ClusterGeneratorSpecGeneratorQuayAccessTokenSpec(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SSHKeySpec controls the behavior of the ssh key generator.
@@ -1602,12 +2188,13 @@ export interface ClusterGeneratorSpecGeneratorSshKeySpec {
    * @schema ClusterGeneratorSpecGeneratorSshKeySpec#keyType
    */
   readonly keyType?: ClusterGeneratorSpecGeneratorSshKeySpecKeyType;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorSshKeySpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorSshKeySpec(obj: ClusterGeneratorSpecGeneratorSshKeySpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1618,7 +2205,7 @@ export function toJson_ClusterGeneratorSpecGeneratorSshKeySpec(obj: ClusterGener
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * STSSessionTokenSpec defines the desired state to generate an AWS STS session token.
@@ -1654,12 +2241,13 @@ export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpec {
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpec#role
    */
   readonly role?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorStsSessionTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpec(obj: ClusterGeneratorSpecGeneratorStsSessionTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1671,7 +2259,7 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpec(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * VaultDynamicSecretSpec defines the desired spec of VaultDynamicSecret.
@@ -1693,6 +2281,15 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec {
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec#controller
    */
   readonly controller?: string;
+
+  /**
+   * GetParameters are query-string parameters passed to Vault on GET calls.
+   * Each key may map to multiple values, matching HTTP query-string semantics.
+   * Ignored for non-GET methods; use Parameters for write bodies.
+   *
+   * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec#getParameters
+   */
+  readonly getParameters?: { [key: string]: string[] };
 
   /**
    * Vault API method to use (GET/POST/other)
@@ -1740,17 +2337,19 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec {
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec#retrySettings
    */
   readonly retrySettings?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecRetrySettings;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmptyResponse': obj.allowEmptyResponse,
     'controller': obj.controller,
+    'getParameters': ((obj.getParameters) === undefined) ? undefined : (Object.entries(obj.getParameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.map(y => y) }), {})),
     'method': obj.method,
     'parameters': obj.parameters,
     'path': obj.path,
@@ -1761,7 +2360,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpec(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * WebhookSpec controls the behavior of the external generator. Any body parameters should be passed to the server through the parameters field.
@@ -1842,12 +2441,13 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpec {
    * @schema ClusterGeneratorSpecGeneratorWebhookSpec#url
    */
   readonly url: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorWebhookSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorWebhookSpec(obj: ClusterGeneratorSpecGeneratorWebhookSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1865,7 +2465,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpec(obj: ClusterGene
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ACRAuth defines the authentication methods for Azure Container Registry.
@@ -1893,12 +2493,13 @@ export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth {
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth#workloadIdentity
    */
   readonly workloadIdentity?: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentity;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth(obj: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1909,7 +2510,7 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuth(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * EnvironmentType specifies the Azure cloud environment endpoints to use for
@@ -1931,6 +2532,117 @@ export enum ClusterGeneratorSpecGeneratorAcrAccessTokenSpecEnvironmentType {
   /** AzureStackCloud */
   AZURE_STACK_CLOUD = "AzureStackCloud",
 }
+
+/**
+ * Provider contains the BeyondtrustWorkloadCredentials provider configuration including authentication,
+ * server connection details, and the folder path to the dynamic secret definition.
+ * The folderPath should point to a dynamic secret definition that has been created in
+ * BeyondTrust Workload Credentials (e.g., "production/aws-temp").
+ * For setup details, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+ *
+ * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider
+ */
+export interface ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider {
+  /**
+   * Auth configures how the Operator authenticates with the BeyondTrust Workload Credentials API.
+   * Currently supports API key authentication via Kubernetes secret reference.
+   * For authentication setup, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#authentication
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#auth
+   */
+  readonly auth: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth;
+
+  /**
+   * CABundle is a base64-encoded CA certificate used to validate the BeyondTrust Workload Credentials API TLS certificate.
+   * Use this when your BeyondTrust instance uses a self-signed certificate or internal CA.
+   * If not set, the system's trusted root certificates are used.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#caBundle
+   */
+  readonly caBundle?: string;
+
+  /**
+   * CAProvider points to a Secret or ConfigMap containing a PEM-encoded CA certificate.
+   * This is used to validate the BeyondTrust Workload Credentials API TLS certificate.
+   * Use this as an alternative to CABundle when you want to reference an existing Kubernetes resource.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#caProvider
+   */
+  readonly caProvider?: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider;
+
+  /**
+   * FolderPath specifies the default folder path for secret retrieval.
+   * Secrets will be fetched from this folder unless overridden in the ExternalSecret spec.
+   * Example: "production/database" or "dev/api-keys"
+   * Leave empty to retrieve secrets from the root folder.
+   * For folder organization, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#folders
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#folderPath
+   */
+  readonly folderPath?: string;
+
+  /**
+   * Server configures the BeyondTrust Workload Credentials server connection details.
+   * Includes the API URL and Site ID for your BeyondTrust instance.
+   * For API reference, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider#server
+   */
+  readonly server: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer;
+
+}
+
+/**
+ * Converts an object of type 'ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider(obj: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProvider | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'auth': toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth(obj.auth),
+    'caBundle': obj.caBundle,
+    'caProvider': toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider(obj.caProvider),
+    'folderPath': obj.folderPath,
+    'server': toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer(obj.server),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * RetrySettings configures exponential backoff for failed API requests.
+ * If not specified, uses the default retry settings.
+ *
+ * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings
+ */
+export interface ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings {
+  /**
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings#maxRetries
+   */
+  readonly maxRetries?: number;
+
+  /**
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings#retryInterval
+   */
+  readonly retryInterval?: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings(obj: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecRetrySettings | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxRetries': obj.maxRetries,
+    'retryInterval': obj.retryInterval,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * Name of the service account you are federating with
@@ -1961,12 +2673,13 @@ export interface ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpecServiceAc
    * @schema ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpecServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpecServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpecServiceAccountRef(obj: ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpecServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1977,7 +2690,7 @@ export function toJson_ClusterGeneratorSpecGeneratorCloudsmithAccessTokenSpecSer
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth defines how to authenticate with AWS
@@ -1999,12 +2712,13 @@ export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuth {
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuth#secretRef
    */
   readonly secretRef?: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuth(obj: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2014,7 +2728,7 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth defines the means for authenticating with GCP
@@ -2042,12 +2756,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth {
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth#workloadIdentityFederation
    */
   readonly workloadIdentityFederation?: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederation;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2058,7 +2773,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuth(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth configures how ESO authenticates with a Github instance.
@@ -2072,12 +2787,13 @@ export interface ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuth {
    * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuth#privateKey
    */
   readonly privateKey: ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKey;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuth(obj: ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2086,7 +2802,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuth(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth is the authentication configuration to authenticate
@@ -2114,12 +2830,13 @@ export interface ClusterGeneratorSpecGeneratorGrafanaSpecAuth {
    * @schema ClusterGeneratorSpecGeneratorGrafanaSpecAuth#token
    */
   readonly token?: ClusterGeneratorSpecGeneratorGrafanaSpecAuthToken;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGrafanaSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuth(obj: ClusterGeneratorSpecGeneratorGrafanaSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2129,7 +2846,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuth(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccount is the configuration for the service account that
@@ -2153,12 +2870,13 @@ export interface ClusterGeneratorSpecGeneratorGrafanaSpecServiceAccount {
    * @schema ClusterGeneratorSpecGeneratorGrafanaSpecServiceAccount#role
    */
   readonly role: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGrafanaSpecServiceAccount' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecServiceAccount(obj: ClusterGeneratorSpecGeneratorGrafanaSpecServiceAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2168,7 +2886,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecServiceAccount(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Secret is a secret selector to a secret containing the seed secret to generate the TOTP value from.
@@ -2198,12 +2916,13 @@ export interface ClusterGeneratorSpecGeneratorMfaSpecSecret {
    * @schema ClusterGeneratorSpecGeneratorMfaSpecSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorMfaSpecSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorMfaSpecSecret(obj: ClusterGeneratorSpecGeneratorMfaSpecSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2214,7 +2933,7 @@ export function toJson_ClusterGeneratorSpecGeneratorMfaSpecSecret(obj: ClusterGe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Encoding specifies the encoding of the generated password.
@@ -2269,12 +2988,13 @@ export interface ClusterGeneratorSpecGeneratorQuayAccessTokenSpecServiceAccountR
    * @schema ClusterGeneratorSpecGeneratorQuayAccessTokenSpecServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorQuayAccessTokenSpecServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorQuayAccessTokenSpecServiceAccountRef(obj: ClusterGeneratorSpecGeneratorQuayAccessTokenSpecServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2285,7 +3005,7 @@ export function toJson_ClusterGeneratorSpecGeneratorQuayAccessTokenSpecServiceAc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * KeyType specifies the SSH key type (rsa, ecdsa, ed25519)
@@ -2321,12 +3041,13 @@ export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuth {
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuth#secretRef
    */
   readonly secretRef?: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuth(obj: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2336,7 +3057,7 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuth(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestParameters contains parameters that can be passed to the STS service.
@@ -2365,12 +3086,13 @@ export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecRequestParamete
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecRequestParameters#tokenCode
    */
   readonly tokenCode?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorStsSessionTokenSpecRequestParameters' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecRequestParameters(obj: ClusterGeneratorSpecGeneratorStsSessionTokenSpecRequestParameters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2381,7 +3103,7 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecRequestPa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Vault provider common spec
@@ -2493,12 +3215,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvider {
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvider#version
    */
   readonly version?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderVersion;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvider' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvider(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2518,7 +3241,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Result type defines which data is returned from the generator.
@@ -2554,12 +3277,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecRetrySetting
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecRetrySettings#retryInterval
    */
   readonly retryInterval?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecRetrySettings' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecRetrySettings(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecRetrySettings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2569,7 +3293,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecRetryS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth specifies a authorization protocol. Only one protocol may be set.
@@ -2583,12 +3307,13 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpecAuth {
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecAuth#ntlm
    */
   readonly ntlm?: ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorWebhookSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecAuth(obj: ClusterGeneratorSpecGeneratorWebhookSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2597,7 +3322,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecAuth(obj: Cluster
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The provider for the CA bundle to use to validate webhook server certificate.
@@ -2632,12 +3357,13 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpecCaProvider {
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecCaProvider#type
    */
   readonly type: ClusterGeneratorSpecGeneratorWebhookSpecCaProviderType;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorWebhookSpecCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecCaProvider(obj: ClusterGeneratorSpecGeneratorWebhookSpecCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2649,7 +3375,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecCaProvider(obj: C
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Result formatting
@@ -2663,12 +3389,13 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpecResult {
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecResult#jsonPath
    */
   readonly jsonPath?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorWebhookSpecResult' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecResult(obj: ClusterGeneratorSpecGeneratorWebhookSpecResult | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2677,7 +3404,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecResult(obj: Clust
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * WebhookSecret defines a secret reference that will be used in webhook templates.
@@ -2698,12 +3425,13 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpecSecrets {
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecSecrets#secretRef
    */
   readonly secretRef: ClusterGeneratorSpecGeneratorWebhookSpecSecretsSecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorWebhookSpecSecrets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecSecrets(obj: ClusterGeneratorSpecGeneratorWebhookSpecSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2713,7 +3441,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecSecrets(obj: Clus
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ManagedIdentity uses Azure Managed Identity to authenticate with Azure.
@@ -2727,12 +3455,13 @@ export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthManagedIdent
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthManagedIdentity#identityId
    */
   readonly identityId?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthManagedIdentity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthManagedIdentity(obj: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthManagedIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2741,7 +3470,7 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthManage
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServicePrincipal uses Azure Service Principal credentials to authenticate with Azure.
@@ -2756,12 +3485,13 @@ export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrinc
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipal#secretRef
    */
   readonly secretRef: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipal' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipal(obj: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipal | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2770,7 +3500,7 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * WorkloadIdentity uses Azure Workload Identity to authenticate with Azure.
@@ -2785,12 +3515,13 @@ export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIden
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentity(obj: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2799,7 +3530,141 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorklo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Auth configures how the Operator authenticates with the BeyondTrust Workload Credentials API.
+ * Currently supports API key authentication via Kubernetes secret reference.
+ * For authentication setup, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#authentication
+ *
+ * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth
+ */
+export interface ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth {
+  /**
+   * APIKey configures API token authentication for BeyondTrust Workload Credentials.
+   * The token is retrieved from a Kubernetes secret and used as a Bearer token for API requests.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth#apikey
+   */
+  readonly apikey: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey;
+
+}
+
+/**
+ * Converts an object of type 'ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth(obj: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuth | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apikey': toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey(obj.apikey),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * CAProvider points to a Secret or ConfigMap containing a PEM-encoded CA certificate.
+ * This is used to validate the BeyondTrust Workload Credentials API TLS certificate.
+ * Use this as an alternative to CABundle when you want to reference an existing Kubernetes resource.
+ *
+ * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider
+ */
+export interface ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider {
+  /**
+   * The key where the CA certificate can be found in the Secret or ConfigMap.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the object located at the provider type.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider#name
+   */
+  readonly name: string;
+
+  /**
+   * The namespace the Provider type is in.
+   * Can only be defined when used in a ClusterSecretStore.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * The type of provider to use such as "Secret", or "ConfigMap".
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider#type
+   */
+  readonly type: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProviderType;
+
+}
+
+/**
+ * Converts an object of type 'ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider(obj: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProvider | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+    'type': obj.type,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Server configures the BeyondTrust Workload Credentials server connection details.
+ * Includes the API URL and Site ID for your BeyondTrust instance.
+ * For API reference, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+ *
+ * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer
+ */
+export interface ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer {
+  /**
+   * APIURL is the base URL of your BeyondTrust Workload Credentials API server.
+   * This should be the full URL to your BeyondTrust instance.
+   * Example: https://api.beyondtrust.io/siie
+   * For more information, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#base-url
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer#apiUrl
+   */
+  readonly apiUrl: string;
+
+  /**
+   * SiteID is your BeyondTrust Workload Credentials site identifier (UUID format).
+   * This identifier is unique to your BeyondTrust Workload Credentials instance.
+   * You can find your Site ID in the BeyondTrust Workload Credentials admin console.
+   * Example: a1b2c3d4-e5f6-4890-abcd-ef1234567890
+   * For more information, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer#siteId
+   */
+  readonly siteId: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer(obj: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderServer | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiUrl': obj.apiUrl,
+    'siteId': obj.siteId,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
@@ -2813,12 +3678,13 @@ export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwt {
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwtServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwt(obj: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2827,7 +3693,7 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AWSAuthSecretRef holds secret references for AWS credentials
@@ -2858,12 +3724,13 @@ export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecre
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRef(obj: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2874,7 +3741,7 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GCPSMAuthSecretRef defines the reference to a secret containing Google Cloud Platform credentials.
@@ -2888,12 +3755,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRef {
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRef#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRef(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2902,7 +3770,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GCPWorkloadIdentity defines the configuration for using GCP Workload Identity authentication.
@@ -2931,12 +3799,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIden
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentity(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2948,7 +3817,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorklo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GCPWorkloadIdentityFederation holds the configurations required for generating federated access tokens.
@@ -2992,18 +3861,31 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIden
   readonly externalTokenEndpoint?: string;
 
   /**
+   * GCPServiceAccountEmail is the email of the Google Cloud service account to impersonate
+   * after Workload Identity Federation. Use this to grant access through the service account's
+   * IAM bindings (for example roles/secretmanager.secretAccessor). When set, it overrides
+   * service_account_impersonation_url in the external account JSON from credConfig;
+   * when serviceAccountRef is set, it also overrides the "iam.gke.io/gcp-service-account" annotation
+   * on that ServiceAccount.
+   *
+   * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederation#gcpServiceAccountEmail
+   */
+  readonly gcpServiceAccountEmail?: string;
+
+  /**
    * serviceAccountRef is the reference to the kubernetes ServiceAccount to be used for obtaining the tokens,
    * when Kubernetes is configured as provider in workload identity pool.
    *
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederation#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederation' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederation(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederation | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3011,12 +3893,13 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorklo
     'awsSecurityCredentials': toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials(obj.awsSecurityCredentials),
     'credConfig': toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig(obj.credConfig),
     'externalTokenEndpoint': obj.externalTokenEndpoint,
+    'gcpServiceAccountEmail': obj.gcpServiceAccountEmail,
     'serviceAccountRef': toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef(obj.serviceAccountRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GithubSecretRef references a secret containing GitHub credentials.
@@ -3031,12 +3914,13 @@ export interface ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKe
    * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKey#secretRef
    */
   readonly secretRef: ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKeySecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKey' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKey(obj: ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3045,7 +3929,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Basic auth credentials used to authenticate against the Grafana instance.
@@ -3069,12 +3953,13 @@ export interface ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasic {
    * @schema ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasic#username
    */
   readonly username: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasic' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasic(obj: ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasic | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3084,7 +3969,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasic(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A service account token used to authenticate against the Grafana instance.
@@ -3108,12 +3993,13 @@ export interface ClusterGeneratorSpecGeneratorGrafanaSpecAuthToken {
    * @schema ClusterGeneratorSpecGeneratorGrafanaSpecAuthToken#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGrafanaSpecAuthToken' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuthToken(obj: ClusterGeneratorSpecGeneratorGrafanaSpecAuthToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3123,7 +4009,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuthToken(obj: Cl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
@@ -3137,12 +4023,13 @@ export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwt {
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwtServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwt(obj: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3151,7 +4038,7 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwt(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AWSAuthSecretRef holds secret references for AWS credentials
@@ -3182,12 +4069,13 @@ export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRef {
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSessionTokenSecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRef(obj: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3198,7 +4086,7 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Vault server.
@@ -3286,12 +4174,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth#userPass
    */
   readonly userPass?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthUserPass;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3309,7 +4198,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Vault server certificate.
@@ -3345,12 +4234,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCaPr
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCaProvider#type
    */
   readonly type: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCaProviderType;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCaProvider(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3362,7 +4252,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CheckAndSet defines the Check-And-Set (CAS) settings for PushSecret operations.
@@ -3379,12 +4269,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderChec
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCheckAndSet#required
    */
   readonly required?: boolean;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCheckAndSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCheckAndSet(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderCheckAndSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3393,7 +4284,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The configuration used for client side related TLS communication, when the Vault server
@@ -3422,12 +4313,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTls 
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTls#keySecretRef
    */
   readonly keySecretRef?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsKeySecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTls(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3437,7 +4329,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Version is the Vault KV secret engine version. This can be either "v1" or
@@ -3473,12 +4365,13 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm {
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm#usernameSecret
    */
   readonly usernameSecret: ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmUsernameSecret;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm(obj: ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3488,7 +4381,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlm(obj: Clu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -3521,12 +4414,13 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpecSecretsSecretRef {
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecSecretsSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorWebhookSpecSecretsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecSecretsSecretRef(obj: ClusterGeneratorSpecGeneratorWebhookSpecSecretsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3536,7 +4430,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecSecretsSecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AzureACRServicePrincipalAuthSecretRef defines the secret references for Azure Service Principal authentication.
@@ -3558,12 +4452,13 @@ export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrinc
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRef#clientSecret
    */
   readonly clientSecret?: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRef(obj: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3573,7 +4468,7 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountRef specified the service account
@@ -3605,12 +4500,13 @@ export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIden
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef(obj: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3621,7 +4517,52 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthWorklo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * APIKey configures API token authentication for BeyondTrust Workload Credentials.
+ * The token is retrieved from a Kubernetes secret and used as a Bearer token for API requests.
+ *
+ * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey
+ */
+export interface ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey {
+  /**
+   * Token references the Kubernetes secret containing the BeyondTrust Workload Credentials API token.
+   * The secret should contain the API key used to authenticate with BeyondTrust Workload Credentials.
+   * Create an API token in your BeyondTrust Workload Credentials console and store it in a Kubernetes secret.
+   * For details on creating API tokens, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#authentication
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey#token
+   */
+  readonly token: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken;
+
+}
+
+/**
+ * Converts an object of type 'ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey(obj: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikey | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'token': toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken(obj.token),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * The type of provider to use such as "Secret", or "ConfigMap".
+ *
+ * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProviderType
+ */
+export enum ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderCaProviderType {
+  /** Secret */
+  SECRET = "Secret",
+  /** ConfigMap */
+  CONFIG_MAP = "ConfigMap",
+}
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -3652,12 +4593,13 @@ export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwtSe
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwtServiceAccountRef(obj: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3668,7 +4610,7 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -3698,12 +4640,13 @@ export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecre
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRef(obj: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3714,7 +4657,7 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -3744,12 +4687,13 @@ export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecre
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecretRef(obj: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3760,7 +4704,7 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -3792,12 +4736,13 @@ export interface ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecre
    * @schema ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef(obj: ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3808,7 +4753,7 @@ export function toJson_ClusterGeneratorSpecGeneratorEcrAuthorizationTokenSpecAut
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -3838,12 +4783,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRefSec
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3854,7 +4800,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -3885,12 +4831,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIden
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3901,7 +4848,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorklo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * awsSecurityCredentials is for configuring AWS region and credentials to use for obtaining the access token,
@@ -3927,12 +4874,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIden
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials#region
    */
   readonly region: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3942,7 +4890,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorklo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * credConfig holds the configmap reference containing the GCP external account credential configuration in JSON format and the key name containing the json data.
@@ -3972,12 +4920,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIden
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3988,7 +4937,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorklo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * serviceAccountRef is the reference to the kubernetes ServiceAccount to be used for obtaining the tokens,
@@ -4020,12 +4969,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIden
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4036,7 +4986,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorklo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
@@ -4067,12 +5017,13 @@ export interface ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKe
    * @schema ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKeySecretRef(obj: ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPrivateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4083,7 +5034,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGithubAccessTokenSpecAuthPri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A basic auth password used to authenticate against the Grafana instance.
@@ -4104,12 +5055,13 @@ export interface ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasicPassword {
    * @schema ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasicPassword#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasicPassword' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasicPassword(obj: ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasicPassword | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4119,7 +5071,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGrafanaSpecAuthBasicPassword
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -4150,12 +5102,13 @@ export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwtServiceA
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwtServiceAccountRef(obj: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4166,7 +5119,7 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthJwtSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -4196,12 +5149,13 @@ export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefAc
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef(obj: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4212,7 +5166,7 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -4242,12 +5196,13 @@ export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSe
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef(obj: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4258,7 +5213,7 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -4290,12 +5245,13 @@ export interface ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSe
    * @schema ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSessionTokenSecretRef(obj: ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4306,7 +5262,7 @@ export function toJson_ClusterGeneratorSpecGeneratorStsSessionTokenSpecAuthSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AppRole authenticates with Vault using the App Role auth mechanism,
@@ -4350,12 +5306,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRole#secretRef
    */
   readonly secretRef: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRoleSecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRole' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRole(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRole | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4367,7 +5324,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Cert authenticates with TLS Certificates by passing client certificate, private key and ca certificate
@@ -4399,23 +5356,32 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCert#secretRef
    */
   readonly secretRef?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertSecretRef;
+
+  /**
+   * VaultRole specifies the Vault role to use for TLS certificate authentication.
+   *
+   * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCert#vaultRole
+   */
+  readonly vaultRole?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCert(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'clientCert': toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertClientCert(obj.clientCert),
     'path': obj.path,
     'secretRef': toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertSecretRef(obj.secretRef),
+    'vaultRole': obj.vaultRole,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Gcp authenticates with Vault using Google Cloud Platform authentication method
@@ -4472,12 +5438,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcp#workloadIdentity
    */
   readonly workloadIdentity?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcp' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcp(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcp | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4492,7 +5459,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Iam authenticates with vault by passing a special AWS request signed with AWS IAM credentials
@@ -4556,12 +5523,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIam#vaultRole
    */
   readonly vaultRole: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIam' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIam(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIam | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4577,7 +5545,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Jwt authenticates with Vault by passing role and JWT token using the
@@ -4617,12 +5585,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwt#secretRef
    */
   readonly secretRef?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtSecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwt(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4634,7 +5603,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
@@ -4678,12 +5647,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetes(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4695,7 +5665,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Ldap authenticates with Vault by passing username/password pair using
@@ -4728,12 +5698,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthLdap#username
    */
   readonly username: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthLdap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthLdap(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthLdap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4744,7 +5715,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TokenSecretRef authenticates with Vault by presenting a token.
@@ -4774,12 +5745,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthTokenSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthTokenSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4790,7 +5762,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * UserPass authenticates with Vault by passing username/password pair
@@ -4822,12 +5794,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthUserPass#username
    */
   readonly username: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthUserPass' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthUserPass(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthUserPass | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4838,7 +5811,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -4882,12 +5855,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsC
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsCertSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsCertSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4898,7 +5872,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * KeySecretRef to a key in a Secret resource containing client private key
@@ -4930,12 +5904,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsK
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsKeySecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderTlsKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4946,7 +5921,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
@@ -4977,12 +5952,13 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmPasswordSecret 
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmPasswordSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmPasswordSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmPasswordSecret(obj: ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmPasswordSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4993,7 +5969,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmPasswordS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
@@ -5024,12 +6000,13 @@ export interface ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmUsernameSecret 
    * @schema ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmUsernameSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmUsernameSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmUsernameSecret(obj: ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmUsernameSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5040,7 +6017,7 @@ export function toJson_ClusterGeneratorSpecGeneratorWebhookSpecAuthNtlmUsernameS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The Azure clientId of the service principle used for authentication.
@@ -5070,12 +6047,13 @@ export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrinc
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRefClientId#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRefClientId' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRefClientId(obj: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRefClientId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5086,7 +6064,7 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The Azure ClientSecret of the service principle used for authentication.
@@ -5116,12 +6094,13 @@ export interface ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrinc
    * @schema ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret(obj: ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServicePrincipalSecretRefClientSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5132,7 +6111,57 @@ export function toJson_ClusterGeneratorSpecGeneratorAcrAccessTokenSpecAuthServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Token references the Kubernetes secret containing the BeyondTrust Workload Credentials API token.
+ * The secret should contain the API key used to authenticate with BeyondTrust Workload Credentials.
+ * Create an API token in your BeyondTrust Workload Credentials console and store it in a Kubernetes secret.
+ * For details on creating API tokens, see: https://docs.beyondtrust.com/bt-docs/docs/secrets-api#authentication
+ *
+ * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken
+ */
+export interface ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken {
+  /**
+   * A key in the referenced Secret.
+   * Some instances of this field may be defaulted, in others it may be required.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken#key
+   */
+  readonly key?: string;
+
+  /**
+   * The name of the Secret resource being referred to.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken#name
+   */
+  readonly name?: string;
+
+  /**
+   * The namespace of the Secret resource being referred to.
+   * Ignored if referent is not cluster-scoped, otherwise defaults to the namespace of the referent.
+   *
+   * @schema ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken(obj: ClusterGeneratorSpecGeneratorBeyondtrustWorkloadCredentialsDynamicSecretSpecProviderAuthApikeyToken | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * awsCredentialsSecretRef is the reference to the secret which holds the AWS credentials.
@@ -5157,12 +6186,13 @@ export interface ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIden
    * @schema ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef(obj: ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5172,7 +6202,7 @@ export function toJson_ClusterGeneratorSpecGeneratorGcrAccessTokenSpecAuthWorklo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role ID used
@@ -5205,12 +6235,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRoleRoleRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRoleRoleRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRoleRoleRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRoleRoleRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5221,7 +6252,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role secret used
@@ -5254,12 +6285,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRoleSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRoleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRoleSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthAppRoleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5270,7 +6302,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClientCert is a certificate to authenticate using the Cert Vault
@@ -5301,12 +6333,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertClientCert#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertClientCert(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5317,7 +6350,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing client private key to
@@ -5348,12 +6381,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5364,7 +6398,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specify credentials in a Secret object
@@ -5378,12 +6412,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpSecretRef#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5392,7 +6427,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountRef to a service account for impersonation
@@ -5423,12 +6458,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpServiceAccountRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5439,7 +6475,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specify a service account with Workload Identity
@@ -5477,12 +6513,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5494,7 +6531,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specify a service account with IRSA enabled
@@ -5508,12 +6545,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwt' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwt(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5522,7 +6560,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specify credentials in a Secret object
@@ -5552,12 +6590,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5568,7 +6607,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional ServiceAccountToken specifies the Kubernetes service account for which to request
@@ -5608,12 +6647,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountToken#serviceAccountRef
    */
   readonly serviceAccountRef: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountToken(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5624,7 +6664,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional SecretRef that refers to a key in a Secret resource containing JWT token to
@@ -5655,12 +6695,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5671,7 +6712,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -5704,12 +6745,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetesSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetesSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetesSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetesSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5720,7 +6762,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -5754,12 +6796,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5770,7 +6813,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the LDAP
@@ -5802,12 +6845,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthLdapSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthLdapSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthLdapSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthLdapSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5818,7 +6862,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the
@@ -5850,12 +6894,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthUserPassSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthUserPassSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthUserPassSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthUserPassSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5866,7 +6911,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -5896,12 +6941,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5912,7 +6958,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -5943,12 +6989,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5959,7 +7006,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -5990,12 +7037,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6006,7 +7054,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -6036,12 +7084,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyIdSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6052,7 +7101,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -6082,12 +7131,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefSecretAccessKeySecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6098,7 +7148,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -6130,12 +7180,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6146,7 +7197,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Service account field containing the name of a kubernetes ServiceAccount.
@@ -6177,12 +7228,13 @@ export interface ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuth
    * @schema ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef(obj: ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6193,7 +7245,7 @@ export function toJson_ClusterGeneratorSpecGeneratorVaultDynamicSecretSpecProvid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -6244,7 +7296,7 @@ export class EcrAuthorizationToken extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6275,12 +7327,13 @@ export interface EcrAuthorizationTokenProps {
    * @schema ECRAuthorizationToken#spec
    */
   readonly spec?: EcrAuthorizationTokenSpec;
+
 }
 
 /**
  * Converts an object of type 'EcrAuthorizationTokenProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EcrAuthorizationTokenProps(obj: EcrAuthorizationTokenProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6290,7 +7343,7 @@ export function toJson_EcrAuthorizationTokenProps(obj: EcrAuthorizationTokenProp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ECRAuthorizationTokenSpec defines the desired state to generate an AWS ECR authorization token.
@@ -6327,12 +7380,13 @@ export interface EcrAuthorizationTokenSpec {
    * @schema EcrAuthorizationTokenSpec#scope
    */
   readonly scope?: string;
+
 }
 
 /**
  * Converts an object of type 'EcrAuthorizationTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EcrAuthorizationTokenSpec(obj: EcrAuthorizationTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6344,7 +7398,7 @@ export function toJson_EcrAuthorizationTokenSpec(obj: EcrAuthorizationTokenSpec 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth defines how to authenticate with AWS
@@ -6366,12 +7420,13 @@ export interface EcrAuthorizationTokenSpecAuth {
    * @schema EcrAuthorizationTokenSpecAuth#secretRef
    */
   readonly secretRef?: EcrAuthorizationTokenSpecAuthSecretRef;
+
 }
 
 /**
  * Converts an object of type 'EcrAuthorizationTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EcrAuthorizationTokenSpecAuth(obj: EcrAuthorizationTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6381,7 +7436,7 @@ export function toJson_EcrAuthorizationTokenSpecAuth(obj: EcrAuthorizationTokenS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
@@ -6395,12 +7450,13 @@ export interface EcrAuthorizationTokenSpecAuthJwt {
    * @schema EcrAuthorizationTokenSpecAuthJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: EcrAuthorizationTokenSpecAuthJwtServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'EcrAuthorizationTokenSpecAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EcrAuthorizationTokenSpecAuthJwt(obj: EcrAuthorizationTokenSpecAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6409,7 +7465,7 @@ export function toJson_EcrAuthorizationTokenSpecAuthJwt(obj: EcrAuthorizationTok
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AWSAuthSecretRef holds secret references for AWS credentials
@@ -6440,12 +7496,13 @@ export interface EcrAuthorizationTokenSpecAuthSecretRef {
    * @schema EcrAuthorizationTokenSpecAuthSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: EcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef;
+
 }
 
 /**
  * Converts an object of type 'EcrAuthorizationTokenSpecAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EcrAuthorizationTokenSpecAuthSecretRef(obj: EcrAuthorizationTokenSpecAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6456,7 +7513,7 @@ export function toJson_EcrAuthorizationTokenSpecAuthSecretRef(obj: EcrAuthorizat
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -6487,12 +7544,13 @@ export interface EcrAuthorizationTokenSpecAuthJwtServiceAccountRef {
    * @schema EcrAuthorizationTokenSpecAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'EcrAuthorizationTokenSpecAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EcrAuthorizationTokenSpecAuthJwtServiceAccountRef(obj: EcrAuthorizationTokenSpecAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6503,7 +7561,7 @@ export function toJson_EcrAuthorizationTokenSpecAuthJwtServiceAccountRef(obj: Ec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -6533,12 +7591,13 @@ export interface EcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRef {
    * @schema EcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'EcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRef(obj: EcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6549,7 +7608,7 @@ export function toJson_EcrAuthorizationTokenSpecAuthSecretRefAccessKeyIdSecretRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -6579,12 +7638,13 @@ export interface EcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecretRef 
    * @schema EcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'EcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecretRef(obj: EcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6595,7 +7655,7 @@ export function toJson_EcrAuthorizationTokenSpecAuthSecretRefSecretAccessKeySecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -6627,12 +7687,13 @@ export interface EcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef {
    * @schema EcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'EcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef(obj: EcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6643,7 +7704,7 @@ export function toJson_EcrAuthorizationTokenSpecAuthSecretRefSessionTokenSecretR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -6691,7 +7752,7 @@ export class Fake extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6719,12 +7780,13 @@ export interface FakeProps {
    * @schema Fake#spec
    */
   readonly spec?: FakeSpec;
+
 }
 
 /**
  * Converts an object of type 'FakeProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_FakeProps(obj: FakeProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6734,7 +7796,7 @@ export function toJson_FakeProps(obj: FakeProps | undefined): Record<string, any
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * FakeSpec contains the static data.
@@ -6757,12 +7819,13 @@ export interface FakeSpec {
    * @schema FakeSpec#data
    */
   readonly data?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'FakeSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_FakeSpec(obj: FakeSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6772,7 +7835,7 @@ export function toJson_FakeSpec(obj: FakeSpec | undefined): Record<string, any> 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -6820,7 +7883,7 @@ export class GcrAccessToken extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6848,12 +7911,13 @@ export interface GcrAccessTokenProps {
    * @schema GCRAccessToken#spec
    */
   readonly spec?: GcrAccessTokenSpec;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenProps(obj: GcrAccessTokenProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6863,7 +7927,7 @@ export function toJson_GcrAccessTokenProps(obj: GcrAccessTokenProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GCRAccessTokenSpec defines the desired state to generate a Google Container Registry access token.
@@ -6884,12 +7948,13 @@ export interface GcrAccessTokenSpec {
    * @schema GcrAccessTokenSpec#projectID
    */
   readonly projectId: string;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpec(obj: GcrAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6899,7 +7964,7 @@ export function toJson_GcrAccessTokenSpec(obj: GcrAccessTokenSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth defines the means for authenticating with GCP
@@ -6927,12 +7992,13 @@ export interface GcrAccessTokenSpecAuth {
    * @schema GcrAccessTokenSpecAuth#workloadIdentityFederation
    */
   readonly workloadIdentityFederation?: GcrAccessTokenSpecAuthWorkloadIdentityFederation;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuth(obj: GcrAccessTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6943,7 +8009,7 @@ export function toJson_GcrAccessTokenSpecAuth(obj: GcrAccessTokenSpecAuth | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GCPSMAuthSecretRef defines the reference to a secret containing Google Cloud Platform credentials.
@@ -6957,12 +8023,13 @@ export interface GcrAccessTokenSpecAuthSecretRef {
    * @schema GcrAccessTokenSpecAuthSecretRef#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: GcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuthSecretRef(obj: GcrAccessTokenSpecAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6971,7 +8038,7 @@ export function toJson_GcrAccessTokenSpecAuthSecretRef(obj: GcrAccessTokenSpecAu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GCPWorkloadIdentity defines the configuration for using GCP Workload Identity authentication.
@@ -7000,12 +8067,13 @@ export interface GcrAccessTokenSpecAuthWorkloadIdentity {
    * @schema GcrAccessTokenSpecAuthWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef: GcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuthWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuthWorkloadIdentity(obj: GcrAccessTokenSpecAuthWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7017,7 +8085,7 @@ export function toJson_GcrAccessTokenSpecAuthWorkloadIdentity(obj: GcrAccessToke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GCPWorkloadIdentityFederation holds the configurations required for generating federated access tokens.
@@ -7061,18 +8129,31 @@ export interface GcrAccessTokenSpecAuthWorkloadIdentityFederation {
   readonly externalTokenEndpoint?: string;
 
   /**
+   * GCPServiceAccountEmail is the email of the Google Cloud service account to impersonate
+   * after Workload Identity Federation. Use this to grant access through the service account's
+   * IAM bindings (for example roles/secretmanager.secretAccessor). When set, it overrides
+   * service_account_impersonation_url in the external account JSON from credConfig;
+   * when serviceAccountRef is set, it also overrides the "iam.gke.io/gcp-service-account" annotation
+   * on that ServiceAccount.
+   *
+   * @schema GcrAccessTokenSpecAuthWorkloadIdentityFederation#gcpServiceAccountEmail
+   */
+  readonly gcpServiceAccountEmail?: string;
+
+  /**
    * serviceAccountRef is the reference to the kubernetes ServiceAccount to be used for obtaining the tokens,
    * when Kubernetes is configured as provider in workload identity pool.
    *
    * @schema GcrAccessTokenSpecAuthWorkloadIdentityFederation#serviceAccountRef
    */
   readonly serviceAccountRef?: GcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuthWorkloadIdentityFederation' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederation(obj: GcrAccessTokenSpecAuthWorkloadIdentityFederation | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7080,12 +8161,13 @@ export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederation(obj: Gcr
     'awsSecurityCredentials': toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials(obj.awsSecurityCredentials),
     'credConfig': toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig(obj.credConfig),
     'externalTokenEndpoint': obj.externalTokenEndpoint,
+    'gcpServiceAccountEmail': obj.gcpServiceAccountEmail,
     'serviceAccountRef': toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef(obj.serviceAccountRef),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -7115,12 +8197,13 @@ export interface GcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef {
    * @schema GcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef(obj: GcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7131,7 +8214,7 @@ export function toJson_GcrAccessTokenSpecAuthSecretRefSecretAccessKeySecretRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -7162,12 +8245,13 @@ export interface GcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef {
    * @schema GcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef(obj: GcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7178,7 +8262,7 @@ export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityServiceAccountRef(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * awsSecurityCredentials is for configuring AWS region and credentials to use for obtaining the access token,
@@ -7204,12 +8288,13 @@ export interface GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCred
    * @schema GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials#region
    */
   readonly region: string;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials(obj: GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7219,7 +8304,7 @@ export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * credConfig holds the configmap reference containing the GCP external account credential configuration in JSON format and the key name containing the json data.
@@ -7249,12 +8334,13 @@ export interface GcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig {
    * @schema GcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig(obj: GcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7265,7 +8351,7 @@ export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationCredConfi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * serviceAccountRef is the reference to the kubernetes ServiceAccount to be used for obtaining the tokens,
@@ -7297,12 +8383,13 @@ export interface GcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountR
    * @schema GcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef(obj: GcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7313,7 +8400,7 @@ export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationServiceAc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * awsCredentialsSecretRef is the reference to the secret which holds the AWS credentials.
@@ -7338,12 +8425,13 @@ export interface GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCred
    * @schema GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef(obj: GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecurityCredentialsAwsCredentialsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7353,7 +8441,7 @@ export function toJson_GcrAccessTokenSpecAuthWorkloadIdentityFederationAwsSecuri
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -7400,7 +8488,7 @@ export class GeneratorState extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -7427,12 +8515,13 @@ export interface GeneratorStateProps {
    * @schema GeneratorState#spec
    */
   readonly spec?: GeneratorStateSpec;
+
 }
 
 /**
  * Converts an object of type 'GeneratorStateProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GeneratorStateProps(obj: GeneratorStateProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7442,7 +8531,7 @@ export function toJson_GeneratorStateProps(obj: GeneratorStateProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GeneratorStateSpec defines the desired state of a generator state resource.
@@ -7478,12 +8567,13 @@ export interface GeneratorStateSpec {
    * @schema GeneratorStateSpec#state
    */
   readonly state: any;
+
 }
 
 /**
  * Converts an object of type 'GeneratorStateSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GeneratorStateSpec(obj: GeneratorStateSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7494,7 +8584,7 @@ export function toJson_GeneratorStateSpec(obj: GeneratorStateSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -7541,7 +8631,7 @@ export class GithubAccessToken extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -7568,12 +8658,13 @@ export interface GithubAccessTokenProps {
    * @schema GithubAccessToken#spec
    */
   readonly spec?: GithubAccessTokenSpec;
+
 }
 
 /**
  * Converts an object of type 'GithubAccessTokenProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GithubAccessTokenProps(obj: GithubAccessTokenProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7583,7 +8674,7 @@ export function toJson_GithubAccessTokenProps(obj: GithubAccessTokenProps | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GithubAccessTokenSpec defines the desired state to generate a GitHub access token.
@@ -7630,12 +8721,13 @@ export interface GithubAccessTokenSpec {
    * @schema GithubAccessTokenSpec#url
    */
   readonly url?: string;
+
 }
 
 /**
  * Converts an object of type 'GithubAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GithubAccessTokenSpec(obj: GithubAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7649,7 +8741,7 @@ export function toJson_GithubAccessTokenSpec(obj: GithubAccessTokenSpec | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth configures how ESO authenticates with a Github instance.
@@ -7663,12 +8755,13 @@ export interface GithubAccessTokenSpecAuth {
    * @schema GithubAccessTokenSpecAuth#privateKey
    */
   readonly privateKey: GithubAccessTokenSpecAuthPrivateKey;
+
 }
 
 /**
  * Converts an object of type 'GithubAccessTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GithubAccessTokenSpecAuth(obj: GithubAccessTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7677,7 +8770,7 @@ export function toJson_GithubAccessTokenSpecAuth(obj: GithubAccessTokenSpecAuth 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GithubSecretRef references a secret containing GitHub credentials.
@@ -7692,12 +8785,13 @@ export interface GithubAccessTokenSpecAuthPrivateKey {
    * @schema GithubAccessTokenSpecAuthPrivateKey#secretRef
    */
   readonly secretRef: GithubAccessTokenSpecAuthPrivateKeySecretRef;
+
 }
 
 /**
  * Converts an object of type 'GithubAccessTokenSpecAuthPrivateKey' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GithubAccessTokenSpecAuthPrivateKey(obj: GithubAccessTokenSpecAuthPrivateKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7706,7 +8800,7 @@ export function toJson_GithubAccessTokenSpecAuthPrivateKey(obj: GithubAccessToke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
@@ -7737,12 +8831,13 @@ export interface GithubAccessTokenSpecAuthPrivateKeySecretRef {
    * @schema GithubAccessTokenSpecAuthPrivateKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'GithubAccessTokenSpecAuthPrivateKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GithubAccessTokenSpecAuthPrivateKeySecretRef(obj: GithubAccessTokenSpecAuthPrivateKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7753,7 +8848,7 @@ export function toJson_GithubAccessTokenSpecAuthPrivateKeySecretRef(obj: GithubA
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -7800,7 +8895,7 @@ export class Grafana extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -7827,12 +8922,13 @@ export interface GrafanaProps {
    * @schema Grafana#spec
    */
   readonly spec?: GrafanaSpec;
+
 }
 
 /**
  * Converts an object of type 'GrafanaProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrafanaProps(obj: GrafanaProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7842,7 +8938,7 @@ export function toJson_GrafanaProps(obj: GrafanaProps | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GrafanaSpec controls the behavior of the grafana generator.
@@ -7872,12 +8968,13 @@ export interface GrafanaSpec {
    * @schema GrafanaSpec#url
    */
   readonly url: string;
+
 }
 
 /**
  * Converts an object of type 'GrafanaSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrafanaSpec(obj: GrafanaSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7888,7 +8985,7 @@ export function toJson_GrafanaSpec(obj: GrafanaSpec | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth is the authentication configuration to authenticate
@@ -7916,12 +9013,13 @@ export interface GrafanaSpecAuth {
    * @schema GrafanaSpecAuth#token
    */
   readonly token?: GrafanaSpecAuthToken;
+
 }
 
 /**
  * Converts an object of type 'GrafanaSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrafanaSpecAuth(obj: GrafanaSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7931,7 +9029,7 @@ export function toJson_GrafanaSpecAuth(obj: GrafanaSpecAuth | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccount is the configuration for the service account that
@@ -7955,12 +9053,13 @@ export interface GrafanaSpecServiceAccount {
    * @schema GrafanaSpecServiceAccount#role
    */
   readonly role: string;
+
 }
 
 /**
  * Converts an object of type 'GrafanaSpecServiceAccount' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrafanaSpecServiceAccount(obj: GrafanaSpecServiceAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7970,7 +9069,7 @@ export function toJson_GrafanaSpecServiceAccount(obj: GrafanaSpecServiceAccount 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Basic auth credentials used to authenticate against the Grafana instance.
@@ -7994,12 +9093,13 @@ export interface GrafanaSpecAuthBasic {
    * @schema GrafanaSpecAuthBasic#username
    */
   readonly username: string;
+
 }
 
 /**
  * Converts an object of type 'GrafanaSpecAuthBasic' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrafanaSpecAuthBasic(obj: GrafanaSpecAuthBasic | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8009,7 +9109,7 @@ export function toJson_GrafanaSpecAuthBasic(obj: GrafanaSpecAuthBasic | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A service account token used to authenticate against the Grafana instance.
@@ -8033,12 +9133,13 @@ export interface GrafanaSpecAuthToken {
    * @schema GrafanaSpecAuthToken#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'GrafanaSpecAuthToken' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrafanaSpecAuthToken(obj: GrafanaSpecAuthToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8048,7 +9149,7 @@ export function toJson_GrafanaSpecAuthToken(obj: GrafanaSpecAuthToken | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A basic auth password used to authenticate against the Grafana instance.
@@ -8069,12 +9170,13 @@ export interface GrafanaSpecAuthBasicPassword {
    * @schema GrafanaSpecAuthBasicPassword#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'GrafanaSpecAuthBasicPassword' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_GrafanaSpecAuthBasicPassword(obj: GrafanaSpecAuthBasicPassword | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8084,7 +9186,7 @@ export function toJson_GrafanaSpecAuthBasicPassword(obj: GrafanaSpecAuthBasicPas
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -8131,7 +9233,7 @@ export class Mfa extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -8158,12 +9260,13 @@ export interface MfaProps {
    * @schema MFA#spec
    */
   readonly spec?: MfaSpec;
+
 }
 
 /**
  * Converts an object of type 'MfaProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MfaProps(obj: MfaProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8173,7 +9276,7 @@ export function toJson_MfaProps(obj: MfaProps | undefined): Record<string, any> 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * MFASpec controls the behavior of the mfa generator.
@@ -8218,12 +9321,13 @@ export interface MfaSpec {
    * @schema MfaSpec#when
    */
   readonly when?: Date;
+
 }
 
 /**
  * Converts an object of type 'MfaSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MfaSpec(obj: MfaSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8236,7 +9340,7 @@ export function toJson_MfaSpec(obj: MfaSpec | undefined): Record<string, any> | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Secret is a secret selector to a secret containing the seed secret to generate the TOTP value from.
@@ -8266,12 +9370,13 @@ export interface MfaSpecSecret {
    * @schema MfaSpecSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'MfaSpecSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MfaSpecSecret(obj: MfaSpecSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8282,7 +9387,7 @@ export function toJson_MfaSpecSecret(obj: MfaSpecSecret | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -8331,7 +9436,7 @@ export class Password extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -8360,12 +9465,13 @@ export interface PasswordProps {
    * @schema Password#spec
    */
   readonly spec?: PasswordSpec;
+
 }
 
 /**
  * Converts an object of type 'PasswordProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PasswordProps(obj: PasswordProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8375,7 +9481,7 @@ export function toJson_PasswordProps(obj: PasswordProps | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * PasswordSpec controls the behavior of the password generator.
@@ -8451,12 +9557,13 @@ export interface PasswordSpec {
    * @schema PasswordSpec#symbols
    */
   readonly symbols?: number;
+
 }
 
 /**
  * Converts an object of type 'PasswordSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PasswordSpec(obj: PasswordSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8472,7 +9579,7 @@ export function toJson_PasswordSpec(obj: PasswordSpec | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Encoding specifies the encoding of the generated password.
@@ -8543,7 +9650,7 @@ export class QuayAccessToken extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -8570,12 +9677,13 @@ export interface QuayAccessTokenProps {
    * @schema QuayAccessToken#spec
    */
   readonly spec?: QuayAccessTokenSpec;
+
 }
 
 /**
  * Converts an object of type 'QuayAccessTokenProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_QuayAccessTokenProps(obj: QuayAccessTokenProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8585,7 +9693,7 @@ export function toJson_QuayAccessTokenProps(obj: QuayAccessTokenProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * QuayAccessTokenSpec defines the desired state to generate a Quay access token.
@@ -8614,12 +9722,13 @@ export interface QuayAccessTokenSpec {
    * @schema QuayAccessTokenSpec#url
    */
   readonly url?: string;
+
 }
 
 /**
  * Converts an object of type 'QuayAccessTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_QuayAccessTokenSpec(obj: QuayAccessTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8630,7 +9739,7 @@ export function toJson_QuayAccessTokenSpec(obj: QuayAccessTokenSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Name of the service account you are federating with
@@ -8661,12 +9770,13 @@ export interface QuayAccessTokenSpecServiceAccountRef {
    * @schema QuayAccessTokenSpecServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'QuayAccessTokenSpecServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_QuayAccessTokenSpecServiceAccountRef(obj: QuayAccessTokenSpecServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8677,7 +9787,7 @@ export function toJson_QuayAccessTokenSpecServiceAccountRef(obj: QuayAccessToken
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -8724,7 +9834,7 @@ export class SshKey extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -8751,12 +9861,13 @@ export interface SshKeyProps {
    * @schema SSHKey#spec
    */
   readonly spec?: SshKeySpec;
+
 }
 
 /**
  * Converts an object of type 'SshKeyProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_SshKeyProps(obj: SshKeyProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8766,7 +9877,7 @@ export function toJson_SshKeyProps(obj: SshKeyProps | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SSHKeySpec controls the behavior of the ssh key generator.
@@ -8797,12 +9908,13 @@ export interface SshKeySpec {
    * @schema SshKeySpec#keyType
    */
   readonly keyType?: SshKeySpecKeyType;
+
 }
 
 /**
  * Converts an object of type 'SshKeySpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_SshKeySpec(obj: SshKeySpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8813,7 +9925,7 @@ export function toJson_SshKeySpec(obj: SshKeySpec | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * KeyType specifies the SSH key type (rsa, ecdsa, ed25519)
@@ -8877,7 +9989,7 @@ export class StsSessionToken extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -8907,12 +10019,13 @@ export interface StsSessionTokenProps {
    * @schema STSSessionToken#spec
    */
   readonly spec?: StsSessionTokenSpec;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenProps(obj: StsSessionTokenProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8922,7 +10035,7 @@ export function toJson_StsSessionTokenProps(obj: StsSessionTokenProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * STSSessionTokenSpec defines the desired state to generate an AWS STS session token.
@@ -8958,12 +10071,13 @@ export interface StsSessionTokenSpec {
    * @schema StsSessionTokenSpec#role
    */
   readonly role?: string;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenSpec(obj: StsSessionTokenSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8975,7 +10089,7 @@ export function toJson_StsSessionTokenSpec(obj: StsSessionTokenSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth defines how to authenticate with AWS
@@ -8997,12 +10111,13 @@ export interface StsSessionTokenSpecAuth {
    * @schema StsSessionTokenSpecAuth#secretRef
    */
   readonly secretRef?: StsSessionTokenSpecAuthSecretRef;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenSpecAuth(obj: StsSessionTokenSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9012,7 +10127,7 @@ export function toJson_StsSessionTokenSpecAuth(obj: StsSessionTokenSpecAuth | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RequestParameters contains parameters that can be passed to the STS service.
@@ -9041,12 +10156,13 @@ export interface StsSessionTokenSpecRequestParameters {
    * @schema StsSessionTokenSpecRequestParameters#tokenCode
    */
   readonly tokenCode?: string;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenSpecRequestParameters' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenSpecRequestParameters(obj: StsSessionTokenSpecRequestParameters | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9057,7 +10173,7 @@ export function toJson_StsSessionTokenSpecRequestParameters(obj: StsSessionToken
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AWSJWTAuth provides configuration to authenticate against AWS using service account tokens.
@@ -9071,12 +10187,13 @@ export interface StsSessionTokenSpecAuthJwt {
    * @schema StsSessionTokenSpecAuthJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: StsSessionTokenSpecAuthJwtServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenSpecAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenSpecAuthJwt(obj: StsSessionTokenSpecAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9085,7 +10202,7 @@ export function toJson_StsSessionTokenSpecAuthJwt(obj: StsSessionTokenSpecAuthJw
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AWSAuthSecretRef holds secret references for AWS credentials
@@ -9116,12 +10233,13 @@ export interface StsSessionTokenSpecAuthSecretRef {
    * @schema StsSessionTokenSpecAuthSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: StsSessionTokenSpecAuthSecretRefSessionTokenSecretRef;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenSpecAuthSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenSpecAuthSecretRef(obj: StsSessionTokenSpecAuthSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9132,7 +10250,7 @@ export function toJson_StsSessionTokenSpecAuthSecretRef(obj: StsSessionTokenSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -9163,12 +10281,13 @@ export interface StsSessionTokenSpecAuthJwtServiceAccountRef {
    * @schema StsSessionTokenSpecAuthJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenSpecAuthJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenSpecAuthJwtServiceAccountRef(obj: StsSessionTokenSpecAuthJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9179,7 +10298,7 @@ export function toJson_StsSessionTokenSpecAuthJwtServiceAccountRef(obj: StsSessi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -9209,12 +10328,13 @@ export interface StsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef {
    * @schema StsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef(obj: StsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9225,7 +10345,7 @@ export function toJson_StsSessionTokenSpecAuthSecretRefAccessKeyIdSecretRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -9255,12 +10375,13 @@ export interface StsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef {
    * @schema StsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef(obj: StsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9271,7 +10392,7 @@ export function toJson_StsSessionTokenSpecAuthSecretRefSecretAccessKeySecretRef(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -9303,12 +10424,13 @@ export interface StsSessionTokenSpecAuthSecretRefSessionTokenSecretRef {
    * @schema StsSessionTokenSpecAuthSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'StsSessionTokenSpecAuthSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_StsSessionTokenSpecAuthSecretRefSessionTokenSecretRef(obj: StsSessionTokenSpecAuthSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9319,7 +10441,7 @@ export function toJson_StsSessionTokenSpecAuthSecretRefSessionTokenSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -9366,7 +10488,7 @@ export class Uuid extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -9393,12 +10515,13 @@ export interface UuidProps {
    * @schema UUID#spec
    */
   readonly spec?: any;
+
 }
 
 /**
  * Converts an object of type 'UuidProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_UuidProps(obj: UuidProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9408,7 +10531,7 @@ export function toJson_UuidProps(obj: UuidProps | undefined): Record<string, any
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -9455,7 +10578,7 @@ export class VaultDynamicSecret extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -9482,12 +10605,13 @@ export interface VaultDynamicSecretProps {
    * @schema VaultDynamicSecret#spec
    */
   readonly spec?: VaultDynamicSecretSpec;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretProps(obj: VaultDynamicSecretProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9497,7 +10621,7 @@ export function toJson_VaultDynamicSecretProps(obj: VaultDynamicSecretProps | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * VaultDynamicSecretSpec defines the desired spec of VaultDynamicSecret.
@@ -9519,6 +10643,15 @@ export interface VaultDynamicSecretSpec {
    * @schema VaultDynamicSecretSpec#controller
    */
   readonly controller?: string;
+
+  /**
+   * GetParameters are query-string parameters passed to Vault on GET calls.
+   * Each key may map to multiple values, matching HTTP query-string semantics.
+   * Ignored for non-GET methods; use Parameters for write bodies.
+   *
+   * @schema VaultDynamicSecretSpec#getParameters
+   */
+  readonly getParameters?: { [key: string]: string[] };
 
   /**
    * Vault API method to use (GET/POST/other)
@@ -9566,17 +10699,19 @@ export interface VaultDynamicSecretSpec {
    * @schema VaultDynamicSecretSpec#retrySettings
    */
   readonly retrySettings?: VaultDynamicSecretSpecRetrySettings;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpec(obj: VaultDynamicSecretSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'allowEmptyResponse': obj.allowEmptyResponse,
     'controller': obj.controller,
+    'getParameters': ((obj.getParameters) === undefined) ? undefined : (Object.entries(obj.getParameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1]?.map(y => y) }), {})),
     'method': obj.method,
     'parameters': obj.parameters,
     'path': obj.path,
@@ -9587,7 +10722,7 @@ export function toJson_VaultDynamicSecretSpec(obj: VaultDynamicSecretSpec | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Vault provider common spec
@@ -9699,12 +10834,13 @@ export interface VaultDynamicSecretSpecProvider {
    * @schema VaultDynamicSecretSpecProvider#version
    */
   readonly version?: VaultDynamicSecretSpecProviderVersion;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProvider' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProvider(obj: VaultDynamicSecretSpecProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9724,7 +10860,7 @@ export function toJson_VaultDynamicSecretSpecProvider(obj: VaultDynamicSecretSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Result type defines which data is returned from the generator.
@@ -9760,12 +10896,13 @@ export interface VaultDynamicSecretSpecRetrySettings {
    * @schema VaultDynamicSecretSpecRetrySettings#retryInterval
    */
   readonly retryInterval?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecRetrySettings' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecRetrySettings(obj: VaultDynamicSecretSpecRetrySettings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9775,7 +10912,7 @@ export function toJson_VaultDynamicSecretSpecRetrySettings(obj: VaultDynamicSecr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth configures how secret-manager authenticates with the Vault server.
@@ -9863,12 +11000,13 @@ export interface VaultDynamicSecretSpecProviderAuth {
    * @schema VaultDynamicSecretSpecProviderAuth#userPass
    */
   readonly userPass?: VaultDynamicSecretSpecProviderAuthUserPass;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuth(obj: VaultDynamicSecretSpecProviderAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9886,7 +11024,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuth(obj: VaultDynamicSecre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The provider for the CA bundle to use to validate Vault server certificate.
@@ -9922,12 +11060,13 @@ export interface VaultDynamicSecretSpecProviderCaProvider {
    * @schema VaultDynamicSecretSpecProviderCaProvider#type
    */
   readonly type: VaultDynamicSecretSpecProviderCaProviderType;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderCaProvider(obj: VaultDynamicSecretSpecProviderCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9939,7 +11078,7 @@ export function toJson_VaultDynamicSecretSpecProviderCaProvider(obj: VaultDynami
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CheckAndSet defines the Check-And-Set (CAS) settings for PushSecret operations.
@@ -9956,12 +11095,13 @@ export interface VaultDynamicSecretSpecProviderCheckAndSet {
    * @schema VaultDynamicSecretSpecProviderCheckAndSet#required
    */
   readonly required?: boolean;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderCheckAndSet' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderCheckAndSet(obj: VaultDynamicSecretSpecProviderCheckAndSet | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9970,7 +11110,7 @@ export function toJson_VaultDynamicSecretSpecProviderCheckAndSet(obj: VaultDynam
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The configuration used for client side related TLS communication, when the Vault server
@@ -9999,12 +11139,13 @@ export interface VaultDynamicSecretSpecProviderTls {
    * @schema VaultDynamicSecretSpecProviderTls#keySecretRef
    */
   readonly keySecretRef?: VaultDynamicSecretSpecProviderTlsKeySecretRef;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderTls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderTls(obj: VaultDynamicSecretSpecProviderTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10014,7 +11155,7 @@ export function toJson_VaultDynamicSecretSpecProviderTls(obj: VaultDynamicSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Version is the Vault KV secret engine version. This can be either "v1" or
@@ -10071,12 +11212,13 @@ export interface VaultDynamicSecretSpecProviderAuthAppRole {
    * @schema VaultDynamicSecretSpecProviderAuthAppRole#secretRef
    */
   readonly secretRef: VaultDynamicSecretSpecProviderAuthAppRoleSecretRef;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthAppRole' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthAppRole(obj: VaultDynamicSecretSpecProviderAuthAppRole | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10088,7 +11230,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthAppRole(obj: VaultDynam
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Cert authenticates with TLS Certificates by passing client certificate, private key and ca certificate
@@ -10120,23 +11262,32 @@ export interface VaultDynamicSecretSpecProviderAuthCert {
    * @schema VaultDynamicSecretSpecProviderAuthCert#secretRef
    */
   readonly secretRef?: VaultDynamicSecretSpecProviderAuthCertSecretRef;
+
+  /**
+   * VaultRole specifies the Vault role to use for TLS certificate authentication.
+   *
+   * @schema VaultDynamicSecretSpecProviderAuthCert#vaultRole
+   */
+  readonly vaultRole?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthCert' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthCert(obj: VaultDynamicSecretSpecProviderAuthCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'clientCert': toJson_VaultDynamicSecretSpecProviderAuthCertClientCert(obj.clientCert),
     'path': obj.path,
     'secretRef': toJson_VaultDynamicSecretSpecProviderAuthCertSecretRef(obj.secretRef),
+    'vaultRole': obj.vaultRole,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Gcp authenticates with Vault using Google Cloud Platform authentication method
@@ -10193,12 +11344,13 @@ export interface VaultDynamicSecretSpecProviderAuthGcp {
    * @schema VaultDynamicSecretSpecProviderAuthGcp#workloadIdentity
    */
   readonly workloadIdentity?: VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthGcp' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthGcp(obj: VaultDynamicSecretSpecProviderAuthGcp | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10213,7 +11365,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthGcp(obj: VaultDynamicSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Iam authenticates with vault by passing a special AWS request signed with AWS IAM credentials
@@ -10277,12 +11429,13 @@ export interface VaultDynamicSecretSpecProviderAuthIam {
    * @schema VaultDynamicSecretSpecProviderAuthIam#vaultRole
    */
   readonly vaultRole: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthIam' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthIam(obj: VaultDynamicSecretSpecProviderAuthIam | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10298,7 +11451,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthIam(obj: VaultDynamicSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Jwt authenticates with Vault by passing role and JWT token using the
@@ -10338,12 +11491,13 @@ export interface VaultDynamicSecretSpecProviderAuthJwt {
    * @schema VaultDynamicSecretSpecProviderAuthJwt#secretRef
    */
   readonly secretRef?: VaultDynamicSecretSpecProviderAuthJwtSecretRef;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthJwt' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthJwt(obj: VaultDynamicSecretSpecProviderAuthJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10355,7 +11509,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthJwt(obj: VaultDynamicSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kubernetes authenticates with Vault by passing the ServiceAccount
@@ -10399,12 +11553,13 @@ export interface VaultDynamicSecretSpecProviderAuthKubernetes {
    * @schema VaultDynamicSecretSpecProviderAuthKubernetes#serviceAccountRef
    */
   readonly serviceAccountRef?: VaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthKubernetes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthKubernetes(obj: VaultDynamicSecretSpecProviderAuthKubernetes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10416,7 +11571,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthKubernetes(obj: VaultDy
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Ldap authenticates with Vault by passing username/password pair using
@@ -10449,12 +11604,13 @@ export interface VaultDynamicSecretSpecProviderAuthLdap {
    * @schema VaultDynamicSecretSpecProviderAuthLdap#username
    */
   readonly username: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthLdap' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthLdap(obj: VaultDynamicSecretSpecProviderAuthLdap | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10465,7 +11621,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthLdap(obj: VaultDynamicS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TokenSecretRef authenticates with Vault by presenting a token.
@@ -10495,12 +11651,13 @@ export interface VaultDynamicSecretSpecProviderAuthTokenSecretRef {
    * @schema VaultDynamicSecretSpecProviderAuthTokenSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthTokenSecretRef(obj: VaultDynamicSecretSpecProviderAuthTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10511,7 +11668,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthTokenSecretRef(obj: Vau
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * UserPass authenticates with Vault by passing username/password pair
@@ -10543,12 +11700,13 @@ export interface VaultDynamicSecretSpecProviderAuthUserPass {
    * @schema VaultDynamicSecretSpecProviderAuthUserPass#username
    */
   readonly username: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthUserPass' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthUserPass(obj: VaultDynamicSecretSpecProviderAuthUserPass | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10559,7 +11717,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthUserPass(obj: VaultDyna
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -10603,12 +11761,13 @@ export interface VaultDynamicSecretSpecProviderTlsCertSecretRef {
    * @schema VaultDynamicSecretSpecProviderTlsCertSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderTlsCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderTlsCertSecretRef(obj: VaultDynamicSecretSpecProviderTlsCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10619,7 +11778,7 @@ export function toJson_VaultDynamicSecretSpecProviderTlsCertSecretRef(obj: Vault
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * KeySecretRef to a key in a Secret resource containing client private key
@@ -10651,12 +11810,13 @@ export interface VaultDynamicSecretSpecProviderTlsKeySecretRef {
    * @schema VaultDynamicSecretSpecProviderTlsKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderTlsKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderTlsKeySecretRef(obj: VaultDynamicSecretSpecProviderTlsKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10667,7 +11827,7 @@ export function toJson_VaultDynamicSecretSpecProviderTlsKeySecretRef(obj: VaultD
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role ID used
@@ -10700,12 +11860,13 @@ export interface VaultDynamicSecretSpecProviderAuthAppRoleRoleRef {
    * @schema VaultDynamicSecretSpecProviderAuthAppRoleRoleRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthAppRoleRoleRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthAppRoleRoleRef(obj: VaultDynamicSecretSpecProviderAuthAppRoleRoleRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10716,7 +11877,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthAppRoleRoleRef(obj: Vau
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Reference to a key in a Secret that contains the App Role secret used
@@ -10749,12 +11910,13 @@ export interface VaultDynamicSecretSpecProviderAuthAppRoleSecretRef {
    * @schema VaultDynamicSecretSpecProviderAuthAppRoleSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthAppRoleSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthAppRoleSecretRef(obj: VaultDynamicSecretSpecProviderAuthAppRoleSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10765,7 +11927,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthAppRoleSecretRef(obj: V
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClientCert is a certificate to authenticate using the Cert Vault
@@ -10796,12 +11958,13 @@ export interface VaultDynamicSecretSpecProviderAuthCertClientCert {
    * @schema VaultDynamicSecretSpecProviderAuthCertClientCert#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthCertClientCert' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthCertClientCert(obj: VaultDynamicSecretSpecProviderAuthCertClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10812,7 +11975,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthCertClientCert(obj: Vau
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing client private key to
@@ -10843,12 +12006,13 @@ export interface VaultDynamicSecretSpecProviderAuthCertSecretRef {
    * @schema VaultDynamicSecretSpecProviderAuthCertSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthCertSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthCertSecretRef(obj: VaultDynamicSecretSpecProviderAuthCertSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10859,7 +12023,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthCertSecretRef(obj: Vaul
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specify credentials in a Secret object
@@ -10873,12 +12037,13 @@ export interface VaultDynamicSecretSpecProviderAuthGcpSecretRef {
    * @schema VaultDynamicSecretSpecProviderAuthGcpSecretRef#secretAccessKeySecretRef
    */
   readonly secretAccessKeySecretRef?: VaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthGcpSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthGcpSecretRef(obj: VaultDynamicSecretSpecProviderAuthGcpSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10887,7 +12052,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthGcpSecretRef(obj: Vault
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountRef to a service account for impersonation
@@ -10918,12 +12083,13 @@ export interface VaultDynamicSecretSpecProviderAuthGcpServiceAccountRef {
    * @schema VaultDynamicSecretSpecProviderAuthGcpServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthGcpServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthGcpServiceAccountRef(obj: VaultDynamicSecretSpecProviderAuthGcpServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10934,7 +12100,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthGcpServiceAccountRef(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specify a service account with Workload Identity
@@ -10972,12 +12138,13 @@ export interface VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity {
    * @schema VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity#serviceAccountRef
    */
   readonly serviceAccountRef: VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity(obj: VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -10989,7 +12156,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentity(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specify a service account with IRSA enabled
@@ -11003,12 +12170,13 @@ export interface VaultDynamicSecretSpecProviderAuthIamJwt {
    * @schema VaultDynamicSecretSpecProviderAuthIamJwt#serviceAccountRef
    */
   readonly serviceAccountRef?: VaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthIamJwt' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthIamJwt(obj: VaultDynamicSecretSpecProviderAuthIamJwt | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11017,7 +12185,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthIamJwt(obj: VaultDynami
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Specify credentials in a Secret object
@@ -11047,12 +12215,13 @@ export interface VaultDynamicSecretSpecProviderAuthIamSecretRef {
    * @schema VaultDynamicSecretSpecProviderAuthIamSecretRef#sessionTokenSecretRef
    */
   readonly sessionTokenSecretRef?: VaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthIamSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthIamSecretRef(obj: VaultDynamicSecretSpecProviderAuthIamSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11063,7 +12232,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthIamSecretRef(obj: Vault
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional ServiceAccountToken specifies the Kubernetes service account for which to request
@@ -11103,12 +12272,13 @@ export interface VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTo
    * @schema VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountToken#serviceAccountRef
    */
   readonly serviceAccountRef: VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountToken' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountToken(obj: VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11119,7 +12289,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAcc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional SecretRef that refers to a key in a Secret resource containing JWT token to
@@ -11150,12 +12320,13 @@ export interface VaultDynamicSecretSpecProviderAuthJwtSecretRef {
    * @schema VaultDynamicSecretSpecProviderAuthJwtSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthJwtSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthJwtSecretRef(obj: VaultDynamicSecretSpecProviderAuthJwtSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11166,7 +12337,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthJwtSecretRef(obj: Vault
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional secret field containing a Kubernetes ServiceAccount JWT used
@@ -11199,12 +12370,13 @@ export interface VaultDynamicSecretSpecProviderAuthKubernetesSecretRef {
    * @schema VaultDynamicSecretSpecProviderAuthKubernetesSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthKubernetesSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthKubernetesSecretRef(obj: VaultDynamicSecretSpecProviderAuthKubernetesSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11215,7 +12387,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthKubernetesSecretRef(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Optional service account field containing the name of a kubernetes ServiceAccount.
@@ -11249,12 +12421,13 @@ export interface VaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef {
    * @schema VaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef(obj: VaultDynamicSecretSpecProviderAuthKubernetesServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11265,7 +12438,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthKubernetesServiceAccoun
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the LDAP
@@ -11297,12 +12470,13 @@ export interface VaultDynamicSecretSpecProviderAuthLdapSecretRef {
    * @schema VaultDynamicSecretSpecProviderAuthLdapSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthLdapSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthLdapSecretRef(obj: VaultDynamicSecretSpecProviderAuthLdapSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11313,7 +12487,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthLdapSecretRef(obj: Vaul
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretRef to a key in a Secret resource containing password for the
@@ -11345,12 +12519,13 @@ export interface VaultDynamicSecretSpecProviderAuthUserPassSecretRef {
    * @schema VaultDynamicSecretSpecProviderAuthUserPassSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthUserPassSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthUserPassSecretRef(obj: VaultDynamicSecretSpecProviderAuthUserPassSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11361,7 +12536,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthUserPassSecretRef(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -11391,12 +12566,13 @@ export interface VaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySe
    * @schema VaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef(obj: VaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11407,7 +12583,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthGcpSecretRefSecretAcces
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -11438,12 +12614,13 @@ export interface VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAcc
    * @schema VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef(obj: VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11454,7 +12631,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthGcpWorkloadIdentityServ
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceAccountSelector is a reference to a ServiceAccount resource.
@@ -11485,12 +12662,13 @@ export interface VaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef {
    * @schema VaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef(obj: VaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11501,7 +12679,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthIamJwtServiceAccountRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The AccessKeyID is used for authentication
@@ -11531,12 +12709,13 @@ export interface VaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyIdSecret
    * @schema VaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyIdSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyIdSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyIdSecretRef(obj: VaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyIdSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11547,7 +12726,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthIamSecretRefAccessKeyId
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SecretAccessKey is used for authentication
@@ -11577,12 +12756,13 @@ export interface VaultDynamicSecretSpecProviderAuthIamSecretRefSecretAccessKeySe
    * @schema VaultDynamicSecretSpecProviderAuthIamSecretRefSecretAccessKeySecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthIamSecretRefSecretAccessKeySecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthIamSecretRefSecretAccessKeySecretRef(obj: VaultDynamicSecretSpecProviderAuthIamSecretRefSecretAccessKeySecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11593,7 +12773,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthIamSecretRefSecretAcces
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The SessionToken used for authentication
@@ -11625,12 +12805,13 @@ export interface VaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecre
    * @schema VaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef(obj: VaultDynamicSecretSpecProviderAuthIamSecretRefSessionTokenSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11641,7 +12822,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthIamSecretRefSessionToke
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Service account field containing the name of a kubernetes ServiceAccount.
@@ -11672,12 +12853,13 @@ export interface VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTo
    * @schema VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef(obj: VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAccountTokenServiceAccountRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11688,7 +12870,7 @@ export function toJson_VaultDynamicSecretSpecProviderAuthJwtKubernetesServiceAcc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -11738,7 +12920,7 @@ export class Webhook extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -11768,12 +12950,13 @@ export interface WebhookProps {
    * @schema Webhook#spec
    */
   readonly spec?: WebhookSpec;
+
 }
 
 /**
  * Converts an object of type 'WebhookProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookProps(obj: WebhookProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11783,7 +12966,7 @@ export function toJson_WebhookProps(obj: WebhookProps | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * WebhookSpec controls the behavior of the external generator. Any body parameters should be passed to the server through the parameters field.
@@ -11864,12 +13047,13 @@ export interface WebhookSpec {
    * @schema WebhookSpec#url
    */
   readonly url: string;
+
 }
 
 /**
  * Converts an object of type 'WebhookSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookSpec(obj: WebhookSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11887,7 +13071,7 @@ export function toJson_WebhookSpec(obj: WebhookSpec | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Auth specifies a authorization protocol. Only one protocol may be set.
@@ -11901,12 +13085,13 @@ export interface WebhookSpecAuth {
    * @schema WebhookSpecAuth#ntlm
    */
   readonly ntlm?: WebhookSpecAuthNtlm;
+
 }
 
 /**
  * Converts an object of type 'WebhookSpecAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookSpecAuth(obj: WebhookSpecAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11915,7 +13100,7 @@ export function toJson_WebhookSpecAuth(obj: WebhookSpecAuth | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The provider for the CA bundle to use to validate webhook server certificate.
@@ -11950,12 +13135,13 @@ export interface WebhookSpecCaProvider {
    * @schema WebhookSpecCaProvider#type
    */
   readonly type: WebhookSpecCaProviderType;
+
 }
 
 /**
  * Converts an object of type 'WebhookSpecCaProvider' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookSpecCaProvider(obj: WebhookSpecCaProvider | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11967,7 +13153,7 @@ export function toJson_WebhookSpecCaProvider(obj: WebhookSpecCaProvider | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Result formatting
@@ -11981,12 +13167,13 @@ export interface WebhookSpecResult {
    * @schema WebhookSpecResult#jsonPath
    */
   readonly jsonPath?: string;
+
 }
 
 /**
  * Converts an object of type 'WebhookSpecResult' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookSpecResult(obj: WebhookSpecResult | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -11995,7 +13182,7 @@ export function toJson_WebhookSpecResult(obj: WebhookSpecResult | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * WebhookSecret defines a secret reference that will be used in webhook templates.
@@ -12016,12 +13203,13 @@ export interface WebhookSpecSecrets {
    * @schema WebhookSpecSecrets#secretRef
    */
   readonly secretRef: WebhookSpecSecretsSecretRef;
+
 }
 
 /**
  * Converts an object of type 'WebhookSpecSecrets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookSpecSecrets(obj: WebhookSpecSecrets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12031,7 +13219,7 @@ export function toJson_WebhookSpecSecrets(obj: WebhookSpecSecrets | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * NTLMProtocol configures the store to use NTLM for auth
@@ -12054,12 +13242,13 @@ export interface WebhookSpecAuthNtlm {
    * @schema WebhookSpecAuthNtlm#usernameSecret
    */
   readonly usernameSecret: WebhookSpecAuthNtlmUsernameSecret;
+
 }
 
 /**
  * Converts an object of type 'WebhookSpecAuthNtlm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookSpecAuthNtlm(obj: WebhookSpecAuthNtlm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12069,7 +13258,7 @@ export function toJson_WebhookSpecAuthNtlm(obj: WebhookSpecAuthNtlm | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * The type of provider to use such as "Secret", or "ConfigMap".
@@ -12102,12 +13291,13 @@ export interface WebhookSpecSecretsSecretRef {
    * @schema WebhookSpecSecretsSecretRef#name
    */
   readonly name?: string;
+
 }
 
 /**
  * Converts an object of type 'WebhookSpecSecretsSecretRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookSpecSecretsSecretRef(obj: WebhookSpecSecretsSecretRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12117,7 +13307,7 @@ export function toJson_WebhookSpecSecretsSecretRef(obj: WebhookSpecSecretsSecret
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
@@ -12148,12 +13338,13 @@ export interface WebhookSpecAuthNtlmPasswordSecret {
    * @schema WebhookSpecAuthNtlmPasswordSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'WebhookSpecAuthNtlmPasswordSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookSpecAuthNtlmPasswordSecret(obj: WebhookSpecAuthNtlmPasswordSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12164,7 +13355,7 @@ export function toJson_WebhookSpecAuthNtlmPasswordSecret(obj: WebhookSpecAuthNtl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SecretKeySelector is a reference to a specific 'key' within a Secret resource.
@@ -12195,12 +13386,13 @@ export interface WebhookSpecAuthNtlmUsernameSecret {
    * @schema WebhookSpecAuthNtlmUsernameSecret#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'WebhookSpecAuthNtlmUsernameSecret' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_WebhookSpecAuthNtlmUsernameSecret(obj: WebhookSpecAuthNtlmUsernameSecret | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -12211,5 +13403,5 @@ export function toJson_WebhookSpecAuthNtlmUsernameSecret(obj: WebhookSpecAuthNtl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 

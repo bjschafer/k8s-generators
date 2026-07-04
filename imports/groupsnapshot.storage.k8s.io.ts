@@ -14,7 +14,7 @@ export class VolumeGroupSnapshot extends ApiObject {
    * Returns the apiVersion and kind for "VolumeGroupSnapshot"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'groupsnapshot.storage.k8s.io/v1beta1',
+    apiVersion: 'groupsnapshot.storage.k8s.io/v1',
     kind: 'VolumeGroupSnapshot',
   }
 
@@ -48,7 +48,7 @@ export class VolumeGroupSnapshot extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -77,12 +77,13 @@ export interface VolumeGroupSnapshotProps {
    * @schema VolumeGroupSnapshot#spec
    */
   readonly spec: VolumeGroupSnapshotSpec;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotProps(obj: VolumeGroupSnapshotProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -92,7 +93,7 @@ export function toJson_VolumeGroupSnapshotProps(obj: VolumeGroupSnapshotProps | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired characteristics of a group snapshot requested by a user.
@@ -120,12 +121,13 @@ export interface VolumeGroupSnapshotSpec {
    * @schema VolumeGroupSnapshotSpec#volumeGroupSnapshotClassName
    */
   readonly volumeGroupSnapshotClassName?: string;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotSpec(obj: VolumeGroupSnapshotSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -135,7 +137,7 @@ export function toJson_VolumeGroupSnapshotSpec(obj: VolumeGroupSnapshotSpec | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Source specifies where a group snapshot will be created from.
@@ -168,12 +170,13 @@ export interface VolumeGroupSnapshotSpecSource {
    * @schema VolumeGroupSnapshotSpecSource#volumeGroupSnapshotContentName
    */
   readonly volumeGroupSnapshotContentName?: string;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotSpecSource' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotSpecSource(obj: VolumeGroupSnapshotSpecSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -183,7 +186,7 @@ export function toJson_VolumeGroupSnapshotSpecSource(obj: VolumeGroupSnapshotSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selector is a label query over persistent volume claims that are to be
@@ -212,12 +215,13 @@ export interface VolumeGroupSnapshotSpecSourceSelector {
    * @schema VolumeGroupSnapshotSpecSourceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotSpecSourceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotSpecSourceSelector(obj: VolumeGroupSnapshotSpecSourceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -227,7 +231,7 @@ export function toJson_VolumeGroupSnapshotSpecSourceSelector(obj: VolumeGroupSna
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -260,12 +264,13 @@ export interface VolumeGroupSnapshotSpecSourceSelectorMatchExpressions {
    * @schema VolumeGroupSnapshotSpecSourceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotSpecSourceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotSpecSourceSelectorMatchExpressions(obj: VolumeGroupSnapshotSpecSourceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -276,7 +281,288 @@ export function toJson_VolumeGroupSnapshotSpecSourceSelectorMatchExpressions(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+
+/**
+ * VolumeGroupSnapshot is a user's request for creating either a point-in-time
+group snapshot or binding to a pre-existing group snapshot.
+ *
+ * @schema VolumeGroupSnapshotV1Beta1
+ */
+export class VolumeGroupSnapshotV1Beta1 extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "VolumeGroupSnapshotV1Beta1"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'groupsnapshot.storage.k8s.io/v1beta1',
+    kind: 'VolumeGroupSnapshot',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "VolumeGroupSnapshotV1Beta1".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: VolumeGroupSnapshotV1Beta1Props): any {
+    return {
+      ...VolumeGroupSnapshotV1Beta1.GVK,
+      ...toJson_VolumeGroupSnapshotV1Beta1Props(props),
+    };
+  }
+
+  /**
+   * Defines a "VolumeGroupSnapshotV1Beta1" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: VolumeGroupSnapshotV1Beta1Props) {
+    super(scope, id, {
+      ...VolumeGroupSnapshotV1Beta1.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...VolumeGroupSnapshotV1Beta1.GVK,
+      ...toJson_VolumeGroupSnapshotV1Beta1Props(resolved),
+    };
+  }
+}
+
+/**
+ * VolumeGroupSnapshot is a user's request for creating either a point-in-time
+ * group snapshot or binding to a pre-existing group snapshot.
+ *
+ * @schema VolumeGroupSnapshotV1Beta1
+ */
+export interface VolumeGroupSnapshotV1Beta1Props {
+  /**
+   * @schema VolumeGroupSnapshotV1Beta1#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * Spec defines the desired characteristics of a group snapshot requested by a user.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1#spec
+   */
+  readonly spec: VolumeGroupSnapshotV1Beta1Spec;
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotV1Beta1Props' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotV1Beta1Props(obj: VolumeGroupSnapshotV1Beta1Props | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_VolumeGroupSnapshotV1Beta1Spec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Spec defines the desired characteristics of a group snapshot requested by a user.
+ * Required.
+ *
+ * @schema VolumeGroupSnapshotV1Beta1Spec
+ */
+export interface VolumeGroupSnapshotV1Beta1Spec {
+  /**
+   * Source specifies where a group snapshot will be created from.
+   * This field is immutable after creation.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1Spec#source
+   */
+  readonly source: VolumeGroupSnapshotV1Beta1SpecSource;
+
+  /**
+   * VolumeGroupSnapshotClassName is the name of the VolumeGroupSnapshotClass
+   * requested by the VolumeGroupSnapshot.
+   * VolumeGroupSnapshotClassName may be left nil to indicate that the default
+   * class will be used.
+   * Empty string is not allowed for this field.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1Spec#volumeGroupSnapshotClassName
+   */
+  readonly volumeGroupSnapshotClassName?: string;
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotV1Beta1Spec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotV1Beta1Spec(obj: VolumeGroupSnapshotV1Beta1Spec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'source': toJson_VolumeGroupSnapshotV1Beta1SpecSource(obj.source),
+    'volumeGroupSnapshotClassName': obj.volumeGroupSnapshotClassName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Source specifies where a group snapshot will be created from.
+ * This field is immutable after creation.
+ * Required.
+ *
+ * @schema VolumeGroupSnapshotV1Beta1SpecSource
+ */
+export interface VolumeGroupSnapshotV1Beta1SpecSource {
+  /**
+   * Selector is a label query over persistent volume claims that are to be
+   * grouped together for snapshotting.
+   * This labelSelector will be used to match the label added to a PVC.
+   * If the label is added or removed to a volume after a group snapshot
+   * is created, the existing group snapshots won't be modified.
+   * Once a VolumeGroupSnapshotContent is created and the sidecar starts to process
+   * it, the volume list will not change with retries.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1SpecSource#selector
+   */
+  readonly selector?: VolumeGroupSnapshotV1Beta1SpecSourceSelector;
+
+  /**
+   * VolumeGroupSnapshotContentName specifies the name of a pre-existing VolumeGroupSnapshotContent
+   * object representing an existing volume group snapshot.
+   * This field should be set if the volume group snapshot already exists and
+   * only needs a representation in Kubernetes.
+   * This field is immutable.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1SpecSource#volumeGroupSnapshotContentName
+   */
+  readonly volumeGroupSnapshotContentName?: string;
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotV1Beta1SpecSource' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotV1Beta1SpecSource(obj: VolumeGroupSnapshotV1Beta1SpecSource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'selector': toJson_VolumeGroupSnapshotV1Beta1SpecSourceSelector(obj.selector),
+    'volumeGroupSnapshotContentName': obj.volumeGroupSnapshotContentName,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Selector is a label query over persistent volume claims that are to be
+ * grouped together for snapshotting.
+ * This labelSelector will be used to match the label added to a PVC.
+ * If the label is added or removed to a volume after a group snapshot
+ * is created, the existing group snapshots won't be modified.
+ * Once a VolumeGroupSnapshotContent is created and the sidecar starts to process
+ * it, the volume list will not change with retries.
+ *
+ * @schema VolumeGroupSnapshotV1Beta1SpecSourceSelector
+ */
+export interface VolumeGroupSnapshotV1Beta1SpecSourceSelector {
+  /**
+   * matchExpressions is a list of label selector requirements. The requirements are ANDed.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1SpecSourceSelector#matchExpressions
+   */
+  readonly matchExpressions?: VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions[];
+
+  /**
+   * matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels
+   * map is equivalent to an element of matchExpressions, whose key field is "key", the
+   * operator is "In", and the values array contains only "value". The requirements are ANDed.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1SpecSourceSelector#matchLabels
+   */
+  readonly matchLabels?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotV1Beta1SpecSourceSelector' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotV1Beta1SpecSourceSelector(obj: VolumeGroupSnapshotV1Beta1SpecSourceSelector | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'matchExpressions': obj.matchExpressions?.map(y => toJson_VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions(y)),
+    'matchLabels': ((obj.matchLabels) === undefined) ? undefined : (Object.entries(obj.matchLabels).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * A label selector requirement is a selector that contains values, a key, and an operator that
+ * relates the key and values.
+ *
+ * @schema VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions
+ */
+export interface VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions {
+  /**
+   * key is the label key that the selector applies to.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions#key
+   */
+  readonly key: string;
+
+  /**
+   * operator represents a key's relationship to a set of values.
+   * Valid operators are In, NotIn, Exists and DoesNotExist.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions#operator
+   */
+  readonly operator: string;
+
+  /**
+   * values is an array of string values. If the operator is In or NotIn,
+   * the values array must be non-empty. If the operator is Exists or DoesNotExist,
+   * the values array must be empty. This array is replaced during a strategic
+   * merge patch.
+   *
+   * @schema VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions#values
+   */
+  readonly values?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions(obj: VolumeGroupSnapshotV1Beta1SpecSourceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'key': obj.key,
+    'operator': obj.operator,
+    'values': obj.values?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -324,7 +610,7 @@ export class VolumeGroupSnapshotV1Beta2 extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -353,12 +639,13 @@ export interface VolumeGroupSnapshotV1Beta2Props {
    * @schema VolumeGroupSnapshotV1Beta2#spec
    */
   readonly spec: VolumeGroupSnapshotV1Beta2Spec;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotV1Beta2Props' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotV1Beta2Props(obj: VolumeGroupSnapshotV1Beta2Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -368,7 +655,7 @@ export function toJson_VolumeGroupSnapshotV1Beta2Props(obj: VolumeGroupSnapshotV
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines the desired characteristics of a group snapshot requested by a user.
@@ -396,12 +683,13 @@ export interface VolumeGroupSnapshotV1Beta2Spec {
    * @schema VolumeGroupSnapshotV1Beta2Spec#volumeGroupSnapshotClassName
    */
   readonly volumeGroupSnapshotClassName?: string;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotV1Beta2Spec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotV1Beta2Spec(obj: VolumeGroupSnapshotV1Beta2Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -411,7 +699,7 @@ export function toJson_VolumeGroupSnapshotV1Beta2Spec(obj: VolumeGroupSnapshotV1
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Source specifies where a group snapshot will be created from.
@@ -444,12 +732,13 @@ export interface VolumeGroupSnapshotV1Beta2SpecSource {
    * @schema VolumeGroupSnapshotV1Beta2SpecSource#volumeGroupSnapshotContentName
    */
   readonly volumeGroupSnapshotContentName?: string;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotV1Beta2SpecSource' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotV1Beta2SpecSource(obj: VolumeGroupSnapshotV1Beta2SpecSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -459,7 +748,7 @@ export function toJson_VolumeGroupSnapshotV1Beta2SpecSource(obj: VolumeGroupSnap
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Selector is a label query over persistent volume claims that are to be
@@ -488,12 +777,13 @@ export interface VolumeGroupSnapshotV1Beta2SpecSourceSelector {
    * @schema VolumeGroupSnapshotV1Beta2SpecSourceSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotV1Beta2SpecSourceSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotV1Beta2SpecSourceSelector(obj: VolumeGroupSnapshotV1Beta2SpecSourceSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -503,7 +793,7 @@ export function toJson_VolumeGroupSnapshotV1Beta2SpecSourceSelector(obj: VolumeG
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -536,12 +826,13 @@ export interface VolumeGroupSnapshotV1Beta2SpecSourceSelectorMatchExpressions {
    * @schema VolumeGroupSnapshotV1Beta2SpecSourceSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotV1Beta2SpecSourceSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotV1Beta2SpecSourceSelectorMatchExpressions(obj: VolumeGroupSnapshotV1Beta2SpecSourceSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -552,7 +843,7 @@ export function toJson_VolumeGroupSnapshotV1Beta2SpecSourceSelectorMatchExpressi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -568,7 +859,7 @@ export class VolumeGroupSnapshotClass extends ApiObject {
    * Returns the apiVersion and kind for "VolumeGroupSnapshotClass"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'groupsnapshot.storage.k8s.io/v1beta1',
+    apiVersion: 'groupsnapshot.storage.k8s.io/v1',
     kind: 'VolumeGroupSnapshotClass',
   }
 
@@ -602,7 +893,7 @@ export class VolumeGroupSnapshotClass extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -657,12 +948,13 @@ export interface VolumeGroupSnapshotClassProps {
    * @schema VolumeGroupSnapshotClass#parameters
    */
   readonly parameters?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotClassProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotClassProps(obj: VolumeGroupSnapshotClassProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -674,7 +966,7 @@ export function toJson_VolumeGroupSnapshotClassProps(obj: VolumeGroupSnapshotCla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DeletionPolicy determines whether a VolumeGroupSnapshotContent created
@@ -690,6 +982,149 @@ export function toJson_VolumeGroupSnapshotClassProps(obj: VolumeGroupSnapshotCla
  * @schema VolumeGroupSnapshotClassDeletionPolicy
  */
 export enum VolumeGroupSnapshotClassDeletionPolicy {
+  /** Delete */
+  DELETE = "Delete",
+  /** Retain */
+  RETAIN = "Retain",
+}
+
+
+/**
+ * VolumeGroupSnapshotClass specifies parameters that a underlying storage system
+uses when creating a volume group snapshot. A specific VolumeGroupSnapshotClass
+is used by specifying its name in a VolumeGroupSnapshot object.
+VolumeGroupSnapshotClasses are non-namespaced.
+ *
+ * @schema VolumeGroupSnapshotClassV1Beta1
+ */
+export class VolumeGroupSnapshotClassV1Beta1 extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "VolumeGroupSnapshotClassV1Beta1"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'groupsnapshot.storage.k8s.io/v1beta1',
+    kind: 'VolumeGroupSnapshotClass',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "VolumeGroupSnapshotClassV1Beta1".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: VolumeGroupSnapshotClassV1Beta1Props): any {
+    return {
+      ...VolumeGroupSnapshotClassV1Beta1.GVK,
+      ...toJson_VolumeGroupSnapshotClassV1Beta1Props(props),
+    };
+  }
+
+  /**
+   * Defines a "VolumeGroupSnapshotClassV1Beta1" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: VolumeGroupSnapshotClassV1Beta1Props) {
+    super(scope, id, {
+      ...VolumeGroupSnapshotClassV1Beta1.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...VolumeGroupSnapshotClassV1Beta1.GVK,
+      ...toJson_VolumeGroupSnapshotClassV1Beta1Props(resolved),
+    };
+  }
+}
+
+/**
+ * VolumeGroupSnapshotClass specifies parameters that a underlying storage system
+ * uses when creating a volume group snapshot. A specific VolumeGroupSnapshotClass
+ * is used by specifying its name in a VolumeGroupSnapshot object.
+ * VolumeGroupSnapshotClasses are non-namespaced.
+ *
+ * @schema VolumeGroupSnapshotClassV1Beta1
+ */
+export interface VolumeGroupSnapshotClassV1Beta1Props {
+  /**
+   * @schema VolumeGroupSnapshotClassV1Beta1#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * DeletionPolicy determines whether a VolumeGroupSnapshotContent created
+   * through the VolumeGroupSnapshotClass should be deleted when its bound
+   * VolumeGroupSnapshot is deleted.
+   * Supported values are "Retain" and "Delete".
+   * "Retain" means that the VolumeGroupSnapshotContent and its physical group
+   * snapshot on underlying storage system are kept.
+   * "Delete" means that the VolumeGroupSnapshotContent and its physical group
+   * snapshot on underlying storage system are deleted.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotClassV1Beta1#deletionPolicy
+   */
+  readonly deletionPolicy: VolumeGroupSnapshotClassV1Beta1DeletionPolicy;
+
+  /**
+   * Driver is the name of the storage driver expected to handle this VolumeGroupSnapshotClass.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotClassV1Beta1#driver
+   */
+  readonly driver: string;
+
+  /**
+   * Parameters is a key-value map with storage driver specific parameters for
+   * creating group snapshots.
+   * These values are opaque to Kubernetes and are passed directly to the driver.
+   *
+   * @schema VolumeGroupSnapshotClassV1Beta1#parameters
+   */
+  readonly parameters?: { [key: string]: string };
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotClassV1Beta1Props' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotClassV1Beta1Props(obj: VolumeGroupSnapshotClassV1Beta1Props | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'deletionPolicy': obj.deletionPolicy,
+    'driver': obj.driver,
+    'parameters': ((obj.parameters) === undefined) ? undefined : (Object.entries(obj.parameters).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * DeletionPolicy determines whether a VolumeGroupSnapshotContent created
+ * through the VolumeGroupSnapshotClass should be deleted when its bound
+ * VolumeGroupSnapshot is deleted.
+ * Supported values are "Retain" and "Delete".
+ * "Retain" means that the VolumeGroupSnapshotContent and its physical group
+ * snapshot on underlying storage system are kept.
+ * "Delete" means that the VolumeGroupSnapshotContent and its physical group
+ * snapshot on underlying storage system are deleted.
+ * Required.
+ *
+ * @schema VolumeGroupSnapshotClassV1Beta1DeletionPolicy
+ */
+export enum VolumeGroupSnapshotClassV1Beta1DeletionPolicy {
   /** Delete */
   DELETE = "Delete",
   /** Retain */
@@ -744,7 +1179,7 @@ export class VolumeGroupSnapshotClassV1Beta2 extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -799,12 +1234,13 @@ export interface VolumeGroupSnapshotClassV1Beta2Props {
    * @schema VolumeGroupSnapshotClassV1Beta2#parameters
    */
   readonly parameters?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotClassV1Beta2Props' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotClassV1Beta2Props(obj: VolumeGroupSnapshotClassV1Beta2Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -816,7 +1252,7 @@ export function toJson_VolumeGroupSnapshotClassV1Beta2Props(obj: VolumeGroupSnap
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DeletionPolicy determines whether a VolumeGroupSnapshotContent created
@@ -850,7 +1286,7 @@ export class VolumeGroupSnapshotContent extends ApiObject {
    * Returns the apiVersion and kind for "VolumeGroupSnapshotContent"
    */
   public static readonly GVK: GroupVersionKind = {
-    apiVersion: 'groupsnapshot.storage.k8s.io/v1beta1',
+    apiVersion: 'groupsnapshot.storage.k8s.io/v1',
     kind: 'VolumeGroupSnapshotContent',
   }
 
@@ -884,7 +1320,7 @@ export class VolumeGroupSnapshotContent extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -913,12 +1349,13 @@ export interface VolumeGroupSnapshotContentProps {
    * @schema VolumeGroupSnapshotContent#spec
    */
   readonly spec: VolumeGroupSnapshotContentSpec;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentProps(obj: VolumeGroupSnapshotContentProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -928,7 +1365,7 @@ export function toJson_VolumeGroupSnapshotContentProps(obj: VolumeGroupSnapshotC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines properties of a VolumeGroupSnapshotContent created by the underlying storage system.
@@ -1004,12 +1441,13 @@ export interface VolumeGroupSnapshotContentSpec {
    * @schema VolumeGroupSnapshotContentSpec#volumeGroupSnapshotRef
    */
   readonly volumeGroupSnapshotRef: VolumeGroupSnapshotContentSpecVolumeGroupSnapshotRef;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentSpec(obj: VolumeGroupSnapshotContentSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1022,7 +1460,7 @@ export function toJson_VolumeGroupSnapshotContentSpec(obj: VolumeGroupSnapshotCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DeletionPolicy determines whether this VolumeGroupSnapshotContent and the
@@ -1077,12 +1515,13 @@ export interface VolumeGroupSnapshotContentSpecSource {
    * @schema VolumeGroupSnapshotContentSpecSource#volumeHandles
    */
   readonly volumeHandles?: string[];
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentSpecSource' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentSpecSource(obj: VolumeGroupSnapshotContentSpecSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1092,7 +1531,7 @@ export function toJson_VolumeGroupSnapshotContentSpecSource(obj: VolumeGroupSnap
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * VolumeGroupSnapshotRef specifies the VolumeGroupSnapshot object to which this
@@ -1167,12 +1606,13 @@ export interface VolumeGroupSnapshotContentSpecVolumeGroupSnapshotRef {
    * @schema VolumeGroupSnapshotContentSpecVolumeGroupSnapshotRef#uid
    */
   readonly uid?: string;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentSpecVolumeGroupSnapshotRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentSpecVolumeGroupSnapshotRef(obj: VolumeGroupSnapshotContentSpecVolumeGroupSnapshotRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1187,7 +1627,7 @@ export function toJson_VolumeGroupSnapshotContentSpecVolumeGroupSnapshotRef(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GroupSnapshotHandles specifies the CSI "group_snapshot_id" of a pre-existing
@@ -1220,12 +1660,13 @@ export interface VolumeGroupSnapshotContentSpecSourceGroupSnapshotHandles {
    * @schema VolumeGroupSnapshotContentSpecSourceGroupSnapshotHandles#volumeSnapshotHandles
    */
   readonly volumeSnapshotHandles: string[];
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentSpecSourceGroupSnapshotHandles' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentSpecSourceGroupSnapshotHandles(obj: VolumeGroupSnapshotContentSpecSourceGroupSnapshotHandles | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1235,7 +1676,411 @@ export function toJson_VolumeGroupSnapshotContentSpecSourceGroupSnapshotHandles(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+
+/**
+ * VolumeGroupSnapshotContent represents the actual "on-disk" group snapshot object
+in the underlying storage system
+ *
+ * @schema VolumeGroupSnapshotContentV1Beta1
+ */
+export class VolumeGroupSnapshotContentV1Beta1 extends ApiObject {
+  /**
+   * Returns the apiVersion and kind for "VolumeGroupSnapshotContentV1Beta1"
+   */
+  public static readonly GVK: GroupVersionKind = {
+    apiVersion: 'groupsnapshot.storage.k8s.io/v1beta1',
+    kind: 'VolumeGroupSnapshotContent',
+  }
+
+  /**
+   * Renders a Kubernetes manifest for "VolumeGroupSnapshotContentV1Beta1".
+   *
+   * This can be used to inline resource manifests inside other objects (e.g. as templates).
+   *
+   * @param props initialization props
+   */
+  public static manifest(props: VolumeGroupSnapshotContentV1Beta1Props): any {
+    return {
+      ...VolumeGroupSnapshotContentV1Beta1.GVK,
+      ...toJson_VolumeGroupSnapshotContentV1Beta1Props(props),
+    };
+  }
+
+  /**
+   * Defines a "VolumeGroupSnapshotContentV1Beta1" API object
+   * @param scope the scope in which to define this object
+   * @param id a scope-local name for the object
+   * @param props initialization props
+   */
+  public constructor(scope: Construct, id: string, props: VolumeGroupSnapshotContentV1Beta1Props) {
+    super(scope, id, {
+      ...VolumeGroupSnapshotContentV1Beta1.GVK,
+      ...props,
+    });
+  }
+
+  /**
+   * Renders the object to Kubernetes JSON.
+   */
+  public toJson(): any {
+    const resolved = super.toJson();
+
+    return {
+      ...VolumeGroupSnapshotContentV1Beta1.GVK,
+      ...toJson_VolumeGroupSnapshotContentV1Beta1Props(resolved),
+    };
+  }
+}
+
+/**
+ * VolumeGroupSnapshotContent represents the actual "on-disk" group snapshot object
+ * in the underlying storage system
+ *
+ * @schema VolumeGroupSnapshotContentV1Beta1
+ */
+export interface VolumeGroupSnapshotContentV1Beta1Props {
+  /**
+   * @schema VolumeGroupSnapshotContentV1Beta1#metadata
+   */
+  readonly metadata?: ApiObjectMetadata;
+
+  /**
+   * Spec defines properties of a VolumeGroupSnapshotContent created by the underlying storage system.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1#spec
+   */
+  readonly spec: VolumeGroupSnapshotContentV1Beta1Spec;
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotContentV1Beta1Props' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotContentV1Beta1Props(obj: VolumeGroupSnapshotContentV1Beta1Props | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'metadata': obj.metadata,
+    'spec': toJson_VolumeGroupSnapshotContentV1Beta1Spec(obj.spec),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Spec defines properties of a VolumeGroupSnapshotContent created by the underlying storage system.
+ * Required.
+ *
+ * @schema VolumeGroupSnapshotContentV1Beta1Spec
+ */
+export interface VolumeGroupSnapshotContentV1Beta1Spec {
+  /**
+   * DeletionPolicy determines whether this VolumeGroupSnapshotContent and the
+   * physical group snapshot on the underlying storage system should be deleted
+   * when the bound VolumeGroupSnapshot is deleted.
+   * Supported values are "Retain" and "Delete".
+   * "Retain" means that the VolumeGroupSnapshotContent and its physical group
+   * snapshot on underlying storage system are kept.
+   * "Delete" means that the VolumeGroupSnapshotContent and its physical group
+   * snapshot on underlying storage system are deleted.
+   * For dynamically provisioned group snapshots, this field will automatically
+   * be filled in by the CSI snapshotter sidecar with the "DeletionPolicy" field
+   * defined in the corresponding VolumeGroupSnapshotClass.
+   * For pre-existing snapshots, users MUST specify this field when creating the
+   * VolumeGroupSnapshotContent object.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1Spec#deletionPolicy
+   */
+  readonly deletionPolicy: VolumeGroupSnapshotContentV1Beta1SpecDeletionPolicy;
+
+  /**
+   * Driver is the name of the CSI driver used to create the physical group snapshot on
+   * the underlying storage system.
+   * This MUST be the same as the name returned by the CSI GetPluginName() call for
+   * that driver.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1Spec#driver
+   */
+  readonly driver: string;
+
+  /**
+   * Source specifies whether the snapshot is (or should be) dynamically provisioned
+   * or already exists, and just requires a Kubernetes object representation.
+   * This field is immutable after creation.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1Spec#source
+   */
+  readonly source: VolumeGroupSnapshotContentV1Beta1SpecSource;
+
+  /**
+   * VolumeGroupSnapshotClassName is the name of the VolumeGroupSnapshotClass from
+   * which this group snapshot was (or will be) created.
+   * Note that after provisioning, the VolumeGroupSnapshotClass may be deleted or
+   * recreated with different set of values, and as such, should not be referenced
+   * post-snapshot creation.
+   * For dynamic provisioning, this field must be set.
+   * This field may be unset for pre-provisioned snapshots.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1Spec#volumeGroupSnapshotClassName
+   */
+  readonly volumeGroupSnapshotClassName?: string;
+
+  /**
+   * VolumeGroupSnapshotRef specifies the VolumeGroupSnapshot object to which this
+   * VolumeGroupSnapshotContent object is bound.
+   * VolumeGroupSnapshot.Spec.VolumeGroupSnapshotContentName field must reference to
+   * this VolumeGroupSnapshotContent's name for the bidirectional binding to be valid.
+   * For a pre-existing VolumeGroupSnapshotContent object, name and namespace of the
+   * VolumeGroupSnapshot object MUST be provided for binding to happen.
+   * This field is immutable after creation.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1Spec#volumeGroupSnapshotRef
+   */
+  readonly volumeGroupSnapshotRef: VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef;
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotContentV1Beta1Spec' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotContentV1Beta1Spec(obj: VolumeGroupSnapshotContentV1Beta1Spec | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'deletionPolicy': obj.deletionPolicy,
+    'driver': obj.driver,
+    'source': toJson_VolumeGroupSnapshotContentV1Beta1SpecSource(obj.source),
+    'volumeGroupSnapshotClassName': obj.volumeGroupSnapshotClassName,
+    'volumeGroupSnapshotRef': toJson_VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef(obj.volumeGroupSnapshotRef),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * DeletionPolicy determines whether this VolumeGroupSnapshotContent and the
+ * physical group snapshot on the underlying storage system should be deleted
+ * when the bound VolumeGroupSnapshot is deleted.
+ * Supported values are "Retain" and "Delete".
+ * "Retain" means that the VolumeGroupSnapshotContent and its physical group
+ * snapshot on underlying storage system are kept.
+ * "Delete" means that the VolumeGroupSnapshotContent and its physical group
+ * snapshot on underlying storage system are deleted.
+ * For dynamically provisioned group snapshots, this field will automatically
+ * be filled in by the CSI snapshotter sidecar with the "DeletionPolicy" field
+ * defined in the corresponding VolumeGroupSnapshotClass.
+ * For pre-existing snapshots, users MUST specify this field when creating the
+ * VolumeGroupSnapshotContent object.
+ * Required.
+ *
+ * @schema VolumeGroupSnapshotContentV1Beta1SpecDeletionPolicy
+ */
+export enum VolumeGroupSnapshotContentV1Beta1SpecDeletionPolicy {
+  /** Delete */
+  DELETE = "Delete",
+  /** Retain */
+  RETAIN = "Retain",
+}
+
+/**
+ * Source specifies whether the snapshot is (or should be) dynamically provisioned
+ * or already exists, and just requires a Kubernetes object representation.
+ * This field is immutable after creation.
+ * Required.
+ *
+ * @schema VolumeGroupSnapshotContentV1Beta1SpecSource
+ */
+export interface VolumeGroupSnapshotContentV1Beta1SpecSource {
+  /**
+   * GroupSnapshotHandles specifies the CSI "group_snapshot_id" of a pre-existing
+   * group snapshot and a list of CSI "snapshot_id" of pre-existing snapshots
+   * on the underlying storage system for which a Kubernetes object
+   * representation was (or should be) created.
+   * This field is immutable.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecSource#groupSnapshotHandles
+   */
+  readonly groupSnapshotHandles?: VolumeGroupSnapshotContentV1Beta1SpecSourceGroupSnapshotHandles;
+
+  /**
+   * VolumeHandles is a list of volume handles on the backend to be snapshotted
+   * together. It is specified for dynamic provisioning of the VolumeGroupSnapshot.
+   * This field is immutable.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecSource#volumeHandles
+   */
+  readonly volumeHandles?: string[];
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotContentV1Beta1SpecSource' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotContentV1Beta1SpecSource(obj: VolumeGroupSnapshotContentV1Beta1SpecSource | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'groupSnapshotHandles': toJson_VolumeGroupSnapshotContentV1Beta1SpecSourceGroupSnapshotHandles(obj.groupSnapshotHandles),
+    'volumeHandles': obj.volumeHandles?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * VolumeGroupSnapshotRef specifies the VolumeGroupSnapshot object to which this
+ * VolumeGroupSnapshotContent object is bound.
+ * VolumeGroupSnapshot.Spec.VolumeGroupSnapshotContentName field must reference to
+ * this VolumeGroupSnapshotContent's name for the bidirectional binding to be valid.
+ * For a pre-existing VolumeGroupSnapshotContent object, name and namespace of the
+ * VolumeGroupSnapshot object MUST be provided for binding to happen.
+ * This field is immutable after creation.
+ * Required.
+ *
+ * @schema VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef
+ */
+export interface VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef {
+  /**
+   * API version of the referent.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef#apiVersion
+   */
+  readonly apiVersion?: string;
+
+  /**
+   * If referring to a piece of an object instead of an entire object, this string
+   * should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2].
+   * For example, if the object reference is to a container within a pod, this would take on a value like:
+   * "spec.containers{name}" (where "name" refers to the name of the container that triggered
+   * the event) or if no container name is specified "spec.containers[2]" (container with
+   * index 2 in this pod). This syntax is chosen only to have some well-defined way of
+   * referencing a part of an object.
+   * TODO: this design is not final and this field is subject to change in the future.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef#fieldPath
+   */
+  readonly fieldPath?: string;
+
+  /**
+   * Kind of the referent.
+   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef#kind
+   */
+  readonly kind?: string;
+
+  /**
+   * Name of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef#name
+   */
+  readonly name?: string;
+
+  /**
+   * Namespace of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * Specific resourceVersion to which this reference is made, if any.
+   * More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef#resourceVersion
+   */
+  readonly resourceVersion?: string;
+
+  /**
+   * UID of the referent.
+   * More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef#uid
+   */
+  readonly uid?: string;
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef(obj: VolumeGroupSnapshotContentV1Beta1SpecVolumeGroupSnapshotRef | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'apiVersion': obj.apiVersion,
+    'fieldPath': obj.fieldPath,
+    'kind': obj.kind,
+    'name': obj.name,
+    'namespace': obj.namespace,
+    'resourceVersion': obj.resourceVersion,
+    'uid': obj.uid,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * GroupSnapshotHandles specifies the CSI "group_snapshot_id" of a pre-existing
+ * group snapshot and a list of CSI "snapshot_id" of pre-existing snapshots
+ * on the underlying storage system for which a Kubernetes object
+ * representation was (or should be) created.
+ * This field is immutable.
+ *
+ * @schema VolumeGroupSnapshotContentV1Beta1SpecSourceGroupSnapshotHandles
+ */
+export interface VolumeGroupSnapshotContentV1Beta1SpecSourceGroupSnapshotHandles {
+  /**
+   * VolumeGroupSnapshotHandle specifies the CSI "group_snapshot_id" of a pre-existing
+   * group snapshot on the underlying storage system for which a Kubernetes object
+   * representation was (or should be) created.
+   * This field is immutable.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecSourceGroupSnapshotHandles#volumeGroupSnapshotHandle
+   */
+  readonly volumeGroupSnapshotHandle: string;
+
+  /**
+   * VolumeSnapshotHandles is a list of CSI "snapshot_id" of pre-existing
+   * snapshots on the underlying storage system for which Kubernetes objects
+   * representation were (or should be) created.
+   * This field is immutable.
+   * Required.
+   *
+   * @schema VolumeGroupSnapshotContentV1Beta1SpecSourceGroupSnapshotHandles#volumeSnapshotHandles
+   */
+  readonly volumeSnapshotHandles: string[];
+
+}
+
+/**
+ * Converts an object of type 'VolumeGroupSnapshotContentV1Beta1SpecSourceGroupSnapshotHandles' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_VolumeGroupSnapshotContentV1Beta1SpecSourceGroupSnapshotHandles(obj: VolumeGroupSnapshotContentV1Beta1SpecSourceGroupSnapshotHandles | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'volumeGroupSnapshotHandle': obj.volumeGroupSnapshotHandle,
+    'volumeSnapshotHandles': obj.volumeSnapshotHandles?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -1283,7 +2128,7 @@ export class VolumeGroupSnapshotContentV1Beta2 extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1312,12 +2157,13 @@ export interface VolumeGroupSnapshotContentV1Beta2Props {
    * @schema VolumeGroupSnapshotContentV1Beta2#spec
    */
   readonly spec: VolumeGroupSnapshotContentV1Beta2Spec;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentV1Beta2Props' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentV1Beta2Props(obj: VolumeGroupSnapshotContentV1Beta2Props | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1327,7 +2173,7 @@ export function toJson_VolumeGroupSnapshotContentV1Beta2Props(obj: VolumeGroupSn
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines properties of a VolumeGroupSnapshotContent created by the underlying storage system.
@@ -1403,12 +2249,13 @@ export interface VolumeGroupSnapshotContentV1Beta2Spec {
    * @schema VolumeGroupSnapshotContentV1Beta2Spec#volumeGroupSnapshotRef
    */
   readonly volumeGroupSnapshotRef: VolumeGroupSnapshotContentV1Beta2SpecVolumeGroupSnapshotRef;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentV1Beta2Spec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentV1Beta2Spec(obj: VolumeGroupSnapshotContentV1Beta2Spec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1421,7 +2268,7 @@ export function toJson_VolumeGroupSnapshotContentV1Beta2Spec(obj: VolumeGroupSna
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DeletionPolicy determines whether this VolumeGroupSnapshotContent and the
@@ -1476,12 +2323,13 @@ export interface VolumeGroupSnapshotContentV1Beta2SpecSource {
    * @schema VolumeGroupSnapshotContentV1Beta2SpecSource#volumeHandles
    */
   readonly volumeHandles?: string[];
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentV1Beta2SpecSource' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentV1Beta2SpecSource(obj: VolumeGroupSnapshotContentV1Beta2SpecSource | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1491,7 +2339,7 @@ export function toJson_VolumeGroupSnapshotContentV1Beta2SpecSource(obj: VolumeGr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * VolumeGroupSnapshotRef specifies the VolumeGroupSnapshot object to which this
@@ -1566,12 +2414,13 @@ export interface VolumeGroupSnapshotContentV1Beta2SpecVolumeGroupSnapshotRef {
    * @schema VolumeGroupSnapshotContentV1Beta2SpecVolumeGroupSnapshotRef#uid
    */
   readonly uid?: string;
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentV1Beta2SpecVolumeGroupSnapshotRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentV1Beta2SpecVolumeGroupSnapshotRef(obj: VolumeGroupSnapshotContentV1Beta2SpecVolumeGroupSnapshotRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1586,7 +2435,7 @@ export function toJson_VolumeGroupSnapshotContentV1Beta2SpecVolumeGroupSnapshotR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GroupSnapshotHandles specifies the CSI "group_snapshot_id" of a pre-existing
@@ -1619,12 +2468,13 @@ export interface VolumeGroupSnapshotContentV1Beta2SpecSourceGroupSnapshotHandles
    * @schema VolumeGroupSnapshotContentV1Beta2SpecSourceGroupSnapshotHandles#volumeSnapshotHandles
    */
   readonly volumeSnapshotHandles: string[];
+
 }
 
 /**
  * Converts an object of type 'VolumeGroupSnapshotContentV1Beta2SpecSourceGroupSnapshotHandles' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeGroupSnapshotContentV1Beta2SpecSourceGroupSnapshotHandles(obj: VolumeGroupSnapshotContentV1Beta2SpecSourceGroupSnapshotHandles | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1634,5 +2484,5 @@ export function toJson_VolumeGroupSnapshotContentV1Beta2SpecSourceGroupSnapshotH
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 

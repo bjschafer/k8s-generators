@@ -47,7 +47,7 @@ export class IngressRoute extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -74,12 +74,13 @@ export interface IngressRouteProps {
    * @schema IngressRoute#spec
    */
   readonly spec: IngressRouteSpec;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteProps(obj: IngressRouteProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -89,7 +90,7 @@ export function toJson_IngressRouteProps(obj: IngressRouteProps | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IngressRouteSpec defines the desired state of IngressRoute.
@@ -100,7 +101,7 @@ export interface IngressRouteSpec {
   /**
    * EntryPoints defines the list of entry point names to bind to.
    * Entry points have to be configured in the static configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/install-configuration/entrypoints/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/install-configuration/entrypoints/
    * Default: all.
    *
    * @schema IngressRouteSpec#entryPoints
@@ -108,9 +109,16 @@ export interface IngressRouteSpec {
   readonly entryPoints?: string[];
 
   /**
+   * IngressClassName defines the name of the IngressClass cluster resource.
+   *
+   * @schema IngressRouteSpec#ingressClassName
+   */
+  readonly ingressClassName?: string;
+
+  /**
    * ParentRefs defines references to parent IngressRoute resources for multi-layer routing.
    * When set, this IngressRoute's routers will be children of the referenced parent IngressRoute's routers.
-   * More info: https://doc.traefik.io/traefik/v3.6/routing/routers/#parentrefs
+   * More info: https://doc.traefik.io/traefik/v3.7/routing/routers/#parentrefs
    *
    * @schema IngressRouteSpec#parentRefs
    */
@@ -125,21 +133,23 @@ export interface IngressRouteSpec {
 
   /**
    * TLS defines the TLS configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/routing/router/#tls
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/routing/router/#tls
    *
    * @schema IngressRouteSpec#tls
    */
   readonly tls?: IngressRouteSpecTls;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpec(obj: IngressRouteSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'entryPoints': obj.entryPoints?.map(y => y),
+    'ingressClassName': obj.ingressClassName,
     'parentRefs': obj.parentRefs?.map(y => toJson_IngressRouteSpecParentRefs(y)),
     'routes': obj.routes?.map(y => toJson_IngressRouteSpecRoutes(y)),
     'tls': toJson_IngressRouteSpecTls(obj.tls),
@@ -147,7 +157,7 @@ export function toJson_IngressRouteSpec(obj: IngressRouteSpec | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IngressRouteRef is a reference to an IngressRoute resource.
@@ -168,12 +178,13 @@ export interface IngressRouteSpecParentRefs {
    * @schema IngressRouteSpecParentRefs#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecParentRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecParentRefs(obj: IngressRouteSpecParentRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -183,7 +194,7 @@ export function toJson_IngressRouteSpecParentRefs(obj: IngressRouteSpecParentRef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Route holds the HTTP route configuration.
@@ -202,7 +213,7 @@ export interface IngressRouteSpecRoutes {
 
   /**
    * Match defines the router's rule.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/routing/rules-and-priority/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/routing/rules-and-priority/
    *
    * @schema IngressRouteSpecRoutes#match
    */
@@ -210,7 +221,7 @@ export interface IngressRouteSpecRoutes {
 
   /**
    * Middlewares defines the list of references to Middleware resources.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/kubernetes/crd/http/middleware/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/kubernetes/crd/http/middleware/
    *
    * @schema IngressRouteSpecRoutes#middlewares
    */
@@ -218,7 +229,7 @@ export interface IngressRouteSpecRoutes {
 
   /**
    * Observability defines the observability configuration for a router.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/routing/observability/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/routing/observability/
    *
    * @schema IngressRouteSpecRoutes#observability
    */
@@ -226,7 +237,7 @@ export interface IngressRouteSpecRoutes {
 
   /**
    * Priority defines the router's priority.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/routing/rules-and-priority/#priority
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/routing/rules-and-priority/#priority
    *
    * @schema IngressRouteSpecRoutes#priority
    */
@@ -242,19 +253,20 @@ export interface IngressRouteSpecRoutes {
 
   /**
    * Syntax defines the router's rule syntax.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/routing/rules-and-priority/#rulesyntax
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/routing/rules-and-priority/#rulesyntax
    *
    * Deprecated: Please do not use this field and rewrite the router rules to use the v3 syntax.
    *
    * @schema IngressRouteSpecRoutes#syntax
    */
   readonly syntax?: string;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecRoutes(obj: IngressRouteSpecRoutes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -269,11 +281,11 @@ export function toJson_IngressRouteSpecRoutes(obj: IngressRouteSpecRoutes | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TLS defines the TLS configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/routing/router/#tls
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/routing/router/#tls
  *
  * @schema IngressRouteSpecTls
  */
@@ -281,7 +293,7 @@ export interface IngressRouteSpecTls {
   /**
    * CertResolver defines the name of the certificate resolver to use.
    * Cert resolvers have to be configured in the static configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/install-configuration/tls/certificate-resolvers/acme/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/install-configuration/tls/certificate-resolvers/acme/
    *
    * @schema IngressRouteSpecTls#certResolver
    */
@@ -289,7 +301,7 @@ export interface IngressRouteSpecTls {
 
   /**
    * Domains defines the list of domains that will be used to issue certificates.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-certificates/#domains
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-certificates/#domains
    *
    * @schema IngressRouteSpecTls#domains
    */
@@ -298,7 +310,7 @@ export interface IngressRouteSpecTls {
   /**
    * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.
    * If not defined, the `default` TLSOption is used.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-options/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-options/
    *
    * @schema IngressRouteSpecTls#options
    */
@@ -318,12 +330,13 @@ export interface IngressRouteSpecTls {
    * @schema IngressRouteSpecTls#store
    */
   readonly store?: IngressRouteSpecTlsStore;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecTls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecTls(obj: IngressRouteSpecTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -336,7 +349,7 @@ export function toJson_IngressRouteSpecTls(obj: IngressRouteSpecTls | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kind defines the kind of the route.
@@ -369,12 +382,13 @@ export interface IngressRouteSpecRoutesMiddlewares {
    * @schema IngressRouteSpecRoutesMiddlewares#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesMiddlewares' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecRoutesMiddlewares(obj: IngressRouteSpecRoutesMiddlewares | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -384,11 +398,11 @@ export function toJson_IngressRouteSpecRoutesMiddlewares(obj: IngressRouteSpecRo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Observability defines the observability configuration for a router.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/routing/observability/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/routing/observability/
  *
  * @schema IngressRouteSpecRoutesObservability
  */
@@ -420,12 +434,13 @@ export interface IngressRouteSpecRoutesObservability {
    * @schema IngressRouteSpecRoutesObservability#tracing
    */
   readonly tracing?: boolean;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesObservability' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecRoutesObservability(obj: IngressRouteSpecRoutesObservability | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -437,7 +452,7 @@ export function toJson_IngressRouteSpecRoutesObservability(obj: IngressRouteSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Service defines an upstream HTTP service to proxy traffic to.
@@ -458,6 +473,13 @@ export interface IngressRouteSpecRoutesServices {
    * @schema IngressRouteSpecRoutesServices#kind
    */
   readonly kind?: IngressRouteSpecRoutesServicesKind;
+
+  /**
+   * Middlewares defines the list of references to Middleware resources to apply to the service.
+   *
+   * @schema IngressRouteSpecRoutesServices#middlewares
+   */
+  readonly middlewares?: IngressRouteSpecRoutesServicesMiddlewares[];
 
   /**
    * Name defines the name of the referenced Kubernetes Service or TraefikService.
@@ -543,7 +565,7 @@ export interface IngressRouteSpecRoutesServices {
 
   /**
    * Sticky defines the sticky sessions configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
    *
    * @schema IngressRouteSpecRoutesServices#sticky
    */
@@ -565,17 +587,19 @@ export interface IngressRouteSpecRoutesServices {
    * @schema IngressRouteSpecRoutesServices#weight
    */
   readonly weight?: number;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServices' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecRoutesServices(obj: IngressRouteSpecRoutesServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'healthCheck': toJson_IngressRouteSpecRoutesServicesHealthCheck(obj.healthCheck),
     'kind': obj.kind,
+    'middlewares': obj.middlewares?.map(y => toJson_IngressRouteSpecRoutesServicesMiddlewares(y)),
     'name': obj.name,
     'namespace': obj.namespace,
     'nativeLB': obj.nativeLb,
@@ -593,7 +617,7 @@ export function toJson_IngressRouteSpecRoutesServices(obj: IngressRouteSpecRoute
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Domain holds a domain name with SANs.
@@ -614,12 +638,13 @@ export interface IngressRouteSpecTlsDomains {
    * @schema IngressRouteSpecTlsDomains#sans
    */
   readonly sans?: string[];
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecTlsDomains' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecTlsDomains(obj: IngressRouteSpecTlsDomains | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -629,19 +654,19 @@ export function toJson_IngressRouteSpecTlsDomains(obj: IngressRouteSpecTlsDomain
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.
  * If not defined, the `default` TLSOption is used.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-options/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-options/
  *
  * @schema IngressRouteSpecTlsOptions
  */
 export interface IngressRouteSpecTlsOptions {
   /**
    * Name defines the name of the referenced TLSOption.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/kubernetes/crd/http/tlsoption/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/kubernetes/crd/http/tlsoption/
    *
    * @schema IngressRouteSpecTlsOptions#name
    */
@@ -649,17 +674,18 @@ export interface IngressRouteSpecTlsOptions {
 
   /**
    * Namespace defines the namespace of the referenced TLSOption.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/kubernetes/crd/http/tlsoption/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/kubernetes/crd/http/tlsoption/
    *
    * @schema IngressRouteSpecTlsOptions#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecTlsOptions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecTlsOptions(obj: IngressRouteSpecTlsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -669,7 +695,7 @@ export function toJson_IngressRouteSpecTlsOptions(obj: IngressRouteSpecTlsOption
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Store defines the reference to the TLSStore, that will be used to store certificates.
@@ -680,7 +706,7 @@ export function toJson_IngressRouteSpecTlsOptions(obj: IngressRouteSpecTlsOption
 export interface IngressRouteSpecTlsStore {
   /**
    * Name defines the name of the referenced TLSStore.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/kubernetes/crd/http/tlsstore/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/kubernetes/crd/http/tlsstore/
    *
    * @schema IngressRouteSpecTlsStore#name
    */
@@ -688,17 +714,18 @@ export interface IngressRouteSpecTlsStore {
 
   /**
    * Namespace defines the namespace of the referenced TLSStore.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/kubernetes/crd/http/tlsstore/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/kubernetes/crd/http/tlsstore/
    *
    * @schema IngressRouteSpecTlsStore#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecTlsStore' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecTlsStore(obj: IngressRouteSpecTlsStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -708,7 +735,7 @@ export function toJson_IngressRouteSpecTlsStore(obj: IngressRouteSpecTlsStore | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TraceVerbosity defines the verbosity level of the tracing for this router.
@@ -818,12 +845,13 @@ export interface IngressRouteSpecRoutesServicesHealthCheck {
    * @schema IngressRouteSpecRoutesServicesHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: IngressRouteSpecRoutesServicesHealthCheckUnhealthyInterval;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServicesHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecRoutesServicesHealthCheck(obj: IngressRouteSpecRoutesServicesHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -843,7 +871,7 @@ export function toJson_IngressRouteSpecRoutesServicesHealthCheck(obj: IngressRou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -856,6 +884,43 @@ export enum IngressRouteSpecRoutesServicesKind {
   /** TraefikService */
   TRAEFIK_SERVICE = "TraefikService",
 }
+
+/**
+ * MiddlewareRef is a reference to a Middleware resource.
+ *
+ * @schema IngressRouteSpecRoutesServicesMiddlewares
+ */
+export interface IngressRouteSpecRoutesServicesMiddlewares {
+  /**
+   * Name defines the name of the referenced Middleware resource.
+   *
+   * @schema IngressRouteSpecRoutesServicesMiddlewares#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Middleware resource.
+   *
+   * @schema IngressRouteSpecRoutesServicesMiddlewares#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'IngressRouteSpecRoutesServicesMiddlewares' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_IngressRouteSpecRoutesServicesMiddlewares(obj: IngressRouteSpecRoutesServicesMiddlewares | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * PassiveHealthCheck defines passive health checks for ExternalName services.
@@ -876,12 +941,13 @@ export interface IngressRouteSpecRoutesServicesPassiveHealthCheck {
    * @schema IngressRouteSpecRoutesServicesPassiveHealthCheck#maxFailedAttempts
    */
   readonly maxFailedAttempts?: number;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServicesPassiveHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecRoutesServicesPassiveHealthCheck(obj: IngressRouteSpecRoutesServicesPassiveHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -891,7 +957,7 @@ export function toJson_IngressRouteSpecRoutesServicesPassiveHealthCheck(obj: Ing
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -926,12 +992,13 @@ export interface IngressRouteSpecRoutesServicesResponseForwarding {
    * @schema IngressRouteSpecRoutesServicesResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServicesResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecRoutesServicesResponseForwarding(obj: IngressRouteSpecRoutesServicesResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -940,11 +1007,11 @@ export function toJson_IngressRouteSpecRoutesServicesResponseForwarding(obj: Ing
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
  *
  * @schema IngressRouteSpecRoutesServicesSticky
  */
@@ -955,12 +1022,13 @@ export interface IngressRouteSpecRoutesServicesSticky {
    * @schema IngressRouteSpecRoutesServicesSticky#cookie
    */
   readonly cookie?: IngressRouteSpecRoutesServicesStickyCookie;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServicesSticky' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecRoutesServicesSticky(obj: IngressRouteSpecRoutesServicesSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -969,7 +1037,7 @@ export function toJson_IngressRouteSpecRoutesServicesSticky(obj: IngressRouteSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -1119,12 +1187,13 @@ export interface IngressRouteSpecRoutesServicesStickyCookie {
    * @schema IngressRouteSpecRoutesServicesStickyCookie#secure
    */
   readonly secure?: boolean;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteSpecRoutesServicesStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteSpecRoutesServicesStickyCookie(obj: IngressRouteSpecRoutesServicesStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1139,7 +1208,7 @@ export function toJson_IngressRouteSpecRoutesServicesStickyCookie(obj: IngressRo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SameSite defines the same site policy.
@@ -1201,7 +1270,7 @@ export class IngressRouteTcp extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1228,12 +1297,13 @@ export interface IngressRouteTcpProps {
    * @schema IngressRouteTCP#spec
    */
   readonly spec: IngressRouteTcpSpec;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpProps(obj: IngressRouteTcpProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1243,7 +1313,7 @@ export function toJson_IngressRouteTcpProps(obj: IngressRouteTcpProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IngressRouteTCPSpec defines the desired state of IngressRouteTCP.
@@ -1254,12 +1324,19 @@ export interface IngressRouteTcpSpec {
   /**
    * EntryPoints defines the list of entry point names to bind to.
    * Entry points have to be configured in the static configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/install-configuration/entrypoints/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/install-configuration/entrypoints/
    * Default: all.
    *
    * @schema IngressRouteTcpSpec#entryPoints
    */
   readonly entryPoints?: string[];
+
+  /**
+   * IngressClassName defines the name of the IngressClass cluster resource.
+   *
+   * @schema IngressRouteTcpSpec#ingressClassName
+   */
+  readonly ingressClassName?: string;
 
   /**
    * Routes defines the list of routes.
@@ -1270,28 +1347,30 @@ export interface IngressRouteTcpSpec {
 
   /**
    * TLS defines the TLS configuration on a layer 4 / TCP Route.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/routing/router/#tls
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/routing/router/#tls
    *
    * @schema IngressRouteTcpSpec#tls
    */
   readonly tls?: IngressRouteTcpSpecTls;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpSpec(obj: IngressRouteTcpSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'entryPoints': obj.entryPoints?.map(y => y),
+    'ingressClassName': obj.ingressClassName,
     'routes': obj.routes?.map(y => toJson_IngressRouteTcpSpecRoutes(y)),
     'tls': toJson_IngressRouteTcpSpecTls(obj.tls),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RouteTCP holds the TCP route configuration.
@@ -1301,7 +1380,7 @@ export function toJson_IngressRouteTcpSpec(obj: IngressRouteTcpSpec | undefined)
 export interface IngressRouteTcpSpecRoutes {
   /**
    * Match defines the router's rule.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/routing/rules-and-priority/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/routing/rules-and-priority/
    *
    * @schema IngressRouteTcpSpecRoutes#match
    */
@@ -1316,7 +1395,7 @@ export interface IngressRouteTcpSpecRoutes {
 
   /**
    * Priority defines the router's priority.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/routing/rules-and-priority/#priority
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/routing/rules-and-priority/#priority
    *
    * @schema IngressRouteTcpSpecRoutes#priority
    */
@@ -1331,19 +1410,20 @@ export interface IngressRouteTcpSpecRoutes {
 
   /**
    * Syntax defines the router's rule syntax.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/routing/rules-and-priority/#rulesyntax
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/routing/rules-and-priority/#rulesyntax
    *
    * Deprecated: Please do not use this field and rewrite the router rules to use the v3 syntax.
    *
    * @schema IngressRouteTcpSpecRoutes#syntax
    */
   readonly syntax?: IngressRouteTcpSpecRoutesSyntax;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecRoutes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpSpecRoutes(obj: IngressRouteTcpSpecRoutes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1356,11 +1436,11 @@ export function toJson_IngressRouteTcpSpecRoutes(obj: IngressRouteTcpSpecRoutes 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TLS defines the TLS configuration on a layer 4 / TCP Route.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/routing/router/#tls
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/routing/router/#tls
  *
  * @schema IngressRouteTcpSpecTls
  */
@@ -1368,7 +1448,7 @@ export interface IngressRouteTcpSpecTls {
   /**
    * CertResolver defines the name of the certificate resolver to use.
    * Cert resolvers have to be configured in the static configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/install-configuration/tls/certificate-resolvers/acme/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/install-configuration/tls/certificate-resolvers/acme/
    *
    * @schema IngressRouteTcpSpecTls#certResolver
    */
@@ -1376,7 +1456,7 @@ export interface IngressRouteTcpSpecTls {
 
   /**
    * Domains defines the list of domains that will be used to issue certificates.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/tls/#domains
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/tls/#domains
    *
    * @schema IngressRouteTcpSpecTls#domains
    */
@@ -1385,7 +1465,7 @@ export interface IngressRouteTcpSpecTls {
   /**
    * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.
    * If not defined, the `default` TLSOption is used.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/tls/#tls-options
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/tls/#tls-options
    *
    * @schema IngressRouteTcpSpecTls#options
    */
@@ -1412,12 +1492,13 @@ export interface IngressRouteTcpSpecTls {
    * @schema IngressRouteTcpSpecTls#store
    */
   readonly store?: IngressRouteTcpSpecTlsStore;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecTls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpSpecTls(obj: IngressRouteTcpSpecTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1431,7 +1512,7 @@ export function toJson_IngressRouteTcpSpecTls(obj: IngressRouteTcpSpecTls | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ObjectReference is a generic reference to a Traefik resource.
@@ -1452,12 +1533,13 @@ export interface IngressRouteTcpSpecRoutesMiddlewares {
    * @schema IngressRouteTcpSpecRoutesMiddlewares#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecRoutesMiddlewares' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpSpecRoutesMiddlewares(obj: IngressRouteTcpSpecRoutesMiddlewares | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1467,7 +1549,7 @@ export function toJson_IngressRouteTcpSpecRoutesMiddlewares(obj: IngressRouteTcp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceTCP defines an upstream TCP service to proxy traffic to.
@@ -1519,7 +1601,7 @@ export interface IngressRouteTcpSpecRoutesServices {
 
   /**
    * ProxyProtocol defines the PROXY protocol configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/service/#proxy-protocol
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/service/#proxy-protocol
    *
    * Deprecated: ProxyProtocol will not be supported in future APIVersions, please use ServersTransport to configure ProxyProtocol instead.
    *
@@ -1562,12 +1644,13 @@ export interface IngressRouteTcpSpecRoutesServices {
    * @schema IngressRouteTcpSpecRoutesServices#weight
    */
   readonly weight?: number;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecRoutesServices' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpSpecRoutesServices(obj: IngressRouteTcpSpecRoutesServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1585,11 +1668,11 @@ export function toJson_IngressRouteTcpSpecRoutesServices(obj: IngressRouteTcpSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Syntax defines the router's rule syntax.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/routing/rules-and-priority/#rulesyntax
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/routing/rules-and-priority/#rulesyntax
  *
  * Deprecated: Please do not use this field and rewrite the router rules to use the v3 syntax.
  *
@@ -1621,12 +1704,13 @@ export interface IngressRouteTcpSpecTlsDomains {
    * @schema IngressRouteTcpSpecTlsDomains#sans
    */
   readonly sans?: string[];
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecTlsDomains' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpSpecTlsDomains(obj: IngressRouteTcpSpecTlsDomains | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1636,12 +1720,12 @@ export function toJson_IngressRouteTcpSpecTlsDomains(obj: IngressRouteTcpSpecTls
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Options defines the reference to a TLSOption, that specifies the parameters of the TLS connection.
  * If not defined, the `default` TLSOption is used.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/tls/#tls-options
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/tls/#tls-options
  *
  * @schema IngressRouteTcpSpecTlsOptions
  */
@@ -1659,12 +1743,13 @@ export interface IngressRouteTcpSpecTlsOptions {
    * @schema IngressRouteTcpSpecTlsOptions#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecTlsOptions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpSpecTlsOptions(obj: IngressRouteTcpSpecTlsOptions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1674,7 +1759,7 @@ export function toJson_IngressRouteTcpSpecTlsOptions(obj: IngressRouteTcpSpecTls
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Store defines the reference to the TLSStore, that will be used to store certificates.
@@ -1696,12 +1781,13 @@ export interface IngressRouteTcpSpecTlsStore {
    * @schema IngressRouteTcpSpecTlsStore#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecTlsStore' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpSpecTlsStore(obj: IngressRouteTcpSpecTlsStore | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1711,7 +1797,7 @@ export function toJson_IngressRouteTcpSpecTlsStore(obj: IngressRouteTcpSpecTlsSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -1732,7 +1818,7 @@ export class IngressRouteTcpSpecRoutesServicesPort {
 
 /**
  * ProxyProtocol defines the PROXY protocol configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/service/#proxy-protocol
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/service/#proxy-protocol
  *
  * Deprecated: ProxyProtocol will not be supported in future APIVersions, please use ServersTransport to configure ProxyProtocol instead.
  *
@@ -1745,12 +1831,13 @@ export interface IngressRouteTcpSpecRoutesServicesProxyProtocol {
    * @schema IngressRouteTcpSpecRoutesServicesProxyProtocol#version
    */
   readonly version?: number;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteTcpSpecRoutesServicesProxyProtocol' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteTcpSpecRoutesServicesProxyProtocol(obj: IngressRouteTcpSpecRoutesServicesProxyProtocol | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1759,7 +1846,7 @@ export function toJson_IngressRouteTcpSpecRoutesServicesProxyProtocol(obj: Ingre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -1806,7 +1893,7 @@ export class IngressRouteUdp extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1833,12 +1920,13 @@ export interface IngressRouteUdpProps {
    * @schema IngressRouteUDP#spec
    */
   readonly spec: IngressRouteUdpSpec;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteUdpProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteUdpProps(obj: IngressRouteUdpProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1848,7 +1936,7 @@ export function toJson_IngressRouteUdpProps(obj: IngressRouteUdpProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IngressRouteUDPSpec defines the desired state of a IngressRouteUDP.
@@ -1859,7 +1947,7 @@ export interface IngressRouteUdpSpec {
   /**
    * EntryPoints defines the list of entry point names to bind to.
    * Entry points have to be configured in the static configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/install-configuration/entrypoints/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/install-configuration/entrypoints/
    * Default: all.
    *
    * @schema IngressRouteUdpSpec#entryPoints
@@ -1867,27 +1955,36 @@ export interface IngressRouteUdpSpec {
   readonly entryPoints?: string[];
 
   /**
+   * IngressClassName defines the name of the IngressClass cluster resource.
+   *
+   * @schema IngressRouteUdpSpec#ingressClassName
+   */
+  readonly ingressClassName?: string;
+
+  /**
    * Routes defines the list of routes.
    *
    * @schema IngressRouteUdpSpec#routes
    */
   readonly routes: IngressRouteUdpSpecRoutes[];
+
 }
 
 /**
  * Converts an object of type 'IngressRouteUdpSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteUdpSpec(obj: IngressRouteUdpSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'entryPoints': obj.entryPoints?.map(y => y),
+    'ingressClassName': obj.ingressClassName,
     'routes': obj.routes?.map(y => toJson_IngressRouteUdpSpecRoutes(y)),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RouteUDP holds the UDP route configuration.
@@ -1901,12 +1998,13 @@ export interface IngressRouteUdpSpecRoutes {
    * @schema IngressRouteUdpSpecRoutes#services
    */
   readonly services?: IngressRouteUdpSpecRoutesServices[];
+
 }
 
 /**
  * Converts an object of type 'IngressRouteUdpSpecRoutes' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteUdpSpecRoutes(obj: IngressRouteUdpSpecRoutes | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1915,7 +2013,7 @@ export function toJson_IngressRouteUdpSpecRoutes(obj: IngressRouteUdpSpecRoutes 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServiceUDP defines an upstream UDP service to proxy traffic to.
@@ -1971,12 +2069,13 @@ export interface IngressRouteUdpSpecRoutesServices {
    * @schema IngressRouteUdpSpecRoutesServices#weight
    */
   readonly weight?: number;
+
 }
 
 /**
  * Converts an object of type 'IngressRouteUdpSpecRoutesServices' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_IngressRouteUdpSpecRoutesServices(obj: IngressRouteUdpSpecRoutesServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1990,7 +2089,7 @@ export function toJson_IngressRouteUdpSpecRoutesServices(obj: IngressRouteUdpSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -2012,7 +2111,7 @@ export class IngressRouteUdpSpecRoutesServicesPort {
 
 /**
  * Middleware is the CRD implementation of a Traefik Middleware.
-More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/overview/
+More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/overview/
  *
  * @schema Middleware
  */
@@ -2055,7 +2154,7 @@ export class Middleware extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -2067,7 +2166,7 @@ export class Middleware extends ApiObject {
 
 /**
  * Middleware is the CRD implementation of a Traefik Middleware.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/overview/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/overview/
  *
  * @schema Middleware
  */
@@ -2083,12 +2182,13 @@ export interface MiddlewareProps {
    * @schema Middleware#spec
    */
   readonly spec: MiddlewareSpec;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareProps(obj: MiddlewareProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2098,7 +2198,7 @@ export function toJson_MiddlewareProps(obj: MiddlewareProps | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * MiddlewareSpec defines the desired state of a Middleware.
@@ -2109,7 +2209,7 @@ export interface MiddlewareSpec {
   /**
    * AddPrefix holds the add prefix middleware configuration.
    * This middleware updates the path of a request before forwarding it.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/addprefix/
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/addprefix/
    *
    * @schema MiddlewareSpec#addPrefix
    */
@@ -2118,7 +2218,7 @@ export interface MiddlewareSpec {
   /**
    * BasicAuth holds the basic auth middleware configuration.
    * This middleware restricts access to your services to known users.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/basicauth/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/basicauth/
    *
    * @schema MiddlewareSpec#basicAuth
    */
@@ -2127,7 +2227,7 @@ export interface MiddlewareSpec {
   /**
    * Buffering holds the buffering middleware configuration.
    * This middleware retries or limits the size of requests that can be forwarded to backends.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/buffering/#maxrequestbodybytes
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/buffering/#maxrequestbodybytes
    *
    * @schema MiddlewareSpec#buffering
    */
@@ -2136,7 +2236,7 @@ export interface MiddlewareSpec {
   /**
    * Chain holds the configuration of the chain middleware.
    * This middleware enables to define reusable combinations of other pieces of middleware.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/chain/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/chain/
    *
    * @schema MiddlewareSpec#chain
    */
@@ -2152,7 +2252,7 @@ export interface MiddlewareSpec {
   /**
    * Compress holds the compress middleware configuration.
    * This middleware compresses responses before sending them to the client, using gzip, brotli, or zstd compression.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/compress/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/compress/
    *
    * @schema MiddlewareSpec#compress
    */
@@ -2169,16 +2269,23 @@ export interface MiddlewareSpec {
   /**
    * DigestAuth holds the digest auth middleware configuration.
    * This middleware restricts access to your services to known users.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/digestauth/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/digestauth/
    *
    * @schema MiddlewareSpec#digestAuth
    */
   readonly digestAuth?: MiddlewareSpecDigestAuth;
 
   /**
+   * EncodedCharacters configures which encoded characters are allowed in the request path.
+   *
+   * @schema MiddlewareSpec#encodedCharacters
+   */
+  readonly encodedCharacters?: MiddlewareSpecEncodedCharacters;
+
+  /**
    * ErrorPage holds the custom error middleware configuration.
    * This middleware returns a custom page in lieu of the default, according to configured ranges of HTTP Status codes.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/errorpages/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/errorpages/
    *
    * @schema MiddlewareSpec#errors
    */
@@ -2187,7 +2294,7 @@ export interface MiddlewareSpec {
   /**
    * ForwardAuth holds the forward auth middleware configuration.
    * This middleware delegates the request authentication to a Service.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/forwardauth/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/forwardauth/
    *
    * @schema MiddlewareSpec#forwardAuth
    */
@@ -2204,7 +2311,7 @@ export interface MiddlewareSpec {
   /**
    * Headers holds the headers middleware configuration.
    * This middleware manages the requests and responses headers.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/headers/#customrequestheaders
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/headers/#customrequestheaders
    *
    * @schema MiddlewareSpec#headers
    */
@@ -2213,7 +2320,7 @@ export interface MiddlewareSpec {
   /**
    * InFlightReq holds the in-flight request middleware configuration.
    * This middleware limits the number of requests being processed and served concurrently.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/inflightreq/
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/inflightreq/
    *
    * @schema MiddlewareSpec#inFlightReq
    */
@@ -2222,7 +2329,7 @@ export interface MiddlewareSpec {
   /**
    * IPAllowList holds the IP allowlist middleware configuration.
    * This middleware limits allowed requests based on the client IP.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/
    *
    * @schema MiddlewareSpec#ipAllowList
    */
@@ -2238,7 +2345,7 @@ export interface MiddlewareSpec {
   /**
    * PassTLSClientCert holds the pass TLS client cert middleware configuration.
    * This middleware adds the selected data from the passed client TLS certificate to a header.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/passtlsclientcert/
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/passtlsclientcert/
    *
    * @schema MiddlewareSpec#passTLSClientCert
    */
@@ -2246,7 +2353,7 @@ export interface MiddlewareSpec {
 
   /**
    * Plugin defines the middleware plugin configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/overview/#community-middlewares
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/overview/#community-middlewares
    *
    * @schema MiddlewareSpec#plugin
    */
@@ -2255,7 +2362,7 @@ export interface MiddlewareSpec {
   /**
    * RateLimit holds the rate limit configuration.
    * This middleware ensures that services will receive a fair amount of requests, and allows one to define what fair is.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/ratelimit/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/ratelimit/
    *
    * @schema MiddlewareSpec#rateLimit
    */
@@ -2264,7 +2371,7 @@ export interface MiddlewareSpec {
   /**
    * RedirectRegex holds the redirect regex middleware configuration.
    * This middleware redirects a request using regex matching and replacement.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/redirectregex/#regex
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/redirectregex/#regex
    *
    * @schema MiddlewareSpec#redirectRegex
    */
@@ -2273,7 +2380,7 @@ export interface MiddlewareSpec {
   /**
    * RedirectScheme holds the redirect scheme middleware configuration.
    * This middleware redirects requests from a scheme/port to another.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/redirectscheme/
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/redirectscheme/
    *
    * @schema MiddlewareSpec#redirectScheme
    */
@@ -2282,7 +2389,7 @@ export interface MiddlewareSpec {
   /**
    * ReplacePath holds the replace path middleware configuration.
    * This middleware replaces the path of the request URL and store the original path in an X-Replaced-Path header.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/replacepath/
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/replacepath/
    *
    * @schema MiddlewareSpec#replacePath
    */
@@ -2291,7 +2398,7 @@ export interface MiddlewareSpec {
   /**
    * ReplacePathRegex holds the replace path regex middleware configuration.
    * This middleware replaces the path of a URL using regex matching and replacement.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/replacepathregex/
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/replacepathregex/
    *
    * @schema MiddlewareSpec#replacePathRegex
    */
@@ -2301,7 +2408,7 @@ export interface MiddlewareSpec {
    * Retry holds the retry middleware configuration.
    * This middleware reissues requests a given number of times to a backend server if that server does not reply.
    * As soon as the server answers, the middleware stops retrying, regardless of the response status.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/retry/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/retry/
    *
    * @schema MiddlewareSpec#retry
    */
@@ -2310,7 +2417,7 @@ export interface MiddlewareSpec {
   /**
    * StripPrefix holds the strip prefix middleware configuration.
    * This middleware removes the specified prefixes from the URL path.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/stripprefix/
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/stripprefix/
    *
    * @schema MiddlewareSpec#stripPrefix
    */
@@ -2319,17 +2426,18 @@ export interface MiddlewareSpec {
   /**
    * StripPrefixRegex holds the strip prefix regex middleware configuration.
    * This middleware removes the matching prefixes from the URL path.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/stripprefixregex/
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/stripprefixregex/
    *
    * @schema MiddlewareSpec#stripPrefixRegex
    */
   readonly stripPrefixRegex?: MiddlewareSpecStripPrefixRegex;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpec(obj: MiddlewareSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2341,6 +2449,7 @@ export function toJson_MiddlewareSpec(obj: MiddlewareSpec | undefined): Record<s
     'compress': toJson_MiddlewareSpecCompress(obj.compress),
     'contentType': toJson_MiddlewareSpecContentType(obj.contentType),
     'digestAuth': toJson_MiddlewareSpecDigestAuth(obj.digestAuth),
+    'encodedCharacters': toJson_MiddlewareSpecEncodedCharacters(obj.encodedCharacters),
     'errors': toJson_MiddlewareSpecErrors(obj.errors),
     'forwardAuth': toJson_MiddlewareSpecForwardAuth(obj.forwardAuth),
     'grpcWeb': toJson_MiddlewareSpecGrpcWeb(obj.grpcWeb),
@@ -2362,12 +2471,12 @@ export function toJson_MiddlewareSpec(obj: MiddlewareSpec | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AddPrefix holds the add prefix middleware configuration.
  * This middleware updates the path of a request before forwarding it.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/addprefix/
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/addprefix/
  *
  * @schema MiddlewareSpecAddPrefix
  */
@@ -2379,12 +2488,13 @@ export interface MiddlewareSpecAddPrefix {
    * @schema MiddlewareSpecAddPrefix#prefix
    */
   readonly prefix?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecAddPrefix' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecAddPrefix(obj: MiddlewareSpecAddPrefix | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2393,19 +2503,19 @@ export function toJson_MiddlewareSpecAddPrefix(obj: MiddlewareSpecAddPrefix | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BasicAuth holds the basic auth middleware configuration.
  * This middleware restricts access to your services to known users.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/basicauth/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/basicauth/
  *
  * @schema MiddlewareSpecBasicAuth
  */
 export interface MiddlewareSpecBasicAuth {
   /**
    * HeaderField defines a header field to store the authenticated user.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/basicauth/#headerfield
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/basicauth/#headerfield
    *
    * @schema MiddlewareSpecBasicAuth#headerField
    */
@@ -2433,12 +2543,13 @@ export interface MiddlewareSpecBasicAuth {
    * @schema MiddlewareSpecBasicAuth#secret
    */
   readonly secret?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecBasicAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecBasicAuth(obj: MiddlewareSpecBasicAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2450,12 +2561,12 @@ export function toJson_MiddlewareSpecBasicAuth(obj: MiddlewareSpecBasicAuth | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Buffering holds the buffering middleware configuration.
  * This middleware retries or limits the size of requests that can be forwarded to backends.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/buffering/#maxrequestbodybytes
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/buffering/#maxrequestbodybytes
  *
  * @schema MiddlewareSpecBuffering
  */
@@ -2497,17 +2608,18 @@ export interface MiddlewareSpecBuffering {
   /**
    * RetryExpression defines the retry conditions.
    * It is a logical combination of functions with operators AND (&&) and OR (||).
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/buffering/#retryexpression
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/buffering/#retryexpression
    *
    * @schema MiddlewareSpecBuffering#retryExpression
    */
   readonly retryExpression?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecBuffering' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecBuffering(obj: MiddlewareSpecBuffering | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2520,12 +2632,12 @@ export function toJson_MiddlewareSpecBuffering(obj: MiddlewareSpecBuffering | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Chain holds the configuration of the chain middleware.
  * This middleware enables to define reusable combinations of other pieces of middleware.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/chain/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/chain/
  *
  * @schema MiddlewareSpecChain
  */
@@ -2536,12 +2648,13 @@ export interface MiddlewareSpecChain {
    * @schema MiddlewareSpecChain#middlewares
    */
   readonly middlewares?: MiddlewareSpecChainMiddlewares[];
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecChain' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecChain(obj: MiddlewareSpecChain | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2550,7 +2663,7 @@ export function toJson_MiddlewareSpecChain(obj: MiddlewareSpecChain | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CircuitBreaker holds the circuit breaker configuration.
@@ -2592,12 +2705,13 @@ export interface MiddlewareSpecCircuitBreaker {
    * @schema MiddlewareSpecCircuitBreaker#responseCode
    */
   readonly responseCode?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecCircuitBreaker' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecCircuitBreaker(obj: MiddlewareSpecCircuitBreaker | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2610,12 +2724,12 @@ export function toJson_MiddlewareSpecCircuitBreaker(obj: MiddlewareSpecCircuitBr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Compress holds the compress middleware configuration.
  * This middleware compresses responses before sending them to the client, using gzip, brotli, or zstd compression.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/compress/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/compress/
  *
  * @schema MiddlewareSpecCompress
  */
@@ -2656,12 +2770,13 @@ export interface MiddlewareSpecCompress {
    * @schema MiddlewareSpecCompress#minResponseBodyBytes
    */
   readonly minResponseBodyBytes?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecCompress' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecCompress(obj: MiddlewareSpecCompress | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2674,7 +2789,7 @@ export function toJson_MiddlewareSpecCompress(obj: MiddlewareSpecCompress | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ContentType holds the content-type middleware configuration.
@@ -2692,12 +2807,13 @@ export interface MiddlewareSpecContentType {
    * @schema MiddlewareSpecContentType#autoDetect
    */
   readonly autoDetect?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecContentType' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecContentType(obj: MiddlewareSpecContentType | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2706,19 +2822,19 @@ export function toJson_MiddlewareSpecContentType(obj: MiddlewareSpecContentType 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DigestAuth holds the digest auth middleware configuration.
  * This middleware restricts access to your services to known users.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/digestauth/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/digestauth/
  *
  * @schema MiddlewareSpecDigestAuth
  */
 export interface MiddlewareSpecDigestAuth {
   /**
    * HeaderField defines a header field to store the authenticated user.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/digestauth/#headerfield
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/digestauth/#headerfield
    *
    * @schema MiddlewareSpecDigestAuth#headerField
    */
@@ -2745,12 +2861,13 @@ export interface MiddlewareSpecDigestAuth {
    * @schema MiddlewareSpecDigestAuth#secret
    */
   readonly secret?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecDigestAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecDigestAuth(obj: MiddlewareSpecDigestAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2762,12 +2879,89 @@ export function toJson_MiddlewareSpecDigestAuth(obj: MiddlewareSpecDigestAuth | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * EncodedCharacters configures which encoded characters are allowed in the request path.
+ *
+ * @schema MiddlewareSpecEncodedCharacters
+ */
+export interface MiddlewareSpecEncodedCharacters {
+  /**
+   * AllowEncodedBackSlash defines whether requests with encoded back slash characters in the path are allowed.
+   *
+   * @schema MiddlewareSpecEncodedCharacters#allowEncodedBackSlash
+   */
+  readonly allowEncodedBackSlash?: boolean;
+
+  /**
+   * AllowEncodedHash defines whether requests with encoded hash characters in the path are allowed.
+   *
+   * @schema MiddlewareSpecEncodedCharacters#allowEncodedHash
+   */
+  readonly allowEncodedHash?: boolean;
+
+  /**
+   * AllowEncodedNullCharacter defines whether requests with encoded null characters in the path are allowed.
+   *
+   * @schema MiddlewareSpecEncodedCharacters#allowEncodedNullCharacter
+   */
+  readonly allowEncodedNullCharacter?: boolean;
+
+  /**
+   * AllowEncodedPercent defines whether requests with encoded percent characters in the path are allowed.
+   *
+   * @schema MiddlewareSpecEncodedCharacters#allowEncodedPercent
+   */
+  readonly allowEncodedPercent?: boolean;
+
+  /**
+   * AllowEncodedQuestionMark defines whether requests with encoded question mark characters in the path are allowed.
+   *
+   * @schema MiddlewareSpecEncodedCharacters#allowEncodedQuestionMark
+   */
+  readonly allowEncodedQuestionMark?: boolean;
+
+  /**
+   * AllowEncodedSemicolon defines whether requests with encoded semicolon characters in the path are allowed.
+   *
+   * @schema MiddlewareSpecEncodedCharacters#allowEncodedSemicolon
+   */
+  readonly allowEncodedSemicolon?: boolean;
+
+  /**
+   * AllowEncodedSlash defines whether requests with encoded slash characters in the path are allowed.
+   *
+   * @schema MiddlewareSpecEncodedCharacters#allowEncodedSlash
+   */
+  readonly allowEncodedSlash?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'MiddlewareSpecEncodedCharacters' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_MiddlewareSpecEncodedCharacters(obj: MiddlewareSpecEncodedCharacters | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'allowEncodedBackSlash': obj.allowEncodedBackSlash,
+    'allowEncodedHash': obj.allowEncodedHash,
+    'allowEncodedNullCharacter': obj.allowEncodedNullCharacter,
+    'allowEncodedPercent': obj.allowEncodedPercent,
+    'allowEncodedQuestionMark': obj.allowEncodedQuestionMark,
+    'allowEncodedSemicolon': obj.allowEncodedSemicolon,
+    'allowEncodedSlash': obj.allowEncodedSlash,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * ErrorPage holds the custom error middleware configuration.
  * This middleware returns a custom page in lieu of the default, according to configured ranges of HTTP Status codes.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/errorpages/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/errorpages/
  *
  * @schema MiddlewareSpecErrors
  */
@@ -2784,7 +2978,7 @@ export interface MiddlewareSpecErrors {
 
   /**
    * Service defines the reference to a Kubernetes Service that will serve the error page.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/errorpages/#service
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/errorpages/#service
    *
    * @schema MiddlewareSpecErrors#service
    */
@@ -2808,12 +3002,13 @@ export interface MiddlewareSpecErrors {
    * @schema MiddlewareSpecErrors#statusRewrites
    */
   readonly statusRewrites?: { [key: string]: number };
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecErrors(obj: MiddlewareSpecErrors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2825,12 +3020,12 @@ export function toJson_MiddlewareSpecErrors(obj: MiddlewareSpecErrors | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ForwardAuth holds the forward auth middleware configuration.
  * This middleware delegates the request authentication to a Service.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/forwardauth/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/forwardauth/
  *
  * @schema MiddlewareSpecForwardAuth
  */
@@ -2866,11 +3061,18 @@ export interface MiddlewareSpecForwardAuth {
 
   /**
    * AuthResponseHeadersRegex defines the regex to match headers to copy from the authentication server response and set on forwarded request, after stripping all headers that match the regex.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/forwardauth/#authresponseheadersregex
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/forwardauth/#authresponseheadersregex
    *
    * @schema MiddlewareSpecForwardAuth#authResponseHeadersRegex
    */
   readonly authResponseHeadersRegex?: string;
+
+  /**
+   * AuthSigninURL specifies the URL to redirect to when the authentication server returns 401 Unauthorized.
+   *
+   * @schema MiddlewareSpecForwardAuth#authSigninURL
+   */
+  readonly authSigninUrl?: string;
 
   /**
    * ForwardBody defines whether to send the request body to the authentication server.
@@ -2881,7 +3083,7 @@ export interface MiddlewareSpecForwardAuth {
 
   /**
    * HeaderField defines a header field to store the authenticated user.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/forwardauth/#headerfield
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/forwardauth/#headerfield
    *
    * @schema MiddlewareSpecForwardAuth#headerField
    */
@@ -2925,15 +3127,18 @@ export interface MiddlewareSpecForwardAuth {
   /**
    * TrustForwardHeader defines whether to trust (ie: forward) all X-Forwarded-* headers.
    *
+   * Deprecated: Use forwardedHeaders.trustedIPs at the EntryPoint level instead, and set trustForwardHeader to true on this middleware.
+   *
    * @schema MiddlewareSpecForwardAuth#trustForwardHeader
    */
   readonly trustForwardHeader?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecForwardAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecForwardAuth(obj: MiddlewareSpecForwardAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2942,6 +3147,7 @@ export function toJson_MiddlewareSpecForwardAuth(obj: MiddlewareSpecForwardAuth 
     'authRequestHeaders': obj.authRequestHeaders?.map(y => y),
     'authResponseHeaders': obj.authResponseHeaders?.map(y => y),
     'authResponseHeadersRegex': obj.authResponseHeadersRegex,
+    'authSigninURL': obj.authSigninUrl,
     'forwardBody': obj.forwardBody,
     'headerField': obj.headerField,
     'maxBodySize': obj.maxBodySize,
@@ -2954,7 +3160,7 @@ export function toJson_MiddlewareSpecForwardAuth(obj: MiddlewareSpecForwardAuth 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GrpcWeb holds the gRPC web middleware configuration.
@@ -2970,12 +3176,13 @@ export interface MiddlewareSpecGrpcWeb {
    * @schema MiddlewareSpecGrpcWeb#allowOrigins
    */
   readonly allowOrigins?: string[];
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecGrpcWeb' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecGrpcWeb(obj: MiddlewareSpecGrpcWeb | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2984,12 +3191,12 @@ export function toJson_MiddlewareSpecGrpcWeb(obj: MiddlewareSpecGrpcWeb | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Headers holds the headers middleware configuration.
  * This middleware manages the requests and responses headers.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/headers/#customrequestheaders
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/headers/#customrequestheaders
  *
  * @schema MiddlewareSpecHeaders
  */
@@ -3233,12 +3440,13 @@ export interface MiddlewareSpecHeaders {
    * @schema MiddlewareSpecHeaders#stsSeconds
    */
   readonly stsSeconds?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecHeaders' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecHeaders(obj: MiddlewareSpecHeaders | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3279,12 +3487,12 @@ export function toJson_MiddlewareSpecHeaders(obj: MiddlewareSpecHeaders | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * InFlightReq holds the in-flight request middleware configuration.
  * This middleware limits the number of requests being processed and served concurrently.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/inflightreq/
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/inflightreq/
  *
  * @schema MiddlewareSpecInFlightReq
  */
@@ -3301,17 +3509,18 @@ export interface MiddlewareSpecInFlightReq {
    * SourceCriterion defines what criterion is used to group requests as originating from a common source.
    * If several strategies are defined at the same time, an error will be raised.
    * If none are set, the default is to use the requestHost.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/inflightreq/#sourcecriterion
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/inflightreq/#sourcecriterion
    *
    * @schema MiddlewareSpecInFlightReq#sourceCriterion
    */
   readonly sourceCriterion?: MiddlewareSpecInFlightReqSourceCriterion;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecInFlightReq' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecInFlightReq(obj: MiddlewareSpecInFlightReq | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3321,19 +3530,19 @@ export function toJson_MiddlewareSpecInFlightReq(obj: MiddlewareSpecInFlightReq 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IPAllowList holds the IP allowlist middleware configuration.
  * This middleware limits allowed requests based on the client IP.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/
  *
  * @schema MiddlewareSpecIpAllowList
  */
 export interface MiddlewareSpecIpAllowList {
   /**
    * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/#ipstrategy
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/#ipstrategy
    *
    * @schema MiddlewareSpecIpAllowList#ipStrategy
    */
@@ -3353,12 +3562,13 @@ export interface MiddlewareSpecIpAllowList {
    * @schema MiddlewareSpecIpAllowList#sourceRange
    */
   readonly sourceRange?: string[];
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecIpAllowList' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecIpAllowList(obj: MiddlewareSpecIpAllowList | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3369,7 +3579,7 @@ export function toJson_MiddlewareSpecIpAllowList(obj: MiddlewareSpecIpAllowList 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Deprecated: please use IPAllowList instead.
@@ -3379,7 +3589,7 @@ export function toJson_MiddlewareSpecIpAllowList(obj: MiddlewareSpecIpAllowList 
 export interface MiddlewareSpecIpWhiteList {
   /**
    * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/#ipstrategy
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/#ipstrategy
    *
    * @schema MiddlewareSpecIpWhiteList#ipStrategy
    */
@@ -3391,12 +3601,13 @@ export interface MiddlewareSpecIpWhiteList {
    * @schema MiddlewareSpecIpWhiteList#sourceRange
    */
   readonly sourceRange?: string[];
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecIpWhiteList' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecIpWhiteList(obj: MiddlewareSpecIpWhiteList | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3406,12 +3617,12 @@ export function toJson_MiddlewareSpecIpWhiteList(obj: MiddlewareSpecIpWhiteList 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * PassTLSClientCert holds the pass TLS client cert middleware configuration.
  * This middleware adds the selected data from the passed client TLS certificate to a header.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/passtlsclientcert/
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/passtlsclientcert/
  *
  * @schema MiddlewareSpecPassTlsClientCert
  */
@@ -3429,12 +3640,13 @@ export interface MiddlewareSpecPassTlsClientCert {
    * @schema MiddlewareSpecPassTlsClientCert#pem
    */
   readonly pem?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecPassTlsClientCert' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecPassTlsClientCert(obj: MiddlewareSpecPassTlsClientCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3444,12 +3656,12 @@ export function toJson_MiddlewareSpecPassTlsClientCert(obj: MiddlewareSpecPassTl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RateLimit holds the rate limit configuration.
  * This middleware ensures that services will receive a fair amount of requests, and allows one to define what fair is.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/ratelimit/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/ratelimit/
  *
  * @schema MiddlewareSpecRateLimit
  */
@@ -3495,12 +3707,13 @@ export interface MiddlewareSpecRateLimit {
    * @schema MiddlewareSpecRateLimit#sourceCriterion
    */
   readonly sourceCriterion?: MiddlewareSpecRateLimitSourceCriterion;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimit' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecRateLimit(obj: MiddlewareSpecRateLimit | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3513,12 +3726,12 @@ export function toJson_MiddlewareSpecRateLimit(obj: MiddlewareSpecRateLimit | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RedirectRegex holds the redirect regex middleware configuration.
  * This middleware redirects a request using regex matching and replacement.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/redirectregex/#regex
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/redirectregex/#regex
  *
  * @schema MiddlewareSpecRedirectRegex
  */
@@ -3543,12 +3756,13 @@ export interface MiddlewareSpecRedirectRegex {
    * @schema MiddlewareSpecRedirectRegex#replacement
    */
   readonly replacement?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRedirectRegex' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecRedirectRegex(obj: MiddlewareSpecRedirectRegex | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3559,12 +3773,12 @@ export function toJson_MiddlewareSpecRedirectRegex(obj: MiddlewareSpecRedirectRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RedirectScheme holds the redirect scheme middleware configuration.
  * This middleware redirects requests from a scheme/port to another.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/redirectscheme/
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/redirectscheme/
  *
  * @schema MiddlewareSpecRedirectScheme
  */
@@ -3590,12 +3804,13 @@ export interface MiddlewareSpecRedirectScheme {
    * @schema MiddlewareSpecRedirectScheme#scheme
    */
   readonly scheme?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRedirectScheme' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecRedirectScheme(obj: MiddlewareSpecRedirectScheme | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3606,12 +3821,12 @@ export function toJson_MiddlewareSpecRedirectScheme(obj: MiddlewareSpecRedirectS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ReplacePath holds the replace path middleware configuration.
  * This middleware replaces the path of the request URL and store the original path in an X-Replaced-Path header.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/replacepath/
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/replacepath/
  *
  * @schema MiddlewareSpecReplacePath
  */
@@ -3622,12 +3837,13 @@ export interface MiddlewareSpecReplacePath {
    * @schema MiddlewareSpecReplacePath#path
    */
   readonly path?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecReplacePath' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecReplacePath(obj: MiddlewareSpecReplacePath | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3636,12 +3852,12 @@ export function toJson_MiddlewareSpecReplacePath(obj: MiddlewareSpecReplacePath 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ReplacePathRegex holds the replace path regex middleware configuration.
  * This middleware replaces the path of a URL using regex matching and replacement.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/replacepathregex/
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/replacepathregex/
  *
  * @schema MiddlewareSpecReplacePathRegex
  */
@@ -3659,12 +3875,13 @@ export interface MiddlewareSpecReplacePathRegex {
    * @schema MiddlewareSpecReplacePathRegex#replacement
    */
   readonly replacement?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecReplacePathRegex' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecReplacePathRegex(obj: MiddlewareSpecReplacePathRegex | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3674,13 +3891,13 @@ export function toJson_MiddlewareSpecReplacePathRegex(obj: MiddlewareSpecReplace
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Retry holds the retry middleware configuration.
  * This middleware reissues requests a given number of times to a backend server if that server does not reply.
  * As soon as the server answers, the middleware stops retrying, regardless of the response status.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/retry/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/retry/
  *
  * @schema MiddlewareSpecRetry
  */
@@ -3693,6 +3910,13 @@ export interface MiddlewareSpecRetry {
   readonly attempts?: number;
 
   /**
+   * DisableRetryOnNetworkError defines whether to disable the retry if an error occurs when transmitting the request to the server.
+   *
+   * @schema MiddlewareSpecRetry#disableRetryOnNetworkError
+   */
+  readonly disableRetryOnNetworkError?: boolean;
+
+  /**
    * InitialInterval defines the first wait time in the exponential backoff series.
    * The maximum interval is calculated as twice the initialInterval.
    * If unspecified, requests will be retried immediately.
@@ -3702,27 +3926,65 @@ export interface MiddlewareSpecRetry {
    * @schema MiddlewareSpecRetry#initialInterval
    */
   readonly initialInterval?: MiddlewareSpecRetryInitialInterval;
+
+  /**
+   * MaxRequestBodyBytes defines the maximum size for the request body.
+   * Default is `-1`, which means no limit.
+   *
+   * @default 1`, which means no limit.
+   * @schema MiddlewareSpecRetry#maxRequestBodyBytes
+   */
+  readonly maxRequestBodyBytes?: number;
+
+  /**
+   * RetryNonIdempotentMethod activates the retry for non-idempotent methods (POST, LOCK, PATCH)
+   *
+   * @schema MiddlewareSpecRetry#retryNonIdempotentMethod
+   */
+  readonly retryNonIdempotentMethod?: boolean;
+
+  /**
+   * Status defines the range of HTTP status codes to retry on.
+   *
+   * @schema MiddlewareSpecRetry#status
+   */
+  readonly status?: string[];
+
+  /**
+   * Timeout defines how much time the middleware is allowed to retry the request.
+   * The value of timeout should be provided in seconds or as a valid duration format,
+   * see https://pkg.go.dev/time#ParseDuration.
+   *
+   * @schema MiddlewareSpecRetry#timeout
+   */
+  readonly timeout?: MiddlewareSpecRetryTimeout;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRetry' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecRetry(obj: MiddlewareSpecRetry | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'attempts': obj.attempts,
+    'disableRetryOnNetworkError': obj.disableRetryOnNetworkError,
     'initialInterval': obj.initialInterval?.value,
+    'maxRequestBodyBytes': obj.maxRequestBodyBytes,
+    'retryNonIdempotentMethod': obj.retryNonIdempotentMethod,
+    'status': obj.status?.map(y => y),
+    'timeout': obj.timeout?.value,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * StripPrefix holds the strip prefix middleware configuration.
  * This middleware removes the specified prefixes from the URL path.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/stripprefix/
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/stripprefix/
  *
  * @schema MiddlewareSpecStripPrefix
  */
@@ -3742,12 +4004,13 @@ export interface MiddlewareSpecStripPrefix {
    * @schema MiddlewareSpecStripPrefix#prefixes
    */
   readonly prefixes?: string[];
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecStripPrefix' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecStripPrefix(obj: MiddlewareSpecStripPrefix | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3757,12 +4020,12 @@ export function toJson_MiddlewareSpecStripPrefix(obj: MiddlewareSpecStripPrefix 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * StripPrefixRegex holds the strip prefix regex middleware configuration.
  * This middleware removes the matching prefixes from the URL path.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/stripprefixregex/
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/stripprefixregex/
  *
  * @schema MiddlewareSpecStripPrefixRegex
  */
@@ -3773,12 +4036,13 @@ export interface MiddlewareSpecStripPrefixRegex {
    * @schema MiddlewareSpecStripPrefixRegex#regex
    */
   readonly regex?: string[];
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecStripPrefixRegex' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecStripPrefixRegex(obj: MiddlewareSpecStripPrefixRegex | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3787,7 +4051,7 @@ export function toJson_MiddlewareSpecStripPrefixRegex(obj: MiddlewareSpecStripPr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * MiddlewareRef is a reference to a Middleware resource.
@@ -3808,12 +4072,13 @@ export interface MiddlewareSpecChainMiddlewares {
    * @schema MiddlewareSpecChainMiddlewares#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecChainMiddlewares' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecChainMiddlewares(obj: MiddlewareSpecChainMiddlewares | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3823,7 +4088,7 @@ export function toJson_MiddlewareSpecChainMiddlewares(obj: MiddlewareSpecChainMi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CheckPeriod is the interval between successive checks of the circuit breaker condition (when in standby state).
@@ -3875,7 +4140,7 @@ export class MiddlewareSpecCircuitBreakerRecoveryDuration {
 
 /**
  * Service defines the reference to a Kubernetes Service that will serve the error page.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/middlewares/errorpages/#service
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/middlewares/errorpages/#service
  *
  * @schema MiddlewareSpecErrorsService
  */
@@ -3893,6 +4158,13 @@ export interface MiddlewareSpecErrorsService {
    * @schema MiddlewareSpecErrorsService#kind
    */
   readonly kind?: MiddlewareSpecErrorsServiceKind;
+
+  /**
+   * Middlewares defines the list of references to Middleware resources to apply to the service.
+   *
+   * @schema MiddlewareSpecErrorsService#middlewares
+   */
+  readonly middlewares?: MiddlewareSpecErrorsServiceMiddlewares[];
 
   /**
    * Name defines the name of the referenced Kubernetes Service or TraefikService.
@@ -3978,7 +4250,7 @@ export interface MiddlewareSpecErrorsService {
 
   /**
    * Sticky defines the sticky sessions configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
    *
    * @schema MiddlewareSpecErrorsService#sticky
    */
@@ -4000,17 +4272,19 @@ export interface MiddlewareSpecErrorsService {
    * @schema MiddlewareSpecErrorsService#weight
    */
   readonly weight?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsService' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecErrorsService(obj: MiddlewareSpecErrorsService | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'healthCheck': toJson_MiddlewareSpecErrorsServiceHealthCheck(obj.healthCheck),
     'kind': obj.kind,
+    'middlewares': obj.middlewares?.map(y => toJson_MiddlewareSpecErrorsServiceMiddlewares(y)),
     'name': obj.name,
     'namespace': obj.namespace,
     'nativeLB': obj.nativeLb,
@@ -4028,7 +4302,7 @@ export function toJson_MiddlewareSpecErrorsService(obj: MiddlewareSpecErrorsServ
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TLS defines the configuration used to secure the connection to the authentication server.
@@ -4065,12 +4339,13 @@ export interface MiddlewareSpecForwardAuthTls {
    * @schema MiddlewareSpecForwardAuthTls#insecureSkipVerify
    */
   readonly insecureSkipVerify?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecForwardAuthTls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecForwardAuthTls(obj: MiddlewareSpecForwardAuthTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4082,20 +4357,20 @@ export function toJson_MiddlewareSpecForwardAuthTls(obj: MiddlewareSpecForwardAu
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SourceCriterion defines what criterion is used to group requests as originating from a common source.
  * If several strategies are defined at the same time, an error will be raised.
  * If none are set, the default is to use the requestHost.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/inflightreq/#sourcecriterion
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/inflightreq/#sourcecriterion
  *
  * @schema MiddlewareSpecInFlightReqSourceCriterion
  */
 export interface MiddlewareSpecInFlightReqSourceCriterion {
   /**
    * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/#ipstrategy
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/#ipstrategy
    *
    * @schema MiddlewareSpecInFlightReqSourceCriterion#ipStrategy
    */
@@ -4114,12 +4389,13 @@ export interface MiddlewareSpecInFlightReqSourceCriterion {
    * @schema MiddlewareSpecInFlightReqSourceCriterion#requestHost
    */
   readonly requestHost?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecInFlightReqSourceCriterion' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecInFlightReqSourceCriterion(obj: MiddlewareSpecInFlightReqSourceCriterion | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4130,11 +4406,11 @@ export function toJson_MiddlewareSpecInFlightReqSourceCriterion(obj: MiddlewareS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/#ipstrategy
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/#ipstrategy
  *
  * @schema MiddlewareSpecIpAllowListIpStrategy
  */
@@ -4159,12 +4435,13 @@ export interface MiddlewareSpecIpAllowListIpStrategy {
    * @schema MiddlewareSpecIpAllowListIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecIpAllowListIpStrategy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecIpAllowListIpStrategy(obj: MiddlewareSpecIpAllowListIpStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4175,11 +4452,11 @@ export function toJson_MiddlewareSpecIpAllowListIpStrategy(obj: MiddlewareSpecIp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/#ipstrategy
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/#ipstrategy
  *
  * @schema MiddlewareSpecIpWhiteListIpStrategy
  */
@@ -4204,12 +4481,13 @@ export interface MiddlewareSpecIpWhiteListIpStrategy {
    * @schema MiddlewareSpecIpWhiteListIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecIpWhiteListIpStrategy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecIpWhiteListIpStrategy(obj: MiddlewareSpecIpWhiteListIpStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4220,7 +4498,7 @@ export function toJson_MiddlewareSpecIpWhiteListIpStrategy(obj: MiddlewareSpecIp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Info selects the specific client certificate details you want to add to the X-Forwarded-Tls-Client-Cert-Info header.
@@ -4269,12 +4547,13 @@ export interface MiddlewareSpecPassTlsClientCertInfo {
    * @schema MiddlewareSpecPassTlsClientCertInfo#subject
    */
   readonly subject?: MiddlewareSpecPassTlsClientCertInfoSubject;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecPassTlsClientCertInfo' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecPassTlsClientCertInfo(obj: MiddlewareSpecPassTlsClientCertInfo | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4288,7 +4567,7 @@ export function toJson_MiddlewareSpecPassTlsClientCertInfo(obj: MiddlewareSpecPa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Period, in combination with Average, defines the actual maximum rate, such as:
@@ -4392,12 +4671,13 @@ export interface MiddlewareSpecRateLimitRedis {
    * @schema MiddlewareSpecRateLimitRedis#writeTimeout
    */
   readonly writeTimeout?: MiddlewareSpecRateLimitRedisWriteTimeout;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimitRedis' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecRateLimitRedis(obj: MiddlewareSpecRateLimitRedis | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4415,7 +4695,7 @@ export function toJson_MiddlewareSpecRateLimitRedis(obj: MiddlewareSpecRateLimit
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SourceCriterion defines what criterion is used to group requests as originating from a common source.
@@ -4427,7 +4707,7 @@ export function toJson_MiddlewareSpecRateLimitRedis(obj: MiddlewareSpecRateLimit
 export interface MiddlewareSpecRateLimitSourceCriterion {
   /**
    * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
-   * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/#ipstrategy
+   * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/#ipstrategy
    *
    * @schema MiddlewareSpecRateLimitSourceCriterion#ipStrategy
    */
@@ -4446,12 +4726,13 @@ export interface MiddlewareSpecRateLimitSourceCriterion {
    * @schema MiddlewareSpecRateLimitSourceCriterion#requestHost
    */
   readonly requestHost?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimitSourceCriterion' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecRateLimitSourceCriterion(obj: MiddlewareSpecRateLimitSourceCriterion | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4462,7 +4743,7 @@ export function toJson_MiddlewareSpecRateLimitSourceCriterion(obj: MiddlewareSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * InitialInterval defines the first wait time in the exponential backoff series.
@@ -4479,6 +4760,24 @@ export class MiddlewareSpecRetryInitialInterval {
   }
   public static fromString(value: string): MiddlewareSpecRetryInitialInterval {
     return new MiddlewareSpecRetryInitialInterval(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * Timeout defines how much time the middleware is allowed to retry the request.
+ * The value of timeout should be provided in seconds or as a valid duration format,
+ * see https://pkg.go.dev/time#ParseDuration.
+ *
+ * @schema MiddlewareSpecRetryTimeout
+ */
+export class MiddlewareSpecRetryTimeout {
+  public static fromNumber(value: number): MiddlewareSpecRetryTimeout {
+    return new MiddlewareSpecRetryTimeout(value);
+  }
+  public static fromString(value: string): MiddlewareSpecRetryTimeout {
+    return new MiddlewareSpecRetryTimeout(value);
   }
   private constructor(public readonly value: number | string) {
   }
@@ -4580,12 +4879,13 @@ export interface MiddlewareSpecErrorsServiceHealthCheck {
    * @schema MiddlewareSpecErrorsServiceHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: MiddlewareSpecErrorsServiceHealthCheckUnhealthyInterval;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsServiceHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecErrorsServiceHealthCheck(obj: MiddlewareSpecErrorsServiceHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4605,7 +4905,7 @@ export function toJson_MiddlewareSpecErrorsServiceHealthCheck(obj: MiddlewareSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -4618,6 +4918,43 @@ export enum MiddlewareSpecErrorsServiceKind {
   /** TraefikService */
   TRAEFIK_SERVICE = "TraefikService",
 }
+
+/**
+ * MiddlewareRef is a reference to a Middleware resource.
+ *
+ * @schema MiddlewareSpecErrorsServiceMiddlewares
+ */
+export interface MiddlewareSpecErrorsServiceMiddlewares {
+  /**
+   * Name defines the name of the referenced Middleware resource.
+   *
+   * @schema MiddlewareSpecErrorsServiceMiddlewares#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Middleware resource.
+   *
+   * @schema MiddlewareSpecErrorsServiceMiddlewares#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'MiddlewareSpecErrorsServiceMiddlewares' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_MiddlewareSpecErrorsServiceMiddlewares(obj: MiddlewareSpecErrorsServiceMiddlewares | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * PassiveHealthCheck defines passive health checks for ExternalName services.
@@ -4638,12 +4975,13 @@ export interface MiddlewareSpecErrorsServicePassiveHealthCheck {
    * @schema MiddlewareSpecErrorsServicePassiveHealthCheck#maxFailedAttempts
    */
   readonly maxFailedAttempts?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsServicePassiveHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecErrorsServicePassiveHealthCheck(obj: MiddlewareSpecErrorsServicePassiveHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4653,7 +4991,7 @@ export function toJson_MiddlewareSpecErrorsServicePassiveHealthCheck(obj: Middle
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -4688,12 +5026,13 @@ export interface MiddlewareSpecErrorsServiceResponseForwarding {
    * @schema MiddlewareSpecErrorsServiceResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsServiceResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecErrorsServiceResponseForwarding(obj: MiddlewareSpecErrorsServiceResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4702,11 +5041,11 @@ export function toJson_MiddlewareSpecErrorsServiceResponseForwarding(obj: Middle
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
  *
  * @schema MiddlewareSpecErrorsServiceSticky
  */
@@ -4717,12 +5056,13 @@ export interface MiddlewareSpecErrorsServiceSticky {
    * @schema MiddlewareSpecErrorsServiceSticky#cookie
    */
   readonly cookie?: MiddlewareSpecErrorsServiceStickyCookie;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsServiceSticky' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecErrorsServiceSticky(obj: MiddlewareSpecErrorsServiceSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4731,7 +5071,7 @@ export function toJson_MiddlewareSpecErrorsServiceSticky(obj: MiddlewareSpecErro
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -4755,7 +5095,7 @@ export enum MiddlewareSpecErrorsServiceStrategy {
 
 /**
  * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/#ipstrategy
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/#ipstrategy
  *
  * @schema MiddlewareSpecInFlightReqSourceCriterionIpStrategy
  */
@@ -4780,12 +5120,13 @@ export interface MiddlewareSpecInFlightReqSourceCriterionIpStrategy {
    * @schema MiddlewareSpecInFlightReqSourceCriterionIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecInFlightReqSourceCriterionIpStrategy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecInFlightReqSourceCriterionIpStrategy(obj: MiddlewareSpecInFlightReqSourceCriterionIpStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4796,7 +5137,7 @@ export function toJson_MiddlewareSpecInFlightReqSourceCriterionIpStrategy(obj: M
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Issuer defines the client certificate issuer details to add to the X-Forwarded-Tls-Client-Cert-Info header.
@@ -4852,12 +5193,13 @@ export interface MiddlewareSpecPassTlsClientCertInfoIssuer {
    * @schema MiddlewareSpecPassTlsClientCertInfoIssuer#serialNumber
    */
   readonly serialNumber?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecPassTlsClientCertInfoIssuer' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecPassTlsClientCertInfoIssuer(obj: MiddlewareSpecPassTlsClientCertInfoIssuer | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4872,7 +5214,7 @@ export function toJson_MiddlewareSpecPassTlsClientCertInfoIssuer(obj: Middleware
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Subject defines the client certificate subject details to add to the X-Forwarded-Tls-Client-Cert-Info header.
@@ -4935,12 +5277,13 @@ export interface MiddlewareSpecPassTlsClientCertInfoSubject {
    * @schema MiddlewareSpecPassTlsClientCertInfoSubject#serialNumber
    */
   readonly serialNumber?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecPassTlsClientCertInfoSubject' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecPassTlsClientCertInfoSubject(obj: MiddlewareSpecPassTlsClientCertInfoSubject | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4956,7 +5299,7 @@ export function toJson_MiddlewareSpecPassTlsClientCertInfoSubject(obj: Middlewar
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DialTimeout sets the timeout for establishing new connections.
@@ -5021,12 +5364,13 @@ export interface MiddlewareSpecRateLimitRedisTls {
    * @schema MiddlewareSpecRateLimitRedisTls#insecureSkipVerify
    */
   readonly insecureSkipVerify?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimitRedisTls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecRateLimitRedisTls(obj: MiddlewareSpecRateLimitRedisTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5037,7 +5381,7 @@ export function toJson_MiddlewareSpecRateLimitRedisTls(obj: MiddlewareSpecRateLi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * WriteTimeout defines the timeout for socket write operations.
@@ -5058,7 +5402,7 @@ export class MiddlewareSpecRateLimitRedisWriteTimeout {
 
 /**
  * IPStrategy holds the IP strategy configuration used by Traefik to determine the client IP.
- * More info: https://doc.traefik.io/traefik/v3.6/middlewares/http/ipallowlist/#ipstrategy
+ * More info: https://doc.traefik.io/traefik/v3.7/middlewares/http/ipallowlist/#ipstrategy
  *
  * @schema MiddlewareSpecRateLimitSourceCriterionIpStrategy
  */
@@ -5083,12 +5427,13 @@ export interface MiddlewareSpecRateLimitSourceCriterionIpStrategy {
    * @schema MiddlewareSpecRateLimitSourceCriterionIpStrategy#ipv6Subnet
    */
   readonly ipv6Subnet?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecRateLimitSourceCriterionIpStrategy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecRateLimitSourceCriterionIpStrategy(obj: MiddlewareSpecRateLimitSourceCriterionIpStrategy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5099,7 +5444,7 @@ export function toJson_MiddlewareSpecRateLimitSourceCriterionIpStrategy(obj: Mid
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Interval defines the frequency of the health check calls for healthy targets.
@@ -5229,12 +5574,13 @@ export interface MiddlewareSpecErrorsServiceStickyCookie {
    * @schema MiddlewareSpecErrorsServiceStickyCookie#secure
    */
   readonly secure?: boolean;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareSpecErrorsServiceStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareSpecErrorsServiceStickyCookie(obj: MiddlewareSpecErrorsServiceStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5249,7 +5595,7 @@ export function toJson_MiddlewareSpecErrorsServiceStickyCookie(obj: MiddlewareSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SameSite defines the same site policy.
@@ -5269,7 +5615,7 @@ export enum MiddlewareSpecErrorsServiceStickyCookieSameSite {
 
 /**
  * MiddlewareTCP is the CRD implementation of a Traefik TCP middleware.
-More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/middlewares/overview/
+More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/middlewares/overview/
  *
  * @schema MiddlewareTCP
  */
@@ -5312,7 +5658,7 @@ export class MiddlewareTcp extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -5324,7 +5670,7 @@ export class MiddlewareTcp extends ApiObject {
 
 /**
  * MiddlewareTCP is the CRD implementation of a Traefik TCP middleware.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/middlewares/overview/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/middlewares/overview/
  *
  * @schema MiddlewareTCP
  */
@@ -5340,12 +5686,13 @@ export interface MiddlewareTcpProps {
    * @schema MiddlewareTCP#spec
    */
   readonly spec: MiddlewareTcpSpec;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareTcpProps(obj: MiddlewareTcpProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5355,7 +5702,7 @@ export function toJson_MiddlewareTcpProps(obj: MiddlewareTcpProps | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * MiddlewareTCPSpec defines the desired state of a MiddlewareTCP.
@@ -5373,7 +5720,7 @@ export interface MiddlewareTcpSpec {
   /**
    * IPAllowList defines the IPAllowList middleware configuration.
    * This middleware accepts/refuses connections based on the client IP.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/middlewares/ipallowlist/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/middlewares/ipallowlist/
    *
    * @schema MiddlewareTcpSpec#ipAllowList
    */
@@ -5382,19 +5729,20 @@ export interface MiddlewareTcpSpec {
   /**
    * IPWhiteList defines the IPWhiteList middleware configuration.
    * This middleware accepts/refuses connections based on the client IP.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/middlewares/ipwhitelist/
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/middlewares/ipwhitelist/
    *
    * Deprecated: please use IPAllowList instead.
    *
    * @schema MiddlewareTcpSpec#ipWhiteList
    */
   readonly ipWhiteList?: MiddlewareTcpSpecIpWhiteList;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareTcpSpec(obj: MiddlewareTcpSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5405,7 +5753,7 @@ export function toJson_MiddlewareTcpSpec(obj: MiddlewareTcpSpec | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * InFlightConn defines the InFlightConn middleware configuration.
@@ -5420,12 +5768,13 @@ export interface MiddlewareTcpSpecInFlightConn {
    * @schema MiddlewareTcpSpecInFlightConn#amount
    */
   readonly amount?: number;
+
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpSpecInFlightConn' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareTcpSpecInFlightConn(obj: MiddlewareTcpSpecInFlightConn | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5434,12 +5783,12 @@ export function toJson_MiddlewareTcpSpecInFlightConn(obj: MiddlewareTcpSpecInFli
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IPAllowList defines the IPAllowList middleware configuration.
  * This middleware accepts/refuses connections based on the client IP.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/middlewares/ipallowlist/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/middlewares/ipallowlist/
  *
  * @schema MiddlewareTcpSpecIpAllowList
  */
@@ -5450,12 +5799,13 @@ export interface MiddlewareTcpSpecIpAllowList {
    * @schema MiddlewareTcpSpecIpAllowList#sourceRange
    */
   readonly sourceRange?: string[];
+
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpSpecIpAllowList' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareTcpSpecIpAllowList(obj: MiddlewareTcpSpecIpAllowList | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5464,12 +5814,12 @@ export function toJson_MiddlewareTcpSpecIpAllowList(obj: MiddlewareTcpSpecIpAllo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * IPWhiteList defines the IPWhiteList middleware configuration.
  * This middleware accepts/refuses connections based on the client IP.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/middlewares/ipwhitelist/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/middlewares/ipwhitelist/
  *
  * Deprecated: please use IPAllowList instead.
  *
@@ -5482,12 +5832,13 @@ export interface MiddlewareTcpSpecIpWhiteList {
    * @schema MiddlewareTcpSpecIpWhiteList#sourceRange
    */
   readonly sourceRange?: string[];
+
 }
 
 /**
  * Converts an object of type 'MiddlewareTcpSpecIpWhiteList' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_MiddlewareTcpSpecIpWhiteList(obj: MiddlewareTcpSpecIpWhiteList | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5496,14 +5847,14 @@ export function toJson_MiddlewareTcpSpecIpWhiteList(obj: MiddlewareTcpSpecIpWhit
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
  * ServersTransport is the CRD implementation of a ServersTransport.
 If no serversTransport is specified, the default@internal will be used.
 The default@internal serversTransport is created from the static configuration.
-More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/serverstransport/
+More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/serverstransport/
  *
  * @schema ServersTransport
  */
@@ -5546,7 +5897,7 @@ export class ServersTransport extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -5560,7 +5911,7 @@ export class ServersTransport extends ApiObject {
  * ServersTransport is the CRD implementation of a ServersTransport.
  * If no serversTransport is specified, the default@internal will be used.
  * The default@internal serversTransport is created from the static configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/serverstransport/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/serverstransport/
  *
  * @schema ServersTransport
  */
@@ -5576,12 +5927,13 @@ export interface ServersTransportProps {
    * @schema ServersTransport#spec
    */
   readonly spec: ServersTransportSpec;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportProps(obj: ServersTransportProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5591,7 +5943,7 @@ export function toJson_ServersTransportProps(obj: ServersTransportProps | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServersTransportSpec defines the desired state of a ServersTransport.
@@ -5605,6 +5957,13 @@ export interface ServersTransportSpec {
    * @schema ServersTransportSpec#certificatesSecrets
    */
   readonly certificatesSecrets?: string[];
+
+  /**
+   * CipherSuites defines the cipher suites to use when contacting backend servers.
+   *
+   * @schema ServersTransportSpec#cipherSuites
+   */
+  readonly cipherSuites?: string[];
 
   /**
    * DisableHTTP2 disables HTTP/2 for connections with backend servers.
@@ -5633,6 +5992,20 @@ export interface ServersTransportSpec {
    * @schema ServersTransportSpec#maxIdleConnsPerHost
    */
   readonly maxIdleConnsPerHost?: number;
+
+  /**
+   * MaxVersion defines the maximum TLS version to use when contacting backend servers.
+   *
+   * @schema ServersTransportSpec#maxVersion
+   */
+  readonly maxVersion?: string;
+
+  /**
+   * MinVersion defines the minimum TLS version to use when contacting backend servers.
+   *
+   * @schema ServersTransportSpec#minVersion
+   */
+  readonly minVersion?: string;
 
   /**
    * PeerCertURI defines the peer cert URI used to match against SAN URI during the peer certificate verification.
@@ -5670,20 +6043,24 @@ export interface ServersTransportSpec {
    * @schema ServersTransportSpec#spiffe
    */
   readonly spiffe?: ServersTransportSpecSpiffe;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportSpec(obj: ServersTransportSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'certificatesSecrets': obj.certificatesSecrets?.map(y => y),
+    'cipherSuites': obj.cipherSuites?.map(y => y),
     'disableHTTP2': obj.disableHttp2,
     'forwardingTimeouts': toJson_ServersTransportSpecForwardingTimeouts(obj.forwardingTimeouts),
     'insecureSkipVerify': obj.insecureSkipVerify,
     'maxIdleConnsPerHost': obj.maxIdleConnsPerHost,
+    'maxVersion': obj.maxVersion,
+    'minVersion': obj.minVersion,
     'peerCertURI': obj.peerCertUri,
     'rootCAs': obj.rootCAs?.map(y => toJson_ServersTransportSpecRootCAs(y)),
     'rootCAsSecrets': obj.rootCAsSecrets?.map(y => y),
@@ -5693,7 +6070,7 @@ export function toJson_ServersTransportSpec(obj: ServersTransportSpec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ForwardingTimeouts defines the timeouts for requests forwarded to the backend servers.
@@ -5735,12 +6112,13 @@ export interface ServersTransportSpecForwardingTimeouts {
    * @schema ServersTransportSpecForwardingTimeouts#responseHeaderTimeout
    */
   readonly responseHeaderTimeout?: ServersTransportSpecForwardingTimeoutsResponseHeaderTimeout;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportSpecForwardingTimeouts' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportSpecForwardingTimeouts(obj: ServersTransportSpecForwardingTimeouts | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5753,7 +6131,7 @@ export function toJson_ServersTransportSpecForwardingTimeouts(obj: ServersTransp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RootCA defines a reference to a Secret or a ConfigMap that holds a CA certificate.
@@ -5777,12 +6155,13 @@ export interface ServersTransportSpecRootCAs {
    * @schema ServersTransportSpecRootCAs#secret
    */
   readonly secret?: string;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportSpecRootCAs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportSpecRootCAs(obj: ServersTransportSpecRootCAs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5792,7 +6171,7 @@ export function toJson_ServersTransportSpecRootCAs(obj: ServersTransportSpecRoot
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spiffe defines the SPIFFE configuration.
@@ -5813,12 +6192,13 @@ export interface ServersTransportSpecSpiffe {
    * @schema ServersTransportSpecSpiffe#trustDomain
    */
   readonly trustDomain?: string;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportSpecSpiffe' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportSpecSpiffe(obj: ServersTransportSpecSpiffe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5828,7 +6208,7 @@ export function toJson_ServersTransportSpecSpiffe(obj: ServersTransportSpecSpiff
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DialTimeout is the amount of time to wait until a connection to a backend server can be established.
@@ -5915,7 +6295,7 @@ export class ServersTransportSpecForwardingTimeoutsResponseHeaderTimeout {
  * ServersTransportTCP is the CRD implementation of a TCPServersTransport.
 If no tcpServersTransport is specified, a default one named default@internal will be used.
 The default@internal tcpServersTransport can be configured in the static configuration.
-More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/serverstransport/
+More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/serverstransport/
  *
  * @schema ServersTransportTCP
  */
@@ -5958,7 +6338,7 @@ export class ServersTransportTcp extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -5972,7 +6352,7 @@ export class ServersTransportTcp extends ApiObject {
  * ServersTransportTCP is the CRD implementation of a TCPServersTransport.
  * If no tcpServersTransport is specified, a default one named default@internal will be used.
  * The default@internal tcpServersTransport can be configured in the static configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/tcp/serverstransport/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/tcp/serverstransport/
  *
  * @schema ServersTransportTCP
  */
@@ -5988,12 +6368,13 @@ export interface ServersTransportTcpProps {
    * @schema ServersTransportTCP#spec
    */
   readonly spec: ServersTransportTcpSpec;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportTcpProps(obj: ServersTransportTcpProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6003,7 +6384,7 @@ export function toJson_ServersTransportTcpProps(obj: ServersTransportTcpProps | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ServersTransportTCPSpec defines the desired state of a ServersTransportTCP.
@@ -6045,12 +6426,13 @@ export interface ServersTransportTcpSpec {
    * @schema ServersTransportTcpSpec#tls
    */
   readonly tls?: ServersTransportTcpSpecTls;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportTcpSpec(obj: ServersTransportTcpSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6063,7 +6445,7 @@ export function toJson_ServersTransportTcpSpec(obj: ServersTransportTcpSpec | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DialKeepAlive is the interval between keep-alive probes for an active network connection. If zero, keep-alive probes are sent with a default value (currently 15 seconds), if supported by the protocol and operating system. Network protocols or operating systems that do not support keep-alives ignore this field. If negative, keep-alive probes are disabled.
@@ -6109,12 +6491,13 @@ export interface ServersTransportTcpSpecProxyProtocol {
    * @schema ServersTransportTcpSpecProxyProtocol#version
    */
   readonly version?: number;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpSpecProxyProtocol' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportTcpSpecProxyProtocol(obj: ServersTransportTcpSpecProxyProtocol | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6123,7 +6506,7 @@ export function toJson_ServersTransportTcpSpecProxyProtocol(obj: ServersTranspor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TerminationDelay defines the delay to wait before fully terminating the connection, after one connected peer has closed its writing capability.
@@ -6198,12 +6581,13 @@ export interface ServersTransportTcpSpecTls {
    * @schema ServersTransportTcpSpecTls#spiffe
    */
   readonly spiffe?: ServersTransportTcpSpecTlsSpiffe;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpSpecTls' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportTcpSpecTls(obj: ServersTransportTcpSpecTls | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6218,7 +6602,7 @@ export function toJson_ServersTransportTcpSpecTls(obj: ServersTransportTcpSpecTl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RootCA defines a reference to a Secret or a ConfigMap that holds a CA certificate.
@@ -6242,12 +6626,13 @@ export interface ServersTransportTcpSpecTlsRootCAs {
    * @schema ServersTransportTcpSpecTlsRootCAs#secret
    */
   readonly secret?: string;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpSpecTlsRootCAs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportTcpSpecTlsRootCAs(obj: ServersTransportTcpSpecTlsRootCAs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6257,7 +6642,7 @@ export function toJson_ServersTransportTcpSpecTlsRootCAs(obj: ServersTransportTc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spiffe defines the SPIFFE configuration.
@@ -6278,12 +6663,13 @@ export interface ServersTransportTcpSpecTlsSpiffe {
    * @schema ServersTransportTcpSpecTlsSpiffe#trustDomain
    */
   readonly trustDomain?: string;
+
 }
 
 /**
  * Converts an object of type 'ServersTransportTcpSpecTlsSpiffe' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServersTransportTcpSpecTlsSpiffe(obj: ServersTransportTcpSpecTlsSpiffe | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6293,12 +6679,12 @@ export function toJson_ServersTransportTcpSpecTlsSpiffe(obj: ServersTransportTcp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
  * TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection.
-More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#tls-options
+More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#tls-options
  *
  * @schema TLSOption
  */
@@ -6341,7 +6727,7 @@ export class TlsOption extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6353,7 +6739,7 @@ export class TlsOption extends ApiObject {
 
 /**
  * TLSOption is the CRD implementation of a Traefik TLS Option, allowing to configure some parameters of the TLS connection.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#tls-options
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#tls-options
  *
  * @schema TLSOption
  */
@@ -6369,12 +6755,13 @@ export interface TlsOptionProps {
    * @schema TLSOption#spec
    */
   readonly spec: TlsOptionSpec;
+
 }
 
 /**
  * Converts an object of type 'TlsOptionProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TlsOptionProps(obj: TlsOptionProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6384,7 +6771,7 @@ export function toJson_TlsOptionProps(obj: TlsOptionProps | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TLSOptionSpec defines the desired state of a TLSOption.
@@ -6394,7 +6781,7 @@ export function toJson_TlsOptionProps(obj: TlsOptionProps | undefined): Record<s
 export interface TlsOptionSpec {
   /**
    * ALPNProtocols defines the list of supported application level protocols for the TLS handshake, in order of preference.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#alpn-protocols
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#alpn-protocols
    *
    * @schema TlsOptionSpec#alpnProtocols
    */
@@ -6402,7 +6789,7 @@ export interface TlsOptionSpec {
 
   /**
    * CipherSuites defines the list of supported cipher suites for TLS versions up to TLS 1.2.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#cipher-suites
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#cipher-suites
    *
    * @schema TlsOptionSpec#cipherSuites
    */
@@ -6417,7 +6804,7 @@ export interface TlsOptionSpec {
 
   /**
    * CurvePreferences defines the preferred elliptic curves.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#curve-preferences
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#curve-preferences
    *
    * @schema TlsOptionSpec#curvePreferences
    */
@@ -6464,12 +6851,13 @@ export interface TlsOptionSpec {
    * @schema TlsOptionSpec#sniStrict
    */
   readonly sniStrict?: boolean;
+
 }
 
 /**
  * Converts an object of type 'TlsOptionSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TlsOptionSpec(obj: TlsOptionSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6486,7 +6874,7 @@ export function toJson_TlsOptionSpec(obj: TlsOptionSpec | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClientAuth defines the server's policy for TLS Client Authentication.
@@ -6507,12 +6895,13 @@ export interface TlsOptionSpecClientAuth {
    * @schema TlsOptionSpecClientAuth#secretNames
    */
   readonly secretNames?: string[];
+
 }
 
 /**
  * Converts an object of type 'TlsOptionSpecClientAuth' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TlsOptionSpecClientAuth(obj: TlsOptionSpecClientAuth | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6522,7 +6911,7 @@ export function toJson_TlsOptionSpecClientAuth(obj: TlsOptionSpecClientAuth | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ClientAuthType defines the client authentication type to apply.
@@ -6547,7 +6936,7 @@ export enum TlsOptionSpecClientAuthClientAuthType {
  * TLSStore is the CRD implementation of a Traefik TLS Store.
 For the time being, only the TLSStore named default is supported.
 This means that you cannot have two stores that are named default in different Kubernetes namespaces.
-More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#certificates-stores
+More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#certificates-stores
  *
  * @schema TLSStore
  */
@@ -6590,7 +6979,7 @@ export class TlsStore extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6604,7 +6993,7 @@ export class TlsStore extends ApiObject {
  * TLSStore is the CRD implementation of a Traefik TLS Store.
  * For the time being, only the TLSStore named default is supported.
  * This means that you cannot have two stores that are named default in different Kubernetes namespaces.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#certificates-stores
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/tls/tls-certificates/#certificates-stores#certificates-stores
  *
  * @schema TLSStore
  */
@@ -6620,12 +7009,13 @@ export interface TlsStoreProps {
    * @schema TLSStore#spec
    */
   readonly spec: TlsStoreSpec;
+
 }
 
 /**
  * Converts an object of type 'TlsStoreProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TlsStoreProps(obj: TlsStoreProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6635,7 +7025,7 @@ export function toJson_TlsStoreProps(obj: TlsStoreProps | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TLSStoreSpec defines the desired state of a TLSStore.
@@ -6663,12 +7053,13 @@ export interface TlsStoreSpec {
    * @schema TlsStoreSpec#defaultGeneratedCert
    */
   readonly defaultGeneratedCert?: TlsStoreSpecDefaultGeneratedCert;
+
 }
 
 /**
  * Converts an object of type 'TlsStoreSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TlsStoreSpec(obj: TlsStoreSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6679,7 +7070,7 @@ export function toJson_TlsStoreSpec(obj: TlsStoreSpec | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Certificate holds a secret name for the TLSStore resource.
@@ -6693,12 +7084,13 @@ export interface TlsStoreSpecCertificates {
    * @schema TlsStoreSpecCertificates#secretName
    */
   readonly secretName: string;
+
 }
 
 /**
  * Converts an object of type 'TlsStoreSpecCertificates' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TlsStoreSpecCertificates(obj: TlsStoreSpecCertificates | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6707,7 +7099,7 @@ export function toJson_TlsStoreSpecCertificates(obj: TlsStoreSpecCertificates | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DefaultCertificate defines the default certificate configuration.
@@ -6721,12 +7113,13 @@ export interface TlsStoreSpecDefaultCertificate {
    * @schema TlsStoreSpecDefaultCertificate#secretName
    */
   readonly secretName: string;
+
 }
 
 /**
  * Converts an object of type 'TlsStoreSpecDefaultCertificate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TlsStoreSpecDefaultCertificate(obj: TlsStoreSpecDefaultCertificate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6735,7 +7128,7 @@ export function toJson_TlsStoreSpecDefaultCertificate(obj: TlsStoreSpecDefaultCe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DefaultGeneratedCert defines the default generated certificate configuration.
@@ -6756,12 +7149,13 @@ export interface TlsStoreSpecDefaultGeneratedCert {
    * @schema TlsStoreSpecDefaultGeneratedCert#resolver
    */
   readonly resolver?: string;
+
 }
 
 /**
  * Converts an object of type 'TlsStoreSpecDefaultGeneratedCert' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TlsStoreSpecDefaultGeneratedCert(obj: TlsStoreSpecDefaultGeneratedCert | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6771,7 +7165,7 @@ export function toJson_TlsStoreSpecDefaultGeneratedCert(obj: TlsStoreSpecDefault
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Domain is the domain definition for the DefaultCertificate.
@@ -6792,12 +7186,13 @@ export interface TlsStoreSpecDefaultGeneratedCertDomain {
    * @schema TlsStoreSpecDefaultGeneratedCertDomain#sans
    */
   readonly sans?: string[];
+
 }
 
 /**
  * Converts an object of type 'TlsStoreSpecDefaultGeneratedCertDomain' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TlsStoreSpecDefaultGeneratedCertDomain(obj: TlsStoreSpecDefaultGeneratedCertDomain | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6807,7 +7202,7 @@ export function toJson_TlsStoreSpecDefaultGeneratedCertDomain(obj: TlsStoreSpecD
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -6815,7 +7210,7 @@ export function toJson_TlsStoreSpecDefaultGeneratedCertDomain(obj: TlsStoreSpecD
 TraefikService object allows to:
 - Apply weight to Services on load-balancing
 - Mirror traffic on services
-More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/kubernetes/crd/http/traefikservice/
+More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/kubernetes/crd/http/traefikservice/
  *
  * @schema TraefikService
  */
@@ -6858,7 +7253,7 @@ export class TraefikService extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -6873,7 +7268,7 @@ export class TraefikService extends ApiObject {
  * TraefikService object allows to:
  * - Apply weight to Services on load-balancing
  * - Mirror traffic on services
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/kubernetes/crd/http/traefikservice/
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/kubernetes/crd/http/traefikservice/
  *
  * @schema TraefikService
  */
@@ -6889,12 +7284,13 @@ export interface TraefikServiceProps {
    * @schema TraefikService#spec
    */
   readonly spec: TraefikServiceSpec;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceProps(obj: TraefikServiceProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6904,7 +7300,7 @@ export function toJson_TraefikServiceProps(obj: TraefikServiceProps | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * TraefikServiceSpec defines the desired state of a TraefikService.
@@ -6912,6 +7308,13 @@ export function toJson_TraefikServiceProps(obj: TraefikServiceProps | undefined)
  * @schema TraefikServiceSpec
  */
 export interface TraefikServiceSpec {
+  /**
+   * Failover defines the Failover service configuration.
+   *
+   * @schema TraefikServiceSpec#failover
+   */
+  readonly failover?: TraefikServiceSpecFailover;
+
   /**
    * HighestRandomWeight defines the highest random weight service configuration.
    *
@@ -6932,15 +7335,17 @@ export interface TraefikServiceSpec {
    * @schema TraefikServiceSpec#weighted
    */
   readonly weighted?: TraefikServiceSpecWeighted;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpec(obj: TraefikServiceSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
+    'failover': toJson_TraefikServiceSpecFailover(obj.failover),
     'highestRandomWeight': toJson_TraefikServiceSpecHighestRandomWeight(obj.highestRandomWeight),
     'mirroring': toJson_TraefikServiceSpecMirroring(obj.mirroring),
     'weighted': toJson_TraefikServiceSpecWeighted(obj.weighted),
@@ -6948,7 +7353,52 @@ export function toJson_TraefikServiceSpec(obj: TraefikServiceSpec | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Failover defines the Failover service configuration.
+ *
+ * @schema TraefikServiceSpecFailover
+ */
+export interface TraefikServiceSpecFailover {
+  /**
+   * Errors defines which errors should trigger the use of the fallback service.
+   *
+   * @schema TraefikServiceSpecFailover#errors
+   */
+  readonly errors: TraefikServiceSpecFailoverErrors;
+
+  /**
+   * Fallback defines the fallback service to use when the main service returns an error.
+   *
+   * @schema TraefikServiceSpecFailover#fallback
+   */
+  readonly fallback: TraefikServiceSpecFailoverFallback;
+
+  /**
+   * Service defines the main service to use.
+   *
+   * @schema TraefikServiceSpecFailover#service
+   */
+  readonly service: TraefikServiceSpecFailoverService;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailover' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailover(obj: TraefikServiceSpecFailover | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'errors': toJson_TraefikServiceSpecFailoverErrors(obj.errors),
+    'fallback': toJson_TraefikServiceSpecFailoverFallback(obj.fallback),
+    'service': toJson_TraefikServiceSpecFailoverService(obj.service),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * HighestRandomWeight defines the highest random weight service configuration.
@@ -6962,12 +7412,13 @@ export interface TraefikServiceSpecHighestRandomWeight {
    * @schema TraefikServiceSpecHighestRandomWeight#services
    */
   readonly services?: TraefikServiceSpecHighestRandomWeightServices[];
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecHighestRandomWeight' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecHighestRandomWeight(obj: TraefikServiceSpecHighestRandomWeight | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -6976,7 +7427,7 @@ export function toJson_TraefikServiceSpecHighestRandomWeight(obj: TraefikService
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Mirroring defines the Mirroring service configuration.
@@ -7006,6 +7457,13 @@ export interface TraefikServiceSpecMirroring {
    * @schema TraefikServiceSpecMirroring#maxBodySize
    */
   readonly maxBodySize?: number;
+
+  /**
+   * Middlewares defines the list of references to Middleware resources to apply to the service.
+   *
+   * @schema TraefikServiceSpecMirroring#middlewares
+   */
+  readonly middlewares?: TraefikServiceSpecMirroringMiddlewares[];
 
   /**
    * MirrorBody defines whether the body of the request should be mirrored.
@@ -7106,7 +7564,7 @@ export interface TraefikServiceSpecMirroring {
 
   /**
    * Sticky defines the sticky sessions configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
    *
    * @schema TraefikServiceSpecMirroring#sticky
    */
@@ -7128,18 +7586,20 @@ export interface TraefikServiceSpecMirroring {
    * @schema TraefikServiceSpecMirroring#weight
    */
   readonly weight?: number;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroring' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroring(obj: TraefikServiceSpecMirroring | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'healthCheck': toJson_TraefikServiceSpecMirroringHealthCheck(obj.healthCheck),
     'kind': obj.kind,
     'maxBodySize': obj.maxBodySize,
+    'middlewares': obj.middlewares?.map(y => toJson_TraefikServiceSpecMirroringMiddlewares(y)),
     'mirrorBody': obj.mirrorBody,
     'mirrors': obj.mirrors?.map(y => toJson_TraefikServiceSpecMirroringMirrors(y)),
     'name': obj.name,
@@ -7159,7 +7619,7 @@ export function toJson_TraefikServiceSpecMirroring(obj: TraefikServiceSpecMirror
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Weighted defines the Weighted Round Robin configuration.
@@ -7176,17 +7636,18 @@ export interface TraefikServiceSpecWeighted {
 
   /**
    * Sticky defines whether sticky sessions are enabled.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/kubernetes/crd/http/traefikservice/#stickiness-and-load-balancing
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/kubernetes/crd/http/traefikservice/#stickiness-and-load-balancing
    *
    * @schema TraefikServiceSpecWeighted#sticky
    */
   readonly sticky?: TraefikServiceSpecWeightedSticky;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeighted' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecWeighted(obj: TraefikServiceSpecWeighted | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7196,7 +7657,375 @@ export function toJson_TraefikServiceSpecWeighted(obj: TraefikServiceSpecWeighte
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Errors defines which errors should trigger the use of the fallback service.
+ *
+ * @schema TraefikServiceSpecFailoverErrors
+ */
+export interface TraefikServiceSpecFailoverErrors {
+  /**
+   * MaxRequestBodyBytes defines the maximum size allowed for the body of the request.
+   * Default value is -1, which means unlimited size.
+   *
+   * @schema TraefikServiceSpecFailoverErrors#maxRequestBodyBytes
+   */
+  readonly maxRequestBodyBytes?: number;
+
+  /**
+   * Status defines the list of status code ranges for which the fallback service should be used.
+   *
+   * @schema TraefikServiceSpecFailoverErrors#status
+   */
+  readonly status?: string[];
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverErrors' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverErrors(obj: TraefikServiceSpecFailoverErrors | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'maxRequestBodyBytes': obj.maxRequestBodyBytes,
+    'status': obj.status?.map(y => y),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Fallback defines the fallback service to use when the main service returns an error.
+ *
+ * @schema TraefikServiceSpecFailoverFallback
+ */
+export interface TraefikServiceSpecFailoverFallback {
+  /**
+   * Healthcheck defines health checks for ExternalName services.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#healthCheck
+   */
+  readonly healthCheck?: TraefikServiceSpecFailoverFallbackHealthCheck;
+
+  /**
+   * Kind defines the kind of the Service.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#kind
+   */
+  readonly kind?: TraefikServiceSpecFailoverFallbackKind;
+
+  /**
+   * Middlewares defines the list of references to Middleware resources to apply to the service.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#middlewares
+   */
+  readonly middlewares?: TraefikServiceSpecFailoverFallbackMiddlewares[];
+
+  /**
+   * Name defines the name of the referenced Kubernetes Service or TraefikService.
+   * The differentiation between the two is specified in the Kind field.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Kubernetes Service or TraefikService.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * NativeLB controls, when creating the load-balancer,
+   * whether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP.
+   * The Kubernetes Service itself does load-balance to the pods.
+   * By default, NativeLB is false.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#nativeLB
+   */
+  readonly nativeLb?: boolean;
+
+  /**
+   * NodePortLB controls, when creating the load-balancer,
+   * whether the LB's children are directly the nodes internal IPs using the nodePort when the service type is NodePort.
+   * It allows services to be reachable when Traefik runs externally from the Kubernetes cluster but within the same network of the nodes.
+   * By default, NodePortLB is false.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#nodePortLB
+   */
+  readonly nodePortLb?: boolean;
+
+  /**
+   * PassHostHeader defines whether the client Host header is forwarded to the upstream Kubernetes Service.
+   * By default, passHostHeader is true.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#passHostHeader
+   */
+  readonly passHostHeader?: boolean;
+
+  /**
+   * PassiveHealthCheck defines passive health checks for ExternalName services.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#passiveHealthCheck
+   */
+  readonly passiveHealthCheck?: TraefikServiceSpecFailoverFallbackPassiveHealthCheck;
+
+  /**
+   * Port defines the port of a Kubernetes Service.
+   * This can be a reference to a named port.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#port
+   */
+  readonly port?: TraefikServiceSpecFailoverFallbackPort;
+
+  /**
+   * ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#responseForwarding
+   */
+  readonly responseForwarding?: TraefikServiceSpecFailoverFallbackResponseForwarding;
+
+  /**
+   * Scheme defines the scheme to use for the request to the upstream Kubernetes Service.
+   * It defaults to https when Kubernetes Service port is 443, http otherwise.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#scheme
+   */
+  readonly scheme?: string;
+
+  /**
+   * ServersTransport defines the name of ServersTransport resource to use.
+   * It allows to configure the transport between Traefik and your servers.
+   * Can only be used on a Kubernetes Service.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#serversTransport
+   */
+  readonly serversTransport?: string;
+
+  /**
+   * Sticky defines the sticky sessions configuration.
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+   *
+   * @schema TraefikServiceSpecFailoverFallback#sticky
+   */
+  readonly sticky?: TraefikServiceSpecFailoverFallbackSticky;
+
+  /**
+   * Strategy defines the load balancing strategy between the servers.
+   * Supported values are: wrr (Weighed round-robin), p2c (Power of two choices), hrw (Highest Random Weight), and leasttime (Least-Time).
+   * RoundRobin value is deprecated and supported for backward compatibility.
+   *
+   * @schema TraefikServiceSpecFailoverFallback#strategy
+   */
+  readonly strategy?: TraefikServiceSpecFailoverFallbackStrategy;
+
+  /**
+   * Weight defines the weight and should only be specified when Name references a TraefikService object
+   * (and to be precise, one that embeds a Weighted Round Robin).
+   *
+   * @schema TraefikServiceSpecFailoverFallback#weight
+   */
+  readonly weight?: number;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverFallback' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverFallback(obj: TraefikServiceSpecFailoverFallback | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'healthCheck': toJson_TraefikServiceSpecFailoverFallbackHealthCheck(obj.healthCheck),
+    'kind': obj.kind,
+    'middlewares': obj.middlewares?.map(y => toJson_TraefikServiceSpecFailoverFallbackMiddlewares(y)),
+    'name': obj.name,
+    'namespace': obj.namespace,
+    'nativeLB': obj.nativeLb,
+    'nodePortLB': obj.nodePortLb,
+    'passHostHeader': obj.passHostHeader,
+    'passiveHealthCheck': toJson_TraefikServiceSpecFailoverFallbackPassiveHealthCheck(obj.passiveHealthCheck),
+    'port': obj.port?.value,
+    'responseForwarding': toJson_TraefikServiceSpecFailoverFallbackResponseForwarding(obj.responseForwarding),
+    'scheme': obj.scheme,
+    'serversTransport': obj.serversTransport,
+    'sticky': toJson_TraefikServiceSpecFailoverFallbackSticky(obj.sticky),
+    'strategy': obj.strategy,
+    'weight': obj.weight,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Service defines the main service to use.
+ *
+ * @schema TraefikServiceSpecFailoverService
+ */
+export interface TraefikServiceSpecFailoverService {
+  /**
+   * Healthcheck defines health checks for ExternalName services.
+   *
+   * @schema TraefikServiceSpecFailoverService#healthCheck
+   */
+  readonly healthCheck?: TraefikServiceSpecFailoverServiceHealthCheck;
+
+  /**
+   * Kind defines the kind of the Service.
+   *
+   * @schema TraefikServiceSpecFailoverService#kind
+   */
+  readonly kind?: TraefikServiceSpecFailoverServiceKind;
+
+  /**
+   * Middlewares defines the list of references to Middleware resources to apply to the service.
+   *
+   * @schema TraefikServiceSpecFailoverService#middlewares
+   */
+  readonly middlewares?: TraefikServiceSpecFailoverServiceMiddlewares[];
+
+  /**
+   * Name defines the name of the referenced Kubernetes Service or TraefikService.
+   * The differentiation between the two is specified in the Kind field.
+   *
+   * @schema TraefikServiceSpecFailoverService#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Kubernetes Service or TraefikService.
+   *
+   * @schema TraefikServiceSpecFailoverService#namespace
+   */
+  readonly namespace?: string;
+
+  /**
+   * NativeLB controls, when creating the load-balancer,
+   * whether the LB's children are directly the pods IPs or if the only child is the Kubernetes Service clusterIP.
+   * The Kubernetes Service itself does load-balance to the pods.
+   * By default, NativeLB is false.
+   *
+   * @schema TraefikServiceSpecFailoverService#nativeLB
+   */
+  readonly nativeLb?: boolean;
+
+  /**
+   * NodePortLB controls, when creating the load-balancer,
+   * whether the LB's children are directly the nodes internal IPs using the nodePort when the service type is NodePort.
+   * It allows services to be reachable when Traefik runs externally from the Kubernetes cluster but within the same network of the nodes.
+   * By default, NodePortLB is false.
+   *
+   * @schema TraefikServiceSpecFailoverService#nodePortLB
+   */
+  readonly nodePortLb?: boolean;
+
+  /**
+   * PassHostHeader defines whether the client Host header is forwarded to the upstream Kubernetes Service.
+   * By default, passHostHeader is true.
+   *
+   * @schema TraefikServiceSpecFailoverService#passHostHeader
+   */
+  readonly passHostHeader?: boolean;
+
+  /**
+   * PassiveHealthCheck defines passive health checks for ExternalName services.
+   *
+   * @schema TraefikServiceSpecFailoverService#passiveHealthCheck
+   */
+  readonly passiveHealthCheck?: TraefikServiceSpecFailoverServicePassiveHealthCheck;
+
+  /**
+   * Port defines the port of a Kubernetes Service.
+   * This can be a reference to a named port.
+   *
+   * @schema TraefikServiceSpecFailoverService#port
+   */
+  readonly port?: TraefikServiceSpecFailoverServicePort;
+
+  /**
+   * ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.
+   *
+   * @schema TraefikServiceSpecFailoverService#responseForwarding
+   */
+  readonly responseForwarding?: TraefikServiceSpecFailoverServiceResponseForwarding;
+
+  /**
+   * Scheme defines the scheme to use for the request to the upstream Kubernetes Service.
+   * It defaults to https when Kubernetes Service port is 443, http otherwise.
+   *
+   * @schema TraefikServiceSpecFailoverService#scheme
+   */
+  readonly scheme?: string;
+
+  /**
+   * ServersTransport defines the name of ServersTransport resource to use.
+   * It allows to configure the transport between Traefik and your servers.
+   * Can only be used on a Kubernetes Service.
+   *
+   * @schema TraefikServiceSpecFailoverService#serversTransport
+   */
+  readonly serversTransport?: string;
+
+  /**
+   * Sticky defines the sticky sessions configuration.
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+   *
+   * @schema TraefikServiceSpecFailoverService#sticky
+   */
+  readonly sticky?: TraefikServiceSpecFailoverServiceSticky;
+
+  /**
+   * Strategy defines the load balancing strategy between the servers.
+   * Supported values are: wrr (Weighed round-robin), p2c (Power of two choices), hrw (Highest Random Weight), and leasttime (Least-Time).
+   * RoundRobin value is deprecated and supported for backward compatibility.
+   *
+   * @schema TraefikServiceSpecFailoverService#strategy
+   */
+  readonly strategy?: TraefikServiceSpecFailoverServiceStrategy;
+
+  /**
+   * Weight defines the weight and should only be specified when Name references a TraefikService object
+   * (and to be precise, one that embeds a Weighted Round Robin).
+   *
+   * @schema TraefikServiceSpecFailoverService#weight
+   */
+  readonly weight?: number;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverService' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverService(obj: TraefikServiceSpecFailoverService | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'healthCheck': toJson_TraefikServiceSpecFailoverServiceHealthCheck(obj.healthCheck),
+    'kind': obj.kind,
+    'middlewares': obj.middlewares?.map(y => toJson_TraefikServiceSpecFailoverServiceMiddlewares(y)),
+    'name': obj.name,
+    'namespace': obj.namespace,
+    'nativeLB': obj.nativeLb,
+    'nodePortLB': obj.nodePortLb,
+    'passHostHeader': obj.passHostHeader,
+    'passiveHealthCheck': toJson_TraefikServiceSpecFailoverServicePassiveHealthCheck(obj.passiveHealthCheck),
+    'port': obj.port?.value,
+    'responseForwarding': toJson_TraefikServiceSpecFailoverServiceResponseForwarding(obj.responseForwarding),
+    'scheme': obj.scheme,
+    'serversTransport': obj.serversTransport,
+    'sticky': toJson_TraefikServiceSpecFailoverServiceSticky(obj.sticky),
+    'strategy': obj.strategy,
+    'weight': obj.weight,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * Service defines an upstream HTTP service to proxy traffic to.
@@ -7217,6 +8046,13 @@ export interface TraefikServiceSpecHighestRandomWeightServices {
    * @schema TraefikServiceSpecHighestRandomWeightServices#kind
    */
   readonly kind?: TraefikServiceSpecHighestRandomWeightServicesKind;
+
+  /**
+   * Middlewares defines the list of references to Middleware resources to apply to the service.
+   *
+   * @schema TraefikServiceSpecHighestRandomWeightServices#middlewares
+   */
+  readonly middlewares?: TraefikServiceSpecHighestRandomWeightServicesMiddlewares[];
 
   /**
    * Name defines the name of the referenced Kubernetes Service or TraefikService.
@@ -7302,7 +8138,7 @@ export interface TraefikServiceSpecHighestRandomWeightServices {
 
   /**
    * Sticky defines the sticky sessions configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
    *
    * @schema TraefikServiceSpecHighestRandomWeightServices#sticky
    */
@@ -7324,17 +8160,19 @@ export interface TraefikServiceSpecHighestRandomWeightServices {
    * @schema TraefikServiceSpecHighestRandomWeightServices#weight
    */
   readonly weight?: number;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecHighestRandomWeightServices' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecHighestRandomWeightServices(obj: TraefikServiceSpecHighestRandomWeightServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'healthCheck': toJson_TraefikServiceSpecHighestRandomWeightServicesHealthCheck(obj.healthCheck),
     'kind': obj.kind,
+    'middlewares': obj.middlewares?.map(y => toJson_TraefikServiceSpecHighestRandomWeightServicesMiddlewares(y)),
     'name': obj.name,
     'namespace': obj.namespace,
     'nativeLB': obj.nativeLb,
@@ -7352,7 +8190,7 @@ export function toJson_TraefikServiceSpecHighestRandomWeightServices(obj: Traefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Healthcheck defines health checks for ExternalName services.
@@ -7450,12 +8288,13 @@ export interface TraefikServiceSpecMirroringHealthCheck {
    * @schema TraefikServiceSpecMirroringHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: TraefikServiceSpecMirroringHealthCheckUnhealthyInterval;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringHealthCheck(obj: TraefikServiceSpecMirroringHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7475,7 +8314,7 @@ export function toJson_TraefikServiceSpecMirroringHealthCheck(obj: TraefikServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -7488,6 +8327,43 @@ export enum TraefikServiceSpecMirroringKind {
   /** TraefikService */
   TRAEFIK_SERVICE = "TraefikService",
 }
+
+/**
+ * MiddlewareRef is a reference to a Middleware resource.
+ *
+ * @schema TraefikServiceSpecMirroringMiddlewares
+ */
+export interface TraefikServiceSpecMirroringMiddlewares {
+  /**
+   * Name defines the name of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecMirroringMiddlewares#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecMirroringMiddlewares#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecMirroringMiddlewares' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecMirroringMiddlewares(obj: TraefikServiceSpecMirroringMiddlewares | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * MirrorService holds the mirror configuration.
@@ -7508,6 +8384,13 @@ export interface TraefikServiceSpecMirroringMirrors {
    * @schema TraefikServiceSpecMirroringMirrors#kind
    */
   readonly kind?: TraefikServiceSpecMirroringMirrorsKind;
+
+  /**
+   * Middlewares defines the list of references to Middleware resources to apply to the service.
+   *
+   * @schema TraefikServiceSpecMirroringMirrors#middlewares
+   */
+  readonly middlewares?: TraefikServiceSpecMirroringMirrorsMiddlewares[];
 
   /**
    * Name defines the name of the referenced Kubernetes Service or TraefikService.
@@ -7601,7 +8484,7 @@ export interface TraefikServiceSpecMirroringMirrors {
 
   /**
    * Sticky defines the sticky sessions configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
    *
    * @schema TraefikServiceSpecMirroringMirrors#sticky
    */
@@ -7623,17 +8506,19 @@ export interface TraefikServiceSpecMirroringMirrors {
    * @schema TraefikServiceSpecMirroringMirrors#weight
    */
   readonly weight?: number;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrors(obj: TraefikServiceSpecMirroringMirrors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'healthCheck': toJson_TraefikServiceSpecMirroringMirrorsHealthCheck(obj.healthCheck),
     'kind': obj.kind,
+    'middlewares': obj.middlewares?.map(y => toJson_TraefikServiceSpecMirroringMirrorsMiddlewares(y)),
     'name': obj.name,
     'namespace': obj.namespace,
     'nativeLB': obj.nativeLb,
@@ -7652,7 +8537,7 @@ export function toJson_TraefikServiceSpecMirroringMirrors(obj: TraefikServiceSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * PassiveHealthCheck defines passive health checks for ExternalName services.
@@ -7673,12 +8558,13 @@ export interface TraefikServiceSpecMirroringPassiveHealthCheck {
    * @schema TraefikServiceSpecMirroringPassiveHealthCheck#maxFailedAttempts
    */
   readonly maxFailedAttempts?: number;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringPassiveHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringPassiveHealthCheck(obj: TraefikServiceSpecMirroringPassiveHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7688,7 +8574,7 @@ export function toJson_TraefikServiceSpecMirroringPassiveHealthCheck(obj: Traefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -7723,12 +8609,13 @@ export interface TraefikServiceSpecMirroringResponseForwarding {
    * @schema TraefikServiceSpecMirroringResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringResponseForwarding(obj: TraefikServiceSpecMirroringResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7737,11 +8624,11 @@ export function toJson_TraefikServiceSpecMirroringResponseForwarding(obj: Traefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
  *
  * @schema TraefikServiceSpecMirroringSticky
  */
@@ -7752,12 +8639,13 @@ export interface TraefikServiceSpecMirroringSticky {
    * @schema TraefikServiceSpecMirroringSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecMirroringStickyCookie;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringSticky' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringSticky(obj: TraefikServiceSpecMirroringSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7766,7 +8654,7 @@ export function toJson_TraefikServiceSpecMirroringSticky(obj: TraefikServiceSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -7807,6 +8695,13 @@ export interface TraefikServiceSpecWeightedServices {
    * @schema TraefikServiceSpecWeightedServices#kind
    */
   readonly kind?: TraefikServiceSpecWeightedServicesKind;
+
+  /**
+   * Middlewares defines the list of references to Middleware resources to apply to the service.
+   *
+   * @schema TraefikServiceSpecWeightedServices#middlewares
+   */
+  readonly middlewares?: TraefikServiceSpecWeightedServicesMiddlewares[];
 
   /**
    * Name defines the name of the referenced Kubernetes Service or TraefikService.
@@ -7892,7 +8787,7 @@ export interface TraefikServiceSpecWeightedServices {
 
   /**
    * Sticky defines the sticky sessions configuration.
-   * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+   * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
    *
    * @schema TraefikServiceSpecWeightedServices#sticky
    */
@@ -7914,17 +8809,19 @@ export interface TraefikServiceSpecWeightedServices {
    * @schema TraefikServiceSpecWeightedServices#weight
    */
   readonly weight?: number;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServices' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecWeightedServices(obj: TraefikServiceSpecWeightedServices | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'healthCheck': toJson_TraefikServiceSpecWeightedServicesHealthCheck(obj.healthCheck),
     'kind': obj.kind,
+    'middlewares': obj.middlewares?.map(y => toJson_TraefikServiceSpecWeightedServicesMiddlewares(y)),
     'name': obj.name,
     'namespace': obj.namespace,
     'nativeLB': obj.nativeLb,
@@ -7942,11 +8839,11 @@ export function toJson_TraefikServiceSpecWeightedServices(obj: TraefikServiceSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Sticky defines whether sticky sessions are enabled.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/kubernetes/crd/http/traefikservice/#stickiness-and-load-balancing
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/kubernetes/crd/http/traefikservice/#stickiness-and-load-balancing
  *
  * @schema TraefikServiceSpecWeightedSticky
  */
@@ -7957,12 +8854,13 @@ export interface TraefikServiceSpecWeightedSticky {
    * @schema TraefikServiceSpecWeightedSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecWeightedStickyCookie;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedSticky' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecWeightedSticky(obj: TraefikServiceSpecWeightedSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -7971,7 +8869,627 @@ export function toJson_TraefikServiceSpecWeightedSticky(obj: TraefikServiceSpecW
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Healthcheck defines health checks for ExternalName services.
+ *
+ * @schema TraefikServiceSpecFailoverFallbackHealthCheck
+ */
+export interface TraefikServiceSpecFailoverFallbackHealthCheck {
+  /**
+   * FollowRedirects defines whether redirects should be followed during the health check calls.
+   * Default: true
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#followRedirects
+   */
+  readonly followRedirects?: boolean;
+
+  /**
+   * Headers defines custom headers to be sent to the health check endpoint.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#headers
+   */
+  readonly headers?: { [key: string]: string };
+
+  /**
+   * Hostname defines the value of hostname in the Host header of the health check request.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#hostname
+   */
+  readonly hostname?: string;
+
+  /**
+   * Interval defines the frequency of the health check calls for healthy targets.
+   * Default: 30s
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#interval
+   */
+  readonly interval?: TraefikServiceSpecFailoverFallbackHealthCheckInterval;
+
+  /**
+   * Method defines the healthcheck method.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#method
+   */
+  readonly method?: string;
+
+  /**
+   * Mode defines the health check mode.
+   * If defined to grpc, will use the gRPC health check protocol to probe the server.
+   * Default: http
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#mode
+   */
+  readonly mode?: string;
+
+  /**
+   * Path defines the server URL path for the health check endpoint.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#path
+   */
+  readonly path?: string;
+
+  /**
+   * Port defines the server URL port for the health check endpoint.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#port
+   */
+  readonly port?: number;
+
+  /**
+   * Scheme replaces the server URL scheme for the health check endpoint.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#scheme
+   */
+  readonly scheme?: string;
+
+  /**
+   * Status defines the expected HTTP status code of the response to the health check request.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#status
+   */
+  readonly status?: number;
+
+  /**
+   * Timeout defines the maximum duration Traefik will wait for a health check request before considering the server unhealthy.
+   * Default: 5s
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#timeout
+   */
+  readonly timeout?: TraefikServiceSpecFailoverFallbackHealthCheckTimeout;
+
+  /**
+   * UnhealthyInterval defines the frequency of the health check calls for unhealthy targets.
+   * When UnhealthyInterval is not defined, it defaults to the Interval value.
+   * Default: 30s
+   *
+   * @schema TraefikServiceSpecFailoverFallbackHealthCheck#unhealthyInterval
+   */
+  readonly unhealthyInterval?: TraefikServiceSpecFailoverFallbackHealthCheckUnhealthyInterval;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverFallbackHealthCheck' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverFallbackHealthCheck(obj: TraefikServiceSpecFailoverFallbackHealthCheck | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'followRedirects': obj.followRedirects,
+    'headers': ((obj.headers) === undefined) ? undefined : (Object.entries(obj.headers).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'hostname': obj.hostname,
+    'interval': obj.interval?.value,
+    'method': obj.method,
+    'mode': obj.mode,
+    'path': obj.path,
+    'port': obj.port,
+    'scheme': obj.scheme,
+    'status': obj.status,
+    'timeout': obj.timeout?.value,
+    'unhealthyInterval': obj.unhealthyInterval?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Kind defines the kind of the Service.
+ *
+ * @schema TraefikServiceSpecFailoverFallbackKind
+ */
+export enum TraefikServiceSpecFailoverFallbackKind {
+  /** Service */
+  SERVICE = "Service",
+  /** TraefikService */
+  TRAEFIK_SERVICE = "TraefikService",
+}
+
+/**
+ * MiddlewareRef is a reference to a Middleware resource.
+ *
+ * @schema TraefikServiceSpecFailoverFallbackMiddlewares
+ */
+export interface TraefikServiceSpecFailoverFallbackMiddlewares {
+  /**
+   * Name defines the name of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackMiddlewares#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackMiddlewares#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverFallbackMiddlewares' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverFallbackMiddlewares(obj: TraefikServiceSpecFailoverFallbackMiddlewares | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * PassiveHealthCheck defines passive health checks for ExternalName services.
+ *
+ * @schema TraefikServiceSpecFailoverFallbackPassiveHealthCheck
+ */
+export interface TraefikServiceSpecFailoverFallbackPassiveHealthCheck {
+  /**
+   * FailureWindow defines the time window during which the failed attempts must occur for the server to be marked as unhealthy. It also defines for how long the server will be considered unhealthy.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackPassiveHealthCheck#failureWindow
+   */
+  readonly failureWindow?: TraefikServiceSpecFailoverFallbackPassiveHealthCheckFailureWindow;
+
+  /**
+   * MaxFailedAttempts is the number of consecutive failed attempts allowed within the failure window before marking the server as unhealthy.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackPassiveHealthCheck#maxFailedAttempts
+   */
+  readonly maxFailedAttempts?: number;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverFallbackPassiveHealthCheck' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverFallbackPassiveHealthCheck(obj: TraefikServiceSpecFailoverFallbackPassiveHealthCheck | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'failureWindow': obj.failureWindow?.value,
+    'maxFailedAttempts': obj.maxFailedAttempts,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Port defines the port of a Kubernetes Service.
+ * This can be a reference to a named port.
+ *
+ * @schema TraefikServiceSpecFailoverFallbackPort
+ */
+export class TraefikServiceSpecFailoverFallbackPort {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverFallbackPort {
+    return new TraefikServiceSpecFailoverFallbackPort(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverFallbackPort {
+    return new TraefikServiceSpecFailoverFallbackPort(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.
+ *
+ * @schema TraefikServiceSpecFailoverFallbackResponseForwarding
+ */
+export interface TraefikServiceSpecFailoverFallbackResponseForwarding {
+  /**
+   * FlushInterval defines the interval, in milliseconds, in between flushes to the client while copying the response body.
+   * A negative value means to flush immediately after each write to the client.
+   * This configuration is ignored when ReverseProxy recognizes a response as a streaming response;
+   * for such responses, writes are flushed to the client immediately.
+   * Default: 100ms
+   *
+   * @schema TraefikServiceSpecFailoverFallbackResponseForwarding#flushInterval
+   */
+  readonly flushInterval?: string;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverFallbackResponseForwarding' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverFallbackResponseForwarding(obj: TraefikServiceSpecFailoverFallbackResponseForwarding | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'flushInterval': obj.flushInterval,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sticky defines the sticky sessions configuration.
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+ *
+ * @schema TraefikServiceSpecFailoverFallbackSticky
+ */
+export interface TraefikServiceSpecFailoverFallbackSticky {
+  /**
+   * Cookie defines the sticky cookie configuration.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackSticky#cookie
+   */
+  readonly cookie?: TraefikServiceSpecFailoverFallbackStickyCookie;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverFallbackSticky' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverFallbackSticky(obj: TraefikServiceSpecFailoverFallbackSticky | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'cookie': toJson_TraefikServiceSpecFailoverFallbackStickyCookie(obj.cookie),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Strategy defines the load balancing strategy between the servers.
+ * Supported values are: wrr (Weighed round-robin), p2c (Power of two choices), hrw (Highest Random Weight), and leasttime (Least-Time).
+ * RoundRobin value is deprecated and supported for backward compatibility.
+ *
+ * @schema TraefikServiceSpecFailoverFallbackStrategy
+ */
+export enum TraefikServiceSpecFailoverFallbackStrategy {
+  /** wrr */
+  WRR = "wrr",
+  /** p2c */
+  P2C = "p2c",
+  /** hrw */
+  HRW = "hrw",
+  /** leasttime */
+  LEASTTIME = "leasttime",
+  /** RoundRobin */
+  ROUND_ROBIN = "RoundRobin",
+}
+
+/**
+ * Healthcheck defines health checks for ExternalName services.
+ *
+ * @schema TraefikServiceSpecFailoverServiceHealthCheck
+ */
+export interface TraefikServiceSpecFailoverServiceHealthCheck {
+  /**
+   * FollowRedirects defines whether redirects should be followed during the health check calls.
+   * Default: true
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#followRedirects
+   */
+  readonly followRedirects?: boolean;
+
+  /**
+   * Headers defines custom headers to be sent to the health check endpoint.
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#headers
+   */
+  readonly headers?: { [key: string]: string };
+
+  /**
+   * Hostname defines the value of hostname in the Host header of the health check request.
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#hostname
+   */
+  readonly hostname?: string;
+
+  /**
+   * Interval defines the frequency of the health check calls for healthy targets.
+   * Default: 30s
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#interval
+   */
+  readonly interval?: TraefikServiceSpecFailoverServiceHealthCheckInterval;
+
+  /**
+   * Method defines the healthcheck method.
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#method
+   */
+  readonly method?: string;
+
+  /**
+   * Mode defines the health check mode.
+   * If defined to grpc, will use the gRPC health check protocol to probe the server.
+   * Default: http
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#mode
+   */
+  readonly mode?: string;
+
+  /**
+   * Path defines the server URL path for the health check endpoint.
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#path
+   */
+  readonly path?: string;
+
+  /**
+   * Port defines the server URL port for the health check endpoint.
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#port
+   */
+  readonly port?: number;
+
+  /**
+   * Scheme replaces the server URL scheme for the health check endpoint.
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#scheme
+   */
+  readonly scheme?: string;
+
+  /**
+   * Status defines the expected HTTP status code of the response to the health check request.
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#status
+   */
+  readonly status?: number;
+
+  /**
+   * Timeout defines the maximum duration Traefik will wait for a health check request before considering the server unhealthy.
+   * Default: 5s
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#timeout
+   */
+  readonly timeout?: TraefikServiceSpecFailoverServiceHealthCheckTimeout;
+
+  /**
+   * UnhealthyInterval defines the frequency of the health check calls for unhealthy targets.
+   * When UnhealthyInterval is not defined, it defaults to the Interval value.
+   * Default: 30s
+   *
+   * @schema TraefikServiceSpecFailoverServiceHealthCheck#unhealthyInterval
+   */
+  readonly unhealthyInterval?: TraefikServiceSpecFailoverServiceHealthCheckUnhealthyInterval;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverServiceHealthCheck' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverServiceHealthCheck(obj: TraefikServiceSpecFailoverServiceHealthCheck | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'followRedirects': obj.followRedirects,
+    'headers': ((obj.headers) === undefined) ? undefined : (Object.entries(obj.headers).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {})),
+    'hostname': obj.hostname,
+    'interval': obj.interval?.value,
+    'method': obj.method,
+    'mode': obj.mode,
+    'path': obj.path,
+    'port': obj.port,
+    'scheme': obj.scheme,
+    'status': obj.status,
+    'timeout': obj.timeout?.value,
+    'unhealthyInterval': obj.unhealthyInterval?.value,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Kind defines the kind of the Service.
+ *
+ * @schema TraefikServiceSpecFailoverServiceKind
+ */
+export enum TraefikServiceSpecFailoverServiceKind {
+  /** Service */
+  SERVICE = "Service",
+  /** TraefikService */
+  TRAEFIK_SERVICE = "TraefikService",
+}
+
+/**
+ * MiddlewareRef is a reference to a Middleware resource.
+ *
+ * @schema TraefikServiceSpecFailoverServiceMiddlewares
+ */
+export interface TraefikServiceSpecFailoverServiceMiddlewares {
+  /**
+   * Name defines the name of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecFailoverServiceMiddlewares#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecFailoverServiceMiddlewares#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverServiceMiddlewares' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverServiceMiddlewares(obj: TraefikServiceSpecFailoverServiceMiddlewares | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * PassiveHealthCheck defines passive health checks for ExternalName services.
+ *
+ * @schema TraefikServiceSpecFailoverServicePassiveHealthCheck
+ */
+export interface TraefikServiceSpecFailoverServicePassiveHealthCheck {
+  /**
+   * FailureWindow defines the time window during which the failed attempts must occur for the server to be marked as unhealthy. It also defines for how long the server will be considered unhealthy.
+   *
+   * @schema TraefikServiceSpecFailoverServicePassiveHealthCheck#failureWindow
+   */
+  readonly failureWindow?: TraefikServiceSpecFailoverServicePassiveHealthCheckFailureWindow;
+
+  /**
+   * MaxFailedAttempts is the number of consecutive failed attempts allowed within the failure window before marking the server as unhealthy.
+   *
+   * @schema TraefikServiceSpecFailoverServicePassiveHealthCheck#maxFailedAttempts
+   */
+  readonly maxFailedAttempts?: number;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverServicePassiveHealthCheck' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverServicePassiveHealthCheck(obj: TraefikServiceSpecFailoverServicePassiveHealthCheck | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'failureWindow': obj.failureWindow?.value,
+    'maxFailedAttempts': obj.maxFailedAttempts,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Port defines the port of a Kubernetes Service.
+ * This can be a reference to a named port.
+ *
+ * @schema TraefikServiceSpecFailoverServicePort
+ */
+export class TraefikServiceSpecFailoverServicePort {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverServicePort {
+    return new TraefikServiceSpecFailoverServicePort(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverServicePort {
+    return new TraefikServiceSpecFailoverServicePort(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * ResponseForwarding defines how Traefik forwards the response from the upstream Kubernetes Service to the client.
+ *
+ * @schema TraefikServiceSpecFailoverServiceResponseForwarding
+ */
+export interface TraefikServiceSpecFailoverServiceResponseForwarding {
+  /**
+   * FlushInterval defines the interval, in milliseconds, in between flushes to the client while copying the response body.
+   * A negative value means to flush immediately after each write to the client.
+   * This configuration is ignored when ReverseProxy recognizes a response as a streaming response;
+   * for such responses, writes are flushed to the client immediately.
+   * Default: 100ms
+   *
+   * @schema TraefikServiceSpecFailoverServiceResponseForwarding#flushInterval
+   */
+  readonly flushInterval?: string;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverServiceResponseForwarding' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverServiceResponseForwarding(obj: TraefikServiceSpecFailoverServiceResponseForwarding | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'flushInterval': obj.flushInterval,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Sticky defines the sticky sessions configuration.
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+ *
+ * @schema TraefikServiceSpecFailoverServiceSticky
+ */
+export interface TraefikServiceSpecFailoverServiceSticky {
+  /**
+   * Cookie defines the sticky cookie configuration.
+   *
+   * @schema TraefikServiceSpecFailoverServiceSticky#cookie
+   */
+  readonly cookie?: TraefikServiceSpecFailoverServiceStickyCookie;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverServiceSticky' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverServiceSticky(obj: TraefikServiceSpecFailoverServiceSticky | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'cookie': toJson_TraefikServiceSpecFailoverServiceStickyCookie(obj.cookie),
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Strategy defines the load balancing strategy between the servers.
+ * Supported values are: wrr (Weighed round-robin), p2c (Power of two choices), hrw (Highest Random Weight), and leasttime (Least-Time).
+ * RoundRobin value is deprecated and supported for backward compatibility.
+ *
+ * @schema TraefikServiceSpecFailoverServiceStrategy
+ */
+export enum TraefikServiceSpecFailoverServiceStrategy {
+  /** wrr */
+  WRR = "wrr",
+  /** p2c */
+  P2C = "p2c",
+  /** hrw */
+  HRW = "hrw",
+  /** leasttime */
+  LEASTTIME = "leasttime",
+  /** RoundRobin */
+  ROUND_ROBIN = "RoundRobin",
+}
 
 /**
  * Healthcheck defines health checks for ExternalName services.
@@ -8069,12 +9587,13 @@ export interface TraefikServiceSpecHighestRandomWeightServicesHealthCheck {
    * @schema TraefikServiceSpecHighestRandomWeightServicesHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: TraefikServiceSpecHighestRandomWeightServicesHealthCheckUnhealthyInterval;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecHighestRandomWeightServicesHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecHighestRandomWeightServicesHealthCheck(obj: TraefikServiceSpecHighestRandomWeightServicesHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8094,7 +9613,7 @@ export function toJson_TraefikServiceSpecHighestRandomWeightServicesHealthCheck(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -8107,6 +9626,43 @@ export enum TraefikServiceSpecHighestRandomWeightServicesKind {
   /** TraefikService */
   TRAEFIK_SERVICE = "TraefikService",
 }
+
+/**
+ * MiddlewareRef is a reference to a Middleware resource.
+ *
+ * @schema TraefikServiceSpecHighestRandomWeightServicesMiddlewares
+ */
+export interface TraefikServiceSpecHighestRandomWeightServicesMiddlewares {
+  /**
+   * Name defines the name of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecHighestRandomWeightServicesMiddlewares#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecHighestRandomWeightServicesMiddlewares#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecHighestRandomWeightServicesMiddlewares' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecHighestRandomWeightServicesMiddlewares(obj: TraefikServiceSpecHighestRandomWeightServicesMiddlewares | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * PassiveHealthCheck defines passive health checks for ExternalName services.
@@ -8127,12 +9683,13 @@ export interface TraefikServiceSpecHighestRandomWeightServicesPassiveHealthCheck
    * @schema TraefikServiceSpecHighestRandomWeightServicesPassiveHealthCheck#maxFailedAttempts
    */
   readonly maxFailedAttempts?: number;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecHighestRandomWeightServicesPassiveHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecHighestRandomWeightServicesPassiveHealthCheck(obj: TraefikServiceSpecHighestRandomWeightServicesPassiveHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8142,7 +9699,7 @@ export function toJson_TraefikServiceSpecHighestRandomWeightServicesPassiveHealt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -8177,12 +9734,13 @@ export interface TraefikServiceSpecHighestRandomWeightServicesResponseForwarding
    * @schema TraefikServiceSpecHighestRandomWeightServicesResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecHighestRandomWeightServicesResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecHighestRandomWeightServicesResponseForwarding(obj: TraefikServiceSpecHighestRandomWeightServicesResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8191,11 +9749,11 @@ export function toJson_TraefikServiceSpecHighestRandomWeightServicesResponseForw
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
  *
  * @schema TraefikServiceSpecHighestRandomWeightServicesSticky
  */
@@ -8206,12 +9764,13 @@ export interface TraefikServiceSpecHighestRandomWeightServicesSticky {
    * @schema TraefikServiceSpecHighestRandomWeightServicesSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecHighestRandomWeightServicesStickyCookie;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecHighestRandomWeightServicesSticky' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecHighestRandomWeightServicesSticky(obj: TraefikServiceSpecHighestRandomWeightServicesSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8220,7 +9779,7 @@ export function toJson_TraefikServiceSpecHighestRandomWeightServicesSticky(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -8390,12 +9949,13 @@ export interface TraefikServiceSpecMirroringMirrorsHealthCheck {
    * @schema TraefikServiceSpecMirroringMirrorsHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: TraefikServiceSpecMirroringMirrorsHealthCheckUnhealthyInterval;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrorsHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrorsHealthCheck(obj: TraefikServiceSpecMirroringMirrorsHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8415,7 +9975,7 @@ export function toJson_TraefikServiceSpecMirroringMirrorsHealthCheck(obj: Traefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -8428,6 +9988,43 @@ export enum TraefikServiceSpecMirroringMirrorsKind {
   /** TraefikService */
   TRAEFIK_SERVICE = "TraefikService",
 }
+
+/**
+ * MiddlewareRef is a reference to a Middleware resource.
+ *
+ * @schema TraefikServiceSpecMirroringMirrorsMiddlewares
+ */
+export interface TraefikServiceSpecMirroringMirrorsMiddlewares {
+  /**
+   * Name defines the name of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecMirroringMirrorsMiddlewares#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecMirroringMirrorsMiddlewares#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecMirroringMirrorsMiddlewares' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecMirroringMirrorsMiddlewares(obj: TraefikServiceSpecMirroringMirrorsMiddlewares | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * PassiveHealthCheck defines passive health checks for ExternalName services.
@@ -8448,12 +10045,13 @@ export interface TraefikServiceSpecMirroringMirrorsPassiveHealthCheck {
    * @schema TraefikServiceSpecMirroringMirrorsPassiveHealthCheck#maxFailedAttempts
    */
   readonly maxFailedAttempts?: number;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrorsPassiveHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrorsPassiveHealthCheck(obj: TraefikServiceSpecMirroringMirrorsPassiveHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8463,7 +10061,7 @@ export function toJson_TraefikServiceSpecMirroringMirrorsPassiveHealthCheck(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -8498,12 +10096,13 @@ export interface TraefikServiceSpecMirroringMirrorsResponseForwarding {
    * @schema TraefikServiceSpecMirroringMirrorsResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrorsResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrorsResponseForwarding(obj: TraefikServiceSpecMirroringMirrorsResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8512,11 +10111,11 @@ export function toJson_TraefikServiceSpecMirroringMirrorsResponseForwarding(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
  *
  * @schema TraefikServiceSpecMirroringMirrorsSticky
  */
@@ -8527,12 +10126,13 @@ export interface TraefikServiceSpecMirroringMirrorsSticky {
    * @schema TraefikServiceSpecMirroringMirrorsSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecMirroringMirrorsStickyCookie;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrorsSticky' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrorsSticky(obj: TraefikServiceSpecMirroringMirrorsSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8541,7 +10141,7 @@ export function toJson_TraefikServiceSpecMirroringMirrorsSticky(obj: TraefikServ
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -8639,12 +10239,13 @@ export interface TraefikServiceSpecMirroringStickyCookie {
    * @schema TraefikServiceSpecMirroringStickyCookie#secure
    */
   readonly secure?: boolean;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringStickyCookie(obj: TraefikServiceSpecMirroringStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8659,7 +10260,7 @@ export function toJson_TraefikServiceSpecMirroringStickyCookie(obj: TraefikServi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Healthcheck defines health checks for ExternalName services.
@@ -8757,12 +10358,13 @@ export interface TraefikServiceSpecWeightedServicesHealthCheck {
    * @schema TraefikServiceSpecWeightedServicesHealthCheck#unhealthyInterval
    */
   readonly unhealthyInterval?: TraefikServiceSpecWeightedServicesHealthCheckUnhealthyInterval;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServicesHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecWeightedServicesHealthCheck(obj: TraefikServiceSpecWeightedServicesHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8782,7 +10384,7 @@ export function toJson_TraefikServiceSpecWeightedServicesHealthCheck(obj: Traefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kind defines the kind of the Service.
@@ -8795,6 +10397,43 @@ export enum TraefikServiceSpecWeightedServicesKind {
   /** TraefikService */
   TRAEFIK_SERVICE = "TraefikService",
 }
+
+/**
+ * MiddlewareRef is a reference to a Middleware resource.
+ *
+ * @schema TraefikServiceSpecWeightedServicesMiddlewares
+ */
+export interface TraefikServiceSpecWeightedServicesMiddlewares {
+  /**
+   * Name defines the name of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecWeightedServicesMiddlewares#name
+   */
+  readonly name: string;
+
+  /**
+   * Namespace defines the namespace of the referenced Middleware resource.
+   *
+   * @schema TraefikServiceSpecWeightedServicesMiddlewares#namespace
+   */
+  readonly namespace?: string;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecWeightedServicesMiddlewares' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecWeightedServicesMiddlewares(obj: TraefikServiceSpecWeightedServicesMiddlewares | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'name': obj.name,
+    'namespace': obj.namespace,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * PassiveHealthCheck defines passive health checks for ExternalName services.
@@ -8815,12 +10454,13 @@ export interface TraefikServiceSpecWeightedServicesPassiveHealthCheck {
    * @schema TraefikServiceSpecWeightedServicesPassiveHealthCheck#maxFailedAttempts
    */
   readonly maxFailedAttempts?: number;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServicesPassiveHealthCheck' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecWeightedServicesPassiveHealthCheck(obj: TraefikServiceSpecWeightedServicesPassiveHealthCheck | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8830,7 +10470,7 @@ export function toJson_TraefikServiceSpecWeightedServicesPassiveHealthCheck(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Port defines the port of a Kubernetes Service.
@@ -8865,12 +10505,13 @@ export interface TraefikServiceSpecWeightedServicesResponseForwarding {
    * @schema TraefikServiceSpecWeightedServicesResponseForwarding#flushInterval
    */
   readonly flushInterval?: string;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServicesResponseForwarding' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecWeightedServicesResponseForwarding(obj: TraefikServiceSpecWeightedServicesResponseForwarding | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8879,11 +10520,11 @@ export function toJson_TraefikServiceSpecWeightedServicesResponseForwarding(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Sticky defines the sticky sessions configuration.
- * More info: https://doc.traefik.io/traefik/v3.6/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
+ * More info: https://doc.traefik.io/traefik/v3.7/reference/routing-configuration/http/load-balancing/service/#sticky-sessions
  *
  * @schema TraefikServiceSpecWeightedServicesSticky
  */
@@ -8894,12 +10535,13 @@ export interface TraefikServiceSpecWeightedServicesSticky {
    * @schema TraefikServiceSpecWeightedServicesSticky#cookie
    */
   readonly cookie?: TraefikServiceSpecWeightedServicesStickyCookie;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServicesSticky' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecWeightedServicesSticky(obj: TraefikServiceSpecWeightedServicesSticky | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -8908,7 +10550,7 @@ export function toJson_TraefikServiceSpecWeightedServicesSticky(obj: TraefikServ
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Strategy defines the load balancing strategy between the servers.
@@ -8990,12 +10632,13 @@ export interface TraefikServiceSpecWeightedStickyCookie {
    * @schema TraefikServiceSpecWeightedStickyCookie#secure
    */
   readonly secure?: boolean;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecWeightedStickyCookie(obj: TraefikServiceSpecWeightedStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9010,7 +10653,309 @@ export function toJson_TraefikServiceSpecWeightedStickyCookie(obj: TraefikServic
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Interval defines the frequency of the health check calls for healthy targets.
+ * Default: 30s
+ *
+ * @schema TraefikServiceSpecFailoverFallbackHealthCheckInterval
+ */
+export class TraefikServiceSpecFailoverFallbackHealthCheckInterval {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverFallbackHealthCheckInterval {
+    return new TraefikServiceSpecFailoverFallbackHealthCheckInterval(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverFallbackHealthCheckInterval {
+    return new TraefikServiceSpecFailoverFallbackHealthCheckInterval(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * Timeout defines the maximum duration Traefik will wait for a health check request before considering the server unhealthy.
+ * Default: 5s
+ *
+ * @schema TraefikServiceSpecFailoverFallbackHealthCheckTimeout
+ */
+export class TraefikServiceSpecFailoverFallbackHealthCheckTimeout {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverFallbackHealthCheckTimeout {
+    return new TraefikServiceSpecFailoverFallbackHealthCheckTimeout(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverFallbackHealthCheckTimeout {
+    return new TraefikServiceSpecFailoverFallbackHealthCheckTimeout(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * UnhealthyInterval defines the frequency of the health check calls for unhealthy targets.
+ * When UnhealthyInterval is not defined, it defaults to the Interval value.
+ * Default: 30s
+ *
+ * @schema TraefikServiceSpecFailoverFallbackHealthCheckUnhealthyInterval
+ */
+export class TraefikServiceSpecFailoverFallbackHealthCheckUnhealthyInterval {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverFallbackHealthCheckUnhealthyInterval {
+    return new TraefikServiceSpecFailoverFallbackHealthCheckUnhealthyInterval(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverFallbackHealthCheckUnhealthyInterval {
+    return new TraefikServiceSpecFailoverFallbackHealthCheckUnhealthyInterval(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * FailureWindow defines the time window during which the failed attempts must occur for the server to be marked as unhealthy. It also defines for how long the server will be considered unhealthy.
+ *
+ * @schema TraefikServiceSpecFailoverFallbackPassiveHealthCheckFailureWindow
+ */
+export class TraefikServiceSpecFailoverFallbackPassiveHealthCheckFailureWindow {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverFallbackPassiveHealthCheckFailureWindow {
+    return new TraefikServiceSpecFailoverFallbackPassiveHealthCheckFailureWindow(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverFallbackPassiveHealthCheckFailureWindow {
+    return new TraefikServiceSpecFailoverFallbackPassiveHealthCheckFailureWindow(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * Cookie defines the sticky cookie configuration.
+ *
+ * @schema TraefikServiceSpecFailoverFallbackStickyCookie
+ */
+export interface TraefikServiceSpecFailoverFallbackStickyCookie {
+  /**
+   * Domain defines the host to which the cookie will be sent.
+   * More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#domaindomain-value
+   *
+   * @schema TraefikServiceSpecFailoverFallbackStickyCookie#domain
+   */
+  readonly domain?: string;
+
+  /**
+   * HTTPOnly defines whether the cookie can be accessed by client-side APIs, such as JavaScript.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackStickyCookie#httpOnly
+   */
+  readonly httpOnly?: boolean;
+
+  /**
+   * MaxAge defines the number of seconds until the cookie expires.
+   * When set to a negative number, the cookie expires immediately.
+   * When set to zero, the cookie never expires.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackStickyCookie#maxAge
+   */
+  readonly maxAge?: number;
+
+  /**
+   * Name defines the Cookie name.
+   *
+   * @schema TraefikServiceSpecFailoverFallbackStickyCookie#name
+   */
+  readonly name?: string;
+
+  /**
+   * Path defines the path that must exist in the requested URL for the browser to send the Cookie header.
+   * When not provided the cookie will be sent on every request to the domain.
+   * More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#pathpath-value
+   *
+   * @schema TraefikServiceSpecFailoverFallbackStickyCookie#path
+   */
+  readonly path?: string;
+
+  /**
+   * SameSite defines the same site policy.
+   * More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+   *
+   * @schema TraefikServiceSpecFailoverFallbackStickyCookie#sameSite
+   */
+  readonly sameSite?: TraefikServiceSpecFailoverFallbackStickyCookieSameSite;
+
+  /**
+   * Secure defines whether the cookie can only be transmitted over an encrypted connection (i.e. HTTPS).
+   *
+   * @schema TraefikServiceSpecFailoverFallbackStickyCookie#secure
+   */
+  readonly secure?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverFallbackStickyCookie' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverFallbackStickyCookie(obj: TraefikServiceSpecFailoverFallbackStickyCookie | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'domain': obj.domain,
+    'httpOnly': obj.httpOnly,
+    'maxAge': obj.maxAge,
+    'name': obj.name,
+    'path': obj.path,
+    'sameSite': obj.sameSite,
+    'secure': obj.secure,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
+
+/**
+ * Interval defines the frequency of the health check calls for healthy targets.
+ * Default: 30s
+ *
+ * @schema TraefikServiceSpecFailoverServiceHealthCheckInterval
+ */
+export class TraefikServiceSpecFailoverServiceHealthCheckInterval {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverServiceHealthCheckInterval {
+    return new TraefikServiceSpecFailoverServiceHealthCheckInterval(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverServiceHealthCheckInterval {
+    return new TraefikServiceSpecFailoverServiceHealthCheckInterval(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * Timeout defines the maximum duration Traefik will wait for a health check request before considering the server unhealthy.
+ * Default: 5s
+ *
+ * @schema TraefikServiceSpecFailoverServiceHealthCheckTimeout
+ */
+export class TraefikServiceSpecFailoverServiceHealthCheckTimeout {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverServiceHealthCheckTimeout {
+    return new TraefikServiceSpecFailoverServiceHealthCheckTimeout(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverServiceHealthCheckTimeout {
+    return new TraefikServiceSpecFailoverServiceHealthCheckTimeout(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * UnhealthyInterval defines the frequency of the health check calls for unhealthy targets.
+ * When UnhealthyInterval is not defined, it defaults to the Interval value.
+ * Default: 30s
+ *
+ * @schema TraefikServiceSpecFailoverServiceHealthCheckUnhealthyInterval
+ */
+export class TraefikServiceSpecFailoverServiceHealthCheckUnhealthyInterval {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverServiceHealthCheckUnhealthyInterval {
+    return new TraefikServiceSpecFailoverServiceHealthCheckUnhealthyInterval(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverServiceHealthCheckUnhealthyInterval {
+    return new TraefikServiceSpecFailoverServiceHealthCheckUnhealthyInterval(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * FailureWindow defines the time window during which the failed attempts must occur for the server to be marked as unhealthy. It also defines for how long the server will be considered unhealthy.
+ *
+ * @schema TraefikServiceSpecFailoverServicePassiveHealthCheckFailureWindow
+ */
+export class TraefikServiceSpecFailoverServicePassiveHealthCheckFailureWindow {
+  public static fromNumber(value: number): TraefikServiceSpecFailoverServicePassiveHealthCheckFailureWindow {
+    return new TraefikServiceSpecFailoverServicePassiveHealthCheckFailureWindow(value);
+  }
+  public static fromString(value: string): TraefikServiceSpecFailoverServicePassiveHealthCheckFailureWindow {
+    return new TraefikServiceSpecFailoverServicePassiveHealthCheckFailureWindow(value);
+  }
+  private constructor(public readonly value: number | string) {
+  }
+}
+
+/**
+ * Cookie defines the sticky cookie configuration.
+ *
+ * @schema TraefikServiceSpecFailoverServiceStickyCookie
+ */
+export interface TraefikServiceSpecFailoverServiceStickyCookie {
+  /**
+   * Domain defines the host to which the cookie will be sent.
+   * More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#domaindomain-value
+   *
+   * @schema TraefikServiceSpecFailoverServiceStickyCookie#domain
+   */
+  readonly domain?: string;
+
+  /**
+   * HTTPOnly defines whether the cookie can be accessed by client-side APIs, such as JavaScript.
+   *
+   * @schema TraefikServiceSpecFailoverServiceStickyCookie#httpOnly
+   */
+  readonly httpOnly?: boolean;
+
+  /**
+   * MaxAge defines the number of seconds until the cookie expires.
+   * When set to a negative number, the cookie expires immediately.
+   * When set to zero, the cookie never expires.
+   *
+   * @schema TraefikServiceSpecFailoverServiceStickyCookie#maxAge
+   */
+  readonly maxAge?: number;
+
+  /**
+   * Name defines the Cookie name.
+   *
+   * @schema TraefikServiceSpecFailoverServiceStickyCookie#name
+   */
+  readonly name?: string;
+
+  /**
+   * Path defines the path that must exist in the requested URL for the browser to send the Cookie header.
+   * When not provided the cookie will be sent on every request to the domain.
+   * More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#pathpath-value
+   *
+   * @schema TraefikServiceSpecFailoverServiceStickyCookie#path
+   */
+  readonly path?: string;
+
+  /**
+   * SameSite defines the same site policy.
+   * More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+   *
+   * @schema TraefikServiceSpecFailoverServiceStickyCookie#sameSite
+   */
+  readonly sameSite?: TraefikServiceSpecFailoverServiceStickyCookieSameSite;
+
+  /**
+   * Secure defines whether the cookie can only be transmitted over an encrypted connection (i.e. HTTPS).
+   *
+   * @schema TraefikServiceSpecFailoverServiceStickyCookie#secure
+   */
+  readonly secure?: boolean;
+
+}
+
+/**
+ * Converts an object of type 'TraefikServiceSpecFailoverServiceStickyCookie' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_TraefikServiceSpecFailoverServiceStickyCookie(obj: TraefikServiceSpecFailoverServiceStickyCookie | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'domain': obj.domain,
+    'httpOnly': obj.httpOnly,
+    'maxAge': obj.maxAge,
+    'name': obj.name,
+    'path': obj.path,
+    'sameSite': obj.sameSite,
+    'secure': obj.secure,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * Interval defines the frequency of the health check calls for healthy targets.
@@ -9140,12 +11085,13 @@ export interface TraefikServiceSpecHighestRandomWeightServicesStickyCookie {
    * @schema TraefikServiceSpecHighestRandomWeightServicesStickyCookie#secure
    */
   readonly secure?: boolean;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecHighestRandomWeightServicesStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecHighestRandomWeightServicesStickyCookie(obj: TraefikServiceSpecHighestRandomWeightServicesStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9160,7 +11106,7 @@ export function toJson_TraefikServiceSpecHighestRandomWeightServicesStickyCookie
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Interval defines the frequency of the health check calls for healthy targets.
@@ -9290,12 +11236,13 @@ export interface TraefikServiceSpecMirroringMirrorsStickyCookie {
    * @schema TraefikServiceSpecMirroringMirrorsStickyCookie#secure
    */
   readonly secure?: boolean;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecMirroringMirrorsStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecMirroringMirrorsStickyCookie(obj: TraefikServiceSpecMirroringMirrorsStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9310,7 +11257,7 @@ export function toJson_TraefikServiceSpecMirroringMirrorsStickyCookie(obj: Traef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SameSite defines the same site policy.
@@ -9455,12 +11402,13 @@ export interface TraefikServiceSpecWeightedServicesStickyCookie {
    * @schema TraefikServiceSpecWeightedServicesStickyCookie#secure
    */
   readonly secure?: boolean;
+
 }
 
 /**
  * Converts an object of type 'TraefikServiceSpecWeightedServicesStickyCookie' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_TraefikServiceSpecWeightedServicesStickyCookie(obj: TraefikServiceSpecWeightedServicesStickyCookie | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -9475,7 +11423,7 @@ export function toJson_TraefikServiceSpecWeightedServicesStickyCookie(obj: Traef
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SameSite defines the same site policy.
@@ -9484,6 +11432,36 @@ export function toJson_TraefikServiceSpecWeightedServicesStickyCookie(obj: Traef
  * @schema TraefikServiceSpecWeightedStickyCookieSameSite
  */
 export enum TraefikServiceSpecWeightedStickyCookieSameSite {
+  /** none */
+  NONE = "none",
+  /** lax */
+  LAX = "lax",
+  /** strict */
+  STRICT = "strict",
+}
+
+/**
+ * SameSite defines the same site policy.
+ * More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+ *
+ * @schema TraefikServiceSpecFailoverFallbackStickyCookieSameSite
+ */
+export enum TraefikServiceSpecFailoverFallbackStickyCookieSameSite {
+  /** none */
+  NONE = "none",
+  /** lax */
+  LAX = "lax",
+  /** strict */
+  STRICT = "strict",
+}
+
+/**
+ * SameSite defines the same site policy.
+ * More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
+ *
+ * @schema TraefikServiceSpecFailoverServiceStickyCookieSameSite
+ */
+export enum TraefikServiceSpecFailoverServiceStickyCookieSameSite {
   /** none */
   NONE = "none",
   /** lax */

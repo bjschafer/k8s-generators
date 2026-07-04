@@ -49,7 +49,7 @@ export class Addon extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -78,12 +78,13 @@ export interface AddonProps {
    * @schema Addon#spec
    */
   readonly spec?: AddonSpec;
+
 }
 
 /**
  * Converts an object of type 'AddonProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AddonProps(obj: AddonProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -93,7 +94,7 @@ export function toJson_AddonProps(obj: AddonProps | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec provides information about the on-disk manifest backing this resource.
@@ -114,12 +115,13 @@ export interface AddonSpec {
    * @schema AddonSpec#source
    */
   readonly source?: string;
+
 }
 
 /**
  * Converts an object of type 'AddonSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_AddonSpec(obj: AddonSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -129,7 +131,7 @@ export function toJson_AddonSpec(obj: AddonSpec | undefined): Record<string, any
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -176,7 +178,7 @@ export class EtcdSnapshotFile extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -203,12 +205,13 @@ export interface EtcdSnapshotFileProps {
    * @schema ETCDSnapshotFile#spec
    */
   readonly spec?: EtcdSnapshotFileSpec;
+
 }
 
 /**
  * Converts an object of type 'EtcdSnapshotFileProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EtcdSnapshotFileProps(obj: EtcdSnapshotFileProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -218,7 +221,7 @@ export function toJson_EtcdSnapshotFileProps(obj: EtcdSnapshotFileProps | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Spec defines properties of an etcd snapshot file
@@ -268,12 +271,13 @@ export interface EtcdSnapshotFileSpec {
    * @schema EtcdSnapshotFileSpec#snapshotName
    */
   readonly snapshotName: string;
+
 }
 
 /**
  * Converts an object of type 'EtcdSnapshotFileSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EtcdSnapshotFileSpec(obj: EtcdSnapshotFileSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -286,7 +290,7 @@ export function toJson_EtcdSnapshotFileSpec(obj: EtcdSnapshotFileSpec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * S3 contains extra metadata about the S3 storage system holding the
@@ -351,12 +355,13 @@ export interface EtcdSnapshotFileSpecS3 {
    * @schema EtcdSnapshotFileSpecS3#skipSSLVerify
    */
   readonly skipSslVerify?: boolean;
+
 }
 
 /**
  * Converts an object of type 'EtcdSnapshotFileSpecS3' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_EtcdSnapshotFileSpecS3(obj: EtcdSnapshotFileSpecS3 | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -372,5 +377,5 @@ export function toJson_EtcdSnapshotFileSpecS3(obj: EtcdSnapshotFileSpecS3 | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 

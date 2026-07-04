@@ -49,7 +49,7 @@ export class SealedSecret extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -78,12 +78,13 @@ export interface SealedSecretProps {
    * @schema SealedSecret#spec
    */
   readonly spec: SealedSecretSpec;
+
 }
 
 /**
  * Converts an object of type 'SealedSecretProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_SealedSecretProps(obj: SealedSecretProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -93,7 +94,7 @@ export function toJson_SealedSecretProps(obj: SealedSecretProps | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * SealedSecretSpec is the specification of a SealedSecret.
@@ -120,12 +121,13 @@ export interface SealedSecretSpec {
    * @schema SealedSecretSpec#template
    */
   readonly template?: SealedSecretSpecTemplate;
+
 }
 
 /**
  * Converts an object of type 'SealedSecretSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_SealedSecretSpec(obj: SealedSecretSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -136,7 +138,7 @@ export function toJson_SealedSecretSpec(obj: SealedSecretSpec | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Template defines the structure of the Secret that will be
@@ -176,12 +178,13 @@ export interface SealedSecretSpecTemplate {
    * @schema SealedSecretSpecTemplate#type
    */
   readonly type?: string;
+
 }
 
 /**
  * Converts an object of type 'SealedSecretSpecTemplate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_SealedSecretSpecTemplate(obj: SealedSecretSpecTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -193,7 +196,7 @@ export function toJson_SealedSecretSpecTemplate(obj: SealedSecretSpecTemplate | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Standard object's metadata.
@@ -226,12 +229,13 @@ export interface SealedSecretSpecTemplateMetadata {
    * @schema SealedSecretSpecTemplateMetadata#namespace
    */
   readonly namespace?: string;
+
 }
 
 /**
  * Converts an object of type 'SealedSecretSpecTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_SealedSecretSpecTemplateMetadata(obj: SealedSecretSpecTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -244,5 +248,5 @@ export function toJson_SealedSecretSpecTemplateMetadata(obj: SealedSecretSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 

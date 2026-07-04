@@ -47,7 +47,7 @@ export class ImageUpdater extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -76,12 +76,13 @@ export interface ImageUpdaterProps {
    * @schema ImageUpdater#spec
    */
   readonly spec?: ImageUpdaterSpec;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterProps(obj: ImageUpdaterProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -91,7 +92,7 @@ export function toJson_ImageUpdaterProps(obj: ImageUpdaterProps | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ImageUpdaterSpec defines the desired state of ImageUpdater
@@ -120,41 +121,30 @@ export interface ImageUpdaterSpec {
   readonly commonUpdateSettings?: ImageUpdaterSpecCommonUpdateSettings;
 
   /**
-   * Namespace indicates the target namespace of the applications.
-   *
-   * Deprecated: This field is deprecated and will be removed in a future release.
-   * The controller now uses the ImageUpdater CR's namespace (metadata.namespace)
-   * to determine which namespace to search for applications. This field is ignored.
-   *
-   * @schema ImageUpdaterSpec#namespace
-   */
-  readonly namespace?: string;
-
-  /**
    * WriteBackConfig provides global default settings for how and where to write back image updates.
    * This can be overridden at the ApplicationRef level.
    *
    * @schema ImageUpdaterSpec#writeBackConfig
    */
   readonly writeBackConfig?: ImageUpdaterSpecWriteBackConfig;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpec(obj: ImageUpdaterSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'applicationRefs': obj.applicationRefs?.map(y => toJson_ImageUpdaterSpecApplicationRefs(y)),
     'commonUpdateSettings': toJson_ImageUpdaterSpecCommonUpdateSettings(obj.commonUpdateSettings),
-    'namespace': obj.namespace,
     'writeBackConfig': toJson_ImageUpdaterSpecWriteBackConfig(obj.writeBackConfig),
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ApplicationRef contains various criteria by which to include applications for managing by image updater
@@ -215,12 +205,13 @@ export interface ImageUpdaterSpecApplicationRefs {
    * @schema ImageUpdaterSpecApplicationRefs#writeBackConfig
    */
   readonly writeBackConfig?: ImageUpdaterSpecApplicationRefsWriteBackConfig;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefs' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefs(obj: ImageUpdaterSpecApplicationRefs | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -234,7 +225,7 @@ export function toJson_ImageUpdaterSpecApplicationRefs(obj: ImageUpdaterSpecAppl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CommonUpdateSettings provides global default settings for update strategies,
@@ -292,12 +283,13 @@ export interface ImageUpdaterSpecCommonUpdateSettings {
    * @schema ImageUpdaterSpecCommonUpdateSettings#updateStrategy
    */
   readonly updateStrategy?: string;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecCommonUpdateSettings' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecCommonUpdateSettings(obj: ImageUpdaterSpecCommonUpdateSettings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -311,7 +303,7 @@ export function toJson_ImageUpdaterSpecCommonUpdateSettings(obj: ImageUpdaterSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * WriteBackConfig provides global default settings for how and where to write back image updates.
@@ -335,12 +327,13 @@ export interface ImageUpdaterSpecWriteBackConfig {
    * @schema ImageUpdaterSpecWriteBackConfig#method
    */
   readonly method: string;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecWriteBackConfig' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecWriteBackConfig(obj: ImageUpdaterSpecWriteBackConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -350,7 +343,7 @@ export function toJson_ImageUpdaterSpecWriteBackConfig(obj: ImageUpdaterSpecWrit
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CommonUpdateSettings overrides the global CommonUpdateSettings for applications
@@ -408,12 +401,13 @@ export interface ImageUpdaterSpecApplicationRefsCommonUpdateSettings {
    * @schema ImageUpdaterSpecApplicationRefsCommonUpdateSettings#updateStrategy
    */
   readonly updateStrategy?: string;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsCommonUpdateSettings' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsCommonUpdateSettings(obj: ImageUpdaterSpecApplicationRefsCommonUpdateSettings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -427,7 +421,7 @@ export function toJson_ImageUpdaterSpecApplicationRefsCommonUpdateSettings(obj: 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ImageConfig defines how a specific container image should be discovered, updated,
@@ -471,12 +465,13 @@ export interface ImageUpdaterSpecApplicationRefsImages {
    * @schema ImageUpdaterSpecApplicationRefsImages#manifestTargets
    */
   readonly manifestTargets?: ImageUpdaterSpecApplicationRefsImagesManifestTargets;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsImages' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsImages(obj: ImageUpdaterSpecApplicationRefsImages | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -488,7 +483,7 @@ export function toJson_ImageUpdaterSpecApplicationRefsImages(obj: ImageUpdaterSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LabelSelectors indicates the label selectors to apply for application selection
@@ -511,12 +506,13 @@ export interface ImageUpdaterSpecApplicationRefsLabelSelectors {
    * @schema ImageUpdaterSpecApplicationRefsLabelSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsLabelSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsLabelSelectors(obj: ImageUpdaterSpecApplicationRefsLabelSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -526,7 +522,7 @@ export function toJson_ImageUpdaterSpecApplicationRefsLabelSelectors(obj: ImageU
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * WriteBackConfig overrides the global WriteBackConfig settings for applications
@@ -551,12 +547,13 @@ export interface ImageUpdaterSpecApplicationRefsWriteBackConfig {
    * @schema ImageUpdaterSpecApplicationRefsWriteBackConfig#method
    */
   readonly method: string;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsWriteBackConfig' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsWriteBackConfig(obj: ImageUpdaterSpecApplicationRefsWriteBackConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -566,7 +563,7 @@ export function toJson_ImageUpdaterSpecApplicationRefsWriteBackConfig(obj: Image
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GitConfig provides Git configuration settings if the write-back method involves Git.
@@ -582,6 +579,15 @@ export interface ImageUpdaterSpecWriteBackConfigGitConfig {
    * @schema ImageUpdaterSpecWriteBackConfigGitConfig#branch
    */
   readonly branch?: string;
+
+  /**
+   * PullRequest configures creation of pull requests when writing back image updates to Git.
+   * When set, the controller opens a PR instead of pushing to the branch.
+   * If not specified write back config method is `git`.
+   *
+   * @schema ImageUpdaterSpecWriteBackConfigGitConfig#pullRequest
+   */
+  readonly pullRequest?: ImageUpdaterSpecWriteBackConfigGitConfigPullRequest;
 
   /**
    * Repository URL to commit changes to.
@@ -602,23 +608,25 @@ export interface ImageUpdaterSpecWriteBackConfigGitConfig {
    * @schema ImageUpdaterSpecWriteBackConfigGitConfig#writeBackTarget
    */
   readonly writeBackTarget?: string;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecWriteBackConfigGitConfig' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecWriteBackConfigGitConfig(obj: ImageUpdaterSpecWriteBackConfigGitConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'branch': obj.branch,
+    'pullRequest': toJson_ImageUpdaterSpecWriteBackConfigGitConfigPullRequest(obj.pullRequest),
     'repository': obj.repository,
     'writeBackTarget': obj.writeBackTarget,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CommonUpdateSettings overrides the effective default CommonUpdateSettings for this specific image.
@@ -674,12 +682,13 @@ export interface ImageUpdaterSpecApplicationRefsImagesCommonUpdateSettings {
    * @schema ImageUpdaterSpecApplicationRefsImagesCommonUpdateSettings#updateStrategy
    */
   readonly updateStrategy?: string;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsImagesCommonUpdateSettings' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsImagesCommonUpdateSettings(obj: ImageUpdaterSpecApplicationRefsImagesCommonUpdateSettings | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -693,7 +702,7 @@ export function toJson_ImageUpdaterSpecApplicationRefsImagesCommonUpdateSettings
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ManifestTarget defines how and where to update this image in Kubernetes manifests.
@@ -718,12 +727,13 @@ export interface ImageUpdaterSpecApplicationRefsImagesManifestTargets {
    * @schema ImageUpdaterSpecApplicationRefsImagesManifestTargets#kustomize
    */
   readonly kustomize?: ImageUpdaterSpecApplicationRefsImagesManifestTargetsKustomize;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsImagesManifestTargets' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsImagesManifestTargets(obj: ImageUpdaterSpecApplicationRefsImagesManifestTargets | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -733,7 +743,7 @@ export function toJson_ImageUpdaterSpecApplicationRefsImagesManifestTargets(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -766,12 +776,13 @@ export interface ImageUpdaterSpecApplicationRefsLabelSelectorsMatchExpressions {
    * @schema ImageUpdaterSpecApplicationRefsLabelSelectorsMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsLabelSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsLabelSelectorsMatchExpressions(obj: ImageUpdaterSpecApplicationRefsLabelSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -782,7 +793,7 @@ export function toJson_ImageUpdaterSpecApplicationRefsLabelSelectorsMatchExpress
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * GitConfig provides Git configuration settings if the write-back method involves Git.
@@ -798,6 +809,15 @@ export interface ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfig {
    * @schema ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfig#branch
    */
   readonly branch?: string;
+
+  /**
+   * PullRequest configures creation of pull requests when writing back image updates to Git.
+   * When set, the controller opens a PR instead of pushing to the branch.
+   * If not specified write back config method is `git`.
+   *
+   * @schema ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfig#pullRequest
+   */
+  readonly pullRequest?: ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfigPullRequest;
 
   /**
    * Repository URL to commit changes to.
@@ -818,23 +838,64 @@ export interface ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfig {
    * @schema ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfig#writeBackTarget
    */
   readonly writeBackTarget?: string;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfig' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfig(obj: ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
     'branch': obj.branch,
+    'pullRequest': toJson_ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfigPullRequest(obj.pullRequest),
     'repository': obj.repository,
     'writeBackTarget': obj.writeBackTarget,
   };
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * PullRequest configures creation of pull requests when writing back image updates to Git.
+ * When set, the controller opens a PR instead of pushing to the branch.
+ * If not specified write back config method is `git`.
+ *
+ * @schema ImageUpdaterSpecWriteBackConfigGitConfigPullRequest
+ */
+export interface ImageUpdaterSpecWriteBackConfigGitConfigPullRequest {
+  /**
+   * GitHub configures PR creation via the GitHub API.
+   *
+   * @schema ImageUpdaterSpecWriteBackConfigGitConfigPullRequest#github
+   */
+  readonly github?: any;
+
+  /**
+   * GitLab configures MR creation via the GitLab API.
+   *
+   * @schema ImageUpdaterSpecWriteBackConfigGitConfigPullRequest#gitlab
+   */
+  readonly gitlab?: any;
+
+}
+
+/**
+ * Converts an object of type 'ImageUpdaterSpecWriteBackConfigGitConfigPullRequest' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ImageUpdaterSpecWriteBackConfigGitConfigPullRequest(obj: ImageUpdaterSpecWriteBackConfigGitConfigPullRequest | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'github': obj.github,
+    'gitlab': obj.gitlab,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 
 /**
  * Helm specifies update parameters if the target manifest is managed by Helm
@@ -872,12 +933,13 @@ export interface ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm {
    * @schema ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm#tag
    */
   readonly tag?: string;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm(obj: ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -888,7 +950,7 @@ export function toJson_ImageUpdaterSpecApplicationRefsImagesManifestTargetsHelm(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kustomize specifies update parameters if the target manifest is managed by Kustomize
@@ -907,12 +969,13 @@ export interface ImageUpdaterSpecApplicationRefsImagesManifestTargetsKustomize {
    * @schema ImageUpdaterSpecApplicationRefsImagesManifestTargetsKustomize#name
    */
   readonly name: string;
+
 }
 
 /**
  * Converts an object of type 'ImageUpdaterSpecApplicationRefsImagesManifestTargetsKustomize' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ImageUpdaterSpecApplicationRefsImagesManifestTargetsKustomize(obj: ImageUpdaterSpecApplicationRefsImagesManifestTargetsKustomize | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -921,5 +984,44 @@ export function toJson_ImageUpdaterSpecApplicationRefsImagesManifestTargetsKusto
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
+
+/**
+ * PullRequest configures creation of pull requests when writing back image updates to Git.
+ * When set, the controller opens a PR instead of pushing to the branch.
+ * If not specified write back config method is `git`.
+ *
+ * @schema ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfigPullRequest
+ */
+export interface ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfigPullRequest {
+  /**
+   * GitHub configures PR creation via the GitHub API.
+   *
+   * @schema ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfigPullRequest#github
+   */
+  readonly github?: any;
+
+  /**
+   * GitLab configures MR creation via the GitLab API.
+   *
+   * @schema ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfigPullRequest#gitlab
+   */
+  readonly gitlab?: any;
+
+}
+
+/**
+ * Converts an object of type 'ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfigPullRequest' to JSON representation.
+ */
+/* eslint-disable max-len, quote-props */
+export function toJson_ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfigPullRequest(obj: ImageUpdaterSpecApplicationRefsWriteBackConfigGitConfigPullRequest | undefined): Record<string, any> | undefined {
+  if (obj === undefined) { return undefined; }
+  const result = {
+    'github': obj.github,
+    'gitlab': obj.gitlab,
+  };
+  // filter undefined values
+  return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
+}
+/* eslint-enable max-len, quote-props */
 

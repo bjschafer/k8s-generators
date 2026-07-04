@@ -48,7 +48,7 @@ export class Backup extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -76,12 +76,13 @@ export interface BackupProps {
    * @schema Backup#spec
    */
   readonly spec?: BackupSpec;
+
 }
 
 /**
  * Converts an object of type 'BackupProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupProps(obj: BackupProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -91,7 +92,7 @@ export function toJson_BackupProps(obj: BackupProps | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackupSpec defines the specification for a Velero backup.
@@ -321,12 +322,13 @@ export interface BackupSpec {
    * @schema BackupSpec#volumeSnapshotLocations
    */
   readonly volumeSnapshotLocations?: string[];
+
 }
 
 /**
  * Converts an object of type 'BackupSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpec(obj: BackupSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -361,7 +363,7 @@ export function toJson_BackupSpec(obj: BackupSpec | undefined): Record<string, a
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Hooks represent custom behaviors that should be executed at different phases of the backup.
@@ -375,12 +377,13 @@ export interface BackupSpecHooks {
    * @schema BackupSpecHooks#resources
    */
   readonly resources?: BackupSpecHooksResources[];
+
 }
 
 /**
  * Converts an object of type 'BackupSpecHooks' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecHooks(obj: BackupSpecHooks | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -389,7 +392,7 @@ export function toJson_BackupSpecHooks(obj: BackupSpecHooks | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LabelSelector is a metav1.LabelSelector to filter with
@@ -414,12 +417,13 @@ export interface BackupSpecLabelSelector {
    * @schema BackupSpecLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'BackupSpecLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecLabelSelector(obj: BackupSpecLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -429,7 +433,7 @@ export function toJson_BackupSpecLabelSelector(obj: BackupSpecLabelSelector | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema BackupSpecMetadata
@@ -439,12 +443,13 @@ export interface BackupSpecMetadata {
    * @schema BackupSpecMetadata#labels
    */
   readonly labels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'BackupSpecMetadata' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecMetadata(obj: BackupSpecMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -453,7 +458,7 @@ export function toJson_BackupSpecMetadata(obj: BackupSpecMetadata | undefined): 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -478,12 +483,13 @@ export interface BackupSpecOrLabelSelectors {
    * @schema BackupSpecOrLabelSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'BackupSpecOrLabelSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecOrLabelSelectors(obj: BackupSpecOrLabelSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -493,7 +499,7 @@ export function toJson_BackupSpecOrLabelSelectors(obj: BackupSpecOrLabelSelector
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourcePolicy specifies the referenced resource policies that backup should follow
@@ -523,12 +529,13 @@ export interface BackupSpecResourcePolicy {
    * @schema BackupSpecResourcePolicy#name
    */
   readonly name: string;
+
 }
 
 /**
  * Converts an object of type 'BackupSpecResourcePolicy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecResourcePolicy(obj: BackupSpecResourcePolicy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -539,7 +546,7 @@ export function toJson_BackupSpecResourcePolicy(obj: BackupSpecResourcePolicy | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * UploaderConfig specifies the configuration for the uploader.
@@ -553,12 +560,13 @@ export interface BackupSpecUploaderConfig {
    * @schema BackupSpecUploaderConfig#parallelFilesUpload
    */
   readonly parallelFilesUpload?: number;
+
 }
 
 /**
  * Converts an object of type 'BackupSpecUploaderConfig' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecUploaderConfig(obj: BackupSpecUploaderConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -567,7 +575,7 @@ export function toJson_BackupSpecUploaderConfig(obj: BackupSpecUploaderConfig | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackupResourceHookSpec defines one or more BackupResourceHooks that should be executed based on
@@ -635,12 +643,13 @@ export interface BackupSpecHooksResources {
    * @schema BackupSpecHooksResources#pre
    */
   readonly pre?: BackupSpecHooksResourcesPre[];
+
 }
 
 /**
  * Converts an object of type 'BackupSpecHooksResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecHooksResources(obj: BackupSpecHooksResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -656,7 +665,7 @@ export function toJson_BackupSpecHooksResources(obj: BackupSpecHooksResources | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -689,12 +698,13 @@ export interface BackupSpecLabelSelectorMatchExpressions {
    * @schema BackupSpecLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'BackupSpecLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecLabelSelectorMatchExpressions(obj: BackupSpecLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -705,7 +715,7 @@ export function toJson_BackupSpecLabelSelectorMatchExpressions(obj: BackupSpecLa
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -738,12 +748,13 @@ export interface BackupSpecOrLabelSelectorsMatchExpressions {
    * @schema BackupSpecOrLabelSelectorsMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'BackupSpecOrLabelSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecOrLabelSelectorsMatchExpressions(obj: BackupSpecOrLabelSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -754,7 +765,7 @@ export function toJson_BackupSpecOrLabelSelectorsMatchExpressions(obj: BackupSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LabelSelector, if specified, filters the resources to which this hook spec applies.
@@ -777,12 +788,13 @@ export interface BackupSpecHooksResourcesLabelSelector {
    * @schema BackupSpecHooksResourcesLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'BackupSpecHooksResourcesLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecHooksResourcesLabelSelector(obj: BackupSpecHooksResourcesLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -792,7 +804,7 @@ export function toJson_BackupSpecHooksResourcesLabelSelector(obj: BackupSpecHook
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackupResourceHook defines a hook for a resource.
@@ -806,12 +818,13 @@ export interface BackupSpecHooksResourcesPost {
    * @schema BackupSpecHooksResourcesPost#exec
    */
   readonly exec: BackupSpecHooksResourcesPostExec;
+
 }
 
 /**
  * Converts an object of type 'BackupSpecHooksResourcesPost' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecHooksResourcesPost(obj: BackupSpecHooksResourcesPost | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -820,7 +833,7 @@ export function toJson_BackupSpecHooksResourcesPost(obj: BackupSpecHooksResource
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackupResourceHook defines a hook for a resource.
@@ -834,12 +847,13 @@ export interface BackupSpecHooksResourcesPre {
    * @schema BackupSpecHooksResourcesPre#exec
    */
   readonly exec: BackupSpecHooksResourcesPreExec;
+
 }
 
 /**
  * Converts an object of type 'BackupSpecHooksResourcesPre' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecHooksResourcesPre(obj: BackupSpecHooksResourcesPre | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -848,7 +862,7 @@ export function toJson_BackupSpecHooksResourcesPre(obj: BackupSpecHooksResources
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -881,12 +895,13 @@ export interface BackupSpecHooksResourcesLabelSelectorMatchExpressions {
    * @schema BackupSpecHooksResourcesLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'BackupSpecHooksResourcesLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecHooksResourcesLabelSelectorMatchExpressions(obj: BackupSpecHooksResourcesLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -897,7 +912,7 @@ export function toJson_BackupSpecHooksResourcesLabelSelectorMatchExpressions(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Exec defines an exec hook.
@@ -934,12 +949,13 @@ export interface BackupSpecHooksResourcesPostExec {
    * @schema BackupSpecHooksResourcesPostExec#timeout
    */
   readonly timeout?: string;
+
 }
 
 /**
  * Converts an object of type 'BackupSpecHooksResourcesPostExec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecHooksResourcesPostExec(obj: BackupSpecHooksResourcesPostExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -951,7 +967,7 @@ export function toJson_BackupSpecHooksResourcesPostExec(obj: BackupSpecHooksReso
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Exec defines an exec hook.
@@ -988,12 +1004,13 @@ export interface BackupSpecHooksResourcesPreExec {
    * @schema BackupSpecHooksResourcesPreExec#timeout
    */
   readonly timeout?: string;
+
 }
 
 /**
  * Converts an object of type 'BackupSpecHooksResourcesPreExec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupSpecHooksResourcesPreExec(obj: BackupSpecHooksResourcesPreExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1005,7 +1022,7 @@ export function toJson_BackupSpecHooksResourcesPreExec(obj: BackupSpecHooksResou
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * OnError specifies how Velero should behave if it encounters an error executing this hook.
@@ -1076,7 +1093,7 @@ export class BackupRepository extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1101,12 +1118,13 @@ export interface BackupRepositoryProps {
    * @schema BackupRepository#spec
    */
   readonly spec?: BackupRepositorySpec;
+
 }
 
 /**
  * Converts an object of type 'BackupRepositoryProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupRepositoryProps(obj: BackupRepositoryProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1116,7 +1134,7 @@ export function toJson_BackupRepositoryProps(obj: BackupRepositoryProps | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackupRepositorySpec is the specification for a BackupRepository.
@@ -1168,12 +1186,13 @@ export interface BackupRepositorySpec {
    * @schema BackupRepositorySpec#volumeNamespace
    */
   readonly volumeNamespace: string;
+
 }
 
 /**
  * Converts an object of type 'BackupRepositorySpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupRepositorySpec(obj: BackupRepositorySpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1187,7 +1206,7 @@ export function toJson_BackupRepositorySpec(obj: BackupRepositorySpec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RepositoryType indicates the type of the backend repository
@@ -1246,7 +1265,7 @@ export class BackupStorageLocation extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1273,12 +1292,13 @@ export interface BackupStorageLocationProps {
    * @schema BackupStorageLocation#spec
    */
   readonly spec?: BackupStorageLocationSpec;
+
 }
 
 /**
  * Converts an object of type 'BackupStorageLocationProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupStorageLocationProps(obj: BackupStorageLocationProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1288,7 +1308,7 @@ export function toJson_BackupStorageLocationProps(obj: BackupStorageLocationProp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackupStorageLocationSpec defines the desired state of a Velero BackupStorageLocation
@@ -1351,12 +1371,13 @@ export interface BackupStorageLocationSpec {
    * @schema BackupStorageLocationSpec#validationFrequency
    */
   readonly validationFrequency?: string;
+
 }
 
 /**
  * Converts an object of type 'BackupStorageLocationSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupStorageLocationSpec(obj: BackupStorageLocationSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1372,7 +1393,7 @@ export function toJson_BackupStorageLocationSpec(obj: BackupStorageLocationSpec 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * AccessMode defines the permissions for the backup storage location.
@@ -1416,12 +1437,13 @@ export interface BackupStorageLocationSpecCredential {
    * @schema BackupStorageLocationSpecCredential#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'BackupStorageLocationSpecCredential' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupStorageLocationSpecCredential(obj: BackupStorageLocationSpecCredential | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1432,7 +1454,7 @@ export function toJson_BackupStorageLocationSpecCredential(obj: BackupStorageLoc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ObjectStorageLocation specifies the settings necessary to connect to a provider's object storage.
@@ -1470,12 +1492,13 @@ export interface BackupStorageLocationSpecObjectStorage {
    * @schema BackupStorageLocationSpecObjectStorage#prefix
    */
   readonly prefix?: string;
+
 }
 
 /**
  * Converts an object of type 'BackupStorageLocationSpecObjectStorage' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupStorageLocationSpecObjectStorage(obj: BackupStorageLocationSpecObjectStorage | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1487,7 +1510,7 @@ export function toJson_BackupStorageLocationSpecObjectStorage(obj: BackupStorage
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * CACertRef is a reference to a Secret containing the CA certificate bundle to use
@@ -1521,12 +1544,13 @@ export interface BackupStorageLocationSpecObjectStorageCaCertRef {
    * @schema BackupStorageLocationSpecObjectStorageCaCertRef#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'BackupStorageLocationSpecObjectStorageCaCertRef' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_BackupStorageLocationSpecObjectStorageCaCertRef(obj: BackupStorageLocationSpecObjectStorageCaCertRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1537,7 +1561,7 @@ export function toJson_BackupStorageLocationSpecObjectStorageCaCertRef(obj: Back
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -1584,7 +1608,7 @@ export class DataDownload extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1611,12 +1635,13 @@ export interface DataDownloadProps {
    * @schema DataDownload#spec
    */
   readonly spec?: DataDownloadSpec;
+
 }
 
 /**
  * Converts an object of type 'DataDownloadProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DataDownloadProps(obj: DataDownloadProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1626,7 +1651,7 @@ export function toJson_DataDownloadProps(obj: DataDownloadProps | undefined): Re
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DataDownloadSpec is the specification for a DataDownload.
@@ -1708,12 +1733,13 @@ export interface DataDownloadSpec {
    * @schema DataDownloadSpec#targetVolume
    */
   readonly targetVolume: DataDownloadSpecTargetVolume;
+
 }
 
 /**
  * Converts an object of type 'DataDownloadSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DataDownloadSpec(obj: DataDownloadSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1731,7 +1757,7 @@ export function toJson_DataDownloadSpec(obj: DataDownloadSpec | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * NodeOS is OS of the node where the DataDownload is processed.
@@ -1773,12 +1799,13 @@ export interface DataDownloadSpecTargetVolume {
    * @schema DataDownloadSpecTargetVolume#pvc
    */
   readonly pvc: string;
+
 }
 
 /**
  * Converts an object of type 'DataDownloadSpecTargetVolume' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DataDownloadSpecTargetVolume(obj: DataDownloadSpecTargetVolume | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1789,7 +1816,7 @@ export function toJson_DataDownloadSpecTargetVolume(obj: DataDownloadSpecTargetV
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -1836,7 +1863,7 @@ export class DataUpload extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -1863,12 +1890,13 @@ export interface DataUploadProps {
    * @schema DataUpload#spec
    */
   readonly spec?: DataUploadSpec;
+
 }
 
 /**
  * Converts an object of type 'DataUploadProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DataUploadProps(obj: DataUploadProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1878,7 +1906,7 @@ export function toJson_DataUploadProps(obj: DataUploadProps | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DataUploadSpec is the specification for a DataUpload.
@@ -1953,12 +1981,13 @@ export interface DataUploadSpec {
    * @schema DataUploadSpec#sourcePVC
    */
   readonly sourcePvc: string;
+
 }
 
 /**
  * Converts an object of type 'DataUploadSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DataUploadSpec(obj: DataUploadSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1975,7 +2004,7 @@ export function toJson_DataUploadSpec(obj: DataUploadSpec | undefined): Record<s
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * If SnapshotType is CSI, CSISnapshot provides the information of the CSI snapshot.
@@ -2010,12 +2039,13 @@ export interface DataUploadSpecCsiSnapshot {
    * @schema DataUploadSpecCsiSnapshot#volumeSnapshot
    */
   readonly volumeSnapshot: string;
+
 }
 
 /**
  * Converts an object of type 'DataUploadSpecCsiSnapshot' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DataUploadSpecCsiSnapshot(obj: DataUploadSpecCsiSnapshot | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2027,7 +2057,7 @@ export function toJson_DataUploadSpecCsiSnapshot(obj: DataUploadSpecCsiSnapshot 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -2074,7 +2104,7 @@ export class DeleteBackupRequest extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -2101,12 +2131,13 @@ export interface DeleteBackupRequestProps {
    * @schema DeleteBackupRequest#spec
    */
   readonly spec?: DeleteBackupRequestSpec;
+
 }
 
 /**
  * Converts an object of type 'DeleteBackupRequestProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DeleteBackupRequestProps(obj: DeleteBackupRequestProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2116,7 +2147,7 @@ export function toJson_DeleteBackupRequestProps(obj: DeleteBackupRequestProps | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DeleteBackupRequestSpec is the specification for which backups to delete.
@@ -2128,12 +2159,13 @@ export interface DeleteBackupRequestSpec {
    * @schema DeleteBackupRequestSpec#backupName
    */
   readonly backupName: string;
+
 }
 
 /**
  * Converts an object of type 'DeleteBackupRequestSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DeleteBackupRequestSpec(obj: DeleteBackupRequestSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2142,7 +2174,7 @@ export function toJson_DeleteBackupRequestSpec(obj: DeleteBackupRequestSpec | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -2190,7 +2222,7 @@ export class DownloadRequest extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -2218,12 +2250,13 @@ export interface DownloadRequestProps {
    * @schema DownloadRequest#spec
    */
   readonly spec?: DownloadRequestSpec;
+
 }
 
 /**
  * Converts an object of type 'DownloadRequestProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DownloadRequestProps(obj: DownloadRequestProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2233,7 +2266,7 @@ export function toJson_DownloadRequestProps(obj: DownloadRequestProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * DownloadRequestSpec is the specification for a download request.
@@ -2247,12 +2280,13 @@ export interface DownloadRequestSpec {
    * @schema DownloadRequestSpec#target
    */
   readonly target: DownloadRequestSpecTarget;
+
 }
 
 /**
  * Converts an object of type 'DownloadRequestSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DownloadRequestSpec(obj: DownloadRequestSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2261,7 +2295,7 @@ export function toJson_DownloadRequestSpec(obj: DownloadRequestSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Target is what to download (e.g. logs for a backup).
@@ -2282,12 +2316,13 @@ export interface DownloadRequestSpecTarget {
    * @schema DownloadRequestSpecTarget#name
    */
   readonly name: string;
+
 }
 
 /**
  * Converts an object of type 'DownloadRequestSpecTarget' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_DownloadRequestSpecTarget(obj: DownloadRequestSpecTarget | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2297,7 +2332,7 @@ export function toJson_DownloadRequestSpecTarget(obj: DownloadRequestSpecTarget 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Kind is the type of file to download.
@@ -2380,7 +2415,7 @@ export class PodVolumeBackup extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -2405,12 +2440,13 @@ export interface PodVolumeBackupProps {
    * @schema PodVolumeBackup#spec
    */
   readonly spec?: PodVolumeBackupSpec;
+
 }
 
 /**
  * Converts an object of type 'PodVolumeBackupProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PodVolumeBackupProps(obj: PodVolumeBackupProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2420,7 +2456,7 @@ export function toJson_PodVolumeBackupProps(obj: PodVolumeBackupProps | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * PodVolumeBackupSpec is the specification for a PodVolumeBackup.
@@ -2495,12 +2531,13 @@ export interface PodVolumeBackupSpec {
    * @schema PodVolumeBackupSpec#volume
    */
   readonly volume: string;
+
 }
 
 /**
  * Converts an object of type 'PodVolumeBackupSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PodVolumeBackupSpec(obj: PodVolumeBackupSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2517,7 +2554,7 @@ export function toJson_PodVolumeBackupSpec(obj: PodVolumeBackupSpec | undefined)
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Pod is a reference to the pod containing the volume to be backed up.
@@ -2584,12 +2621,13 @@ export interface PodVolumeBackupSpecPod {
    * @schema PodVolumeBackupSpecPod#uid
    */
   readonly uid?: string;
+
 }
 
 /**
  * Converts an object of type 'PodVolumeBackupSpecPod' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PodVolumeBackupSpecPod(obj: PodVolumeBackupSpecPod | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2604,7 +2642,7 @@ export function toJson_PodVolumeBackupSpecPod(obj: PodVolumeBackupSpecPod | unde
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * UploaderType is the type of the uploader to handle the data transfer.
@@ -2663,7 +2701,7 @@ export class PodVolumeRestore extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -2688,12 +2726,13 @@ export interface PodVolumeRestoreProps {
    * @schema PodVolumeRestore#spec
    */
   readonly spec?: PodVolumeRestoreSpec;
+
 }
 
 /**
  * Converts an object of type 'PodVolumeRestoreProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PodVolumeRestoreProps(obj: PodVolumeRestoreProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2703,7 +2742,7 @@ export function toJson_PodVolumeRestoreProps(obj: PodVolumeRestoreProps | undefi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * PodVolumeRestoreSpec is the specification for a PodVolumeRestore.
@@ -2783,12 +2822,13 @@ export interface PodVolumeRestoreSpec {
    * @schema PodVolumeRestoreSpec#volume
    */
   readonly volume: string;
+
 }
 
 /**
  * Converts an object of type 'PodVolumeRestoreSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PodVolumeRestoreSpec(obj: PodVolumeRestoreSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2806,7 +2846,7 @@ export function toJson_PodVolumeRestoreSpec(obj: PodVolumeRestoreSpec | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Pod is a reference to the pod containing the volume to be restored.
@@ -2873,12 +2913,13 @@ export interface PodVolumeRestoreSpecPod {
    * @schema PodVolumeRestoreSpecPod#uid
    */
   readonly uid?: string;
+
 }
 
 /**
  * Converts an object of type 'PodVolumeRestoreSpecPod' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_PodVolumeRestoreSpecPod(obj: PodVolumeRestoreSpecPod | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2893,7 +2934,7 @@ export function toJson_PodVolumeRestoreSpecPod(obj: PodVolumeRestoreSpecPod | un
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * UploaderType is the type of the uploader to handle the data transfer.
@@ -2953,7 +2994,7 @@ export class Restore extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -2981,12 +3022,13 @@ export interface RestoreProps {
    * @schema Restore#spec
    */
   readonly spec?: RestoreSpec;
+
 }
 
 /**
  * Converts an object of type 'RestoreProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreProps(obj: RestoreProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -2996,7 +3038,7 @@ export function toJson_RestoreProps(obj: RestoreProps | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RestoreSpec defines the specification for a Velero restore.
@@ -3150,12 +3192,13 @@ export interface RestoreSpec {
    * @schema RestoreSpec#uploaderConfig
    */
   readonly uploaderConfig?: RestoreSpecUploaderConfig;
+
 }
 
 /**
  * Converts an object of type 'RestoreSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpec(obj: RestoreSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3181,7 +3224,7 @@ export function toJson_RestoreSpec(obj: RestoreSpec | undefined): Record<string,
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Hooks represent custom behaviors that should be executed during or post restore.
@@ -3193,12 +3236,13 @@ export interface RestoreSpecHooks {
    * @schema RestoreSpecHooks#resources
    */
   readonly resources?: RestoreSpecHooksResources[];
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecHooks' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecHooks(obj: RestoreSpecHooks | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3207,7 +3251,7 @@ export function toJson_RestoreSpecHooks(obj: RestoreSpecHooks | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LabelSelector is a metav1.LabelSelector to filter with
@@ -3232,12 +3276,13 @@ export interface RestoreSpecLabelSelector {
    * @schema RestoreSpecLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecLabelSelector(obj: RestoreSpecLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3247,7 +3292,7 @@ export function toJson_RestoreSpecLabelSelector(obj: RestoreSpecLabelSelector | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -3272,12 +3317,13 @@ export interface RestoreSpecOrLabelSelectors {
    * @schema RestoreSpecOrLabelSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecOrLabelSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecOrLabelSelectors(obj: RestoreSpecOrLabelSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3287,7 +3333,7 @@ export function toJson_RestoreSpecOrLabelSelectors(obj: RestoreSpecOrLabelSelect
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourceModifier specifies the reference to JSON resource patches that should be applied to resources before restoration.
@@ -3317,12 +3363,13 @@ export interface RestoreSpecResourceModifier {
    * @schema RestoreSpecResourceModifier#name
    */
   readonly name: string;
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecResourceModifier' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecResourceModifier(obj: RestoreSpecResourceModifier | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3333,7 +3380,7 @@ export function toJson_RestoreSpecResourceModifier(obj: RestoreSpecResourceModif
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RestoreStatus specifies which resources we should restore the status
@@ -3356,12 +3403,13 @@ export interface RestoreSpecRestoreStatus {
    * @schema RestoreSpecRestoreStatus#includedResources
    */
   readonly includedResources?: string[];
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecRestoreStatus' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecRestoreStatus(obj: RestoreSpecRestoreStatus | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3371,7 +3419,7 @@ export function toJson_RestoreSpecRestoreStatus(obj: RestoreSpecRestoreStatus | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * UploaderConfig specifies the configuration for the restore.
@@ -3392,12 +3440,13 @@ export interface RestoreSpecUploaderConfig {
    * @schema RestoreSpecUploaderConfig#writeSparseFiles
    */
   readonly writeSparseFiles?: boolean;
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecUploaderConfig' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecUploaderConfig(obj: RestoreSpecUploaderConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3407,7 +3456,7 @@ export function toJson_RestoreSpecUploaderConfig(obj: RestoreSpecUploaderConfig 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RestoreResourceHookSpec defines one or more RestoreResrouceHooks that should be executed based on
@@ -3466,12 +3515,13 @@ export interface RestoreSpecHooksResources {
    * @schema RestoreSpecHooksResources#postHooks
    */
   readonly postHooks?: RestoreSpecHooksResourcesPostHooks[];
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecHooksResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecHooksResources(obj: RestoreSpecHooksResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3486,7 +3536,7 @@ export function toJson_RestoreSpecHooksResources(obj: RestoreSpecHooksResources 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -3519,12 +3569,13 @@ export interface RestoreSpecLabelSelectorMatchExpressions {
    * @schema RestoreSpecLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecLabelSelectorMatchExpressions(obj: RestoreSpecLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3535,7 +3586,7 @@ export function toJson_RestoreSpecLabelSelectorMatchExpressions(obj: RestoreSpec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -3568,12 +3619,13 @@ export interface RestoreSpecOrLabelSelectorsMatchExpressions {
    * @schema RestoreSpecOrLabelSelectorsMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecOrLabelSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecOrLabelSelectorsMatchExpressions(obj: RestoreSpecOrLabelSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3584,7 +3636,7 @@ export function toJson_RestoreSpecOrLabelSelectorsMatchExpressions(obj: RestoreS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LabelSelector, if specified, filters the resources to which this hook spec applies.
@@ -3607,12 +3659,13 @@ export interface RestoreSpecHooksResourcesLabelSelector {
    * @schema RestoreSpecHooksResourcesLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecHooksResourcesLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecHooksResourcesLabelSelector(obj: RestoreSpecHooksResourcesLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3622,7 +3675,7 @@ export function toJson_RestoreSpecHooksResourcesLabelSelector(obj: RestoreSpecHo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * RestoreResourceHook defines a restore hook for a resource.
@@ -3643,12 +3696,13 @@ export interface RestoreSpecHooksResourcesPostHooks {
    * @schema RestoreSpecHooksResourcesPostHooks#init
    */
   readonly init?: RestoreSpecHooksResourcesPostHooksInit;
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecHooksResourcesPostHooks' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecHooksResourcesPostHooks(obj: RestoreSpecHooksResourcesPostHooks | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3658,7 +3712,7 @@ export function toJson_RestoreSpecHooksResourcesPostHooks(obj: RestoreSpecHooksR
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -3691,12 +3745,13 @@ export interface RestoreSpecHooksResourcesLabelSelectorMatchExpressions {
    * @schema RestoreSpecHooksResourcesLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecHooksResourcesLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecHooksResourcesLabelSelectorMatchExpressions(obj: RestoreSpecHooksResourcesLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3707,7 +3762,7 @@ export function toJson_RestoreSpecHooksResourcesLabelSelectorMatchExpressions(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Exec defines an exec restore hook.
@@ -3759,12 +3814,13 @@ export interface RestoreSpecHooksResourcesPostHooksExec {
    * @schema RestoreSpecHooksResourcesPostHooksExec#waitTimeout
    */
   readonly waitTimeout?: string;
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecHooksResourcesPostHooksExec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecHooksResourcesPostHooksExec(obj: RestoreSpecHooksResourcesPostHooksExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3778,7 +3834,7 @@ export function toJson_RestoreSpecHooksResourcesPostHooksExec(obj: RestoreSpecHo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Init defines an init restore hook.
@@ -3799,12 +3855,13 @@ export interface RestoreSpecHooksResourcesPostHooksInit {
    * @schema RestoreSpecHooksResourcesPostHooksInit#timeout
    */
   readonly timeout?: string;
+
 }
 
 /**
  * Converts an object of type 'RestoreSpecHooksResourcesPostHooksInit' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_RestoreSpecHooksResourcesPostHooksInit(obj: RestoreSpecHooksResourcesPostHooksInit | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3814,7 +3871,7 @@ export function toJson_RestoreSpecHooksResourcesPostHooksInit(obj: RestoreSpecHo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * OnError specifies how Velero should behave if it encounters an error executing this hook.
@@ -3874,7 +3931,7 @@ export class Schedule extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -3902,12 +3959,13 @@ export interface ScheduleProps {
    * @schema Schedule#spec
    */
   readonly spec?: ScheduleSpec;
+
 }
 
 /**
  * Converts an object of type 'ScheduleProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleProps(obj: ScheduleProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3917,7 +3975,7 @@ export function toJson_ScheduleProps(obj: ScheduleProps | undefined): Record<str
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ScheduleSpec defines the specification for a Velero schedule
@@ -3965,12 +4023,13 @@ export interface ScheduleSpec {
    * @schema ScheduleSpec#useOwnerReferencesInBackup
    */
   readonly useOwnerReferencesInBackup?: boolean;
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpec(obj: ScheduleSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -3983,7 +4042,7 @@ export function toJson_ScheduleSpec(obj: ScheduleSpec | undefined): Record<strin
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Template is the definition of the Backup to be run
@@ -4214,12 +4273,13 @@ export interface ScheduleSpecTemplate {
    * @schema ScheduleSpecTemplate#volumeSnapshotLocations
    */
   readonly volumeSnapshotLocations?: string[];
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplate' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplate(obj: ScheduleSpecTemplate | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4254,7 +4314,7 @@ export function toJson_ScheduleSpecTemplate(obj: ScheduleSpecTemplate | undefine
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Hooks represent custom behaviors that should be executed at different phases of the backup.
@@ -4268,12 +4328,13 @@ export interface ScheduleSpecTemplateHooks {
    * @schema ScheduleSpecTemplateHooks#resources
    */
   readonly resources?: ScheduleSpecTemplateHooksResources[];
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateHooks' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateHooks(obj: ScheduleSpecTemplateHooks | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4282,7 +4343,7 @@ export function toJson_ScheduleSpecTemplateHooks(obj: ScheduleSpecTemplateHooks 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LabelSelector is a metav1.LabelSelector to filter with
@@ -4307,12 +4368,13 @@ export interface ScheduleSpecTemplateLabelSelector {
    * @schema ScheduleSpecTemplateLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateLabelSelector(obj: ScheduleSpecTemplateLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4322,7 +4384,7 @@ export function toJson_ScheduleSpecTemplateLabelSelector(obj: ScheduleSpecTempla
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * @schema ScheduleSpecTemplateMetadata
@@ -4332,12 +4394,13 @@ export interface ScheduleSpecTemplateMetadata {
    * @schema ScheduleSpecTemplateMetadata#labels
    */
   readonly labels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateMetadata' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateMetadata(obj: ScheduleSpecTemplateMetadata | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4346,7 +4409,7 @@ export function toJson_ScheduleSpecTemplateMetadata(obj: ScheduleSpecTemplateMet
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector is a label query over a set of resources. The result of matchLabels and
@@ -4371,12 +4434,13 @@ export interface ScheduleSpecTemplateOrLabelSelectors {
    * @schema ScheduleSpecTemplateOrLabelSelectors#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateOrLabelSelectors' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateOrLabelSelectors(obj: ScheduleSpecTemplateOrLabelSelectors | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4386,7 +4450,7 @@ export function toJson_ScheduleSpecTemplateOrLabelSelectors(obj: ScheduleSpecTem
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * ResourcePolicy specifies the referenced resource policies that backup should follow
@@ -4416,12 +4480,13 @@ export interface ScheduleSpecTemplateResourcePolicy {
    * @schema ScheduleSpecTemplateResourcePolicy#name
    */
   readonly name: string;
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateResourcePolicy' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateResourcePolicy(obj: ScheduleSpecTemplateResourcePolicy | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4432,7 +4497,7 @@ export function toJson_ScheduleSpecTemplateResourcePolicy(obj: ScheduleSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * UploaderConfig specifies the configuration for the uploader.
@@ -4446,12 +4511,13 @@ export interface ScheduleSpecTemplateUploaderConfig {
    * @schema ScheduleSpecTemplateUploaderConfig#parallelFilesUpload
    */
   readonly parallelFilesUpload?: number;
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateUploaderConfig' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateUploaderConfig(obj: ScheduleSpecTemplateUploaderConfig | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4460,7 +4526,7 @@ export function toJson_ScheduleSpecTemplateUploaderConfig(obj: ScheduleSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackupResourceHookSpec defines one or more BackupResourceHooks that should be executed based on
@@ -4528,12 +4594,13 @@ export interface ScheduleSpecTemplateHooksResources {
    * @schema ScheduleSpecTemplateHooksResources#pre
    */
   readonly pre?: ScheduleSpecTemplateHooksResourcesPre[];
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateHooksResources' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateHooksResources(obj: ScheduleSpecTemplateHooksResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4549,7 +4616,7 @@ export function toJson_ScheduleSpecTemplateHooksResources(obj: ScheduleSpecTempl
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -4582,12 +4649,13 @@ export interface ScheduleSpecTemplateLabelSelectorMatchExpressions {
    * @schema ScheduleSpecTemplateLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateLabelSelectorMatchExpressions(obj: ScheduleSpecTemplateLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4598,7 +4666,7 @@ export function toJson_ScheduleSpecTemplateLabelSelectorMatchExpressions(obj: Sc
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -4631,12 +4699,13 @@ export interface ScheduleSpecTemplateOrLabelSelectorsMatchExpressions {
    * @schema ScheduleSpecTemplateOrLabelSelectorsMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateOrLabelSelectorsMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateOrLabelSelectorsMatchExpressions(obj: ScheduleSpecTemplateOrLabelSelectorsMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4647,7 +4716,7 @@ export function toJson_ScheduleSpecTemplateOrLabelSelectorsMatchExpressions(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * LabelSelector, if specified, filters the resources to which this hook spec applies.
@@ -4670,12 +4739,13 @@ export interface ScheduleSpecTemplateHooksResourcesLabelSelector {
    * @schema ScheduleSpecTemplateHooksResourcesLabelSelector#matchLabels
    */
   readonly matchLabels?: { [key: string]: string };
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateHooksResourcesLabelSelector' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateHooksResourcesLabelSelector(obj: ScheduleSpecTemplateHooksResourcesLabelSelector | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4685,7 +4755,7 @@ export function toJson_ScheduleSpecTemplateHooksResourcesLabelSelector(obj: Sche
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackupResourceHook defines a hook for a resource.
@@ -4699,12 +4769,13 @@ export interface ScheduleSpecTemplateHooksResourcesPost {
    * @schema ScheduleSpecTemplateHooksResourcesPost#exec
    */
   readonly exec: ScheduleSpecTemplateHooksResourcesPostExec;
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateHooksResourcesPost' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateHooksResourcesPost(obj: ScheduleSpecTemplateHooksResourcesPost | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4713,7 +4784,7 @@ export function toJson_ScheduleSpecTemplateHooksResourcesPost(obj: ScheduleSpecT
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * BackupResourceHook defines a hook for a resource.
@@ -4727,12 +4798,13 @@ export interface ScheduleSpecTemplateHooksResourcesPre {
    * @schema ScheduleSpecTemplateHooksResourcesPre#exec
    */
   readonly exec: ScheduleSpecTemplateHooksResourcesPreExec;
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateHooksResourcesPre' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateHooksResourcesPre(obj: ScheduleSpecTemplateHooksResourcesPre | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4741,7 +4813,7 @@ export function toJson_ScheduleSpecTemplateHooksResourcesPre(obj: ScheduleSpecTe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * A label selector requirement is a selector that contains values, a key, and an operator that
@@ -4774,12 +4846,13 @@ export interface ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions
    * @schema ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions#values
    */
   readonly values?: string[];
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions(obj: ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpressions | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4790,7 +4863,7 @@ export function toJson_ScheduleSpecTemplateHooksResourcesLabelSelectorMatchExpre
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Exec defines an exec hook.
@@ -4827,12 +4900,13 @@ export interface ScheduleSpecTemplateHooksResourcesPostExec {
    * @schema ScheduleSpecTemplateHooksResourcesPostExec#timeout
    */
   readonly timeout?: string;
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateHooksResourcesPostExec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateHooksResourcesPostExec(obj: ScheduleSpecTemplateHooksResourcesPostExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4844,7 +4918,7 @@ export function toJson_ScheduleSpecTemplateHooksResourcesPostExec(obj: ScheduleS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Exec defines an exec hook.
@@ -4881,12 +4955,13 @@ export interface ScheduleSpecTemplateHooksResourcesPreExec {
    * @schema ScheduleSpecTemplateHooksResourcesPreExec#timeout
    */
   readonly timeout?: string;
+
 }
 
 /**
  * Converts an object of type 'ScheduleSpecTemplateHooksResourcesPreExec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ScheduleSpecTemplateHooksResourcesPreExec(obj: ScheduleSpecTemplateHooksResourcesPreExec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -4898,7 +4973,7 @@ export function toJson_ScheduleSpecTemplateHooksResourcesPreExec(obj: ScheduleSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * OnError specifies how Velero should behave if it encounters an error executing this hook.
@@ -4970,7 +5045,7 @@ export class ServerStatusRequest extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -4998,12 +5073,13 @@ export interface ServerStatusRequestProps {
    * @schema ServerStatusRequest#spec
    */
   readonly spec?: any;
+
 }
 
 /**
  * Converts an object of type 'ServerStatusRequestProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_ServerStatusRequestProps(obj: ServerStatusRequestProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5013,7 +5089,7 @@ export function toJson_ServerStatusRequestProps(obj: ServerStatusRequestProps | 
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 
 /**
@@ -5060,7 +5136,7 @@ export class VolumeSnapshotLocation extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public override toJson(): any {
+  public toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -5087,12 +5163,13 @@ export interface VolumeSnapshotLocationProps {
    * @schema VolumeSnapshotLocation#spec
    */
   readonly spec?: VolumeSnapshotLocationSpec;
+
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotLocationProps' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeSnapshotLocationProps(obj: VolumeSnapshotLocationProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5102,7 +5179,7 @@ export function toJson_VolumeSnapshotLocationProps(obj: VolumeSnapshotLocationPr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * VolumeSnapshotLocationSpec defines the specification for a Velero VolumeSnapshotLocation.
@@ -5130,12 +5207,13 @@ export interface VolumeSnapshotLocationSpec {
    * @schema VolumeSnapshotLocationSpec#provider
    */
   readonly provider: string;
+
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotLocationSpec' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeSnapshotLocationSpec(obj: VolumeSnapshotLocationSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5146,7 +5224,7 @@ export function toJson_VolumeSnapshotLocationSpec(obj: VolumeSnapshotLocationSpe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
 /**
  * Credential contains the credential information intended to be used with this location
@@ -5178,12 +5256,13 @@ export interface VolumeSnapshotLocationSpecCredential {
    * @schema VolumeSnapshotLocationSpecCredential#optional
    */
   readonly optional?: boolean;
+
 }
 
 /**
  * Converts an object of type 'VolumeSnapshotLocationSpecCredential' to JSON representation.
  */
-/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-disable max-len, quote-props */
 export function toJson_VolumeSnapshotLocationSpecCredential(obj: VolumeSnapshotLocationSpecCredential | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -5194,5 +5273,5 @@ export function toJson_VolumeSnapshotLocationSpecCredential(obj: VolumeSnapshotL
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
+/* eslint-enable max-len, quote-props */
 
