@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: powerdnsadmin/pda-legacy:latest
       namePattern: pdns-admin
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

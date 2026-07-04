@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: ghcr.io/wizarrrr/wizarr:latest
       namePattern: wizarr
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

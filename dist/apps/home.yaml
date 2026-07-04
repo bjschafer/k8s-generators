@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: jordanroher/starbase-80:latest
       namePattern: home
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

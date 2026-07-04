@@ -36,7 +36,6 @@ spec:
             updateStrategy: semver
           imageName: rclone/rclone:1.x
       namePattern: rclone
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

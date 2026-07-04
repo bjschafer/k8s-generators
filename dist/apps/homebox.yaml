@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: ghcr.io/sysadminsmedia/homebox:latest
       namePattern: homebox
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

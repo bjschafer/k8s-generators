@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: ghcr.io/linkwarden/linkwarden:latest
       namePattern: bookmarks
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

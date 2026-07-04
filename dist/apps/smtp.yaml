@@ -36,7 +36,6 @@ spec:
             updateStrategy: semver
           imageName: boky/postfix:latest
       namePattern: smtp
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

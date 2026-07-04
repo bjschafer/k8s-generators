@@ -36,7 +36,6 @@ spec:
             updateStrategy: semver
           imageName: ghcr.io/mealie-recipes/mealie:v3.x.x
       namePattern: mealie
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

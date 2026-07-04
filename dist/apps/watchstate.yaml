@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: ghcr.io/arabcoders/watchstate:latest
       namePattern: watchstate
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

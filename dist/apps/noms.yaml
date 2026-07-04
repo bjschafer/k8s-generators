@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: registry.cmdcentral.xyz/cmdcentral/noms:main
       namePattern: noms
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

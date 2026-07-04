@@ -40,7 +40,6 @@ spec:
             updateStrategy: semver
           imageName: ghcr.io/immich-app/immich-server:v3.x.x
       namePattern: immich
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

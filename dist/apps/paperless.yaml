@@ -57,7 +57,6 @@ spec:
             updateStrategy: digest
           imageName: clusterzx/paperless-ai:latest
       namePattern: paperless
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

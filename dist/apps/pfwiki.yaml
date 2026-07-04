@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: lscr.io/linuxserver/bookstack:latest
       namePattern: pfwiki
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

@@ -157,7 +157,6 @@ export class ArgoApp extends Chart {
           namespace: ARGO_NAMESPACE,
         },
         spec: {
-          namespace: ARGO_NAMESPACE,
           applicationRefs: [
             {
               namePattern: name,

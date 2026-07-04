@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: ghcr.io/manyfold3d/manyfold:latest
       namePattern: manyfold
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

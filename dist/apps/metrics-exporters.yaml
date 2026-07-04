@@ -48,7 +48,6 @@ spec:
             updateStrategy: digest
           imageName: ghcr.io/unpoller/unpoller:latest
       namePattern: metrics-exporters
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

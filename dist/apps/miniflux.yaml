@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: ghcr.io/miniflux/miniflux:latest-distroless
       namePattern: miniflux
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

@@ -56,7 +56,6 @@ spec:
             updateStrategy: digest
           imageName: ghcr.io/linuxserver/prowlarr:latest
       namePattern: media
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

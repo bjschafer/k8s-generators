@@ -36,7 +36,6 @@ spec:
             updateStrategy: semver
           imageName: ghcr.io/goauthentik/server:2026.5.x
       namePattern: authentik
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

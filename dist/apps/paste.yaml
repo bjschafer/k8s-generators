@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: danielszabo99/microbin:latest
       namePattern: paste
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

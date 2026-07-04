@@ -40,7 +40,6 @@ spec:
             updateStrategy: semver
           imageName: ghcr.io/home-operations/external-dns-unifi-webhook:latest
       namePattern: external-dns
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main

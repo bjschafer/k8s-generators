@@ -36,7 +36,6 @@ spec:
             updateStrategy: digest
           imageName: ghcr.io/donkie/spoolman:latest
       namePattern: spoolman
-  namespace: argocd
   writeBackConfig:
     gitConfig:
       branch: main
