@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: prod
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-logs-single
-    app.kubernetes.io/version: v1.50.0
-    helm.sh/chart: victoria-logs-single-0.12.4
+    app.kubernetes.io/version: v1.51.0
+    helm.sh/chart: victoria-logs-single-0.13.8
   name: prod-victoria-logs-single-server
   namespace: logs
 spec:
@@ -43,7 +43,7 @@ spec:
             - --syslog.listenAddr.tcp=:1514
             - --syslog.listenAddr.udp=:1514
             - --syslog.timezone=America/Chicago
-          image: victoriametrics/victoria-logs:v1.50.0
+          image: victoriametrics/victoria-logs:v1.51.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 10
@@ -56,6 +56,11 @@ spec:
           ports:
             - containerPort: 9428
               name: http
+            - containerPort: 1514
+              name: syslog-tcp
+            - containerPort: 1514
+              name: syslog-udp
+              protocol: UDP
           readinessProbe:
             failureThreshold: 3
             httpGet:

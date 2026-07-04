@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: prod
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-logs-single
-    app.kubernetes.io/version: v1.50.0
-    helm.sh/chart: victoria-logs-single-0.12.4
+    app.kubernetes.io/version: v1.51.0
+    helm.sh/chart: victoria-logs-single-0.13.8
   name: prod-victoria-logs-single-server
   namespace: logs
 spec:
@@ -17,6 +17,14 @@ spec:
       port: 9428
       protocol: TCP
       targetPort: http
+    - name: syslog-tcp
+      port: 1514
+      protocol: TCP
+      targetPort: syslog-tcp
+    - name: syslog-udp
+      port: 1514
+      protocol: UDP
+      targetPort: syslog-udp
   selector:
     app: server
     app.kubernetes.io/instance: prod
