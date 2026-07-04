@@ -1,10 +1,6 @@
 import { ApiObject, App, Chart } from "cdk8s";
 import { Construct } from "constructs";
-import {
-  NewArgoApp,
-  ArgoAppSource,
-  ENABLE_SERVERSIDE_APPLY,
-} from "../../lib/argo";
+import { NewArgoApp, ArgoAppSource, ENABLE_SERVERSIDE_APPLY } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { NewKustomize } from "../../lib/kustomize";
