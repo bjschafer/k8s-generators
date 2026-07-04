@@ -1,5 +1,11 @@
 import { App, Duration, Size } from "cdk8s";
-import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe, Volume } from "cdk8s-plus-33";
+import {
+  Cpu,
+  EnvValue,
+  PersistentVolumeAccessMode,
+  Probe,
+  Volume,
+} from "cdk8s-plus-33";
 import { basename } from "path";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
@@ -56,17 +62,19 @@ const valkey = new Valkey(app, "valkey", {
   resources: {
     requests: {
       cpu: Quantity.fromString("100m"),
-      memory: Quantity.fromString("64Mi"),
+      memory: Quantity.fromString("128Mi"),
     },
     limits: {
       cpu: Quantity.fromString("100m"),
-      memory: Quantity.fromString("64Mi"),
+      memory: Quantity.fromString("128Mi"),
     },
   },
 });
 
 const commonEnv: Record<string, EnvValue> = {
-  IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue("http://immich-machine-learning:3003"),
+  IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue(
+    "http://immich-machine-learning:3003",
+  ),
   REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service!.name),
   REDIS_PORT: EnvValue.fromValue("6379"),
   REDIS_PASSWORD: EnvValue.fromSecretValue({
