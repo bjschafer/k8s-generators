@@ -10,7 +10,7 @@ import { AddCRDs } from "../../lib/util";
 export const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const version = "1.20.1";
+const version = "1.20.3";
 
 NewArgoApp(name, {
   namespace: namespace,
