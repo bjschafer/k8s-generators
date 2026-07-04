@@ -114,21 +114,23 @@ data:
         labels: 
           alerts.cmdcentral.xyz/kind: metrics
       groups: 
-        kubeScheduler:
+        kube-scheduler.rules:
           enabled: false
-        kubeStateMetrics:
+        kube-state-metrics:
           enabled: false
         kubernetes-apps:
+          enabled: false
           jobNamespaces:
             kube-state-metrics: .*
+        kubernetes-resources:
+          enabled: false
         kubernetes-storage:
+          enabled: false
           jobNamespaces:
             kubelet: .*
-        kubernetesApps:
+        kubernetes-system-controller-manager:
           enabled: false
-        kubernetesSystemControllerManager:
-          enabled: false
-        kubernetesSystemScheduler:
+        kubernetes-system-scheduler:
           enabled: false
       sources: 
         - enabled: false

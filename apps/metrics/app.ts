@@ -51,21 +51,33 @@ new HelmApp(app, "stack", {
     defaultRules: {
       groups: {
         // k3s doesn't run kube-scheduler
-        kubeScheduler: {
+        // group names must match victoria-metrics-k8s-stack's default rule
+        // group keys exactly (hyphenated, not camelCase) or the disable is a no-op
+        "kube-scheduler.rules": {
           create: false,
         },
         // k3s doesn't run kube-scheduler
-        kubernetesSystemScheduler: {
+        "kubernetes-system-scheduler": {
           create: false,
         },
         // k3s doesn't run controller-manager
-        kubernetesSystemControllerManager: {
+        "kubernetes-system-controller-manager": {
           create: false,
         },
-        kubeStateMetrics: {
+        "kube-state-metrics": {
           create: false,
         },
-        kubernetesApps: {
+        // duplicates our own KubernetesPod*/KubernetesDaemonset*/KubernetesStatefulset*
+        // alerts in alerts.ts
+        "kubernetes-apps": {
+          create: false,
+        },
+        // duplicates our own KubernetesVolumeOutOfDiskSpace/KubernetesPersistentvolumeError
+        "kubernetes-storage": {
+          create: false,
+        },
+        // duplicates our own KubernetesPodCpuThrottling
+        "kubernetes-resources": {
           create: false,
         },
       },
