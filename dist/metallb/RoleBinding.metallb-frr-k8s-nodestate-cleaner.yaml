@@ -4,15 +4,15 @@ metadata:
   labels:
     app.kubernetes.io/instance: metallb
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: metallb
-    app.kubernetes.io/version: v0.16.1
-    helm.sh/chart: metallb-0.16.1
-  name: metallb-controller
+    app.kubernetes.io/name: frr-k8s
+    app.kubernetes.io/version: v0.0.25
+    helm.sh/chart: frr-k8s-0.0.25
+  name: metallb-frr-k8s-nodestate-cleaner
   namespace: metallb-system
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: metallb-controller
+  name: metallb-frr-k8s-nodestate-cleaner
 subjects:
   - kind: ServiceAccount
-    name: metallb-controller
+    name: metallb-frr-k8s-controller

@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: metallb
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: metallb
-    app.kubernetes.io/version: v0.15.3
-    helm.sh/chart: metallb-0.15.3
+    app.kubernetes.io/version: v0.16.1
+    helm.sh/chart: metallb-0.16.1
   name: metallb:speaker
 rules:
   - apiGroups:
@@ -44,3 +44,26 @@ rules:
       - configurationstates/status
     verbs:
       - "*"
+  - apiGroups:
+      - authentication.k8s.io
+    resources:
+      - tokenreviews
+    verbs:
+      - create
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - subjectaccessreviews
+    verbs:
+      - create
+  - apiGroups:
+      - frrk8s.metallb.io
+    resources:
+      - frrconfigurations
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - delete
