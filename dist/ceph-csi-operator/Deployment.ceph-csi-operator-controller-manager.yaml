@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: ceph-csi-operator
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: ceph-csi-operator
-    app.kubernetes.io/version: v1.0.1
+    app.kubernetes.io/version: v1.0.3
     control-plane: controller-manager
-    helm.sh/chart: ceph-csi-operator-1.0.1
+    helm.sh/chart: ceph-csi-operator-1.0.3
   name: ceph-csi-operator-controller-manager
   namespace: ceph
 spec:
@@ -42,7 +42,7 @@ spec:
               value: ""
             - name: KUBERNETES_CLUSTER_DOMAIN
               value: cluster.local
-          image: quay.io/cephcsi/ceph-csi-operator:v1.0.1
+          image: quay.io/cephcsi/ceph-csi-operator:v1.0.3
           livenessProbe:
             httpGet:
               path: /healthz

@@ -1,6 +1,10 @@
 import { ApiObject, App, Chart } from "cdk8s";
 import { Construct } from "constructs";
-import { NewArgoApp, ArgoAppSource, ENABLE_SERVERSIDE_APPLY } from "../../lib/argo";
+import {
+  NewArgoApp,
+  ArgoAppSource,
+  ENABLE_SERVERSIDE_APPLY,
+} from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { NewKustomize } from "../../lib/kustomize";
@@ -27,7 +31,7 @@ const clusterID = "e708730c-9bbe-4567-a37d-6386f6800180";
 new HelmApp(app, "operator", {
   chart: "ceph-csi-operator",
   repo: "https://ceph.github.io/ceph-csi-operator/",
-  version: "1.0.1",
+  version: "1.0.3",
   releaseName: "ceph-csi-operator",
   namespace,
   values: {
@@ -35,7 +39,7 @@ new HelmApp(app, "operator", {
       manager: {
         image: {
           repository: "quay.io/cephcsi/ceph-csi-operator",
-          tag: "v1.0.1",
+          tag: "v1.0.3",
         },
       },
     },

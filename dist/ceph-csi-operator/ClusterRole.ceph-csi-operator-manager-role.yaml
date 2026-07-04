@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: ceph-csi-operator
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: ceph-csi-operator
-    app.kubernetes.io/version: v1.0.1
-    helm.sh/chart: ceph-csi-operator-1.0.1
+    app.kubernetes.io/version: v1.0.3
+    helm.sh/chart: ceph-csi-operator-1.0.3
   name: ceph-csi-operator-manager-role
 rules:
   - apiGroups:
@@ -21,6 +21,13 @@ rules:
       - list
       - patch
       - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - nodes
+    verbs:
+      - list
       - watch
   - apiGroups:
       - apps
