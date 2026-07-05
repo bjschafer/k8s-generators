@@ -15,7 +15,7 @@ import {
   Protocol,
   Secret,
   Volume,
-} from "cdk8s-plus-33";
+} from "cdk8s-plus-34";
 import { DEFAULT_SECURITY_CONTEXT, LSIO_ENVVALUE } from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
 import {

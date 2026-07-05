@@ -1,5 +1,5 @@
 import { AppProps, YamlOutputType } from "cdk8s";
-import { DnsPolicy, EnvValue } from "cdk8s-plus-33";
+import { DnsPolicy, EnvValue } from "cdk8s-plus-34";
 import { EnvVar, Quantity } from "../imports/k8s";
 
 export const DEFAULT_CPU_LIMIT = Quantity.fromString("250m");
@@ -47,10 +47,6 @@ export function DEFAULT_APP_PROPS(namespace: string): AppProps {
     yamlOutputType: YamlOutputType.FILE_PER_RESOURCE,
   };
 }
-
-// Set by mise from the pinned kubectl version; see mise.toml [env]
-if (!process.env.KUBE_VERSION) throw new Error("KUBE_VERSION is not set — run via mise");
-export const KUBE_VERSION = process.env.KUBE_VERSION;
 
 export const INGRESS_CLASS_NAME = "traefik";
 

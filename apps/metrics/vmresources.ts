@@ -1,5 +1,5 @@
 import { Chart } from "cdk8s";
-import { HttpIngressPath, KubeIngress } from "cdk8s-plus-33/lib/imports/k8s";
+import { HttpIngressPath, KubeIngress } from "cdk8s-plus-34/lib/imports/k8s";
 import { Construct } from "constructs";
 import { join } from "path";
 import { IngressRule } from "../../imports/k8s";

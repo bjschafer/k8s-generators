@@ -8,7 +8,7 @@ import {
   PersistentVolumeMode,
   PersistentVolumeProps,
   PersistentVolumeReclaimPolicy,
-} from "cdk8s-plus-33";
+} from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { BACKUP_ANNOTATION_EXCLUDE } from "./consts";
 

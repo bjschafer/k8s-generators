@@ -1,5 +1,5 @@
 import { Chart, Size } from "cdk8s";
-import { Cpu } from "cdk8s-plus-33";
+import { Cpu } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { VmProbe, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";

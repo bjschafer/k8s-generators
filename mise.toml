@@ -5,6 +5,7 @@ helm = "3.20"
 promtool = "latest"
 pint = "latest"
 "aqua:prometheus/alertmanager" = "latest"
+bitwarden-secrets-manager = "latest"
 
 [env]
 # Derived from the pinned kubectl above so helm template uses the right .Capabilities.KubeVersion
@@ -44,19 +45,14 @@ description = "Lint TypeScript files"
 depends = ["install"]
 run = 'bun x oxlint apps/ lib/ tools/'
 
-[tasks.test]
-description = "Run tests"
-depends = ["install"]
-run = "bun x jest --passWithNoTests"
-
 [tasks.typecheck]
 description = "Type-check TypeScript files"
 depends = ["install"]
 run = "bun x tsc --noEmit"
 
 [tasks.check]
-description = "Format, lint, and test"
-depends = ["fmt", "lint", "test", "validate-alerts", "typecheck"]
+description = "Format, lint, validate alerts, and typecheck"
+depends = ["fmt", "lint", "validate-alerts", "typecheck"]
 
 [tasks.schemas]
 description = "Generate TypeScript types from JSON schemas"

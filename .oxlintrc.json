@@ -11,12 +11,38 @@
     // CDK8s constructs register in the app tree via constructor side effects
     "no-new": "off",
     // CDK8s uses _toKube as an internal API for serialization
-    "no-underscore-dangle": ["error", { "allow": ["_toKube"] }]
+    "no-underscore-dangle": ["error", { "allow": ["_toKube"] }],
+    // Only cdk8s-plus-34 is a declared dependency (see package.json). Other
+    // cdk8s-plus-* versions resolve only as phantom transitive deps of
+    // cdk8s-cli and must never be imported directly — bump this rule's
+    // "34" alongside package.json when upgrading.
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": [
+              "cdk8s-plus-*",
+              "cdk8s-plus-*/**",
+              "!cdk8s-plus-34",
+              "!cdk8s-plus-34/**"
+            ],
+            "message": "Only cdk8s-plus-34 is a declared dependency. Import from \"cdk8s-plus-34\" instead."
+          }
+        ]
+      }
+    ]
   },
   "env": {
     "builtin": true,
     "node": true
   },
   "globals": {},
-  "ignorePatterns": ["**/*.d.ts", "**/*.js", "**/imports/", "**/dist/", "**/docs/"]
+  "ignorePatterns": [
+    "**/*.d.ts",
+    "**/*.js",
+    "**/imports/",
+    "**/dist/",
+    "**/docs/"
+  ]
 }

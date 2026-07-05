@@ -13,7 +13,7 @@ import {
   Probe,
   Secret,
   Volume,
-} from "cdk8s-plus-33";
+} from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { Chart } from "cdk8s";
 import { CLUSTER_ISSUER, DEFAULT_SECURITY_CONTEXT, GET_COMMON_LABELS, IP_CIDRS_V4 } from "./consts";

@@ -1,5 +1,4 @@
 import { App, AppProps, Chart, YamlOutputType } from "cdk8s";
-import { SecretReference } from "cdk8s-plus-33/lib/imports/k8s";
 import { Construct } from "constructs";
 import * as path from "node:path";
 import {
@@ -12,6 +11,7 @@ import {
   ApplicationSpecIgnoreDifferences,
   ApplicationSpecSyncPolicy,
 } from "../imports/argoproj.io";
+import { SecretReference } from "../imports/k8s";
 
 export const ARGO_NAMESPACE = "argocd";
 export const ARGO_DESTINATION_SERVER = "https://kubernetes.default.svc";

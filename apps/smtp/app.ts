@@ -1,5 +1,5 @@
 import { App, Chart, Size } from "cdk8s";
-import { ConfigMap, Cpu, EnvValue } from "cdk8s-plus-33";
+import { ConfigMap, Cpu, EnvValue } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";

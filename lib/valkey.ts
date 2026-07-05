@@ -1,7 +1,7 @@
 import { Chart } from "cdk8s";
-import { ISecret, Secret } from "cdk8s-plus-33";
+import { ISecret, Secret } from "cdk8s-plus-34";
 import { BACKUP_ANNOTATION_EXCLUDE } from "./consts";
-import { Quantity, ResourceRequirements } from "cdk8s-plus-33/lib/imports/k8s";
+import { Quantity, ResourceRequirements } from "cdk8s-plus-34/lib/imports/k8s";
 import { Construct } from "constructs";
 import { IntOrString, KubeSecret, KubeService, KubeStatefulSet } from "../imports/k8s";
 

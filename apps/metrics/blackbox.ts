@@ -8,7 +8,7 @@ import {
   ImagePullPolicy,
   Probe,
   Volume,
-} from "cdk8s-plus-33";
+} from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { VmProbe, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { DEFAULT_SECURITY_CONTEXT, RELOADER_ENABLED } from "../../lib/consts";

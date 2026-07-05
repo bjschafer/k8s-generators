@@ -1,8 +1,15 @@
 import { App, Chart, Helm, HelmProps } from "cdk8s";
 import { ARGO_DEFAULT_PROPS, ARGO_DESTINATION_SERVER, ARGO_NAMESPACE, ArgoAppProps } from "./argo";
-import { KUBE_VERSION } from "./consts";
 import { Construct } from "constructs";
 import { Application } from "../imports/argoproj.io";
+
+// Set by mise from the pinned kubectl version; see mise.toml [env]. Checked
+// lazily here (rather than at module load in lib/consts.ts) so importing
+// consts.ts doesn't break tooling that never renders a Helm chart.
+function getKubeVersion(): string {
+  if (!process.env.KUBE_VERSION) throw new Error("KUBE_VERSION is not set — run via mise");
+  return process.env.KUBE_VERSION;
+}
 
 export interface ArgoHelmAppProps {
   readonly chart: string;
@@ -70,7 +77,7 @@ export class HelmApp<T extends values> extends Chart {
 
     new Helm(this, `${id}-chart`, {
       ...props,
-      helmFlags: [...(props.helmFlags ?? []), "--kube-version", KUBE_VERSION],
+      helmFlags: [...(props.helmFlags ?? []), "--kube-version", getKubeVersion()],
     });
   }
 }

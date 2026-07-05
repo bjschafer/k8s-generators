@@ -1,5 +1,5 @@
 import { Chart } from "cdk8s";
-import { ISecret, Secret } from "cdk8s-plus-32";
+import { ISecret, Secret } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import {
   ExternalSecret,

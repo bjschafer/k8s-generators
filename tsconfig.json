@@ -6,10 +6,7 @@
     "experimentalDecorators": true,
     "inlineSourceMap": true,
     "inlineSources": true,
-    "lib": [
-      "es2022",
-      "es2023"
-    ],
+    "lib": ["es2022", "es2023"],
     "module": "CommonJS",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
@@ -25,11 +22,11 @@
     "stripInternal": true,
     "target": "ES2017"
   },
-  "include": [
-    "**/*.ts"
-  ],
+  "include": ["**/*.ts"],
   "exclude": [
     "node_modules",
-    "tools"
+    // Bun-only globals (Bun.Glob, top-level for-await under CommonJS/ES2017) that
+    // would need @types/bun or a project-wide module/target bump to type-check.
+    "tools/validate-alerts.ts"
   ]
 }

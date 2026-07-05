@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - ghcr.io/tizbac/pmoxs3backuproxy:latest@sha256:02258c99e659a98e49d7a2acaff26724844c14d7da49e9cb92ebf0f95dfc615a

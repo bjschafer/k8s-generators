@@ -1,5 +1,5 @@
 import { App, Chart } from "cdk8s";
-import { IntOrString, KubeService } from "cdk8s-plus-33/lib/imports/k8s";
+import { IntOrString, KubeService } from "cdk8s-plus-34/lib/imports/k8s";
 import { Construct } from "constructs";
 import { basename } from "path";
 import {

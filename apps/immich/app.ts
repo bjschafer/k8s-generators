@@ -5,7 +5,7 @@ import {
   PersistentVolumeAccessMode,
   Probe,
   Volume,
-} from "cdk8s-plus-33";
+} from "cdk8s-plus-34";
 import { basename } from "path";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";

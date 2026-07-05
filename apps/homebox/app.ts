@@ -1,5 +1,5 @@
 import { App, Chart, Size } from "cdk8s";
-import { Cpu, EnvValue, Secret } from "cdk8s-plus-33";
+import { Cpu, EnvValue, Secret } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";

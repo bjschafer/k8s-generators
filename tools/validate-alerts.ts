@@ -11,7 +11,7 @@ import { tmpdir } from "node:os";
 import { join, basename } from "node:path";
 import { parse, stringify } from "yaml";
 
-const rootDir = join(import.meta.dir, "..");
+const rootDir = join(__dirname, "..");
 const tmpDir = mkdtempSync(join(tmpdir(), "vmrule-validate-"));
 const tmpFiles: string[] = [];
 let exitCode = 0;
@@ -55,11 +55,15 @@ try {
   }
 
   console.log(`Validating ${tmpFiles.length} VMRule file(s) with promtool...`);
-  const promtool = spawnSync("promtool", ["check", "rules", ...tmpFiles], { stdio: "inherit" });
+  const promtool = spawnSync("promtool", ["check", "rules", ...tmpFiles], {
+    stdio: "inherit",
+  });
   if (promtool.status !== 0) exitCode = 1;
 
   console.log(`\nLinting ${tmpFiles.length} VMRule file(s) with pint...`);
-  const pint = spawnSync("pint", ["--offline", "lint", ...tmpFiles], { stdio: "inherit" });
+  const pint = spawnSync("pint", ["--offline", "lint", ...tmpFiles], {
+    stdio: "inherit",
+  });
   if (pint.status !== 0) exitCode = 1;
 } finally {
   for (const f of tmpFiles) {
