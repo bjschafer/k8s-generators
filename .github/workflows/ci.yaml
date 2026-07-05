@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel superseded runs on the same ref to save CI time.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: build, verify, lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Installs the tools pinned in mise.toml (bun, kubectl, helm, promtool,
+      # pint, alertmanager) and exports the derived [env] (KUBE_VERSION) for
+      # every subsequent `mise run` invocation below.
+      - name: Install mise + pinned tools
+        uses: jdx/mise-action@v4
+        with:
+          install: true
+          cache: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Cache bun's package cache separately from mise's tool-install cache
+      # above, keyed on the lockfile so dependency installs are fast without
+      # risking a stale/incorrect result (bun install --frozen-lockfile below
+      # still verifies against bun.lock regardless of cache hit).
+      - name: Cache bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            bun-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: mise run install
+
+      # --force bypasses mise's source-based task caching: CI must always
+      # regenerate dist/ from source so the git diff check below is meaningful.
+      - name: Build (synth all apps into dist/)
+        run: mise run --force build
+
+      - name: Verify dist/ matches committed output
+        run: |
+          if ! git diff --exit-code; then
+            echo "::error::dist/ is out of sync with the TypeScript source — run 'mise run build' and commit the result."
+            exit 1
+          fi
+
+      - name: Typecheck
+        run: mise run typecheck
+
+      - name: Lint
+        run: mise run lint
+
+      # Check-only: the `fmt` mise task runs oxfmt with --write, which would
+      # mutate files in CI. Use --check here instead so CI only verifies.
+      - name: Format check
+        run: bun x oxfmt --check "**/*.ts"
+
+      # Depends on dist/ having been built above; mise's source-based caching
+      # will skip re-running the build since dist/ is already up to date.
+      - name: Validate Prometheus alert rules
+        run: mise run validate-alerts
