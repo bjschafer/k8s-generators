@@ -10,8 +10,6 @@ spec:
           regex: /var/lib/kubelet/pods.+
           sourceLabels:
             - mountpoint
-          source_labels:
-            - mountpoint
         - action: labeldrop
           regex: (plan_upgrade_cattle_io.*)
         - action: labeldrop
@@ -22,10 +20,7 @@ spec:
           replacement: $1
           sourceLabels:
             - __meta_kubernetes_pod_node_name
-          source_labels:
-            - __meta_kubernetes_pod_node_name
           targetLabel: instance
-          target_label: instance
   jobLabel: node-exporter
   selector:
     matchLabels:
