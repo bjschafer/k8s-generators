@@ -112,13 +112,13 @@ spec:
             allowPrivilegeEscalation: false
             privileged: false
             readOnlyRootFilesystem: false
-            runAsNonRoot: true
+            runAsNonRoot: false
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
-        runAsNonRoot: true
+        runAsNonRoot: false
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
