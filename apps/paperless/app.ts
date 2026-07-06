@@ -15,7 +15,7 @@ import {
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { BitwardenSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
@@ -234,6 +234,9 @@ class Paperless extends Chart {
         component: "gotenberg",
       },
       args: ["gotenberg", "--chromium-disable-routes=true"],
+      // audited safe: image ships USER=gotenberg
+      securityContext: NONROOT_SECURITY_CONTEXT,
+      containerSecurityContext: NONROOT_SECURITY_CONTEXT,
       resources: {
         cpu: {
           request: Cpu.millis(50),
@@ -261,6 +264,9 @@ class Paperless extends Chart {
         app: "paperless",
         component: "tika",
       },
+      // audited safe: image ships USER=35002
+      securityContext: NONROOT_SECURITY_CONTEXT,
+      containerSecurityContext: NONROOT_SECURITY_CONTEXT,
       resources: {
         cpu: {
           request: Cpu.millis(50),

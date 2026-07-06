@@ -93,13 +93,13 @@ spec:
             allowPrivilegeEscalation: false
             privileged: false
             readOnlyRootFilesystem: false
-            runAsNonRoot: false
+            runAsNonRoot: true
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
-        runAsNonRoot: false
+        runAsNonRoot: true
       serviceAccountName: authentik
       setHostnameAsFQDN: false
       shareProcessNamespace: false

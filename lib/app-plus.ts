@@ -4,6 +4,7 @@ import {
   ConfigMapVolumeOptions,
   ContainerPort,
   ContainerResources,
+  ContainerSecurityContextProps,
   Deployment,
   DeploymentStrategy,
   EnvFrom,
@@ -15,6 +16,7 @@ import {
   PersistentVolumeClaimProps,
   PersistentVolumeMode,
   PodDnsProps,
+  PodSecurityContextProps,
   Probe,
   Secret,
   Service,
@@ -22,7 +24,7 @@ import {
   ServicePort,
   ServiceType,
   Volume,
-} from "cdk8s-plus-33";
+} from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { CLUSTER_ISSUER, DEFAULT_SECURITY_CONTEXT } from "./consts";
 import { WellKnownLabels } from "./labels";
@@ -79,6 +81,10 @@ export interface AppPlusProps {
   readonly deploymentStrategy?: DeploymentStrategy;
   readonly enableServiceLinks?: boolean;
   readonly disableService?: boolean;
+  // overrides for lib/consts.ts DEFAULT_SECURITY_CONTEXT, e.g. to opt an
+  // audited-safe app into runAsNonRoot. Do not use to relax the default.
+  readonly securityContext?: PodSecurityContextProps;
+  readonly containerSecurityContext?: ContainerSecurityContextProps;
 }
 
 export class AppPlus extends Chart {
@@ -118,17 +124,11 @@ export class AppPlus extends Chart {
 
     const ports: ContainerPort[] = [];
     if (props.ports) {
-      if (props.ports.every((p) => typeof p === "number")) {
-        ports.push(
-          ...props.ports.map(function (port: number): ContainerPort {
-            return {
-              number: port,
-            };
-          }),
-        );
-      } else {
-        ports.push(...(props.ports as ContainerPort[]));
-      }
+      ports.push(
+        ...props.ports.map(
+          (port): ContainerPort => (typeof port === "number" ? { number: port } : port),
+        ),
+      );
     }
 
     if (props.monitoringConfig) {
@@ -164,7 +164,7 @@ export class AppPlus extends Chart {
           ...props.labels,
         },
       },
-      securityContext: DEFAULT_SECURITY_CONTEXT,
+      securityContext: props.securityContext ?? DEFAULT_SECURITY_CONTEXT,
       serviceAccount: serviceAccount,
       automountServiceAccountToken: props.automountServiceAccount,
       enableServiceLinks: props.enableServiceLinks,
@@ -172,7 +172,7 @@ export class AppPlus extends Chart {
       containers: [
         {
           name: props.name,
-          securityContext: DEFAULT_SECURITY_CONTEXT,
+          securityContext: props.containerSecurityContext ?? DEFAULT_SECURITY_CONTEXT,
           args: props.args,
           image: props.image,
           ports: ports,

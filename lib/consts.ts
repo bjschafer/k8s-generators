@@ -85,6 +85,14 @@ export const DEFAULT_SECURITY_CONTEXT = {
   readOnlyRootFilesystem: false,
 };
 
+// Phase 1 hardening: for images audited as running non-root (either the image
+// ships a non-root USER, or a live pod was confirmed running non-root).
+// Does NOT flip readOnlyRootFilesystem -- that's a later phase.
+export const NONROOT_SECURITY_CONTEXT = {
+  ensureNonRoot: true,
+  readOnlyRootFilesystem: false,
+};
+
 export const IP_CIDRS_V4: { [name: string]: string } = {
   WIRED_LAN: "10.0.3.0/24",
   DMZ: "10.0.4.0/24",

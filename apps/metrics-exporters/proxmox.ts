@@ -1,9 +1,9 @@
 import { Chart, Size, Yaml } from "cdk8s";
-import { ConfigMap, Cpu, EnvValue, Probe } from "cdk8s-plus-33";
+import { ConfigMap, Cpu, EnvValue, Probe } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { VmProbe } from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";
-import { DNS_POLICY_NONE, RELOADER_ENABLED } from "../../lib/consts";
+import { DNS_POLICY_NONE, NONROOT_SECURITY_CONTEXT, RELOADER_ENABLED } from "../../lib/consts";
 import { BitwardenSecret } from "../../lib/secrets";
 import { namespace } from "./app";
 
@@ -48,6 +48,9 @@ export class ProxmoxExporter extends Chart {
       labels: labels,
       annotations: RELOADER_ENABLED,
       image: "prompve/prometheus-pve-exporter",
+      // audited safe: image ships USER=prometheus (101)
+      securityContext: NONROOT_SECURITY_CONTEXT,
+      containerSecurityContext: NONROOT_SECURITY_CONTEXT,
       ports: [
         {
           name: "metrics",

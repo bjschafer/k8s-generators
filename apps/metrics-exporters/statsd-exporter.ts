@@ -1,8 +1,8 @@
 import { Chart, Size } from "cdk8s";
-import { Cpu, Protocol, Service, ServiceType } from "cdk8s-plus-33";
+import { Cpu, Protocol, Service, ServiceType } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { AppPlus } from "../../lib/app-plus";
-import { EXTERNAL_DNS_ANNOTATION_KEY } from "../../lib/consts";
+import { EXTERNAL_DNS_ANNOTATION_KEY, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { namespace } from "./app";
 
 const name = "statsd-exporter";
@@ -21,6 +21,9 @@ export class StatsdExporter extends Chart {
       // InfluxDB-flavored tags are what versitygw emits (comma-separated key=value)
       args: ["--statsd.parse-influxdb-tags"],
       disableIngress: true,
+      // audited safe: image ships USER=65534
+      securityContext: NONROOT_SECURITY_CONTEXT,
+      containerSecurityContext: NONROOT_SECURITY_CONTEXT,
       ports: [{ name: "metrics", number: metricsPort }],
       resources: {
         cpu: { request: Cpu.millis(50), limit: Cpu.millis(200) },

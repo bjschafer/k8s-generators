@@ -1,5 +1,5 @@
 import { App, Chart, Duration, Size } from "cdk8s";
-import { Cpu, EnvValue, Probe, ServiceAccount } from "cdk8s-plus-33";
+import { Cpu, EnvValue, Probe, ServiceAccount } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { basename } from "path";
 import {
@@ -15,7 +15,7 @@ import {
 } from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
@@ -166,6 +166,9 @@ const server = new AppPlus(app, "authentik-server", {
   replicas: 2,
   ports: [9000, 9443],
   args: ["server"],
+  // audited safe: image ships USER=1000
+  securityContext: NONROOT_SECURITY_CONTEXT,
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT,
   serviceAccountName: rbac.serviceAccount.name,
   automountServiceAccount: true,
   limitToAMD64: true, // https://github.com/goauthentik/authentik/issues/2078
@@ -215,6 +218,9 @@ new AppPlus(app, "authentik-worker", {
   },
   replicas: 2,
   ports: [9000],
+  // audited safe: image ships USER=1000
+  securityContext: NONROOT_SECURITY_CONTEXT,
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT,
   monitoringConfig: {
     port: 9300,
   },

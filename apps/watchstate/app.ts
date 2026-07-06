@@ -1,10 +1,10 @@
 import { App, Size } from "cdk8s";
 import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
-import { EnvValue, PersistentVolumeAccessMode } from "cdk8s-plus-33";
+import { EnvValue, PersistentVolumeAccessMode } from "cdk8s-plus-34";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -35,6 +35,9 @@ new AppPlus(app, "watchstate", {
     },
   },
   ports: [port],
+  // audited safe: image ships USER=user
+  securityContext: NONROOT_SECURITY_CONTEXT,
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT,
 
   extraEnv: {
     WS_API_AUTO: EnvValue.fromValue("true"),

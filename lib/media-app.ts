@@ -18,9 +18,14 @@ import {
   Secret,
   ServicePort,
   Volume,
-} from "cdk8s-plus-33";
+} from "cdk8s-plus-34";
 import { StorageClass } from "./volume";
-import { DEFAULT_SECURITY_CONTEXT, GET_SERVICE_URL, LSIO_ENVVALUE } from "./consts";
+import {
+  DEFAULT_SECURITY_CONTEXT,
+  GET_SERVICE_URL,
+  LSIO_ENVVALUE,
+  NONROOT_SECURITY_CONTEXT,
+} from "./consts";
 import { NFSConcreteVolume } from "./nfs";
 import { VmServiceScrape } from "../imports/operator.victoriametrics.com";
 
@@ -154,7 +159,10 @@ export class MediaApp extends Chart {
         };
       }
       deploy.addContainer({
-        securityContext: DEFAULT_SECURITY_CONTEXT,
+        // exportarr (ghcr.io/onedr0p/exportarr) ships USER=nonroot, audited safe
+        // for runAsNonRoot; main app container above stays on the permissive
+        // default since LSIO images require root to start.
+        securityContext: NONROOT_SECURITY_CONTEXT,
         image: `ghcr.io/onedr0p/exportarr:${exportarrVersion}`,
         name: "exportarr",
         args: [props.name],

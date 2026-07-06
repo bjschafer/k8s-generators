@@ -70,7 +70,7 @@ spec:
             allowPrivilegeEscalation: false
             privileged: false
             readOnlyRootFilesystem: false
-            runAsNonRoot: false
+            runAsNonRoot: true
           volumeMounts:
             - mountPath: /etc/pve.yml
               name: configmap-proxmox-exporter
@@ -86,7 +86,7 @@ spec:
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
-        runAsNonRoot: false
+        runAsNonRoot: true
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30

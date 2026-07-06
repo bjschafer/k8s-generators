@@ -1,11 +1,10 @@
-import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
-import { App } from "cdk8s/lib/app";
+import { basename } from "../../lib/util";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
+import { App, Size } from "cdk8s";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { Size } from "cdk8s";
 import { StorageClass } from "../../lib/volume";
-import { PersistentVolumeAccessMode, Probe } from "cdk8s-plus-33";
+import { PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
 import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
@@ -43,6 +42,9 @@ new AppPlus(app, `${name}-app`, {
     },
   },
   ports: [80],
+  // audited safe: image ships USER=pda
+  securityContext: NONROOT_SECURITY_CONTEXT,
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT,
   volumes: [
     {
       props: {

@@ -70,7 +70,7 @@ spec:
             allowPrivilegeEscalation: false
             privileged: false
             readOnlyRootFilesystem: false
-            runAsNonRoot: false
+            runAsNonRoot: true
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always

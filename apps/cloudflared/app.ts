@@ -1,9 +1,9 @@
 import { App, Duration, Size } from "cdk8s";
-import { Cpu, EnvValue, Probe } from "cdk8s-plus-33";
+import { Cpu, EnvValue, Probe } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { CmdcentralPodMonitor } from "../../lib/monitoring/victoriametrics";
 import { BitwardenSecret } from "../../lib/secrets";
@@ -53,6 +53,9 @@ new AppPlus(app, `${name}-app`, {
   },
   replicas: 2,
   ports: [{ number: metricsPort, name: "metrics" }],
+  // audited safe: image ships USER=65532
+  securityContext: NONROOT_SECURITY_CONTEXT,
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT,
   disableIngress: true,
   // No inbound traffic — Service would be unused; VmPodScrape handles metrics collection directly
   disableService: true,

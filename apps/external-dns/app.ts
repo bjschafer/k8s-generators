@@ -1,10 +1,14 @@
 import { App, Chart, Size } from "cdk8s";
-import { Cpu, Deployment, DeploymentStrategy, EnvValue, ServiceAccount } from "cdk8s-plus-33";
+import { Cpu, Deployment, DeploymentStrategy, EnvValue, ServiceAccount } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { KubeClusterRole, KubeClusterRoleBinding } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS, DEFAULT_SECURITY_CONTEXT } from "../../lib/consts";
+import {
+  DEFAULT_APP_PROPS,
+  DEFAULT_SECURITY_CONTEXT,
+  NONROOT_SECURITY_CONTEXT,
+} from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { BitwardenSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
@@ -172,7 +176,9 @@ class ExternalDnsUnifi extends Chart {
     deploy.addContainer({
       name: "unifi-webhook",
       image: UNIFI_WEBHOOK_IMAGE,
-      securityContext: DEFAULT_SECURITY_CONTEXT,
+      // audited safe: image ships USER=65532 (unlike the external-dns
+      // container above, which is untested and stays on the permissive default)
+      securityContext: NONROOT_SECURITY_CONTEXT,
       envVariables: {
         UNIFI_HOST: EnvValue.fromValue("https://10.0.10.1"),
         UNIFI_SKIP_TLS_VERIFY: EnvValue.fromValue("true"),
