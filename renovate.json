@@ -1,0 +1,32 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "description": "package.json/bun.lock dependency bumps are handled manually via `mise run upgrade` (bun update) per CLAUDE.md's 'confirm before adding dependencies' policy - don't have Renovate open PRs for them.",
+      "matchManagers": ["npm"],
+      "enabled": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Bump literal versions pinned in tools/sources.ts (velero, and the disabled cnpg/kured/sealed-secrets/system-upgrade-controller placeholders), each annotated with a `// renovate: datasource=... depName=...` comment directly above the `value` field.",
+      "managerFilePatterns": ["/^tools/sources\\.ts$/"],
+      "matchStrings": [
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*version: \\{ kind: \"literal\", value: \"(?<currentValue>[^\"]+)\" \\},"
+      ]
+    },
+    {
+      "customType": "regex",
+      "description": "Bump the app-const chart/release versions in apps/cert-manager/app.ts and apps/metrics/app.ts that tools/sources.ts derives its CRD versions from (VersionSource kind 'app-const'). Annotated the same way as the literal versions in tools/sources.ts.",
+      "managerFilePatterns": [
+        "/^apps/cert-manager/app\\.ts$/",
+        "/^apps/metrics/app\\.ts$/"
+      ],
+      "matchStrings": [
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*(?:export )?const version = \"(?<currentValue>[^\"]+)\";"
+      ]
+    }
+  ]
+}
