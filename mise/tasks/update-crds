@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#MISE description="Fetch upstream CRDs / static manifests declared in tools/sources.ts"
+#MISE depends=["install"]
+
+set -euo pipefail
+
+bun run tools/update-crds.ts "$@"
