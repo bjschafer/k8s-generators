@@ -20,12 +20,7 @@ import {
   Volume,
 } from "cdk8s-plus-34";
 import { StorageClass } from "./volume";
-import {
-  DEFAULT_SECURITY_CONTEXT,
-  GET_SERVICE_URL,
-  LSIO_ENVVALUE,
-  NONROOT_SECURITY_CONTEXT,
-} from "./consts";
+import { DEFAULT_SECURITY_CONTEXT, GET_SERVICE_URL, LSIO_ENVVALUE } from "./consts";
 import { NFSConcreteVolume } from "./nfs";
 import { VmServiceScrape } from "../imports/operator.victoriametrics.com";
 
@@ -159,10 +154,14 @@ export class MediaApp extends Chart {
         };
       }
       deploy.addContainer({
-        // exportarr (ghcr.io/onedr0p/exportarr) ships USER=nonroot, audited safe
-        // for runAsNonRoot; main app container above stays on the permissive
-        // default since LSIO images require root to start.
-        securityContext: NONROOT_SECURITY_CONTEXT,
+        // exportarr (ghcr.io/onedr0p/exportarr) ships USER=nonroot, but the
+        // kubelet's runAsNonRoot check is static (image-declared USER only)
+        // and rejects a non-numeric name even though the image genuinely
+        // runs non-root -- confirmed live (CreateContainerConfigError:
+        // "image has non-numeric user (nonroot)"). Needs an explicit
+        // runAsUser (numeric) to actually enable this; reverted to the
+        // permissive default for now.
+        securityContext: DEFAULT_SECURITY_CONTEXT,
         image: `ghcr.io/onedr0p/exportarr:${exportarrVersion}`,
         name: "exportarr",
         args: [props.name],
