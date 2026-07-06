@@ -5,7 +5,10 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { MonitoringRule } from "../../lib/monitoring/victoriametrics";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
-import { BitwardenSecret } from "../../lib/secrets";
+import {
+  ExternalSecret,
+  ExternalSecretSpecSecretStoreRefKind,
+} from "../../imports/external-secrets.io";
 import heredoc from "tsheredoc";
 
 const namespace = basename(__dirname);
@@ -27,14 +30,43 @@ NewArgoApp(name, {
 
 // The legacy SealedSecret also carried an empty `runner-registration-token`
 // key (legacy registration flow; the runner authenticates with `runner-token`
-// only). Empty values can't be stored in Bitwarden Secrets Manager, so the
-// ESO-managed secret intentionally omits it — verify the runner re-registers
-// cleanly at cutover.
-new BitwardenSecret(app, "runner-registration", {
-  name: "runner-registration",
-  namespace: namespace,
-  data: {
-    "runner-token": "ca54cb8e-30ed-4a08-9b19-b47e018265db",
+// only, GitLab 16+ having deprecated registration tokens). Empty values can't
+// be stored in Bitwarden Secrets Manager, so this bypasses the shared
+// BitwardenSecret construct (which only supports remoteRef-sourced keys) to
+// add a static empty placeholder for that key via target.template instead.
+// It's load-bearing: the gitlab-runner Helm chart's projected-secrets volume
+// unconditionally references both keys whenever `runners.secret` is set
+// (see templates/deployment.yaml in the gitlab-runner chart), so the key
+// must exist in the Secret or the kubelet refuses to mount the volume at all
+// -- even though the entrypoint script only conditionally uses its content.
+const runnerRegistrationSecretChart = new Chart(app, "runner-registration-secret");
+new ExternalSecret(runnerRegistrationSecretChart, "runner-registration", {
+  metadata: {
+    name: "runner-registration",
+    namespace: namespace,
+  },
+  spec: {
+    secretStoreRef: {
+      kind: ExternalSecretSpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
+      name: "bitwarden",
+    },
+    data: [
+      {
+        secretKey: "runner-token",
+        remoteRef: {
+          key: "ca54cb8e-30ed-4a08-9b19-b47e018265db",
+        },
+      },
+    ],
+    target: {
+      name: "runner-registration",
+      template: {
+        data: {
+          "runner-token": '{{ .["runner-token"] }}',
+          "runner-registration-token": "",
+        },
+      },
+    },
   },
 });
 
