@@ -9,6 +9,7 @@ import {
   VolumeSnapshotClass,
   VolumeSnapshotClassDeletionPolicy,
 } from "../../imports/snapshot.storage.k8s.io";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const name = "ceph-csi-operator";
 const namespace = "ceph";
@@ -75,7 +76,20 @@ new HelmApp(app, "drivers", {
 });
 
 // 3. StorageClasses and VolumeSnapshotClasses
-const secret = "csi-rbd-secret";
+// HIGH RISK cutover: this secret is consumed by the CSI driver at
+// provision/stage time. Only delete the legacy SealedSecret from the prod
+// repo during a maintenance window and verify PVC provisioning immediately.
+const csiSecret = new BitwardenSecret(app, "csi-rbd-secret", {
+  name: "csi-rbd-secret",
+  namespace: namespace,
+  data: {
+    adminID: "5074d521-3f0b-44a0-a93e-b47e0182043a",
+    adminKey: "5b752ae9-38f7-4f94-880c-b47e01820467",
+    userID: "782ffb88-3872-46e7-a6f9-b47e01820498",
+    userKey: "f59159ab-07d2-4776-a91b-b47e018204cc",
+  },
+});
+const secret = csiSecret.secretName;
 
 class CephConfig extends Chart {
   constructor(scope: Construct, id: string) {

@@ -1,5 +1,6 @@
 resources:
   - Deployment.spoolman.yaml
+  - ExternalSecret.spoolman-creds.yaml
   - Ingress.spoolman.yaml
   - Service.spoolman.yaml
   - VMServiceScrape.spoolman.yaml

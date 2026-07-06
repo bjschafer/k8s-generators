@@ -3,9 +3,10 @@ import { App, Duration, Size } from "cdk8s";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
-import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe, Secret } from "cdk8s-plus-33";
+import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
 import { StorageClass } from "../../lib/volume";
 import { NewKustomize } from "../../lib/kustomize";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -34,7 +35,13 @@ NewArgoApp(name, {
   },
 });
 
-const secrets = Secret.fromSecretName(app, `${name}-secrets`, "secrets");
+const secrets = new BitwardenSecret(app, "secrets", {
+  name: "secrets",
+  namespace: namespace,
+  data: {
+    MICROBIN_ADMIN_PASSWORD: "23d81c6d-5676-4102-96bd-b47e01822207",
+  },
+});
 
 new AppPlus(app, "paste", {
   name,
@@ -71,10 +78,7 @@ new AppPlus(app, "paste", {
   ],
   extraEnv: {
     MICROBIN_ADMIN_USERNAME: EnvValue.fromValue("bschafer"),
-    MICROBIN_ADMIN_PASSWORD: EnvValue.fromSecretValue({
-      secret: secrets,
-      key: "MICROBIN_ADMIN_PASSWORD",
-    }),
+    ...secrets.toEnvValues(),
     MICROBIN_DEFAULT_EXPIRY: EnvValue.fromValue("1week"),
     MICROBIN_DISABLE_TELEMETRY: EnvValue.fromValue("true"),
     MICROBIN_ENABLE_READONLY: EnvValue.fromValue("true"),

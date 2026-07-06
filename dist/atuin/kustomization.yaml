@@ -1,5 +1,6 @@
 resources:
   - Deployment.atuin.yaml
+  - ExternalSecret.db-creds.yaml
   - Ingress.atuin.yaml
   - Service.atuin.yaml
   - VMServiceScrape.atuin.yaml

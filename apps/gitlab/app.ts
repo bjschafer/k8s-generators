@@ -5,6 +5,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { MonitoringRule } from "../../lib/monitoring/victoriametrics";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
+import { BitwardenSecret } from "../../lib/secrets";
 import heredoc from "tsheredoc";
 
 const namespace = basename(__dirname);
@@ -22,6 +23,19 @@ NewArgoApp(name, {
   namespace: namespace,
   source: ArgoAppSource.GENERATORS,
   recurse: true,
+});
+
+// The legacy SealedSecret also carried an empty `runner-registration-token`
+// key (legacy registration flow; the runner authenticates with `runner-token`
+// only). Empty values can't be stored in Bitwarden Secrets Manager, so the
+// ESO-managed secret intentionally omits it — verify the runner re-registers
+// cleanly at cutover.
+new BitwardenSecret(app, "runner-registration", {
+  name: "runner-registration",
+  namespace: namespace,
+  data: {
+    "runner-token": "ca54cb8e-30ed-4a08-9b19-b47e018265db",
+  },
 });
 
 class Runner extends Chart {

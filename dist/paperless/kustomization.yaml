@@ -7,6 +7,8 @@ resources:
   - Deployment.paperless.yaml
   - Deployment.tika.yaml
   - ExternalSecret.paperless-ai-secrets.yaml
+  - ExternalSecret.paperless-db-creds.yaml
+  - ExternalSecret.paperless-oidc.yaml
   - Ingress.paperless-ai.yaml
   - Ingress.paperless.yaml
   - PersistentVolumeClaim.data.yaml

@@ -1,5 +1,5 @@
 import { App, Duration, Size } from "cdk8s";
-import { Cpu, EnvFrom, EnvValue, Probe, Secret } from "cdk8s-plus-33";
+import { Cpu, EnvFrom, EnvValue, Probe } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
@@ -23,6 +23,22 @@ NewArgoApp(name, {
         versionConstraint: "v3.x.x",
       },
     ],
+  },
+});
+
+const dbCreds = new BitwardenSecret(app, "db-creds", {
+  name: "db-creds",
+  namespace: namespace,
+  data: {
+    POSTGRES_PASSWORD: "6ba20123-688f-4926-9ba9-b47e01820757",
+  },
+});
+
+const oidcCreds = new BitwardenSecret(app, "oidc-creds", {
+  name: "oidc-creds",
+  namespace: namespace,
+  data: {
+    OIDC_CLIENT_SECRET: "ec54b3ed-071d-42bc-a7fd-b47e0182080d",
   },
 });
 
@@ -98,12 +114,8 @@ new AppPlus(app, `${name}-app`, {
     ...aiSecrets.toEnvValues(),
   },
   envFrom: [
-    new EnvFrom(undefined, undefined, Secret.fromSecretName(app, `${name}-db-creds`, "db-creds")),
-    new EnvFrom(
-      undefined,
-      undefined,
-      Secret.fromSecretName(app, `${name}-oidc-creds`, "oidc-creds"),
-    ),
+    new EnvFrom(undefined, undefined, dbCreds.secret),
+    new EnvFrom(undefined, undefined, oidcCreds.secret),
   ],
   volumes: [
     {

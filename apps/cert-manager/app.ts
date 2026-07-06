@@ -5,15 +5,28 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { Construct } from "constructs";
 import { ClusterIssuer } from "../../imports/cert-manager.io";
+import { BitwardenSecret } from "../../lib/secrets";
 import { AddCRDs } from "../../lib/util";
 
 export const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+// renovate: datasource=github-releases depName=cert-manager/cert-manager extractVersion=^v(?<version>.*)$
 const version = "1.20.3";
 
 NewArgoApp(name, {
   namespace: namespace,
+});
+
+// HIGH RISK cutover: consumed by the ACME DNS01 solver on every cert
+// issuance/renewal. Only delete the legacy SealedSecret from the prod repo
+// during a maintenance window and verify issuance immediately afterwards.
+new BitwardenSecret(app, "cloudflare-api-token", {
+  name: "cloudflare-api-token",
+  namespace: namespace,
+  data: {
+    "api-token": "1f8d71e2-21e2-42e7-9eb4-b47e01820565",
+  },
 });
 
 new HelmApp(app, "helm", {

@@ -1,5 +1,5 @@
 import { App, Chart, Size } from "cdk8s";
-import { Cpu, Secret } from "cdk8s-plus-33";
+import { Cpu, Secret } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { Certificate } from "../../imports/cert-manager.io";
 import { ArgoAppSource, ArgoUpdaterImageProps, NewArgoApp } from "../../lib/argo";
@@ -7,6 +7,7 @@ import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { NFSVolumeContainer } from "../../lib/nfs";
+import { BitwardenSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
 import { Kometa } from "./kometa";
 import { Navidrome } from "./navidrome";
@@ -145,6 +146,46 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
     },
   },
 ];
+
+// exportarr API-key secrets, referenced by name via existingApiSecretName above
+new BitwardenSecret(app, "sonarr-api", {
+  name: "sonarr-api",
+  namespace: namespace,
+  data: {
+    APIKEY: "9a5c19fe-540f-4118-b27d-b47e01821945",
+  },
+});
+new BitwardenSecret(app, "radarr-api", {
+  name: "radarr-api",
+  namespace: namespace,
+  data: {
+    APIKEY: "5c46e216-ac6c-4cd0-a268-b47e0182092b",
+  },
+});
+new BitwardenSecret(app, "lidarr-api", {
+  name: "lidarr-api",
+  namespace: namespace,
+  data: {
+    APIKEY: "dd23efa0-4b21-4ecb-bc79-b47e0182089b",
+  },
+});
+new BitwardenSecret(app, "sabnzbd-api", {
+  name: "sabnzbd-api",
+  namespace: namespace,
+  data: {
+    APIKEY: "37529817-2277-4d51-ad84-b47e018209b4",
+  },
+});
+
+// referenced by name in navidrome.ts
+new BitwardenSecret(app, "navidrome-lastfm", {
+  name: "navidrome-lastfm",
+  namespace: namespace,
+  data: {
+    ND_LASTFM_APIKEY: "9f043b19-e039-40f6-a09f-b47e018219e4",
+    ND_LASTFM__SECRET: "b7e23cb7-432e-4557-b0bf-b47e01821a13",
+  },
+});
 
 const ingressSecret = Secret.fromSecretName(app, "media-tls", "media-tls");
 

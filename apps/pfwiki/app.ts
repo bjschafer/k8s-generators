@@ -1,5 +1,5 @@
 import { App, Size } from "cdk8s";
-import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe, Secret } from "cdk8s-plus-33";
+import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
@@ -7,6 +7,7 @@ import { MysqlInstance } from "../../lib/mysql";
 import { basename } from "../../lib/util";
 import { StorageClass } from "../../lib/volume";
 import { NewKustomize } from "../../lib/kustomize";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -48,6 +49,15 @@ new MysqlInstance(app, "db", {
   pvcSize: Size.gibibytes(20),
 });
 
+// Root password for the MysqlInstance above; the app connects as root.
+const dbCreds = new BitwardenSecret(app, "db-creds", {
+  name: "db-creds",
+  namespace: namespace,
+  data: {
+    MARIADB_ROOT_PASSWORD: "a34911fa-e45d-40e6-815b-b47e018222a2",
+  },
+});
+
 new AppPlus(app, "pfwiki", {
   name: "pfwiki",
   namespace: namespace,
@@ -82,7 +92,7 @@ new AppPlus(app, "pfwiki", {
     DB_PORT: EnvValue.fromValue("3306"),
     DB_USER: EnvValue.fromValue("root"),
     DB_PASS: EnvValue.fromSecretValue({
-      secret: Secret.fromSecretName(app, "app-creds", "db-creds"),
+      secret: dbCreds.secret,
       key: "MARIADB_ROOT_PASSWORD",
     }),
     DB_DATABASE: EnvValue.fromValue("bookstack"),

@@ -2,11 +2,12 @@ import { App, Size } from "cdk8s";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { Cpu, EnvValue, Probe, Secret } from "cdk8s-plus-33";
+import { Cpu, EnvValue, Probe } from "cdk8s-plus-34";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { WellKnownLabels } from "../../lib/labels";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -32,7 +33,13 @@ NewArgoApp(name, {
   },
 });
 
-const dbCreds = Secret.fromSecretName(app, `${name}-creds`, `${name}-creds`);
+const dbCreds = new BitwardenSecret(app, "spoolman-creds", {
+  name: "spoolman-creds",
+  namespace: namespace,
+  data: {
+    SPOOLMAN_DB_PASSWORD: "3c0f66d2-d948-408f-ac18-b47e01822341",
+  },
+});
 
 new AppPlus(app, `${name}-app`, {
   name: namespace,
@@ -59,7 +66,7 @@ new AppPlus(app, `${name}-app`, {
     SPOOLMAN_DB_NAME: EnvValue.fromValue(name),
     SPOOLMAN_DB_USERNAME: EnvValue.fromValue(name),
     SPOOLMAN_DB_PASSWORD: EnvValue.fromSecretValue({
-      secret: dbCreds,
+      secret: dbCreds.secret,
       key: "SPOOLMAN_DB_PASSWORD",
     }),
     SPOOLMAN_HOST: EnvValue.fromValue("0.0.0.0"),

@@ -8,10 +8,9 @@ import {
   PersistentVolumeClaim,
   PersistentVolumeMode,
   Probe,
-  Secret,
   ServiceType,
   Volume,
-} from "cdk8s-plus-33";
+} from "cdk8s-plus-34";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
@@ -85,6 +84,22 @@ const paperlessAiSecrets = new BitwardenSecret(app, "paperless-ai-secrets", {
     PAPERLESS_API_TOKEN: "e28143d1-da02-4aaa-b13e-b3fa003d731a",
     CUSTOM_API_KEY: "7f062e0d-213c-4f54-aa03-b3fa003da758",
     API_KEY: "44f376da-3434-4cf6-8963-b3fa003dd595",
+  },
+});
+
+const paperlessDbCreds = new BitwardenSecret(app, "paperless-db-creds", {
+  name: "paperless-db-creds",
+  namespace: namespace,
+  data: {
+    PAPERLESS_DBPASS: "7a3a5a6d-84a8-49a1-a9ea-b47e018220c6",
+  },
+});
+
+const paperlessOidc = new BitwardenSecret(app, "paperless-oidc", {
+  name: "paperless-oidc",
+  namespace: namespace,
+  data: {
+    PAPERLESS_SOCIALACCOUNT_PROVIDERS: "3234f44e-ccbd-4d8c-8afd-b47e01822174",
   },
 });
 
@@ -169,8 +184,8 @@ class Paperless extends Chart {
       volumeMode: PersistentVolumeMode.FILE_SYSTEM,
     });
 
-    const dbCredsSecret = Secret.fromSecretName(app, "db-creds", "paperless-db-creds");
-    const oidcSecret = Secret.fromSecretName(app, "oidc", "paperless-oidc");
+    const dbCredsSecret = paperlessDbCreds.secret;
+    const oidcSecret = paperlessOidc.secret;
 
     // Main Paperless deployment
     const paperless = new AppPlus(app, "paperless-web", {

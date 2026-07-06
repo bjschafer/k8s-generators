@@ -1,12 +1,13 @@
 import { App, Size } from "cdk8s";
-import { Cpu, EnvValue, Secret } from "cdk8s-plus-33";
+import { Cpu, EnvValue } from "cdk8s-plus-34";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { WellKnownLabels } from "../../lib/labels";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -35,6 +36,14 @@ NewArgoApp(name, {
   },
 });
 
+const dbCreds = new BitwardenSecret(app, "db-creds", {
+  name: "db-creds",
+  namespace: namespace,
+  data: {
+    ATUIN_DB_URI: "69ef5aa3-46f3-4ad6-af17-b47e0182011f",
+  },
+});
+
 new AppPlus(app, "atuin", {
   name,
   namespace,
@@ -53,6 +62,9 @@ new AppPlus(app, "atuin", {
     },
   },
   ports: [port],
+  // audited safe: image ships USER=atuin
+  securityContext: NONROOT_SECURITY_CONTEXT,
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT,
   monitoringConfig: {
     port: 9001,
   },
@@ -60,10 +72,7 @@ new AppPlus(app, "atuin", {
     ATUIN_HOST: EnvValue.fromValue("0.0.0.0"), // bind address
     ATUIN_PORT: EnvValue.fromValue("8888"),
     ATUIN_OPEN_REGISTRATION: EnvValue.fromValue("false"),
-    ATUIN_DB_URI: EnvValue.fromSecretValue({
-      secret: Secret.fromSecretName(app, "db-creds", "db-creds"),
-      key: "ATUIN_DB_URI",
-    }),
+    ...dbCreds.toEnvValues(),
     ATUIN_METRICS__ENABLE: EnvValue.fromValue("true"), // at 9001
     ATUIN_METRICS__HOST: EnvValue.fromValue("0.0.0.0"),
   },

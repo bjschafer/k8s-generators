@@ -10,6 +10,11 @@ resources:
   - Deployment.sabnzbd.yaml
   - Deployment.sonarr.yaml
   - ExternalSecret.kometa-secrets.yaml
+  - ExternalSecret.lidarr-api.yaml
+  - ExternalSecret.navidrome-lastfm.yaml
+  - ExternalSecret.radarr-api.yaml
+  - ExternalSecret.sabnzbd-api.yaml
+  - ExternalSecret.sonarr-api.yaml
   - Ingress.lidarr.yaml
   - Ingress.prowlarr.yaml
   - Ingress.radarr.yaml

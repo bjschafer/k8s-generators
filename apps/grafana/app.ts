@@ -4,11 +4,12 @@ import { readdirSync, readFileSync } from "fs";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { Construct } from "constructs";
-import { ConfigMap } from "cdk8s-plus-33";
+import { ConfigMap } from "cdk8s-plus-34";
 import {
   VmServiceScrape,
   VmServiceScrapeSpecEndpointsScheme,
 } from "../../imports/operator.victoriametrics.com";
+import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -17,6 +18,25 @@ const version = "12.7.2";
 
 NewArgoApp(name, {
   namespace: namespace,
+});
+
+// Consumed by the helm chart via envFromSecret (grafana-secrets) and
+// extraSecretMounts (auth-cmdcentral-oauth) below.
+new BitwardenSecret(app, "grafana-secrets", {
+  name: "grafana-secrets",
+  namespace: namespace,
+  data: {
+    GF_DATABASE_PASSWORD: "b7950d8e-f11c-4559-9304-b47e018206b9",
+  },
+});
+
+new BitwardenSecret(app, "auth-cmdcentral-oauth", {
+  name: "auth-cmdcentral-oauth",
+  namespace: namespace,
+  data: {
+    client_id: "7e2b3368-e556-4dbf-b6ed-b47e018205f7",
+    client_secret: "63969db0-fe73-40e3-8af6-b47e01820623",
+  },
 });
 
 class Grafana extends Chart {

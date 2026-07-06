@@ -1,5 +1,7 @@
 resources:
   - Deployment.miniflux.yaml
+  - ExternalSecret.db-creds.yaml
+  - ExternalSecret.oauth.yaml
   - Ingress.miniflux.yaml
   - Service.miniflux.yaml
   - VMServiceScrape.miniflux.yaml

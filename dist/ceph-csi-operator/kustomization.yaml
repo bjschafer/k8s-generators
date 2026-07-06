@@ -32,6 +32,7 @@ resources:
   - Deployment.ceph-csi-operator-controller-manager.yaml
   - Driver.cephfs.csi.ceph.com.yaml
   - Driver.rbd.csi.ceph.com.yaml
+  - ExternalSecret.csi-rbd-secret.yaml
   - OperatorConfig.ceph-csi-operator-config.yaml
   - Role.ceph-csi-operator-leader-election-role.yaml
   - Role.cephfs-csi-ceph-com-ctrlplugin-r.yaml
