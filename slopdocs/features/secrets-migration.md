@@ -38,81 +38,80 @@ findability in the Bitwarden UI.
 - Worst case for LOW-risk apps: pod restarts during the gap fail to start until the
   Secret reappears. Running pods are unaffected (env vars are baked in at start).
 
-## Classification (all 43)
+## Classification (all 43) — CUTOVER COMPLETE as of 2026-07-06
 
-| Legacy secret                           | Category         | Status                               | Risk                 |
-| --------------------------------------- | ---------------- | ------------------------------------ | -------------------- |
-| atuin/db-creds                          | (a) generators   | migrated + wired                     | LOW                  |
-| bookmarks/secrets                       | (a) generators   | migrated + wired                     | LOW                  |
-| ceph/csi-rbd-secret                     | (a) generators   | migrated + wired                     | **HIGH**             |
-| cert-manager/cloudflare-api-token       | (a) generators   | migrated + wired                     | **HIGH**             |
-| gitlab/runner-registration              | (a) generators   | migrated + wired (see note)          | LOW                  |
-| grafana/auth-cmdcentral-oauth           | (a) generators   | migrated + wired                     | LOW                  |
-| grafana/grafana-secrets                 | (a) generators   | migrated + wired                     | LOW                  |
-| mealie/db-creds                         | (a) generators   | migrated + wired                     | LOW                  |
-| mealie/oidc-creds                       | (a) generators   | migrated + wired                     | LOW                  |
-| media/lidarr-api                        | (a) generators   | migrated + wired                     | LOW                  |
-| media/navidrome-lastfm                  | (a) generators   | migrated + wired                     | LOW                  |
-| media/radarr-api                        | (a) generators   | migrated + wired                     | LOW                  |
-| media/sabnzbd-api                       | (a) generators   | migrated + wired                     | LOW                  |
-| media/sonarr-api                        | (a) generators   | migrated + wired                     | LOW                  |
-| metrics/alertmanager-secrets            | (a) generators   | migrated + wired                     | MED (alert delivery) |
-| metrics/hass-bearer-token               | (a) generators   | migrated + wired                     | LOW                  |
-| miniflux/db-creds                       | (a) generators   | migrated + wired                     | LOW                  |
-| miniflux/oauth                          | (a) generators   | migrated + wired                     | LOW                  |
-| paperless/paperless-db-creds            | (a) generators   | migrated + wired                     | LOW                  |
-| paperless/paperless-oidc                | (a) generators   | migrated + wired                     | LOW                  |
-| paste/secrets                           | (a) generators   | migrated + wired                     | LOW                  |
-| pfwiki/db-creds                         | (a) generators   | migrated + wired                     | LOW                  |
-| spoolman/spoolman-creds                 | (a) generators   | migrated + wired                     | LOW                  |
-| argocd/gitlab-webhook                   | (b) prod-only    | in bws, snippet below                | —                    |
-| catbot/bot-token                        | (b) prod-only    | in bws, snippet below                | —                    |
-| cmdcentralbot/bot-token                 | (b) prod-only    | in bws, snippet below                | —                    |
-| monica/app-secrets                      | (b) prod-only    | in bws, snippet below                | —                    |
-| monica/mariadb-creds                    | (b) prod-only    | in bws, snippet below                | —                    |
-| netbox/db-creds                         | (b) prod-only    | in bws, snippet below                | —                    |
-| netbox/netbox                           | (b) prod-only    | in bws, snippet below                | —                    |
-| netbox/oidc                             | (b) prod-only    | in bws, snippet below                | —                    |
-| pfapi/db-creds                          | (b) prod-only    | in bws, snippet below                | —                    |
-| argocd/argocd-secret                    | (c) hand-migrate | skipped (multi-key argocd internals) | —                    |
-| catbot/github-registry-cred             | (c) hand-migrate | skipped (.dockerconfigjson blob)     | —                    |
-| cmdcentralbot/github-registry-cred      | (c) hand-migrate | skipped (.dockerconfigjson blob)     | —                    |
-| external-secrets/bitwarden-access-token | (d) bootstrap    | **permanent manual** (see below)     | —                    |
-| recipes/secrets                         | orphan           | deleted from prod                    | —                    |
-| media/readarr-api                       | orphan           | deleted from prod                    | —                    |
-| media/doplarr-secrets                   | orphan           | deleted from prod                    | —                    |
-| metrics/unifi-creds                     | orphan           | deleted from prod                    | —                    |
-| metrics/proxmox-exporter                | orphan           | deleted from prod                    | —                    |
-| postgres/backups                        | orphan           | deleted from prod                    | —                    |
+Every row below is done: SealedSecret deleted from prod, ExternalSecret Ready,
+Secret owned by ESO, post-cutover hash verified against the bws value. The one
+open item is the gitlab-runner mount validation noted below.
 
-## Per-App Cutover Checklist (category a)
+| Legacy secret                           | Category         | Status                                              | Risk                 |
+| --------------------------------------- | ---------------- | --------------------------------------------------- | -------------------- |
+| atuin/db-creds                          | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| bookmarks/secrets                       | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| ceph/csi-rbd-secret                     | (a) generators   | **cut over, Ready, hash OK, PVC-verified**          | **HIGH**             |
+| cert-manager/cloudflare-api-token       | (a) generators   | **cut over, Ready, hash OK, staging-cert-verified** | **HIGH**             |
+| gitlab/runner-registration              | (a) generators   | **cut over, Ready, hash OK** (see note)             | LOW                  |
+| grafana/auth-cmdcentral-oauth           | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| grafana/grafana-secrets                 | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| mealie/db-creds                         | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| mealie/oidc-creds                       | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| media/lidarr-api                        | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| media/navidrome-lastfm                  | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| media/radarr-api                        | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| media/sabnzbd-api                       | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| media/sonarr-api                        | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| metrics/alertmanager-secrets            | (a) generators   | **cut over, Ready, hash OK**                        | MED (alert delivery) |
+| metrics/hass-bearer-token               | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| miniflux/db-creds                       | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| miniflux/oauth                          | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| paperless/paperless-db-creds            | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| paperless/paperless-oidc                | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| paste/secrets                           | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| pfwiki/db-creds                         | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| spoolman/spoolman-creds                 | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
+| argocd/gitlab-webhook                   | (b) prod-only    | in bws, snippet below                               | —                    |
+| catbot/bot-token                        | (b) prod-only    | in bws, snippet below                               | —                    |
+| cmdcentralbot/bot-token                 | (b) prod-only    | in bws, snippet below                               | —                    |
+| monica/app-secrets                      | (b) prod-only    | in bws, snippet below                               | —                    |
+| monica/mariadb-creds                    | (b) prod-only    | in bws, snippet below                               | —                    |
+| netbox/db-creds                         | (b) prod-only    | in bws, snippet below                               | —                    |
+| netbox/netbox                           | (b) prod-only    | in bws, snippet below                               | —                    |
+| netbox/oidc                             | (b) prod-only    | in bws, snippet below                               | —                    |
+| pfapi/db-creds                          | (b) prod-only    | in bws, snippet below                               | —                    |
+| argocd/argocd-secret                    | (c) hand-migrate | **investigated, not executed** (see below)          | —                    |
+| catbot/github-registry-cred             | (c) hand-migrate | **cut over by hand, Ready, hash OK**                | —                    |
+| cmdcentralbot/github-registry-cred      | (c) hand-migrate | **cut over by hand, Ready, hash OK**                | —                    |
+| external-secrets/bitwarden-access-token | (d) bootstrap    | **permanent manual** (see below)                    | —                    |
+| recipes/secrets                         | orphan           | deleted from prod                                   | —                    |
+| media/readarr-api                       | orphan           | deleted from prod                                   | —                    |
+| media/doplarr-secrets                   | orphan           | deleted from prod                                   | —                    |
+| metrics/unifi-creds                     | orphan           | deleted from prod                                   | —                    |
+| metrics/proxmox-exporter                | orphan           | deleted from prod                                   | —                    |
+| postgres/backups                        | orphan           | deleted from prod                                   | —                    |
 
-For each row: delete the listed prod file(s), push prod, then verify. Order within
-the LOW group doesn't matter; do a couple first and build confidence.
+## Per-App Cutover Checklist (category a) — all done
 
-### LOW risk — anytime
+All LOW-risk apps were cut over in one commit (prod `15998a2d`) and verified:
+`ExternalSecret` Ready, Secret re-owned by ESO, post-cutover hash matches the
+phase-0-recorded hash, no new pod failures. ceph and cert-manager (HIGH risk)
+were cut over individually with immediate verification (see below). gitlab was
+held back for the runner-registration-token investigation, done separately
+(see the gitlab note below), then cut over on its own commit.
 
-| App       | Delete from prod repo                                                                                                                                      | Verify after                                                                                                                                                                                                                                                                                                                                                               |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| atuin     | `secrets/atuin/db-creds.yaml`                                                                                                                              | `kubectl get es -n atuin db-creds` Ready; restart pod, syncs still work                                                                                                                                                                                                                                                                                                    |
-| bookmarks | `secrets/bookmarks/secrets.yaml`                                                                                                                           | ES Ready; linkwarden login (SSO) works                                                                                                                                                                                                                                                                                                                                     |
-| gitlab    | `secrets/gitlab/runner-registration.yaml`                                                                                                                  | ES Ready; runner pod re-registers and picks up a job. **Note:** legacy Secret had an _empty_ `runner-registration-token` key that Bitwarden can't store; the ESO Secret only has `runner-token`. Modern gitlab-runner chart auths with `runner-token` (glrt-…) only, but if the chart complains about the missing key, add a template/placeholder or re-check chart values |
-| grafana   | `secrets/grafana/sealedsecret.auth-cmdcentral-oauth.yaml`, `secrets/grafana/sealedsecret.grafana-secrets.yaml`                                             | Both ES Ready; grafana pods restart OK (DB + OAuth login)                                                                                                                                                                                                                                                                                                                  |
-| mealie    | `secrets/mealie/sealedsecret.db-creds.yaml`, `secrets/mealie/sealedsecret.oidc-creds.yaml`                                                                 | ES Ready; app restart connects to postgres, OIDC login                                                                                                                                                                                                                                                                                                                     |
-| media     | `secrets/media/lidarr.yaml`, `secrets/media/radarr.yaml`, `secrets/media/sabnzbd.yaml`, `secrets/media/sonarr.yaml`, `secrets/media/navidrome-lastfm.yaml` | ES Ready ×5; exportarr sidecars scrape OK, navidrome lastfm still linked                                                                                                                                                                                                                                                                                                   |
-| metrics   | `secrets/metrics/alertmanager-secrets.yaml`, `secrets/metrics/hass-bearer-token.yaml`                                                                      | ES Ready; send a test alert (pushover/email), hass scrape target up                                                                                                                                                                                                                                                                                                        |
-| miniflux  | `secrets/miniflux/sealedsecret.db-creds.yaml`, `secrets/miniflux/sealedsecret.oauth.yaml`                                                                  | ES Ready; app restart, OIDC login                                                                                                                                                                                                                                                                                                                                          |
-| paperless | `secrets/paperless/sealedsecret.paperless-db-creds.yaml`, `secrets/paperless/sealedsecret.paperless-oidc.yaml`                                             | ES Ready; web pod restart, SSO login                                                                                                                                                                                                                                                                                                                                       |
-| paste     | `secrets/paste/secrets.yaml`                                                                                                                               | ES Ready; admin login                                                                                                                                                                                                                                                                                                                                                      |
-| pfwiki    | `secrets/pfwiki/db-creds.yaml`                                                                                                                             | ES Ready; **both** the mariadb StatefulSet and bookstack consume `db-creds` — restart both, wiki loads                                                                                                                                                                                                                                                                     |
-| spoolman  | `secrets/spoolman/sealedsecret.spoolman-creds.yaml`                                                                                                        | ES Ready; app restart connects to postgres                                                                                                                                                                                                                                                                                                                                 |
+**ceph** (prod `d2066062`): `ExternalSecret/csi-rbd-secret` Ready within
+seconds, hash parity on all 4 keys (adminID/adminKey/userID/userKey). Created
+a scratch 1Gi PVC on `ceph-rbd`, Bound immediately, deleted — confirms the CSI
+provisioner authenticates fine with the ESO-managed secret.
 
-### HIGH risk — maintenance window, verify immediately
+**cert-manager** (prod `b6e77951`): `ExternalSecret/cloudflare-api-token`
+Ready, hash parity, no auth errors in the cert-manager controller logs.
+Issued a throwaway `letsencrypt-staging` Certificate
+(`cutover-verify-staging`, dnsName `cutover-verify.cmdcentral.xyz`) — went
+Ready in under 2 minutes (DNS01 solved fine), then deleted the Certificate and
+its Secret. Existing ClusterIssuers/Certificates stayed Ready throughout.
 
-| App          | Delete from prod repo                            | Verify after                                                                                                                                                                                                                                                                                                                                           |
-| ------------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ceph         | `secrets/ceph/csi.yaml`                          | `kubectl get es -n ceph csi-rbd-secret` Ready **within seconds of deletion** (force-sync if not); then create a scratch PVC on `ceph-rbd` AND `cephfs`, confirm Bound, delete it. Existing mounted volumes are unaffected (node-stage creds only needed at attach time), but new provisioning/attach/expand/snapshot breaks while the Secret is absent |
-| cert-manager | `secrets/cert-manager/cloudflare-api-token.yaml` | ES Ready; issue a test cert (`letsencrypt-staging` ClusterIssuer) and confirm DNS01 solves. Renewals fail silently-ish while the Secret is absent, so don't leave this broken overnight                                                                                                                                                                |
+**gitlab** (prod `da599d1d`, generators `198089df`/`0597e6c3`): see the
+dedicated note below — this one needed real remediation, not just a delete.
 
 ## Category (b) — prod-only apps (values already in Bitwarden)
 
@@ -194,13 +193,113 @@ new BitwardenSecret(app, "db-creds", {
 - **external-secrets/bitwarden-access-token** — the token ESO itself uses to reach
   Bitwarden. ESO cannot manage its own credential (chicken-and-egg), so this stays
   a **permanent manual bootstrap**: keep the SealedSecret in the prod repo (or
-  re-create the Secret by hand on cluster rebuild). Never delete it.
-- **argocd/argocd-secret** — argocd-internal multi-purpose secret (admin/user
-  password hashes, server signature key). Hand-migrate if ever needed; argocd also
-  mutates it in-cluster.
-- **{catbot,cmdcentralbot}/github-registry-cred** — `.dockerconfigjson` structured
-  blobs. ESO can build these with `target.template`, which `BitwardenSecret`
-  doesn't support yet. Hand-migrate when those apps move to generators.
+  re-create the Secret by hand on cluster rebuild). Never delete it. The
+  **write-scoped** token used for this cutover session (a separate, temporary
+  bws access token, not this bootstrap one) should be **revoked** now that the
+  cutover is done — it's not needed again until the next batch of secrets moves.
+- **argocd/argocd-secret** — investigated, not executed (see below).
+- **{catbot,cmdcentralbot}/github-registry-cred** — hand-migrated (see below).
+
+## gitlab/runner-registration — the one that needed real remediation
+
+The live `runner-registration-token` key has been empty for a while.
+Investigated whether it's still needed before cutting over:
+
+- gitlab-runner (`prod-runner-gitlab-runner`, in the `gitlab` namespace) is
+  live and healthy, and its own logs confirm it registers via the modern
+  authentication-token flow (`"Configuration (with the authentication token)
+was saved"`), matching GitLab 16+'s deprecation of registration tokens. So
+  the secret is genuinely in use — only the legacy key inside it is dead.
+- But the `gitlab-runner` Helm chart's `projected-secrets` volume
+  unconditionally references **both** `runner-token` and
+  `runner-registration-token` whenever `runners.secret` is set (chart
+  `templates/deployment.yaml`), regardless of whether the entrypoint script
+  actually reads the latter. An ESO secret with only `runner-token` would mount
+  fine for the _currently running_ pod (already-mounted volumes aren't
+  re-validated), but the kubelet would refuse to schedule the _next_ one with
+  `references non-existent secret key` — i.e. this would look fine at cutover
+  and then silently break the runner's next restart (node drain, chart bump,
+  `selfHeal` reconcile, anything).
+- `BitwardenSecret` only supports remoteRef-sourced keys (bws itself can't
+  store an empty string, which is the whole reason this key was omitted
+  originally), so `apps/gitlab/app.ts` now bypasses it for this one secret:
+  a hand-built `ExternalSecret` with `target.template.data` adding a static
+  empty `runner-registration-token` alongside the real `runner-token`.
+- First attempt at the template used `{{ .["runner-token"] }}`, which isn't
+  valid Go template syntax — ESO logged `bad character U+005B '['` and never
+  rendered the secret. Fixed to `{{ index . "runner-token" }}` (the correct
+  way to look up a map key that isn't a valid Go identifier).
+- Verified: `ExternalSecret` Ready, Secret has both keys (`runner-token`
+  correctly populated, `runner-registration-token` present-but-empty), hash
+  parity on `runner-token`. **Not yet verified**: the volume actually mounting
+  on a fresh pod, since forcing a restart of a live Deployment is outside this
+  session's authorized cluster writes. Restart the runner deployment (or wait
+  for its next natural restart) and confirm the pod comes up healthy and
+  re-registers.
+
+## Registry-cred hand-migration (catbot, cmdcentralbot) — done
+
+`.dockerconfigjson` secrets can't go through `BitwardenSecret` (no
+`target.template` support), so these were migrated by hand directly in the
+**prod** repo (these two apps haven't moved to generators):
+
+- Pushed the full `.dockerconfigjson` JSON string to Bitwarden as one entry
+  each: `Catbot - github-registry-cred - dockerconfigjson`,
+  `Cmdcentralbot - github-registry-cred - dockerconfigjson`.
+- Added `{catbot,cmdcentralbot}/externalsecret.github-registry-cred.yaml`
+  (plain ESO YAML, `target.template.type: kubernetes.io/dockerconfigjson`,
+  `target.template.data[".dockerconfigjson"]` templated from the bws-sourced
+  value via `{{ index . "dockerconfigjson" }}`), deleted the sealed versions,
+  same commit.
+- Hit a real snag on push: both apps build via `kustomize` directly from
+  their own prod-repo folder (not routed through the shared `secrets/` app),
+  and their `kustomization.yaml` still listed the now-deleted
+  `sealedsecret.github-registry-cred.yaml` — ArgoCD couldn't generate a
+  manifest at all (`no such file or directory`), taking both apps to
+  `Unknown` sync status. Fixed by swapping the resource list entry to the new
+  `externalsecret.*.yaml` file and verifying with `kubectl kustomize` locally
+  before pushing again.
+- Verified: both `ExternalSecret`s Ready, Secret type `kubernetes.io/dockerconfigjson`
+  owned by ESO, hash parity on the full JSON blob, both bot pods still
+  `Running` unaffected (imagePullSecrets only get re-validated on the next
+  actual image pull, which hadn't happened yet at verification time — same
+  caveat as the gitlab volume mount, but lower risk since a plain
+  imagePullSecrets reference doesn't have the strict per-key `items` list a
+  projected volume does).
+
+## argocd/argocd-secret — investigation only, do not execute yet
+
+Compared the sealed version's `encryptedData` key names against the live
+Secret's key names (names only, no values pulled) — both sides have exactly
+the same 9 keys:
+
+`accounts.bschafer.password`, `accounts.bschafer.passwordMtime`,
+`accounts.bschafer.tokens`, `admin.password`, `admin.passwordMtime`,
+`dex.authentik.clientSecret`, `server.secretkey`, `tls.crt`, `tls.key`.
+
+Of those, argocd-server **self-manages and mutates at runtime**:
+
+- `server.secretkey` — auto-generated JWT signing key if absent.
+- `admin.password` / `admin.passwordMtime` — rewritten whenever the admin
+  password changes (CLI/UI).
+- `accounts.bschafer.password` / `.passwordMtime` / `.tokens` — same, for the
+  local `bschafer` account, plus `argocd account generate-token` appends to
+  `.tokens`.
+- `tls.crt` / `tls.key` — argocd-server self-generates these for its internal
+  gRPC/repo-server TLS if not otherwise provided.
+
+Only **`dex.authentik.clientSecret`** (the Authentik OIDC client secret) is
+genuinely externally-sourced and never touched by argocd itself.
+
+**Recommendation**: when argocd migrates to generators, do **not** point a
+`BitwardenSecret`/plain `ExternalSecret` at this Secret with the default
+`creationPolicy: Owner` — ESO would take ownership of the whole Secret and
+overwrite/reset the JWT signing key, admin password hash, and API tokens on
+every reconcile, invalidating every active session and token. Instead use
+`creationPolicy: Merge` with the ExternalSecret declaring **only**
+`dex.authentik.clientSecret`, so ESO adds/updates that one key in place and
+leaves everything argocd self-manages alone. Execute this when argocd
+actually migrates to generators, not before.
 
 ## Orphans (deleted from prod, commit `b44c443d`)
 
@@ -209,9 +308,16 @@ new BitwardenSecret(app, "db-creds", {
 ESO-based exporters in `apps/metrics-exporters/`), `postgres/backups` (superseded
 by ESO-managed `postgres/s3-creds`). Deleting `metrics/proxmox-exporter` is what
 unblocks the new proxmox-exporter, which reuses the same Secret name. The live
-Secrets are GC'd by their ownerReferences on push. An untracked
-`secrets/recipes/plaintextsecret.yaml` remains on disk in the prod repo; remove it
-by hand.
+Secrets are GC'd by their ownerReferences on push. The untracked
+`secrets/recipes/plaintextsecret.yaml` mentioned here previously has been removed.
+
+**Note for next pass**: there are several more `plaintextsecret*` files sitting
+untracked (gitignored) on disk across the prod repo — e.g. under
+`secrets/atuin/`, `secrets/grafana/` (two), `secrets/media/`, `secrets/metrics/`
+(four), `secrets/miniflux/` (two). These weren't part of this cutover's scope
+(only the one under `secrets/recipes/` was called out), and weren't touched.
+Worth a manual pass to confirm they're all genuinely stale local artifacts and
+clean them up, same as the recipes one.
 
 ## Tooling
 
