@@ -249,9 +249,6 @@ class Paperless extends Chart {
         component: "gotenberg",
       },
       args: ["gotenberg", "--chromium-disable-routes=true"],
-      // audited safe: image ships USER=gotenberg
-      securityContext: NONROOT_SECURITY_CONTEXT,
-      containerSecurityContext: NONROOT_SECURITY_CONTEXT,
       resources: {
         cpu: {
           request: Cpu.millis(50),
