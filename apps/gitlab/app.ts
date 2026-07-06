@@ -62,7 +62,7 @@ new ExternalSecret(runnerRegistrationSecretChart, "runner-registration", {
       name: "runner-registration",
       template: {
         data: {
-          "runner-token": '{{ .["runner-token"] }}',
+          "runner-token": '{{ index . "runner-token" }}',
           "runner-registration-token": "",
         },
       },
