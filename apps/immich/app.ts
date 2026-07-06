@@ -1,5 +1,11 @@
 import { App, Duration, Size } from "cdk8s";
-import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe, Volume } from "cdk8s-plus-34";
+import {
+  Cpu,
+  EnvValue,
+  PersistentVolumeAccessMode,
+  Probe,
+  Volume,
+} from "cdk8s-plus-34";
 import { basename } from "path";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
@@ -60,13 +66,19 @@ const valkey = new Valkey(app, "valkey", {
     },
     limits: {
       cpu: Quantity.fromString("100m"),
-      memory: Quantity.fromString("128Mi"),
+      // Baseline is ~15Mi, but immich v3's library-wide reprocessing bursts the
+      // BullMQ job queue to ~125Mi+, pinning the old 128Mi limit and OOMKilling
+      // valkey in a loop. Can't cap with maxmemory eviction (would drop jobs), so
+      // give burst headroom instead. Should fall back to baseline once v3 drains.
+      memory: Quantity.fromString("512Mi"),
     },
   },
 });
 
 const commonEnv: Record<string, EnvValue> = {
-  IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue("http://immich-machine-learning:3003"),
+  IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue(
+    "http://immich-machine-learning:3003",
+  ),
   REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service!.name),
   REDIS_PORT: EnvValue.fromValue("6379"),
   REDIS_PASSWORD: EnvValue.fromSecretValue({
