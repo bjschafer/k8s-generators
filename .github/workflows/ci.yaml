@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # Installs the tools pinned in mise.toml (bun, kubectl, helm, promtool,
       # pint, alertmanager) and exports the derived [env] (KUBE_VERSION) for
