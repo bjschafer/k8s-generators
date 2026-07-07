@@ -16,7 +16,7 @@
     },
     "devDependencies": {
         "@types/js-yaml": "^4.0.9",
-        "@types/node": "^25.9.4",
+        "@types/node": "^26.0.0",
         "cdk8s-cli": "^2.207.35",
         "json-schema-to-typescript": "^15.0.4",
         "oxfmt": "^0.57.0",
