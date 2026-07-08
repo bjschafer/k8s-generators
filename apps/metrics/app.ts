@@ -12,7 +12,7 @@ import { VmResources } from "./vmresources";
 export const namespace = basename(__dirname);
 export const name = namespace;
 // renovate: datasource=docker depName=ghcr.io/victoriametrics/helm-charts/victoria-metrics-k8s-stack
-export const version = "0.85.10";
+export const version = "0.86.0";
 export const hostname = "metrics.cmdcentral.xyz";
 
 const app = new App(DEFAULT_APP_PROPS(namespace));
