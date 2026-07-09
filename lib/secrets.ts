@@ -3,6 +3,9 @@ import { Construct } from "constructs";
 import {
   ExternalSecret,
   ExternalSecretSpecData,
+  ExternalSecretSpecDataRemoteRefConversionStrategy,
+  ExternalSecretSpecDataRemoteRefDecodingStrategy,
+  ExternalSecretSpecDataRemoteRefMetadataPolicy,
   ExternalSecretSpecSecretStoreRefKind,
 } from "../imports/external-secrets.io";
 import { EnvValue, ISecret, Secret } from "cdk8s-plus-34";
@@ -42,6 +45,9 @@ export class BitwardenSecret extends Chart {
             secretKey: value[0],
             remoteRef: {
               key: value[1],
+              conversionStrategy: ExternalSecretSpecDataRemoteRefConversionStrategy.DEFAULT,
+              decodingStrategy: ExternalSecretSpecDataRemoteRefDecodingStrategy.NONE,
+              metadataPolicy: ExternalSecretSpecDataRemoteRefMetadataPolicy.NONE,
             },
           };
         }),
