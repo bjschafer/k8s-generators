@@ -78,7 +78,7 @@
             "editorMode": "code",
             "expr": "hostname:$hostname _SYSTEMD_UNIT:$unit ${level:raw} ${search:raw} | stats by (level) count()",
             "legendFormat": "{{level}}",
-            "queryType": "range",
+            "queryType": "statsRange",
             "refId": "A"
           }
         ],

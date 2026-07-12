@@ -78,7 +78,7 @@
             "editorMode": "code",
             "expr": "kubernetes.pod_namespace:$namespace kubernetes.container_name:$container ${level:raw} ${search:raw} | stats by (level) count()",
             "legendFormat": "{{level}}",
-            "queryType": "range",
+            "queryType": "statsRange",
             "refId": "A"
           }
         ],

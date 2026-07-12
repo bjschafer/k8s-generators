@@ -82,7 +82,7 @@
             "editorMode": "code",
             "expr": "_SYSTEMD_UNIT:pdns-recursor.service hostname:$hostname ${search:raw} | unpack_logfmt result_prefix \"dns_\" | stats by (dns_qtype) count()",
             "legendFormat": "{{dns_qtype}}",
-            "queryType": "range",
+            "queryType": "statsRange",
             "refId": "A"
           }
         ],
