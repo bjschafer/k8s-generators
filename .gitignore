@@ -6,5 +6,6 @@ node_modules
 .idea/
 .mise/
 plaintextsecret*
+vlogscli-history
 
 !imports/helm-values/*.d.ts

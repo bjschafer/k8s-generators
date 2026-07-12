@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#MISE description="Query VictoriaLogs (logs.cmdcentral.xyz). No args = interactive REPL; args = one-shot LogsQL query."
+
+set -euo pipefail
+
+DATASOURCE="${VLOGS_DATASOURCE:-https://logs.cmdcentral.xyz/select/logsql/query}"
+
+if [ "$#" -eq 0 ]; then
+  # Interactive REPL — banner and prompts are helpful here.
+  exec vlogscli-prod -datasource.url="$DATASOURCE"
+fi
+
+# One-shot: run the given LogsQL query in compact output mode. vlogscli prints
+# its interactive banner (and a harmless "cannot sync data to stdout" fsync
+# error, since stdout is a pipe here) to *stdout*, so strip those known lines
+# and keep only result rows. `|| true` because grep -v exits 1 with no rows.
+printf '\\c\n%s\n' "$*" \
+  | vlogscli-prod -datasource.url="$DATASOURCE" 2>/dev/null \
+  | { grep -vE '^(sending queries to|type \? and press enter|compact output mode|executing \[|error when reading query response: cannot sync data to stdout)' || true; }

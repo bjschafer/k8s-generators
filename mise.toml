@@ -6,6 +6,9 @@ promtool = "latest"
 pint = "latest"
 "aqua:prometheus/alertmanager" = "latest"
 bitwarden-secrets-manager = "latest"
+# vlogscli ships bundled with vlagent inside the `vlutils` release archive;
+# pin the exe + asset so the github backend extracts the right binary.
+"github:VictoriaMetrics/VictoriaLogs[exe=vlogscli-prod,matching=vlutils]" = "latest"
 
 [env]
 # Derived from the pinned kubectl above so helm template uses the right .Capabilities.KubeVersion
