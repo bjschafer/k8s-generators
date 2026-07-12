@@ -30,6 +30,7 @@ spec:
     spec:
       containers:
         - args:
+            - --delete.enable
             - --envflag.enable
             - --envflag.prefix=VM_
             - --http.shutdownDelay=15s

@@ -1,10 +1,18 @@
 import { App, Chart, Helm } from "cdk8s";
 import { basename } from "path";
-import { CLUSTER_ISSUER, DEFAULT_APP_PROPS, EXTERNAL_DNS_ANNOTATION_KEY } from "../../lib/consts";
+import {
+  CLUSTER_ISSUER,
+  DEFAULT_APP_PROPS,
+  EXTERNAL_DNS_ANNOTATION_KEY,
+} from "../../lib/consts";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Construct } from "constructs";
 import { StorageClass } from "../../lib/volume";
-import { VmAlert, VmPodScrape, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
+import {
+  VmAlert,
+  VmPodScrape,
+  VmServiceScrape,
+} from "../../imports/operator.victoriametrics.com";
 import { IntOrString, KubeService } from "../../imports/k8s";
 import { LOGS_RULE } from "../../lib/monitoring/alerts";
 import { addAlerts } from "./alerts";
@@ -29,7 +37,8 @@ NewArgoApp(name, {
 class VMLogs extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
-    const hostname = "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428";
+    const hostname =
+      "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428";
 
     new Helm(this, "vmlogs", {
       chart: "victoria-logs-single",
@@ -45,6 +54,7 @@ class VMLogs extends Chart {
             "syslog.listenAddr.udp": ":1514",
             "syslog.timezone": "America/Chicago",
             "memory.allowedPercent": "80", // https://docs.victoriametrics.com/vmagent/#troubleshooting
+            "delete.enable": "true",
           },
           retentionPeriod: "3", // months
           retentionDiskSpaceUsage: "75GiB",
