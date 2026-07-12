@@ -58,6 +58,11 @@ class VMLogs extends Chart {
           },
           retentionPeriod: "3", // months
           retentionDiskSpaceUsage: "75GiB",
+          podSecurityContext: {
+            // avoid a slow recursive chown of the volume on every restart
+            // on Ceph RBD over spinning disks
+            fsGroupChangePolicy: "OnRootMismatch",
+          },
           persistentVolume: {
             enabled: true,
             storageClassName: StorageClass.CEPH_RBD,

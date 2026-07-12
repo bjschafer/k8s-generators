@@ -89,6 +89,7 @@ spec:
               name: server-volume
       securityContext:
         fsGroup: 2000
+        fsGroupChangePolicy: OnRootMismatch
         runAsNonRoot: true
         runAsUser: 1000
       terminationGracePeriodSeconds: 60
