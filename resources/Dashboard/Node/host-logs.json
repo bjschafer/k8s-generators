@@ -2,11 +2,7 @@
   "apiVersion": "dashboard.grafana.app/v0alpha1",
   "kind": "Dashboard",
   "metadata": {
-    "annotations": {
-      "grafana.app/folder": "XEOgZ1EMz"
-    },
-    "labels": {},
-    "name": "cebru82ry248wf",
+    "name": "host-logs",
     "namespace": "default"
   },
   "spec": {
@@ -61,7 +57,7 @@
           "x": 0,
           "y": 0
         },
-        "id": 2,
+        "id": 1,
         "options": {
           "legend": {
             "displayMode": "list",
@@ -80,13 +76,13 @@
               "uid": "fe9j59s06pc74c"
             },
             "editorMode": "code",
-            "expr": "_SYSTEMD_UNIT:pdns-recursor.service hostname:$hostname ${search:raw} | unpack_logfmt result_prefix \"dns_\" | stats by (dns_qtype) count()",
-            "legendFormat": "{{dns_qtype}}",
+            "expr": "hostname:$hostname _SYSTEMD_UNIT:$unit ${level:raw} ${search:raw} | stats by (level) count()",
+            "legendFormat": "{{level}}",
             "queryType": "range",
             "refId": "A"
           }
         ],
-        "title": "Queries by type",
+        "title": "Log volume by level",
         "type": "timeseries"
       },
       {
@@ -104,7 +100,7 @@
           "x": 0,
           "y": 6
         },
-        "id": 1,
+        "id": 2,
         "options": {
           "dedupStrategy": "none",
           "enableLogDetails": true,
@@ -122,13 +118,13 @@
               "uid": "fe9j59s06pc74c"
             },
             "editorMode": "code",
-            "expr": "_SYSTEMD_UNIT:pdns-recursor.service hostname:$hostname ${search:raw} | unpack_logfmt result_prefix \"dns_\"",
+            "expr": "hostname:$hostname _SYSTEMD_UNIT:$unit ${level:raw} ${search:raw}",
             "legendFormat": "",
             "queryType": "instant",
             "refId": "A"
           }
         ],
-        "title": "Queries",
+        "title": "Logs",
         "type": "logs"
       }
     ],
@@ -136,7 +132,8 @@
     "schemaVersion": 40,
     "tags": [
       "logs",
-      "dns"
+      "journald",
+      "host"
     ],
     "templating": {
       "list": [
@@ -149,13 +146,13 @@
             "uid": "fe9j59s06pc74c"
           },
           "definition": "fieldValue(hostname)",
-          "description": "Recursor host(s).",
+          "description": "Host(s).",
           "query": {
             "refId": "VictoriaLogsVariableQueryEditor-VariableQuery",
             "type": "fieldValue",
             "field": "hostname",
-            "query": "_SYSTEMD_UNIT:pdns-recursor.service",
-            "limit": 100
+            "query": "",
+            "limit": 1000
           },
           "refresh": 2,
           "sort": 1,
@@ -176,11 +173,88 @@
           "skipUrlSync": false
         },
         {
+          "name": "unit",
+          "label": "Unit",
+          "type": "query",
+          "datasource": {
+            "type": "victoriametrics-logs-datasource",
+            "uid": "fe9j59s06pc74c"
+          },
+          "definition": "fieldValue(_SYSTEMD_UNIT)",
+          "description": "systemd unit(s), filtered by host.",
+          "query": {
+            "refId": "VictoriaLogsVariableQueryEditor-VariableQuery",
+            "type": "fieldValue",
+            "field": "_SYSTEMD_UNIT",
+            "query": "hostname:$hostname",
+            "limit": 1000
+          },
+          "refresh": 2,
+          "sort": 1,
+          "multi": true,
+          "includeAll": true,
+          "allValue": null,
+          "current": {
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "options": [],
+          "regex": "",
+          "hide": 0,
+          "skipUrlSync": false
+        },
+        {
+          "name": "level",
+          "label": "Level",
+          "type": "custom",
+          "query": "All levels : *, errors : level:err*, warnings+ : (level:err* OR level:warn*), info+ : (level:err* OR level:warn* OR level:info OR level:notice), debug/trace : (level:debug* OR level:trace*)",
+          "description": "Severity filter. 'All levels' includes lines with no level.",
+          "multi": false,
+          "includeAll": false,
+          "current": {
+            "text": "All levels",
+            "value": "*"
+          },
+          "options": [
+            {
+              "text": "All levels",
+              "value": "*",
+              "selected": true
+            },
+            {
+              "text": "errors",
+              "value": "level:err*",
+              "selected": false
+            },
+            {
+              "text": "warnings+",
+              "value": "(level:err* OR level:warn*)",
+              "selected": false
+            },
+            {
+              "text": "info+",
+              "value": "(level:err* OR level:warn* OR level:info OR level:notice)",
+              "selected": false
+            },
+            {
+              "text": "debug/trace",
+              "value": "(level:debug* OR level:trace*)",
+              "selected": false
+            }
+          ],
+          "hide": 0,
+          "skipUrlSync": false
+        },
+        {
           "name": "search",
           "label": "Search",
           "type": "textbox",
           "query": "",
-          "description": "Free LogsQL, AND-combined (matches the raw message), e.g. a domain fragment like jellyfin.",
+          "description": "Free LogsQL, AND-combined: words, \"phrases\", field:value, field:~\"regex\", NOT term.",
           "current": {
             "text": "",
             "value": ""
@@ -198,13 +272,13 @@
       ]
     },
     "time": {
-      "from": "now-6h",
+      "from": "now-1h",
       "to": "now"
     },
     "timepicker": {},
     "timezone": "browser",
-    "title": "DNS Logs",
-    "uid": "cebru82ry248wf",
+    "title": "Host Logs",
+    "uid": "host-logs",
     "weekStart": ""
   }
 }
