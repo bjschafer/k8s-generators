@@ -53,16 +53,17 @@ Pipes chain: `filter | stats ... | sort ... | limit ...`. Full reference: https:
 - `kubernetes.pod_namespace` — the namespace (`argocd`, `immich`, `media`, `ceph`, …)
 - `kubernetes.container_name`, `kubernetes.pod_name`
 - `stream` — `stdout` or `stderr`
-- `level` — parsed log level where available (`error`, `warn`, `info`, `notice`, `debug`)
+- `level` — parsed & downcased from JSON app logs (`error`, `warn`, `info`, …). Only present for apps that log structured JSON with a level key; plaintext container logs have no `level`, so fall back to a `error` word match for those.
 
 **Hosts** (journald/syslog, `source_type:journald`):
 
 - `hostname` — `infra1`, `infra2`, `vmhost01`–`03`, `pandora`, `gitlab`, `apt`, …
-- `SYSLOG_IDENTIFIER` / `_SYSTEMD_UNIT` — the service (`pdns-recursor`, `caddy`, `pdns_server`, `vector`, `node_exporter`, …). NOTE: the bare `unit` stream field is mostly empty for journald — use `SYSLOG_IDENTIFIER` instead.
+- `level` — mapped from journald `PRIORITY` (`error` = PRIORITY 0–3, `warn` = 4, `notice` = 5, `info` = 6, `debug` = 7). Present on every journald record, so `hostname:infra1 level:error` works.
+- `SYSLOG_IDENTIFIER` / `_SYSTEMD_UNIT` — the service (`pdns-recursor`, `caddy`, `pdns_server`, `vector`, `node_exporter`, …). journald streams are keyed on `hostname,_SYSTEMD_UNIT`, so filtering by `_SYSTEMD_UNIT` is index-fast; `SYSLOG_IDENTIFIER` also works for finer matches (e.g. kernel sub-loggers).
 
 **Network gear** (CEF): `cef.device_vendor` (`Ubiquiti`), `cef.device_product` (`UniFi Protect`, `UniFi Network`), `cef.device_event_class_id`.
 
-**Universal:** `_msg` (log line), `_time`, `_stream`, `source_type`.
+**Universal:** `_msg` (log line), `_time`, `_stream`, `source_type`. `level` is now populated for journald (all), k8s (JSON logs), and UniFi syslog — so `level:error` is a good first filter across sources.
 
 Discover live values with `stats by (<field>)`, e.g. `mise run logs '_time:1h * | stats by (kubernetes.pod_namespace) count() as n | sort by (n desc)'`.
 
@@ -105,6 +106,9 @@ mise run logs '_time:6h error | stats by (_time:10m) count() as n'
 ```bash
 # What's logging on a host, by service
 mise run logs '_time:1h hostname:infra1 | stats by (SYSLOG_IDENTIFIER) count() as n | sort by (n desc) | limit 15'
+
+# Errors/warnings across all hosts (journald PRIORITY -> level)
+mise run logs '_time:1h source_type:journald (level:error OR level:warn) | keep _time, hostname, SYSLOG_IDENTIFIER, _msg | sort by (_time desc) | limit 50'
 
 # Tail a specific systemd service
 mise run logs '_time:30m hostname:vmhost03 SYSLOG_IDENTIFIER:caddy | keep _time, _msg | sort by (_time desc) | limit 50'
