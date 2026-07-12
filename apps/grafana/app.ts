@@ -154,6 +154,13 @@ class Grafana extends Chart {
           dashboards: {
             enabled: true,
             folderAnnotation: "k8s-sidecar-target-directory",
+            // The sidecar posts to Grafana's admin-only
+            // /api/admin/provisioning/dashboards/reload endpoint, but the chart
+            // wires no credentials for it (we auth via OAuth, no basic-auth
+            // creds), so every reload 401s. Skip the reload call and let
+            // Grafana's file provisioner pick up dashboard changes on its scan
+            // interval instead.
+            skipReload: true,
             provider: {
               allowUiUpdates: true,
               foldersFromFilesStructure: true,
