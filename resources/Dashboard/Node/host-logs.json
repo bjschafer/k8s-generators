@@ -76,7 +76,7 @@
               "uid": "fe9j59s06pc74c"
             },
             "editorMode": "code",
-            "expr": "hostname:$hostname _SYSTEMD_UNIT:$unit ${level:raw} ${search:raw} | stats by (level) count()",
+            "expr": "hostname:$hostname _SYSTEMD_UNIT:$unit ${exclude:raw} ${level:raw} ${search:raw} | stats by (level) count()",
             "legendFormat": "{{level}}",
             "queryType": "statsRange",
             "refId": "A"
@@ -118,7 +118,7 @@
               "uid": "fe9j59s06pc74c"
             },
             "editorMode": "code",
-            "expr": "hostname:$hostname _SYSTEMD_UNIT:$unit ${level:raw} ${search:raw}",
+            "expr": "hostname:$hostname _SYSTEMD_UNIT:$unit ${exclude:raw} ${level:raw} ${search:raw}",
             "legendFormat": "",
             "queryType": "instant",
             "refId": "A"
@@ -204,6 +204,33 @@
           },
           "options": [],
           "regex": "",
+          "hide": 0,
+          "skipUrlSync": false
+        },
+        {
+          "name": "exclude",
+          "label": "Noise filter",
+          "type": "custom",
+          "query": "Hide DNS query logs : NOT (_SYSTEMD_UNIT:pdns.service OR _SYSTEMD_UNIT:pdns-recursor.service), Show everything : *",
+          "description": "DNS recursor/auth query logs are high-volume and have their own DNS Logs dashboard.",
+          "multi": false,
+          "includeAll": false,
+          "current": {
+            "text": "Hide DNS query logs",
+            "value": "NOT (_SYSTEMD_UNIT:pdns.service OR _SYSTEMD_UNIT:pdns-recursor.service)"
+          },
+          "options": [
+            {
+              "text": "Hide DNS query logs",
+              "value": "NOT (_SYSTEMD_UNIT:pdns.service OR _SYSTEMD_UNIT:pdns-recursor.service)",
+              "selected": true
+            },
+            {
+              "text": "Show everything",
+              "value": "*",
+              "selected": false
+            }
+          ],
           "hide": 0,
           "skipUrlSync": false
         },
