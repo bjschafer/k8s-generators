@@ -97,6 +97,24 @@ class VMLogs extends Chart {
             },
           },
           customConfig: {
+            // Deep-merged over the chart's default vector config. We override
+            // the `parser` remap to promote a JSON app-log level to a top-level
+            // `level` field so `level:error` / `level:warn*` work cluster-wide,
+            // matching the host-side vector (ansible roles/vector).
+            transforms: {
+              parser: {
+                source: [
+                  ".log = parse_json(.message) ?? .message",
+                  "del(.message)",
+                  "if is_object(.log) {",
+                  "  lvl = .log.level || .log.severity || .log.lvl || .log.loglevel || .log.levelname",
+                  "  if lvl != null {",
+                  '    .level = downcase(to_string(lvl) ?? "")',
+                  "  }",
+                  "}",
+                ].join("\n"),
+              },
+            },
             sinks: {
               vlogs: {
                 endpoints: [`${hostname}/insert/elasticsearch`],

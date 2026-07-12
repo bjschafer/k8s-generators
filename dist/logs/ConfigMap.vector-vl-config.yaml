@@ -49,7 +49,13 @@ data:
       parser:
         inputs:
         - k8s
-        source: |
+        source: |-
           .log = parse_json(.message) ?? .message
           del(.message)
+          if is_object(.log) {
+            lvl = .log.level || .log.severity || .log.lvl || .log.loglevel || .log.levelname
+            if lvl != null {
+              .level = downcase(to_string(lvl) ?? "")
+            }
+          }
         type: remap
