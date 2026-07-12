@@ -159,32 +159,9 @@ spec:
               name: auth-cmdcentral-oauth
               readOnly: true
       enableServiceLinks: true
-      initContainers:
-        - command:
-            - chown
-            - -R
-            - 472:472
-            - /var/lib/grafana
-          image: public.ecr.aws/docker/library/busybox:latest
-          imagePullPolicy: IfNotPresent
-          name: init-chown-data
-          securityContext:
-            capabilities:
-              add:
-                - CHOWN
-                - DAC_OVERRIDE
-              drop:
-                - ALL
-            readOnlyRootFilesystem: false
-            runAsNonRoot: false
-            runAsUser: 0
-            seccompProfile:
-              type: RuntimeDefault
-          volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: storage
       securityContext:
         fsGroup: 472
+        fsGroupChangePolicy: OnRootMismatch
         runAsGroup: 472
         runAsNonRoot: true
         runAsUser: 472
