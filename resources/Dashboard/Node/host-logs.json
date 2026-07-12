@@ -106,7 +106,7 @@
           "enableLogDetails": true,
           "prettifyLogMessage": false,
           "showCommonLabels": false,
-          "showLabels": true,
+          "showLabels": false,
           "showTime": true,
           "sortOrder": "Descending",
           "wrapLogMessage": true
@@ -118,7 +118,7 @@
               "uid": "fe9j59s06pc74c"
             },
             "editorMode": "code",
-            "expr": "hostname:$hostname _SYSTEMD_UNIT:$unit ${exclude:raw} ${level:raw} ${search:raw}",
+            "expr": "hostname:$hostname _SYSTEMD_UNIT:$unit ${exclude:raw} ${level:raw} ${search:raw} | format \"[<hostname> \u00b7 <_SYSTEMD_UNIT>] <_msg>\"",
             "legendFormat": "",
             "queryType": "instant",
             "refId": "A"

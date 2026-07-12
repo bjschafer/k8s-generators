@@ -106,7 +106,7 @@
           "enableLogDetails": true,
           "prettifyLogMessage": false,
           "showCommonLabels": false,
-          "showLabels": true,
+          "showLabels": false,
           "showTime": true,
           "sortOrder": "Descending",
           "wrapLogMessage": true
@@ -118,7 +118,7 @@
               "uid": "fe9j59s06pc74c"
             },
             "editorMode": "code",
-            "expr": "kubernetes.pod_namespace:$namespace kubernetes.container_name:$container ${level:raw} ${search:raw}",
+            "expr": "kubernetes.pod_namespace:$namespace kubernetes.container_name:$container ${level:raw} ${search:raw} | format \"[<kubernetes.pod_namespace>/<kubernetes.pod_name>] <_msg>\"",
             "legendFormat": "",
             "queryType": "instant",
             "refId": "A"
