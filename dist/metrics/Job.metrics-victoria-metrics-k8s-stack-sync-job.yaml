@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
-    app.kubernetes.io/version: v0.0.9
-    helm.sh/chart: victoria-metrics-k8s-stack-0.86.0
+    app.kubernetes.io/version: v0.0.10
+    helm.sh/chart: victoria-metrics-k8s-stack-0.86.1
   name: metrics-victoria-metrics-k8s-stack-sync-job
   namespace: metrics
 spec:
@@ -22,8 +22,8 @@ spec:
         app.kubernetes.io/instance: metrics
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: victoria-metrics-k8s-stack
-        app.kubernetes.io/version: v0.0.9
-        helm.sh/chart: victoria-metrics-k8s-stack-0.86.0
+        app.kubernetes.io/version: v0.0.10
+        helm.sh/chart: victoria-metrics-k8s-stack-0.86.1
     spec:
       containers:
         - env:
@@ -43,7 +43,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.serviceAccountName
-          image: ghcr.io/victoriametrics/sync-job:v0.0.9
+          image: ghcr.io/victoriametrics/sync-job:v0.0.10
           imagePullPolicy: IfNotPresent
           name: sync-job
           volumeMounts:
