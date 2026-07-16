@@ -19,6 +19,6 @@
         "json-schema-to-typescript": "^15.0.4",
         "oxfmt": "^0.59.0",
         "oxlint": "^1.72.0",
-        "typescript": "^6.0.3"
+        "typescript": "^7.0.0"
     }
 }
