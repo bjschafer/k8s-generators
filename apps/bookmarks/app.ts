@@ -1,10 +1,5 @@
 import { App, Duration, Size } from "cdk8s";
-import {
-  Cpu,
-  EnvValue,
-  PersistentVolumeAccessMode,
-  Probe,
-} from "cdk8s-plus-34";
+import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
@@ -74,9 +69,7 @@ new AppPlus(app, `${name}-app`, {
   },
   ports: [port],
   extraEnv: {
-    NEXTAUTH_URL: EnvValue.fromValue(
-      "https://bookmarks.cmdcentral.xyz/api/v1/auth",
-    ),
+    NEXTAUTH_URL: EnvValue.fromValue("https://bookmarks.cmdcentral.xyz/api/v1/auth"),
     NEXTAUTH_SECRET: EnvValue.fromSecretValue({
       secret: secrets.secret,
       key: "NEXTAUTH_SECRET",
@@ -89,17 +82,13 @@ new AppPlus(app, `${name}-app`, {
     NEXT_PUBLIC_CREDENTIALS_ENABLED: EnvValue.fromValue("false"), // disable non-SSO signin
 
     // Try LLM categorization on CF workers
-    OPENAI_MODEL: EnvValue.fromValue(
-      "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-    ),
+    OPENAI_MODEL: EnvValue.fromValue("@cf/meta/llama-3.3-70b-instruct-fp8-fast"),
     ...aiSecrets.toEnvValues(),
 
     // Authentik SSO
     NEXT_PUBLIC_AUTHENTIK_ENABLED: EnvValue.fromValue("true"),
     AUTHENTIK_CUSTOM_NAME: EnvValue.fromValue("Cmdcentral Login"),
-    AUTHENTIK_ISSUER: EnvValue.fromValue(
-      "https://login.cmdcentral.xyz/application/o/bookmarks",
-    ),
+    AUTHENTIK_ISSUER: EnvValue.fromValue("https://login.cmdcentral.xyz/application/o/bookmarks"),
     AUTHENTIK_CLIENT_ID: EnvValue.fromSecretValue({
       secret: secrets.secret,
       key: "AUTHENTIK_CLIENT_ID",
