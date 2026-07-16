@@ -7,8 +7,8 @@
   ],
   "packageRules": [
     {
-      "description": "package.json/bun.lock dependency bumps are handled manually via `mise run upgrade` (bun update) per CLAUDE.md's 'confirm before adding dependencies' policy - don't have Renovate open PRs for them.",
-      "matchManagers": ["npm"],
+      "description": "package.json/bun.lock dependency bumps are handled manually via `mise run upgrade` (bun update) per CLAUDE.md's 'confirm before adding dependencies' policy - don't have Renovate open PRs for them. Must name `bun`, not just `npm`: because bun.lock exists, the bun manager claims package.json and the npm manager never sees it, so matching npm alone silently matched nothing.",
+      "matchManagers": ["npm", "bun"],
       "enabled": false
     },
     {
