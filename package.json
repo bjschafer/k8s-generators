@@ -10,12 +10,10 @@
         "cdk8s": "^2.70.82",
         "cdk8s-plus-34": "^2.0.35",
         "constructs": "^10.6.0",
-        "js-yaml": "4.1.1",
         "tsheredoc": "^1.0.1",
         "yaml": "^2.9.0"
     },
     "devDependencies": {
-        "@types/js-yaml": "^4.0.9",
         "@types/node": "^26.0.0",
         "cdk8s-cli": "^2.207.35",
         "json-schema-to-typescript": "^15.0.4",

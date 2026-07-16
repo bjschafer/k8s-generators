@@ -1,6 +1,6 @@
 import { basename } from "path";
 import * as fs from "fs";
-import * as yaml from "js-yaml";
+import { stringify } from "yaml";
 
 export function NewKustomize(outdir: string) {
   const files = fs
@@ -18,5 +18,5 @@ export function NewKustomize(outdir: string) {
     resources: files.toSorted().map((f) => basename(f)),
   };
 
-  fs.writeFileSync(`${outdir}/kustomization.yaml`, yaml.dump(kustomization));
+  fs.writeFileSync(`${outdir}/kustomization.yaml`, stringify(kustomization));
 }

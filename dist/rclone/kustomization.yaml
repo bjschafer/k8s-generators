@@ -5,6 +5,5 @@ resources:
   - NetworkPolicy.default-block-ingress.yaml
   - NetworkPolicy.rclone-crypt-wasabi-cmdcentral-k8s-backups-allow-internal.yaml
   - NetworkPolicy.rclone-crypt-wasabi-cmdcentral-k8s-backups-allow-traefik.yaml
-  - >-
-    NetworkPolicy.rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups-allow-namespaces.yaml
+  - NetworkPolicy.rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups-allow-namespaces.yaml
   - Service.rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.yaml
