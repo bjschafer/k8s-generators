@@ -14,6 +14,14 @@ jobs:
   ci:
     name: build, verify, lint
     runs-on: ubuntu-latest
+    env:
+      # The regen-and-push path below is privileged (it checks out a writable
+      # branch and pushes to it), so gate it on who opened the PR rather than on
+      # the branch name -- this is a public repo, and anyone can open a PR from a
+      # branch called renovate/whatever. The head-repo test keeps it to in-repo
+      # branches: fork PRs get no secrets anyway, but this fails them closed
+      # rather than leaving them to fail confusingly at checkout.
+      IS_RENOVATE_PR: ${{ github.event.pull_request.user.login == 'renovate[bot]' && github.event.pull_request.head.repo.full_name == github.repository }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -24,8 +32,8 @@ jobs:
           # the detached merge commit, and a PAT rather than GITHUB_TOKEN --
           # pushes made with GITHUB_TOKEN never trigger a new workflow run, so
           # Renovate would wait forever for checks on the commit we push.
-          ref: ${{ startsWith(github.head_ref, 'renovate/') && github.head_ref || '' }}
-          token: ${{ (startsWith(github.head_ref, 'renovate/') && secrets.RENOVATE_SYNC_TOKEN) || secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.pull_request.user.login == 'renovate[bot]' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref || '' }}
+          token: ${{ (github.event.pull_request.user.login == 'renovate[bot]' && github.event.pull_request.head.repo.full_name == github.repository && secrets.RENOVATE_SYNC_TOKEN) || secrets.GITHUB_TOKEN }}
 
       # Installs the tools pinned in mise.toml (bun, kubectl, helm, promtool,
       # pint, alertmanager) and exports the derived [env] (KUBE_VERSION) for
@@ -57,7 +65,7 @@ jobs:
       # Refetch them before the build so dist/ is synthesized from the CRDs the
       # new version actually ships. Skips sources marked enabled: false.
       - name: Refresh upstream CRDs (Renovate PRs)
-        if: ${{ startsWith(github.head_ref, 'renovate/') }}
+        if: env.IS_RENOVATE_PR == 'true'
         run: mise run update-crds --all
 
       # --force bypasses mise's source-based task caching: CI must always
@@ -68,7 +76,7 @@ jobs:
       # On Renovate branches drift is expected and gets committed back below,
       # so only enforce the check everywhere else.
       - name: Verify dist/ matches committed output
-        if: ${{ !startsWith(github.head_ref, 'renovate/') }}
+        if: env.IS_RENOVATE_PR != 'true'
         run: |
           if ! git diff --exit-code; then
             echo "::error::dist/ is out of sync with the TypeScript source — run 'mise run build' and commit the result."
@@ -97,7 +105,7 @@ jobs:
       # CI on the new head commit -- that run finds nothing to regenerate, goes
       # green, and Renovate automerges it.
       - name: Sync regenerated CRDs/dist back to the Renovate branch
-        if: ${{ startsWith(github.head_ref, 'renovate/') }}
+        if: env.IS_RENOVATE_PR == 'true'
         env:
           HEAD_REF: ${{ github.head_ref }}
         run: |
