@@ -8,7 +8,7 @@
         "cdk8s": "^2.70.82",
         "cdk8s-plus-34": "^2.0.35",
         "constructs": "^10.6.0",
-        "tsheredoc": "^1.0.1",
+        "tsheredoc": "^2.0.0",
         "yaml": "^2.9.0",
       },
       "devDependencies": {
@@ -332,7 +332,7 @@
 
     "to-regex-range": ["to-regex-range@5.0.1", "", { "dependencies": { "is-number": "^7.0.0" } }, "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ=="],
 
-    "tsheredoc": ["tsheredoc@1.0.1", "", {}, "sha512-aOyKWGdZSKEMFnzlccLu3wwB4VgpGhJ6bZON9uM+p8hgHSczfMvPdspxX+Dkr+q8/Dpgla1UwK6pFLmutUEUaw=="],
+    "tsheredoc": ["tsheredoc@2.0.0", "", {}, "sha512-JlXu1AN36spxpWArlAD61sEGr5FxCDzsuPYW/YfjlpownWD+6EFnC5QsSydUVTFwIfoG/gX8faoXCxWobdED+Q=="],
 
     "tslib": ["tslib@2.8.1", "", {}, "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="],
 
