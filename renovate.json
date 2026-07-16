@@ -17,6 +17,17 @@
       "matchManagers": ["custom.regex"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
+    },
+    {
+      "description": "The velero CLI renders its own CRDs, so mise.toml's pin and tools/sources.ts' pin must match -- sources.ts hard-fails the render otherwise. Renovate sees them through two managers (mise, custom.regex) under two depNames, which would mean two PRs that each fail CI alone and can only go green once both land. Group them so they always move as one. Deliberately not scoped to minor/patch: a major has to stay grouped too.",
+      "matchDepNames": ["velero", "vmware-tanzu/velero"],
+      "groupName": "velero"
+    },
+    {
+      "description": "Mirror of the custom.regex automerge rule above, for the mise-managed half of the grouped velero PR -- a grouped branch only automerges if every dependency in it is allowed to.",
+      "matchDepNames": ["velero", "vmware-tanzu/velero"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
     }
   ],
   "customManagers": [

@@ -2,6 +2,12 @@
 bun = "latest"
 kubectl = "1.36"
 helm = "3.21.3"
+# Renders the velero CRDs (`velero install --crds-only`), so the CLI version IS
+# the CRD version -- unlike helm above, which only pulls a chart at a version
+# passed to it. tools/sources.ts pins the same version and hard-fails if the
+# installed CLI disagrees, so these two must be bumped together; renovate.json
+# groups them into one PR to keep that true.
+velero = "1.18.2"
 promtool = "latest"
 pint = "latest"
 "aqua:prometheus/alertmanager" = "latest"
