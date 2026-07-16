@@ -1,11 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
+  "description": "CI regenerates the CRDs and dist/ that a version bump implies, and pushes them back onto the Renovate branch as github-actions[bot] (see .github/workflows/ci.yaml). gitIgnoredAuthors keeps Renovate from treating that commit as a third-party modification, which would otherwise block both rebasing and automerge.",
+  "gitIgnoredAuthors": [
+    "41898282+github-actions[bot]@users.noreply.github.com"
+  ],
+  "platformAutomerge": false,
   "packageRules": [
     {
       "description": "package.json/bun.lock dependency bumps are handled manually via `mise run upgrade` (bun update) per CLAUDE.md's 'confirm before adding dependencies' policy - don't have Renovate open PRs for them.",
       "matchManagers": ["npm"],
       "enabled": false
+    },
+    {
+      "description": "Chart/CRD version bumps (the custom.regex managers below) are fully self-completing once CI pushes the regenerated CRDs + dist/, and CI synthesizes and validates the exact manifests Argo will apply. Let minor/patch automerge on green; majors still get regenerated onto the branch by CI, but wait for a human to actually look at the CRD diff before Argo applies it.",
+      "matchManagers": ["custom.regex"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
     }
   ],
   "customManagers": [
