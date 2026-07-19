@@ -67,10 +67,10 @@ class Grafana extends Chart {
         resources: {
           requests: {
             cpu: "100m",
-            memory: "384Mi",
+            memory: "512Mi",
           },
           limits: {
-            memory: "512Mi",
+            memory: "1Gi",
           },
         },
         persistence: {
@@ -87,7 +87,8 @@ class Grafana extends Chart {
         env: {
           TZ: "America/Chicago",
           GF_DATABASE_TYPE: "postgres",
-          GF_DATABASE_HOST: "prod-pg17-pooler-rw.postgres.svc.cluster.local:5432",
+          GF_DATABASE_HOST:
+            "prod-pg17-pooler-rw.postgres.svc.cluster.local:5432",
           GF_DATABASE_NAME: "grafana",
           GF_DATABASE_USER: "grafana",
           GF_DATABASE_SSL_MODE: "require",
@@ -108,20 +109,23 @@ class Grafana extends Chart {
         },
         "grafana.ini": {
           auth: {
-            signout_redirect_url: "https://login.cmdcentral.xyz/application/o/grafana/end-session/",
+            signout_redirect_url:
+              "https://login.cmdcentral.xyz/application/o/grafana/end-session/",
             oauth_auto_login: true,
             oauth_allow_insecure_email_lookup: true,
           },
           "auth.generic_oauth": {
             enabled: true,
             client_id: "$__file{/etc/secrets/auth_cmdcentral_oauth/client_id}",
-            client_secret: "$__file{/etc/secrets/auth_cmdcentral_oauth/client_secret}",
+            client_secret:
+              "$__file{/etc/secrets/auth_cmdcentral_oauth/client_secret}",
             name: "Cmdcentral Login",
             scopes: "openid email profile",
             auth_url: "https://login.cmdcentral.xyz/application/o/authorize/",
             token_url: "https://login.cmdcentral.xyz/application/o/token/",
             api_url: "https://login.cmdcentral.xyz/application/o/userinfo/",
-            role_attribute_path: "contains(groups[*], 'wheel') && 'Admin' || 'Viewer'",
+            role_attribute_path:
+              "contains(groups[*], 'wheel') && 'Admin' || 'Viewer'",
           },
           "auth.proxy": {
             enabled: true,
@@ -206,7 +210,11 @@ class Grafana extends Chart {
   }
 
   private loadDashboards(ns: string) {
-    const dashboardsDir = join(dirname(dirname(__dirname)), "resources", "Dashboard");
+    const dashboardsDir = join(
+      dirname(dirname(__dirname)),
+      "resources",
+      "Dashboard",
+    );
     this.loadDashboardsFromDir(dashboardsDir, dashboardsDir, ns);
   }
 
@@ -225,7 +233,10 @@ class Grafana extends Chart {
       if (/\/v2/.test(raw.apiVersion ?? "")) continue;
       // grafanactl wraps dashboards in apiVersion/kind/spec — extract the inner spec
       const dashboardJson = raw.spec ?? raw;
-      const uid: string = dashboardJson.uid ?? raw.metadata?.name ?? basename(entry.name, ".json");
+      const uid: string =
+        dashboardJson.uid ??
+        raw.metadata?.name ??
+        basename(entry.name, ".json");
       // Inject uid so Grafana can upsert existing dashboards rather than creating duplicates
       dashboardJson.uid = uid;
       // ConfigMap names must be RFC 1123: lowercase alphanumeric and hyphens only
@@ -244,7 +255,8 @@ class Grafana extends Chart {
       const annotations: Record<string, string> = {
         "argocd.argoproj.io/sync-options": "ServerSideApply=true",
       };
-      if (folder && folder !== "General") annotations["k8s-sidecar-target-directory"] = folder;
+      if (folder && folder !== "General")
+        annotations["k8s-sidecar-target-directory"] = folder;
 
       new ConfigMap(this, `dashboard-${uid}`, {
         metadata: {
