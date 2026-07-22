@@ -6,7 +6,7 @@ Avoid adding new dependencies without getting confirmation from me first.
 
 Do not create new documentation files or update the readme without getting confirmation from me first.
 
-This is all managed via GitOps, *do not* manually apply manifests.
+This is all managed via GitOps, _do not_ manually apply manifests.
 
 # Structure
 
@@ -22,4 +22,6 @@ This is all managed via GitOps, *do not* manually apply manifests.
 ## Building
 
 - You can test changes by invoking `mise run build`.
-- Ensure files are formatted properly according to eslint rules. `mise run fmt` and `mise run lint` can be helpful here.
+- **Before every commit, run `mise run pre-commit`.** It runs exactly what CI runs: `fmt` (oxfmt), `--force build`, `lint` (oxlint), `typecheck`, and `validate-alerts`. `mise run setup-hooks` installs it as a git pre-commit hook so this happens automatically.
+- Never commit a formatting violation or a stale `dist/`. Both fail CI, and because commits go straight to `main`, a failure there turns `main` red — which in turn breaks every open Renovate PR, since they inherit `main`'s tree and die before CI's regen/sync step can push their generated output. That is not a cosmetic failure: it silently lands version bumps with no manifests.
+- If you edit any `.ts` file, run `mise run fmt` before committing. If you edit anything that feeds a manifest, run `mise run build` and commit the resulting `dist/` changes in the same commit.

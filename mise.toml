@@ -66,3 +66,45 @@ depends = ["fmt", "lint", "validate-alerts", "typecheck"]
 [tasks.schemas]
 description = "Generate TypeScript types from JSON schemas"
 run = 'bun x json2ts -i schemas/ -o imports/helm-values/'
+
+# Guards the invariant the Renovate automation quietly depends on: main is
+# always green. A Renovate branch inherits main's tree and cannot fix a
+# breakage it didn't cause -- so when main is red, every Renovate PR dies at
+# that same inherited step, and the regen/sync step in .github/workflows/ci.yaml
+# (deliberately the last one in the job) never runs. The result is a version
+# bump landing with no regenerated dist/, which is exactly how metrics drifted
+# at 0.87.0. Running CI's gates locally keeps a red main from being committed
+# in the first place. Bypass with `git commit --no-verify` when you mean to.
+[tasks.pre-commit]
+description = "Run CI's gates locally before committing (install via `mise run setup-hooks`)"
+depends = ["install"]
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Both write in place; --force bypasses build's source-based caching so dist/
+# is always regenerated from source, matching what CI checks.
+mise run fmt
+mise run --force build
+
+# Anything the two steps above changed now shows as unstaged. Scoped to the
+# paths they can touch so unrelated work-in-progress doesn't trip the hook.
+if ! git diff --quiet -- '*.ts' dist/; then
+  {
+    echo
+    echo "pre-commit: fmt/build changed files that aren't staged:"
+    git diff --name-only -- '*.ts' dist/ | sed 's/^/  /'
+    echo
+    echo "They're already fixed in your working tree -- 'git add' them and commit again."
+  } >&2
+  exit 1
+fi
+
+mise run lint
+mise run typecheck
+mise run validate-alerts
+"""
+
+[tasks.setup-hooks]
+description = "Install the git pre-commit hook that runs `mise run pre-commit`"
+run = "mise generate git-pre-commit --write --task=pre-commit"

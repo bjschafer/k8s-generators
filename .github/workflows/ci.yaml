@@ -122,3 +122,15 @@ jobs:
           git add -A
           git commit -m "chore(deps): regenerate CRDs and dist"
           git push origin "HEAD:$HEAD_REF"
+
+      # The sync step above is last on purpose, but that means ANY earlier
+      # failure -- including one inherited from a red main, which this branch
+      # can't fix -- silently turns it into a no-op. Left unannotated that is
+      # indistinguishable from an ordinary check failure, and merging anyway
+      # lands a version bump with no regenerated output (see the metrics 0.87.0
+      # drift). Say so explicitly instead.
+      - name: Flag that the regen/sync never ran
+        if: failure() && env.IS_RENOVATE_PR == 'true'
+        run: |
+          echo "::error::CI failed before the regen/sync step, so the regenerated CRDs and dist/ were NOT pushed to this branch. Merging now lands the version bump without its generated output. Fix the failure above (if it came from main, fix main first and rebase) and re-run."
+          exit 1

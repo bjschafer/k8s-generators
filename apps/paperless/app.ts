@@ -145,11 +145,7 @@ new ExternalSecret(secretKeyChart, "secret", {
     target: { name: secretKeyName },
   },
 });
-const paperlessSecretKey = Secret.fromSecretName(
-  app,
-  "secret-key-ref",
-  secretKeyName,
-);
+const paperlessSecretKey = Secret.fromSecretName(app, "secret-key-ref", secretKeyName);
 
 class Paperless extends Chart {
   constructor(scope: App, id: string) {
@@ -286,10 +282,7 @@ class Paperless extends Chart {
     const ftpVol = Volume.fromPersistentVolumeClaim(app, "ftp-vol", ftpPvc);
 
     paperless.Deployment.addVolume(ftpVol);
-    paperless.Deployment.containers[0].mount(
-      "/usr/src/paperless/consume",
-      ftpVol,
-    );
+    paperless.Deployment.containers[0].mount("/usr/src/paperless/consume", ftpVol);
 
     // Gotenberg deployment
     new AppPlus(app, "gotenberg", {
@@ -398,16 +391,9 @@ class Paperless extends Chart {
     });
 
     // Mount ftp volume - reuse ftpPvcRef from earlier
-    const ftpVolForFtpServer = Volume.fromPersistentVolumeClaim(
-      app,
-      "ftp-vol-ftpserver",
-      ftpPvc,
-    );
+    const ftpVolForFtpServer = Volume.fromPersistentVolumeClaim(app, "ftp-vol-ftpserver", ftpPvc);
     ftpserver.Deployment.addVolume(ftpVolForFtpServer);
-    ftpserver.Deployment.containers[0].mount(
-      "/home/scanner",
-      ftpVolForFtpServer,
-    );
+    ftpserver.Deployment.containers[0].mount("/home/scanner", ftpVolForFtpServer);
 
     // paperless-ai: AI-powered companion for paperless-ngx
     new AppPlus(app, "paperless-ai", {
