@@ -8,9 +8,15 @@ import {
   PersistentVolumeClaim,
   PersistentVolumeMode,
   Probe,
+  Secret,
   ServiceType,
   Volume,
 } from "cdk8s-plus-34";
+import {
+  ExternalSecret,
+  ExternalSecretSpecDataFromSourceRefGeneratorRefKind,
+} from "../../imports/external-secrets.io";
+import { Password } from "../../imports/generators.external-secrets.io";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
@@ -102,6 +108,48 @@ const paperlessOidc = new BitwardenSecret(app, "paperless-oidc", {
     PAPERLESS_SOCIALACCOUNT_PROVIDERS: "3234f44e-ccbd-4d8c-8afd-b47e01822174",
   },
 });
+
+// Django SECRET_KEY. Upstream hard-fails at startup if this is unset or "change-me".
+// Nothing at rest derives from it (mail creds and share links are stored plainly), so it
+// only signs sessions/CSRF -- a regenerated value just forces re-login via SSO. Generated
+// once and never rotated (refreshInterval "0"), so it stays stable across pod restarts.
+const secretKeyName = "paperless-secret-key";
+const secretKeyGeneratorName = "paperless-secret-key-generator";
+const secretKeyChart = new Chart(app, "secret-key");
+new Password(secretKeyChart, "gen", {
+  metadata: { name: secretKeyGeneratorName, namespace: namespace },
+  spec: {
+    length: 64,
+    digits: 10,
+    symbols: 0,
+    noUpper: false,
+    allowRepeat: true,
+    secretKeys: ["PAPERLESS_SECRET_KEY"],
+  },
+});
+new ExternalSecret(secretKeyChart, "secret", {
+  metadata: { name: secretKeyName, namespace: namespace },
+  spec: {
+    refreshInterval: "0",
+    dataFrom: [
+      {
+        sourceRef: {
+          generatorRef: {
+            apiVersion: "generators.external-secrets.io/v1alpha1",
+            kind: ExternalSecretSpecDataFromSourceRefGeneratorRefKind.PASSWORD,
+            name: secretKeyGeneratorName,
+          },
+        },
+      },
+    ],
+    target: { name: secretKeyName },
+  },
+});
+const paperlessSecretKey = Secret.fromSecretName(
+  app,
+  "secret-key-ref",
+  secretKeyName,
+);
 
 class Paperless extends Chart {
   constructor(scope: App, id: string) {
@@ -220,6 +268,7 @@ class Paperless extends Chart {
         new EnvFrom(cm, undefined, undefined),
         new EnvFrom(undefined, undefined, dbCredsSecret),
         new EnvFrom(undefined, undefined, oidcSecret),
+        new EnvFrom(undefined, undefined, paperlessSecretKey),
       ],
       enableServiceLinks: false,
       volumes: [
@@ -237,7 +286,10 @@ class Paperless extends Chart {
     const ftpVol = Volume.fromPersistentVolumeClaim(app, "ftp-vol", ftpPvc);
 
     paperless.Deployment.addVolume(ftpVol);
-    paperless.Deployment.containers[0].mount("/usr/src/paperless/consume", ftpVol);
+    paperless.Deployment.containers[0].mount(
+      "/usr/src/paperless/consume",
+      ftpVol,
+    );
 
     // Gotenberg deployment
     new AppPlus(app, "gotenberg", {
@@ -346,9 +398,16 @@ class Paperless extends Chart {
     });
 
     // Mount ftp volume - reuse ftpPvcRef from earlier
-    const ftpVolForFtpServer = Volume.fromPersistentVolumeClaim(app, "ftp-vol-ftpserver", ftpPvc);
+    const ftpVolForFtpServer = Volume.fromPersistentVolumeClaim(
+      app,
+      "ftp-vol-ftpserver",
+      ftpPvc,
+    );
     ftpserver.Deployment.addVolume(ftpVolForFtpServer);
-    ftpserver.Deployment.containers[0].mount("/home/scanner", ftpVolForFtpServer);
+    ftpserver.Deployment.containers[0].mount(
+      "/home/scanner",
+      ftpVolForFtpServer,
+    );
 
     // paperless-ai: AI-powered companion for paperless-ngx
     new AppPlus(app, "paperless-ai", {

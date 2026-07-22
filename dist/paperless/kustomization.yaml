@@ -9,8 +9,10 @@ resources:
   - ExternalSecret.paperless-ai-secrets.yaml
   - ExternalSecret.paperless-db-creds.yaml
   - ExternalSecret.paperless-oidc.yaml
+  - ExternalSecret.paperless-secret-key.yaml
   - Ingress.paperless-ai.yaml
   - Ingress.paperless.yaml
+  - Password.paperless-secret-key-generator.yaml
   - PersistentVolumeClaim.data.yaml
   - PersistentVolumeClaim.ftp.yaml
   - PersistentVolumeClaim.paperless-ai-data.yaml

@@ -35,6 +35,8 @@ spec:
                 name: paperless-db-creds
             - secretRef:
                 name: paperless-oidc
+            - secretRef:
+                name: paperless-secret-key
           image: ghcr.io/paperless-ngx/paperless-ngx:latest
           imagePullPolicy: Always
           livenessProbe:
