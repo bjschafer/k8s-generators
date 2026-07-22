@@ -254,7 +254,7 @@ export const sources: CrdSource[] = [
       "repo alongside a hand-written upgrade-plan.yaml (which has no upstream source and stays manual). " +
       "Placeholder entry for the eventual migration.",
     // renovate: datasource=github-releases depName=rancher/system-upgrade-controller
-    version: { kind: "literal", value: "0.19.2" },
+    version: { kind: "literal", value: "0.20.1" },
     outputDir: "apps/system-upgrade/crds",
     crdOnly: false,
     filenameKind: true,
