@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
     app.kubernetes.io/version: v0.0.11
-    helm.sh/chart: victoria-metrics-k8s-stack-0.86.2
+    helm.sh/chart: victoria-metrics-k8s-stack-0.87.0
   name: metrics-victoria-metrics-k8s-stack-sync-job
   namespace: metrics
 spec:
@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: victoria-metrics-k8s-stack
         app.kubernetes.io/version: v0.0.11
-        helm.sh/chart: victoria-metrics-k8s-stack-0.86.2
+        helm.sh/chart: victoria-metrics-k8s-stack-0.87.0
     spec:
       containers:
         - env:
