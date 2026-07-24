@@ -1997,7 +1997,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Plain on/off states \u2014 1 means active. Unlike the locks these are informational rather than a warning: a connected plug or a moving car is not a fault condition.",
+        "description": "Plain on/off states \u2014 1 means active. Unlike the locks these are informational rather than a warning: a connected plug or a moving car is not a fault condition. Glass Surface Heating is deliberately excluded: it reads 1 for 100% of its history including while parked and while climatisation was idle, so it is a climatisation setting rather than a live state, and the integration documents no such sensor.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -2084,7 +2084,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sort_by_label(hass_binary_sensor_state{entity=~\"binary_sensor.e_tron_r_gt_(plug_state|is_moving|parking_light|glass_surface_heating)\"}, \"friendly_name\")",
+            "expr": "sort_by_label(hass_binary_sensor_state{entity=~\"binary_sensor.e_tron_r_gt_(plug_state|is_moving|parking_light)\"}, \"friendly_name\")",
             "legendFormat": "{{friendly_name}}",
             "range": true,
             "refId": "A"
