@@ -28,7 +28,13 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - envFrom:
+        - env:
+            - name: PAPERLESS_AI_LLM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: CUSTOM_API_KEY
+                  name: paperless-ai-secrets
+          envFrom:
             - configMapRef:
                 name: paperless-web-config
             - secretRef:

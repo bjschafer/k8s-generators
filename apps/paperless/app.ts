@@ -177,6 +177,14 @@ class Paperless extends Chart {
         PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true",
         PAPERLESS_DATA_DIR: "/data/data",
         PAPERLESS_MEDIA_ROOT: "/data/media",
+        // Reuses the same Cloudflare AI Gateway endpoint/model as the paperless-ai
+        // companion below -- built-in suggestions are opt-in per document, so this
+        // complements rather than replaces that automated tagging pipeline.
+        PAPERLESS_AI_ENABLED: "true",
+        PAPERLESS_AI_LLM_BACKEND: "openai-like",
+        PAPERLESS_AI_LLM_MODEL: "workers-ai/@cf/zai-org/glm-4.7-flash",
+        PAPERLESS_AI_LLM_ENDPOINT:
+          "https://gateway.ai.cloudflare.com/v1/5b51f634ca1cf16a0c47a4fcd00a5cf3/cmdcentral/compat",
       },
     });
 
@@ -266,6 +274,12 @@ class Paperless extends Chart {
         new EnvFrom(undefined, undefined, oidcSecret),
         new EnvFrom(undefined, undefined, paperlessSecretKey),
       ],
+      extraEnv: {
+        PAPERLESS_AI_LLM_API_KEY: EnvValue.fromSecretValue({
+          secret: paperlessAiSecrets.secret,
+          key: "CUSTOM_API_KEY",
+        }),
+      },
       enableServiceLinks: false,
       volumes: [
         {
