@@ -1799,7 +1799,8 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "thresholds"
+              "mode": "fixed",
+              "fixedColor": "text"
             },
             "custom": {
               "fillOpacity": 70,
@@ -1820,6 +1821,7 @@
                   "to": 0.5,
                   "result": {
                     "text": "Closed",
+                    "color": "green",
                     "index": 0
                   }
                 }
@@ -1831,6 +1833,7 @@
                   "to": 1.5,
                   "result": {
                     "text": "Open",
+                    "color": "orange",
                     "index": 1
                   }
                 }
@@ -1842,10 +1845,6 @@
                 {
                   "color": "green",
                   "value": 0
-                },
-                {
-                  "color": "orange",
-                  "value": 1
                 }
               ]
             }
@@ -1901,7 +1900,8 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "thresholds"
+              "mode": "fixed",
+              "fixedColor": "text"
             },
             "custom": {
               "fillOpacity": 70,
@@ -1922,6 +1922,7 @@
                   "to": 0.5,
                   "result": {
                     "text": "Locked",
+                    "color": "green",
                     "index": 0
                   }
                 }
@@ -1933,6 +1934,7 @@
                   "to": 1.5,
                   "result": {
                     "text": "Unlocked",
+                    "color": "orange",
                     "index": 1
                   }
                 }
@@ -1944,10 +1946,6 @@
                 {
                   "color": "green",
                   "value": 0
-                },
-                {
-                  "color": "orange",
-                  "value": 1
                 }
               ]
             }
@@ -2003,7 +2001,8 @@
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "thresholds"
+              "mode": "fixed",
+              "fixedColor": "text"
             },
             "custom": {
               "fillOpacity": 70,
@@ -2024,6 +2023,7 @@
                   "to": 0.5,
                   "result": {
                     "text": "Off",
+                    "color": "text",
                     "index": 0
                   }
                 }
@@ -2035,6 +2035,7 @@
                   "to": 1.5,
                   "result": {
                     "text": "On",
+                    "color": "blue",
                     "index": 1
                   }
                 }
@@ -2046,10 +2047,6 @@
                 {
                   "color": "green",
                   "value": 0
-                },
-                {
-                  "color": "blue",
-                  "value": 1
                 }
               ]
             }
