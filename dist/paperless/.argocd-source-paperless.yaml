@@ -1,8 +1,8 @@
 kustomize:
   images:
-  - ghcr.io/paperless-ngx/paperless-ngx:latest@sha256:087be9870c285b06fea34cfd6490c02eb3281052f6ff338ca6cd1f068ff3ff28
-  - stilliard/pure-ftpd:latest@sha256:41c9aaded1fd06053c500d28415613ca7605ecc39a3e1c2ec4f0a279bd78f253
-  - docker.io/apache/tika:latest@sha256:90b7fa1dc018434075fce9e1d9b88b1e3d0ea6979d0cf86e116c79a8073ae973
-  - gotenberg/gotenberg:8.34.0
-  - ghcr.io/valkey-io/valkey:8.1.9
-  - clusterzx/paperless-ai:latest@sha256:2b65888163fd59716f1c8285b31c5bd0b30c9c3c192c42b516688e3887d4ba60
+    - ghcr.io/paperless-ngx/paperless-ngx:latest@sha256:fef384c955d2ec2acf1bd0882ffc195ecc170266c803dfe28b79df6deabb3569
+    - stilliard/pure-ftpd:latest@sha256:41c9aaded1fd06053c500d28415613ca7605ecc39a3e1c2ec4f0a279bd78f253
+    - docker.io/apache/tika:latest@sha256:90b7fa1dc018434075fce9e1d9b88b1e3d0ea6979d0cf86e116c79a8073ae973
+    - gotenberg/gotenberg:8.34.0
+    - ghcr.io/valkey-io/valkey:8.1.9
+    - clusterzx/paperless-ai:latest@sha256:2b65888163fd59716f1c8285b31c5bd0b30c9c3c192c42b516688e3887d4ba60
