@@ -273,15 +273,24 @@
             },
             "mappings": [
               {
-                "type": "value",
+                "type": "range",
                 "options": {
-                  "0": {
-                    "index": 0,
-                    "text": "Unplugged"
-                  },
-                  "1": {
-                    "index": 1,
-                    "text": "Plugged in"
+                  "from": -0.5,
+                  "to": 0.5,
+                  "result": {
+                    "text": "Unplugged",
+                    "index": 0
+                  }
+                }
+              },
+              {
+                "type": "range",
+                "options": {
+                  "from": 0.5,
+                  "to": 1.5,
+                  "result": {
+                    "text": "Plugged in",
+                    "index": 1
                   }
                 }
               }
@@ -1805,15 +1814,24 @@
             },
             "mappings": [
               {
-                "type": "value",
+                "type": "range",
                 "options": {
-                  "0": {
-                    "index": 0,
-                    "text": "Closed"
-                  },
-                  "1": {
-                    "index": 1,
-                    "text": "Open"
+                  "from": -0.5,
+                  "to": 0.5,
+                  "result": {
+                    "text": "Closed",
+                    "index": 0
+                  }
+                }
+              },
+              {
+                "type": "range",
+                "options": {
+                  "from": 0.5,
+                  "to": 1.5,
+                  "result": {
+                    "text": "Open",
+                    "index": 1
                   }
                 }
               }
@@ -1898,15 +1916,24 @@
             },
             "mappings": [
               {
-                "type": "value",
+                "type": "range",
                 "options": {
-                  "0": {
-                    "index": 0,
-                    "text": "Locked"
-                  },
-                  "1": {
-                    "index": 1,
-                    "text": "Unlocked"
+                  "from": -0.5,
+                  "to": 0.5,
+                  "result": {
+                    "text": "Locked",
+                    "index": 0
+                  }
+                }
+              },
+              {
+                "type": "range",
+                "options": {
+                  "from": 0.5,
+                  "to": 1.5,
+                  "result": {
+                    "text": "Unlocked",
+                    "index": 1
                   }
                 }
               }
@@ -1991,15 +2018,24 @@
             },
             "mappings": [
               {
-                "type": "value",
+                "type": "range",
                 "options": {
-                  "0": {
-                    "index": 0,
-                    "text": "Off"
-                  },
-                  "1": {
-                    "index": 1,
-                    "text": "On"
+                  "from": -0.5,
+                  "to": 0.5,
+                  "result": {
+                    "text": "Off",
+                    "index": 0
+                  }
+                }
+              },
+              {
+                "type": "range",
+                "options": {
+                  "from": 0.5,
+                  "to": 1.5,
+                  "result": {
+                    "text": "On",
+                    "index": 1
                   }
                 }
               }
