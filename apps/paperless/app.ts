@@ -185,6 +185,11 @@ class Paperless extends Chart {
         PAPERLESS_AI_LLM_MODEL: "workers-ai/@cf/zai-org/glm-4.7-flash",
         PAPERLESS_AI_LLM_ENDPOINT:
           "https://gateway.ai.cloudflare.com/v1/5b51f634ca1cf16a0c47a4fcd00a5cf3/cmdcentral/compat",
+        // Embedding endpoint/key fall back to the LLM_ENDPOINT/LLM_API_KEY above,
+        // so RAG (document chat + similar-document suggestions) reuses the same
+        // Cloudflare AI Gateway credentials rather than needing its own.
+        PAPERLESS_AI_LLM_EMBEDDING_BACKEND: "openai-like",
+        PAPERLESS_AI_LLM_EMBEDDING_MODEL: "workers-ai/@cf/google/embeddinggemma-300m",
       },
     });
 

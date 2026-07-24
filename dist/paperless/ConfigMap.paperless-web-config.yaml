@@ -6,6 +6,8 @@ metadata:
 data:
   PAPERLESS_AI_ENABLED: "true"
   PAPERLESS_AI_LLM_BACKEND: openai-like
+  PAPERLESS_AI_LLM_EMBEDDING_BACKEND: openai-like
+  PAPERLESS_AI_LLM_EMBEDDING_MODEL: workers-ai/@cf/google/embeddinggemma-300m
   PAPERLESS_AI_LLM_ENDPOINT: https://gateway.ai.cloudflare.com/v1/5b51f634ca1cf16a0c47a4fcd00a5cf3/cmdcentral/compat
   PAPERLESS_AI_LLM_MODEL: workers-ai/@cf/zai-org/glm-4.7-flash
   PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
