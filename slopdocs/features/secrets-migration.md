@@ -74,9 +74,9 @@ open item is the gitlab-runner mount validation noted below.
 | cmdcentralbot/bot-token                 | (b) prod-only    | in bws, snippet below                               | —                    |
 | monica/app-secrets                      | (b) prod-only    | in bws, snippet below                               | —                    |
 | monica/mariadb-creds                    | (b) prod-only    | in bws, snippet below                               | —                    |
-| netbox/db-creds                         | (b) prod-only    | in bws, snippet below                               | —                    |
-| netbox/netbox                           | (b) prod-only    | in bws, snippet below                               | —                    |
-| netbox/oidc                             | (b) prod-only    | in bws, snippet below                               | —                    |
+| netbox/db-creds                         | (b) prod-only    | **cut over 2026-07-24, Ready, hash OK**             | LOW                  |
+| netbox/netbox                           | (b) prod-only    | **cut over 2026-07-24, Ready, hash OK**             | LOW                  |
+| netbox/oidc                             | (b) prod-only    | **cut over 2026-07-24, Ready, hash OK**             | LOW                  |
 | pfapi/db-creds                          | (b) prod-only    | in bws, snippet below                               | —                    |
 | argocd/argocd-secret                    | (c) hand-migrate | **investigated, not executed** (see below)          | —                    |
 | catbot/github-registry-cred             | (c) hand-migrate | **cut over by hand, Ready, hash OK**                | —                    |
@@ -118,6 +118,18 @@ dedicated note below — this one needed real remediation, not just a delete.
 No code exists in this repo for these yet. When each app migrates to generators,
 paste its snippet. UUIDs are the bws entry IDs (values live only in Bitwarden).
 
+**netbox is done** — migrated to generators on 2026-07-24 (generators `5dc78ffb`,
+prod `e85ab19b`). Its three snippets are now live in `apps/netbox/app.ts`, so they
+were dropped from the list below. All three ExternalSecrets went Ready with hashes
+byte-identical to the pre-cutover SealedSecret values. Note the netbox SealedSecrets
+weren't deleted by hand as the runbook above describes: the cutover pruned the whole
+`netbox` Namespace (the prod app rendered `ns.netbox.yaml`, generators doesn't), which
+took the SealedSecrets and their Secrets with it and let ESO create the replacements
+unopposed. That same prune also took the media PVC, which came back as an empty
+dynamically-provisioned volume; recovered by hand and pinned via `volumeName`
+(generators `0c59ae6b`). **Before migrating any remaining category (b) app that owns a
+PVC, set its PV to `reclaimPolicy: Retain` first.**
+
 ```typescript
 new BitwardenSecret(app, "gitlab-webhook", {
   name: "gitlab-webhook",
@@ -151,27 +163,6 @@ new BitwardenSecret(app, "mariadb-creds", {
   name: "mariadb-creds",
   namespace: "monica",
   data: { MARIADB_ROOT_PASSWORD: "d64591f7-dafd-4178-b36a-b47e01827c29" },
-});
-
-new BitwardenSecret(app, "db-creds", {
-  name: "db-creds",
-  namespace: "netbox",
-  data: { password: "421b33c5-ec6c-40ec-a488-b47e01827cbc" },
-});
-
-new BitwardenSecret(app, "netbox", {
-  name: "netbox",
-  namespace: "netbox",
-  data: { SECRET_KEY: "1131094d-5258-4d6f-bf9d-b47e01827d5c" },
-});
-
-new BitwardenSecret(app, "oidc", {
-  name: "oidc",
-  namespace: "netbox",
-  data: {
-    SOCIAL_AUTH_OIDC_KEY: "63035698-a60b-4ea0-915d-b47e01827df8",
-    SOCIAL_AUTH_OIDC_SECRET: "ce4cbbd8-3fa5-44da-bdef-b47e01827e30",
-  },
 });
 
 new BitwardenSecret(app, "db-creds", {
@@ -311,13 +302,17 @@ unblocks the new proxmox-exporter, which reuses the same Secret name. The live
 Secrets are GC'd by their ownerReferences on push. The untracked
 `secrets/recipes/plaintextsecret.yaml` mentioned here previously has been removed.
 
-**Note for next pass**: there are several more `plaintextsecret*` files sitting
-untracked (gitignored) on disk across the prod repo — e.g. under
-`secrets/atuin/`, `secrets/grafana/` (two), `secrets/media/`, `secrets/metrics/`
-(four), `secrets/miniflux/` (two). These weren't part of this cutover's scope
-(only the one under `secrets/recipes/` was called out), and weren't touched.
-Worth a manual pass to confirm they're all genuinely stale local artifacts and
-clean them up, same as the recipes one.
+**Note for next pass**: there are more `plaintextsecret*` files sitting untracked
+(gitignored) on disk across the prod repo. 22 remain as of 2026-07-24, under
+`argocd/`, `monica/`, `pfapi/`, and `secrets/{argocd,atuin,bookmarks,ceph,cert-manager,grafana,media,metrics,miniflux,postgres,rclone,todos}/`.
+These weren't part of this cutover's scope and weren't touched. Worth a manual pass
+to confirm they're all genuinely stale local artifacts and clean them up, same as
+the recipes one.
+
+netbox's two (`plaintextsecret.oidc.yaml`, `plaintextsecret.notasecret.authentik.py`)
+were deleted on 2026-07-24 along with the rest of `prod/netbox/`, after confirming
+the OIDC key and secret in them were byte-identical to what ESO now serves from
+Bitwarden. That's the check to repeat before deleting any of the others.
 
 ## Tooling
 
