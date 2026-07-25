@@ -17,11 +17,6 @@ export interface ValkeyProps {
   storageClass?: string;
   password?: string;
   noAuth?: boolean;
-  /**
-   * Appended to the valkey-server command line, e.g. to set `--maxmemory` and an
-   * eviction policy when one instance is shared by a cache and a task queue.
-   */
-  extraArgs?: string[];
 }
 
 export class Valkey extends Chart {
@@ -113,14 +108,9 @@ export class Valkey extends Chart {
                 image: `ghcr.io/valkey-io/valkey:${props.version}`,
                 imagePullPolicy: "IfNotPresent",
                 command: ["valkey-server"],
-                args: [
-                  ...(props.noAuth ? [] : ["--requirepass", "$(VALKEY_PASSWORD)"]),
-                  "--appendonly",
-                  "yes",
-                  "--save",
-                  "",
-                  ...(props.extraArgs ?? []),
-                ],
+                args: props.noAuth
+                  ? ["--appendonly", "yes", "--save", ""]
+                  : ["--requirepass", "$(VALKEY_PASSWORD)", "--appendonly", "yes", "--save", ""],
                 env: props.noAuth
                   ? []
                   : [

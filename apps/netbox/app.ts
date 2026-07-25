@@ -76,15 +76,15 @@ const oidcSecret = new BitwardenSecret(app, "oidc", {
 });
 
 // One valkey serves both roles netbox needs: the RQ task queue (database 0) and the
-// django cache (database 1). Cache entries carry a TTL and queue keys don't, so
-// volatile-lru evicts only cache entries if the instance fills up -- background jobs
-// are never dropped to make room for cached pages.
+// django cache (database 1). No --maxmemory/eviction policy: netbox's cache entries
+// are written without a TTL, so there's nothing an eviction policy is allowed to
+// reclaim without also dropping queued jobs. The container limit is the bound, as it
+// was when these were two separate instances.
 const valkey = new Valkey(app, "valkey", {
   name: name,
   namespace: namespace,
   version: "7-alpine",
   password: "netbox",
-  extraArgs: ["--maxmemory", "200mb", "--maxmemory-policy", "volatile-lru"],
   resources: {
     requests: {
       cpu: Quantity.fromString("50m"),
