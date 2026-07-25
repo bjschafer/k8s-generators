@@ -65,11 +65,15 @@ export interface AppPlusProps {
   readonly disableProbes?: boolean;
   readonly livenessProbe?: Probe;
   readonly readinessProbe?: Probe;
+  // for slow-starting apps (e.g. ones that run db migrations on boot), gates the
+  // liveness/readiness probes until the container comes up.
+  readonly startupProbe?: Probe;
   readonly serviceAccountName?: string;
   readonly automountServiceAccount?: boolean;
   readonly extraIngressHosts?: string[];
   readonly disableIngress?: boolean;
   readonly limitToAMD64?: boolean;
+  readonly command?: string[];
   readonly args?: string[];
   readonly monitoringConfig?: {
     readonly port: number;
@@ -173,6 +177,7 @@ export class AppPlus extends Chart {
         {
           name: props.name,
           securityContext: props.containerSecurityContext ?? DEFAULT_SECURITY_CONTEXT,
+          command: props.command,
           args: props.args,
           image: props.image,
           ports: ports,
@@ -187,6 +192,7 @@ export class AppPlus extends Chart {
             ? undefined
             : (props.livenessProbe ??
               (ports[0] ? Probe.fromTcpSocket({ port: ports[0].number }) : undefined)),
+          startup: props.disableProbes ? undefined : props.startupProbe,
         },
       ],
     });
@@ -206,10 +212,18 @@ export class AppPlus extends Chart {
     }
 
     if (props.configmapMounts) {
+      // A single ConfigMap can be mounted at several paths (e.g. two subPath mounts
+      // pulling different keys out of the same map), so create one volume per
+      // ConfigMap and mount it repeatedly. Volume options come from the first entry.
+      const cmVolumes = new Map<string, Volume>();
       for (const vol of props.configmapMounts) {
-        const cm = ConfigMap.fromConfigMapName(this, `${id}-${vol.name}-cm`, vol.name);
-        const deployVol = Volume.fromConfigMap(this, `${id}-${vol.name}-vol`, cm, vol.options);
-        deploy.addVolume(deployVol);
+        let deployVol = cmVolumes.get(vol.name);
+        if (!deployVol) {
+          const cm = ConfigMap.fromConfigMapName(this, `${id}-${vol.name}-cm`, vol.name);
+          deployVol = Volume.fromConfigMap(this, `${id}-${vol.name}-vol`, cm, vol.options);
+          cmVolumes.set(vol.name, deployVol);
+          deploy.addVolume(deployVol);
+        }
         deploy.containers[0].mount(vol.mountPath, deployVol, {
           subPath: vol.subPath,
         });

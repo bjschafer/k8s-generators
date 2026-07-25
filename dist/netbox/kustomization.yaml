@@ -1,0 +1,15 @@
+resources:
+  - ConfigMap.authentik.yaml
+  - ConfigMap.netbox.yaml
+  - Deployment.netbox-worker.yaml
+  - Deployment.netbox.yaml
+  - ExternalSecret.db-creds.yaml
+  - ExternalSecret.netbox.yaml
+  - ExternalSecret.oidc.yaml
+  - Ingress.netbox.yaml
+  - PersistentVolumeClaim.data.yaml
+  - Secret.netbox-valkey.yaml
+  - Service.netbox-valkey-master.yaml
+  - Service.netbox.yaml
+  - StatefulSet.netbox-valkey-master.yaml
+  - VMServiceScrape.netbox.yaml

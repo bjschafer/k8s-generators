@@ -1,0 +1,110 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/component: master
+    app.kubernetes.io/instance: netbox
+    app.kubernetes.io/name: valkey
+  name: netbox-valkey-master
+  namespace: netbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: master
+      app.kubernetes.io/instance: netbox
+      app.kubernetes.io/name: valkey
+  serviceName: netbox-valkey-headless
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: master
+        app.kubernetes.io/instance: netbox
+        app.kubernetes.io/name: valkey
+        velero.io/exclude-from-backup: "true"
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/component: master
+                    app.kubernetes.io/instance: netbox
+                    app.kubernetes.io/name: valkey
+                namespaces:
+                  - netbox
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      containers:
+        - args:
+            - --requirepass
+            - $(VALKEY_PASSWORD)
+            - --appendonly
+            - "yes"
+            - --save
+            - ""
+            - --maxmemory
+            - 200mb
+            - --maxmemory-policy
+            - volatile-lru
+          command:
+            - valkey-server
+          env:
+            - name: VALKEY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: valkey-password
+                  name: netbox-valkey
+          image: ghcr.io/valkey-io/valkey:7-alpine
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - valkey-cli
+                - --no-auth-warning
+                - -a
+                - $(VALKEY_PASSWORD)
+                - ping
+            failureThreshold: 5
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 6
+          name: valkey
+          ports:
+            - containerPort: 6379
+              name: valkey
+          readinessProbe:
+            exec:
+              command:
+                - valkey-cli
+                - --no-auth-warning
+                - -a
+                - $(VALKEY_PASSWORD)
+                - ping
+            failureThreshold: 5
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          securityContext:
+            runAsUser: 999
+          volumeMounts:
+            - mountPath: /data
+              name: valkey-data
+      securityContext:
+        fsGroup: 999
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - emptyDir: {}
+          name: valkey-data
+  updateStrategy:
+    rollingUpdate: {}
+    type: RollingUpdate

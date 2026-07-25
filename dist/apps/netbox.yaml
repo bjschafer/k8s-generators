@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app.kubernetes.io/name: netbox
+  name: netbox
+  namespace: argocd
+spec:
+  destination:
+    namespace: netbox
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/netbox
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: netbox
+  name: netbox-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: netbox
+          commonUpdateSettings:
+            allowTags: regexp:^v[0-9]+\.[0-9]+\.[0-9]+$
+            updateStrategy: semver
+          imageName: netboxcommunity/netbox:v4.x.x
+        - alias: valkey
+          commonUpdateSettings:
+            allowTags: regexp:^[v]?[0-9]+\.[0-9]+\.[0-9]+$
+            updateStrategy: semver
+          imageName: ghcr.io/valkey-io/valkey:7-alpine
+      namePattern: netbox
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git

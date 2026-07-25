@@ -1,0 +1,15 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: netbox
+  namespace: netbox
+spec:
+  endpoints:
+    - port: http
+  namespaceSelector:
+    matchNames:
+      - netbox
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: app
+      app.kubernetes.io/name: netbox

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: app
+    app.kubernetes.io/name: netbox
+  name: netbox
+  namespace: netbox
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    cdk8s.io/metadata.addr: netbox-app-netbox-app-deployment-c8d563b8
+  type: ClusterIP

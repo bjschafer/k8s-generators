@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: netbox
+  namespace: netbox
+data:
+  DB_HOST: prod.postgres.svc.cluster.local
+  DB_NAME: netbox
+  DB_PORT: "5432"
+  DB_USER: netbox
+  EMAIL_FROM: netbox@cmdcentral.xyz
+  LOGIN_PERSISTENCE: "true"
+  LOGOUT_REDIRECT_URL: https://login.cmdcentral.xyz/application/o/netbox/end-session/
+  METRICS_ENABLED: "true"
+  REDIS_CACHE_DATABASE: "1"
+  REDIS_DATABASE: "0"
+  REDIS_HOST: netbox-valkey-master
+  REDIS_PORT: "6379"
+  REDIS_SSL: "false"
+  REMOTE_AUTH_AUTO_CREATE_USER: "true"
+  REMOTE_AUTH_BACKEND: social_core.backends.open_id_connect.OpenIdConnectAuth
+  REMOTE_AUTH_ENABLED: "true"
+  SOCIAL_AUTH_OIDC_OIDC_ENDPOINT: https://login.cmdcentral.xyz/application/o/netbox/
+  SOCIAL_AUTH_OIDC_SCOPE: '["openid", "profile", "email", "roles"]'
+immutable: false
