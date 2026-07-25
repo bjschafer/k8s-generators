@@ -14,3 +14,4 @@ spec:
       storage: 5Gi
   storageClassName: cephfs
   volumeMode: Filesystem
+  volumeName: pvc-ee0b6284-d5ba-4d57-8464-fdedfccb61b9

@@ -112,6 +112,8 @@ export class AppPlus extends Chart {
           storage: vol.props.storage ?? Size.gibibytes(5),
           storageClassName: vol.props.storageClassName ?? StorageClass.CEPH_RBD,
           volumeMode: vol.props.volumeMode ?? PersistentVolumeMode.FILE_SYSTEM,
+          // pins the claim to an existing PV instead of provisioning a new one
+          volume: vol.props.volume,
         });
         const v = Volume.fromPersistentVolumeClaim(this, `${id}-${vol.mountPath}-vol`, pvc);
         volumes.push(v);

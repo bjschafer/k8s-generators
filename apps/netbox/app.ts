@@ -4,6 +4,7 @@ import {
   Cpu,
   EnvFrom,
   EnvValue,
+  PersistentVolume,
   PersistentVolumeAccessMode,
   Probe,
 } from "cdk8s-plus-34";
@@ -216,6 +217,14 @@ new AppPlus(app, `${name}-app`, {
         storage: Size.gibibytes(5),
         storageClassName: StorageClass.CEPHFS,
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
+        // Pinned to the volume that has held netbox's uploaded media since 2022.
+        // Without this the claim is satisfied by dynamic provisioning, so anything
+        // that recreates it (a namespace prune, say) silently comes back empty.
+        volume: PersistentVolume.fromPersistentVolumeName(
+          app,
+          "netbox-media-pv",
+          "pvc-ee0b6284-d5ba-4d57-8464-fdedfccb61b9",
+        ),
       },
     },
   ],
