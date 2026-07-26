@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: home-assistant
+  name: home-assistant
+  namespace: hass
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: home-assistant-app-home-assistant-app-deployment-c8e0db23
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: home-assistant
+        cdk8s.io/metadata.addr: home-assistant-app-home-assistant-app-deployment-c8e0db23
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+          image: ghcr.io/home-assistant/home-assistant
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8123
+          name: home-assistant
+          ports:
+            - containerPort: 8123
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8123
+          resources:
+            limits:
+              memory: 2048Mi
+            requests:
+              cpu: 100m
+              memory: 1024Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 30
+            periodSeconds: 5
+            tcpSocket:
+              port: 8123
+          volumeMounts:
+            - mountPath: /config
+              name: pvc-config
+      dnsConfig:
+        nameservers:
+          - 10.0.10.100
+          - 10.0.10.101
+        searches:
+          - cmdcentral.xyz
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-config
+          persistentVolumeClaim:
+            claimName: config
+            readOnly: false

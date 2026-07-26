@@ -1,0 +1,4 @@
+kustomize:
+  images:
+  - ghcr.io/home-assistant/home-assistant:2026.7.4
+  - causticlab/hass-configurator-docker:latest@sha256:06f064f1b4a5b17d8095e8565ae334267c4af9c6eaae19b4da536959ea6498b8

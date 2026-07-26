@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configurator
+  namespace: hass
+data:
+  HC_API_PASSWORD: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIwZTM0MjhjYmY2NmI0NmU4YTUxZWM2OTliMjNiMjVmZiIsImlhdCI6MTY1NzQ3NTM4NSwiZXhwIjoxOTcyODM1Mzg1fQ.-qiqwSkbM20TpzEkY621jQlo8azafujO8YHsHs2WJTE
+  HC_HASS_API: http://home-assistant:8123/api
+  HC_PASSWORD: "{sha256}8ce1228d8b2140c4d1779944e5e122235eae15de96b1424c74aa825cb23e79cb"
+  HC_USERNAME: bschafer
+immutable: false

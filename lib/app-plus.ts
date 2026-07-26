@@ -115,6 +115,9 @@ export interface AppPlusProps {
   readonly backendHTTPS?: boolean;
   readonly service?: ServiceProps;
   readonly dns?: PodDnsProps;
+  // puts the pod on the node's network namespace. For workloads that need to
+  // see broadcast/multicast traffic on the LAN, e.g. device discovery.
+  readonly hostNetwork?: boolean;
   readonly deploymentStrategy?: DeploymentStrategy;
   readonly enableServiceLinks?: boolean;
   readonly disableService?: boolean;
@@ -209,6 +212,7 @@ export class AppPlus extends Chart {
       dockerRegistryAuth: props.dockerRegistryAuth,
       enableServiceLinks: props.enableServiceLinks,
       dns: props.dns,
+      hostNetwork: props.hostNetwork,
       containers: [
         {
           name: props.name,

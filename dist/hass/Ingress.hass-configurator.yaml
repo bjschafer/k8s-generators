@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: hass-configurator
+  namespace: hass
+spec:
+  rules:
+    - host: hass.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: hass-configurator
+                port:
+                  number: 3218
+            path: /configurator
+            pathType: Prefix
+  tls:
+    - hosts:
+        - hass.cmdcentral.xyz
+      secretName: hass-tls

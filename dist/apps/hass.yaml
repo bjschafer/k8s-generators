@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app.kubernetes.io/name: hass
+  name: hass
+  namespace: argocd
+spec:
+  destination:
+    namespace: hass
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/hass
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: hass
+  name: hass-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: home-assistant
+          commonUpdateSettings:
+            allowTags: regexp:^[0-9]{4}\.[0-9]{1,2}\.[0-9]*$
+            updateStrategy: name
+          imageName: ghcr.io/home-assistant/home-assistant:latest
+        - alias: hass-configurator-docker
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: causticlab/hass-configurator-docker:latest
+      namePattern: hass
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git
