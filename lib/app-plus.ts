@@ -45,6 +45,14 @@ export interface ConfigMapVolume {
   readonly options?: ConfigMapVolumeOptions;
 }
 
+export interface AppPlusIngressHost {
+  readonly host: string;
+  // @default the app's first port
+  readonly port?: number;
+  // @default "/"
+  readonly path?: string;
+}
+
 export interface ServiceProps {
   readonly type?: ServiceType;
   annotations?: { [p: string]: string };
@@ -73,10 +81,18 @@ export interface AppPlusProps {
   readonly automountServiceAccount?: boolean;
   // pull secret for images in a private registry
   readonly dockerRegistryAuth?: ISecret;
+  // hostnames served in addition to the default `<name>.cmdcentral.xyz`, all
+  // routed to the app's first port at "/".
   readonly extraIngressHosts?: string[];
+  // full control over the ingress rules, *replacing* the default host rather
+  // than adding to it. For apps served under an unrelated name, or ones
+  // fanning hostnames out across several ports.
+  readonly ingressHosts?: AppPlusIngressHost[];
   // labels applied to the Ingress only, on top of `labels`. For markers that
   // describe the route rather than the workload, e.g. cmdcentral.xyz/external.
   readonly ingressLabels?: { [p: string]: string };
+  // @default `<name>-tls`
+  readonly tlsSecretName?: string;
   readonly disableIngress?: boolean;
   readonly limitToAMD64?: boolean;
   readonly command?: string[];
@@ -283,18 +299,24 @@ export class AppPlus extends Chart {
         },
       });
 
-      const ingressHosts = [`${props.name}.cmdcentral.xyz`];
-      if (props.extraIngressHosts) {
-        ingressHosts.push(...props.extraIngressHosts);
+      const rules: AppPlusIngressHost[] = props.ingressHosts ?? [
+        { host: `${props.name}.cmdcentral.xyz` },
+        ...(props.extraIngressHosts ?? []).map((host) => ({ host })),
+      ];
+
+      for (const rule of rules) {
+        ingress.addHostRule(
+          rule.host,
+          rule.path ?? "/",
+          IngressBackend.fromService(svc, { port: rule.port ?? ports[0]?.number }),
+        );
       }
 
-      for (const host of ingressHosts) {
-        ingress.addHostRule(host, "/", IngressBackend.fromService(svc, { port: ports[0]?.number }));
-      }
+      const tlsSecretName = props.tlsSecretName ?? `${props.name}-tls`;
       ingress.addTls([
         {
-          hosts: ingressHosts,
-          secret: Secret.fromSecretName(this, `${props.name}-tls`, `${props.name}-tls`),
+          hosts: rules.map((rule) => rule.host),
+          secret: Secret.fromSecretName(this, `${props.name}-tls`, tlsSecretName),
         },
       ]);
 

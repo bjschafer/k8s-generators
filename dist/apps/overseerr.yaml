@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app.kubernetes.io/name: overseerr
+  name: overseerr
+  namespace: argocd
+spec:
+  destination:
+    namespace: overseerr
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dist/overseerr
+    repoURL: git@github.com:bjschafer/k8s-generators.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  labels:
+    app.kubernetes.io/name: overseerr
+  name: overseerr-updater
+  namespace: argocd
+spec:
+  applicationRefs:
+    - images:
+        - alias: seerr
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/seerr-team/seerr:latest
+      namePattern: overseerr
+  writeBackConfig:
+    gitConfig:
+      branch: main
+    method: git
