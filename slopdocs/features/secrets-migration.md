@@ -70,14 +70,14 @@ open item is the gitlab-runner mount validation noted below.
 | pfwiki/db-creds                         | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
 | spoolman/spoolman-creds                 | (a) generators   | **cut over, Ready, hash OK**                        | LOW                  |
 | argocd/gitlab-webhook                   | (b) prod-only    | in bws, snippet below                               | —                    |
-| catbot/bot-token                        | (b) prod-only    | in bws, snippet below                               | —                    |
-| cmdcentralbot/bot-token                 | (b) prod-only    | in bws, snippet below                               | —                    |
+| catbot/bot-token                        | (b) prod-only    | **cut over 2026-07-26, Ready, hash OK**             | LOW                  |
+| cmdcentralbot/bot-token                 | (b) prod-only    | **cut over 2026-07-26, Ready, hash OK**             | LOW                  |
 | monica/app-secrets                      | (b) prod-only    | in bws, snippet below                               | —                    |
 | monica/mariadb-creds                    | (b) prod-only    | in bws, snippet below                               | —                    |
 | netbox/db-creds                         | (b) prod-only    | **cut over 2026-07-24, Ready, hash OK**             | LOW                  |
 | netbox/netbox                           | (b) prod-only    | **cut over 2026-07-24, Ready, hash OK**             | LOW                  |
 | netbox/oidc                             | (b) prod-only    | **cut over 2026-07-24, Ready, hash OK**             | LOW                  |
-| pfapi/db-creds                          | (b) prod-only    | in bws, snippet below                               | —                    |
+| pfapi/db-creds                          | (b) prod-only    | **cut over 2026-07-26, Ready, hash OK**             | LOW                  |
 | argocd/argocd-secret                    | (c) hand-migrate | **investigated, not executed** (see below)          | —                    |
 | catbot/github-registry-cred             | (c) hand-migrate | **cut over by hand, Ready, hash OK**                | —                    |
 | cmdcentralbot/github-registry-cred      | (c) hand-migrate | **cut over by hand, Ready, hash OK**                | —                    |
@@ -130,23 +130,34 @@ dynamically-provisioned volume; recovered by hand and pinned via `volumeName`
 (generators `0c59ae6b`). **Before migrating any remaining category (b) app that owns a
 PVC, set its PV to `reclaimPolicy: Retain` first.**
 
+**catbot, cmdcentralbot and pfapi are done** — migrated 2026-07-26, snippets now live
+in their `apps/*/app.ts` (catbot/cmdcentralbot via `lib/bot.ts`) and dropped from the
+list below. All hashes byte-identical to the pre-cutover SealedSecret values.
+
+The namespace prune the netbox note warns about did **not** recur, because the cutover
+order changed. Removing the app from prod's app-of-apps only deletes the `Application`
+— no Argo `Application` here carries a cascade finalizer, so its resources are merely
+orphaned, and the workload keeps running. The Namespace is then lost at the *next*
+step: the new generators-side app adopts it via the leftover
+`argocd.argoproj.io/tracking-id` annotation, doesn't declare it, and prunes it. So the
+sequence is: remove from prod → wait for the `Application` to disappear →
+`kubectl annotate ns <ns> argocd.argoproj.io/tracking-id-` → push the generators app.
+Nothing owns the namespace during that window, so there's no controller to fight.
+
+Two other things that recur on every one of these:
+
+- The orphaned SealedSecret **is** adopted and pruned by the new app (it keeps its
+  tracking-id and isn't in the new source), which is exactly what's wanted — that's
+  what frees ESO to create the replacement. No manual delete needed.
+- Deployments always fail their first apply with `spec.selector: field is immutable`,
+  because AppPlus selects on `cdk8s.io/metadata.addr` and the hand-written manifests
+  didn't. Delete the Deployment and let Argo recreate it; brief downtime, no data loss.
+
 ```typescript
 new BitwardenSecret(app, "gitlab-webhook", {
   name: "gitlab-webhook",
   namespace: "argocd",
   data: { GITLAB_WEBHOOK_SECRET: "71c6bae5-37c9-4455-afa9-b47e0182795b" },
-});
-
-new BitwardenSecret(app, "bot-token", {
-  name: "bot-token",
-  namespace: "catbot",
-  data: { BOT_TOKEN: "90a18b3e-cf95-4d62-b8dc-b47e018279de" },
-});
-
-new BitwardenSecret(app, "bot-token", {
-  name: "bot-token",
-  namespace: "cmdcentralbot",
-  data: { BOT_TOKEN: "206f1cf4-94b9-4b68-96a0-b47e01827a95" },
 });
 
 new BitwardenSecret(app, "app-secrets", {
@@ -164,20 +175,12 @@ new BitwardenSecret(app, "mariadb-creds", {
   namespace: "monica",
   data: { MARIADB_ROOT_PASSWORD: "d64591f7-dafd-4178-b36a-b47e01827c29" },
 });
-
-new BitwardenSecret(app, "db-creds", {
-  name: "db-creds",
-  namespace: "pfapi",
-  data: {
-    Database_Database: "302c4529-0e67-488a-acce-b47e01827ec2",
-    Database_Host: "98b5df13-e42f-4a38-8b12-b47e01827f0b",
-    Database_Password: "cd9acc1c-c087-44b0-9875-b47e01827f38",
-    Database_Port: "2e96ce16-64f9-46ef-9848-b47e01827f64",
-    Database_Type: "0f88cf46-0ab3-4096-a9ac-b47e01827fb0",
-    Database_Username: "b4ce08bd-6169-4a12-ae62-b47e0182b531",
-  },
-});
 ```
+
+Both monica entries are for an app that no longer runs — the namespace is gone
+(removed in prod `ce873c68`), though its database PV
+(`pvc-b890de7d-f636-4655-b5fc-e826dfc1f049`, 25Gi, `Released`, `Retain`) still
+exists. Kept in case it's ever restored.
 
 ## Special / Bootstrap Cases
 
