@@ -94,6 +94,9 @@ spec:
         - effect: NoExecute
           key: node-role.kubernetes.io/etcd
           operator: Exists
+        - key: k3s-controlplane
+          effect: NoExecute
+          operator: Exists
       volumes:
         - hostPath:
             path: /etc/ssl

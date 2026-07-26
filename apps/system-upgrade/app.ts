@@ -1,4 +1,4 @@
-import { App, Chart } from "cdk8s";
+import { App, Chart, JsonPatch } from "cdk8s";
 import { Construct } from "constructs";
 import { join } from "path";
 import { basename } from "../../lib/util";
@@ -38,7 +38,26 @@ class SystemUpgrade extends Chart {
 
     // Upstream's controller bundle + the Plan CRD, vendored by
     // `mise run update-crds system-upgrade-controller`.
-    AddCRDs(this, join(__dirname, "crds"));
+    const included = AddCRDs(this, join(__dirname, "crds"));
+
+    // Upstream pins the controller to a control-plane node but only tolerates
+    // the standard control-plane taints. Ours are tainted k3s-controlplane
+    // instead, so out of the box the pod is unschedulable everywhere: the
+    // control plane rejects it on the taint and the workers fail the affinity.
+    // Patched here rather than in the vendored file, which update-crds rewrites.
+    const controller = included
+      .flatMap((include) => include.apiObjects)
+      .find((obj) => obj.kind === "Deployment" && obj.name === "system-upgrade-controller");
+    if (!controller) {
+      throw new Error("system-upgrade-controller Deployment not found in vendored manifests");
+    }
+    controller.addJsonPatch(
+      JsonPatch.add("/spec/template/spec/tolerations/-", {
+        key: "k3s-controlplane",
+        effect: "NoExecute",
+        operator: "Exists",
+      }),
+    );
 
     // Control plane first. Agents refuse to move ahead of it -- see the
     // prepare step on the agent plan below.
