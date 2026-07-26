@@ -1,0 +1,8 @@
+resources:
+  - ClusterRole.kured.yaml
+  - ClusterRoleBinding.kured.yaml
+  - DaemonSet.kured.yaml
+  - Role.kured.yaml
+  - RoleBinding.kured.yaml
+  - ServiceAccount.kured.yaml
+  - VMPodScrape.kured.yaml

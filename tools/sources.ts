@@ -213,15 +213,15 @@ export const sources: CrdSource[] = [
   {
     name: "kured",
     description:
-      "kured DaemonSet + RBAC, a single vendored manifest today in the legacy prod/kured repo. Placeholder " +
-      "entry ready for when kured migrates here; URL pattern verified against the latest upstream " +
-      "release but not yet exercised end-to-end against a real apps/kured chart.",
+      "kured DaemonSet + RBAC, the whole combined release manifest rather than just CRDs (it has none). " +
+      "Deployed by apps/kured, which Includes these verbatim -- we run upstream's defaults, so there " +
+      "is nothing to override. Any config would be command-line flags on the DaemonSet, and belongs " +
+      "in a patch in app.ts rather than an edit to the vendored file.",
     // renovate: datasource=github-releases depName=kubereboot/kured
     version: { kind: "literal", value: "1.23.0" },
     outputDir: "apps/kured/crds",
     crdOnly: false,
     filenameKind: true,
-    enabled: false,
     fetch: {
       kind: "web",
       urls: (version) => [

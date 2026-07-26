@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kured
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: kured
+  template:
+    metadata:
+      labels:
+        name: kured
+    spec:
+      containers:
+        - command:
+            - /usr/bin/kured
+            - --reboot-sentinel=/sentinel/reboot-required
+          env:
+            - name: KURED_NODE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          image: ghcr.io/kubereboot/kured:1.23.0
+          imagePullPolicy: IfNotPresent
+          name: kured
+          ports:
+            - containerPort: 8080
+              name: metrics
+          securityContext:
+            privileged: true
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /sentinel
+              name: sentinel
+              readOnly: true
+      hostPID: true
+      restartPolicy: Always
+      serviceAccountName: kured
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+      volumes:
+        - hostPath:
+            path: /var/run
+            type: Directory
+          name: sentinel
+  updateStrategy:
+    type: RollingUpdate

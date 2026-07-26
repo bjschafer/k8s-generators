@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: kured
+  namespace: kube-system
+rules:
+  - apiGroups:
+      - apps
+    resourceNames:
+      - kured
+    resources:
+      - daemonsets
+    verbs:
+      - update
