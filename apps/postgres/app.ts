@@ -292,6 +292,21 @@ class VectorPostgres extends Chart {
     super(scope, id);
 
     const imageBase = "ghcr.io/tensorchord/cloudnative-vectorchord";
+    // Tags are `<pgMajor>.<pgMinor>-<vectorchordVersion>`, and the repository
+    // publishes every Postgres major side by side -- 18.3-1.1.0 sits right
+    // next to 17.10-1.1.1. So each entry is pinned to its own const with a
+    // depName scoped to one major line, and renovate.json caps each with
+    // `allowedVersions`. Without that ceiling Renovate would read these as
+    // ordinary versions and happily offer 18.x here, which is not an image
+    // bump but an in-place Postgres major upgrade of a live database.
+    // Those rules also switch automerge off: everything else in this repo
+    // automerges minor/patch on green, and a Postgres image is not something
+    // to let through unread.
+    // renovate: datasource=docker depName=vectorchord-pg16 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
+    const vectorchordPg16 = "16.14-1.1.1";
+    // renovate: datasource=docker depName=vectorchord-pg17 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
+    const vectorchordPg17 = "17.10-1.1.1";
+
     const catalog = new ImageCatalog(this, "catalog", {
       metadata: {
         namespace: namespace,
@@ -300,11 +315,14 @@ class VectorPostgres extends Chart {
       spec: {
         images: [
           {
-            image: `${imageBase}:16.14-1.1.1`,
+            // Nothing selects major 16 today -- immich-pg16 kept its name
+            // through a major upgrade and now resolves major 17. Kept so the
+            // catalog can still satisfy a 16 cluster, but it is unexercised.
+            image: `${imageBase}:${vectorchordPg16}`,
             major: 16,
           },
           {
-            image: `${imageBase}:17.10-1.1.1`,
+            image: `${imageBase}:${vectorchordPg17}`,
             major: 17,
           },
         ],

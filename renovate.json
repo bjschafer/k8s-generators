@@ -18,6 +18,20 @@
       "automerge": true
     },
     {
+      "description": "The vectorchord ImageCatalog entries in apps/postgres/app.ts are Postgres images for a live database, and the repository publishes every major side by side (18.3-1.1.0 sits next to 17.10-1.1.1). Cap each entry to its own major line: without this Renovate reads the tag as an ordinary version and offers 18.x for the major-17 entry, which CNPG would treat as an in-place major upgrade rather than an image bump. The `loose` versioning these carry compares the tag as a plain number sequence, so within a line 17.10-1.1.1 -> 17.11-1.1.0 still resolves correctly.",
+      "matchDepNames": ["vectorchord-pg16"],
+      "allowedVersions": "/^16\\./"
+    },
+    {
+      "matchDepNames": ["vectorchord-pg17"],
+      "allowedVersions": "/^17\\./"
+    },
+    {
+      "description": "Opt the Postgres images back out of the blanket custom.regex automerge above. A chart bump that breaks renders red in CI; a bad Postgres image passes CI and then rolls a database. These get read by a human.",
+      "matchDepNames": ["vectorchord-pg16", "vectorchord-pg17"],
+      "automerge": false
+    },
+    {
       "description": "The velero CLI renders its own CRDs, so mise.toml's pin and tools/sources.ts' pin must match -- sources.ts hard-fails the render otherwise. Renovate sees them through two managers (mise, custom.regex) under two depNames, which would mean two PRs that each fail CI alone and can only go green once both land. Group them so they always move as one. Deliberately not scoped to minor/patch: a major has to stay grouped too.",
       "matchDepNames": ["velero", "vmware-tanzu/velero"],
       "groupName": "velero"
@@ -43,8 +57,8 @@
       "description": "Bump chart/release versions pinned in any apps/*/app.ts, annotated the same way as the literal versions in tools/sources.ts. Two shapes are matched: a top-level `const <name> = \"...\"` (the common case, and what tools/sources.ts reads back via VersionSource kind 'app-const'), and an inline `version: \"...\"` inside a HelmApp call for the charts that never needed a named const. `registryUrl` is optional and only carried by the `datasource=helm` entries -- the helm datasource has no default registry to fall back on, so a chart without it resolves to nothing and is silently skipped.",
       "managerFilePatterns": ["/^apps/[^/]+/app\\.ts$/"],
       "matchStrings": [
-        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*(?:export )?const \\w+ = \"(?<currentValue>[^\"]+)\";",
-        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*version: \"(?<currentValue>[^\"]+)\","
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*(?:export )?const \\w+ = \"(?<currentValue>[^\"]+)\";",
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*version: \"(?<currentValue>[^\"]+)\","
       ]
     }
   ]
