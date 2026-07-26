@@ -1,9 +1,5 @@
 resources:
-  - ConfigMap.configurator.yaml
-  - Deployment.hass-configurator.yaml
   - Deployment.home-assistant.yaml
-  - Ingress.hass-configurator.yaml
   - Ingress.home-assistant.yaml
   - PersistentVolumeClaim.config.yaml
-  - Service.hass-configurator.yaml
   - Service.home-assistant.yaml

@@ -36,10 +36,6 @@ spec:
             allowTags: regexp:^[0-9]{4}\.[0-9]{1,2}\.[0-9]*$
             updateStrategy: name
           imageName: ghcr.io/home-assistant/home-assistant:latest
-        - alias: hass-configurator-docker
-          commonUpdateSettings:
-            updateStrategy: digest
-          imageName: causticlab/hass-configurator-docker:latest
       namePattern: hass
   writeBackConfig:
     gitConfig:
