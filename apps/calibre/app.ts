@@ -8,6 +8,7 @@ import { NFSVolumeContainer } from "../../lib/nfs";
 import { StorageClass } from "../../lib/volume";
 import {
   Cpu,
+  EmptyDirMedium,
   EnvValue,
   PersistentVolume,
   PersistentVolumeAccessMode,
@@ -61,7 +62,10 @@ new AppPlus(app, `${name}-app`, {
     },
     memory: {
       request: Size.gibibytes(1),
-      limit: Size.gibibytes(2),
+      // /dev/shm below is a Memory-medium emptyDir, and tmpfs pages count
+      // against this limit. 2Gi would have left the desktop sharing its
+      // headroom with a 1Gi shm, so the limit carries that ceiling on top.
+      limit: Size.gibibytes(3),
     },
   },
   ports: [
@@ -94,6 +98,18 @@ new AppPlus(app, `${name}-app`, {
     {
       volume: Volume.fromPersistentVolumeClaim(app, "books-vol", books.pvc),
       mountPath: "/books",
+    },
+    {
+      // The image's selkies stack runs labwc as a nested Wayland compositor,
+      // and its shm buffers saturate the 64Mi /dev/shm the container runtime
+      // gives us by default. Faulting a page past that ceiling kills labwc with
+      // SIGBUS, so the desktop crash-loops and the video pane just flashes
+      // black. 1Gi is what upstream's compose example asks for (shm_size).
+      volume: Volume.fromEmptyDir(app, "shm-vol", "dshm", {
+        medium: EmptyDirMedium.MEMORY,
+        sizeLimit: Size.gibibytes(1),
+      }),
+      mountPath: "/dev/shm",
     },
   ],
   livenessProbe: Probe.fromTcpSocket({ port: adminPort }),
