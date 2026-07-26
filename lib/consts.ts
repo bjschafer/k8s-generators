@@ -93,6 +93,20 @@ export const NONROOT_SECURITY_CONTEXT = {
   readOnlyRootFilesystem: false,
 };
 
+// Same as NONROOT_SECURITY_CONTEXT, but spells out the uid/gid explicitly.
+// Needed when the image's USER directive is a *name* rather than a number
+// (e.g. `USER pda`): the kubelet can't resolve a name to a uid, so it refuses
+// to start the container with "has runAsNonRoot and image has non-numeric
+// user", even though the user really is non-root. Read the numbers off the
+// running workload with `kubectl exec <pod> -- id`.
+export function NONROOT_SECURITY_CONTEXT_UID(user: number, group?: number) {
+  return {
+    ...NONROOT_SECURITY_CONTEXT,
+    user: user,
+    group: group,
+  };
+}
+
 export const IP_CIDRS_V4: { [name: string]: string } = {
   WIRED_LAN: "10.0.3.0/24",
   DMZ: "10.0.4.0/24",

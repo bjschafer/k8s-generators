@@ -1,5 +1,5 @@
 import { basename } from "../../lib/util";
-import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT_UID } from "../../lib/consts";
 import { App, Size } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
@@ -41,9 +41,10 @@ new AppPlus(app, `${name}-app`, {
     },
   },
   ports: [80],
-  // audited safe: image ships USER=pda
-  securityContext: NONROOT_SECURITY_CONTEXT,
-  containerSecurityContext: NONROOT_SECURITY_CONTEXT,
+  // audited safe: image ships USER=pda, which is uid 100 / gid 101. Spelled out
+  // because the kubelet can't verify a non-numeric USER against runAsNonRoot.
+  securityContext: NONROOT_SECURITY_CONTEXT_UID(100, 101),
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(100, 101),
   volumes: [
     {
       props: {

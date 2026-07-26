@@ -50,7 +50,9 @@ spec:
             allowPrivilegeEscalation: false
             privileged: false
             readOnlyRootFilesystem: false
+            runAsGroup: 101
             runAsNonRoot: true
+            runAsUser: 100
           volumeMounts:
             - mountPath: /data
               name: pvc-app-config
@@ -61,7 +63,9 @@ spec:
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
+        runAsGroup: 101
         runAsNonRoot: true
+        runAsUser: 100
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
