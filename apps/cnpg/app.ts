@@ -44,6 +44,25 @@ class Cnpg extends Chart {
     // the cutover a true no-op.
     super(scope, id);
 
+    // The bundle ships Namespace.cnpg-system.yaml and update-crds keeps
+    // rewriting it, but NewKustomize filters `Namespace*` out of
+    // kustomization.yaml, so it is never applied -- CreateNamespace=true owns
+    // the namespace instead.
+    //
+    // That gap bit during the cutover. The old prod Application managed the
+    // Namespace, so the identically-named new one inherited it as a tracked
+    // resource, found it absent from its own desired state, and pruned it.
+    // Everything in cnpg-system went with it, and termination then wedged on
+    // the barman-cloud Service's cnpg.io/cleanupPlugin finalizer, which only
+    // the operator -- by then deleted -- would have cleared. Clearing that
+    // finalizer by hand let the namespace drain and Argo rebuild it.
+    //
+    // It is not a recurring risk: the rebuilt namespace is a CreateNamespace
+    // prerequisite with no tracking metadata, so it is no longer prunable. The
+    // databases were never in danger, living in `postgres` rather than here,
+    // but a future prod->generators cutover of an app whose namespace holds
+    // PVCs would not get off so lightly.
+    //
     // Three upstream bundles, vendored by `mise run update-crds`:
     //   cnpg                  - operator CRDs, RBAC, webhooks, Deployment
     //   cnpg-barman-cloud     - the backup plugin behind the ObjectStores
