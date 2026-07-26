@@ -155,14 +155,14 @@ export const sources: CrdSource[] = [
     name: "cnpg",
     description:
       "CloudNativePG operator manifests (CRDs, RBAC, webhooks, Deployment) - the full release bundle, " +
-      "not just CRDs. Not yet wired into apps/postgres; today CNPG is applied out-of-band from the " +
-      "legacy prod/cnpg repo. outputDir is a placeholder for once that migrates.",
+      "not just CRDs. Deployed by apps/cnpg, which Includes these verbatim. Kept separate from " +
+      "apps/postgres: the operator lives in cnpg-system and owns cluster-scoped CRDs, while the " +
+      "databases it manages have their own lifecycle in the postgres namespace.",
     // renovate: datasource=github-releases depName=cloudnative-pg/cloudnative-pg extractVersion=^v(?<version>.*)$
     version: { kind: "literal", value: "1.30.0" },
-    outputDir: "apps/postgres/crds",
+    outputDir: "apps/cnpg/crds",
     crdOnly: false,
     filenameKind: true,
-    enabled: false,
     fetch: {
       kind: "web",
       urls: (version) => {
@@ -177,13 +177,13 @@ export const sources: CrdSource[] = [
     name: "cnpg-barman-cloud",
     description:
       "CloudNativePG barman-cloud plugin manifests. Companion to `cnpg` above; versioned independently " +
-      "upstream. Same not-yet-migrated caveat applies.",
+      "upstream. This is what backs the ObjectStore resources in the postgres namespace, so it has to " +
+      "move in lockstep with the operator.",
     // renovate: datasource=github-releases depName=cloudnative-pg/plugin-barman-cloud extractVersion=^v(?<version>.*)$
     version: { kind: "literal", value: "0.13.0" },
-    outputDir: "apps/postgres/crds",
+    outputDir: "apps/cnpg/crds",
     crdOnly: false,
     filenameKind: true,
-    enabled: false,
     fetch: {
       kind: "web",
       urls: (version) => [
@@ -194,11 +194,19 @@ export const sources: CrdSource[] = [
   {
     name: "cnpg-image-catalogs",
     description:
-      "CNPG postgres-containers ClusterImageCatalogs (bookworm + trixie). These track upstream " +
-      "`main`/rolling files with no version of their own, so there's nothing for Renovate to bump - " +
-      "re-run periodically to pick up new point releases.",
+      "CNPG postgres-containers ClusterImageCatalogs (bookworm + trixie). Load-bearing, not reference " +
+      "data: postgres/prod-pg17 resolves its running image through the trixie catalog, so editing " +
+      "these rolls the production database.\n\n" +
+      "Deliberately `enabled: false`, which here means 'refresh only when asked' rather than 'not " +
+      "migrated yet'. These track upstream `main` with no version of their own, so they are pure " +
+      "drift: CI runs `update-crds --all` on every Renovate PR, and if this were enabled, an " +
+      "unrelated chart bump would quietly pick up whatever base image upstream published that " +
+      "morning, commit it to the branch, and automerge it -- rolling all three prod-pg17 instances " +
+      "as a side effect of a Grafana update. Refresh it on purpose with " +
+      "`mise run update-crds cnpg-image-catalogs`, in its own commit, when a Postgres restart is " +
+      "acceptable.",
     version: { kind: "none" },
-    outputDir: "apps/postgres/crds",
+    outputDir: "apps/cnpg/crds",
     crdOnly: false,
     filenameKind: true,
     enabled: false,
