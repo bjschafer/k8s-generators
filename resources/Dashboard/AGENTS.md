@@ -1,0 +1,1 @@
+Grafana dashboard JSON source files. Compiled into ConfigMaps by `apps/grafana/app.ts` at build time. To add or update a dashboard, edit the JSON here and run `mise run build`. Use `grafanactl` to pull the current live state of a dashboard before editing, not to deploy (GitOps handles that). See `slopdocs/features/grafana-dashboards.md` for full workflow.
