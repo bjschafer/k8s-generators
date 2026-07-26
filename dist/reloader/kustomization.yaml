@@ -1,0 +1,8 @@
+resources:
+  - ClusterRole.reloader-role.yaml
+  - ClusterRoleBinding.reloader-role-binding.yaml
+  - Deployment.reloader.yaml
+  - Role.reloader-metadata-role.yaml
+  - RoleBinding.reloader-metadata-role-binding.yaml
+  - ServiceAccount.reloader.yaml
+  - VMPodScrape.reloader.yaml
