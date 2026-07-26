@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - powerdnsadmin/pda-legacy:latest@sha256:0fc92c8ef63a6704083ca1989c83d2b747f7abc0e5045d56d9c69a76e08a9a5e
