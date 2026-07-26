@@ -23,7 +23,7 @@ spec:
   log:
     rotation:
       maxFiles: 7
-      maxLogSize: 10Gi
+      maxLogSize: 10G
       periodicity: daily
     verbosity: 0
   nodePlugin:
