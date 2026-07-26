@@ -15,6 +15,7 @@ import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 const namespace = "metallb-system";
 const name = "metallb";
 const app = new App(DEFAULT_APP_PROPS(name));
+// renovate: datasource=helm depName=metallb registryUrl=https://metallb.github.io/metallb
 const version = "0.16.1";
 
 NewArgoApp(name, {

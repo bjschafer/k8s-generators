@@ -18,6 +18,7 @@ NewArgoApp(name, {
 new HelmApp(app, "helm", {
   chart: "snapshot-controller",
   repo: "https://piraeus.io/helm-charts/",
+  // renovate: datasource=helm depName=snapshot-controller registryUrl=https://piraeus.io/helm-charts/
   version: "5.1.1",
   releaseName: name,
   namespace,

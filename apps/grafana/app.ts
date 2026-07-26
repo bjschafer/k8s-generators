@@ -14,6 +14,7 @@ import { BitwardenSecret } from "../../lib/secrets";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+// renovate: datasource=helm depName=grafana registryUrl=https://grafana-community.github.io/helm-charts
 const version = "12.7.2";
 
 NewArgoApp(name, {

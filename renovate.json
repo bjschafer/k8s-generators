@@ -32,7 +32,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Bump literal versions pinned in tools/sources.ts (velero, and the disabled cnpg/kured/sealed-secrets/system-upgrade-controller placeholders), each annotated with a `// renovate: datasource=... depName=...` comment directly above the `value` field.",
+      "description": "Bump literal versions pinned in tools/sources.ts (velero, kured, sealed-secrets, system-upgrade-controller, and the still-disabled cnpg entries awaiting that app's migration out of the legacy prod repo), each annotated with a `// renovate: datasource=... depName=...` comment directly above the `value` field.",
       "managerFilePatterns": ["/^tools/sources\\.ts$/"],
       "matchStrings": [
         "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*version: \\{ kind: \"literal\", value: \"(?<currentValue>[^\"]+)\" \\},"
@@ -40,13 +40,11 @@
     },
     {
       "customType": "regex",
-      "description": "Bump the app-const chart/release versions in apps/cert-manager/app.ts and apps/metrics/app.ts that tools/sources.ts derives its CRD versions from (VersionSource kind 'app-const'). Annotated the same way as the literal versions in tools/sources.ts.",
-      "managerFilePatterns": [
-        "/^apps/cert-manager/app\\.ts$/",
-        "/^apps/metrics/app\\.ts$/"
-      ],
+      "description": "Bump chart/release versions pinned in any apps/*/app.ts, annotated the same way as the literal versions in tools/sources.ts. Two shapes are matched: a top-level `const <name> = \"...\"` (the common case, and what tools/sources.ts reads back via VersionSource kind 'app-const'), and an inline `version: \"...\"` inside a HelmApp call for the charts that never needed a named const. `registryUrl` is optional and only carried by the `datasource=helm` entries -- the helm datasource has no default registry to fall back on, so a chart without it resolves to nothing and is silently skipped.",
+      "managerFilePatterns": ["/^apps/[^/]+/app\\.ts$/"],
       "matchStrings": [
-        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*(?:export )?const version = \"(?<currentValue>[^\"]+)\";"
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*(?:export )?const \\w+ = \"(?<currentValue>[^\"]+)\";",
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*version: \"(?<currentValue>[^\"]+)\","
       ]
     }
   ]

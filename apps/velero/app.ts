@@ -20,7 +20,13 @@ import { AddCRDs } from "../../lib/util";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+// The chart version (12.x) tracks separately from the velero CLI/CRD version
+// (1.18.x) that mise.toml and tools/sources.ts pin in lockstep. Both would
+// otherwise land under depName `velero` and get swept into that group, so this
+// one takes a distinct depName and looks the chart up via packageName.
+// renovate: datasource=helm depName=velero-chart packageName=velero registryUrl=https://vmware-tanzu.github.io/helm-charts/
 const chartVersion = "12.1.0";
+// renovate: datasource=docker depName=velero/velero-plugin-for-aws
 const awsVersion = "1.14.2";
 
 NewArgoApp(name, {

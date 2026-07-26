@@ -253,9 +253,9 @@ export const sources: CrdSource[] = [
   {
     name: "system-upgrade-controller",
     description:
-      "rancher system-upgrade-controller + its CRD, vendored today in the legacy prod/system-upgrade " +
-      "repo alongside a hand-written upgrade-plan.yaml (which has no upstream source and stays manual). " +
-      "Placeholder entry for the eventual migration.",
+      "rancher system-upgrade-controller + its CRD. Deployed by apps/system-upgrade, which pairs these " +
+      "with a hand-written upgrade Plan pinned to `k3sVersion` -- that Plan has no upstream source and " +
+      "stays manual, since bumping it is a cluster Kubernetes upgrade rather than a dependency bump.",
     // renovate: datasource=github-releases depName=rancher/system-upgrade-controller
     version: { kind: "literal", value: "0.20.1" },
     outputDir: "apps/system-upgrade/crds",

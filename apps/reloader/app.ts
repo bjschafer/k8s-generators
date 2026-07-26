@@ -10,6 +10,7 @@ import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+// renovate: datasource=helm depName=reloader registryUrl=https://stakater.github.io/stakater-charts
 const version = "2.2.14";
 
 NewArgoApp(name, {

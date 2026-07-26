@@ -28,6 +28,7 @@ const clusterID = "e708730c-9bbe-4567-a37d-6386f6800180";
 new HelmApp(app, "operator", {
   chart: "ceph-csi-operator",
   repo: "https://ceph.github.io/ceph-csi-operator/",
+  // renovate: datasource=helm depName=ceph-csi-operator registryUrl=https://ceph.github.io/ceph-csi-operator/
   version: "1.0.3",
   releaseName: "ceph-csi-operator",
   namespace,
@@ -48,6 +49,7 @@ new HelmApp(app, "operator", {
 new HelmApp(app, "drivers", {
   chart: "ceph-csi-drivers",
   repo: "https://ceph.github.io/ceph-csi-operator/",
+  // renovate: datasource=helm depName=ceph-csi-drivers registryUrl=https://ceph.github.io/ceph-csi-operator/
   version: "1.0.1",
   releaseName: "ceph-csi-drivers",
   namespace,

@@ -12,6 +12,7 @@ import { addAlerts } from "./alerts";
 export const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+// renovate: datasource=helm depName=victoria-logs-single registryUrl=https://victoriametrics.github.io/helm-charts/
 const version = "0.13.8";
 
 NewArgoApp(name, {
