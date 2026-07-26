@@ -34,7 +34,7 @@ spec:
         - alias: cloudflared
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: cloudflare/cloudflared:latest
+          imageName: cloudflare/cloudflared
       namePattern: cloudflared
   writeBackConfig:
     gitConfig:

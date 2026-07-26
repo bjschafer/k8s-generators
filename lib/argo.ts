@@ -112,9 +112,18 @@ export class ArgoApp extends Chart {
       const images: ImageUpdaterSpecApplicationRefsImages[] = props.autoUpdate.images.map(
         (image) => {
           const alias = this.getImageAlias(image.image);
+          // The tag half of `imageName` means different things per strategy.
+          // For `digest` it names the mutable tag to follow, so an unspecified
+          // one sensibly defaults to `latest`. For every other strategy it is a
+          // *version constraint*, and `latest` is not a parseable one -- semver
+          // rejects it outright ("improper constraint: latest") and the image
+          // stops updating with only a log line to show for it. Omitting the
+          // tag is upstream's documented way to say "no constraint".
           const versionConstraint = image.versionConstraint
             ? `:${image.versionConstraint}`
-            : ":latest";
+            : image.strategy === "digest"
+              ? ":latest"
+              : "";
 
           const updateStrategy = this.mapUpdateStrategy(image.strategy);
 

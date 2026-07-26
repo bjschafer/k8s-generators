@@ -34,7 +34,7 @@ spec:
         - alias: postfix
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: boky/postfix:latest
+          imageName: boky/postfix
       namePattern: smtp
   writeBackConfig:
     gitConfig:

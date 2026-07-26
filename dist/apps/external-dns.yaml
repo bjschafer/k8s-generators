@@ -34,11 +34,11 @@ spec:
         - alias: external-dns
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: registry.k8s.io/external-dns/external-dns:latest
+          imageName: registry.k8s.io/external-dns/external-dns
         - alias: external-dns-unifi-webhook
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: ghcr.io/home-operations/external-dns-unifi-webhook:latest
+          imageName: ghcr.io/home-operations/external-dns-unifi-webhook
       namePattern: external-dns
   writeBackConfig:
     gitConfig:
