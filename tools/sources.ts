@@ -258,7 +258,6 @@ export const sources: CrdSource[] = [
     outputDir: "apps/system-upgrade/crds",
     crdOnly: false,
     filenameKind: true,
-    enabled: false,
     fetch: {
       kind: "web",
       urls: (version) => [

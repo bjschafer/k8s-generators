@@ -1,0 +1,13 @@
+resources:
+  - ClusterRole.system-upgrade-controller-drainer.yaml
+  - ClusterRole.system-upgrade-controller.yaml
+  - ClusterRoleBinding.system-upgrade-drainer.yaml
+  - ClusterRoleBinding.system-upgrade.yaml
+  - ConfigMap.default-controller-env.yaml
+  - CustomResourceDefinition.plans.upgrade.cattle.io.yaml
+  - Deployment.system-upgrade-controller.yaml
+  - Plan.agent-plan.yaml
+  - Plan.server-plan.yaml
+  - Role.system-upgrade-controller.yaml
+  - RoleBinding.system-upgrade.yaml
+  - ServiceAccount.system-upgrade.yaml
