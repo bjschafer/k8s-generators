@@ -1,0 +1,57 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    deployment:
+      replicas: 3
+    additionalArguments:
+      # these shouldn't be necessary in later versions of traefik
+      - --entryPoints.websecure.transport.respondingTimeouts.readTimeout=600s
+      - --entryPoints.websecure.transport.respondingTimeouts.idleTimeout=600s
+      - --entryPoints.websecure.transport.respondingTimeouts.writeTimeout=600s
+    ingressRoute:
+      dashboard:
+        enabled: true
+        matchRule: 'Host(`traefik-k8s.cmdcentral.xyz`) && (PathPrefix(`/dashboard`) || PathPrefix(`/api`))'
+        entryPoints:
+          - traefik
+          - web
+          - websecure
+    ports:
+      web:
+        redirections:
+          entrypoint:
+            to: websecure
+            scheme: https
+        forwardedHeaders:
+          insecure: true
+        proxyProtocol:
+          insecure: true
+      websecure:
+        transport:
+          respondingTimeouts:
+            readTimeout: 600s
+            idleTimeout: 600s
+            writeTimeout: 600s
+        forwardedHeaders:
+          insecure: true
+        proxyProtocol:
+          insecure: true
+      ssh:
+        port: 22
+        expose:
+          default: true
+    providers:
+      kubernetesCRD:
+        allowCrossNamespace: true
+      kubernetesGateway:
+        enabled: true
+    service:
+      annotations:
+        metallb.io/loadBalancerIPs: 10.0.10.80
+        external-dns.alpha.kubernetes.io/hostname: traefik-k8s.cmdcentral.xyz
+      spec:
+        externalTrafficPolicy: Local

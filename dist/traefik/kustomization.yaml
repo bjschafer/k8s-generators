@@ -1,0 +1,2 @@
+resources:
+  - HelmChartConfig.traefik.yaml
