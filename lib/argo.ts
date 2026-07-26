@@ -125,7 +125,11 @@ export class ArgoApp extends Chart {
               ? ":latest"
               : "";
 
-          const updateStrategy = this.mapUpdateStrategy(image.strategy);
+          // ArgoUpdateStrategy already spells these the way upstream does, so
+          // the value passes straight through. It used to be rewritten to the
+          // legacy `latest`/`name` spellings, which upstream now warns about
+          // and plans to drop.
+          const updateStrategy = image.strategy;
 
           return {
             alias,
@@ -178,17 +182,6 @@ export class ArgoApp extends Chart {
           writeBackConfig,
         },
       });
-    }
-  }
-
-  private mapUpdateStrategy(strategy: ArgoUpdateStrategy): string {
-    switch (strategy) {
-      case "newest-build":
-        return "latest";
-      case "alphabetical":
-        return "name";
-      default:
-        return strategy;
     }
   }
 

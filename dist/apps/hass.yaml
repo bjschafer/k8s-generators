@@ -34,7 +34,7 @@ spec:
         - alias: home-assistant
           commonUpdateSettings:
             allowTags: regexp:^[0-9]{4}\.[0-9]{1,2}\.[0-9]*$
-            updateStrategy: name
+            updateStrategy: alphabetical
           imageName: ghcr.io/home-assistant/home-assistant
       namePattern: hass
   writeBackConfig:
