@@ -14,6 +14,7 @@ import {
   ClusterSpec,
   ClusterSpecBootstrapInitdbImportType,
   Database,
+  DatabaseSpecDatabaseReclaimPolicy,
   ImageCatalog,
   Pooler,
   PoolerSpecPgbouncerPoolMode,
@@ -280,15 +281,17 @@ class ProdPostgres extends Chart {
   }
 }
 
-export interface ImportProps {
-  sourceClusterName: string;
-  sourceClusterNamespace: string;
-  databases: string[];
-  roles: string[];
-}
+/**
+ * The vectorchord image catalog is a namespace singleton -- every
+ * VectorPostgres cluster resolves its image through this one object, so it
+ * lives in its own chart rather than inside the per-cluster class. Two
+ * clusters instantiating their own copy would emit the same
+ * `ImageCatalog/vectorchord` twice.
+ */
+class VectorImageCatalog extends Chart {
+  readonly Catalog: ImageCatalog;
 
-class VectorPostgres extends Chart {
-  constructor(scope: Construct, id: string, name: string, importProps?: ImportProps) {
+  constructor(scope: Construct, id: string) {
     super(scope, id);
 
     const imageBase = "ghcr.io/tensorchord/cloudnative-vectorchord";
@@ -302,12 +305,16 @@ class VectorPostgres extends Chart {
     // Those rules also switch automerge off: everything else in this repo
     // automerges minor/patch on green, and a Postgres image is not something
     // to let through unread.
+    //
+    // The vectorchord version is also bounded by immich, which checks it at
+    // startup and refuses to boot outside `>=0.3.0 <2.0.0`; the bundled
+    // pgvector must stay `>=0.7 <0.9`.
     // renovate: datasource=docker depName=vectorchord-pg16 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
     const vectorchordPg16 = "16.14-1.1.1";
     // renovate: datasource=docker depName=vectorchord-pg17 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
     const vectorchordPg17 = "17.10-1.1.1";
 
-    const catalog = new ImageCatalog(this, "catalog", {
+    this.Catalog = new ImageCatalog(this, "catalog", {
       metadata: {
         namespace: namespace,
         name: "vectorchord",
@@ -328,38 +335,118 @@ class VectorPostgres extends Chart {
         ],
       },
     });
+  }
+}
 
-    const importConfig: Pick<ClusterSpec, "externalClusters" | "bootstrap"> | undefined =
-      importProps
-        ? {
-            externalClusters: [
-              {
-                name: importProps.sourceClusterName,
-                connectionParameters: {
-                  host: `${importProps.sourceClusterName}-r.${importProps.sourceClusterNamespace}.svc.cluster.local`,
-                  user: "postgres",
-                  sslmode: "require",
-                },
-                password: {
-                  name: `${importProps.sourceClusterName}-superuser`,
-                  key: "password",
-                },
-              },
-            ],
-            bootstrap: {
-              initdb: {
-                import: {
-                  type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
-                  databases: importProps.databases,
-                  roles: importProps.roles,
-                  source: {
-                    externalCluster: importProps.sourceClusterName,
-                  },
+export interface ImportProps {
+  sourceClusterName: string;
+  sourceClusterNamespace: string;
+  databases: string[];
+  roles: string[];
+}
+
+/**
+ * Bootstrap by physically restoring another cluster's barman ObjectStore.
+ *
+ * Preferred over {@link ImportProps} when the source is a CNPG cluster on the
+ * same Postgres major: a base-backup restore carries the extension catalog and
+ * the prebuilt vchord indexes across byte for byte. A logical import would
+ * instead re-run `CREATE EXTENSION` against whatever the target image ships
+ * and rebuild every vector index from the dump -- the one operation in this
+ * stack where a version skew between source and target actually bites.
+ */
+export interface RecoveryProps {
+  /** ObjectStore holding the source cluster's base backups and WAL. */
+  objectStoreName: string;
+  /**
+   * Barman server name within that store. Defaults to the source cluster's
+   * name, since that is what CNPG writes under unless told otherwise.
+   */
+  serverName: string;
+}
+
+export interface VectorPostgresProps {
+  /**
+   * Names the Cluster, and by derivation its ObjectStore, scheduled backup,
+   * Database CR and scrape config.
+   */
+  name: string;
+  catalog: ImageCatalog;
+  /** Logical (pg_dump) import from a live cluster. Mutually exclusive with `recovery`. */
+  import?: ImportProps;
+  /** Physical restore from an object store. Mutually exclusive with `import`. */
+  recovery?: RecoveryProps;
+}
+
+class VectorPostgres extends Chart {
+  constructor(scope: Construct, id: string, props: VectorPostgresProps) {
+    super(scope, id);
+
+    const { name, catalog, import: importProps, recovery } = props;
+
+    if (importProps && recovery) {
+      throw new Error(`${name}: cannot bootstrap from both an import and a recovery`);
+    }
+
+    type BootstrapConfig = Pick<ClusterSpec, "externalClusters" | "bootstrap">;
+
+    const recoveryConfig: BootstrapConfig | undefined = recovery
+      ? {
+          bootstrap: {
+            recovery: {
+              source: recovery.serverName,
+            },
+          },
+          externalClusters: [
+            {
+              name: recovery.serverName,
+              plugin: {
+                name: barmanPluginName,
+                // Read-only pointer at the *source* cluster's store. The
+                // cluster's own WAL archiving is the `plugins` stanza below,
+                // which targets its own ObjectStore -- these are deliberately
+                // different objects, so the restore never writes back into the
+                // lineage it was seeded from.
+                parameters: {
+                  barmanObjectName: recovery.objectStoreName,
+                  serverName: recovery.serverName,
                 },
               },
             },
-          }
-        : undefined;
+          ],
+        }
+      : undefined;
+
+    const importConfig: BootstrapConfig | undefined = importProps
+      ? {
+          externalClusters: [
+            {
+              name: importProps.sourceClusterName,
+              connectionParameters: {
+                host: `${importProps.sourceClusterName}-r.${importProps.sourceClusterNamespace}.svc.cluster.local`,
+                user: "postgres",
+                sslmode: "require",
+              },
+              password: {
+                name: `${importProps.sourceClusterName}-superuser`,
+                key: "password",
+              },
+            },
+          ],
+          bootstrap: {
+            initdb: {
+              import: {
+                type: ClusterSpecBootstrapInitdbImportType.MONOLITH,
+                databases: importProps.databases,
+                roles: importProps.roles,
+                source: {
+                  externalCluster: importProps.sourceClusterName,
+                },
+              },
+            },
+          },
+        }
+      : undefined;
 
     new Cluster(this, name, {
       metadata: {
@@ -407,11 +494,15 @@ class VectorPostgres extends Chart {
             name: barmanPluginName,
             isWalArchiver: true,
             parameters: {
-              barmanObjectName: "immich-pg16",
+              // Must track the ObjectStore created below, which is named off
+              // `name`. These were separately hardcoded before, and agreed
+              // only by coincidence.
+              barmanObjectName: name,
             },
           },
         ],
         ...importConfig,
+        ...recoveryConfig,
       },
     });
 
@@ -423,13 +514,21 @@ class VectorPostgres extends Chart {
     new Database(this, "immich-database", {
       metadata: {
         namespace: namespace,
-        name: "immich",
+        // Derived, not fixed: two VectorPostgres clusters coexist during a
+        // cutover and would otherwise collide on a single `Database/immich`.
+        name: `${name}-db`,
       },
       spec: {
         name: "immich",
         owner: "immich",
         cluster: { name },
         extensions: [{ name: "vector" }, { name: "vchord" }],
+        // Already the CRD default, but stated explicitly: this CR gets
+        // renamed and recreated across a cutover, and `delete` would take the
+        // database with it. Deliberately no `version` pin on the extensions --
+        // CNPG would then run ALTER EXTENSION UPDATE, and pgvector 0.9 is
+        // outside immich's supported range.
+        databaseReclaimPolicy: DatabaseSpecDatabaseReclaimPolicy.RETAIN,
       },
     });
 
@@ -533,5 +632,30 @@ createDatabaseRoles(app, prod_pg_17.clusterName);
 // Create all Database CRDs
 createDatabases(app, prod_pg_17.clusterName);
 
-new VectorPostgres(app, "immich-pg16", "immich-pg16");
+const vectorCatalog = new VectorImageCatalog(app, "vectorchord-catalog");
+
+// The name lies: this cluster runs Postgres 17, not 16. It kept its name
+// through an in-place major upgrade because CNPG cluster names are immutable.
+// Being replaced by `immich` below -- delete this once that cluster is
+// serving, along with its ObjectStore (keep the store read-only until the 30d
+// retention on the old lineage expires).
+new VectorPostgres(app, "immich-pg16", {
+  name: "immich-pg16",
+  catalog: vectorCatalog.Catalog,
+});
+
+// Physical restore of immich-pg16 under an honest name. Same image, same
+// major, same extensions -- the only thing changing is the string. Bootstraps
+// once from the old cluster's object store and then archives to its own,
+// deliberately starting a fresh PITR lineage rather than splicing into the
+// old WAL timeline.
+new VectorPostgres(app, "immich", {
+  name: "immich",
+  catalog: vectorCatalog.Catalog,
+  recovery: {
+    objectStoreName: "immich-pg16",
+    serverName: "immich-pg16",
+  },
+});
+
 app.synth();

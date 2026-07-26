@@ -1,0 +1,27 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: immich
+  namespace: postgres
+spec:
+  configuration:
+    data:
+      compression: gzip
+    destinationPath: s3://postgres/k8s/immich
+    endpointURL: https://s3.cmdcentral.xyz
+    s3Credentials:
+      accessKeyId:
+        key: ACCESS_KEY_ID
+        name: s3-creds
+      secretAccessKey:
+        key: SECRET_ACCESS_KEY
+        name: s3-creds
+  instanceSidecarConfiguration:
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+  retentionPolicy: 30d

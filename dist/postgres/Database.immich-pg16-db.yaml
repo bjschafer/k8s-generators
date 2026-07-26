@@ -1,11 +1,12 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
-  name: immich
+  name: immich-pg16-db
   namespace: postgres
 spec:
   cluster:
     name: immich-pg16
+  databaseReclaimPolicy: retain
   extensions:
     - name: vector
     - name: vchord
