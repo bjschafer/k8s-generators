@@ -81,6 +81,19 @@ export interface EsoValuesSchema {
       };
       [k: string]: unknown;
     };
+    networkPolicy?: {
+      egress?: unknown[];
+      enabled?: boolean;
+      ingress?: {
+        ports?: {
+          port?: string | number;
+          protocol?: string;
+          [k: string]: unknown;
+        }[];
+        [k: string]: unknown;
+      }[];
+      [k: string]: unknown;
+    };
     nodeSelector?: {
       [k: string]: unknown;
     };
@@ -152,8 +165,9 @@ export interface EsoValuesSchema {
     };
     startupProbe?: {
       enabled?: boolean;
-      port?: string;
-      useReadinessProbePort?: boolean;
+      failureThreshold?: number;
+      initialDelaySeconds?: number;
+      periodSeconds?: number;
       [k: string]: unknown;
     };
     strategy?: {
@@ -263,6 +277,9 @@ export interface EsoValuesSchema {
   installCRDs?: boolean;
   leaderElect?: boolean;
   leaderElectionID?: string;
+  leaderElectionLeaseDuration?: string;
+  leaderElectionRenewDeadline?: string;
+  leaderElectionRetryPeriod?: string;
   livenessProbe?: {
     enabled?: boolean;
     spec?: {
@@ -315,6 +332,19 @@ export interface EsoValuesSchema {
   };
   nameOverride?: string;
   namespaceOverride?: string;
+  networkPolicy?: {
+    egress?: unknown[];
+    enabled?: boolean;
+    ingress?: {
+      ports?: {
+        port?: string | number;
+        protocol?: string;
+        [k: string]: unknown;
+      }[];
+      [k: string]: unknown;
+    }[];
+    [k: string]: unknown;
+  };
   nodeSelector?: {
     [k: string]: unknown;
   };
@@ -346,6 +376,7 @@ export interface EsoValuesSchema {
   processPushSecret?: boolean;
   processSecretStore?: boolean;
   rbac?: {
+    aggregateToAdmin?: boolean;
     aggregateToEdit?: boolean;
     aggregateToView?: boolean;
     create?: boolean;
@@ -538,6 +569,19 @@ export interface EsoValuesSchema {
       };
       [k: string]: unknown;
     };
+    networkPolicy?: {
+      egress?: unknown[];
+      enabled?: boolean;
+      ingress?: {
+        ports?: {
+          port?: string | number;
+          protocol?: string;
+          [k: string]: unknown;
+        }[];
+        [k: string]: unknown;
+      }[];
+      [k: string]: unknown;
+    };
     nodeSelector?: {
       [k: string]: unknown;
     };
@@ -616,6 +660,13 @@ export interface EsoValuesSchema {
         [k: string]: unknown;
       };
       name?: string;
+      [k: string]: unknown;
+    };
+    startupProbe?: {
+      enabled?: boolean;
+      failureThreshold?: number;
+      initialDelaySeconds?: number;
+      periodSeconds?: number;
       [k: string]: unknown;
     };
     strategy?: {
