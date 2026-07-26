@@ -39,6 +39,10 @@ export class NFSVolumeContainer extends Chart {
     const vol = new NFSVolume(this, name, props);
     const pvc = new PersistentVolumeClaim(this, `${name}-pvc`, {
       ...props,
+      metadata: {
+        ...props.metadata,
+        name: props.claimName ?? name,
+      },
       accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
       storage: vol.storage,
       storageClassName: "",
@@ -57,6 +61,14 @@ export interface NFSVolumeProps extends PersistentVolumeProps {
   readonly nfsHost?: string;
   readonly exportPath: string;
   readonly storage?: Size;
+  /**
+   * Name for the PVC, when it shouldn't match the PV's. PV names are
+   * cluster-scoped and so tend to want an app prefix, which is just noise on
+   * the claim inside the app's own namespace.
+   *
+   * @default - same as the PV name
+   */
+  readonly claimName?: string;
 }
 
 export class NFSVolume extends PersistentVolume implements IPersistentVolume {

@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - lscr.io/linuxserver/calibre:9.11.0

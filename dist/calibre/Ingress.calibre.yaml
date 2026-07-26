@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: calibre
+  namespace: calibre
+spec:
+  rules:
+    - host: calibre-admin.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: calibre
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+    - host: calibre.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: calibre
+                port:
+                  number: 8081
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - calibre-admin.cmdcentral.xyz
+        - calibre.cmdcentral.xyz
+      secretName: calibre-tls

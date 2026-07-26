@@ -12,6 +12,7 @@ import {
   Ingress,
   IngressBackend,
   ISecret,
+  MountOptions,
   PersistentVolumeAccessMode,
   PersistentVolumeClaim,
   PersistentVolumeClaimProps,
@@ -45,6 +46,12 @@ export interface ConfigMapVolume {
   readonly options?: ConfigMapVolumeOptions;
 }
 
+export interface AppPlusExtraVolumeMount {
+  readonly volume: Volume;
+  readonly mountPath: string;
+  readonly options?: MountOptions;
+}
+
 export interface AppPlusIngressHost {
   readonly host: string;
   // @default the app's first port
@@ -68,6 +75,10 @@ export interface AppPlusProps {
   readonly replicas?: number;
   readonly ports?: number[] | ContainerPort[];
   readonly volumes?: AppPlusVolume[];
+  // volumes owned by something else -- an NFS export shared with another app,
+  // or a claim another workload in this namespace already declares. `volumes`
+  // creates the PVC; this one only mounts what's already there.
+  readonly extraVolumeMounts?: AppPlusExtraVolumeMount[];
   readonly configmapMounts?: ConfigMapVolume[];
   readonly extraEnv?: { [key: string]: EnvValue };
   readonly envFrom?: EnvFrom[];
@@ -234,6 +245,11 @@ export class AppPlus extends Chart {
     for (let i = 0; i < volumes.length; i++) {
       deploy.addVolume(volumes[i]);
       deploy.containers[0].mount(props.volumes![i].mountPath, volumes[i]);
+    }
+
+    for (const extra of props.extraVolumeMounts ?? []) {
+      deploy.addVolume(extra.volume);
+      deploy.containers[0].mount(extra.mountPath, extra.volume, extra.options);
     }
 
     if (props.configmapMounts) {

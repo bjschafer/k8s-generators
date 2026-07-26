@@ -1,0 +1,7 @@
+resources:
+  - Deployment.calibre.yaml
+  - Ingress.calibre.yaml
+  - PersistentVolume.calibre-nfs-books.yaml
+  - PersistentVolumeClaim.config.yaml
+  - PersistentVolumeClaim.nfs-books.yaml
+  - Service.calibre.yaml
