@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: pfapi
+  name: pfapi
+  namespace: pfapi
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: pfapi-app-pfapi-app-deployment-c872ea4e
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: pfapi
+        cdk8s.io/metadata.addr: pfapi-app-pfapi-app-deployment-c872ea4e
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: DOTNET_hostBuilder__reloadConfigOnChange
+              value: "false"
+          envFrom:
+            - secretRef:
+                name: db-creds
+          image: ghcr.io/bjschafer/pfapi:main
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8080
+          name: pfapi
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 443
+              name: https
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8080
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 250m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30

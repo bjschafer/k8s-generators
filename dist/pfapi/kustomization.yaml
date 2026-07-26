@@ -1,0 +1,5 @@
+resources:
+  - Deployment.pfapi.yaml
+  - ExternalSecret.db-creds.yaml
+  - Ingress.pfapi.yaml
+  - Service.pfapi.yaml

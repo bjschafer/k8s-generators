@@ -71,6 +71,9 @@ export interface AppPlusProps {
   readonly serviceAccountName?: string;
   readonly automountServiceAccount?: boolean;
   readonly extraIngressHosts?: string[];
+  // labels applied to the Ingress only, on top of `labels`. For markers that
+  // describe the route rather than the workload, e.g. cmdcentral.xyz/external.
+  readonly ingressLabels?: { [p: string]: string };
   readonly disableIngress?: boolean;
   readonly limitToAMD64?: boolean;
   readonly command?: string[];
@@ -272,7 +275,7 @@ export class AppPlus extends Chart {
           annotations: {
             "cert-manager.io/cluster-issuer": CLUSTER_ISSUER.name,
           },
-          labels: props.labels,
+          labels: { ...props.labels, ...props.ingressLabels },
         },
       });
 
