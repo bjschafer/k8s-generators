@@ -32,16 +32,12 @@ new HelmApp(app, "operator", {
   version: "1.0.4",
   releaseName: "ceph-csi-operator",
   namespace,
-  values: {
-    controllerManager: {
-      manager: {
-        image: {
-          repository: "quay.io/cephcsi/ceph-csi-operator",
-          tag: "v1.0.3",
-        },
-      },
-    },
-  },
+  // Deliberately empty: the chart already defaults its manager image to
+  // quay.io/cephcsi/ceph-csi-operator:v<chart version>, so pinning the tag
+  // here only duplicates it -- and then silently stops matching. That is
+  // exactly what happened when the chart moved to 1.0.4 and the hardcoded
+  // v1.0.3 held the operator back. Let the tag follow the chart.
+  values: {},
 });
 
 // 2. Driver CRs: CephConnection, ClientProfile, Driver (rbd + cephfs)
