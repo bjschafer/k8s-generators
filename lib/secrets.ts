@@ -7,6 +7,7 @@ import {
   ExternalSecretSpecDataRemoteRefDecodingStrategy,
   ExternalSecretSpecDataRemoteRefMetadataPolicy,
   ExternalSecretSpecSecretStoreRefKind,
+  ExternalSecretSpecTargetTemplate,
 } from "../imports/external-secrets.io";
 import { EnvValue, ISecret, Secret } from "cdk8s-plus-34";
 
@@ -17,6 +18,13 @@ export interface BitwardenSecretProps {
    * Format is `{ desired secret key: uuid or name of secret in sm}`
    */
   data: Record<string, string>;
+  /**
+   * Reshapes the synced keys into a differently-typed Secret. Needed when the
+   * consumer wants something other than an Opaque key/value map -- an image
+   * pull secret, say, which has to be kubernetes.io/dockerconfigjson with the
+   * payload under `.dockerconfigjson`.
+   */
+  template?: ExternalSecretSpecTargetTemplate;
 }
 
 export class BitwardenSecret extends Chart {
@@ -53,6 +61,7 @@ export class BitwardenSecret extends Chart {
         }),
         target: {
           name: props.name,
+          template: props.template,
         },
       },
     });

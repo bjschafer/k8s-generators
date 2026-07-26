@@ -12,6 +12,7 @@ import {
   ApplicationSpecSyncPolicy,
 } from "../imports/argoproj.io";
 import { SecretReference } from "../imports/k8s";
+import { Role, RoleBinding, Secret, ServiceAccount } from "cdk8s-plus-34";
 
 export const ARGO_NAMESPACE = "argocd";
 export const ARGO_DESTINATION_SERVER = "https://kubernetes.default.svc";
@@ -124,8 +125,10 @@ export class ArgoApp extends Chart {
               updateStrategy,
               allowTags: image.allowTags ? `regexp:${image.allowTags}` : undefined,
               ignoreTags: image.ignoreTags,
+              // the updater resolves credentials by scheme; a bare ns/name is
+              // not one of the forms it understands and is ignored silently.
               pullSecret: image.imagePullSecret
-                ? `${image.imagePullSecret.namespace}/${image.imagePullSecret.name}`
+                ? `pullsecret:${image.imagePullSecret.namespace}/${image.imagePullSecret.name}`
                 : undefined,
             },
             manifestTargets: image.helm
@@ -186,6 +189,63 @@ export class ArgoApp extends Chart {
       return image;
     }
     return alias;
+  }
+}
+
+export interface ImageUpdaterRegistryAccessProps {
+  readonly namespace: string;
+  /**
+   * Name of the image pull Secret in `namespace` that the updater needs to read.
+   */
+  readonly pullSecretName: string;
+}
+
+/**
+ * Lets argocd-image-updater read an app's image pull Secret.
+ *
+ * The updater runs in the argocd namespace, so for an app whose image lives in
+ * a private registry it has no way to authenticate to that registry without
+ * being granted access to the app's own pull secret. The failure mode is quiet
+ * -- the updater just stops resolving new tags and the app sits on whatever
+ * digest it last saw -- so this goes wherever `autoUpdate` is paired with
+ * `AppPlus.dockerRegistryAuth`.
+ */
+export class ImageUpdaterRegistryAccess extends Chart {
+  constructor(scope: Construct, id: string, props: ImageUpdaterRegistryAccessProps) {
+    super(scope, id, { namespace: props.namespace });
+
+    const role = new Role(this, "role", {
+      metadata: {
+        name: "argocd-image-updater-registry",
+        namespace: props.namespace,
+        labels: {
+          "app.kubernetes.io/name": "argocd-image-updater-registry",
+          "app.kubernetes.io/part-of": "argocd-image-updater",
+        },
+        annotations: {
+          "cmdcentral.xyz/why":
+            "Used for ArgoCD Image Updater to be able to read the registry credentials to check for updates.",
+        },
+      },
+    });
+    role.allowRead(Secret.fromSecretName(this, "pull-secret", props.pullSecretName));
+
+    const binding = new RoleBinding(this, "binding", {
+      metadata: {
+        name: "argocd-image-updater",
+        namespace: props.namespace,
+        labels: {
+          "app.kubernetes.io/name": "argocd-image-updater",
+          "app.kubernetes.io/part-of": "argocd-image-updater",
+        },
+      },
+      role: role,
+    });
+    binding.addSubjects(
+      ServiceAccount.fromServiceAccountName(this, "updater-sa", "argocd-image-updater", {
+        namespaceName: ARGO_NAMESPACE,
+      }),
+    );
   }
 }
 

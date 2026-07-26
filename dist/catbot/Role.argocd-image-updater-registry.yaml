@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    cmdcentral.xyz/why: Used for ArgoCD Image Updater to be able to read the registry credentials to check for updates.
+  labels:
+    app.kubernetes.io/name: argocd-image-updater-registry
+    app.kubernetes.io/part-of: argocd-image-updater
+  name: argocd-image-updater-registry
+  namespace: catbot
+rules:
+  - apiGroups:
+      - ""
+    resourceNames:
+      - github-registry-cred
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch

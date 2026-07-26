@@ -1,0 +1,7 @@
+resources:
+  - Deployment.catbot.yaml
+  - ExternalSecret.bot-token.yaml
+  - ExternalSecret.github-registry-cred.yaml
+  - Role.argocd-image-updater-registry.yaml
+  - RoleBinding.argocd-image-updater.yaml
+  - RoleBinding.catbot-view.yaml

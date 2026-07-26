@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: catbot
+  name: catbot
+  namespace: catbot
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: catbot-app-catbot-app-deployment-c83a560c
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: catbot
+        cdk8s.io/metadata.addr: catbot-app-catbot-app-deployment-c83a560c
+    spec:
+      automountServiceAccountToken: true
+      containers:
+        - envFrom:
+            - secretRef:
+                name: bot-token
+          image: ghcr.io/bjschafer/catbot:main
+          imagePullPolicy: Always
+          name: catbot
+          resources:
+            limits:
+              cpu: 200m
+              memory: 192Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+      dnsConfig:
+        nameservers:
+          - 10.0.10.100
+          - 10.0.10.101
+        searches:
+          - cmdcentral.xyz
+      dnsPolicy: None
+      hostNetwork: false
+      imagePullSecrets:
+        - name: github-registry-cred
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30

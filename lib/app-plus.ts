@@ -11,6 +11,7 @@ import {
   EnvValue,
   Ingress,
   IngressBackend,
+  ISecret,
   PersistentVolumeAccessMode,
   PersistentVolumeClaim,
   PersistentVolumeClaimProps,
@@ -70,6 +71,8 @@ export interface AppPlusProps {
   readonly startupProbe?: Probe;
   readonly serviceAccountName?: string;
   readonly automountServiceAccount?: boolean;
+  // pull secret for images in a private registry
+  readonly dockerRegistryAuth?: ISecret;
   readonly extraIngressHosts?: string[];
   // labels applied to the Ingress only, on top of `labels`. For markers that
   // describe the route rather than the workload, e.g. cmdcentral.xyz/external.
@@ -176,6 +179,7 @@ export class AppPlus extends Chart {
       securityContext: props.securityContext ?? DEFAULT_SECURITY_CONTEXT,
       serviceAccount: serviceAccount,
       automountServiceAccountToken: props.automountServiceAccount,
+      dockerRegistryAuth: props.dockerRegistryAuth,
       enableServiceLinks: props.enableServiceLinks,
       dns: props.dns,
       containers: [
