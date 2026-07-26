@@ -90,7 +90,7 @@ const commonEnv: Record<string, EnvValue> = {
     key: "valkey-password",
   }),
   DB_DATABASE_NAME: EnvValue.fromValue("immich"),
-  DB_HOSTNAME: EnvValue.fromValue("immich-pg16-rw.postgres.svc.cluster.local"),
+  DB_HOSTNAME: EnvValue.fromValue("immich-rw.postgres.svc.cluster.local"),
   DB_PORT: EnvValue.fromValue("5432"),
   DB_USERNAME: EnvValue.fromValue("immich"),
   ...dbCreds.toEnvValues(),
@@ -99,6 +99,10 @@ const commonEnv: Record<string, EnvValue> = {
 const server = new AppPlus(app, "immich-server", {
   name: "immich-server",
   namespace: namespace,
+  // CUTOVER: held at zero while the immich cluster is re-restored from the
+  // final immich-pg16 backup. Argo pins replicas, so stopping writes has to
+  // go through git. Back to 1 in the follow-up commit.
+  replicas: 0,
   image: images.SERVER,
   resources: {
     cpu: {
@@ -192,6 +196,9 @@ new AppPlus(app, "immich-machine-learning", {
 const microservices = new AppPlus(app, "immich-microservices", {
   name: "immich-microservices",
   namespace: namespace,
+  // CUTOVER: see immich-server above. This is the half that runs the job
+  // queue, so it is the one actually generating writes.
+  replicas: 0,
   image: images.SERVER,
   resources: {
     cpu: {

@@ -10,7 +10,7 @@ metadata:
 spec:
   minReadySeconds: 0
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -48,7 +48,7 @@ spec:
             - name: DB_DATABASE_NAME
               value: immich
             - name: DB_HOSTNAME
-              value: immich-pg16-rw.postgres.svc.cluster.local
+              value: immich-rw.postgres.svc.cluster.local
             - name: DB_PORT
               value: "5432"
             - name: DB_USERNAME

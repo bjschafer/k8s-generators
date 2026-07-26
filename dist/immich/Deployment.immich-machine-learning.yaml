@@ -44,7 +44,7 @@ spec:
             - name: DB_DATABASE_NAME
               value: immich
             - name: DB_HOSTNAME
-              value: immich-pg16-rw.postgres.svc.cluster.local
+              value: immich-rw.postgres.svc.cluster.local
             - name: DB_PORT
               value: "5432"
             - name: DB_USERNAME
