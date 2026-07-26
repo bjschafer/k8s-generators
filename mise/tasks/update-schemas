@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#MISE description="Fetch upstream values schemas declared in tools/schemas.ts, then regenerate their types"
+#MISE depends=["install"]
+
+set -euo pipefail
+
+bun run tools/update-schemas.ts "$@"
+
+# The fetch is only half the job -- imports/helm-values/ is what apps/ actually
+# import, and a refreshed schemas/*.json with stale generated types is exactly
+# the drift this task exists to close.
+mise run schemas

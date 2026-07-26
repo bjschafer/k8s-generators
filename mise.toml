@@ -65,6 +65,13 @@ depends = ["fmt", "lint", "validate-alerts", "typecheck"]
 
 [tasks.schemas]
 description = "Generate TypeScript types from JSON schemas"
+depends = ["install"]
+# `build` depends on this, so the generated types can never lag the schemas
+# they come from. sources/outputs keep that from costing a json2ts run on
+# every build -- mise skips it when schemas/ hasn't moved. Refreshing the
+# schemas themselves from upstream is `mise run update-schemas`.
+sources = ["schemas/*.json"]
+outputs = ["imports/helm-values/*.d.ts"]
 run = 'bun x json2ts -i schemas/ -o imports/helm-values/'
 
 # Guards the invariant the Renovate automation quietly depends on: main is

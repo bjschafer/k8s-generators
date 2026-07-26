@@ -5,6 +5,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { Construct } from "constructs";
 import { ClusterIssuer } from "../../imports/cert-manager.io";
+import { CertManagerValuesSchema } from "../../imports/helm-values/cert-manager-values.schema";
 import { BitwardenSecret } from "../../lib/secrets";
 import { AddCRDs } from "../../lib/util";
 
@@ -29,7 +30,7 @@ new BitwardenSecret(app, "cloudflare-api-token", {
   },
 });
 
-new HelmApp(app, "helm", {
+new HelmApp<Partial<CertManagerValuesSchema>>(app, "helm", {
   chart: "cert-manager",
   repo: "https://charts.jetstack.io",
   version: version,

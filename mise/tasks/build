@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #MISE description="Synthesize all apps"
-#MISE depends=["install"]
+#MISE depends=["install", "schemas"]
 #MISE sources=["apps/**/*.ts", "lib/**/*.ts", "imports/**/*.ts", "package.json", "bun.lock", "resources/**/*.json"]
 #MISE outputs=["dist/**/*.yaml"]
 

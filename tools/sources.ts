@@ -21,12 +21,46 @@
  *     app.ts file directly if you want automation for it.
  *   - `{ kind: "none" }` - source has no meaningful version (tracks an
  *     upstream branch/rolling file).
+ *
+ * `VersionSource` and `resolveVersion` also back the Helm values-schema
+ * registry in `tools/schemas.ts`; they live here because this is the file
+ * with no side effects on import (`update-crds.ts` runs `main()` at load).
  */
+import { readFileSync } from "fs";
+import { join } from "path";
+
+export const REPO_ROOT = join(__dirname, "..");
 
 export type VersionSource =
   | { kind: "literal"; value: string }
   | { kind: "app-const"; appName: string; constName: string }
   | { kind: "none" };
+
+/** Read a `const <constName> = "..."` declaration back out of `apps/<appName>/app.ts`. */
+export function parseConstStringFromAppTs(appName: string, constName: string): string {
+  const appTsPath = join(REPO_ROOT, "apps", appName, "app.ts");
+  const src = readFileSync(appTsPath, "utf8");
+  const re = new RegExp("\\bconst\\s+" + constName + "\\s*=\\s*[\"'`](.*?)[\"'`]");
+  const m = re.exec(src);
+  if (!m) {
+    throw new Error(`Could not find const ${constName} in ${appTsPath}`);
+  }
+  return m[1];
+}
+
+export function resolveVersion(version: VersionSource, override?: string): string | undefined {
+  if (override) {
+    return override;
+  }
+  switch (version.kind) {
+    case "literal":
+      return version.value;
+    case "app-const":
+      return parseConstStringFromAppTs(version.appName, version.constName);
+    case "none":
+      return undefined;
+  }
+}
 
 export type FetchStrategy =
   /**

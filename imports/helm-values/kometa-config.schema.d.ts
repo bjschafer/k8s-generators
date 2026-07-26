@@ -8,11 +8,80 @@
 /**
  * The metadata_files attribute is used to define Metadata Files by specifying the path of the files that will be executed against the parent library.
  */
-export type MetadataFiles = (FilePath | FolderPath | UrlPath | GitPath | RepoPath)[];
+export type MetadataFiles = (string | FilePath | FolderPath | UrlPath | GitPath | RepoPath)[];
+export type KometaDefaultCollectionPath = {
+  [k: string]: unknown;
+} & {
+  default:
+    | "actor"
+    | "anilist"
+    | "aspect"
+    | "audio_language"
+    | "bafta"
+    | "based"
+    | "basic"
+    | "berlinale"
+    | "cannes"
+    | "cesar"
+    | "choice"
+    | "collectionless"
+    | "content_rating_au"
+    | "content_rating_cs"
+    | "content_rating_de"
+    | "content_rating_nz"
+    | "content_rating_mal"
+    | "content_rating_uk"
+    | "content_rating_us"
+    | "continent"
+    | "country"
+    | "decade"
+    | "director"
+    | "emmy"
+    | "flixpatrol"
+    | "franchise"
+    | "genre"
+    | "golden"
+    | "imdb"
+    | "letterboxd"
+    | "myanimelist"
+    | "network"
+    | "nfr"
+    | "oscars"
+    | "other_chart"
+    | "pca"
+    | "producer"
+    | "razzie"
+    | "region"
+    | "resolution"
+    | "sag"
+    | "seasonal"
+    | "separator_award"
+    | "separator_chart"
+    | "simkl"
+    | "spirit"
+    | "streaming"
+    | "studio"
+    | "subtitle_language"
+    | "sundance"
+    | "tautulli"
+    | "tiff"
+    | "tmdb"
+    | "trakt"
+    | "universe"
+    | "venice"
+    | "writer"
+    | "year";
+  schedule?: string;
+  asset_directory?: string | string[];
+  template_variables?: {
+    [k: string]: unknown;
+  };
+};
 /**
  * The collection_files attribute is used to define Collection Files by specifying the path type and path of the files that will be executed against the parent library.
  */
 export type CollectionFiles = (
+  | string
   | LegacyDefaultCollectionPath
   | KometaDefaultCollectionPath
   | FilePath
@@ -29,6 +98,7 @@ export type CollectionFiles = (
  * The overlay_files attribute is used to define Overlay Files by specifying the path type and path of the files that will be executed against the parent library.
  */
 export type OverlayFiles = (
+  | string
   | LegacyDefaultOverlayPath
   | KometaDefaultOverlayPath
   | FilePath
@@ -75,6 +145,49 @@ export type OverlayPath = (
   | RepoPath
   | RepoPathOverlayWithTemplateVariables
 )[];
+export type MassMetadataSource = (string | number) | ((string | number) | string[])[];
+export type MassMetadataScheduledCollectionMode =
+  | ("default" | "hide" | "hide_items" | "show_items")
+  | {
+      schedule?: string;
+      mode: "default" | "hide" | "hide_items" | "show_items";
+    };
+export type MassMetadataScheduledLabels =
+  | ("none" | "mild" | "moderate" | "severe")
+  | {
+      schedule?: string;
+      severity: "none" | "mild" | "moderate" | "severe";
+    };
+export type MassMetadataScheduledSource =
+  | MassMetadataSource
+  | {
+      schedule?: string;
+      source?: MassMetadataSource;
+    };
+export type MassMetadataImage =
+  | string
+  | {
+      schedule?: string;
+      source?: string | string[];
+      language?: string;
+      seasons?: boolean;
+      episodes?: boolean;
+      ignore_locked?: boolean;
+      ignore_overlays?: boolean;
+    };
+export type PlaylistFiles = (
+  | LegacyDefaultPlaylistPath
+  | KometaDefaultPlaylistPath
+  | FilePath
+  | FilePathPlaylistWithTemplateVariables
+  | FolderPath
+  | UrlPath
+  | UrlPathPlaylistWithTemplateVariables
+  | GitPath
+  | GitPathPlaylistWithTemplateVariables
+  | RepoPath
+  | RepoPathPlaylistWithTemplateVariables
+)[];
 
 export interface KometaConfigSchema {
   libraries?: Libraries;
@@ -93,6 +206,9 @@ export interface KometaConfigSchema {
   settings?: Settings;
   mal?: Mal;
   trakt?: Trakt;
+  yamtrack?: Yamtrack;
+  github?: Github;
+  playlist_files?: PlaylistFiles;
   [k: string]: unknown;
 }
 export interface Libraries {}
@@ -170,6 +286,7 @@ export interface LegacyDefaultCollectionPath {
     | "seasonal"
     | "separator_award"
     | "separator_chart"
+    | "simkl"
     | "spirit"
     | "streaming"
     | "studio"
@@ -187,7 +304,13 @@ export interface LegacyDefaultCollectionPath {
   asset_directory?: string | string[];
   template_variables?: TemplateVariables;
 }
+/**
+ * Template variables shared across all collection defaults files. Per-key variants (use_<<key>>, name_<<key>>, etc.) are accepted via patternProperties.
+ */
 export interface TemplateVariables {
+  /**
+   * Data object used by dynamic collection defaults (e.g. year ranges).
+   */
   data?: {
     starting?: number | string;
     ending?: number | string;
@@ -195,6 +318,9 @@ export interface TemplateVariables {
     depth?: number;
     limit?: number;
   };
+  /**
+   * Image style used by defaults that support multiple poster styles.
+   */
   style?:
     | "color"
     | "white"
@@ -207,70 +333,279 @@ export interface TemplateVariables {
     | "transparent"
     | "default"
     | "standards";
-  [k: string]: unknown;
-}
-export interface KometaDefaultCollectionPath {
-  default:
-    | "actor"
-    | "anilist"
-    | "aspect"
-    | "audio_language"
-    | "bafta"
-    | "based"
-    | "basic"
-    | "berlinale"
-    | "cannes"
-    | "cesar"
-    | "choice"
-    | "collectionless"
-    | "content_rating_au"
-    | "content_rating_cs"
-    | "content_rating_de"
-    | "content_rating_nz"
-    | "content_rating_mal"
-    | "content_rating_uk"
-    | "content_rating_us"
-    | "continent"
-    | "country"
-    | "decade"
-    | "director"
-    | "emmy"
-    | "flixpatrol"
-    | "franchise"
-    | "genre"
-    | "golden"
-    | "imdb"
-    | "letterboxd"
-    | "myanimelist"
-    | "network"
-    | "nfr"
-    | "oscars"
-    | "other_chart"
-    | "pca"
-    | "producer"
-    | "razzie"
-    | "region"
-    | "resolution"
-    | "sag"
-    | "seasonal"
-    | "separator_award"
-    | "separator_chart"
-    | "spirit"
-    | "streaming"
-    | "studio"
-    | "subtitle_language"
-    | "sundance"
-    | "tautulli"
-    | "tiff"
-    | "tmdb"
-    | "trakt"
-    | "universe"
-    | "venice"
-    | "writer"
-    | "year";
+  /**
+   * Controls the collection mode of all collections in this defaults file.
+   */
+  collection_mode?: "default" | "hide" | "hide_items" | "show_items";
+  /**
+   * Changes the sort order of this defaults file's section against other default sections. Use quotes to preserve leading zeros.
+   */
+  collection_section?: string | number;
+  /**
+   * Delete any Plex collections with these names before running.
+   */
+  delete_collections_named?: string | string[];
+  /**
+   * Sets the background filepath for all collections in this defaults file.
+   */
+  file_background?: string;
+  /**
+   * Sets the poster filepath for all collections in this defaults file.
+   */
+  file_poster?: string;
+  /**
+   * TMDb/TVDb IDs to ignore across all collections in this defaults file.
+   */
+  ignore_ids?: string | (number | string)[];
+  /**
+   * IMDb IDs to ignore across all collections in this defaults file.
+   */
+  ignore_imdb_ids?: string | string[];
+  /**
+   * Append a Radarr tag to every movie found by all collections in this defaults file.
+   */
+  item_radarr_tag?: string | string[];
+  /**
+   * Append a Sonarr tag to every series found by all collections in this defaults file.
+   */
+  item_sonarr_tag?: string | string[];
+  /**
+   * Language for collection names and summaries.
+   */
+  language?:
+    | "default"
+    | "en"
+    | "fr"
+    | "ar"
+    | "da"
+    | "nl"
+    | "de"
+    | "it"
+    | "pt-br"
+    | "nb-no"
+    | "es"
+    | "sv"
+    | "ru"
+    | "bg"
+    | "hu";
+  /**
+   * Minimum number of items required for any collection in this defaults file to be created.
+   */
+  minimum_items?: number;
+  /**
+   * Priority position for all collections in this defaults file's Recommendation Hub rows. Lower numbers appear first.
+   */
+  hub_priority?: number;
+  /**
+   * Changes the name_mapping for all collections. Use <<key_name>> as a placeholder.
+   */
+  name_mapping?: string;
+  /**
+   * Override Radarr add_missing for all collections in this defaults file.
+   */
+  radarr_add_missing?: boolean;
+  /**
+   * Override Radarr root_folder_path for all collections in this defaults file.
+   */
+  radarr_folder?: string;
+  /**
+   * Override Radarr monitor_existing for all collections in this defaults file.
+   */
+  radarr_monitor_existing?: boolean;
+  /**
+   * Override Radarr search for all collections in this defaults file.
+   */
+  radarr_search?: boolean;
+  /**
+   * Override Radarr tag for all collections in this defaults file.
+   */
+  radarr_tag?: string | string[];
+  /**
+   * Override Radarr upgrade_existing for all collections in this defaults file.
+   */
+  radarr_upgrade_existing?: boolean;
+  /**
+   * Set the schedule for all collections in this defaults file.
+   */
   schedule?: string;
-  asset_directory?: string | string[];
-  template_variables?: TemplateVariables;
+  /**
+   * Override Sonarr add_missing for all collections in this defaults file.
+   */
+  sonarr_add_missing?: boolean;
+  /**
+   * Override Sonarr root_folder_path for all collections in this defaults file.
+   */
+  sonarr_folder?: string;
+  /**
+   * Override Sonarr monitor_existing for all collections in this defaults file.
+   */
+  sonarr_monitor_existing?: boolean;
+  /**
+   * Override Sonarr search for all collections in this defaults file.
+   */
+  sonarr_search?: boolean;
+  /**
+   * Override Sonarr tag for all collections in this defaults file.
+   */
+  sonarr_tag?: string | string[];
+  /**
+   * Override Sonarr upgrade_existing for all collections in this defaults file.
+   */
+  sonarr_upgrade_existing?: boolean;
+  /**
+   * Changes the prefix of the sort title. Default: '!'
+   */
+  sort_prefix?: string;
+  /**
+   * Changes the sort title for all collections.
+   */
+  sort_title?: string;
+  /**
+   * Sets the background URL for all collections in this defaults file.
+   */
+  url_background?: string;
+  /**
+   * Changes the poster URL for all collections in this defaults file.
+   */
+  url_poster?: string;
+  /**
+   * Set to false to disable all collections in this defaults file.
+   */
+  use_all?: boolean;
+  /**
+   * Controls Home Tab visibility for all collections. true/false or a schedule string.
+   */
+  visible_home?: boolean | string;
+  /**
+   * Controls Library Recommended Tab visibility for all collections. true/false or a schedule string.
+   */
+  visible_library?: boolean | string;
+  /**
+   * Controls Shared Users' Home Tab visibility for all collections. true/false or a schedule string.
+   */
+  visible_shared?: boolean | string;
+  /**
+   * Limit the number of items for all collections in this defaults file.
+   */
+  limit?: number;
+  /**
+   * Changes the Collection Order for all collections in a Defaults File.
+   */
+  collection_order?: string;
+  /**
+   * Changes the Sync Mode for all collections in a Defaults File.
+   */
+  sync_mode?: "sync" | "append";
+  /**
+   * Add a placeholder Movie/Show to the Separator.
+   */
+  placeholder_imdb_id?: string;
+  /**
+   * Choose the Separator Style.
+   */
+  sep_style?:
+    | "amethyst"
+    | "aqua"
+    | "blue"
+    | "forest"
+    | "fuchsia"
+    | "gold"
+    | "gray"
+    | "green"
+    | "navy"
+    | "ocean"
+    | "olive"
+    | "orchid"
+    | "orig"
+    | "pink"
+    | "plum"
+    | "purple"
+    | "red"
+    | "rust"
+    | "salmon"
+    | "sand"
+    | "stb"
+    | "tan";
+  /**
+   * Turn the Separator Collection off.
+   */
+  use_separator?: boolean;
+  /**
+   * Changes the name of the Separator collection.
+   */
+  name_separator?: string;
+  /**
+   * Changes the summary of the Separator collection.
+   */
+  summary_separator?: string;
+  /**
+   * Changes the poster URL of the Separator collection.
+   */
+  url_poster_separator?: string;
+  /**
+   * Changes the Smart Filter Sort for all collections in a Defaults File.
+   */
+  sort_by?: string;
+  /**
+   * Add a placeholder Movie to the Separator. Movie libraries only.
+   */
+  placeholder_tmdb_movie?: number | string;
+  /**
+   * Add a placeholder Show to the Separator. Show libraries only.
+   */
+  placeholder_tvdb_show?: number | string;
+  /**
+   * Changes the title format of the Dynamic Collections.
+   */
+  name_format?: string;
+  /**
+   * Changes the summary format of the Dynamic Collections.
+   */
+  summary_format?: string;
+  /**
+   * Exclude specific keys from creating a Dynamic Collection.
+   */
+  exclude?: string | (string | number)[];
+  /**
+   * Overrides the default addons dictionary.
+   */
+  addons?: {
+    [k: string]: string | string[];
+  };
+  /**
+   * Appends to the default addons dictionary.
+   */
+  append_addons?: {
+    [k: string]: string | string[];
+  };
+  /**
+   * Removes from the default addons dictionary.
+   */
+  remove_addons?: string | string[];
+  /**
+   * Limits which library types this default applies to.
+   */
+  allowed_libraries?: string | string[];
+  /**
+   * Filter to only show winning entries.
+   */
+  winning?: boolean;
+  /**
+   * Turn the individual year collections off.
+   */
+  use_year_collections?: boolean;
+  /**
+   * Change the collection section for year collections only.
+   */
+  year_collection_section?: number | string;
+  /**
+   * Changes Streaming Service lists to only show original content.
+   */
+  originals_only?: boolean;
+  /**
+   * Changes some Streaming Service lists to regional variants.
+   */
+  region?: string;
 }
 export interface FilePathCollectionWithTemplateVariables {
   file: string;
@@ -357,6 +692,7 @@ export interface TemplateVariables1 {
   font_size?: number;
   font_style?: "Any" | "Italic" | "Normal" | "Oblique";
   font?: string;
+  format?: string;
   git?: string;
   group_alignment?: "horizontal" | "vertical";
   hide_text?: boolean;
@@ -550,6 +886,11 @@ export interface TemplateVariables1 {
     | "star";
   rating1_font?: string;
   rating1_font_size?: number;
+  rating1_font_color?: string;
+  rating1_stroke_width?: number;
+  rating1_stroke_color?: string;
+  rating1_horizontal_offset?: string | number;
+  rating1_vertical_offset?: string | number;
   rating2?: "critic" | "audience" | "user";
   rating2_image?:
     | "anidb"
@@ -565,6 +906,11 @@ export interface TemplateVariables1 {
     | "star";
   rating2_font?: string;
   rating2_font_size?: number;
+  rating2_font_color?: string;
+  rating2_stroke_width?: number;
+  rating2_stroke_color?: string;
+  rating2_horizontal_offset?: string | number;
+  rating2_vertical_offset?: string | number;
   rating3?: "critic" | "audience" | "user";
   rating3_image?:
     | "anidb"
@@ -580,6 +926,11 @@ export interface TemplateVariables1 {
     | "star";
   rating3_font?: string;
   rating3_font_size?: number;
+  rating3_font_color?: string;
+  rating3_stroke_width?: number;
+  rating3_stroke_color?: string;
+  rating3_horizontal_offset?: string | number;
+  rating3_vertical_offset?: string | number;
   region?: "us" | "uk" | "ca" | "da" | "de" | "es" | "fr" | "it" | "pt-br";
   remove_overlays?: boolean;
   reapply_overlays?: boolean;
@@ -631,6 +982,21 @@ export interface TemplateVariables1 {
     | "bottom2"
     | "bottom3";
   vertical_spacing?: number;
+  fresh_rating?: number;
+  maximum_rating?: number;
+  minimum_rating?: number;
+  rating1_addon_offset?: number;
+  rating1_addon_position?: string;
+  rating1_extra?: string;
+  rating1_style?: string;
+  rating2_addon_offset?: number;
+  rating2_addon_position?: string;
+  rating2_extra?: string;
+  rating2_style?: string;
+  rating3_addon_offset?: number;
+  rating3_addon_position?: string;
+  rating3_extra?: string;
+  rating3_style?: string;
 }
 export interface KometaDefaultOverlayPath {
   default?:
@@ -740,6 +1106,7 @@ export interface LegacyDefaultCollectionPath1 {
     | "seasonal"
     | "separator_award"
     | "separator_chart"
+    | "simkl"
     | "spirit"
     | "streaming"
     | "studio"
@@ -795,17 +1162,64 @@ export interface LegacyDefaultOverlayPath1 {
   asset_directory?: string | string[];
   template_variables?: TemplateVariables1;
 }
-/**
- * Used to specify Library Operations to run.
- */
 export interface Operations {
   assets_for_all?: boolean;
   assets_for_all_collections?: boolean;
+  /**
+   * Skip item operations for items with any of these labels.
+   */
+  ignore_labels?: string | [string, ...string[]];
+  /**
+   * When true, this library operations run skips items listed in ignore_ids or ignore_imdb_ids.
+   */
+  respect_ignore_ids?: boolean;
   update_blank_track_titles?: boolean;
   remove_title_parentheses?: boolean;
   split_duplicates?: boolean;
   radarr_add_all?: boolean;
   sonarr_add_all?: boolean;
+  mass_metadata_update?: {
+    genre?:
+      | MassMetadataSource
+      | {
+          schedule?: string;
+          source?: MassMetadataSource;
+          mappings?: MetadataMapping;
+        };
+    content_rating?:
+      | MassMetadataSource
+      | {
+          schedule?: string;
+          source?: MassMetadataSource;
+          mappings?: MetadataMapping;
+        };
+    collections?: MassMetadataScheduledCollectionMode;
+    labels?: MassMetadataScheduledLabels;
+    original_title?: MassMetadataScheduledSource;
+    studio?: MassMetadataScheduledSource;
+    originally_available?: MassMetadataScheduledSource;
+    added_at?: MassMetadataScheduledSource;
+    ratings?: {
+      schedule?: string;
+      user?: MassMetadataScheduledSource;
+      critic?: MassMetadataScheduledSource;
+      audience?: MassMetadataScheduledSource;
+      episode_user?: MassMetadataScheduledSource;
+      episode_critic?: MassMetadataScheduledSource;
+      episode_audience?: MassMetadataScheduledSource;
+    };
+    poster?: MassMetadataImage;
+    background?: MassMetadataImage;
+    logo?: MassMetadataImage;
+    square_art?: MassMetadataImage;
+    backup?: {
+      schedule?: string;
+      path?: string;
+      exclude?: string | string[];
+      sync_tags?: boolean;
+      add_blank_entries?: boolean;
+    };
+  };
   mass_genre_update?:
     | (
         | "tmdb"
@@ -847,7 +1261,19 @@ export interface Operations {
         | string[]
       )[];
   mass_content_rating_update?: ((
-    | ("mdb" | "mdb_commonsense" | "mdb_commonsense0" | "omdb" | "mal" | "lock" | "unlock" | "remove" | "reset")
+    | (
+        | "mdb"
+        | "mdb_commonsense"
+        | "mdb_commonsense0"
+        | "plex_csm"
+        | "plex_csm0"
+        | "omdb"
+        | "mal"
+        | "lock"
+        | "unlock"
+        | "remove"
+        | "reset"
+      )
     | {
         [k: string]: unknown;
       }
@@ -864,17 +1290,89 @@ export interface Operations {
     | ("anidb" | "mal" | "tmdb" | "lock" | "unlock" | "remove" | "reset")
     | (("anidb" | "mal" | "tmdb" | "lock" | "unlock" | "remove" | "reset") | string)[];
   mass_originally_available_update?:
-    | ("tmdb" | "tvdb" | "omdb" | "mdb" | "mdb_digital" | "anidb" | "mal" | "lock" | "unlock" | "remove" | "reset")
+    | (
+        | "tmdb"
+        | "tmdb_premiere"
+        | "tmdb_theatrical"
+        | "tmdb_theatricallimited"
+        | "tmdb_digital"
+        | "tmdb_physical"
+        | "tmdb_tv"
+        | "tvdb"
+        | "omdb"
+        | "mdb"
+        | "mdb_digital"
+        | "anidb"
+        | "mal"
+        | "lock"
+        | "unlock"
+        | "remove"
+        | "reset"
+      )
     | string
     | (
-        | ("tmdb" | "tvdb" | "omdb" | "mdb" | "mdb_digital" | "anidb" | "mal" | "lock" | "unlock" | "remove" | "reset")
+        | (
+            | "tmdb"
+            | "tmdb_premiere"
+            | "tmdb_theatrical"
+            | "tmdb_theatricallimited"
+            | "tmdb_digital"
+            | "tmdb_physical"
+            | "tmdb_tv"
+            | "tvdb"
+            | "omdb"
+            | "mdb"
+            | "mdb_digital"
+            | "anidb"
+            | "mal"
+            | "lock"
+            | "unlock"
+            | "remove"
+            | "reset"
+          )
         | string
       )[];
   mass_added_at_update?:
-    | ("tmdb" | "tvdb" | "omdb" | "mdb" | "mdb_digital" | "anidb" | "mal" | "lock" | "unlock" | "remove" | "reset")
+    | (
+        | "tmdb"
+        | "tmdb_premiere"
+        | "tmdb_theatrical"
+        | "tmdb_theatricallimited"
+        | "tmdb_digital"
+        | "tmdb_physical"
+        | "tmdb_tv"
+        | "tvdb"
+        | "omdb"
+        | "mdb"
+        | "mdb_digital"
+        | "anidb"
+        | "mal"
+        | "lock"
+        | "unlock"
+        | "remove"
+        | "reset"
+      )
     | string
     | (
-        | ("tmdb" | "tvdb" | "omdb" | "mdb" | "mdb_digital" | "anidb" | "mal" | "lock" | "unlock" | "remove" | "reset")
+        | (
+            | "tmdb"
+            | "tmdb_premiere"
+            | "tmdb_theatrical"
+            | "tmdb_theatricallimited"
+            | "tmdb_digital"
+            | "tmdb_physical"
+            | "tmdb_tv"
+            | "tvdb"
+            | "omdb"
+            | "mdb"
+            | "mdb_digital"
+            | "anidb"
+            | "mal"
+            | "lock"
+            | "unlock"
+            | "remove"
+            | "reset"
+          )
         | string
       )[];
   mass_audience_rating_update?:
@@ -1292,17 +1790,65 @@ export interface Operations {
         | number
       )[];
   mass_poster_update?: {
-    source?: "tmdb" | "plex" | "lock" | "unlock";
+    source?:
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")[];
+    language?: string;
     seasons?: boolean;
     episodes?: boolean;
     ignore_locked?: boolean;
     ignore_overlays?: boolean;
   };
   mass_background_update?: {
-    source?: "tmdb" | "plex" | "lock" | "unlock";
+    source?:
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")[];
+    language?: string;
     seasons?: boolean;
     episodes?: boolean;
     ignore_locked?: boolean;
+    ignore_overlays?: boolean;
+  };
+  mass_image_update?: {
+    poster?:
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+      | {
+          source?:
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")[];
+          language?: string;
+          seasons?: boolean;
+          episodes?: boolean;
+          ignore_locked?: boolean;
+          ignore_overlays?: boolean;
+        };
+    background?:
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+      | {
+          source?:
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")[];
+          language?: string;
+          seasons?: boolean;
+          episodes?: boolean;
+          ignore_locked?: boolean;
+          ignore_overlays?: boolean;
+        };
+    logo?:
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+      | {
+          source?:
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")[];
+          language?: string;
+          ignore_locked?: boolean;
+        };
+    square_art?:
+      | ("tvdb" | "plex" | "lock" | "unlock")
+      | {
+          source?: ("tvdb" | "plex" | "lock" | "unlock") | ("tvdb" | "plex" | "lock" | "unlock")[];
+          ignore_locked?: boolean;
+        };
   };
   mass_imdb_parental_labels?: "none" | "mild" | "moderate" | "severe";
   mass_collection_mode?: "default" | "hide" | "hide_items" | "show_items";
@@ -1337,6 +1883,13 @@ export interface Operations {
     [k: string]: unknown;
   };
 }
+export interface MetadataMapping {
+  /**
+   * This interface was referenced by `MetadataMapping`'s JSON-Schema definition
+   * via the `patternProperty` "^.*$".
+   */
+  [k: string]: string | number | null;
+}
 export interface Settings {
   /**
    * Used to control Kometa's cache database.
@@ -1357,7 +1910,7 @@ export interface Settings {
    * Used to define where local assets are located.
    * Specify the directories where assets (posters, backgrounds, etc) are located.
    */
-  asset_directory?: string | string[];
+  asset_directory?: string | string[] | null;
   /**
    * Used to control the asset directory folder structure.
    * While true, Kometa will search the asset_directory for a dedicated folder per item vs while false will look for an image.
@@ -1414,6 +1967,10 @@ export interface Settings {
    */
   minimum_items?: number;
   /**
+   * Priority position for all collections in this defaults file's Recommendation Hub rows. Lower numbers appear first.
+   */
+  hub_priority?: number;
+  /**
    * Used to set the collection_order for every collection run.
    * Set the collection_order for every collection run by Kometa unless the collection has a specific collection_order
    * TIP: 'custom' cannot be used if more than one builder is being used for the collection (such as imdb_list and trakt_list within the same collection).
@@ -1464,6 +2021,19 @@ export interface Settings {
    * If a collection is skipped due to it not being scheduled, delete the collection.
    */
   delete_not_scheduled?: boolean;
+  /**
+   * Used to sort Recommendation Hub rows after all collections are processed.
+   * Sorts the library Recommendation Hub rows on the Plex home screen and/or library Recommended tab.
+   */
+  auto_sort_hubs?:
+    | "sort_title"
+    | "sort_title.desc"
+    | "alpha"
+    | "alpha.desc"
+    | "configured"
+    | "configured.desc"
+    | "random"
+    | null;
   /**
    * Used to control the number of minutes to delay running run_again collections.
    * Set the number of minutes to delay running run_again collections after daily run is finished. For example, if a collection adds items to Sonarr/Radarr, the library can automatically re-run 'X' amount of time later so that any downloaded items are processed.
@@ -1526,6 +2096,7 @@ export interface Settings {
   tvdb_language?:
     | (
         | ""
+        | "default"
         | "aar"
         | "abk"
         | "afr"
@@ -1757,7 +2328,7 @@ export interface Settings {
   /**
    * Used to control the JPG or Lossy WEBP quality used with overlay images.
    */
-  overlay_artwork_quality?: number;
+  overlay_artwork_quality?: number | null;
 }
 /**
  * Describes the Plex server where this library is found.
@@ -1766,11 +2337,11 @@ export interface Plex {
   /**
    * URL at which Kometa can connect to this plex server.  NOT app.plex.tv
    */
-  url?: string;
+  url?: string | null;
   /**
    * Admin token for this Plex server
    */
-  token?: string;
+  token?: string | null;
   /**
    * Connection timeout in seconds for this Plex server
    */
@@ -1778,7 +2349,7 @@ export interface Plex {
   /**
    * Sets DB Cache value for this Plex server in MB
    */
-  db_cache?: number | string;
+  db_cache?: number | string | null;
   /**
    * true/false - If 'true', cleans metadata bundles on this Plex server
    */
@@ -1791,27 +2362,31 @@ export interface Plex {
    * true/false - If 'true', optimizes database on this Plex server
    */
   optimize?: boolean;
+  /**
+   * Turn SSL Verification on or off for this library's Plex server.
+   */
+  verify_ssl?: boolean | null;
 }
 export interface Radarr {
-  url?: string;
-  token?: string;
+  url?: string | null;
+  token?: string | null;
   add_missing?: boolean;
   add_existing?: boolean;
   ignore_cache?: boolean;
   upgrade_existing?: boolean;
   search?: boolean;
-  root_folder_path?: string;
+  root_folder_path?: string | null;
   monitor?: boolean;
   monitor_existing?: boolean;
-  quality_profile?: string;
+  quality_profile?: string | null;
   availability?: "announced" | "cinemas" | "released" | "db";
   tag?: string | null;
   radarr_path?: string | null;
   plex_path?: string | null;
 }
 export interface Sonarr {
-  url?: string;
-  token?: string;
+  url?: string | null;
+  token?: string | null;
   add_missing?: boolean;
   add_existing?: boolean;
   ignore_cache?: boolean;
@@ -1819,14 +2394,13 @@ export interface Sonarr {
   season_folder?: boolean;
   search?: boolean;
   cutoff_search?: boolean;
-  root_folder_path?: string;
+  root_folder_path?: string | null;
   monitor?: "all" | "future" | "missing" | "existing" | "pilot" | "first" | "latest" | "none";
   /**
    * Ensures all existing shows in collections match your monitor setting.
-   * Use the sonarr_monitor_existing Sonarr Setting in the collection definition to match the monitor setting per collection.
    */
   monitor_existing?: boolean;
-  quality_profile?: string;
+  quality_profile?: string | null;
   language_profile?: string;
   series_type?: "standard" | "daily" | "anime";
   tag?: string | null;
@@ -1834,8 +2408,8 @@ export interface Sonarr {
   plex_path?: string | null;
 }
 export interface Tautulli {
-  apikey: string;
-  url: string;
+  apikey?: string | null;
+  url?: string | null;
 }
 export interface TemplateVariables2 {
   /**
@@ -1871,7 +2445,7 @@ export interface TemplateVariables2 {
   /**
    * Set the language of Collection Names and Summaries that Kometa has been translated to with weblate
    */
-  language?: "en" | "fr" | "ar" | "da" | "nl" | "de" | "it" | "pt-br" | "nb-no" | "es" | "sv";
+  language?: "en" | "fr" | "ar" | "da" | "nl" | "de" | "it" | "pt-br" | "nb-no" | "es" | "sv" | "ru" | "bg" | "hu";
   /**
    * Add a placeholder Movie/Show to the Separator to ensure Plex sees a collection with 1 item because 0 item collections can be problematic for Plex.
    * Valid for Movie or Show libraries assuming the ID points to an item of the correct type and that its in your library.
@@ -1887,11 +2461,11 @@ export interface Plex1 {
   /**
    * URL at which Kometa can connect to your plex server. NOT app.plex.tv
    */
-  url: string;
+  url: string | null;
   /**
    * Admin token for this Plex server
    */
-  token: string;
+  token: string | null;
   /**
    * Connection timeout in seconds for this Plex server
    */
@@ -1899,7 +2473,7 @@ export interface Plex1 {
   /**
    * Sets DB Cache value for this Plex server in MB
    */
-  db_cache?: number | string;
+  db_cache?: number | string | null;
   /**
    * true/false - If 'true', cleans metadata bundles on this Plex server
    */
@@ -1915,7 +2489,7 @@ export interface Plex1 {
   /**
    * Turn SSL Verification on or off for only Plex.
    */
-  verify_ssl?: boolean;
+  verify_ssl?: boolean | null;
 }
 /**
  * API Information to connect to TMDb; REQUIRED for the script to run
@@ -1924,7 +2498,7 @@ export interface Tmdb {
   /**
    * API Key to connect to TMDb; REQUIRED for the script to run
    */
-  apikey: string;
+  apikey: string | null;
   /**
    * This field can be either null or a valid ISO 639 language code.
    */
@@ -2120,256 +2694,259 @@ export interface Tmdb {
    * This field can be either null or a valid ISO 3166-1 Code.
    */
   region?:
-    | ""
-    | "AD"
-    | "AE"
-    | "AF"
-    | "AG"
-    | "AI"
-    | "AL"
-    | "AM"
-    | "AO"
-    | "AQ"
-    | "AR"
-    | "AS"
-    | "AT"
-    | "AU"
-    | "AW"
-    | "AX"
-    | "AZ"
-    | "BA"
-    | "BB"
-    | "BD"
-    | "BE"
-    | "BF"
-    | "BG"
-    | "BH"
-    | "BI"
-    | "BJ"
-    | "BL"
-    | "BM"
-    | "BN"
-    | "BO"
-    | "BQ"
-    | "BR"
-    | "BS"
-    | "BT"
-    | "BV"
-    | "BW"
-    | "BY"
-    | "BZ"
-    | "CA"
-    | "CC"
-    | "CD"
-    | "CF"
-    | "CG"
-    | "CH"
-    | "CI"
-    | "CK"
-    | "CL"
-    | "CM"
-    | "CN"
-    | "CO"
-    | "CR"
-    | "CU"
-    | "CV"
-    | "CW"
-    | "CX"
-    | "CY"
-    | "CZ"
-    | "DE"
-    | "DJ"
-    | "DK"
-    | "DM"
-    | "DO"
-    | "DZ"
-    | "EC"
-    | "EE"
-    | "EG"
-    | "EH"
-    | "ER"
-    | "ES"
-    | "ET"
-    | "FI"
-    | "FJ"
-    | "FK"
-    | "FM"
-    | "FO"
-    | "FR"
-    | "GA"
-    | "GB"
-    | "GD"
-    | "GE"
-    | "GF"
-    | "GG"
-    | "GH"
-    | "GI"
-    | "GL"
-    | "GM"
-    | "GN"
-    | "GP"
-    | "GQ"
-    | "GR"
-    | "GS"
-    | "GT"
-    | "GU"
-    | "GW"
-    | "GY"
-    | "HK"
-    | "HM"
-    | "HN"
-    | "HR"
-    | "HT"
-    | "HU"
-    | "ID"
-    | "IE"
-    | "IL"
-    | "IM"
-    | "IN"
-    | "IO"
-    | "IQ"
-    | "IR"
-    | "IS"
-    | "IT"
-    | "JE"
-    | "JM"
-    | "JO"
-    | "JP"
-    | "KE"
-    | "KG"
-    | "KH"
-    | "KI"
-    | "KM"
-    | "KN"
-    | "KP"
-    | "KR"
-    | "KW"
-    | "KY"
-    | "KZ"
-    | "LA"
-    | "LB"
-    | "LC"
-    | "LI"
-    | "LK"
-    | "LR"
-    | "LS"
-    | "LT"
-    | "LU"
-    | "LV"
-    | "LY"
-    | "MA"
-    | "MC"
-    | "MD"
-    | "ME"
-    | "MF"
-    | "MG"
-    | "MH"
-    | "MK"
-    | "ML"
-    | "MM"
-    | "MN"
-    | "MO"
-    | "MP"
-    | "MQ"
-    | "MR"
-    | "MS"
-    | "MT"
-    | "MU"
-    | "MV"
-    | "MW"
-    | "MX"
-    | "MY"
-    | "MZ"
-    | "NA"
-    | "NC"
-    | "NE"
-    | "NF"
-    | "NG"
-    | "NI"
-    | "NL"
-    | "NO"
-    | "NP"
-    | "NR"
-    | "NU"
-    | "NZ"
-    | "OM"
-    | "PA"
-    | "PE"
-    | "PF"
-    | "PG"
-    | "PH"
-    | "PK"
-    | "PL"
-    | "PM"
-    | "PN"
-    | "PR"
-    | "PS"
-    | "PT"
-    | "PW"
-    | "PY"
-    | "QA"
-    | "RE"
-    | "RO"
-    | "RS"
-    | "RU"
-    | "RW"
-    | "SA"
-    | "SB"
-    | "SC"
-    | "SD"
-    | "SE"
-    | "SG"
-    | "SH"
-    | "SI"
-    | "SJ"
-    | "SK"
-    | "SL"
-    | "SM"
-    | "SN"
-    | "SO"
-    | "SR"
-    | "SS"
-    | "ST"
-    | "SV"
-    | "SX"
-    | "SY"
-    | "SZ"
-    | "TC"
-    | "TD"
-    | "TF"
-    | "TG"
-    | "TH"
-    | "TJ"
-    | "TK"
-    | "TL"
-    | "TM"
-    | "TN"
-    | "TO"
-    | "TR"
-    | "TT"
-    | "TV"
-    | "TW"
-    | "TZ"
-    | "UA"
-    | "UG"
-    | "UM"
-    | "US"
-    | "UY"
-    | "UZ"
-    | "VA"
-    | "VC"
-    | "VE"
-    | "VG"
-    | "VI"
-    | "VN"
-    | "VU"
-    | "WF"
-    | "WS"
-    | "YE"
-    | "YT"
-    | "ZA"
-    | "ZM"
-    | "ZW";
+    | (
+        | ""
+        | "AD"
+        | "AE"
+        | "AF"
+        | "AG"
+        | "AI"
+        | "AL"
+        | "AM"
+        | "AO"
+        | "AQ"
+        | "AR"
+        | "AS"
+        | "AT"
+        | "AU"
+        | "AW"
+        | "AX"
+        | "AZ"
+        | "BA"
+        | "BB"
+        | "BD"
+        | "BE"
+        | "BF"
+        | "BG"
+        | "BH"
+        | "BI"
+        | "BJ"
+        | "BL"
+        | "BM"
+        | "BN"
+        | "BO"
+        | "BQ"
+        | "BR"
+        | "BS"
+        | "BT"
+        | "BV"
+        | "BW"
+        | "BY"
+        | "BZ"
+        | "CA"
+        | "CC"
+        | "CD"
+        | "CF"
+        | "CG"
+        | "CH"
+        | "CI"
+        | "CK"
+        | "CL"
+        | "CM"
+        | "CN"
+        | "CO"
+        | "CR"
+        | "CU"
+        | "CV"
+        | "CW"
+        | "CX"
+        | "CY"
+        | "CZ"
+        | "DE"
+        | "DJ"
+        | "DK"
+        | "DM"
+        | "DO"
+        | "DZ"
+        | "EC"
+        | "EE"
+        | "EG"
+        | "EH"
+        | "ER"
+        | "ES"
+        | "ET"
+        | "FI"
+        | "FJ"
+        | "FK"
+        | "FM"
+        | "FO"
+        | "FR"
+        | "GA"
+        | "GB"
+        | "GD"
+        | "GE"
+        | "GF"
+        | "GG"
+        | "GH"
+        | "GI"
+        | "GL"
+        | "GM"
+        | "GN"
+        | "GP"
+        | "GQ"
+        | "GR"
+        | "GS"
+        | "GT"
+        | "GU"
+        | "GW"
+        | "GY"
+        | "HK"
+        | "HM"
+        | "HN"
+        | "HR"
+        | "HT"
+        | "HU"
+        | "ID"
+        | "IE"
+        | "IL"
+        | "IM"
+        | "IN"
+        | "IO"
+        | "IQ"
+        | "IR"
+        | "IS"
+        | "IT"
+        | "JE"
+        | "JM"
+        | "JO"
+        | "JP"
+        | "KE"
+        | "KG"
+        | "KH"
+        | "KI"
+        | "KM"
+        | "KN"
+        | "KP"
+        | "KR"
+        | "KW"
+        | "KY"
+        | "KZ"
+        | "LA"
+        | "LB"
+        | "LC"
+        | "LI"
+        | "LK"
+        | "LR"
+        | "LS"
+        | "LT"
+        | "LU"
+        | "LV"
+        | "LY"
+        | "MA"
+        | "MC"
+        | "MD"
+        | "ME"
+        | "MF"
+        | "MG"
+        | "MH"
+        | "MK"
+        | "ML"
+        | "MM"
+        | "MN"
+        | "MO"
+        | "MP"
+        | "MQ"
+        | "MR"
+        | "MS"
+        | "MT"
+        | "MU"
+        | "MV"
+        | "MW"
+        | "MX"
+        | "MY"
+        | "MZ"
+        | "NA"
+        | "NC"
+        | "NE"
+        | "NF"
+        | "NG"
+        | "NI"
+        | "NL"
+        | "NO"
+        | "NP"
+        | "NR"
+        | "NU"
+        | "NZ"
+        | "OM"
+        | "PA"
+        | "PE"
+        | "PF"
+        | "PG"
+        | "PH"
+        | "PK"
+        | "PL"
+        | "PM"
+        | "PN"
+        | "PR"
+        | "PS"
+        | "PT"
+        | "PW"
+        | "PY"
+        | "QA"
+        | "RE"
+        | "RO"
+        | "RS"
+        | "RU"
+        | "RW"
+        | "SA"
+        | "SB"
+        | "SC"
+        | "SD"
+        | "SE"
+        | "SG"
+        | "SH"
+        | "SI"
+        | "SJ"
+        | "SK"
+        | "SL"
+        | "SM"
+        | "SN"
+        | "SO"
+        | "SR"
+        | "SS"
+        | "ST"
+        | "SV"
+        | "SX"
+        | "SY"
+        | "SZ"
+        | "TC"
+        | "TD"
+        | "TF"
+        | "TG"
+        | "TH"
+        | "TJ"
+        | "TK"
+        | "TL"
+        | "TM"
+        | "TN"
+        | "TO"
+        | "TR"
+        | "TT"
+        | "TV"
+        | "TW"
+        | "TZ"
+        | "UA"
+        | "UG"
+        | "UM"
+        | "US"
+        | "UY"
+        | "UZ"
+        | "VA"
+        | "VC"
+        | "VE"
+        | "VG"
+        | "VI"
+        | "VN"
+        | "VU"
+        | "WF"
+        | "WS"
+        | "YE"
+        | "YT"
+        | "ZA"
+        | "ZM"
+        | "ZW"
+      )
+    | null;
   /**
    * An integer greater than 0 in days
    */
@@ -2384,21 +2961,22 @@ export interface Webhooks {
   delete?: string | null;
 }
 export interface Omdb {
-  apikey: string;
+  apikey?: string | null;
   /**
    * An integer greater than 0 in days
    */
-  cache_expiration: number;
+  cache_expiration?: number;
 }
 export interface Mdblist {
-  apikey: string;
+  apikey?: string | null;
   /**
    * An integer greater than 0 in days
    */
-  cache_expiration: number;
+  cache_expiration?: number;
 }
 export interface Notifiarr {
-  apikey: string;
+  apikey?: string | null;
+  url?: string | null;
 }
 export interface Gotify {
   url: string;
@@ -2410,8 +2988,6 @@ export interface Ntfy {
   topic: string;
 }
 export interface Anidb {
-  client?: string;
-  version?: number;
   /**
    * This field can be either null or a valid ISO 639 language code.
    */
@@ -2607,12 +3183,14 @@ export interface Anidb {
    * An integer greater than 0 in days
    */
   cache_expiration?: number;
-  username: string;
-  password: string;
+  /**
+   * Enable access to mature/restricted content
+   */
+  enable_mature?: boolean;
 }
 export interface Sonarr1 {
-  url: string;
-  token: string;
+  url?: string | null;
+  token?: string | null;
   add_missing?: boolean;
   add_existing?: boolean;
   ignore_cache?: boolean;
@@ -2620,45 +3198,171 @@ export interface Sonarr1 {
   season_folder?: boolean;
   search?: boolean;
   cutoff_search?: boolean;
-  root_folder_path: string;
+  root_folder_path?: string | null;
   monitor?: "all" | "future" | "missing" | "existing" | "pilot" | "first" | "latest" | "none";
   /**
    * Ensures all existing shows in collections match your monitor setting.
    * Use the sonarr_monitor_existing Sonarr Setting in the collection definition to match the monitor setting per collection.
    */
   monitor_existing?: boolean;
-  quality_profile: string;
+  quality_profile?: string | null;
   language_profile?: string;
   series_type?: "standard" | "daily" | "anime";
   tag?: string | null;
-  sonarr_path?: string | null;
+  cutoff?: string;
   plex_path?: string | null;
+  sonarr_path?: string | null;
 }
 export interface Radarr1 {
-  url: string;
-  token: string;
+  url?: string | null;
+  token?: string | null;
   add_missing?: boolean;
   add_existing?: boolean;
   ignore_cache?: boolean;
   upgrade_existing?: boolean;
   search?: boolean;
-  root_folder_path: string;
+  root_folder_path?: string | null;
   monitor?: boolean;
   monitor_existing?: boolean;
-  quality_profile?: string;
-  availability: "announced" | "cinemas" | "released" | "db";
+  quality_profile?: string | null;
+  availability?: "announced" | "cinemas" | "released" | "db";
   tag?: string | null;
   radarr_path?: string | null;
   plex_path?: string | null;
 }
 export interface Mal {
-  client_id: string;
-  client_secret: string;
+  client_id?: string | null;
+  client_secret?: string | null;
   [k: string]: unknown;
 }
 export interface Trakt {
-  client_id: string;
-  client_secret: string;
+  client_id?: string | null;
+  client_secret?: string | null;
   pin?: string | null;
   [k: string]: unknown;
+}
+export interface Yamtrack {
+  url?: string;
+  username?: string;
+  password?: string;
+}
+/**
+ * GitHub API credentials. Optional — providing a token raises the rate limit for GitHub requests.
+ */
+export interface Github {
+  /**
+   * GitHub Personal Access Token. Generate at https://github.com/settings/tokens
+   */
+  token?: string;
+}
+/**
+ * @deprecated
+ */
+export interface LegacyDefaultPlaylistPath {
+  pmm: "playlist";
+  schedule?: string;
+  asset_directory?: string | string[];
+  template_variables?: TemplateVariables3;
+}
+/**
+ * Template variables for playlist defaults files.
+ */
+export interface TemplateVariables3 {
+  /**
+   * Image style used by defaults that support multiple poster styles.
+   */
+  style?:
+    | "color"
+    | "white"
+    | "bw"
+    | "diiivoy"
+    | "diiivoycolor"
+    | "rainier"
+    | "signature"
+    | "orig"
+    | "transparent"
+    | "default"
+    | "standards";
+  /**
+   * Which users to sync the playlist to. 'all' for all users.
+   */
+  sync_to_users?: string | null | string[];
+  /**
+   * Users to exclude from the playlist sync.
+   */
+  exclude_users?: string | null | string[];
+  /**
+   * Libraries to pull items from for all playlists in this defaults file. When omitted, playlists use every library processed as part of the run.
+   */
+  libraries?: string | string[];
+  /**
+   * Minimum items required for any playlist to be created.
+   */
+  minimum_items?: number;
+  /**
+   * Priority position for all collections in this defaults file's Recommendation Hub rows. Lower numbers appear first.
+   */
+  hub_priority?: number;
+  /**
+   * Poster URL for all playlists in this defaults file.
+   */
+  url_poster?: string;
+  /**
+   * Poster filepath for all playlists in this defaults file.
+   */
+  file_poster?: string;
+  /**
+   * Set the schedule for all playlists in this defaults file.
+   */
+  schedule?: string;
+  /**
+   * Delete playlists when not scheduled.
+   */
+  delete_not_scheduled?: boolean;
+  /**
+   * Maximum number of items for all playlists in this defaults file.
+   */
+  limit?: number;
+  delete_playlist?: boolean;
+  exclude_user?: string | unknown[];
+  ignore_ids?: string | unknown[] | number;
+  ignore_imdb_ids?: string | unknown[];
+  item_radarr_tag?: string | unknown[];
+  item_sonarr_tag?: string | unknown[];
+  radarr_add_missing?: boolean;
+  radarr_folder?: string;
+  radarr_tag?: string | unknown[];
+  sonarr_add_missing?: boolean;
+  sonarr_folder?: string;
+  sonarr_tag?: string | unknown[];
+}
+export interface KometaDefaultPlaylistPath {
+  default: "playlist";
+  schedule?: string;
+  asset_directory?: string | string[];
+  template_variables?: TemplateVariables3;
+}
+export interface FilePathPlaylistWithTemplateVariables {
+  file: string;
+  schedule?: string;
+  asset_directory?: string | string[];
+  template_variables?: TemplateVariables3;
+}
+export interface UrlPathPlaylistWithTemplateVariables {
+  url: string;
+  schedule?: string;
+  asset_directory?: string | string[];
+  template_variables?: TemplateVariables3;
+}
+export interface GitPathPlaylistWithTemplateVariables {
+  git: string;
+  schedule?: string;
+  asset_directory?: string | string[];
+  template_variables?: TemplateVariables3;
+}
+export interface RepoPathPlaylistWithTemplateVariables {
+  repo: string;
+  schedule?: string;
+  asset_directory?: string | string[];
+  template_variables?: TemplateVariables3;
 }

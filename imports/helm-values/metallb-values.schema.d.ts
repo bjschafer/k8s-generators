@@ -48,14 +48,6 @@ export interface Values {
     serviceAccount?: string;
     namespace?: string;
     /**
-     * kube-rbac-proxy configuration
-     */
-    rbacProxy?: {
-      repository?: string;
-      tag?: string;
-      [k: string]: unknown;
-    };
-    /**
      * Prometheus Operator PodMonitors
      */
     podMonitor: {
@@ -144,6 +136,7 @@ export interface Values {
       [k: string]: unknown;
     };
     ignoreExcludeLB?: boolean;
+    bgpDebounceTimeout?: number | null;
     updateStrategy?: {
       type: string;
       [k: string]: unknown;

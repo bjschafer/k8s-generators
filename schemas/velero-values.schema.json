@@ -105,7 +105,11 @@
             "type": "string"
         },
         "initContainers": {
-            "type": ["array", "string", "null"],
+            "type": [
+                "array",
+                "string",
+                "null"
+            ],
             "items": {}
         },
         "podSecurityContext": {
@@ -362,28 +366,56 @@
                         "type": "object",
                         "properties": {
                             "name": {
-                                "type": ["string", "null"]
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
                             },
                             "provider": {
-                                "type": ["string"]
+                                "type": [
+                                    "string"
+                                ]
                             },
                             "bucket": {
-                                "type": ["string"]
+                                "type": [
+                                    "string"
+                                ]
                             },
                             "caCert": {
-                                "type": ["string", "null"]
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
                             },
                             "prefix": {
-                                "type": ["string", "null"]
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
                             },
                             "default": {
-                                "type": ["boolean", "null"]
+                                "type": [
+                                    "boolean",
+                                    "null"
+                                ]
                             },
                             "validationFrequency": {
-                                "type": ["string", "null"]
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "backupSyncPeriod": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
                             },
                             "accessMode": {
-                                "type": ["string", "null"]
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
                             },
                             "credential": {
                                 "type": "object",
@@ -413,10 +445,15 @@
                         "type": "object",
                         "properties": {
                             "name": {
-                                "type": ["string", "null"]
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
                             },
                             "provider": {
-                                "type": ["string"]
+                                "type": [
+                                    "string"
+                                ]
                             },
                             "credential": {
                                 "type": "object",
@@ -435,7 +472,7 @@
                             }
                         },
                         "required": [
-                           "provider"
+                            "provider"
                         ]
                     }
                 },
@@ -443,7 +480,10 @@
                     "type": "object",
                     "properties": {
                         "requests": {
-                            "type": ["object", "null"],
+                            "type": [
+                                "object",
+                                "null"
+                            ],
                             "properties": {
                                 "cpu": {
                                     "type": "string"
@@ -455,7 +495,10 @@
                             "required": []
                         },
                         "limits": {
-                            "type": ["object", "null"],
+                            "type": [
+                                "object",
+                                "null"
+                            ],
                             "properties": {
                                 "cpu": {
                                     "type": "string"
@@ -483,10 +526,18 @@
                                         "podResources": {
                                             "type": "object",
                                             "properties": {
-                                                "cpuRequest": {"type": "string"},
-                                                "cpuLimit": {"type": "string"},
-                                                "memoryRequest": {"type": "string"},
-                                                "memoryLimit": {"type": "string"}
+                                                "cpuRequest": {
+                                                    "type": "string"
+                                                },
+                                                "cpuLimit": {
+                                                    "type": "string"
+                                                },
+                                                "memoryRequest": {
+                                                    "type": "string"
+                                                },
+                                                "memoryLimit": {
+                                                    "type": "string"
+                                                }
                                             }
                                         },
                                         "keepLatestMaintenanceJobs": {
@@ -517,10 +568,18 @@
                                             "podResources": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "cpuRequest": {"type": "string"},
-                                                    "cpuLimit": {"type": "string"},
-                                                    "memoryRequest": {"type": "string"},
-                                                    "memoryLimit": {"type": "string"}
+                                                    "cpuRequest": {
+                                                        "type": "string"
+                                                    },
+                                                    "cpuLimit": {
+                                                        "type": "string"
+                                                    },
+                                                    "memoryRequest": {
+                                                        "type": "string"
+                                                    },
+                                                    "memoryLimit": {
+                                                        "type": "string"
+                                                    }
                                                 }
                                             },
                                             "keepLatestMaintenanceJobs": {
@@ -547,7 +606,10 @@
                     "required": []
                 },
                 "namespace": {
-                    "type": ["string", "null"]
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "extraArgs": {
                     "type": "array",
@@ -589,15 +651,24 @@
                             "type": "boolean"
                         },
                         "name": {
-                            "type": ["string", "null"]
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         },
                         "annotations": {
-                            "type": ["object", "null"],
+                            "type": [
+                                "object",
+                                "null"
+                            ],
                             "properties": {},
                             "required": []
                         },
                         "labels": {
-                            "type": ["object", "null"],
+                            "type": [
+                                "object",
+                                "null"
+                            ],
                             "properties": {},
                             "required": []
                         },
@@ -628,10 +699,16 @@
                     "type": "boolean"
                 },
                 "name": {
-                    "type": ["string", "null"]
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "existingSecret": {
-                    "type": ["string", "null"]
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "secretContents": {
                     "type": "object",
@@ -784,20 +861,26 @@
         "configMaps"
     ],
     "dependencies": {
-      "deployNodeAgent": {
-        "oneOf": [
-          {
-            "properties": {
-              "deployNodeAgent": { "const": false }
-            }
-          },
-          {
-            "properties": {
-              "deployNodeAgent": { "const": true }
-            },
-            "required": ["nodeAgent"]
-          }
-        ]
-      }
+        "deployNodeAgent": {
+            "oneOf": [
+                {
+                    "properties": {
+                        "deployNodeAgent": {
+                            "const": false
+                        }
+                    }
+                },
+                {
+                    "properties": {
+                        "deployNodeAgent": {
+                            "const": true
+                        }
+                    },
+                    "required": [
+                        "nodeAgent"
+                    ]
+                }
+            ]
+        }
     }
 }

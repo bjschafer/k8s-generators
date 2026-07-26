@@ -68,6 +68,15 @@ jobs:
         if: env.IS_RENOVATE_PR == 'true'
         run: mise run update-crds --all
 
+      # Same reasoning as the CRDs above, for the Helm values schemas in
+      # schemas/: they're pinned to the same chart version the bump just moved,
+      # and a stale one is worse than none -- it type-checks apps/*/app.ts
+      # against a shape the chart no longer has. Regenerates
+      # imports/helm-values/ too; the sync step at the bottom commits both.
+      - name: Refresh upstream values schemas (Renovate PRs)
+        if: env.IS_RENOVATE_PR == 'true'
+        run: mise run update-schemas --all
+
       # --force bypasses mise's source-based task caching: CI must always
       # regenerate dist/ from source so the git diff check below is meaningful.
       - name: Build (synth all apps into dist/)

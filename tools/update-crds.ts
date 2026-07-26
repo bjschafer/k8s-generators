@@ -14,42 +14,15 @@
  * to validate a fetch without touching tracked files under `apps/`.
  */
 import { execFileSync } from "child_process";
-import { mkdirSync, readFileSync, writeFileSync } from "fs";
+import { mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
 import { Yaml } from "cdk8s";
 import { parseAllDocuments, stringify } from "yaml";
-import { type CrdSource, sources } from "./sources";
-
-const REPO_ROOT = join(__dirname, "..");
+import { type CrdSource, REPO_ROOT, resolveVersion, sources } from "./sources";
 
 /** Loose YAML-doc-as-object type; these are ad-hoc k8s manifests, not typed resources. */
 // oxlint-disable-next-line no-explicit-any
 type AnyDoc = any;
-
-export function parseConstStringFromAppTs(appName: string, constName: string): string {
-  const appTsPath = join(REPO_ROOT, "apps", appName, "app.ts");
-  const src = readFileSync(appTsPath, "utf8");
-  const re = new RegExp("\\bconst\\s+" + constName + "\\s*=\\s*[\"'`](.*?)[\"'`]");
-  const m = re.exec(src);
-  if (!m) {
-    throw new Error(`Could not find const ${constName} in ${appTsPath}`);
-  }
-  return m[1];
-}
-
-function resolveVersion(source: CrdSource, override?: string): string | undefined {
-  if (override) {
-    return override;
-  }
-  switch (source.version.kind) {
-    case "literal":
-      return source.version.value;
-    case "app-const":
-      return parseConstStringFromAppTs(source.version.appName, source.version.constName);
-    case "none":
-      return undefined;
-  }
-}
 
 function flattenDocs(raw: string): AnyDoc[] {
   const docs = parseAllDocuments(raw);
@@ -125,7 +98,7 @@ function runOne(
   source: CrdSource,
   opts: { versionOverride?: string; outDirOverride?: string },
 ): void {
-  const version = resolveVersion(source, opts.versionOverride);
+  const version = resolveVersion(source.version, opts.versionOverride);
   const outputDir = opts.outDirOverride
     ? join(opts.outDirOverride, source.name)
     : join(REPO_ROOT, source.outputDir);

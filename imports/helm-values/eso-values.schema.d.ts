@@ -40,6 +40,16 @@ export interface EsoValuesSchema {
       [k: string]: unknown;
     };
     imagePullSecrets?: unknown[];
+    livenessProbe?: {
+      enabled?: boolean;
+      failureThreshold?: number;
+      initialDelaySeconds?: number;
+      periodSeconds?: number;
+      port?: string | number;
+      successThreshold?: number;
+      timeoutSeconds?: number;
+      [k: string]: unknown;
+    };
     log?: {
       level?: string;
       timeEncoding?: string;
@@ -47,7 +57,18 @@ export interface EsoValuesSchema {
     };
     metrics?: {
       listen?: {
+        auth?: {
+          enabled?: boolean;
+          [k: string]: unknown;
+        };
         port?: number;
+        secure?: {
+          certDir?: string;
+          certFile?: string;
+          enabled?: boolean;
+          keyFile?: string;
+          [k: string]: unknown;
+        };
         [k: string]: unknown;
       };
       service?: {
@@ -86,7 +107,13 @@ export interface EsoValuesSchema {
     };
     readinessProbe?: {
       address?: string;
-      port?: number;
+      enabled?: boolean;
+      failureThreshold?: number;
+      initialDelaySeconds?: number;
+      periodSeconds?: number;
+      port?: string | number;
+      successThreshold?: number;
+      timeoutSeconds?: number;
       [k: string]: unknown;
     };
     replicaCount?: number;
@@ -235,6 +262,7 @@ export interface EsoValuesSchema {
   imagePullSecrets?: unknown[];
   installCRDs?: boolean;
   leaderElect?: boolean;
+  leaderElectionID?: string;
   livenessProbe?: {
     enabled?: boolean;
     spec?: {
@@ -261,6 +289,10 @@ export interface EsoValuesSchema {
   };
   metrics?: {
     listen?: {
+      auth?: {
+        enabled?: boolean;
+        [k: string]: unknown;
+      };
       port?: number;
       secure?: {
         certDir?: string;
@@ -317,6 +349,7 @@ export interface EsoValuesSchema {
     aggregateToEdit?: boolean;
     aggregateToView?: boolean;
     create?: boolean;
+    serviceAccountTokenCreate?: boolean;
     servicebindings?: {
       create?: boolean;
       [k: string]: unknown;
@@ -394,12 +427,18 @@ export interface EsoValuesSchema {
     scrapeTimeout?: string;
     [k: string]: unknown;
   };
+  storeRequeueInterval?: string;
   strategy?: {
     [k: string]: unknown;
   };
   systemAuthDelegator?: boolean;
   tolerations?: unknown[];
   topologySpreadConstraints?: unknown[];
+  vault?: {
+    enableTokenCache?: boolean;
+    tokenCacheSize?: number;
+    [k: string]: unknown;
+  };
   webhook?: {
     affinity?: {
       [k: string]: unknown;
@@ -457,6 +496,16 @@ export interface EsoValuesSchema {
       [k: string]: unknown;
     };
     imagePullSecrets?: unknown[];
+    livenessProbe?: {
+      enabled?: boolean;
+      failureThreshold?: number;
+      initialDelaySeconds?: number;
+      periodSeconds?: number;
+      port?: string | number;
+      successThreshold?: number;
+      timeoutSeconds?: number;
+      [k: string]: unknown;
+    };
     log?: {
       level?: string;
       timeEncoding?: string;
@@ -465,7 +514,18 @@ export interface EsoValuesSchema {
     lookaheadInterval?: string;
     metrics?: {
       listen?: {
+        auth?: {
+          enabled?: boolean;
+          [k: string]: unknown;
+        };
         port?: number;
+        secure?: {
+          certDir?: string;
+          certFile?: string;
+          enabled?: boolean;
+          keyFile?: string;
+          [k: string]: unknown;
+        };
         [k: string]: unknown;
       };
       service?: {
@@ -501,7 +561,13 @@ export interface EsoValuesSchema {
     priorityClassName?: string;
     readinessProbe?: {
       address?: string;
-      port?: number;
+      enabled?: boolean;
+      failureThreshold?: number;
+      initialDelaySeconds?: number;
+      periodSeconds?: number;
+      port?: string | number;
+      successThreshold?: number;
+      timeoutSeconds?: number;
       [k: string]: unknown;
     };
     replicaCount?: number;

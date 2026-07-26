@@ -166,6 +166,7 @@ export interface SchemaForVeleroHelmChart {
       prefix?: string | null;
       default?: boolean | null;
       validationFrequency?: string | null;
+      backupSyncPeriod?: string | null;
       accessMode?: string | null;
       credential?: {
         [k: string]: unknown;

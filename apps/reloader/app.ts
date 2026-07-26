@@ -6,6 +6,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { NewKustomize } from "../../lib/kustomize";
 import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
+import { ReloaderValuesSchema } from "../../imports/helm-values/reloader-values.schema";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -17,7 +18,7 @@ NewArgoApp(name, {
   namespace: namespace,
 });
 
-new HelmApp(app, "helm", {
+new HelmApp<Partial<ReloaderValuesSchema>>(app, "helm", {
   chart: "reloader",
   repo: "https://stakater.github.io/stakater-charts",
   version: version,
