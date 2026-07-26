@@ -16,7 +16,19 @@ import { StorageClass } from "../../lib/volume";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const version = "v3.x.x";
+// immich publishes a tag per build -- immich-server alone carries 25k+ of
+// them. A `semver` strategy has to page that entire tag list on every
+// reconcile, which GHCR answers with `toomanyrequests`, so the updater errored
+// hourly and never moved the image off whatever it last resolved. This is a
+// volume problem, not an auth one: anonymous tag listing succeeds, there is
+// just far too much of it.
+//
+// Upstream keeps `v3` pointed at the newest v3.x.y, so following it by digest
+// gets the same patch-within-v3 behaviour the old `v3.x.x` constraint was
+// after, at one manifest request per image instead of 25+ paginated tag-list
+// calls. Moving to v4 stays deliberate and manual, which suits an app that
+// runs database migrations on upgrade.
+const majorTag = "v3";
 
 const images = {
   MACHINE_LEARNING: "ghcr.io/immich-app/immich-machine-learning",
@@ -29,8 +41,8 @@ NewArgoApp(namespace, {
     images: Object.values(images).map((image: string) => {
       return {
         image: image,
-        strategy: "semver",
-        versionConstraint: version,
+        strategy: "digest",
+        versionConstraint: majorTag,
       };
     }),
   },

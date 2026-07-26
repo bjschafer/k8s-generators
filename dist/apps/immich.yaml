@@ -33,12 +33,12 @@ spec:
     - images:
         - alias: immich-machine-learning
           commonUpdateSettings:
-            updateStrategy: semver
-          imageName: ghcr.io/immich-app/immich-machine-learning:v3.x.x
+            updateStrategy: digest
+          imageName: ghcr.io/immich-app/immich-machine-learning:v3
         - alias: immich-server
           commonUpdateSettings:
-            updateStrategy: semver
-          imageName: ghcr.io/immich-app/immich-server:v3.x.x
+            updateStrategy: digest
+          imageName: ghcr.io/immich-app/immich-server:v3
       namePattern: immich
   writeBackConfig:
     gitConfig:
