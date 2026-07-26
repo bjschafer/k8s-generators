@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: ceph-csi-operator
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: ceph-csi-operator
-    app.kubernetes.io/version: v1.0.3
+    app.kubernetes.io/version: v1.0.4
     control-plane: controller-manager
-    helm.sh/chart: ceph-csi-operator-1.0.3
+    helm.sh/chart: ceph-csi-operator-1.0.4
   name: ceph-csi-operator-controller-manager
   namespace: ceph
 spec:
