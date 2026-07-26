@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: config
+  name: app-config
   namespace: pdns-admin
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
-  storageClassName: longhorn
+      storage: 5Gi
+  storageClassName: ceph-rbd
   volumeMode: Filesystem
+  volumeName: pvc-21ad7eba-9add-477e-a3c4-e1147528c57d

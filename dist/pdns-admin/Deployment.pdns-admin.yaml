@@ -53,7 +53,7 @@ spec:
             runAsNonRoot: true
           volumeMounts:
             - mountPath: /data
-              name: pvc-config
+              name: pvc-app-config
       dnsPolicy: ClusterFirst
       hostNetwork: false
       nodeSelector:
@@ -66,7 +66,7 @@ spec:
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-config
+        - name: pvc-app-config
           persistentVolumeClaim:
-            claimName: config
+            claimName: app-config
             readOnly: false

@@ -1,5 +1,5 @@
 resources:
   - Deployment.pdns-admin.yaml
   - Ingress.pdns-admin.yaml
-  - PersistentVolumeClaim.config.yaml
+  - PersistentVolumeClaim.app-config.yaml
   - Service.pdns-admin.yaml
