@@ -29,7 +29,7 @@ new HelmApp(app, "operator", {
   chart: "ceph-csi-operator",
   repo: "https://ceph.github.io/ceph-csi-operator/",
   // renovate: datasource=helm depName=ceph-csi-operator registryUrl=https://ceph.github.io/ceph-csi-operator/
-  version: "1.0.3",
+  version: "1.0.4",
   releaseName: "ceph-csi-operator",
   namespace,
   values: {
