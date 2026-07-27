@@ -312,7 +312,7 @@ class VectorImageCatalog extends Chart {
     // renovate: datasource=docker depName=vectorchord-pg16 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
     const vectorchordPg16 = "16.14-1.1.1";
     // renovate: datasource=docker depName=vectorchord-pg17 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
-    const vectorchordPg17 = "17.10-1.1.1";
+    const vectorchordPg17 = "17.10";
 
     this.Catalog = new ImageCatalog(this, "catalog", {
       metadata: {
