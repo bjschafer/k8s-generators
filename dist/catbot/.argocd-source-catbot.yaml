@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/bjschafer/catbot:main@sha256:a6d769ce82aab7829136903ef2e476a97ef46c6570b6995a7866aabfec91f4f7
+  - ghcr.io/bjschafer/catbot:main@sha256:7ff2021381b6cd672672702d752799a23a3a4e8923810af297426a9bb2cd53ed
