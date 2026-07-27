@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: snapshot-controller
     app.kubernetes.io/version: v8.6.0
-    helm.sh/chart: snapshot-controller-5.1.1
+    helm.sh/chart: snapshot-controller-5.2.0
   name: snapshot-controller
   namespace: ceph
 spec:
