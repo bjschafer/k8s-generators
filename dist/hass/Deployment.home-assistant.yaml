@@ -27,6 +27,13 @@ spec:
         - env:
             - name: TZ
               value: America/Chicago
+            - name: HASS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: hass-db-credentials
+            - name: HASS_DB_URL
+              value: postgresql://hass:$(HASS_DB_PASSWORD)@pg-prod.cmdcentral.xyz/hass
           image: ghcr.io/home-assistant/home-assistant
           imagePullPolicy: Always
           livenessProbe:

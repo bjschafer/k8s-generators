@@ -101,4 +101,17 @@ export const DATABASES: DatabaseConfig[] = [
     comment: "Book Club database owner",
     appNamespace: "book-club",
   },
+
+  {
+    name: "hass",
+    comment: "Home Assistant recorder database owner",
+    appNamespace: "hass",
+    // The role and database predate this registry -- they were created by hand.
+    // Adopting them here is what rotates the password off the hardcoded value.
+    //
+    // No symbols: Home Assistant's recorder takes a single postgresql:// URL,
+    // and the default symbol set ("-_$@") contains characters that change the
+    // meaning of a URL rather than surviving it.
+    passwordGeneration: { length: 40, digits: 8, symbols: 0 },
+  },
 ];

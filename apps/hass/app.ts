@@ -5,6 +5,7 @@ import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
 import { StorageClass } from "../../lib/volume";
+import { createAppDatabaseSecret } from "../postgres/database-provisioning";
 import {
   Cpu,
   DeploymentStrategy,
@@ -61,6 +62,10 @@ const configPvc = new PersistentVolumeClaim(shared, "hass-config-pvc", {
   ),
 });
 
+// Recorder credentials for the `hass` role on prod-pg17, generated and rotated
+// by CNPG via apps/postgres/databases.ts.
+const dbCreds = createAppDatabaseSecret(app, "hass");
+
 new AppPlus(app, "home-assistant-app", {
   name: "home-assistant",
   namespace: namespace,
@@ -77,6 +82,20 @@ new AppPlus(app, "home-assistant-app", {
   ports: [hassPort],
   extraEnv: {
     TZ: EnvValue.fromValue(TZ),
+    // Consumed by `db_url: !env_var HASS_DB_URL` in /config/configuration.yaml,
+    // which lives on the config PVC rather than in this repo.
+    //
+    // Declaration order matters: Kubernetes expands a $(VAR) reference only
+    // against env vars declared *earlier* in the same container, so the
+    // password has to precede the URL that interpolates it.
+    //
+    // Host stays on the external LoadBalancer name, not prod-pg17-pooler-rw:
+    // this pod is hostNetwork with DNS_NAMESERVERS, so *.svc.cluster.local
+    // does not resolve for it.
+    HASS_DB_PASSWORD: EnvValue.fromSecretValue({ secret: dbCreds.secret, key: "password" }),
+    HASS_DB_URL: EnvValue.fromValue(
+      "postgresql://hass:$(HASS_DB_PASSWORD)@pg-prod.cmdcentral.xyz/hass",
+    ),
   },
   extraVolumeMounts: [
     {

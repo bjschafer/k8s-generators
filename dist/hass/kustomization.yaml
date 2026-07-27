@@ -1,5 +1,6 @@
 resources:
   - Deployment.home-assistant.yaml
+  - ExternalSecret.hass-db-credentials.yaml
   - Ingress.home-assistant.yaml
   - PersistentVolumeClaim.config.yaml
   - Service.home-assistant.yaml

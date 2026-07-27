@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: hass
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: Home Assistant recorder database owner
+  login: true
+  name: hass
+  passwordSecret:
+    name: hass-db-credentials
