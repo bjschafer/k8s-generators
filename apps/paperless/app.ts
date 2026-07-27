@@ -147,6 +147,48 @@ new ExternalSecret(secretKeyChart, "secret", {
 });
 const paperlessSecretKey = Secret.fromSecretName(app, "secret-key-ref", secretKeyName);
 
+// FTP login for the scanner that drops documents into the consume directory. Was a
+// hardcoded literal here, which meant it sat in plaintext in a public repo -- and the
+// same value was in use as a Postgres password elsewhere.
+//
+// No symbols, and short enough to be typed on a scanner's front panel: this one is
+// entered by hand on the device, not read by anything that can handle punctuation
+// reliably. Generated once and never rotated (refreshInterval "0") -- a regenerated
+// value would silently break document ingest until the scanner is reconfigured.
+const ftpSecretName = "paperless-ftp-credentials";
+const ftpGeneratorName = "paperless-ftp-password-generator";
+const ftpChart = new Chart(app, "ftp-credentials");
+new Password(ftpChart, "gen", {
+  metadata: { name: ftpGeneratorName, namespace: namespace },
+  spec: {
+    length: 24,
+    digits: 4,
+    symbols: 0,
+    noUpper: false,
+    allowRepeat: true,
+    secretKeys: ["FTP_USER_PASS"],
+  },
+});
+new ExternalSecret(ftpChart, "secret", {
+  metadata: { name: ftpSecretName, namespace: namespace },
+  spec: {
+    refreshInterval: "0",
+    dataFrom: [
+      {
+        sourceRef: {
+          generatorRef: {
+            apiVersion: "generators.external-secrets.io/v1alpha1",
+            kind: ExternalSecretSpecDataFromSourceRefGeneratorRefKind.PASSWORD,
+            name: ftpGeneratorName,
+          },
+        },
+      },
+    ],
+    target: { name: ftpSecretName },
+  },
+});
+const ftpCredentials = Secret.fromSecretName(app, "ftp-credentials-ref", ftpSecretName);
+
 class Paperless extends Chart {
   constructor(scope: App, id: string) {
     super(scope, id);
@@ -392,7 +434,10 @@ class Paperless extends Chart {
       ],
       extraEnv: {
         FTP_USER_NAME: EnvValue.fromValue("scanner"),
-        FTP_USER_PASS: EnvValue.fromValue("qp1341"),
+        FTP_USER_PASS: EnvValue.fromSecretValue({
+          secret: ftpCredentials,
+          key: "FTP_USER_PASS",
+        }),
         FTP_USER_UID: EnvValue.fromValue("1000"),
         FTP_USER_GID: EnvValue.fromValue("1000"),
         FTP_USER_HOME: EnvValue.fromValue("/home/scanner"),

@@ -33,7 +33,10 @@ spec:
             - name: FTP_USER_NAME
               value: scanner
             - name: FTP_USER_PASS
-              value: qp1341
+              valueFrom:
+                secretKeyRef:
+                  key: FTP_USER_PASS
+                  name: paperless-ftp-credentials
             - name: FTP_USER_UID
               value: "1000"
             - name: FTP_USER_GID
