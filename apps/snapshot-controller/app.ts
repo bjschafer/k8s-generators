@@ -19,7 +19,7 @@ new HelmApp(app, "helm", {
   chart: "snapshot-controller",
   repo: "https://piraeus.io/helm-charts/",
   // renovate: datasource=helm depName=snapshot-controller registryUrl=https://piraeus.io/helm-charts/
-  version: "5.1.1",
+  version: "5.2.0",
   releaseName: name,
   namespace,
   values: {
