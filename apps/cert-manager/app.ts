@@ -13,7 +13,7 @@ export const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 // renovate: datasource=github-releases depName=cert-manager/cert-manager extractVersion=^v(?<version>.*)$
-const version = "1.21.0";
+const version = "1.21.1";
 
 NewArgoApp(name, {
   namespace: namespace,
