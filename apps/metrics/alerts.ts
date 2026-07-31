@@ -723,7 +723,13 @@ export function addAlerts(scope: Construct, id: string): void {
       {
         alert: "KubernetesApiServerErrors",
         expr: 'sum(rate(apiserver_request_total{job="apiserver",code=~"(?:5..)"}[1m])) / sum(rate(apiserver_request_total{job="apiserver"}[1m])) * 100 > 3',
-        for: "2m",
+        // Velero's nightly Kopia repo-maintenance burst (~35+ jobs across
+        // backup repos, a couple hours after the 06:00 UTC daily backup)
+        // briefly starves etcd on the control-plane nodes, pushing 5xx rate
+        // above 3% for 5-10min most nights before self-resolving. 2m paged
+        // every night for a non-issue; 10m rides out the known blip while
+        // still catching a real sustained outage.
+        for: "10m",
         labels: {
           priority: PRIORITY.HIGH,
         },

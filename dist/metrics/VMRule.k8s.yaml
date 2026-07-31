@@ -211,7 +211,7 @@ spec:
                 LABELS = {{ $labels }}
             summary: Kubernetes API server errors
           expr: sum(rate(apiserver_request_total{job="apiserver",code=~"(?:5..)"}[1m])) / sum(rate(apiserver_request_total{job="apiserver"}[1m])) * 100 > 3
-          for: 2m
+          for: 10m
           labels:
             namespace: metrics
             priority: "1"
