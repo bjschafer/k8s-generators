@@ -74,7 +74,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "CephOsdLowSpace",
-        expr: `1 - (sum by (job) ((ceph_cluster_total_bytes-ceph_cluster_total_used_bytes)/ceph_cluster_total_bytes)) > 0.9`,
+        expr: `1 - (sum by (job) ((ceph_cluster_total_bytes - ceph_cluster_total_used_bytes) / clamp_min(ceph_cluster_total_bytes, 1))) > 0.9`,
         for: "30m",
         labels: {
           severity: "warning",
@@ -189,7 +189,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "CNPGMaxConnectionsReached",
-        expr: `100 * sum by (pod) (cnpg_backends_total{namespace=~"postgres"}) / sum by (pod) (cnpg_pg_settings_setting{name="max_connections", namespace=~"postgres"}) > 90`,
+        expr: `100 * sum by (pod) (cnpg_backends_total{namespace="postgres"}) / sum by (pod) (cnpg_pg_settings_setting{name="max_connections", namespace="postgres"}) > 90`,
         for: "5m",
         labels: {
           priority: PRIORITY.NORMAL,
