@@ -1,6 +1,6 @@
 [tools]
 bun = "latest"
-kubectl = "1.36.2"
+kubectl = "1.36.3"
 helm = "3.21.3"
 # Renders the velero CRDs (`velero install --crds-only`), so the CLI version IS
 # the CRD version -- unlike helm above, which only pulls a chart at a version
