@@ -104,7 +104,19 @@ export class ScrapeConfigs extends Chart {
       spec: {
         staticConfigs: [
           {
-            targets: ["vmhost03.cmdcentral.xyz:9283"],
+            // Only the *active* ceph-mgr serves metrics; standbys answer 200 with an
+            // empty body. Target all three mons so the scrape follows mgr failover
+            // instead of silently going empty (which is what happened on 2026-07-09,
+            // when the active mgr moved off vmhost03 and every ceph_* series stopped).
+            targets: [
+              "vmhost01.cmdcentral.xyz:9283",
+              "vmhost02.cmdcentral.xyz:9283",
+              "vmhost03.cmdcentral.xyz:9283",
+            ],
+            // Standbys scrape clean (200, no samples), so they never trip a down-target
+            // rule -- and they keep distinct instance labels, so there are no duplicate
+            // `up` series. Cost is a one-window gap in rate() when the active mgr moves;
+            // the dashboards all sum() across instance, so they ride through it.
             labels: {
               job: "ceph",
               cluster: "ceph",

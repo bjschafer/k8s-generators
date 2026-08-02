@@ -9,6 +9,21 @@ spec:
   groups:
     - name: ceph
       rules:
+        - alert: CephMetricsAbsent
+          annotations:
+            description: |
+              No ceph_osd_up series for 15m, so every other Ceph alert is evaluating
+              against no data and cannot fire. Usually means the active ceph-mgr moved
+              and the prometheus module is not serving: only the active mgr returns
+              metrics, standbys answer 200 with an empty body.
+              Check: curl -s http://vmhost0{1,2,3}.cmdcentral.xyz:9283/metrics | wc -l
+            summary: Ceph metrics missing -- all Ceph alerting is blind
+          expr: absent(ceph_osd_up)
+          for: 15m
+          labels:
+            namespace: metrics
+            priority: "1"
+            push_notify: "true"
         - alert: CephState
           annotations:
             description: |

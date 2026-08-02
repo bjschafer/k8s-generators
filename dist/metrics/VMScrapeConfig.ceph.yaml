@@ -9,4 +9,6 @@ spec:
         cluster: ceph
         job: ceph
       targets:
+        - vmhost01.cmdcentral.xyz:9283
+        - vmhost02.cmdcentral.xyz:9283
         - vmhost03.cmdcentral.xyz:9283

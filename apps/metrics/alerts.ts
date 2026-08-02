@@ -39,6 +39,31 @@ export function addAlerts(scope: Construct, id: string): void {
     namespace: namespace,
     rules: [
       {
+        // Every other rule in this group is a comparison, so all of them evaluate to
+        // no-data (not true) the moment the exporter stops -- which is how Ceph
+        // alerting sat dark from 2026-07-09 to 2026-08-01 after the active mgr moved
+        // off the only host being scraped. This is the watchdog for that blind spot.
+        // absent() has no instance label, so a standby mgr can never trip it; it only
+        // fires when no mgr anywhere is serving metrics.
+        alert: "CephMetricsAbsent",
+        expr: `absent(ceph_osd_up)`,
+        for: "15m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "Ceph metrics missing -- all Ceph alerting is blind",
+          description: heredoc`
+            No ceph_osd_up series for 15m, so every other Ceph alert is evaluating
+            against no data and cannot fire. Usually means the active ceph-mgr moved
+            and the prometheus module is not serving: only the active mgr returns
+            metrics, standbys answer 200 with an empty body.
+            Check: curl -s http://vmhost0{1,2,3}.cmdcentral.xyz:9283/metrics | wc -l
+            `,
+        },
+      },
+      {
         alert: "CephState",
         expr: `ceph_health_state != 0`,
         for: "0m",
