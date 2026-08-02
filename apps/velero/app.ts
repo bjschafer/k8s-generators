@@ -95,8 +95,8 @@ class Velero extends Chart {
           podVolumePath: "/var/lib/kubelet/pods",
           dnsPolicy: "ClusterFirst",
           // node-agent-config limits concurrent data uploads per node to avoid
-          // overwhelming Garage's LMDB under concurrent write load
-          // node-agent-config limits concurrent data uploads per node
+          // overwhelming Garage's LMDB under concurrent write load, and to keep
+          // backup read load off Ceph from starving etcd (see configmap below)
           extraArgs: ["--node-agent-configmap=node-agent-config"],
           resources: {
             requests: {
@@ -121,9 +121,14 @@ class Velero extends Chart {
         namespace: namespace,
       },
       data: {
+        // The control plane VMs' RBD disks live on the same Ceph cluster that
+        // data uploads read from, so backup concurrency directly degrades etcd
+        // fsync latency. At 3 the weekly backup drove k8s-02/03 disk util to
+        // ~99%, timing out etcd and flapping every leader-elected controller in
+        // the cluster. Drop to 1 if that recurs.
         "load-concurrency": JSON.stringify({
           loadConcurrency: {
-            globalConfig: 3,
+            globalConfig: 2,
           },
         }),
       },

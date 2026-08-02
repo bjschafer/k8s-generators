@@ -42,6 +42,19 @@ new HelmApp(app, "stack", {
       extraArgs: {
         "controller.disableReconcileFor":
           "PrometheusRule,ScrapeConfig,ServiceMonitor,PodMonitor,AlertmanagerConfig,Probe",
+        // Defaults (15s/10s) are too tight when etcd stalls under Velero backup
+        // load: the operator loses its lease and exits 1. Renewal now gets 45s
+        // of retries. Must keep renew-deadline < lease-duration.
+        "leader-elect-lease-duration": "60s",
+        "leader-elect-renew-deadline": "45s",
+      },
+    },
+    "kube-state-metrics": {
+      // /livez proxies a call to the apiserver, so an apiserver stall kills KSM
+      // even though KSM itself is healthy — and restarting it fixes nothing.
+      // 12 x 10s tolerates 2min of apiserver unavailability before a restart.
+      livenessProbe: {
+        failureThreshold: 12,
       },
     },
     defaultDashboards: {

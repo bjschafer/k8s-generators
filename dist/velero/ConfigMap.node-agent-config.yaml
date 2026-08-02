@@ -4,4 +4,4 @@ metadata:
   name: node-agent-config
   namespace: velero
 data:
-  load-concurrency: '{"loadConcurrency":{"globalConfig":3}}'
+  load-concurrency: '{"loadConcurrency":{"globalConfig":2}}'

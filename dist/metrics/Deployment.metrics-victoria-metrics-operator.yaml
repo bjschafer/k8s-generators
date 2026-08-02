@@ -35,6 +35,8 @@ spec:
             - --health-probe-bind-address=:8081
             - --webhook.enable=true
             - --controller.disableReconcileFor=PrometheusRule,ScrapeConfig,ServiceMonitor,PodMonitor,AlertmanagerConfig,Probe
+            - --leader-elect-lease-duration=60s
+            - --leader-elect-renew-deadline=45s
           env:
             - name: POD_NAME
               valueFrom:
