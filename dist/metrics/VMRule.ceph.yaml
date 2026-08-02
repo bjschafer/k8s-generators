@@ -24,15 +24,39 @@ spec:
             namespace: metrics
             priority: "1"
             push_notify: "true"
+        - alert: CephHealthCheckError
+          annotations:
+            description: |
+              Ceph health check {{ $labels.name }} is failing at HEALTH_ERR.
+              Detail: ceph health detail
+            summary: Ceph {{ $labels.name }} (HEALTH_ERR)
+          expr: ceph_health_detail{severity="HEALTH_ERR"} > 0
+          for: 5m
+          labels:
+            namespace: metrics
+            priority: "1"
+            push_notify: "true"
+        - alert: CephHealthCheckWarning
+          annotations:
+            description: |
+              Ceph health check {{ $labels.name }} has been failing for 15m.
+              Detail: ceph health detail
+            summary: Ceph {{ $labels.name }} (HEALTH_WARN)
+          expr: ceph_health_detail{severity="HEALTH_WARN", name!~"DAEMON_OLD_VERSION|OSD_UPGRADE_FINISHED|TELEMETRY_CHANGED"} > 0
+          for: 15m
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"
         - alert: CephState
           annotations:
             description: |
-              Ceph instance unhealthy
-                VALUE = {{ $value }}
-                LABELS = {{ $labels}}
-            summary: Ceph unhealthy (instance {{ $labels.instance }})
-          expr: ceph_health_state != 0
-          for: 0m
+              ceph_health_status = {{ $value }} (1 = HEALTH_WARN, 2 = HEALTH_ERR) but no
+              ceph_health_detail check is set, so the cause is outside the set the mgr
+              exports. Run: ceph health detail
+            summary: Ceph unhealthy, no named health check to explain it
+          expr: (ceph_health_status != 0) unless on () (max(ceph_health_detail) > 0)
+          for: 5m
           labels:
             namespace: metrics
             priority: "1"

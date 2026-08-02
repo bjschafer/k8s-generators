@@ -64,19 +64,68 @@ export function addAlerts(scope: Construct, id: string): void {
         },
       },
       {
-        alert: "CephState",
-        expr: `ceph_health_state != 0`,
-        for: "0m",
+        // ceph_health_detail is one series per named check, so these say *what* is
+        // wrong (MON_DOWN, PG_DEGRADED, ...) instead of just "ceph is unhealthy".
+        // Ceph tags each check HEALTH_ERR or HEALTH_WARN itself; split on that label
+        // rather than templating priority, so the routing stays greppable.
+        alert: "CephHealthCheckError",
+        expr: `ceph_health_detail{severity="HEALTH_ERR"} > 0`,
+        for: "5m",
         labels: {
           priority: PRIORITY.HIGH,
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary: "Ceph unhealthy (instance {{ $labels.instance }})",
+          summary: "Ceph {{ $labels.name }} (HEALTH_ERR)",
           description: heredoc`
-            Ceph instance unhealthy
-              VALUE = {{ $value }}
-              LABELS = {{ $labels}}
+            Ceph health check {{ $labels.name }} is failing at HEALTH_ERR.
+            Detail: ceph health detail
+            `,
+        },
+      },
+      {
+        // Excluded checks are lifecycle noise rather than faults: DAEMON_OLD_VERSION
+        // and OSD_UPGRADE_FINISHED both trip during the routine kured/system-upgrade
+        // rolling reboots, and TELEMETRY_CHANGED just means the telemetry prompt
+        // changed. RECENT_CRASH is deliberately NOT excluded -- crashes should page.
+        alert: "CephHealthCheckWarning",
+        expr: `ceph_health_detail{severity="HEALTH_WARN", name!~"DAEMON_OLD_VERSION|OSD_UPGRADE_FINISHED|TELEMETRY_CHANGED"} > 0`,
+        for: "15m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "Ceph {{ $labels.name }} (HEALTH_WARN)",
+          description: heredoc`
+            Ceph health check {{ $labels.name }} has been failing for 15m.
+            Detail: ceph health detail
+            `,
+        },
+      },
+      {
+        // Was `ceph_health_state != 0` -- a metric that has never existed, so this
+        // rule could never fire. The real series is ceph_health_status (0/1/2).
+        //
+        // ceph_health_detail only covers the ~24 checks the mgr currently knows about
+        // (no OSD_FULL, MON_DISK_LOW, POOL_FULL, ...), so this stays as the catch-all
+        // for anything the two rules above can't name. The `unless` suppresses it when
+        // a named check already explains the unhealthy state, so a single problem
+        // pages once rather than twice. If ceph_health_detail ever disappears the
+        // unless matches nothing and this degrades back to a plain rollup.
+        alert: "CephState",
+        expr: `(ceph_health_status != 0) unless on () (max(ceph_health_detail) > 0)`,
+        for: "5m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "Ceph unhealthy, no named health check to explain it",
+          description: heredoc`
+            ceph_health_status = {{ $value }} (1 = HEALTH_WARN, 2 = HEALTH_ERR) but no
+            ceph_health_detail check is set, so the cause is outside the set the mgr
+            exports. Run: ceph health detail
             `,
         },
       },
