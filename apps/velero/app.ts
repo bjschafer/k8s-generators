@@ -254,7 +254,6 @@ class Velero extends Chart {
       "immich",
       "mealie",
       "media",
-      "monica",
       "netbox",
       "paperless",
       "rclone",

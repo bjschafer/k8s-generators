@@ -13,7 +13,6 @@ spec:
       - immich
       - mealie
       - media
-      - monica
       - netbox
       - paperless
       - rclone
