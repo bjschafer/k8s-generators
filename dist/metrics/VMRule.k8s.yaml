@@ -135,8 +135,8 @@ spec:
               Pod {{ $labels.pod }} is crash looping
                 VALUE = {{ $value }}
                 LABELS = {{ $labels }}
-            summary: Kubernetes pod crash looping (instance {{ $labels.instance }})
-          expr: increase(kube_pod_container_status_restarts_total[15m]) > 3
+            summary: "Kubernetes pod crash looping (namespace: {{ $labels.namespace }}; pod: {{ $labels.pod }})"
+          expr: increase(max without (instance) (kube_pod_container_status_restarts_total)[15m:1m]) > 3
           for: 5m
           labels:
             namespace: metrics

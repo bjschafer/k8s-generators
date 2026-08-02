@@ -642,14 +642,25 @@ export function addAlerts(scope: Construct, id: string): void {
         alert: "KubernetesPodCrashLooping",
         // Use a 15m window so accumulated restarts remain visible even at max CrashLoopBackOff
         // backoff (~5 min/restart), where a 1m window drops below the threshold.
-        expr: "increase(kube_pod_container_status_restarts_total[15m]) > 3",
+        //
+        // `max without (instance)` before the increase() is load-bearing: `instance` is
+        // kube-state-metrics' own pod IP, so every KSM restart/reschedule starts a fresh series
+        // for each counter. VictoriaMetrics counts a new series' first sample as an increase from
+        // zero, which re-reports every pod's *lifetime* restart total as if it just happened --
+        // a KSM rollout on 2026-08-02 fired 49 phantom alerts that way. Aggregating the label off
+        // first keeps the series stable across KSM churn, unlike an `offset` guard which would go
+        // blind for a full window after each rollout.
+        expr: "increase(max without (instance) (kube_pod_container_status_restarts_total)[15m:1m]) > 3",
         for: "5m",
         labels: {
           priority: PRIORITY.NORMAL,
           push_notify: "true",
         },
         annotations: {
-          summary: "Kubernetes pod crash looping (instance {{ $labels.instance }})",
+          // Deliberately not {{ $labels.instance }}: that was KSM's IP, identical on every alert,
+          // which made a batch of these indistinguishable in notifications.
+          summary:
+            "Kubernetes pod crash looping (namespace: {{ $labels.namespace }}; pod: {{ $labels.pod }})",
           description:
             "Pod {{ $labels.pod }} is crash looping\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
         },
