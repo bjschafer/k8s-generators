@@ -1,10 +1,10 @@
 import { basename } from "../../lib/util";
-import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT_UID } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, DEFAULT_SECURITY_CONTEXT } from "../../lib/consts";
 import { App, Size } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { StorageClass } from "../../lib/volume";
-import { PersistentVolume, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
+import { EnvValue, PersistentVolume, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
 import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
@@ -41,10 +41,29 @@ new AppPlus(app, `${name}-app`, {
     },
   },
   ports: [80],
-  // audited safe: image ships USER=pda, which is uid 100 / gid 101. Spelled out
-  // because the kubelet can't verify a non-numeric USER against runAsNonRoot.
-  securityContext: NONROOT_SECURITY_CONTEXT_UID(100, 101),
-  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(100, 101),
+  extraEnv: {
+    // Works around an upstream regression in v0.5.1 (the first pda-legacy
+    // release since v0.4.2, Jan 2024). Flask 3 removed before_app_first_request,
+    // so register_modules() moved to before_app_request -- but Flask sets
+    // _got_first_request before running those hooks, so oidc_oauth()'s
+    // `@current_app.route('/oidc/authorized')` now raises AssertionError on
+    // every request, 500ing / and failing the liveness probe. The run-once
+    // guard is set *after* the raising call, so it never latches.
+    //
+    // Config beats the DB in Setting().get(), so this env var forces
+    // oidc_oauth() to return early regardless of what's stored in /data.
+    // SSO is dead while this is set -- log in with a local account.
+    // Remove once upstream registers the OIDC route at app-init time.
+    OIDC_OAUTH_ENABLED: EnvValue.fromValue("False"),
+  },
+  // v0.5.1 rebuilt pda-legacy off docker/common/Dockerfile.app, which dropped
+  // the `pda` user entirely -- there is no uid 100 in the image anymore, and
+  // /app ships root-owned (the webassets cache is mode 0600), with an
+  // entrypoint that never drops privileges. Pinning uid 100/101 here got us
+  // PermissionError on .webassets-cache and /.gunicorn. Reverts the
+  // 8c2e7014 hardening for this one app until upstream restores a non-root USER.
+  securityContext: DEFAULT_SECURITY_CONTEXT,
+  containerSecurityContext: DEFAULT_SECURITY_CONTEXT,
   volumes: [
     {
       props: {

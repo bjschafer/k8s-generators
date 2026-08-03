@@ -24,7 +24,10 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - image: powerdnsadmin/pda-legacy:latest
+        - env:
+            - name: OIDC_OAUTH_ENABLED
+              value: "False"
+          image: powerdnsadmin/pda-legacy:latest
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
@@ -50,9 +53,7 @@ spec:
             allowPrivilegeEscalation: false
             privileged: false
             readOnlyRootFilesystem: false
-            runAsGroup: 101
-            runAsNonRoot: true
-            runAsUser: 100
+            runAsNonRoot: false
           volumeMounts:
             - mountPath: /data
               name: pvc-app-config
@@ -63,9 +64,7 @@ spec:
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
-        runAsGroup: 101
-        runAsNonRoot: true
-        runAsUser: 100
+        runAsNonRoot: false
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
