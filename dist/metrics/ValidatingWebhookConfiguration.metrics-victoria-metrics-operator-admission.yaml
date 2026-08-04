@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.73.1
-    helm.sh/chart: victoria-metrics-operator-0.66.3
+    app.kubernetes.io/version: v0.74.0
+    helm.sh/chart: victoria-metrics-operator-0.67.2
   name: metrics-victoria-metrics-operator-admission
 webhooks:
   - admissionReviewVersions:
@@ -65,6 +65,33 @@ webhooks:
           - UPDATE
         resources:
           - vlclusters
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1
+    clientConfig:
+      service:
+        name: metrics-victoria-metrics-operator
+        namespace: metrics
+        path: /validate-operator-victoriametrics-com-v1alpha1-vldistributed
+        port: 9443
+    failurePolicy: Ignore
+    name: vldistributed.operator.victoriametrics.com
+    objectSelector:
+      matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: NotIn
+          values:
+            - victoria-metrics-operator
+    rules:
+      - apiGroups:
+          - operator.victoriametrics.com
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - vldistributed
     sideEffects: None
   - admissionReviewVersions:
       - v1
