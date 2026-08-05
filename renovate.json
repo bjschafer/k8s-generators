@@ -24,17 +24,13 @@
       "automerge": false
     },
     {
-      "description": "The vectorchord ImageCatalog entries in apps/postgres/app.ts are Postgres images for a live database, and the repository publishes every major side by side (18.3-1.1.0 sits next to 17.10-1.1.1). Cap each entry to its own major line: without this Renovate reads the tag as an ordinary version and offers 18.x for the major-17 entry, which CNPG would treat as an in-place major upgrade rather than an image bump. Also require the `-<vchord-version>` suffix: the registry publishes an unsuffixed alias per pg patch (e.g. `16.14`) that floats and gets silently repointed across vchord releases, and under `loose` versioning that bare tag sorts as a newer \"release\" than the suffixed one it's an alias of, so Renovate offers it as a patch bump (#42/#43). Pinning to the suffixed form keeps every bump an explicit, reproducible tag change.",
-      "matchDepNames": ["vectorchord-pg16"],
-      "allowedVersions": "/^16\\.\\d+-\\d+\\.\\d+\\.\\d+$/"
-    },
-    {
+      "description": "The vectorchord ImageCatalog entry in apps/postgres/app.ts is a Postgres image for a live database, and the repository publishes every major side by side (18.3-1.1.0 sits next to 17.10-1.1.1). Cap the entry to its own major line: without this Renovate reads the tag as an ordinary version and offers 18.x for the major-17 entry, which CNPG would treat as an in-place major upgrade rather than an image bump. Also require the `-<vchord-version>` suffix: the registry publishes an unsuffixed alias per pg patch (e.g. `17.10`) that floats and gets silently repointed across vchord releases, and under `loose` versioning that bare tag sorts as a newer \"release\" than the suffixed one it's an alias of, so Renovate offers it as a patch bump (#42/#43). Pinning to the suffixed form keeps every bump an explicit, reproducible tag change.",
       "matchDepNames": ["vectorchord-pg17"],
       "allowedVersions": "/^17\\.\\d+-\\d+\\.\\d+\\.\\d+$/"
     },
     {
       "description": "Opt the Postgres images back out of the blanket custom.regex automerge above. A chart bump that breaks renders red in CI; a bad Postgres image passes CI and then rolls a database. These get read by a human.",
-      "matchDepNames": ["vectorchord-pg16", "vectorchord-pg17"],
+      "matchDepNames": ["vectorchord-pg17"],
       "automerge": false
     },
     {

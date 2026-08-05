@@ -309,8 +309,6 @@ class VectorImageCatalog extends Chart {
     // The vectorchord version is also bounded by immich, which checks it at
     // startup and refuses to boot outside `>=0.3.0 <2.0.0`; the bundled
     // pgvector must stay `>=0.7 <0.9`.
-    // renovate: datasource=docker depName=vectorchord-pg16 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
-    const vectorchordPg16 = "16.14-1.1.1";
     // renovate: datasource=docker depName=vectorchord-pg17 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
     const vectorchordPg17 = "17.10-1.1.1";
 
@@ -320,14 +318,11 @@ class VectorImageCatalog extends Chart {
         name: "vectorchord",
       },
       spec: {
+        // Only major 17. A major-16 entry sat here unselected for the life of
+        // the catalog -- `immich-pg16` was the only candidate and it resolved
+        // 17 -- and went with that cluster. Add a major back only when a
+        // cluster actually asks for it, so every entry stays exercised.
         images: [
-          {
-            // Nothing selects major 16 today -- immich-pg16 kept its name
-            // through a major upgrade and now resolves major 17. Kept so the
-            // catalog can still satisfy a 16 cluster, but it is unexercised.
-            image: `${imageBase}:${vectorchordPg16}`,
-            major: 16,
-          },
           {
             image: `${imageBase}:${vectorchordPg17}`,
             major: 17,
@@ -376,6 +371,67 @@ export interface VectorPostgresProps {
   import?: ImportProps;
   /** Physical restore from an object store. Mutually exclusive with `import`. */
   recovery?: RecoveryProps;
+}
+
+/**
+ * The barman ObjectStore backing a vectorchord cluster.
+ *
+ * Split out of {@link VectorPostgres} because a store's lifetime is not its
+ * cluster's. When a cluster is retired its store has to stay behind: it still
+ * holds that lineage's base backups until the 30d retention expires, and it is
+ * the `externalClusters` target named in whatever successor bootstrapped from
+ * it. Deleting the two together would throw away the only copy of the data the
+ * successor was seeded from.
+ *
+ * Note that a store is single-use in the other direction too -- barman refuses
+ * to archive into a non-empty destination, so a rebuilt cluster needs its
+ * prefix purged before it will come up.
+ */
+class VectorObjectStore extends Chart {
+  constructor(scope: Construct, id: string, name: string) {
+    super(scope, id);
+
+    new ObjectStore(this, "object-store", {
+      metadata: {
+        name: name,
+        namespace: namespace,
+      },
+      spec: {
+        retentionPolicy: "30d",
+        configuration: {
+          endpointUrl: "https://s3.cmdcentral.xyz",
+          destinationPath: `s3://postgres/k8s/${name}`,
+          data: {
+            compression: ObjectStoreSpecConfigurationDataCompression.GZIP,
+          },
+          s3Credentials: {
+            accessKeyId: {
+              name: s3Creds.secretName,
+              key: "ACCESS_KEY_ID",
+            },
+            secretAccessKey: {
+              name: s3Creds.secretName,
+              key: "SECRET_ACCESS_KEY",
+            },
+          },
+        },
+        instanceSidecarConfiguration: {
+          resources: {
+            requests: {
+              memory:
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+            },
+            limits: {
+              memory:
+                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
+              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
+            },
+          },
+        },
+      },
+    });
+  }
 }
 
 class VectorPostgres extends Chart {
@@ -532,46 +588,9 @@ class VectorPostgres extends Chart {
       },
     });
 
-    new ObjectStore(this, "object-store", {
-      metadata: {
-        name: name,
-        namespace: namespace,
-      },
-      spec: {
-        retentionPolicy: "30d",
-        configuration: {
-          endpointUrl: "https://s3.cmdcentral.xyz",
-          destinationPath: `s3://postgres/k8s/${name}`,
-          data: {
-            compression: ObjectStoreSpecConfigurationDataCompression.GZIP,
-          },
-          s3Credentials: {
-            accessKeyId: {
-              name: s3Creds.secretName,
-              key: "ACCESS_KEY_ID",
-            },
-            secretAccessKey: {
-              name: s3Creds.secretName,
-              key: "SECRET_ACCESS_KEY",
-            },
-          },
-        },
-        instanceSidecarConfiguration: {
-          resources: {
-            requests: {
-              memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
-            },
-            limits: {
-              memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
-            },
-          },
-        },
-      },
-    });
+    // Sibling chart, not a child: an ObjectStore outlives the Cluster that
+    // filled it. See VectorObjectStore.
+    new VectorObjectStore(scope, `${id}-object-store`, name);
 
     new ScheduledBackup(this, "nightly", {
       metadata: {
@@ -634,18 +653,20 @@ createDatabases(app, prod_pg_17.clusterName);
 
 const vectorCatalog = new VectorImageCatalog(app, "vectorchord-catalog");
 
-// The name lies: this cluster runs Postgres 17, not 16. It kept its name
-// through an in-place major upgrade because CNPG cluster names are immutable.
-// Being replaced by `immich` below -- delete this once that cluster is
-// serving, along with its ObjectStore (keep the store read-only until the 30d
-// retention on the old lineage expires).
-new VectorPostgres(app, "immich-pg16", {
-  name: "immich-pg16",
-  catalog: vectorCatalog.Catalog,
-});
+// Tombstone of the retired `immich-pg16` cluster, whose name lied twice: it
+// ran Postgres 17, and it used VectorChord, not pgvecto.rs. The cluster itself
+// was deleted 2026-08-04, nine days after `immich` below took over serving.
+//
+// Only the store remains, and only because the lineage it holds is not dead
+// yet. It stays read-only -- nothing archives into it anymore -- and it is
+// still the `externalClusters` target of the bootstrap stanza on `immich`.
+// Delete this after 2026-08-25, when the 30d retention on the last backup of
+// the old lineage (`immich-pg16-cutover-final`, 2026-07-26) has expired and
+// `immich` has 30d of its own base backups to fall back on.
+new VectorObjectStore(app, "immich-pg16-object-store", "immich-pg16");
 
 // Physical restore of immich-pg16 under an honest name. Same image, same
-// major, same extensions -- the only thing changing is the string. Bootstraps
+// major, same extensions -- the only thing changing is the string. Bootstrapped
 // once from the old cluster's object store and then archives to its own,
 // deliberately starting a fresh PITR lineage rather than splicing into the
 // old WAL timeline.
