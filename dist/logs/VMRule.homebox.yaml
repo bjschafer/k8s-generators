@@ -1,0 +1,32 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: logs
+  name: homebox
+  namespace: logs
+spec:
+  groups:
+    - name: homebox
+      rules:
+        - alert: HomeboxNotifierFailed
+          annotations:
+            summary: Homebox failed to deliver a maintenance notification -- check that the notifier target still accepts messages
+          expr: _time:6h kubernetes.pod_namespace:homebox "to send notifiers" | stats count(*) logs_count | filter logs_count:>0
+          for: 0m
+          labels:
+            namespace: logs
+            priority: "0"
+            push_notify: "true"
+            severity: warning
+        - alert: HomeboxNotifierTaskStale
+          annotations:
+            summary: Homebox maintenance-notifier task has not run in over a day
+          expr: _time:26h kubernetes.pod_namespace:homebox "run notifiers" | stats count(*) logs_count | filter logs_count:<1
+          for: 10m
+          labels:
+            namespace: logs
+            priority: "-1"
+            push_notify: "true"
+            severity: warning
+      type: vlogs
