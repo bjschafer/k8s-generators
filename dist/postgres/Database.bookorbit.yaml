@@ -1,0 +1,16 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: bookorbit
+  namespace: postgres
+spec:
+  cluster:
+    name: immich
+  ensure: present
+  extensions:
+    - name: uuid-ossp
+    - name: pg_trgm
+    - name: unaccent
+    - name: vector
+  name: bookorbit
+  owner: bookorbit

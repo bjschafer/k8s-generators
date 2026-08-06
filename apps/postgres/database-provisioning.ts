@@ -28,6 +28,8 @@ export interface AppDatabaseSecretResult {
  * Creates a DatabaseRole CR for each configured database.
  * Call this in the postgres app to create all roles at once.
  * Returns a Chart containing all the roles.
+ *
+ * @param clusterName the cluster to use for entries that do not name one.
  */
 export function createDatabaseRoles(scope: Construct, clusterName: string): Chart {
   const chart = new Chart(scope, "database-roles");
@@ -39,7 +41,7 @@ export function createDatabaseRoles(scope: Construct, clusterName: string): Char
         namespace: "postgres",
       },
       spec: {
-        cluster: { name: clusterName },
+        cluster: { name: db.cluster ?? clusterName },
         name: db.name,
         login: true,
         comment: db.comment,
@@ -170,6 +172,8 @@ export function createPostgresSecrets(scope: Construct): void {
  * Creates Database CRDs for all configured databases.
  * Call this in the postgres app to create all databases at once.
  * Returns a Chart containing all the databases.
+ *
+ * @param clusterName the cluster to use for entries that do not name one.
  */
 export function createDatabases(scope: Construct, clusterName: string): Chart {
   const chart = new Chart(scope, "databases");
@@ -183,8 +187,12 @@ export function createDatabases(scope: Construct, clusterName: string): Chart {
       spec: {
         name: db.name,
         owner: db.name,
-        cluster: { name: clusterName },
+        cluster: { name: db.cluster ?? clusterName },
         ensure: DatabaseSpecEnsure.PRESENT,
+        // Deliberately unversioned: naming a version turns reconciliation into
+        // an ALTER EXTENSION UPDATE on every image bump, which is a schema
+        // change nobody asked for. The image's default version is fine.
+        extensions: db.extensions?.map((name) => ({ name: name })),
       },
     });
   }

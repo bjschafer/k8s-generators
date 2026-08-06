@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  name: bookorbit
+  namespace: bookorbit
+spec:
+  rules:
+    - host: ebooks.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: bookorbit
+                port:
+                  number: 3000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - ebooks.cmdcentral.xyz
+      secretName: bookorbit-tls

@@ -50,6 +50,19 @@ export interface DatabaseConfig {
   bitwardenPasswordId?: string;
   /** Namespace where the app lives (for creating a copy of credentials there) */
   appNamespace?: string;
+  /**
+   * Cluster to create the role and database on. Defaults to the prod cluster,
+   * which is where all of this belongs unless the app needs something prod's
+   * image does not ship -- see `bookorbit` below.
+   */
+  cluster?: string;
+  /**
+   * Extensions for CNPG to install into the database. Use this rather than
+   * letting the app run `CREATE EXTENSION` itself: the owner role is not a
+   * superuser, so it can only create the extensions Postgres marks trusted,
+   * and the operator reconciles this list continuously.
+   */
+  extensions?: string[];
   /** Additional role configuration (DatabaseRole spec fields, minus name/cluster/passwordSecret which are set automatically) */
   roleConfig?: Partial<Omit<DatabaseRoleSpec, "name" | "cluster" | "passwordSecret">>;
   /** Password generation config when not using Bitwarden. Uses defaults if omitted. */
@@ -100,6 +113,22 @@ export const DATABASES: DatabaseConfig[] = [
     name: "book-club",
     comment: "Book Club database owner",
     appNamespace: "book-club",
+  },
+
+  {
+    name: "bookorbit",
+    comment: "BookOrbit database owner",
+    appNamespace: "bookorbit",
+    // Not on prod: BookOrbit's very first migration declares a `vector(256)`
+    // column and an HNSW index, so pgvector has to be there before the app has
+    // ever started. prod-pg17 runs CloudNativePG's `minimal` image, which does
+    // not carry it, and upstream only publishes pgvector *extension images*
+    // for Postgres 18 -- so on 17 the only ways to get it are to re-flavour
+    // prod's image or to use a cluster that already has it. This is the
+    // latter. The cluster is named for immich because immich is what it was
+    // built for; it is a vectorchord image and pgvector comes along with it.
+    cluster: "immich",
+    extensions: ["uuid-ossp", "pg_trgm", "unaccent", "vector"],
   },
 
   {

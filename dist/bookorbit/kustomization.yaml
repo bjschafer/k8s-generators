@@ -1,0 +1,13 @@
+resources:
+  - Deployment.bookorbit.yaml
+  - ExternalSecret.bookorbit-db-credentials.yaml
+  - ExternalSecret.bookorbit-secrets.yaml
+  - Ingress.bookorbit.yaml
+  - Password.bookorbit-secrets-email-encryption-key.yaml
+  - Password.bookorbit-secrets-jwt-secret.yaml
+  - Password.bookorbit-secrets-migration-encryption-key.yaml
+  - Password.bookorbit-secrets-setup-bootstrap-token.yaml
+  - PersistentVolume.bookorbit-nfs-books.yaml
+  - PersistentVolumeClaim.data.yaml
+  - PersistentVolumeClaim.nfs-books.yaml
+  - Service.bookorbit.yaml
