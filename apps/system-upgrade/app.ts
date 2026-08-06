@@ -16,7 +16,7 @@ const app = new App(DEFAULT_APP_PROPS(namespace));
 // node's kubelet version, so it stays inert until the two disagree. Keep it in
 // step with the kubectl pin in mise.toml.
 // renovate: datasource=custom.k3s depName=k3s versioning=loose
-const k3sVersion = "v1.36.2+k3s1";
+const k3sVersion = "v1.36.3+k3s1";
 const upgradeImage = "rancher/k3s-upgrade";
 const serviceAccountName = "system-upgrade";
 
