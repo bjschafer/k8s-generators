@@ -9,14 +9,14 @@ metadata:
     app.kubernetes.io/instance: reloader
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: reloader
-    app.kubernetes.io/version: v1.4.19
-    chart: reloader-2.2.14
+    app.kubernetes.io/version: v1.4.20
+    chart: reloader-2.2.15
     group: com.stakater.platform
-    helm.sh/chart: reloader-2.2.14
+    helm.sh/chart: reloader-2.2.15
     heritage: Helm
     provider: stakater
     release: reloader
-    version: v1.4.19
+    version: v1.4.20
   name: reloader
   namespace: reloader
 spec:
@@ -33,14 +33,14 @@ spec:
         app.kubernetes.io/instance: reloader
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: reloader
-        app.kubernetes.io/version: v1.4.19
-        chart: reloader-2.2.14
+        app.kubernetes.io/version: v1.4.20
+        chart: reloader-2.2.15
         group: com.stakater.platform
-        helm.sh/chart: reloader-2.2.14
+        helm.sh/chart: reloader-2.2.15
         heritage: Helm
         provider: stakater
         release: reloader
-        version: v1.4.19
+        version: v1.4.20
     spec:
       containers:
         - args:
@@ -62,7 +62,7 @@ spec:
                   fieldPath: metadata.namespace
             - name: RELOADER_DEPLOYMENT_NAME
               value: reloader
-          image: ghcr.io/stakater/reloader:v1.4.19
+          image: ghcr.io/stakater/reloader:v1.4.20
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
