@@ -37,17 +37,49 @@ token instead of the SSO session context:
 ```bash
 argo() {
   local token="${ARGOCD_GENERATORS_TOKEN:-$(cat ~/.config/argocd/generators-skill.token 2>/dev/null)}"
-  ARGOCD_AUTH_TOKEN="$token" command argocd --server argo.cmdcentral.xyz "$@"
+  ARGOCD_AUTH_TOKEN="$token" command argocd \
+    --config /nonexistent/argocd-skill-no-local-config.yaml \
+    --server argo.cmdcentral.xyz "$@"
 }
 ```
 
 Define that shell function once per session, then use `argo` in place of
 `argocd` for every example below.
 
-### If the token stops working
+**The `--config` flag pointing at a path that does not exist is load-bearing —
+do not drop it.** Supplying an auth token does *not* stop the CLI from loading
+`~/.config/argocd/config`; if the user's SSO context in that file has an
+expired `auth-token`, the CLI tries to refresh it against dex *before* it ever
+uses your token, and a failed refresh aborts the whole command. Pointing
+`--config` at a nonexistent path means there is no context to refresh. The CLI
+never writes to it (it only writes on `login`, which this skill never runs), so
+the path stays absent and the user's real config is untouched.
 
-The token has no expiry, so this should only happen if it was revoked. Regenerate it
-(requires an interactive `argocd login --sso` from the user first — ask them to run it):
+### If a command fails
+
+First read the error — it tells you which of two unrelated things broke:
+
+| Error | Meaning | Fix |
+|---|---|---|
+| `oauth2: cannot fetch token: ...` / `oauth2: "invalid_request" ...` | Not a token problem. The CLI is refreshing the user's stale SSO context — you dropped `--config` from the wrapper. | Re-run with the wrapper exactly as written above. |
+| `Unauthenticated desc = invalid session: token is malformed` | The token really is empty/garbage. | Check the env var and fallback file are non-empty. |
+| `Unauthenticated` / `permission denied` on a valid-looking token | The token was revoked or RBAC changed. | Regenerate (below). |
+
+Confirm which identity you're actually authenticating as:
+
+```bash
+argo account get-user-info    # expect: Logged In: true, Username: bschafer, Issuer: argocd
+```
+
+`Issuer: argocd` means the API token is in use. Anything else (e.g. a dex
+issuer) means the wrapper isn't isolating the local config.
+
+### Regenerating the token
+
+The token has no expiry, so this is only needed if it was actually revoked.
+Requires an interactive `argocd login --sso` from the user first — ask them to
+run it, and note this writes their normal SSO context, which the wrapper
+deliberately ignores:
 
 ```bash
 argocd login argo.cmdcentral.xyz --sso
