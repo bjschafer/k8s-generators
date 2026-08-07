@@ -29,6 +29,8 @@ spec:
               value: "8675309"
             - name: PGID
               value: "8675309"
+            - name: BINDERY_PORT
+              value: "8787"
             - name: BINDERY_DATA_DIR
               value: /config
             - name: BINDERY_DB_PATH
@@ -76,6 +78,7 @@ spec:
             - mountPath: /books
               name: pvc-nfs-media-ebooks
       dnsPolicy: ClusterFirst
+      enableServiceLinks: false
       hostNetwork: false
       restartPolicy: Always
       securityContext:

@@ -179,7 +179,16 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
         nfsConcreteVolume: nfsVols.Get("nfs-media-ebooks"),
       },
     ],
+    // The service is named `bindery`, so kubelet injects BINDERY_PORT=
+    // tcp://<clusterIP>:8787 as a Docker-link var -- which is exactly the name
+    // bindery reads its listen port from, and it crashes on the URL ("too many
+    // colons in address"). Nothing here wants the link vars, so turn them off
+    // rather than play whack-a-mole with the BINDERY_* namespace.
+    enableServiceLinks: false,
     extraEnv: {
+      // Belt-and-suspenders against the collision above: an explicit container
+      // env var outranks an injected link var even if these are re-enabled.
+      BINDERY_PORT: EnvValue.fromValue("8787"),
       // Keep the SQLite DB on the RWO Ceph volume -- SQLite in WAL mode over
       // NFS is a corruption risk.
       BINDERY_DATA_DIR: EnvValue.fromValue("/config"),
@@ -265,6 +274,7 @@ for (const mediaApp of mediaApps) {
     ingressSecret: ingressSecret,
     extraEnv: mediaApp.extraEnv,
     securityContext: mediaApp.securityContext,
+    enableServiceLinks: mediaApp.enableServiceLinks,
   });
 }
 

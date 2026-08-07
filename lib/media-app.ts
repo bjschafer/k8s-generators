@@ -49,6 +49,12 @@ export interface MediaAppProps {
   // usual linuxserver.io ones -- e.g. distroless images that must be pinned to
   // MEDIA_UID so they can write to the NFS exports the rest of the stack owns.
   readonly securityContext?: MediaAppSecurityContext;
+  // Set false for apps whose own config env vars share a prefix with their
+  // service name -- kubelet injects legacy Docker-link vars (<SVCNAME>_PORT,
+  // <SVCNAME>_SERVICE_HOST, ...) for every service in the namespace, and those
+  // silently clobber same-named app config. Left undefined elsewhere so the
+  // existing apps keep the kubelet default (true) and don't churn a rollout.
+  readonly enableServiceLinks?: boolean;
   readonly extraHostnames?: string[];
   readonly extraEnv?: { [key: string]: EnvValue };
   readonly nfsMounts?: {
@@ -105,6 +111,7 @@ export class MediaApp extends Chart {
       replicas: 1,
       strategy: DeploymentStrategy.recreate(),
       securityContext: securityContext,
+      enableServiceLinks: props.enableServiceLinks,
       containers: [
         {
           name: props.name,
