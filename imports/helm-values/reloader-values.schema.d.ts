@@ -8,6 +8,9 @@
 export interface ReloaderValuesSchema {
   reloader?: {
     reloadStrategy?: "default" | "env-vars" | "annotations";
+    service?: {
+      [k: string]: unknown;
+    };
     [k: string]: unknown;
   };
   [k: string]: unknown;
