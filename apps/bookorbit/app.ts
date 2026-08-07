@@ -57,12 +57,11 @@ const secrets = new GeneratedSecret(app, "secrets", {
   },
 });
 
-// The same export calibre serves out of, mounted read-write: BookOrbit's
-// import, file-rename and book-dock features all write into the library, and
-// without them there is nothing to evaluate it on. Unlike calibre's PV this
-// one reaches the NAS over the storage VLAN, which is lib/nfs.ts's default and
-// how the media namespace already mounts this export -- calibre is on
-// 10.0.10.5 only because its PV predates that.
+// The ebook library, mounted read-write: BookOrbit's import, file-rename and
+// book-dock features all write into it. Reached over the storage VLAN, which is
+// lib/nfs.ts's default and how the media namespace mounts this same export.
+// Note the library root still holds calibre's metadata.db -- BookOrbit does not
+// read it, but it is the record of the pre-BookOrbit catalogue, so leave it.
 const nfsVols = new NFSVolumeContainer(app, "nfs-volume-container");
 nfsVols.Add("bookorbit-nfs-books", {
   exportPath: "/warp/Media/Ebooks",
@@ -121,8 +120,8 @@ new AppPlus(app, name, {
     LIBRARY_BROWSE_ROOT: EnvValue.fromValue("/books"),
 
     // The entrypoint starts as root to chown /data, then drops to these.
-    // Same ids the rest of the media stack writes as, which is what keeps the
-    // library readable by calibre while both are running.
+    // Same ids the rest of the media stack writes as, so the library stays
+    // readable by everything else that mounts this export.
     PUID: EnvValue.fromValue(MEDIA_UID),
     PGID: EnvValue.fromValue(MEDIA_GID),
 
