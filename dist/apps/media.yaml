@@ -55,6 +55,10 @@ spec:
           commonUpdateSettings:
             updateStrategy: digest
           imageName: ghcr.io/linuxserver/prowlarr:latest
+        - alias: bindery
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/vavallee/bindery:latest
       namePattern: media
   writeBackConfig:
     gitConfig:

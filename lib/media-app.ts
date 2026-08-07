@@ -28,12 +28,27 @@ const exportarrVersion = "v2.3.0";
 const exportarrPort = 9707;
 const mediaLabel = { "app.kubernetes.io/instance": "media" };
 
+// Shape shared by the pod- and container-level security contexts. Pod ignores
+// readOnlyRootFilesystem and container ignores fsGroup; both are passed the
+// same object, as cdk8s-plus only type-checks excess properties on literals.
+export interface MediaAppSecurityContext {
+  readonly ensureNonRoot?: boolean;
+  readonly readOnlyRootFilesystem?: boolean;
+  readonly user?: number;
+  readonly group?: number;
+  readonly fsGroup?: number;
+}
+
 export interface MediaAppProps {
   readonly name: string;
   readonly namespace: string;
   readonly port: number;
   readonly image: string;
   readonly resources: ContainerResources;
+  // Defaults to DEFAULT_SECURITY_CONTEXT. Override for images that aren't the
+  // usual linuxserver.io ones -- e.g. distroless images that must be pinned to
+  // MEDIA_UID so they can write to the NFS exports the rest of the stack owns.
+  readonly securityContext?: MediaAppSecurityContext;
   readonly extraHostnames?: string[];
   readonly extraEnv?: { [key: string]: EnvValue };
   readonly nfsMounts?: {
@@ -77,6 +92,8 @@ export class MediaApp extends Chart {
       configVol = Volume.fromPersistentVolumeClaim(this, `${props.name}-vol`, pvc);
     }
 
+    const securityContext = props.securityContext ?? DEFAULT_SECURITY_CONTEXT;
+
     const deploy = new Deployment(this, `${props.name}-deployment`, {
       metadata: {
         name: props.name,
@@ -87,11 +104,11 @@ export class MediaApp extends Chart {
       },
       replicas: 1,
       strategy: DeploymentStrategy.recreate(),
-      securityContext: DEFAULT_SECURITY_CONTEXT,
+      securityContext: securityContext,
       containers: [
         {
           name: props.name,
-          securityContext: DEFAULT_SECURITY_CONTEXT,
+          securityContext: securityContext,
           image: props.image,
           ports: [
             {

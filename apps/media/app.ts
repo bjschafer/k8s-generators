@@ -1,9 +1,15 @@
 import { App, Chart, Size } from "cdk8s";
-import { Cpu, Secret } from "cdk8s-plus-34";
+import { Cpu, EnvValue, Secret } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { Certificate } from "../../imports/cert-manager.io";
 import { ArgoAppSource, ArgoUpdaterImageProps, NewArgoApp } from "../../lib/argo";
-import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
+import {
+  CLUSTER_ISSUER,
+  DEFAULT_APP_PROPS,
+  MEDIA_GID,
+  MEDIA_UID,
+  NONROOT_SECURITY_CONTEXT_UID,
+} from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { NFSVolumeContainer } from "../../lib/nfs";
@@ -145,6 +151,53 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
       enableServiceMonitor: false,
     },
   },
+  {
+    // Readarr's successor -- Readarr was archived in June 2025 when its
+    // metadata backend went offline. Bindery is a single Go binary with
+    // SQLite and multiple metadata sources.
+    name: "bindery",
+    port: 8787,
+    image: "ghcr.io/vavallee/bindery:latest",
+    // Unlike the linuxserver.io images, this one is distroless and its USER is
+    // the *name* `nonroot`, which the kubelet can't resolve -- so the uid has
+    // to be numeric. It's pinned to MEDIA_UID/MEDIA_GID rather than the
+    // image's own nonroot uid so it writes NFS files with the same ownership
+    // as the rest of the stack; the export is root_squashed, so a mismatched
+    // uid means silent write failures on import. fsGroup covers the Ceph RBD
+    // config volume, which is otherwise root-owned on first attach.
+    securityContext: {
+      ...NONROOT_SECURITY_CONTEXT_UID(Number(MEDIA_UID), Number(MEDIA_GID)),
+      fsGroup: Number(MEDIA_GID),
+    },
+    nfsMounts: [
+      {
+        mountPoint: "/downloads",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+      },
+      {
+        mountPoint: "/books",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-ebooks"),
+      },
+    ],
+    extraEnv: {
+      // Keep the SQLite DB on the RWO Ceph volume -- SQLite in WAL mode over
+      // NFS is a corruption risk.
+      BINDERY_DATA_DIR: EnvValue.fromValue("/config"),
+      BINDERY_DB_PATH: EnvValue.fromValue("/config/bindery.db"),
+      BINDERY_LIBRARY_DIR: EnvValue.fromValue("/books"),
+      BINDERY_DOWNLOAD_DIR: EnvValue.fromValue("/downloads"),
+      // Sanity assertions -- bindery checks these against the uid it actually
+      // runs as and fails loudly on a mismatch.
+      BINDERY_PUID: EnvValue.fromValue(MEDIA_UID),
+      BINDERY_PGID: EnvValue.fromValue(MEDIA_GID),
+      BINDERY_TELEMETRY_DISABLED: EnvValue.fromValue("true"),
+    },
+    monitoringConfig: {
+      // exportarr has no bindery provider.
+      enableExportarr: false,
+      enableServiceMonitor: false,
+    },
+  },
 ];
 
 // exportarr API-key secrets, referenced by name via existingApiSecretName above
@@ -211,6 +264,7 @@ for (const mediaApp of mediaApps) {
     monitoringConfig: mediaApp.monitoringConfig,
     ingressSecret: ingressSecret,
     extraEnv: mediaApp.extraEnv,
+    securityContext: mediaApp.securityContext,
   });
 }
 

@@ -2,6 +2,7 @@ resources:
   - Certificate.media-tls.yaml
   - ConfigMap.kometa-config.yaml
   - CronJob.kometa.yaml
+  - Deployment.bindery.yaml
   - Deployment.lidarr.yaml
   - Deployment.navidrome.yaml
   - Deployment.prowlarr.yaml
@@ -15,6 +16,7 @@ resources:
   - ExternalSecret.radarr-api.yaml
   - ExternalSecret.sabnzbd-api.yaml
   - ExternalSecret.sonarr-api.yaml
+  - Ingress.bindery.yaml
   - Ingress.lidarr.yaml
   - Ingress.prowlarr.yaml
   - Ingress.radarr.yaml
@@ -27,6 +29,7 @@ resources:
   - PersistentVolume.nfs-media-music.yaml
   - PersistentVolume.nfs-media-videos-movies.yaml
   - PersistentVolume.nfs-media-videos-tvshows.yaml
+  - PersistentVolumeClaim.bindery.yaml
   - PersistentVolumeClaim.kometa-config.yaml
   - PersistentVolumeClaim.lidarr.yaml
   - PersistentVolumeClaim.navidrome.yaml
@@ -40,6 +43,7 @@ resources:
   - PersistentVolumeClaim.resilio-sync.yaml
   - PersistentVolumeClaim.sabnzbd.yaml
   - PersistentVolumeClaim.sonarr.yaml
+  - Service.bindery.yaml
   - Service.lidarr.yaml
   - Service.navidrome.yaml
   - Service.prowlarr.yaml

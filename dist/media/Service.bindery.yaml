@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+    cdk8s.io/metadata.addr: bindery-bindery-deployment-c8963f86
+  name: bindery
+  namespace: media
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 8787
+      targetPort: 8787
+  selector:
+    cdk8s.io/metadata.addr: bindery-bindery-deployment-c8963f86
+  type: ClusterIP

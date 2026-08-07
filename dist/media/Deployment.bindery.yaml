@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+  name: bindery
+  namespace: media
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: bindery-bindery-deployment-c8963f86
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        cdk8s.io/metadata.addr: bindery-bindery-deployment-c8963f86
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: PUID
+              value: "8675309"
+            - name: PGID
+              value: "8675309"
+            - name: BINDERY_DATA_DIR
+              value: /config
+            - name: BINDERY_DB_PATH
+              value: /config/bindery.db
+            - name: BINDERY_LIBRARY_DIR
+              value: /books
+            - name: BINDERY_DOWNLOAD_DIR
+              value: /downloads
+            - name: BINDERY_PUID
+              value: "8675309"
+            - name: BINDERY_PGID
+              value: "8675309"
+            - name: BINDERY_TELEMETRY_DISABLED
+              value: "true"
+          image: ghcr.io/vavallee/bindery:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8787
+          name: bindery
+          ports:
+            - containerPort: 8787
+              name: http
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8787
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsGroup: 8675309
+            runAsNonRoot: true
+            runAsUser: 8675309
+          volumeMounts:
+            - mountPath: /config
+              name: pvc-bindery
+            - mountPath: /downloads
+              name: pvc-nfs-media-downloads
+            - mountPath: /books
+              name: pvc-nfs-media-ebooks
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroup: 8675309
+        fsGroupChangePolicy: Always
+        runAsGroup: 8675309
+        runAsNonRoot: true
+        runAsUser: 8675309
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-bindery
+          persistentVolumeClaim:
+            claimName: bindery
+            readOnly: false
+        - name: pvc-nfs-media-downloads
+          persistentVolumeClaim:
+            claimName: nfs-media-downloads
+            readOnly: false
+        - name: pvc-nfs-media-ebooks
+          persistentVolumeClaim:
+            claimName: nfs-media-ebooks
+            readOnly: false
