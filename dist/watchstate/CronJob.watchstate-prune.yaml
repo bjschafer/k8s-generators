@@ -16,19 +16,22 @@ spec:
           automountServiceAccountToken: true
           containers:
             - args:
+                - exec
+                - -n
+                - watchstate
+                - deploy/watchstate
+                - --
+                - sh
+                - -c
                 - |-
-                  set -eu
-                  pod=$(kubectl get pod -n watchstate -l app.kubernetes.io/name=watchstate --field-selector=status.phase=Running -o jsonpath='{.items[0].metadata.name}')
-                  test -n "$pod"
                   rc=0
                   for p in file_pruner database_pruner backend_metadata command_sessions media_health_reports; do
                     echo "==> $p"
-                    kubectl exec -n watchstate "$pod" -- console system:prune --run --execute -p "$p" -v || rc=1
+                    console system:prune --run --execute -p "$p" -v || rc=1
                   done
                   exit $rc
               command:
-                - /bin/sh
-                - -c
+                - kubectl
               image: rancher/kubectl:v1.36.2
               imagePullPolicy: IfNotPresent
               name: prune

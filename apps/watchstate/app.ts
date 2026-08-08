@@ -113,6 +113,9 @@ const pruneRole = new Role(pruneChart, "prune-role", {
   },
 });
 pruneRole.allowRead(ApiResource.PODS);
+// `kubectl exec deploy/<name>` reads the Deployment to resolve its selector,
+// then lists pods to pick one.
+pruneRole.allowRead(ApiResource.DEPLOYMENTS);
 // apiGroup must be the empty string -- pods/exec is in the core group, and
 // omitting it synths `apiGroups: [null]`, which matches nothing.
 pruneRole.allow(["create"], ApiResource.custom({ apiGroup: "", resourceType: "pods/exec" }));
@@ -150,22 +153,28 @@ new CronJob(pruneChart, "prune-cronjob", {
   containers: [
     {
       name: "prune",
-      // Matches the kubectl pinned in mise.toml.
+      // Matches the kubectl pinned in mise.toml. This image ships kubectl as
+      // its entrypoint with no shell at all, hence the single exec below --
+      // the loop runs in the watchstate container, which does have sh.
       image: "rancher/kubectl:v1.36.2",
       imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
       securityContext: DEFAULT_SECURITY_CONTEXT,
-      command: ["/bin/sh", "-c"],
+      command: ["kubectl"],
       args: [
+        "exec",
+        "-n",
+        namespace,
+        `deploy/${name}`,
+        "--",
+        "sh",
+        "-c",
         [
-          "set -eu",
-          `pod=$(kubectl get pod -n ${namespace} -l app.kubernetes.io/name=${name} --field-selector=status.phase=Running -o jsonpath='{.items[0].metadata.name}')`,
-          'test -n "$pod"',
           "rc=0",
           // Each pruner is independent, so one failure should not skip the
           // rest -- collect the status and fail the job at the end instead.
           `for p in ${pruners.join(" ")}; do`,
-          `  echo "==> $p"`,
-          `  kubectl exec -n ${namespace} "$pod" -- console system:prune --run --execute -p "$p" -v || rc=1`,
+          '  echo "==> $p"',
+          '  console system:prune --run --execute -p "$p" -v || rc=1',
           "done",
           "exit $rc",
         ].join("\n"),
