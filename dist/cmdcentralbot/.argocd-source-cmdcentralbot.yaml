@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/bjschafer/cmdcentralbot:main@sha256:1652a68d2ec2e1f5eba8ad091ed6d52d6283a40b622371d874247e51fb20556c
+  - ghcr.io/bjschafer/cmdcentralbot:main@sha256:408e199cc620456abc56ad20f3dabc7a05689b239962d7441caf03ae96739124
