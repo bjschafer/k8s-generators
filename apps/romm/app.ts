@@ -26,6 +26,13 @@ NewArgoApp(name, {
         image: image,
         strategy: "digest",
       },
+      // See the note in apps/manyfold/app.ts: the valkey sidecar pulls
+      // IfNotPresent off a floating tag and never re-resolves it on its own.
+      {
+        image: "ghcr.io/valkey-io/valkey",
+        versionConstraint: "7-alpine",
+        strategy: "digest",
+      },
     ],
   },
 });

@@ -1,6 +1,6 @@
 import { App, Chart, Cron, Duration, Size } from "cdk8s";
 import { basename } from "path";
-import { DEFAULT_APP_PROPS, DEFAULT_SECURITY_CONTEXT } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, DEFAULT_SECURITY_CONTEXT, KUBERNETES_VERSION } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
@@ -153,10 +153,13 @@ new CronJob(pruneChart, "prune-cronjob", {
   containers: [
     {
       name: "prune",
-      // Matches the kubectl pinned in mise.toml. This image ships kubectl as
-      // its entrypoint with no shell at all, hence the single exec below --
-      // the loop runs in the watchstate container, which does have sh.
-      image: "rancher/kubectl:v1.36.2",
+      // Derived from the cluster's own k3s pin rather than hand-written, so it
+      // cannot drift out of kubectl's one-minor support window with the
+      // apiserver -- which it already had, sitting on v1.36.2 against a v1.36.3
+      // cluster. This image ships kubectl as its entrypoint with no shell at
+      // all, hence the single exec below -- the loop runs in the watchstate
+      // container, which does have sh.
+      image: `rancher/kubectl:${KUBERNETES_VERSION}`,
       imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
       securityContext: DEFAULT_SECURITY_CONTEXT,
       command: ["kubectl"],

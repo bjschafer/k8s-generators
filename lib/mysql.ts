@@ -20,7 +20,12 @@ export interface MysqlInstanceProps {
   pvcSize: Size;
 }
 
-const DEFAULT_IMAGE = "ghcr.io/mariadb/mariadb:11.7.2-noble";
+// Split out from the image reference below so Renovate's customManager regex
+// can see a bare version to bump -- it matches `const <name> = "<version>"`,
+// and a whole `repo:tag` string parses as a version of nothing.
+// renovate: datasource=docker depName=ghcr.io/mariadb/mariadb
+const mariadbVersion = "11.7.2-noble";
+const DEFAULT_IMAGE = `ghcr.io/mariadb/mariadb:${mariadbVersion}`;
 
 export class MysqlInstance extends Chart {
   constructor(scope: Construct, name: string, props: MysqlInstanceProps) {

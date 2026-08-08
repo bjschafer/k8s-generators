@@ -15,8 +15,8 @@ import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { NFSVolumeContainer } from "../../lib/nfs";
 import { BitwardenSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
-import { Kometa } from "./kometa";
-import { Navidrome } from "./navidrome";
+import { KOMETA_IMAGE, Kometa } from "./kometa";
+import { NAVIDROME_IMAGE, Navidrome } from "./navidrome";
 
 export const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -279,11 +279,12 @@ for (const mediaApp of mediaApps) {
 }
 
 // resilio-sync is special due to subpath mounts
+const resilioImage = "ghcr.io/linuxserver/resilio-sync:2.8.1";
 new MediaApp(app, {
   name: "resilio-sync",
   namespace: namespace,
   port: 8888,
-  image: "ghcr.io/linuxserver/resilio-sync:2.8.1",
+  image: resilioImage,
   resources: {
     cpu: {
       request: Cpu.millis(250),
@@ -362,20 +363,23 @@ NewArgoApp("media", {
   source: ArgoAppSource.GENERATORS,
   recurse: true,
   autoUpdate: {
+    // Derived from every image this app actually deploys, rather than from
+    // `mediaApps` plus a hand-maintained tail. navidrome, resilio-sync and
+    // kometa are each constructed outside that array, and only navidrome was
+    // ever restated here -- so resilio-sync and kometa sat unwatched, kometa
+    // for as long as it has existed.
     images: [
-      {
-        image: "ghcr.io/navidrome/navidrome",
-        versionConstraint: "latest",
+      NAVIDROME_IMAGE,
+      resilioImage,
+      KOMETA_IMAGE,
+      ...mediaApps.map((mediaApp) => mediaApp.image),
+    ].map(function (image): ArgoUpdaterImageProps {
+      return {
+        image: image.split(":")[0],
+        versionConstraint: image.split(":").at(1),
         strategy: "digest",
-      },
-      ...mediaApps.map(function (mediaApp): ArgoUpdaterImageProps {
-        return {
-          image: mediaApp.image.split(":")[0],
-          versionConstraint: mediaApp.image.split(":").at(1),
-          strategy: "digest",
-        };
-      }),
-    ],
+      };
+    }),
   },
 });
 

@@ -20,6 +20,12 @@ import { mediaLabel, namespace } from "./app";
 
 const name = "kometa";
 
+// Exported so apps/media/app.ts can feed it to the argocd-image-updater config
+// instead of restating it. It is a CronJob pulling IfNotPresent, so an
+// unwatched `:latest` here never re-pulls at all -- this image had not moved
+// since the job was first scheduled.
+export const KOMETA_IMAGE = "kometateam/kometa:latest";
+
 const kometaConfig: KometaConfigSchema = {
   plex: {
     url: "http://plex.cmdcentral.xyz:32400",
@@ -168,7 +174,7 @@ export class Kometa extends Chart {
       containers: [
         {
           name: name,
-          image: "kometateam/kometa:latest",
+          image: KOMETA_IMAGE,
           imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
           args: ["--run", "--read-only-config"],
           envVariables: {

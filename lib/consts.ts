@@ -5,6 +5,20 @@ import { EnvVar, Quantity } from "../imports/k8s";
 export const DEFAULT_CPU_LIMIT = Quantity.fromString("250m");
 export const DEFAULT_MEM_LIMIT = Quantity.fromString("256Mi");
 
+// The k3s release every node runs. Bumping this is what actually triggers a
+// rolling cluster upgrade (apps/system-upgrade compares it against each node's
+// kubelet version, so it stays inert until the two disagree), and it is the
+// single source of truth for any in-cluster kubectl image as well -- kubectl is
+// only supported within one minor of the apiserver, so nothing gets to pin its
+// own. Keep the mise.toml kubectl pin in step with it; renovate.json disables
+// that pin's own updates precisely so it can only move with this line.
+// renovate: datasource=custom.k3s depName=k3s versioning=loose
+export const K3S_VERSION = "v1.36.3+k3s1";
+
+// `v1.36.3+k3s1` -> `v1.36.3`. k3s appends its own build number to the upstream
+// Kubernetes version, and a container tag cannot contain `+`.
+export const KUBERNETES_VERSION = K3S_VERSION.split("+")[0];
+
 export const TZ = "America/Chicago";
 export const MEDIA_UID = "8675309";
 export const MEDIA_GID = "8675309";

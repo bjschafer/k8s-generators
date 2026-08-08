@@ -35,6 +35,10 @@ spec:
           commonUpdateSettings:
             updateStrategy: digest
           imageName: ghcr.io/rommapp/romm:latest
+        - alias: valkey
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/valkey-io/valkey:7-alpine
       namePattern: romm
   writeBackConfig:
     gitConfig:

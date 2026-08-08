@@ -43,6 +43,18 @@
       "matchDepNames": ["velero", "vmware-tanzu/velero"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
+    },
+    {
+      "description": "cdk8s shells out to `helm template`, and its integration is built against Helm 3 -- Helm 4 is a different CLI contract, so an automatic major would break every HelmApp render at once. Minor/patch within 3.x is fine and still flows through normally.",
+      "matchManagers": ["mise"],
+      "matchDepNames": ["helm"],
+      "allowedVersions": "<4"
+    },
+    {
+      "description": "kubectl is only supported within one minor of the apiserver, so this pin belongs to the cluster's k3s release, not to kubectl's own release cadence -- left to float it drifts ahead of the cluster and silently changes KUBE_VERSION, which feeds `helm template`'s .Capabilities and re-renders manifests. It moves by hand alongside K3S_VERSION in lib/consts.ts, in the same PR as the k3s bump that a human already has to review.",
+      "matchManagers": ["mise"],
+      "matchDepNames": ["kubectl"],
+      "enabled": false
     }
   ],
   "customDatasources": {
@@ -65,8 +77,8 @@
     },
     {
       "customType": "regex",
-      "description": "Bump chart/release versions pinned in any apps/*/app.ts, annotated the same way as the literal versions in tools/sources.ts. Two shapes are matched: a top-level `const <name> = \"...\"` (the common case, and what tools/sources.ts reads back via VersionSource kind 'app-const'), and an inline `version: \"...\"` inside a HelmApp call for the charts that never needed a named const. `registryUrl` is optional and only carried by the `datasource=helm` entries -- the helm datasource has no default registry to fall back on, so a chart without it resolves to nothing and is silently skipped.",
-      "managerFilePatterns": ["/^apps/[^/]+/app\\.ts$/"],
+      "description": "Bump chart/release versions pinned in any apps/*/app.ts or lib/*.ts, annotated the same way as the literal versions in tools/sources.ts. Two shapes are matched: a top-level `const <name> = \"...\"` (the common case, and what tools/sources.ts reads back via VersionSource kind 'app-const'), and an inline `version: \"...\"` inside a HelmApp call for the charts that never needed a named const. `registryUrl` is optional and only carried by the `datasource=helm` entries -- the helm datasource has no default registry to fall back on, so a chart without it resolves to nothing and is silently skipped. lib/ is in scope because the shared constructs pin images too (mariadb in lib/mysql.ts, exportarr in lib/media-app.ts, the cluster's k3s release in lib/consts.ts), and those went untracked for as long as the pattern only listed apps/.",
+      "managerFilePatterns": ["/^apps/[^/]+/app\\.ts$/", "/^lib/[^/]+\\.ts$/"],
       "matchStrings": [
         "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*(?:export )?const \\w+ = \"(?<currentValue>[^\"]+)\";",
         "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*version: \"(?<currentValue>[^\"]+)\","

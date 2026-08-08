@@ -28,6 +28,10 @@ import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 const name = "navidrome";
 const port = 4533;
 
+// Exported for the argocd-image-updater config in apps/media/app.ts, which
+// previously restated this string by hand.
+export const NAVIDROME_IMAGE = "ghcr.io/navidrome/navidrome:latest";
+
 export class Navidrome extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
@@ -54,7 +58,7 @@ export class Navidrome extends Chart {
         {
           name: name,
           securityContext: DEFAULT_SECURITY_CONTEXT,
-          image: "ghcr.io/navidrome/navidrome:latest",
+          image: NAVIDROME_IMAGE,
           ports: [
             {
               name: "http",

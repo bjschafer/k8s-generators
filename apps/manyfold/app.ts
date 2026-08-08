@@ -26,6 +26,15 @@ NewArgoApp(name, {
         image: image,
         strategy: "digest",
       },
+      // lib/valkey.ts pulls IfNotPresent off a floating minor tag, so without
+      // an entry here the sidecar is frozen on whatever digest it happened to
+      // pull first -- it never re-resolves `7-alpine`. Tracked by digest
+      // rather than semver so it stays on the alpine variant.
+      {
+        image: "ghcr.io/valkey-io/valkey",
+        versionConstraint: "7-alpine",
+        strategy: "digest",
+      },
     ],
   },
 });

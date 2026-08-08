@@ -1,6 +1,14 @@
 [tools]
 bun = "latest"
-kubectl = "1.36.2"
+# Tracks the cluster's k3s release (K3S_VERSION in lib/consts.ts), not kubectl's
+# own latest -- KUBE_VERSION below feeds `helm template`'s .Capabilities, so a
+# kubectl ahead of the apiserver re-renders manifests against an API surface the
+# cluster does not have. Renovate is disabled for this entry so it can only move
+# with a k3s bump; see renovate.json.
+kubectl = "1.36.3"
+# Must stay on 3.x: cdk8s's HelmApp shells out to this binary and is built
+# against the Helm 3 CLI. Constrained in renovate.json rather than left to a
+# comment.
 helm = "3.21.3"
 # Renders the velero CRDs (`velero install --crds-only`), so the CLI version IS
 # the CRD version -- unlike helm above, which only pulls a chart at a version

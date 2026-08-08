@@ -24,6 +24,7 @@ import { DEFAULT_SECURITY_CONTEXT, GET_SERVICE_URL, LSIO_ENVVALUE } from "./cons
 import { NFSConcreteVolume } from "./nfs";
 import { VmServiceScrape } from "../imports/operator.victoriametrics.com";
 
+// renovate: datasource=docker depName=ghcr.io/onedr0p/exportarr
 const exportarrVersion = "v2.3.0";
 const exportarrPort = 9707;
 const mediaLabel = { "app.kubernetes.io/instance": "media" };

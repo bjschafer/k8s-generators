@@ -32,7 +32,7 @@ spec:
                   exit $rc
               command:
                 - kubectl
-              image: rancher/kubectl:v1.36.2
+              image: rancher/kubectl:v1.36.3
               imagePullPolicy: IfNotPresent
               name: prune
               resources:

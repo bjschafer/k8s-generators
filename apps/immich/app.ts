@@ -3,7 +3,7 @@ import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe, Volume } from "cdk8s-
 import { basename } from "path";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
-import { NewArgoApp } from "../../lib/argo";
+import { ArgoUpdaterImageProps, NewArgoApp } from "../../lib/argo";
 import { BACKUP_ANNOTATION_EXCLUDE, DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
@@ -38,13 +38,23 @@ const images = {
 NewArgoApp(namespace, {
   namespace: namespace,
   autoUpdate: {
-    images: Object.values(images).map((image: string) => {
-      return {
-        image: image,
+    images: [
+      ...Object.values(images).map((image: string): ArgoUpdaterImageProps => {
+        return {
+          image: image,
+          strategy: "digest",
+          versionConstraint: majorTag,
+        };
+      }),
+      // Pinned to its own tag, not immich's -- and lib/valkey.ts pulls
+      // IfNotPresent off a floating minor tag, so without an entry here it is
+      // frozen on the digest it first pulled.
+      {
+        image: "ghcr.io/valkey-io/valkey",
+        versionConstraint: "7-alpine",
         strategy: "digest",
-        versionConstraint: majorTag,
-      };
-    }),
+      },
+    ],
   },
 });
 

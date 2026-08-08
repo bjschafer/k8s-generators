@@ -39,6 +39,10 @@ spec:
           commonUpdateSettings:
             updateStrategy: digest
           imageName: ghcr.io/immich-app/immich-server:v3
+        - alias: valkey
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/valkey-io/valkey:7-alpine
       namePattern: immich
   writeBackConfig:
     gitConfig:

@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 import { join } from "path";
 import { basename } from "../../lib/util";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, K3S_VERSION } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { AddCRDs } from "../../lib/util";
 import { Plan } from "../../imports/upgrade.cattle.io";
@@ -11,12 +11,9 @@ import { Plan } from "../../imports/upgrade.cattle.io";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-// The k3s version every node is upgraded to. Bumping this is what actually
-// triggers a rolling cluster upgrade: the controller compares it against each
-// node's kubelet version, so it stays inert until the two disagree. Keep it in
-// step with the kubectl pin in mise.toml.
-// renovate: datasource=custom.k3s depName=k3s versioning=loose
-const k3sVersion = "v1.36.3+k3s1";
+// Moved to lib/consts.ts so the in-cluster kubectl images derive from the same
+// line rather than each carrying their own pin (see K3S_VERSION there).
+const k3sVersion = K3S_VERSION;
 const upgradeImage = "rancher/k3s-upgrade";
 const serviceAccountName = "system-upgrade";
 

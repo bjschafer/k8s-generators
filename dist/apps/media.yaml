@@ -35,6 +35,14 @@ spec:
           commonUpdateSettings:
             updateStrategy: digest
           imageName: ghcr.io/navidrome/navidrome:latest
+        - alias: resilio-sync
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/linuxserver/resilio-sync:2.8.1
+        - alias: kometa
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: kometateam/kometa:latest
         - alias: sonarr
           commonUpdateSettings:
             updateStrategy: digest
