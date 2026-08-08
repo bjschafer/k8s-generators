@@ -19,29 +19,31 @@ Everything below uses the user's existing kubeconfig. There is **no API token,
 nothing to expire, and no SSO login**. ArgoCD's `Application` CRs are the same
 API the CLI writes to, so `kubectl` reaches the identical machinery.
 
-### Do not reintroduce an `argocd` CLI API token
+### Why there's no API token here
 
-A previous version of this skill used a non-expiring token for the local
-`bschafer` account. **It cannot work, and regenerating it will not help.**
-
-ArgoCD stores the registry of valid token IDs in the `accounts.bschafer.tokens`
-key of the `argocd-secret` Secret. That Secret is wholly owned
-(`ownerReferences[].controller: true`) by a **SealedSecret**, defined in the
-separate `k8s-prod` repo at `argocd/sealedsecret.argocd-secret.yaml`, which
-seals that exact key to the literal value `null`. So every sealed-secrets
-reconcile rewrites the token list to empty, silently revoking any token created
-with `argocd account generate-token`. The symptom is:
+An earlier version of this skill used a non-expiring token for the local
+`bschafer` account, and it kept dying every few days with:
 
 ```
 rpc error: code = Unauthenticated desc = invalid session:
 account bschafer does not have token with id <uuid>
 ```
 
-which reads like a normal expiry but recurs every few days. Fixing it properly
-means re-sealing `argocd-secret` without the `tokens` key and adding
-`sealedsecrets.bitnami.com/patch: "true"` so the controller stops pruning keys
-it doesn't own — a change in the *other* repo. Until someone does that, use
-kubectl.
+ArgoCD stores the registry of valid token IDs in the `accounts.bschafer.tokens`
+key of the `argocd-secret` Secret. That Secret is owned by a **SealedSecret** in
+the separate `k8s-prod` repo (`argocd/sealedsecret.argocd-secret.yaml`), which
+sealed that exact key to the literal value `null` — so every sealed-secrets
+reconcile emptied the token list and silently revoked every issued token. It
+read like ordinary expiry, which is what made it take three sessions to spot.
+
+**That root cause was fixed on 2026-08-08** (k8s-prod `f774d85f`): the `tokens`
+key was dropped from `encryptedData` and `sealedsecrets.bitnami.com/patch:
+"true"` added to the template, so the controller patches its own keys instead of
+replacing the whole Secret. API tokens now persist across reconciles.
+
+**This skill still deliberately uses no credential.** kubectl access already
+exists, never expires, needs no rotation, and can't be revoked out from under a
+session. Don't add a token back just because it would now work.
 
 ## Quick Reference
 
