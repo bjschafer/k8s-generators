@@ -22,6 +22,7 @@ export interface EsoValuesSchema {
     deploymentAnnotations?: {
       [k: string]: unknown;
     };
+    enablePartialCache?: boolean;
     extraArgs?: {
       [k: string]: unknown;
     };
@@ -135,6 +136,8 @@ export interface EsoValuesSchema {
       [k: string]: unknown;
     };
     revisionHistoryLimit?: number;
+    runtimeClassName?: string;
+    schedulerName?: string;
     securityContext?: {
       allowPrivilegeEscalation?: boolean;
       capabilities?: {
@@ -409,6 +412,8 @@ export interface EsoValuesSchema {
     [k: string]: unknown;
   };
   revisionHistoryLimit?: number;
+  runtimeClassName?: string;
+  schedulerName?: string;
   scopedNamespace?: string;
   scopedRBAC?: boolean;
   securityContext?: {
@@ -619,6 +624,8 @@ export interface EsoValuesSchema {
       [k: string]: unknown;
     };
     revisionHistoryLimit?: number;
+    runtimeClassName?: string;
+    schedulerName?: string;
     secretAnnotations?: {
       [k: string]: unknown;
     };
