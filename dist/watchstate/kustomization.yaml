@@ -1,5 +1,9 @@
 resources:
+  - CronJob.watchstate-prune.yaml
   - Deployment.watchstate.yaml
   - Ingress.watchstate.yaml
   - PersistentVolumeClaim.config.yaml
+  - Role.watchstate-pruner.yaml
+  - RoleBinding.watchstate-pruner.yaml
   - Service.watchstate.yaml
+  - ServiceAccount.watchstate-pruner.yaml

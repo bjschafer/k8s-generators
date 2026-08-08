@@ -1,10 +1,22 @@
-import { App, Duration, Size } from "cdk8s";
+import { App, Chart, Cron, Duration, Size } from "cdk8s";
 import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, DEFAULT_SECURITY_CONTEXT } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
-import { EnvValue, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
+import {
+  ApiResource,
+  ConcurrencyPolicy,
+  CronJob,
+  EnvValue,
+  ImagePullPolicy,
+  PersistentVolumeAccessMode,
+  Probe,
+  RestartPolicy,
+  Role,
+  RoleBinding,
+  ServiceAccount,
+} from "cdk8s-plus-34";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -66,6 +78,100 @@ new AppPlus(app, "watchstate", {
       props: {
         storage: Size.gibibytes(5),
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
+      },
+    },
+  ],
+});
+
+// WatchState's own scheduler cannot be relied on to prune. It loops on a bare
+// `sleep(60)` (src/Commands/System/SchedulerCommand.php), so its tick drifts by
+// however long the due tasks took -- while each pruner's cron is matched with
+// CronExpression::isDue('now'), which is minute-exact. file_pruner and
+// database_pruner are both '0 */12 * * *', so a tick has to land inside the
+// 00:00 or 12:00 minute for them to run at all. Measured: the wrapper task
+// fired ~18x/day against an expected 288, and the pruners had run about once
+// in the preceding 50 days -- which is how 1.3GB of logs and an 857MB events
+// table accumulated under a 7-day TTL.
+//
+// `--run -p <name>` skips the due check entirely (see runPruners() in
+// PruneCommand.php), so driving the pruners from a real CronJob sidesteps the
+// drift without patching upstream.
+const pruneChart = new Chart(app, "watchstate-prune", { namespace: namespace });
+
+const pruneSa = new ServiceAccount(pruneChart, "prune-sa", {
+  metadata: { name: `${name}-pruner`, namespace: namespace },
+});
+
+const pruneRole = new Role(pruneChart, "prune-role", {
+  metadata: {
+    name: `${name}-pruner`,
+    namespace: namespace,
+    annotations: {
+      "cmdcentral.xyz/why":
+        "Lets the prune CronJob find the watchstate pod and exec the pruners inside it. The config PVC is RWO and held by the Deployment, so a standalone job cannot mount it.",
+    },
+  },
+});
+pruneRole.allowRead(ApiResource.PODS);
+// apiGroup must be the empty string -- pods/exec is in the core group, and
+// omitting it synths `apiGroups: [null]`, which matches nothing.
+pruneRole.allow(["create"], ApiResource.custom({ apiGroup: "", resourceType: "pods/exec" }));
+
+new RoleBinding(pruneChart, "prune-binding", {
+  metadata: { name: `${name}-pruner`, namespace: namespace },
+  role: pruneRole,
+}).addSubjects(pruneSa);
+
+// Every pruner deletes by absolute age rather than by time-since-last-run, so
+// running them more often than their declared cron is idempotent.
+const pruners = [
+  "file_pruner",
+  "database_pruner",
+  "backend_metadata",
+  "command_sessions",
+  "media_health_reports",
+];
+
+new CronJob(pruneChart, "prune-cronjob", {
+  metadata: { name: `${name}-prune`, namespace: namespace },
+  schedule: Cron.schedule({ minute: "0", hour: "*/6" }),
+  concurrencyPolicy: ConcurrencyPolicy.FORBID,
+  restartPolicy: RestartPolicy.ON_FAILURE,
+  successfulJobsRetained: 1,
+  failedJobsRetained: 3,
+  serviceAccount: pruneSa,
+  // The job's whole purpose is calling the API, so it needs its token. cdk8s
+  // defaults this to false.
+  automountServiceAccountToken: true,
+  // Default is 10s, which silently skips the run if the CronJob controller is
+  // busy at the top of the hour.
+  startingDeadline: Duration.minutes(10),
+  securityContext: DEFAULT_SECURITY_CONTEXT,
+  containers: [
+    {
+      name: "prune",
+      // Matches the kubectl pinned in mise.toml.
+      image: "rancher/kubectl:v1.36.2",
+      imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
+      securityContext: DEFAULT_SECURITY_CONTEXT,
+      command: ["/bin/sh", "-c"],
+      args: [
+        [
+          "set -eu",
+          `pod=$(kubectl get pod -n ${namespace} -l app.kubernetes.io/name=${name} --field-selector=status.phase=Running -o jsonpath='{.items[0].metadata.name}')`,
+          'test -n "$pod"',
+          "rc=0",
+          // Each pruner is independent, so one failure should not skip the
+          // rest -- collect the status and fail the job at the end instead.
+          `for p in ${pruners.join(" ")}; do`,
+          `  echo "==> $p"`,
+          `  kubectl exec -n ${namespace} "$pod" -- console system:prune --run --execute -p "$p" -v || rc=1`,
+          "done",
+          "exit $rc",
+        ].join("\n"),
+      ],
+      resources: {
+        memory: { request: Size.mebibytes(64), limit: Size.mebibytes(128) },
       },
     },
   ],

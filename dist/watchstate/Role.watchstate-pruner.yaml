@@ -1,0 +1,22 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    cmdcentral.xyz/why: Lets the prune CronJob find the watchstate pod and exec the pruners inside it. The config PVC is RWO and held by the Deployment, so a standalone job cannot mount it.
+  name: watchstate-pruner
+  namespace: watchstate
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - pods/exec
+    verbs:
+      - create
