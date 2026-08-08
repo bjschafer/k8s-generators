@@ -8,100 +8,55 @@ description: Use when you want to check ArgoCD application/sync status or force 
 Interact with the homelab ArgoCD instance to check sync/health status and force
 immediate reconciliation, instead of waiting out the default polling interval.
 
-**Server:** `https://argo.cmdcentral.xyz`
+**Server:** `https://argo.cmdcentral.xyz` (web UI — for humans)
 **App naming:** one Application per `apps/<name>` folder in this repo, named
-and namespaced to match (see root `CLAUDE.md`). `argo app list` is the source
-of truth if unsure.
+and namespaced to match (see root `CLAUDE.md`). `kubectl -n argocd get app` is
+the source of truth if unsure.
 
-## Auth (already set up — no browser SSO needed)
+## Auth: none needed — drive the Application CRs with kubectl
 
-Interactive `argocd login --sso` requires a browser and will hang in a
-non-interactive session. Instead this skill uses a pre-generated, non-expiring
-API token for the local `bschafer` account (mapped to `role:admin` in
-`argocd-rbac-cm` — same privilege as your SSO login).
+Everything below uses the user's existing kubeconfig. There is **no API token,
+nothing to expire, and no SSO login**. ArgoCD's `Application` CRs are the same
+API the CLI writes to, so `kubectl` reaches the identical machinery.
 
-The token is stored as the atuin dotfiles var `ARGOCD_GENERATORS_TOKEN` (synced
-via the user's own atuin server, same pattern as `NETBOX_TOKEN`/`PVE_TOKEN_*`).
-It is deliberately **not** named `ARGOCD_AUTH_TOKEN` — that name is what the
-`argocd` CLI reads natively, and exporting it globally would silently replace
-the user's SSO identity with this admin API token for *all* their everyday
-interactive `argocd` usage on every machine. A local fallback copy also lives
-at `~/.config/argocd/generators-skill.token` (chmod 600) for sessions where
-the atuin var hasn't propagated yet. **Never** print either value, copy it
-into a file inside this repo, or put it in a commit — this repo is public
-([[project_generators_repo_is_public]]).
+### Do not reintroduce an `argocd` CLI API token
 
-Every command in this skill must be run through this wrapper so it uses the
-token instead of the SSO session context:
+A previous version of this skill used a non-expiring token for the local
+`bschafer` account. **It cannot work, and regenerating it will not help.**
 
-```bash
-argo() {
-  local token="${ARGOCD_GENERATORS_TOKEN:-$(cat ~/.config/argocd/generators-skill.token 2>/dev/null)}"
-  ARGOCD_AUTH_TOKEN="$token" command argocd \
-    --config /nonexistent/argocd-skill-no-local-config.yaml \
-    --server argo.cmdcentral.xyz "$@"
-}
+ArgoCD stores the registry of valid token IDs in the `accounts.bschafer.tokens`
+key of the `argocd-secret` Secret. That Secret is wholly owned
+(`ownerReferences[].controller: true`) by a **SealedSecret**, defined in the
+separate `k8s-prod` repo at `argocd/sealedsecret.argocd-secret.yaml`, which
+seals that exact key to the literal value `null`. So every sealed-secrets
+reconcile rewrites the token list to empty, silently revoking any token created
+with `argocd account generate-token`. The symptom is:
+
+```
+rpc error: code = Unauthenticated desc = invalid session:
+account bschafer does not have token with id <uuid>
 ```
 
-Define that shell function once per session, then use `argo` in place of
-`argocd` for every example below.
-
-**The `--config` flag pointing at a path that does not exist is load-bearing —
-do not drop it.** Supplying an auth token does *not* stop the CLI from loading
-`~/.config/argocd/config`; if the user's SSO context in that file has an
-expired `auth-token`, the CLI tries to refresh it against dex *before* it ever
-uses your token, and a failed refresh aborts the whole command. Pointing
-`--config` at a nonexistent path means there is no context to refresh. The CLI
-never writes to it (it only writes on `login`, which this skill never runs), so
-the path stays absent and the user's real config is untouched.
-
-### If a command fails
-
-First read the error — it tells you which of two unrelated things broke:
-
-| Error | Meaning | Fix |
-|---|---|---|
-| `oauth2: cannot fetch token: ...` / `oauth2: "invalid_request" ...` | Not a token problem. The CLI is refreshing the user's stale SSO context — you dropped `--config` from the wrapper. | Re-run with the wrapper exactly as written above. |
-| `Unauthenticated desc = invalid session: token is malformed` | The token really is empty/garbage. | Check the env var and fallback file are non-empty. |
-| `Unauthenticated` / `permission denied` on a valid-looking token | The token was revoked or RBAC changed. | Regenerate (below). |
-
-Confirm which identity you're actually authenticating as:
-
-```bash
-argo account get-user-info    # expect: Logged In: true, Username: bschafer, Issuer: argocd
-```
-
-`Issuer: argocd` means the API token is in use. Anything else (e.g. a dex
-issuer) means the wrapper isn't isolating the local config.
-
-### Regenerating the token
-
-The token has no expiry, so this is only needed if it was actually revoked.
-Requires an interactive `argocd login --sso` from the user first — ask them to
-run it, and note this writes their normal SSO context, which the wrapper
-deliberately ignores:
-
-```bash
-argocd login argo.cmdcentral.xyz --sso
-NEW_TOKEN=$(argocd account generate-token --account bschafer)
-atuin dotfiles var set ARGOCD_GENERATORS_TOKEN "$NEW_TOKEN"
-echo "$NEW_TOKEN" > ~/.config/argocd/generators-skill.token
-chmod 600 ~/.config/argocd/generators-skill.token
-```
+which reads like a normal expiry but recurs every few days. Fixing it properly
+means re-sealing `argocd-secret` without the `tokens` key and adding
+`sealedsecrets.bitnami.com/patch: "true"` so the controller stops pruning keys
+it doesn't own — a change in the *other* repo. Until someone does that, use
+kubectl.
 
 ## Quick Reference
 
 | Goal | Command |
 |------|---------|
-| List all apps + sync/health status | `argo app list` |
-| Status of one app | `argo app get <app>` |
-| Diff live vs. desired manifests | `argo app diff <app>` |
-| Force sync now | `argo app sync <app>` |
-| Sync and block until done | `argo app sync <app> --timeout 300` |
-| Wait for healthy+synced (no sync trigger) | `argo app wait <app> --health` |
-| Sync history | `argo app history <app>` |
-| Rollback to a previous revision | `argo app rollback <app> <history-id>` |
-| Tail live resource tree | `argo app resources <app>` |
+| List all apps + sync/health | `kubectl -n argocd get app` |
+| Status of one app | `kubectl -n argocd get app <app> -o custom-columns=SYNC:.status.sync.status,HEALTH:.status.health.status,REV:.status.sync.revision` |
+| Nudge a refresh (cheap) | `kubectl -n argocd annotate app <app> argocd.argoproj.io/refresh=hard --overwrite` |
+| Force a sync now | `.operation` patch — see below |
+| Which resources are out of sync | `kubectl -n argocd get app <app> -o jsonpath='{.status.resources}'` |
+| Sync history | `kubectl -n argocd get app <app> -o jsonpath='{.status.history}'` |
+| Why did the last sync fail | `kubectl -n argocd get app <app> -o jsonpath='{.status.operationState.message}'` |
+
+All 53 apps run with `syncPolicy.automated.selfHeal: true`, which is why the
+cheap refresh below is usually sufficient.
 
 ## Common Workflows
 
@@ -109,39 +64,106 @@ chmod 600 ~/.config/argocd/generators-skill.token
 
 ArgoCD polls the repo on an interval (and this repo also has webhook-based
 refresh), so most of the time a sync happens within seconds. Use this when you
-don't want to wait, or need to confirm a change actually landed:
+don't want to wait.
+
+**Option 1 — hard refresh (preferred, cheapest).** Re-pulls git and re-renders
+manifests. Because every app has `automated.selfHeal`, any resulting drift
+auto-syncs immediately. The controller consumes and removes the annotation.
 
 ```bash
-argo app get <app>              # check current sync/health status first
-argo app sync <app> --timeout 300
+kubectl -n argocd annotate app <app> argocd.argoproj.io/refresh=hard --overwrite
 ```
 
-`app sync` triggers a hard refresh + sync in one step — no need to call
-`app get --hard-refresh` separately first.
-
-### Confirm what will change before syncing
+**Option 2 — explicit sync operation.** The exact thing `argocd app sync` does
+under the hood: write `.operation` on the Application. Use when you want a real
+sync operation recorded in history, or want to block on the result.
 
 ```bash
-argo app diff <app>
+kubectl -n argocd patch app <app> --type merge \
+  -p '{"operation":{"initiatedBy":{"username":"claude-code-skill"},"sync":{"syncStrategy":{"hook":{}}}}}'
 ```
 
-Empty output means live state already matches desired state.
+Omitting `sync.revision` makes it sync the app's own `targetRevision`
+(`HEAD` or `main` here), which is what you almost always want.
+
+### Sync and block until it finishes
+
+`.status.operationState` still holds the *previous* operation's result for a
+moment after you patch, so polling `phase` alone races. Capture `startedAt`
+first and wait for it to change:
+
+```bash
+app=<app>
+prev=$(kubectl -n argocd get app "$app" -o jsonpath='{.status.operationState.startedAt}')
+kubectl -n argocd patch app "$app" --type merge \
+  -p '{"operation":{"initiatedBy":{"username":"claude-code-skill"},"sync":{"syncStrategy":{"hook":{}}}}}'
+
+for i in $(seq 60); do
+  sleep 5
+  read -r started phase < <(kubectl -n argocd get app "$app" \
+    -o jsonpath='{.status.operationState.startedAt}{" "}{.status.operationState.phase}')
+  [ "$started" != "$prev" ] || continue          # still the old operation
+  case "$phase" in Succeeded|Failed|Error) break ;; esac
+done
+
+kubectl -n argocd get app "$app" -o jsonpath='phase={.status.operationState.phase}{"\n"}msg={.status.operationState.message}{"\n"}'
+```
+
+### Wait for healthy + synced without triggering anything
+
+```bash
+kubectl -n argocd wait app/<app> --for=jsonpath='{.status.health.status}'=Healthy --timeout=300s
+kubectl -n argocd wait app/<app> --for=jsonpath='{.status.sync.status}'=Synced --timeout=300s
+```
 
 ### Check status across everything (e.g. after a broad change)
 
 ```bash
-argo app list
+kubectl -n argocd get app
 ```
 
-Look for `OutOfSync` or non-`Healthy` in the output; investigate those with
-`argo app get <app>` before syncing individually.
+Or just the problems:
+
+```bash
+kubectl -n argocd get app -o json | jq -r '
+  .items[]
+  | select(.status.sync.status != "Synced" or .status.health.status != "Healthy")
+  | "\(.metadata.name)\t\(.status.sync.status)\t\(.status.health.status)"'
+```
+
+### See what's drifted
+
+There is no kubectl equivalent of `argocd app diff`'s rendered manifest diff,
+but the per-resource verdict is on the CR:
+
+```bash
+kubectl -n argocd get app <app> -o json | jq -r '
+  .status.resources[] | select(.status != "Synced")
+  | "\(.kind)/\(.name)\t\(.status)"'
+```
+
+Empty output means live state matches desired state.
+
+## Limitations — these still need the interactive CLI
+
+Two things genuinely need an authenticated `argocd` client. Ask the user to run
+`argocd login argo.cmdcentral.xyz --sso` in their own terminal (it needs a
+browser and will hang in a non-interactive session), then run the command
+themselves:
+
+- **`argocd app diff <app>`** — rendered desired-vs-live manifest diff.
+- **`argocd app rollback <app> <id>`** — and note rollback fights `selfHeal`:
+  with automated sync on, the controller drags the app straight back to
+  `targetRevision`. A real rollback means reverting the commit in git, not
+  rolling back in ArgoCD.
 
 ## Notes
 
-- This is a **full-admin** credential. Only use it for read/status checks and
-  syncing — don't use it to poke around unrelated cluster config.
-- Syncing via ArgoCD is the GitOps-sanctioned path — it applies exactly what's
-  committed to `main`. This is different from `kubectl apply`, which the root
-  `CLAUDE.md` prohibits.
-- If `argo app sync` reports drift that doesn't match your local `dist/`, run
-  `mise run build` first — you may be looking at stale generated manifests.
+- Patching `.operation` and annotating for refresh are ArgoCD's own sanctioned
+  control surface — they apply exactly what is committed to `main`. This is
+  *not* the same as `kubectl apply` of a manifest, which the root `CLAUDE.md`
+  prohibits.
+- Only use kubectl against `Application` CRs in the `argocd` namespace for
+  status and sync. Don't reach around ArgoCD to mutate managed workloads.
+- If reported drift doesn't match your local `dist/`, run `mise run build`
+  first — you may be looking at stale generated manifests.
