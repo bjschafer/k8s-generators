@@ -49,6 +49,14 @@ new AppPlus(app, "watchstate", {
 
   extraEnv: {
     WS_API_AUTO: EnvValue.fromValue("true"),
+
+    // The import/export tasks default to '-v', which logs a notice line per
+    // media item. That lands twice: in logs/task.<date>.jsonl (~30MB/day) and
+    // in the events table's `logs` column (~320KB per import row, 851MB total).
+    // "(empty)" is the app's own sentinel for an empty string -- see env() in
+    // src/Libs/helpers.php. Warnings and errors are still recorded.
+    WS_CRON_IMPORT_ARGS: EnvValue.fromValue("(empty)"),
+    WS_CRON_EXPORT_ARGS: EnvValue.fromValue("(empty)"),
   },
 
   volumes: [

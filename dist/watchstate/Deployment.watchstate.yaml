@@ -27,6 +27,10 @@ spec:
         - env:
             - name: WS_API_AUTO
               value: "true"
+            - name: WS_CRON_IMPORT_ARGS
+              value: (empty)
+            - name: WS_CRON_EXPORT_ARGS
+              value: (empty)
           image: ghcr.io/arabcoders/watchstate
           imagePullPolicy: Always
           livenessProbe:
