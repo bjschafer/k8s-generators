@@ -50,6 +50,11 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 60
+            periodSeconds: 5
+            tcpSocket:
+              port: 8080
           volumeMounts:
             - mountPath: /config
               name: pvc-config
