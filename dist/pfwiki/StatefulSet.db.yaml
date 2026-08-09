@@ -19,6 +19,8 @@ spec:
       automountServiceAccountToken: false
       containers:
         - env:
+            - name: MARIADB_AUTO_UPGRADE
+              value: "1"
             - name: MARIADB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:

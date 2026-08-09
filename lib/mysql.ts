@@ -90,6 +90,11 @@ export class MysqlInstance extends Chart {
 
     sts.containers[0].mount("/var/lib/mysql", volume);
 
+    // Required so the official MariaDB container runs `mariadb-upgrade` when
+    // the image tag moves across major versions (e.g. 11.x -> 12.x). Without
+    // this the server starts with stale system tables from the old major.
+    sts.containers[0].env.addVariable("MARIADB_AUTO_UPGRADE", EnvValue.fromValue("1"));
+
     sts.containers[0].env.addVariable(
       "MARIADB_ROOT_PASSWORD",
       EnvValue.fromSecretValue({
