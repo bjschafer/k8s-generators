@@ -1,6 +1,10 @@
 import { App, Chart, Cron, Duration, Size } from "cdk8s";
 import { basename } from "path";
-import { DEFAULT_APP_PROPS, DEFAULT_SECURITY_CONTEXT, KUBERNETES_VERSION } from "../../lib/consts";
+import {
+  DEFAULT_APP_PROPS,
+  DEFAULT_SECURITY_CONTEXT,
+  KUBECTL_IMAGE_VERSION,
+} from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
@@ -149,17 +153,25 @@ new CronJob(pruneChart, "prune-cronjob", {
   // Default is 10s, which silently skips the run if the CronJob controller is
   // busy at the top of the hour.
   startingDeadline: Duration.minutes(10),
+  // Without a deadline, a job that can never terminate -- an unpullable image
+  // being the obvious case, since ImagePullBackOff retries forever and never
+  // counts as a failure -- stays Active indefinitely, and FORBID above then
+  // skips every subsequent run for as long as it hangs. That turns any transient
+  // registry problem into a permanently stopped pruner with nothing but an
+  // Active job to show for it. A healthy run takes about 10s; anything still
+  // going after 30m is wedged, so let it fail and free the next schedule.
+  activeDeadline: Duration.minutes(30),
   securityContext: DEFAULT_SECURITY_CONTEXT,
   containers: [
     {
       name: "prune",
-      // Derived from the cluster's own k3s pin rather than hand-written, so it
-      // cannot drift out of kubectl's one-minor support window with the
-      // apiserver -- which it already had, sitting on v1.36.2 against a v1.36.3
-      // cluster. This image ships kubectl as its entrypoint with no shell at
-      // all, hence the single exec below -- the loop runs in the watchstate
+      // Pinned to a tag rancher has actually published rather than derived from
+      // the cluster's k3s patch -- see KUBECTL_IMAGE_VERSION, which carries both
+      // the reason and the check that keeps it inside kubectl's one-minor
+      // support window. This image ships kubectl as its entrypoint with no shell
+      // at all, hence the single exec below -- the loop runs in the watchstate
       // container, which does have sh.
-      image: `rancher/kubectl:${KUBERNETES_VERSION}`,
+      image: `rancher/kubectl:${KUBECTL_IMAGE_VERSION}`,
       imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
       securityContext: DEFAULT_SECURITY_CONTEXT,
       command: ["kubectl"],

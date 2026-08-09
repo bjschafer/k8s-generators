@@ -7,17 +7,46 @@ export const DEFAULT_MEM_LIMIT = Quantity.fromString("256Mi");
 
 // The k3s release every node runs. Bumping this is what actually triggers a
 // rolling cluster upgrade (apps/system-upgrade compares it against each node's
-// kubelet version, so it stays inert until the two disagree), and it is the
-// single source of truth for any in-cluster kubectl image as well -- kubectl is
-// only supported within one minor of the apiserver, so nothing gets to pin its
-// own. Keep the mise.toml kubectl pin in step with it; renovate.json disables
-// that pin's own updates precisely so it can only move with this line.
+// kubelet version, so it stays inert until the two disagree). Keep the mise.toml
+// kubectl pin in step with it; renovate.json disables that pin's own updates
+// precisely so it can only move with this line.
 // renovate: datasource=custom.k3s depName=k3s versioning=loose
 export const K3S_VERSION = "v1.36.3+k3s1";
 
 // `v1.36.3+k3s1` -> `v1.36.3`. k3s appends its own build number to the upstream
 // Kubernetes version, and a container tag cannot contain `+`.
 export const KUBERNETES_VERSION = K3S_VERSION.split("+")[0];
+
+// The tag for in-cluster kubectl container images. This deliberately is *not*
+// derived from KUBERNETES_VERSION: rancher publishes its kubectl image per
+// upstream patch on its own cadence and lags behind k3s, so deriving the tag
+// renders a reference to something that may not exist yet. That is not
+// hypothetical -- it is exactly how the watchstate prune CronJob wedged, sitting
+// in ImagePullBackOff against `rancher/kubectl:v1.36.3` (404, while v1.36.2 was
+// the newest published) and, under concurrencyPolicy Forbid, silently skipping
+// every subsequent run. Renovate tracks this against the registry's real tag
+// list, so it can only ever name a tag that exists; the assertion below is what
+// keeps it tied to the cluster instead.
+// renovate: datasource=docker depName=rancher/kubectl
+export const KUBECTL_IMAGE_VERSION = "v1.36.2";
+
+// kubectl is supported within one minor of the apiserver -- one *minor*, not an
+// exact patch match, which is the slack that lets the pin above float on
+// rancher's cadence. Nothing else stops a k3s minor bump from stranding it (or
+// Renovate from running it a minor ahead of the cluster), so fail the synth
+// rather than ship a manifest that talks to the apiserver out of support.
+const minorOrdinal = (version: string): number => {
+  const parsed = /^v(\d+)\.(\d+)\./.exec(version);
+  if (!parsed) throw new Error(`Unparseable Kubernetes version: ${version}`);
+  return Number(parsed[1]) * 1000 + Number(parsed[2]);
+};
+
+if (Math.abs(minorOrdinal(KUBECTL_IMAGE_VERSION) - minorOrdinal(KUBERNETES_VERSION)) > 1) {
+  throw new Error(
+    `KUBECTL_IMAGE_VERSION (${KUBECTL_IMAGE_VERSION}) is more than one minor away from the cluster's ${KUBERNETES_VERSION}. ` +
+      `Bump it to a tag rancher has actually published for the cluster's minor.`,
+  );
+}
 
 export const TZ = "America/Chicago";
 export const MEDIA_UID = "8675309";
