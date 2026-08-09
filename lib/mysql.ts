@@ -24,7 +24,7 @@ export interface MysqlInstanceProps {
 // can see a bare version to bump -- it matches `const <name> = "<version>"`,
 // and a whole `repo:tag` string parses as a version of nothing.
 // renovate: datasource=docker depName=ghcr.io/mariadb/mariadb
-const mariadbVersion = "11.7.2-noble";
+const mariadbVersion = "11.8.8-noble";
 const DEFAULT_IMAGE = `ghcr.io/mariadb/mariadb:${mariadbVersion}`;
 
 export class MysqlInstance extends Chart {
