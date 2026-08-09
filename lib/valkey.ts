@@ -5,7 +5,7 @@ import { Quantity, ResourceRequirements } from "cdk8s-plus-34/lib/imports/k8s";
 import { Construct } from "constructs";
 import { IntOrString, KubeSecret, KubeService, KubeStatefulSet } from "../imports/k8s";
 
-export type ValkeyVersion = "7" | "7-alpine" | "8" | "8-alpine";
+export type ValkeyVersion = "8" | "8-alpine";
 
 export interface ValkeyProps {
   name: string;

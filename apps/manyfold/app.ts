@@ -28,11 +28,11 @@ NewArgoApp(name, {
       },
       // lib/valkey.ts pulls IfNotPresent off a floating minor tag, so without
       // an entry here the sidecar is frozen on whatever digest it happened to
-      // pull first -- it never re-resolves `7-alpine`. Tracked by digest
+      // pull first -- it never re-resolves `8-alpine`. Tracked by digest
       // rather than semver so it stays on the alpine variant.
       {
         image: "ghcr.io/valkey-io/valkey",
-        versionConstraint: "7-alpine",
+        versionConstraint: "8-alpine",
         strategy: "digest",
       },
     ],
@@ -59,7 +59,7 @@ const manyfoldSecrets = new BitwardenSecret(app, "manyfold-secrets", {
 const valkey = new Valkey(app, "valkey", {
   name: name,
   namespace: namespace,
-  version: "7-alpine",
+  version: "8-alpine",
   resources: {
     requests: {
       cpu: Quantity.fromString("100m"),

@@ -43,7 +43,7 @@ NewArgoApp(name, {
       {
         image: "ghcr.io/valkey-io/valkey",
         strategy: "semver",
-        versionConstraint: "7-alpine",
+        versionConstraint: "8-alpine",
         allowTags: "^[v]?[0-9]+\\.[0-9]+\\.[0-9]+$",
       },
     ],
@@ -84,7 +84,7 @@ const oidcSecret = new BitwardenSecret(app, "oidc", {
 const valkey = new Valkey(app, "valkey", {
   name: name,
   namespace: namespace,
-  version: "7-alpine",
+  version: "8-alpine",
   password: "netbox",
   resources: {
     requests: {

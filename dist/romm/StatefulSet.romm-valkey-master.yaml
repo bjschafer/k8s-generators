@@ -52,7 +52,7 @@ spec:
                 secretKeyRef:
                   key: valkey-password
                   name: romm-valkey
-          image: ghcr.io/valkey-io/valkey:7-alpine
+          image: ghcr.io/valkey-io/valkey:8-alpine
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:

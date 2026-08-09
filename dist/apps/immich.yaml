@@ -42,7 +42,7 @@ spec:
         - alias: valkey
           commonUpdateSettings:
             updateStrategy: digest
-          imageName: ghcr.io/valkey-io/valkey:7-alpine
+          imageName: ghcr.io/valkey-io/valkey:8-alpine
       namePattern: immich
   writeBackConfig:
     gitConfig:

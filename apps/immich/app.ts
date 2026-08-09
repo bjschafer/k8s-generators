@@ -51,7 +51,7 @@ NewArgoApp(namespace, {
       // frozen on the digest it first pulled.
       {
         image: "ghcr.io/valkey-io/valkey",
-        versionConstraint: "7-alpine",
+        versionConstraint: "8-alpine",
         strategy: "digest",
       },
     ],
@@ -74,7 +74,7 @@ const dbCreds = new BitwardenSecret(app, "dbcreds", {
 const valkey = new Valkey(app, "valkey", {
   name: "immich",
   namespace: namespace,
-  version: "7-alpine",
+  version: "8-alpine",
   resources: {
     requests: {
       cpu: Quantity.fromString("100m"),

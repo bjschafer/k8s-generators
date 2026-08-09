@@ -30,7 +30,7 @@ NewArgoApp(name, {
       // IfNotPresent off a floating tag and never re-resolves it on its own.
       {
         image: "ghcr.io/valkey-io/valkey",
-        versionConstraint: "7-alpine",
+        versionConstraint: "8-alpine",
         strategy: "digest",
       },
     ],
@@ -62,7 +62,7 @@ const rommSecrets = new BitwardenSecret(app, "romm-secrets", {
 const valkey = new Valkey(app, "valkey", {
   name: name,
   namespace: namespace,
-  version: "7-alpine",
+  version: "8-alpine",
   resources: {
     requests: {
       cpu: Quantity.fromString("100m"),
