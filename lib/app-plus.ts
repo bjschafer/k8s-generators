@@ -167,8 +167,8 @@ export class AppPlus extends Chart {
     const ports: ContainerPort[] = [];
     if (props.ports) {
       ports.push(
-        ...props.ports.map(
-          (port): ContainerPort => (typeof port === "number" ? { number: port } : port),
+        ...props.ports.map((port): ContainerPort =>
+          typeof port === "number" ? { number: port } : port,
         ),
       );
     }
