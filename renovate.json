@@ -5,11 +5,31 @@
   "gitIgnoredAuthors": [
     "41898282+github-actions[bot]@users.noreply.github.com"
   ],
+  "vulnerabilityAlerts": {
+    "description": "Security remediation, kept separate from the ordinary update flow: ungrouped so a fix is never held behind an unrelated bump in the same branch, and labelled so it is obvious in the PR list. This was previously dead - a packageRule with `enabled: false` suppresses vulnerability PRs for that manager too, so the blanket npm/bun disable meant no advisory for cdk8s, constructs or any transitive dep ever produced one. Requires Dependabot alerts to be enabled on the repo; Renovate reads them, it does not run its own scanner.",
+    "enabled": true,
+    "groupName": null,
+    "labels": ["security"]
+  },
   "packageRules": [
     {
-      "description": "package.json/bun.lock dependency bumps are handled manually via `mise run upgrade` (bun update) per CLAUDE.md's 'confirm before adding dependencies' policy - don't have Renovate open PRs for them. Must name `bun`, not just `npm`: because bun.lock exists, the bun manager claims package.json and the npm manager never sees it, so matching npm alone silently matched nothing.",
+      "description": "package.json/bun.lock bumps get PRs, but never automerge by default. This used to be a blanket `enabled: false` justified by CLAUDE.md's 'confirm before adding dependencies' policy, but that policy governs *adding* a dependency, not bumping one already in the tree - and conflating the two meant nothing was watching. The manual path (`mise run upgrade`) went unexercised long enough for cdk8s-plus-34 to sit 13 patch releases behind inside its own caret range. The safety net here is unusually good: CI synthesizes every manifest, so the dist/ diff on the PR *is* the blast radius, rendered. Read that diff and merge. Must name `bun`, not just `npm`: because bun.lock exists, the bun manager claims package.json and the npm manager never sees it, so matching npm alone silently matches nothing.",
       "matchManagers": ["npm", "bun"],
-      "enabled": false
+      "automerge": false
+    },
+    {
+      "description": "Nothing in devDependencies can change a rendered manifest on the PR that bumps it - these only format, lint, type-check, or generate the values-schema types. If a bump breaks, CI goes red and nothing reaches the cluster, so there is no dist/ diff worth a human's time. Grouped into one PR and automerged on green. One caveat, deliberately accepted: cdk8s-cli does generate checked-in code (imports/), but only via `mise run imports`, which is manual and needs live cluster access - it is not in the build or pre-commit chain, so an automerged bump cannot rewrite imports/ by itself; it just means the next time someone runs that task by hand they get a newer generator, and they review that diff then. Minor/patch only: a major here (typescript 7, oxlint 2) is a rule/behaviour change worth reading, and an oxfmt major can reformat every .ts file in the repo - CI would push the reformat back onto the branch and it would still be correct, but that is a diff someone should see.",
+      "matchManagers": ["npm", "bun"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "dev tooling",
+      "automerge": true
+    },
+    {
+      "description": "cdk8s-plus is versioned per Kubernetes minor - the `-34` suffix is k8s 1.34 - so it belongs to the same 'tracks the cluster' category as the kubectl pin, not to its own release cadence. There is no cdk8s-plus-35 published yet, so this is a future move rather than a present gap, but when one lands it is a package rename plus a construct-API sweep across every app, and it must land deliberately alongside a k3s upgrade. Kept ungrouped so it can never ride in on someone else's branch, and explicit here rather than relying on the blanket rule above so that removing that rule cannot silently arm this one.",
+      "matchManagers": ["npm", "bun"],
+      "matchPackageNames": ["cdk8s-plus-34"],
+      "automerge": false
     },
     {
       "description": "Chart/CRD version bumps (the custom.regex managers below) are fully self-completing once CI pushes the regenerated CRDs + dist/, and CI synthesizes and validates the exact manifests Argo will apply. Let minor/patch automerge on green; majors still get regenerated onto the branch by CI, but wait for a human to actually look at the CRD diff before Argo applies it.",
