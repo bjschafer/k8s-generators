@@ -1,4 +1,4 @@
 kustomize:
   images:
   - netboxcommunity/netbox:v4.6.7
-  - ghcr.io/valkey-io/valkey:7.2.14
+  - ghcr.io/valkey-io/valkey:8.1.9
