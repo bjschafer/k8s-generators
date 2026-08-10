@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: energy
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: Alliant Energy usage warehouse owner
+  login: true
+  name: energy
+  passwordSecret:
+    name: energy-db-credentials

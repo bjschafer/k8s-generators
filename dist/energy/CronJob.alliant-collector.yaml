@@ -1,0 +1,121 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: alliant-collector
+  namespace: energy
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 900
+      template:
+        metadata:
+          labels:
+            cdk8s.io/metadata.addr: alliant-collector-cronjob-c894eba7
+        spec:
+          automountServiceAccountToken: false
+          containers:
+            - command:
+                - psql
+                - --single-transaction
+                - -v
+                - ON_ERROR_STOP=1
+                - -f
+                - /scripts/load.sql
+              env:
+                - name: PGHOST
+                  value: prod.postgres.svc.cluster.local
+                - name: PGPORT
+                  value: "5432"
+                - name: PGDATABASE
+                  value: energy
+                - name: PGUSER
+                  value: energy
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: password
+                      name: energy-db-credentials
+              image: postgres:17-alpine
+              imagePullPolicy: IfNotPresent
+              name: load
+              resources:
+                limits:
+                  memory: 256Mi
+                requests:
+                  cpu: 50m
+                  memory: 128Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                privileged: false
+                readOnlyRootFilesystem: false
+                runAsGroup: 65534
+                runAsNonRoot: true
+                runAsUser: 65534
+              volumeMounts:
+                - mountPath: /scripts
+                  name: configmap-alliant-collector-scripts
+                - mountPath: /data
+                  name: data
+          dnsPolicy: ClusterFirst
+          hostNetwork: false
+          initContainers:
+            - command:
+                - python3
+                - /scripts/alliant_fetch.py
+              env:
+                - name: ALLIANT_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      key: ALLIANT_USERNAME
+                      name: alliant-credentials
+                - name: ALLIANT_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: ALLIANT_PASSWORD
+                      name: alliant-credentials
+                - name: OUT_DIR
+                  value: /data
+              image: python:3.13-alpine
+              imagePullPolicy: IfNotPresent
+              name: fetch
+              resources:
+                limits:
+                  memory: 256Mi
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                privileged: false
+                readOnlyRootFilesystem: false
+                runAsGroup: 65534
+                runAsNonRoot: true
+                runAsUser: 65534
+              volumeMounts:
+                - mountPath: /scripts
+                  name: configmap-alliant-collector-scripts
+                - mountPath: /data
+                  name: data
+          restartPolicy: OnFailure
+          securityContext:
+            fsGroup: 65534
+            fsGroupChangePolicy: Always
+            runAsGroup: 65534
+            runAsNonRoot: true
+            runAsUser: 65534
+          setHostnameAsFQDN: false
+          shareProcessNamespace: false
+          terminationGracePeriodSeconds: 30
+          volumes:
+            - configMap:
+                name: alliant-collector-scripts
+              name: configmap-alliant-collector-scripts
+            - emptyDir:
+                sizeLimit: 64Mi
+              name: data
+  schedule: 17 5 * * *
+  startingDeadlineSeconds: 10
+  successfulJobsHistoryLimit: 3
+  suspend: false

@@ -179,6 +179,7 @@ export function createDatabases(scope: Construct, clusterName: string): Chart {
   const chart = new Chart(scope, "databases");
 
   for (const db of DATABASES) {
+    if (db.roleOnly) continue;
     new CnpgDatabase(chart, `db-${db.name}`, {
       metadata: {
         name: db.name,

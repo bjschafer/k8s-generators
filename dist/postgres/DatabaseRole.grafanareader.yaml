@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: grafanareader
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: Read-only reporting login used by Grafana datasources
+  login: true
+  name: grafanareader
+  passwordSecret:
+    name: grafanareader-db-credentials

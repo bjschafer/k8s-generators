@@ -1,0 +1,769 @@
+{
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "alliant-energy",
+    "annotations": {},
+    "labels": {}
+  },
+  "spec": {
+    "uid": "alliant-energy",
+    "title": "Electric Usage (Alliant)",
+    "description": "Hourly, daily and billing-period electricity usage pulled from Alliant Energy's MyAccount API. Data lags roughly 4 days behind real time.",
+    "tags": [
+      "energy",
+      "alliant"
+    ],
+    "editable": true,
+    "graphTooltip": 1,
+    "schemaVersion": 41,
+    "preload": false,
+    "refresh": "",
+    "time": {
+      "from": "now-90d",
+      "to": "now"
+    },
+    "timezone": "America/Chicago",
+    "timepicker": {},
+    "fiscalYearStartMonth": 0,
+    "links": [],
+    "annotations": {
+      "list": []
+    },
+    "templating": {
+      "list": [
+        {
+          "name": "datasource",
+          "label": "Data source",
+          "type": "datasource",
+          "query": "grafana-postgresql-datasource",
+          "current": {},
+          "options": [],
+          "refresh": 1,
+          "regex": "",
+          "includeAll": false,
+          "hide": 0
+        }
+      ]
+    },
+    "panels": [
+      {
+        "id": 1,
+        "type": "stat",
+        "title": "Usage (kWh)",
+        "description": "Total consumption over the selected time range.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 0,
+          "y": 0
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT sum(kwh) AS \"kWh\" FROM hourly_usage WHERE $__timeFilter(ts);",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "decimals": 0,
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 2,
+        "type": "stat",
+        "title": "Est. cost",
+        "description": "Usage costed at the blended $/kWh of the billing period each hour falls in. Approximate: it spreads fixed charges across kWh rather than modelling the tariff.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 4,
+          "y": 0
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT sum(cost_usd) AS \"cost\" FROM hourly_usage_cost WHERE $__timeFilter(ts);",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "currencyUSD",
+            "decimals": 0,
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 3,
+        "type": "stat",
+        "title": "Avg/day (kWh)",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 8,
+          "y": 0
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT sum(kwh) / NULLIF(count(DISTINCT local_date), 0) AS \"kWh/day\" FROM hourly_usage WHERE $__timeFilter(ts);",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "decimals": 1,
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 4,
+        "type": "stat",
+        "title": "Peak day (kWh)",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 12,
+          "y": 0
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT max(d) AS \"kWh\" FROM (SELECT sum(kwh) AS d FROM hourly_usage WHERE $__timeFilter(ts) GROUP BY local_date) x;",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "decimals": 1,
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 5,
+        "type": "stat",
+        "title": "Latest rate",
+        "description": "Blended rate of the most recent billing period: total charged divided by total kWh.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 16,
+          "y": 0
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT amount_usd / NULLIF(kwh, 0) AS \"$/kWh\" FROM billing_period ORDER BY period_start DESC LIMIT 1;",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "currencyUSD",
+            "decimals": 4,
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 6,
+        "type": "stat",
+        "title": "Data lag",
+        "description": "Days between today and the most recent day Alliant has published. Steady-state is about 4; a climbing number means the collector is failing.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 20,
+          "y": 0
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT current_date - max(local_date) AS \"days\" FROM daily_usage;",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "d",
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 7
+                },
+                {
+                  "color": "red",
+                  "value": 10
+                }
+              ]
+            }
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 10,
+        "type": "barchart",
+        "title": "Daily usage",
+        "description": "One bar per day. Single series, so the title carries the identity and no legend is needed.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 14,
+          "x": 0,
+          "y": 4
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT local_date::timestamp AT TIME ZONE 'America/Chicago' AS \"time\", kwh AS \"kWh\"\nFROM daily_usage\nWHERE $__timeFilter(local_date::timestamp AT TIME ZONE 'America/Chicago')\nORDER BY 1;",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "orientation": "vertical",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 100,
+          "showValue": "never",
+          "stacking": "none",
+          "groupWidth": 0.7,
+          "barWidth": 0.9,
+          "barRadius": 0.15,
+          "fullHighlight": false,
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          },
+          "legend": {
+            "showLegend": false,
+            "displayMode": "list",
+            "placement": "bottom",
+            "calcs": []
+          }
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "kwatth",
+            "decimals": 1,
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "blue"
+            },
+            "custom": {
+              "lineWidth": 0,
+              "fillOpacity": 90,
+              "gradientMode": "none",
+              "axisSoftMin": 0
+            },
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 11,
+        "type": "table",
+        "title": "Billing periods",
+        "description": "As billed: read-to-read periods, which do not align to calendar months.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 10,
+          "x": 14,
+          "y": 4
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT to_char(period_end, 'YYYY-MM-DD') AS \"Billed\",\n       kwh AS \"kWh\", amount_usd AS \"Amount\",\n       amount_usd / NULLIF(kwh, 0) AS \"$/kWh\"\nFROM billing_period\nORDER BY period_start DESC;",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "showHeader": true,
+          "cellHeight": "sm",
+          "footer": {
+            "show": false,
+            "reducer": [
+              "sum"
+            ],
+            "countRows": false,
+            "fields": ""
+          }
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              }
+            },
+            "mappings": []
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Billed"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 105
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "kWh"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "none"
+                },
+                {
+                  "id": "decimals",
+                  "value": 0
+                },
+                {
+                  "id": "custom.width",
+                  "value": 75
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Amount"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "currencyUSD"
+                },
+                {
+                  "id": "decimals",
+                  "value": 0
+                },
+                {
+                  "id": "custom.width",
+                  "value": 90
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "$/kWh"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "currencyUSD"
+                },
+                {
+                  "id": "decimals",
+                  "value": 4
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": 12,
+        "type": "heatmap",
+        "title": "Hour of day",
+        "description": "Days across, hour of day up, one cell per hour. Single-hue ramp so darker always means more. Y buckets are hours, not value bins -- the panel does no bucketing of its own.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 14,
+          "x": 0,
+          "y": 13
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT local_date::timestamp AT TIME ZONE 'America/Chicago' AS \"time\",\n       max(kwh) FILTER (WHERE hour_start = 0) AS \"0\",\n       max(kwh) FILTER (WHERE hour_start = 1) AS \"1\",\n       max(kwh) FILTER (WHERE hour_start = 2) AS \"2\",\n       max(kwh) FILTER (WHERE hour_start = 3) AS \"3\",\n       max(kwh) FILTER (WHERE hour_start = 4) AS \"4\",\n       max(kwh) FILTER (WHERE hour_start = 5) AS \"5\",\n       max(kwh) FILTER (WHERE hour_start = 6) AS \"6\",\n       max(kwh) FILTER (WHERE hour_start = 7) AS \"7\",\n       max(kwh) FILTER (WHERE hour_start = 8) AS \"8\",\n       max(kwh) FILTER (WHERE hour_start = 9) AS \"9\",\n       max(kwh) FILTER (WHERE hour_start = 10) AS \"10\",\n       max(kwh) FILTER (WHERE hour_start = 11) AS \"11\",\n       max(kwh) FILTER (WHERE hour_start = 12) AS \"12\",\n       max(kwh) FILTER (WHERE hour_start = 13) AS \"13\",\n       max(kwh) FILTER (WHERE hour_start = 14) AS \"14\",\n       max(kwh) FILTER (WHERE hour_start = 15) AS \"15\",\n       max(kwh) FILTER (WHERE hour_start = 16) AS \"16\",\n       max(kwh) FILTER (WHERE hour_start = 17) AS \"17\",\n       max(kwh) FILTER (WHERE hour_start = 18) AS \"18\",\n       max(kwh) FILTER (WHERE hour_start = 19) AS \"19\",\n       max(kwh) FILTER (WHERE hour_start = 20) AS \"20\",\n       max(kwh) FILTER (WHERE hour_start = 21) AS \"21\",\n       max(kwh) FILTER (WHERE hour_start = 22) AS \"22\",\n       max(kwh) FILTER (WHERE hour_start = 23) AS \"23\"\nFROM hourly_usage\nWHERE $__timeFilter(local_date::timestamp AT TIME ZONE 'America/Chicago')\nGROUP BY 1\nORDER BY 1;",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "calculate": false,
+          "color": {
+            "mode": "scheme",
+            "scheme": "Blues",
+            "steps": 64,
+            "reverse": false,
+            "exponent": 0.5,
+            "fill": "dark-orange"
+          },
+          "cellGap": 1,
+          "cellValues": {
+            "unit": "kwatth",
+            "decimals": 2
+          },
+          "yAxis": {
+            "axisPlacement": "left",
+            "reverse": false,
+            "unit": "short",
+            "decimals": 0,
+            "axisLabel": "Hour of day"
+          },
+          "rowsFrame": {
+            "layout": "le",
+            "value": "kWh"
+          },
+          "legend": {
+            "show": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "yHistogram": false,
+            "showColorScale": true
+          },
+          "exemplars": {
+            "color": "rgba(255,0,255,0.7)"
+          },
+          "filterValues": {
+            "le": 1e-09
+          }
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "hideFrom": {
+                "tooltip": false,
+                "viz": false,
+                "legend": false
+              }
+            }
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 13,
+        "type": "trend",
+        "title": "Average load profile by season",
+        "description": "Mean kWh for each hour of the day. Uses all history regardless of the time picker -- a seasonal comparison needs every season in it. The gap between the lines is what climate control costs.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 10,
+          "x": 14,
+          "y": 13
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT hour_start AS \"Hour\",\n       avg(kwh) FILTER (WHERE extract(month FROM local_date) IN (6,7,8))    AS \"Summer\",\n       avg(kwh) FILTER (WHERE extract(month FROM local_date) IN (12,1,2))   AS \"Winter\",\n       avg(kwh) FILTER (WHERE extract(month FROM local_date) IN (3,4,5,9,10,11)) AS \"Shoulder\"\nFROM hourly_usage\nGROUP BY 1\nORDER BY 1;",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "xField": "Hour",
+          "legend": {
+            "showLegend": true,
+            "displayMode": "list",
+            "placement": "bottom",
+            "calcs": []
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "kwatth",
+            "decimals": 2,
+            "custom": {
+              "drawStyle": "line",
+              "lineWidth": 2,
+              "fillOpacity": 0,
+              "showPoints": "never",
+              "spanNulls": true,
+              "axisSoftMin": 0,
+              "pointSize": 8
+            },
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 14,
+        "type": "barchart",
+        "title": "This year vs last year, by month",
+        "description": "Same unit on one axis, so the comparison is honest. Partial months at either end read short by definition.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 23
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT to_char(date_trunc('month', local_date), 'Mon') AS \"Month\",\n       sum(kwh) FILTER (WHERE extract(year FROM local_date) = extract(year FROM current_date))     AS \"This year\",\n       sum(kwh) FILTER (WHERE extract(year FROM local_date) = extract(year FROM current_date) - 1) AS \"Last year\"\nFROM daily_usage\nGROUP BY extract(month FROM local_date), 1\nORDER BY extract(month FROM local_date);",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "xField": "Month",
+          "orientation": "vertical",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0,
+          "showValue": "never",
+          "stacking": "none",
+          "groupWidth": 0.7,
+          "barWidth": 0.8,
+          "barRadius": 0.15,
+          "fullHighlight": false,
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          },
+          "legend": {
+            "showLegend": true,
+            "displayMode": "list",
+            "placement": "bottom",
+            "calcs": []
+          }
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "kwatth",
+            "decimals": 0,
+            "custom": {
+              "lineWidth": 0,
+              "fillOpacity": 90,
+              "gradientMode": "none",
+              "axisSoftMin": 0
+            },
+            "mappings": []
+          },
+          "overrides": []
+        }
+      }
+    ]
+  }
+}

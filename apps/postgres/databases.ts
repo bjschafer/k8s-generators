@@ -65,6 +65,13 @@ export interface DatabaseConfig {
   extensions?: string[];
   /** Additional role configuration (DatabaseRole spec fields, minus name/cluster/passwordSecret which are set automatically) */
   roleConfig?: Partial<Omit<DatabaseRoleSpec, "name" | "cluster" | "passwordSecret">>;
+  /**
+   * Manage the role but do not create a database for it. For shared roles that
+   * exist to read *other* people's databases -- a reporting login, say -- where
+   * the usual name-is-both-role-and-database assumption does not hold and would
+   * otherwise leave an empty database lying around.
+   */
+  roleOnly?: boolean;
   /** Password generation config when not using Bitwarden. Uses defaults if omitted. */
   passwordGeneration?: PasswordGenerationConfig;
 }
@@ -142,5 +149,27 @@ export const DATABASES: DatabaseConfig[] = [
     // and the default symbol set ("-_$@") contains characters that change the
     // meaning of a URL rather than surviving it.
     passwordGeneration: { length: 40, digits: 8, symbols: 0 },
+  },
+
+  {
+    name: "energy",
+    comment: "Alliant Energy usage warehouse owner",
+    appNamespace: "energy",
+    // The loader is `psql -f`, which reads the password from PGPASSWORD rather
+    // than a URL, so the default symbol set is safe here.
+  },
+
+  {
+    name: "grafanareader",
+    comment: "Read-only reporting login used by Grafana datasources",
+    // Predates this registry -- created by hand, and the password was never
+    // recorded anywhere. Adopting it here is what puts that password in a
+    // secret we can actually read, same as `hass` above.
+    //
+    // Adoption ROTATES the password, so every Grafana datasource using this
+    // role must be re-entered once from `grafanareader-db-credentials`.
+    roleOnly: true,
+    // Owns nothing: it only ever reads other roles' databases, and each of
+    // those grants it SELECT itself (see apps/energy/load.sql).
   },
 ];

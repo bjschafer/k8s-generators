@@ -1,0 +1,5 @@
+resources:
+  - ConfigMap.alliant-collector-scripts.yaml
+  - CronJob.alliant-collector.yaml
+  - ExternalSecret.alliant-credentials.yaml
+  - ExternalSecret.energy-db-credentials.yaml
