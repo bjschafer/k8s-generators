@@ -23,6 +23,8 @@ spec:
                 - ON_ERROR_STOP=1
                 - -f
                 - /scripts/load.sql
+                - -f
+                - /scripts/tariff.sql
               env:
                 - name: PGHOST
                   value: prod.postgres.svc.cluster.local

@@ -766,6 +766,283 @@
           },
           "overrides": []
         }
+      },
+      {
+        "id": 20,
+        "type": "stat",
+        "title": "Modeled saving vs flat",
+        "description": "Rolling 12 months: what RG1 (flat) would have cost minus what RD1 costs, on identical usage. Ignores the time picker -- a year is the only window in which the seasonal windows and the demand charge both average out.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 0,
+          "y": 32
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT (SELECT sum(total_usd) FROM bill_estimate WHERE plan='RG1' AND period_end > now() - interval '1 year')\n     - (SELECT sum(total_usd) FROM bill_estimate WHERE plan='RD1' AND period_end > now() - interval '1 year') AS \"saving\";",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "currencyUSD",
+            "decimals": 0,
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 21,
+        "type": "stat",
+        "title": "Demand charge (latest)",
+        "description": "$5.88/kW on the highest single hour, nonholiday weekdays 10:00-20:00. Estimated from hourly data, so biased LOW -- the meter measures demand over 15-30 min and averaging an hour flattens short spikes.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 6,
+          "y": 32
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT peak_kw_est * (SELECT demand_usd_per_kw FROM tou_plan WHERE plan='RD1') AS \"usd\"\nFROM demand_estimate ORDER BY period_start DESC LIMIT 1;",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "orientation": "auto",
+          "textMode": "auto",
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "currencyUSD",
+            "decimals": 2,
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 22,
+        "type": "barchart",
+        "title": "Modeled 12-month cost by plan",
+        "description": "Same real usage priced under all three residential plans. Stacked so the demand charge -- which is why RD1's per-kWh prices can undercut RG5's -- is visible rather than buried in a total.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 32
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT plan AS \"Plan\",\n       sum(energy_usd) AS \"Energy\", sum(demand_usd) AS \"Demand\", sum(customer_usd) AS \"Fixed\"\nFROM bill_estimate WHERE period_end > now() - interval '1 year'\nGROUP BY plan ORDER BY sum(total_usd);",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "xField": "Plan",
+          "orientation": "vertical",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0,
+          "showValue": "never",
+          "stacking": "normal",
+          "groupWidth": 0.7,
+          "barWidth": 0.6,
+          "barRadius": 0.15,
+          "fullHighlight": false,
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          },
+          "legend": {
+            "showLegend": true,
+            "displayMode": "list",
+            "placement": "bottom",
+            "calcs": []
+          }
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "currencyUSD",
+            "decimals": 0,
+            "custom": {
+              "lineWidth": 0,
+              "fillOpacity": 90,
+              "gradientMode": "none",
+              "axisSoftMin": 0
+            },
+            "mappings": []
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 23,
+        "type": "barchart",
+        "title": "Usage by rate period",
+        "description": "Daily kWh split into RD1's three rate windows. This is where load-shifting shows up: moving AC and EV charging out of High and into Low shrinks the dark band and grows the pale one.",
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 41
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "editorMode": "code",
+            "rawQuery": true,
+            "rawSql": "SELECT local_date::timestamp AT TIME ZONE 'America/Chicago' AS \"time\",\n       sum(kwh) FILTER (WHERE period = 'low')     AS \"Low $0.09\",\n       sum(kwh) FILTER (WHERE period = 'regular') AS \"Regular $0.18\",\n       sum(kwh) FILTER (WHERE period = 'high')    AS \"High $0.26\"\nFROM hourly_usage_priced\nWHERE plan = 'RD1' AND $__timeFilter(local_date::timestamp AT TIME ZONE 'America/Chicago')\nGROUP BY 1 ORDER BY 1;",
+            "datasource": {
+              "type": "grafana-postgresql-datasource",
+              "uid": "${datasource}"
+            }
+          }
+        ],
+        "options": {
+          "orientation": "vertical",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 100,
+          "showValue": "never",
+          "stacking": "normal",
+          "groupWidth": 0.7,
+          "barWidth": 0.9,
+          "barRadius": 0,
+          "fullHighlight": false,
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          },
+          "legend": {
+            "showLegend": true,
+            "displayMode": "list",
+            "placement": "bottom",
+            "calcs": []
+          }
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "kwatth",
+            "decimals": 1,
+            "custom": {
+              "lineWidth": 0,
+              "fillOpacity": 95,
+              "gradientMode": "none",
+              "axisSoftMin": 0
+            },
+            "mappings": []
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Low $0.09"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "super-light-blue"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Regular $0.18"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "blue"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "High $0.26"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "dark-blue"
+                  }
+                }
+              ]
+            }
+          ]
+        }
       }
     ]
   }

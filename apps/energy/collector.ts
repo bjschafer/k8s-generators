@@ -65,6 +65,7 @@ export class AlliantCollector extends Chart {
       data: {
         "alliant_fetch.py": readFileSync(join(__dirname, "alliant_fetch.py"), "utf-8"),
         "load.sql": readFileSync(join(__dirname, "load.sql"), "utf-8"),
+        "tariff.sql": readFileSync(join(__dirname, "tariff.sql"), "utf-8"),
       },
     });
     const scriptVol = Volume.fromConfigMap(this, "scripts-vol", scripts);
@@ -107,6 +108,10 @@ export class AlliantCollector extends Chart {
             "ON_ERROR_STOP=1",
             "-f",
             "/scripts/load.sql",
+            // Second -f, same transaction: the rate model depends on the tables
+            // load.sql creates, and neither half should land without the other.
+            "-f",
+            "/scripts/tariff.sql",
           ],
           envVariables: {
             PGHOST: EnvValue.fromValue("prod.postgres.svc.cluster.local"),
