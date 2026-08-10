@@ -37,10 +37,13 @@
           "label": "Data source",
           "type": "datasource",
           "query": "grafana-postgresql-datasource",
-          "current": {},
+          "current": {
+            "text": "Energy",
+            "value": "Energy"
+          },
           "options": [],
           "refresh": 1,
-          "regex": "",
+          "regex": "^Energy$",
           "includeAll": false,
           "hide": 0
         }
