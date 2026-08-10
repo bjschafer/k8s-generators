@@ -12,7 +12,7 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 // renovate: datasource=helm depName=reloader registryUrl=https://stakater.github.io/stakater-charts
-const version = "2.2.15";
+const version = "2.2.16";
 
 NewArgoApp(name, {
   namespace: namespace,
