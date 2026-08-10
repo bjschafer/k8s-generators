@@ -392,7 +392,7 @@
             "format": "time_series",
             "editorMode": "code",
             "rawQuery": true,
-            "rawSql": "SELECT local_date::timestamp AT TIME ZONE 'America/Chicago' AS \"time\", kwh AS \"kWh\"\nFROM daily_usage\nWHERE $__timeFilter(local_date::timestamp AT TIME ZONE 'America/Chicago')\nORDER BY 1;",
+            "rawSql": "SELECT local_date::timestamp AT TIME ZONE 'America/Chicago' AS \"time\",\n       sum(kwh) AS \"kWh\"\nFROM daily_usage\nWHERE $__timeFilter(local_date::timestamp AT TIME ZONE 'America/Chicago')\nGROUP BY 1\nORDER BY 1;",
             "datasource": {
               "type": "grafana-postgresql-datasource",
               "uid": "${datasource}"
@@ -460,7 +460,7 @@
             "format": "table",
             "editorMode": "code",
             "rawQuery": true,
-            "rawSql": "SELECT to_char(period_end, 'YYYY-MM-DD') AS \"Billed\",\n       kwh AS \"kWh\", amount_usd AS \"Amount\",\n       amount_usd / NULLIF(kwh, 0) AS \"$/kWh\"\nFROM billing_period\nORDER BY period_start DESC;",
+            "rawSql": "SELECT to_char(period_end, 'YYYY-MM-DD') AS \"Billed\",\n       sum(kwh) AS \"kWh\", sum(amount_usd) AS \"Amount\",\n       sum(amount_usd) / NULLIF(sum(kwh), 0) AS \"$/kWh\"\nFROM billing_period\nGROUP BY period_start, period_end\nORDER BY period_start DESC;",
             "datasource": {
               "type": "grafana-postgresql-datasource",
               "uid": "${datasource}"
@@ -582,7 +582,7 @@
             "format": "time_series",
             "editorMode": "code",
             "rawQuery": true,
-            "rawSql": "SELECT local_date::timestamp AT TIME ZONE 'America/Chicago' AS \"time\",\n       max(kwh) FILTER (WHERE hour_start = 0) AS \"0\",\n       max(kwh) FILTER (WHERE hour_start = 1) AS \"1\",\n       max(kwh) FILTER (WHERE hour_start = 2) AS \"2\",\n       max(kwh) FILTER (WHERE hour_start = 3) AS \"3\",\n       max(kwh) FILTER (WHERE hour_start = 4) AS \"4\",\n       max(kwh) FILTER (WHERE hour_start = 5) AS \"5\",\n       max(kwh) FILTER (WHERE hour_start = 6) AS \"6\",\n       max(kwh) FILTER (WHERE hour_start = 7) AS \"7\",\n       max(kwh) FILTER (WHERE hour_start = 8) AS \"8\",\n       max(kwh) FILTER (WHERE hour_start = 9) AS \"9\",\n       max(kwh) FILTER (WHERE hour_start = 10) AS \"10\",\n       max(kwh) FILTER (WHERE hour_start = 11) AS \"11\",\n       max(kwh) FILTER (WHERE hour_start = 12) AS \"12\",\n       max(kwh) FILTER (WHERE hour_start = 13) AS \"13\",\n       max(kwh) FILTER (WHERE hour_start = 14) AS \"14\",\n       max(kwh) FILTER (WHERE hour_start = 15) AS \"15\",\n       max(kwh) FILTER (WHERE hour_start = 16) AS \"16\",\n       max(kwh) FILTER (WHERE hour_start = 17) AS \"17\",\n       max(kwh) FILTER (WHERE hour_start = 18) AS \"18\",\n       max(kwh) FILTER (WHERE hour_start = 19) AS \"19\",\n       max(kwh) FILTER (WHERE hour_start = 20) AS \"20\",\n       max(kwh) FILTER (WHERE hour_start = 21) AS \"21\",\n       max(kwh) FILTER (WHERE hour_start = 22) AS \"22\",\n       max(kwh) FILTER (WHERE hour_start = 23) AS \"23\"\nFROM hourly_usage\nWHERE $__timeFilter(local_date::timestamp AT TIME ZONE 'America/Chicago')\nGROUP BY 1\nORDER BY 1;",
+            "rawSql": "SELECT local_date::timestamp AT TIME ZONE 'America/Chicago' AS \"time\",\n       sum(kwh) FILTER (WHERE hour_start = 0) AS \"0\",\n       sum(kwh) FILTER (WHERE hour_start = 1) AS \"1\",\n       sum(kwh) FILTER (WHERE hour_start = 2) AS \"2\",\n       sum(kwh) FILTER (WHERE hour_start = 3) AS \"3\",\n       sum(kwh) FILTER (WHERE hour_start = 4) AS \"4\",\n       sum(kwh) FILTER (WHERE hour_start = 5) AS \"5\",\n       sum(kwh) FILTER (WHERE hour_start = 6) AS \"6\",\n       sum(kwh) FILTER (WHERE hour_start = 7) AS \"7\",\n       sum(kwh) FILTER (WHERE hour_start = 8) AS \"8\",\n       sum(kwh) FILTER (WHERE hour_start = 9) AS \"9\",\n       sum(kwh) FILTER (WHERE hour_start = 10) AS \"10\",\n       sum(kwh) FILTER (WHERE hour_start = 11) AS \"11\",\n       sum(kwh) FILTER (WHERE hour_start = 12) AS \"12\",\n       sum(kwh) FILTER (WHERE hour_start = 13) AS \"13\",\n       sum(kwh) FILTER (WHERE hour_start = 14) AS \"14\",\n       sum(kwh) FILTER (WHERE hour_start = 15) AS \"15\",\n       sum(kwh) FILTER (WHERE hour_start = 16) AS \"16\",\n       sum(kwh) FILTER (WHERE hour_start = 17) AS \"17\",\n       sum(kwh) FILTER (WHERE hour_start = 18) AS \"18\",\n       sum(kwh) FILTER (WHERE hour_start = 19) AS \"19\",\n       sum(kwh) FILTER (WHERE hour_start = 20) AS \"20\",\n       sum(kwh) FILTER (WHERE hour_start = 21) AS \"21\",\n       sum(kwh) FILTER (WHERE hour_start = 22) AS \"22\",\n       sum(kwh) FILTER (WHERE hour_start = 23) AS \"23\"\nFROM hourly_usage\nWHERE $__timeFilter(local_date::timestamp AT TIME ZONE 'America/Chicago')\nGROUP BY 1\nORDER BY 1;",
             "datasource": {
               "type": "grafana-postgresql-datasource",
               "uid": "${datasource}"
@@ -664,7 +664,7 @@
             "format": "table",
             "editorMode": "code",
             "rawQuery": true,
-            "rawSql": "SELECT hour_start AS \"Hour\",\n       avg(kwh) FILTER (WHERE extract(month FROM local_date) IN (6,7,8))    AS \"Summer\",\n       avg(kwh) FILTER (WHERE extract(month FROM local_date) IN (12,1,2))   AS \"Winter\",\n       avg(kwh) FILTER (WHERE extract(month FROM local_date) IN (3,4,5,9,10,11)) AS \"Shoulder\"\nFROM hourly_usage\nGROUP BY 1\nORDER BY 1;",
+            "rawSql": "WITH per_hour AS (\n  SELECT local_date, hour_start, sum(kwh) AS kwh\n  FROM hourly_usage GROUP BY 1, 2\n)\nSELECT hour_start AS \"Hour\",\n       avg(kwh) FILTER (WHERE extract(month FROM local_date) IN (6,7,8))    AS \"Summer\",\n       avg(kwh) FILTER (WHERE extract(month FROM local_date) IN (12,1,2))   AS \"Winter\",\n       avg(kwh) FILTER (WHERE extract(month FROM local_date) IN (3,4,5,9,10,11)) AS \"Shoulder\"\nFROM per_hour\nGROUP BY 1\nORDER BY 1;",
             "datasource": {
               "type": "grafana-postgresql-datasource",
               "uid": "${datasource}"

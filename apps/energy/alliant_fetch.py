@@ -29,12 +29,13 @@ from __future__ import annotations
 import csv
 import json
 import os
+import socket
 import sys
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from typing import Any, Iterable
 
 BASE = "https://alliant-svc.smartcmobile.com"
@@ -155,6 +156,20 @@ def hour_start(read_date: str) -> tuple[str, int]:
     return day, (hour - 1) if hour >= 1 else 23
 
 
+def tou(row: dict) -> tuple[str, str]:
+    """Time-of-use tier and rate plan, normalised to '' rather than None.
+
+    Both are empty on a flat-rate account. They are carried anyway because the
+    account is moving to time-of-use billing and Alliant would not commit to a
+    date -- capturing them now means the tiers are simply there when they start
+    arriving, instead of being silently dropped until someone notices.
+
+    '' rather than NULL because these are part of the primary key downstream,
+    and NULL cannot be.
+    """
+    return (row.get("tierTou") or "", row.get("ratePlan") or "")
+
+
 def collect(auth: dict[str, str], account: str, meter: str, start: str, end: str):
     """Fetch all three granularities for one meter.
 
@@ -162,35 +177,76 @@ def collect(auth: dict[str, str], account: str, meter: str, start: str, end: str
     for 17 months), so there is no paging and no incremental state to corrupt --
     every run re-fetches everything and upserts.
     """
-    hourly: dict[tuple[str, int], float] = {}
+    hourly: dict[tuple[str, int, str], tuple[float, str]] = {}
     # Duplicate hour rows appear on days the utility re-read the meter. They are
     # byte-identical repeats, so last-wins is right; summing them double-counts
     # (verified against the daily series: dedup matches to 0.04% over 17 months,
     # keeping duplicates overshoots by ~78 kWh).
+    #
+    # The tier is part of the key: under time-of-use an hour may legitimately
+    # come back as several rows, one per tier, and keying on the hour alone
+    # would silently collapse them into whichever sorted last.
     dupes = 0
     for row in usage(auth, account, meter, f"{start} 00:00:01", f"{end} 00:00:00", "HH"):
-        key = hour_start(row["readDate"])
+        day, hour = hour_start(row["readDate"])
+        tier, plan = tou(row)
+        key = (day, hour, tier)
         if key in hourly:
             dupes += 1
-        hourly[key] = float(row["consumption"])
+        hourly[key] = (float(row["consumption"]), plan)
 
-    daily = {r["readDate"][:10]: float(r["consumption"]) for r in usage(auth, account, meter, start, end, "DA")}
+    daily: dict[tuple[str, str], tuple[float, str]] = {}
+    for r in usage(auth, account, meter, start, end, "DA"):
+        tier, plan = tou(r)
+        daily[(r["readDate"][:10], tier)] = (float(r["consumption"]), plan)
 
-    billing = [
-        {
-            "period_start": r["readingFrom"][:10],
-            "period_end": r["readingTo"][:10],
-            "kwh": float(r["consumption"]),
-            "amount_usd": float(r["amount"] or 0),
-        }
-        for r in usage(auth, account, meter, start, end, "MO")
+    billing = []
+    for r in usage(auth, account, meter, start, end, "MO"):
         # Monthly rows are keyed by billing period; anything without a real
         # period is a placeholder row the portal ignores too.
-        if r.get("readingFrom", "").startswith("2")
-    ]
+        if not r.get("readingFrom", "").startswith("2"):
+            continue
+        tier, plan = tou(r)
+        billing.append(
+            {
+                "period_start": r["readingFrom"][:10],
+                "period_end": r["readingTo"][:10],
+                "tier_tou": tier,
+                "rate_plan": plan,
+                "kwh": float(r["consumption"]),
+                "amount_usd": float(r["amount"] or 0),
+            }
+        )
 
-    log(f"  meter {meter}: {len(hourly)} hourly ({dupes} dupes dropped), {len(daily)} daily, {len(billing)} billing")
+    tiers = sorted({k[2] for k in hourly} | {k[1] for k in daily} | {b["tier_tou"] for b in billing})
+    log(
+        f"  meter {meter}: {len(hourly)} hourly ({dupes} dupes dropped), "
+        f"{len(daily)} daily, {len(billing)} billing | tou tiers seen: {tiers or ['(none)']}"
+    )
     return hourly, daily, billing
+
+
+def emit_freshness(newest_day: str) -> None:
+    """Publish the newest day we have as a statsd gauge, for alerting.
+
+    A *timestamp* rather than a lag on purpose: Prometheus derives the lag with
+    `time() - alliant_last_data_timestamp_seconds`, which keeps growing even if
+    this job stops running entirely. A lag gauge would freeze at its last value
+    and quietly stop alerting in exactly the case that matters most.
+
+    Fire-and-forget UDP -- statsd is not worth failing a good load over.
+    """
+    host = os.environ.get("STATSD_HOST")
+    if not host:
+        return
+    port = int(os.environ.get("STATSD_PORT", "9125"))
+    epoch = int(datetime.strptime(newest_day, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp())
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.sendto(f"alliant_last_data_timestamp_seconds:{epoch}|g".encode(), (host, port))
+        log(f"statsd: alliant_last_data_timestamp_seconds={epoch} ({newest_day}) -> {host}:{port}")
+    except OSError as exc:
+        log(f"statsd emit failed (ignored): {exc}")
 
 
 def write_csv(path: str, header: Iterable[str], rows: Iterable[Iterable]) -> int:
@@ -238,23 +294,45 @@ def main() -> int:
         for meter in sorted({m["meterNumber"] for m in meters}):
             # Usage endpoints want the composite "premise-account" form.
             hourly, daily, billing = collect(auth, f"{premise}-{acct}", meter, start, end)
-            hourly_rows += [(acct, meter, d, h, v) for (d, h), v in sorted(hourly.items())]
-            daily_rows += [(acct, meter, d, v) for d, v in sorted(daily.items())]
+            hourly_rows += [
+                (acct, meter, d, h, tier, plan, v) for (d, h, tier), (v, plan) in sorted(hourly.items())
+            ]
+            daily_rows += [(acct, meter, d, tier, plan, v) for (d, tier), (v, plan) in sorted(daily.items())]
             billing_rows += [
-                (acct, meter, b["period_start"], b["period_end"], b["kwh"], b["amount_usd"]) for b in billing
+                (
+                    acct,
+                    meter,
+                    b["period_start"],
+                    b["period_end"],
+                    b["tier_tou"],
+                    b["rate_plan"],
+                    b["kwh"],
+                    b["amount_usd"],
+                )
+                for b in billing
             ]
 
     if not hourly_rows:
         raise SystemExit("no hourly usage returned -- refusing to signal success")
 
-    n_h = write_csv(f"{out_dir}/hourly.csv", ("account", "meter", "local_date", "hour_start", "kwh"), hourly_rows)
-    n_d = write_csv(f"{out_dir}/daily.csv", ("account", "meter", "local_date", "kwh"), daily_rows)
+    n_h = write_csv(
+        f"{out_dir}/hourly.csv",
+        ("account", "meter", "local_date", "hour_start", "tier_tou", "rate_plan", "kwh"),
+        hourly_rows,
+    )
+    n_d = write_csv(
+        f"{out_dir}/daily.csv",
+        ("account", "meter", "local_date", "tier_tou", "rate_plan", "kwh"),
+        daily_rows,
+    )
     n_b = write_csv(
         f"{out_dir}/billing.csv",
-        ("account", "meter", "period_start", "period_end", "kwh", "amount_usd"),
+        ("account", "meter", "period_start", "period_end", "tier_tou", "rate_plan", "kwh", "amount_usd"),
         billing_rows,
     )
     log(f"wrote {n_h} hourly, {n_d} daily, {n_b} billing rows to {out_dir}")
+
+    emit_freshness(max(r[2] for r in daily_rows))
     return 0
 
 

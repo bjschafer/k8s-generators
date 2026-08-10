@@ -1,0 +1,32 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: metrics
+  name: energy
+  namespace: metrics
+spec:
+  groups:
+    - name: energy
+      rules:
+        - alert: AlliantUsageDataStale
+          annotations:
+            description: |
+              Either the collector is failing or Alliant has stopped publishing.
+              Check: kubectl logs -n energy -l job-name=<latest> -c fetch
+            summary: Alliant usage data is {{ $value | humanize }} days old
+          expr: (time() - alliant_last_data_timestamp_seconds) / 86400 > 8
+          for: 6h
+          labels:
+            namespace: metrics
+            priority: "-1"
+            push_notify: "true"
+        - alert: AlliantCollectorNotSucceeding
+          annotations:
+            summary: alliant-collector has not completed successfully in over 36 hours
+          expr: time() - kube_cronjob_status_last_successful_time{namespace="energy", cronjob="alliant-collector"} > 36 * 3600
+          for: 1h
+          labels:
+            namespace: metrics
+            priority: "-1"
+            push_notify: "true"

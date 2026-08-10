@@ -77,6 +77,10 @@ spec:
                       name: alliant-credentials
                 - name: OUT_DIR
                   value: /data
+                - name: STATSD_HOST
+                  value: statsd-exporter-lb.metrics-exporters.svc.cluster.local
+                - name: STATSD_PORT
+                  value: "9125"
               image: python:3.13-alpine
               imagePullPolicy: IfNotPresent
               name: fetch

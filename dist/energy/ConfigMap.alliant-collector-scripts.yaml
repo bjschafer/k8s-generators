@@ -36,12 +36,13 @@ data:
     import csv
     import json
     import os
+    import socket
     import sys
     import time
     import urllib.error
     import urllib.parse
     import urllib.request
-    from datetime import date, timedelta
+    from datetime import date, datetime, timedelta, timezone
     from typing import Any, Iterable
 
     BASE = "https://alliant-svc.smartcmobile.com"
@@ -162,6 +163,20 @@ data:
         return day, (hour - 1) if hour >= 1 else 23
 
 
+    def tou(row: dict) -> tuple[str, str]:
+        """Time-of-use tier and rate plan, normalised to '' rather than None.
+
+        Both are empty on a flat-rate account. They are carried anyway because the
+        account is moving to time-of-use billing and Alliant would not commit to a
+        date -- capturing them now means the tiers are simply there when they start
+        arriving, instead of being silently dropped until someone notices.
+
+        '' rather than NULL because these are part of the primary key downstream,
+        and NULL cannot be.
+        """
+        return (row.get("tierTou") or "", row.get("ratePlan") or "")
+
+
     def collect(auth: dict[str, str], account: str, meter: str, start: str, end: str):
         """Fetch all three granularities for one meter.
 
@@ -169,35 +184,76 @@ data:
         for 17 months), so there is no paging and no incremental state to corrupt --
         every run re-fetches everything and upserts.
         """
-        hourly: dict[tuple[str, int], float] = {}
+        hourly: dict[tuple[str, int, str], tuple[float, str]] = {}
         # Duplicate hour rows appear on days the utility re-read the meter. They are
         # byte-identical repeats, so last-wins is right; summing them double-counts
         # (verified against the daily series: dedup matches to 0.04% over 17 months,
         # keeping duplicates overshoots by ~78 kWh).
+        #
+        # The tier is part of the key: under time-of-use an hour may legitimately
+        # come back as several rows, one per tier, and keying on the hour alone
+        # would silently collapse them into whichever sorted last.
         dupes = 0
         for row in usage(auth, account, meter, f"{start} 00:00:01", f"{end} 00:00:00", "HH"):
-            key = hour_start(row["readDate"])
+            day, hour = hour_start(row["readDate"])
+            tier, plan = tou(row)
+            key = (day, hour, tier)
             if key in hourly:
                 dupes += 1
-            hourly[key] = float(row["consumption"])
+            hourly[key] = (float(row["consumption"]), plan)
 
-        daily = {r["readDate"][:10]: float(r["consumption"]) for r in usage(auth, account, meter, start, end, "DA")}
+        daily: dict[tuple[str, str], tuple[float, str]] = {}
+        for r in usage(auth, account, meter, start, end, "DA"):
+            tier, plan = tou(r)
+            daily[(r["readDate"][:10], tier)] = (float(r["consumption"]), plan)
 
-        billing = [
-            {
-                "period_start": r["readingFrom"][:10],
-                "period_end": r["readingTo"][:10],
-                "kwh": float(r["consumption"]),
-                "amount_usd": float(r["amount"] or 0),
-            }
-            for r in usage(auth, account, meter, start, end, "MO")
+        billing = []
+        for r in usage(auth, account, meter, start, end, "MO"):
             # Monthly rows are keyed by billing period; anything without a real
             # period is a placeholder row the portal ignores too.
-            if r.get("readingFrom", "").startswith("2")
-        ]
+            if not r.get("readingFrom", "").startswith("2"):
+                continue
+            tier, plan = tou(r)
+            billing.append(
+                {
+                    "period_start": r["readingFrom"][:10],
+                    "period_end": r["readingTo"][:10],
+                    "tier_tou": tier,
+                    "rate_plan": plan,
+                    "kwh": float(r["consumption"]),
+                    "amount_usd": float(r["amount"] or 0),
+                }
+            )
 
-        log(f"  meter {meter}: {len(hourly)} hourly ({dupes} dupes dropped), {len(daily)} daily, {len(billing)} billing")
+        tiers = sorted({k[2] for k in hourly} | {k[1] for k in daily} | {b["tier_tou"] for b in billing})
+        log(
+            f"  meter {meter}: {len(hourly)} hourly ({dupes} dupes dropped), "
+            f"{len(daily)} daily, {len(billing)} billing | tou tiers seen: {tiers or ['(none)']}"
+        )
         return hourly, daily, billing
+
+
+    def emit_freshness(newest_day: str) -> None:
+        """Publish the newest day we have as a statsd gauge, for alerting.
+
+        A *timestamp* rather than a lag on purpose: Prometheus derives the lag with
+        `time() - alliant_last_data_timestamp_seconds`, which keeps growing even if
+        this job stops running entirely. A lag gauge would freeze at its last value
+        and quietly stop alerting in exactly the case that matters most.
+
+        Fire-and-forget UDP -- statsd is not worth failing a good load over.
+        """
+        host = os.environ.get("STATSD_HOST")
+        if not host:
+            return
+        port = int(os.environ.get("STATSD_PORT", "9125"))
+        epoch = int(datetime.strptime(newest_day, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp())
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+                s.sendto(f"alliant_last_data_timestamp_seconds:{epoch}|g".encode(), (host, port))
+            log(f"statsd: alliant_last_data_timestamp_seconds={epoch} ({newest_day}) -> {host}:{port}")
+        except OSError as exc:
+            log(f"statsd emit failed (ignored): {exc}")
 
 
     def write_csv(path: str, header: Iterable[str], rows: Iterable[Iterable]) -> int:
@@ -245,23 +301,45 @@ data:
             for meter in sorted({m["meterNumber"] for m in meters}):
                 # Usage endpoints want the composite "premise-account" form.
                 hourly, daily, billing = collect(auth, f"{premise}-{acct}", meter, start, end)
-                hourly_rows += [(acct, meter, d, h, v) for (d, h), v in sorted(hourly.items())]
-                daily_rows += [(acct, meter, d, v) for d, v in sorted(daily.items())]
+                hourly_rows += [
+                    (acct, meter, d, h, tier, plan, v) for (d, h, tier), (v, plan) in sorted(hourly.items())
+                ]
+                daily_rows += [(acct, meter, d, tier, plan, v) for (d, tier), (v, plan) in sorted(daily.items())]
                 billing_rows += [
-                    (acct, meter, b["period_start"], b["period_end"], b["kwh"], b["amount_usd"]) for b in billing
+                    (
+                        acct,
+                        meter,
+                        b["period_start"],
+                        b["period_end"],
+                        b["tier_tou"],
+                        b["rate_plan"],
+                        b["kwh"],
+                        b["amount_usd"],
+                    )
+                    for b in billing
                 ]
 
         if not hourly_rows:
             raise SystemExit("no hourly usage returned -- refusing to signal success")
 
-        n_h = write_csv(f"{out_dir}/hourly.csv", ("account", "meter", "local_date", "hour_start", "kwh"), hourly_rows)
-        n_d = write_csv(f"{out_dir}/daily.csv", ("account", "meter", "local_date", "kwh"), daily_rows)
+        n_h = write_csv(
+            f"{out_dir}/hourly.csv",
+            ("account", "meter", "local_date", "hour_start", "tier_tou", "rate_plan", "kwh"),
+            hourly_rows,
+        )
+        n_d = write_csv(
+            f"{out_dir}/daily.csv",
+            ("account", "meter", "local_date", "tier_tou", "rate_plan", "kwh"),
+            daily_rows,
+        )
         n_b = write_csv(
             f"{out_dir}/billing.csv",
-            ("account", "meter", "period_start", "period_end", "kwh", "amount_usd"),
+            ("account", "meter", "period_start", "period_end", "tier_tou", "rate_plan", "kwh", "amount_usd"),
             billing_rows,
         )
         log(f"wrote {n_h} hourly, {n_d} daily, {n_b} billing rows to {out_dir}")
+
+        emit_freshness(max(r[2] for r in daily_rows))
         return 0
 
 
@@ -284,10 +362,15 @@ data:
       -- for Grafana's benefit and is not authoritative.
       local_date date             NOT NULL,
       hour_start smallint         NOT NULL CHECK (hour_start BETWEEN 0 AND 23),
+      -- Empty on a flat-rate account. In the key because under time-of-use one hour
+      -- can return several rows, one per tier, and keying on the hour alone would
+      -- collapse them. '' not NULL, since a key column cannot be NULL.
+      tier_tou   text             NOT NULL DEFAULT '',
+      rate_plan  text             NOT NULL DEFAULT '',
       kwh        double precision NOT NULL,
       ts         timestamptz      NOT NULL,
       updated_at timestamptz      NOT NULL DEFAULT now(),
-      PRIMARY KEY (account, meter, local_date, hour_start)
+      PRIMARY KEY (account, meter, local_date, hour_start, tier_tou)
     );
     CREATE INDEX IF NOT EXISTS hourly_usage_ts_idx ON hourly_usage (ts);
 
@@ -295,9 +378,11 @@ data:
       account    text             NOT NULL,
       meter      text             NOT NULL,
       local_date date             NOT NULL,
+      tier_tou   text             NOT NULL DEFAULT '',
+      rate_plan  text             NOT NULL DEFAULT '',
       kwh        double precision NOT NULL,
       updated_at timestamptz      NOT NULL DEFAULT now(),
-      PRIMARY KEY (account, meter, local_date)
+      PRIMARY KEY (account, meter, local_date, tier_tou)
     );
 
     -- One row per billing period. `amount_usd` is what makes cost analysis possible
@@ -307,10 +392,12 @@ data:
       meter        text             NOT NULL,
       period_start date             NOT NULL,
       period_end   date             NOT NULL,
+      tier_tou     text             NOT NULL DEFAULT '',
+      rate_plan    text             NOT NULL DEFAULT '',
       kwh          double precision NOT NULL,
       amount_usd   double precision NOT NULL,
       updated_at   timestamptz      NOT NULL DEFAULT now(),
-      PRIMARY KEY (account, meter, period_start)
+      PRIMARY KEY (account, meter, period_start, tier_tou)
     );
 
     CREATE TABLE IF NOT EXISTS collector_run (
@@ -321,46 +408,93 @@ data:
       billing_rows integer    NOT NULL
     );
 
+    -- Migration for databases created before the time-of-use columns existed. The
+    -- CREATE TABLE statements above only fire on an empty database, so bringing an
+    -- existing one forward has to be explicit. Idempotent, so it is safe to leave
+    -- here permanently rather than running it once by hand and forgetting why.
+    ALTER TABLE hourly_usage   ADD COLUMN IF NOT EXISTS tier_tou  text NOT NULL DEFAULT '';
+    ALTER TABLE hourly_usage   ADD COLUMN IF NOT EXISTS rate_plan text NOT NULL DEFAULT '';
+    ALTER TABLE daily_usage    ADD COLUMN IF NOT EXISTS tier_tou  text NOT NULL DEFAULT '';
+    ALTER TABLE daily_usage    ADD COLUMN IF NOT EXISTS rate_plan text NOT NULL DEFAULT '';
+    ALTER TABLE billing_period ADD COLUMN IF NOT EXISTS tier_tou  text NOT NULL DEFAULT '';
+    ALTER TABLE billing_period ADD COLUMN IF NOT EXISTS rate_plan text NOT NULL DEFAULT '';
+
+    -- Widen each primary key to include the tier. Without this a time-of-use hour
+    -- that arrives as several tier rows would upsert over itself and only the last
+    -- tier would survive -- silent, and invisible until a bill disagreed.
+    DO $$
+    DECLARE
+      t record;
+    BEGIN
+      FOR t IN
+        SELECT * FROM (VALUES
+          ('hourly_usage',   'account, meter, local_date, hour_start, tier_tou'),
+          ('daily_usage',    'account, meter, local_date, tier_tou'),
+          ('billing_period', 'account, meter, period_start, tier_tou')
+        ) AS v(tbl, cols)
+      LOOP
+        IF NOT EXISTS (
+          SELECT 1
+            FROM pg_index i
+            JOIN pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY (i.indkey)
+           WHERE i.indrelid = t.tbl::regclass AND i.indisprimary AND a.attname = 'tier_tou'
+        ) THEN
+          EXECUTE format('ALTER TABLE %I DROP CONSTRAINT %I', t.tbl, t.tbl || '_pkey');
+          EXECUTE format('ALTER TABLE %I ADD PRIMARY KEY (%s)', t.tbl, t.cols);
+          RAISE NOTICE 'widened primary key on % to include tier_tou', t.tbl;
+        END IF;
+      END LOOP;
+    END
+    $$;
+
     CREATE TEMP TABLE stg_hourly (
-      account text, meter text, local_date date, hour_start smallint, kwh double precision
+      account text, meter text, local_date date, hour_start smallint,
+      tier_tou text, rate_plan text, kwh double precision
     ) ON COMMIT DROP;
     CREATE TEMP TABLE stg_daily (
-      account text, meter text, local_date date, kwh double precision
+      account text, meter text, local_date date,
+      tier_tou text, rate_plan text, kwh double precision
     ) ON COMMIT DROP;
     CREATE TEMP TABLE stg_billing (
       account text, meter text, period_start date, period_end date,
-      kwh double precision, amount_usd double precision
+      tier_tou text, rate_plan text, kwh double precision, amount_usd double precision
     ) ON COMMIT DROP;
 
-    \copy stg_hourly  FROM '/data/hourly.csv'  WITH (FORMAT csv, HEADER true)
-    \copy stg_daily   FROM '/data/daily.csv'   WITH (FORMAT csv, HEADER true)
-    \copy stg_billing FROM '/data/billing.csv' WITH (FORMAT csv, HEADER true)
+    -- FORCE_NOT_NULL because CSV cannot distinguish an empty field from NULL, and
+    -- an absent time-of-use tier is legitimately the empty string -- it is part of
+    -- the primary key, so NULL is not an option.
+    \copy stg_hourly  FROM '/data/hourly.csv'  WITH (FORMAT csv, HEADER true, FORCE_NOT_NULL (tier_tou, rate_plan))
+    \copy stg_daily   FROM '/data/daily.csv'   WITH (FORMAT csv, HEADER true, FORCE_NOT_NULL (tier_tou, rate_plan))
+    \copy stg_billing FROM '/data/billing.csv' WITH (FORMAT csv, HEADER true, FORCE_NOT_NULL (tier_tou, rate_plan))
 
-    INSERT INTO hourly_usage (account, meter, local_date, hour_start, kwh, ts)
-    SELECT account, meter, local_date, hour_start, kwh,
+    INSERT INTO hourly_usage (account, meter, local_date, hour_start, tier_tou, rate_plan, kwh, ts)
+    SELECT account, meter, local_date, hour_start, tier_tou, rate_plan, kwh,
            -- Naive local wall time -> instant. Postgres owns the tz database, so
            -- this stays correct across DST rule changes without redeploying.
            (local_date + make_interval(hours => hour_start)) AT TIME ZONE 'America/Chicago'
       FROM stg_hourly
-        ON CONFLICT (account, meter, local_date, hour_start) DO UPDATE
-       SET kwh = EXCLUDED.kwh, ts = EXCLUDED.ts, updated_at = now()
+        ON CONFLICT (account, meter, local_date, hour_start, tier_tou) DO UPDATE
+       SET kwh = EXCLUDED.kwh, ts = EXCLUDED.ts,
+           rate_plan = EXCLUDED.rate_plan, updated_at = now()
         -- Skip no-op writes so updated_at stays meaningful as "when did this value
         -- last actually change".
-     WHERE hourly_usage.kwh IS DISTINCT FROM EXCLUDED.kwh;
+     WHERE (hourly_usage.kwh, hourly_usage.rate_plan)
+            IS DISTINCT FROM (EXCLUDED.kwh, EXCLUDED.rate_plan);
 
-    INSERT INTO daily_usage (account, meter, local_date, kwh)
-    SELECT account, meter, local_date, kwh FROM stg_daily
-        ON CONFLICT (account, meter, local_date) DO UPDATE
-       SET kwh = EXCLUDED.kwh, updated_at = now()
-     WHERE daily_usage.kwh IS DISTINCT FROM EXCLUDED.kwh;
+    INSERT INTO daily_usage (account, meter, local_date, tier_tou, rate_plan, kwh)
+    SELECT account, meter, local_date, tier_tou, rate_plan, kwh FROM stg_daily
+        ON CONFLICT (account, meter, local_date, tier_tou) DO UPDATE
+       SET kwh = EXCLUDED.kwh, rate_plan = EXCLUDED.rate_plan, updated_at = now()
+     WHERE (daily_usage.kwh, daily_usage.rate_plan)
+            IS DISTINCT FROM (EXCLUDED.kwh, EXCLUDED.rate_plan);
 
-    INSERT INTO billing_period (account, meter, period_start, period_end, kwh, amount_usd)
-    SELECT account, meter, period_start, period_end, kwh, amount_usd FROM stg_billing
-        ON CONFLICT (account, meter, period_start) DO UPDATE
+    INSERT INTO billing_period (account, meter, period_start, period_end, tier_tou, rate_plan, kwh, amount_usd)
+    SELECT account, meter, period_start, period_end, tier_tou, rate_plan, kwh, amount_usd FROM stg_billing
+        ON CONFLICT (account, meter, period_start, tier_tou) DO UPDATE
        SET period_end = EXCLUDED.period_end, kwh = EXCLUDED.kwh,
-           amount_usd = EXCLUDED.amount_usd, updated_at = now()
-     WHERE (billing_period.kwh, billing_period.amount_usd)
-            IS DISTINCT FROM (EXCLUDED.kwh, EXCLUDED.amount_usd);
+           amount_usd = EXCLUDED.amount_usd, rate_plan = EXCLUDED.rate_plan, updated_at = now()
+     WHERE (billing_period.kwh, billing_period.amount_usd, billing_period.rate_plan)
+            IS DISTINCT FROM (EXCLUDED.kwh, EXCLUDED.amount_usd, EXCLUDED.rate_plan);
 
     INSERT INTO collector_run (hourly_rows, daily_rows, billing_rows)
     SELECT (SELECT count(*) FROM stg_hourly),
@@ -370,13 +504,28 @@ data:
     -- Blended $/kWh per billing period, spread back over the hours it covers, so
     -- hourly usage can be costed. Alliant bills on read-to-read periods that do not
     -- align to months, which is exactly the join SQL makes easy and PromQL does not.
-    CREATE OR REPLACE VIEW hourly_usage_cost AS
-    SELECT h.account, h.meter, h.ts, h.local_date, h.hour_start, h.kwh,
+    -- Joining on tier as well as period is what makes this survive the switch to
+    -- time-of-use. Today every tier is '' so it is a no-op. Once tiers arrive, an
+    -- on-peak hour costs at the on-peak period's blended rate rather than at one
+    -- rate smeared across the whole bill -- and, just as importantly, the join
+    -- stops fanning out one hourly row across every tier row of its period, which
+    -- would multiply the cost by the number of tiers.
+    --
+    -- Still an approximation while a period has one tier: it spreads fixed charges
+    -- across kWh rather than modelling the tariff, so per-hour cost is indicative
+    -- and the period total is exact.
+    -- Dropped and recreated rather than CREATE OR REPLACE: replace can only append
+    -- columns, so any change to the column *order* fails against an existing view.
+    -- Safe because a view holds no data, and the grant block below re-grants it.
+    DROP VIEW IF EXISTS hourly_usage_cost;
+    CREATE VIEW hourly_usage_cost AS
+    SELECT h.account, h.meter, h.ts, h.local_date, h.hour_start, h.tier_tou, h.kwh,
            b.amount_usd / NULLIF(b.kwh, 0)               AS rate_usd_per_kwh,
            h.kwh * (b.amount_usd / NULLIF(b.kwh, 0))     AS cost_usd
       FROM hourly_usage h
       LEFT JOIN billing_period b
         ON b.account = h.account AND b.meter = h.meter
+       AND b.tier_tou = h.tier_tou
        AND h.local_date > b.period_start AND h.local_date <= b.period_end;
 
     -- Grafana reads through the shared hand-made `grafanareader` role against the

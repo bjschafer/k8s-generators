@@ -131,6 +131,14 @@ export class AlliantCollector extends Chart {
           envVariables: {
             ...alliantCreds.toEnvValues(),
             OUT_DIR: EnvValue.fromValue("/data"),
+            // Publishes the newest day we hold as a gauge, which
+            // AlliantUsageDataStale turns into a lag. The UDP ingest port lives
+            // on the -lb Service; the plain ClusterIP one only exposes the
+            // scrape port.
+            STATSD_HOST: EnvValue.fromValue(
+              "statsd-exporter-lb.metrics-exporters.svc.cluster.local",
+            ),
+            STATSD_PORT: EnvValue.fromValue("9125"),
           },
           resources: {
             cpu: { request: Cpu.millis(100) },

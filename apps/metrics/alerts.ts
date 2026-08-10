@@ -213,6 +213,52 @@ export function addAlerts(scope: Construct, id: string): void {
     ],
   });
 
+  new Alert(scope, `${id}-energy`, {
+    name: "energy",
+    namespace: namespace,
+    rules: [
+      {
+        // The gauge is a timestamp rather than a lag on purpose: the lag is
+        // derived here, so it keeps climbing even if the collector stops
+        // emitting entirely. A lag gauge would freeze at its last good value
+        // and go quiet in exactly the case worth paging about.
+        //
+        // Alliant publishes ~4 days in arrears normally, so 8 days is roughly
+        // two missed collections -- late enough not to fire on their routine
+        // slowness, early enough to notice before a month of data is missing.
+        alert: "AlliantUsageDataStale",
+        expr: `(time() - alliant_last_data_timestamp_seconds) / 86400 > 8`,
+        for: "6h",
+        labels: {
+          priority: PRIORITY.LOW,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "Alliant usage data is {{ $value | humanize }} days old",
+          description: heredoc`
+            Either the collector is failing or Alliant has stopped publishing.
+            Check: kubectl logs -n energy -l job-name=<latest> -c fetch
+            `,
+        },
+      },
+      {
+        // Distinct from the staleness alert and deliberately faster: this fires
+        // on the mechanism (the CronJob) rather than the data, so a broken
+        // collector is visible a day before the data itself looks old.
+        alert: "AlliantCollectorNotSucceeding",
+        expr: `time() - kube_cronjob_status_last_successful_time{namespace="energy", cronjob="alliant-collector"} > 36 * 3600`,
+        for: "1h",
+        labels: {
+          priority: PRIORITY.LOW,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "alliant-collector has not completed successfully in over 36 hours",
+        },
+      },
+    ],
+  });
+
   new Alert(scope, `${id}-certmanager`, {
     name: "certmanager",
     namespace: namespace,
