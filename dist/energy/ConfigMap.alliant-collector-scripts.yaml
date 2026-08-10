@@ -738,13 +738,19 @@ data:
     CREATE INDEX hourly_usage_priced_plan_date_idx ON hourly_usage_priced (plan, local_date);
     CREATE INDEX hourly_usage_priced_ts_idx         ON hourly_usage_priced (ts);
 
+    -- A freshly built materialized view carries no statistics until autovacuum gets
+    -- to it, and the planner's default guesses were bad enough that building
+    -- bill_estimate off it nested-looped and ran for minutes. Analyze immediately so
+    -- the very next statement in this same transaction plans against real numbers.
+    ANALYZE hourly_usage_priced;
+
     -- Demand charge basis: the single highest hour on nonholiday weekdays between
     -- 10:00 and 20:00, per billing period.
     --
     -- APPROXIMATE, and biased low. Utilities meter demand over 15- or 30-minute
     -- intervals; averaging a whole hour flattens exactly the short spikes a demand
     -- charge is meant to catch. Treat this as a floor on the real charge.
-    CREATE VIEW demand_estimate AS
+    CREATE MATERIALIZED VIEW demand_estimate AS
     SELECT b.account, b.meter, b.period_start, b.period_end,
            max(h.kwh) AS peak_kw_est
       FROM billing_period b
@@ -759,6 +765,8 @@ data:
     -- Modelled all-in bill per plan per billing period: energy + demand + the fixed
     -- monthly charge. Comparable to billing_period.amount_usd, which is what was
     -- actually charged.
+    ANALYZE demand_estimate;
+
     -- One row per (billing period, day). Exists purely so the aggregates below can
     -- join on date *equality*: joining hourly rows to periods on a range predicate
     -- forces a nested loop that re-evaluates the priced view once per period, which
@@ -785,6 +793,7 @@ data:
       LEFT JOIN demand_estimate d
         ON d.account = p.account AND d.meter = p.meter AND d.period_start = bd.period_start
      GROUP BY 1, 2, 3, 4, 5;
+    ANALYZE bill_estimate;
 
     -- Grafana reads these through grafanareader; the grant block in load.sql runs
     -- before these views exist on a fresh database, so re-grant here.
