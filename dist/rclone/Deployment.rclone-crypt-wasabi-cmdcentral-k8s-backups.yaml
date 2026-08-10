@@ -31,7 +31,6 @@ spec:
         - args:
             - --config
             - /config/rclone.conf
-            - --fast-list
             - serve
             - s3
             - "crypt-wasabi-cmdcentral-k8s-backups:"
@@ -41,10 +40,8 @@ spec:
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
-            httpGet:
-              path: /
+            tcpSocket:
               port: 8042
-              scheme: HTTP
           name: rclone
           ports:
             - containerPort: 8042
@@ -55,6 +52,8 @@ spec:
               path: /
               port: 8042
               scheme: HTTP
+            periodSeconds: 30
+            timeoutSeconds: 10
           resources:
             limits:
               memory: 2048Mi

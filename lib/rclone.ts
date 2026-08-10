@@ -15,7 +15,7 @@ import {
   Volume,
 } from "cdk8s-plus-34";
 import { Construct } from "constructs";
-import { Chart } from "cdk8s";
+import { Chart, Duration } from "cdk8s";
 import { CLUSTER_ISSUER, DEFAULT_SECURITY_CONTEXT, GET_COMMON_LABELS, IP_CIDRS_V4 } from "./consts";
 
 const DEFAULT_IMAGE = "rclone/rclone";
@@ -85,7 +85,6 @@ export class Rclone extends Chart {
             args: [
               "--config",
               "/config/rclone.conf",
-              "--fast-list",
               "serve",
               "s3",
               `${backend.name}:`,
@@ -99,8 +98,19 @@ export class Rclone extends Chart {
               },
             ],
             resources: props.resources,
-            readiness: Probe.fromHttpGet("/", { port: backend.port }),
-            liveness: Probe.fromHttpGet("/", { port: backend.port }),
+            // Liveness must not depend on the upstream remote: GET / performs a live listing
+            // of the backing remote and serialises behind clients' recursive walks, so an
+            // upstream latency blip trips the 1s default timeout three times running and the
+            // kubelet kills a healthy process mid-transfer. A timed-out probe also never
+            // populates the VFS dir cache, so the next probe pays full cold cost too -- one
+            // marginal probe cascades into a crashloop. TCP proves the process is up;
+            // readiness keeps the real S3 check, where failure only drops it from the Service.
+            liveness: Probe.fromTcpSocket({ port: backend.port }),
+            readiness: Probe.fromHttpGet("/", {
+              port: backend.port,
+              timeoutSeconds: Duration.seconds(10),
+              periodSeconds: Duration.seconds(30),
+            }),
             volumeMounts: [
               {
                 volume: configVolume,
