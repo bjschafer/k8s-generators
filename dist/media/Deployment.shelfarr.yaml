@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
-            initialDelaySeconds: 90
+            initialDelaySeconds: 180
             tcpSocket:
               port: 5056
           name: shelfarr
@@ -44,7 +44,6 @@ spec:
               name: http
           readinessProbe:
             failureThreshold: 3
-            initialDelaySeconds: 90
             tcpSocket:
               port: 5056
           resources:
@@ -59,6 +58,8 @@ spec:
           volumeMounts:
             - mountPath: /rails/storage
               name: pvc-shelfarr
+            - mountPath: /rails/tmp/cache
+              name: shelfarr-rails-tmp-cache
             - mountPath: /downloads
               name: pvc-nfs-media-downloads
             - mountPath: /ebooks
@@ -79,6 +80,9 @@ spec:
           persistentVolumeClaim:
             claimName: shelfarr
             readOnly: false
+        - emptyDir:
+            sizeLimit: 1024Mi
+          name: shelfarr-rails-tmp-cache
         - name: pvc-nfs-media-downloads
           persistentVolumeClaim:
             claimName: nfs-media-downloads

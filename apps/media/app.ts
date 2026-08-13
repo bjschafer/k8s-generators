@@ -219,12 +219,20 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
     name: "shelfarr",
     port: 5056,
     image: "ghcr.io/pedro-revez-silva/shelfarr:latest",
-    // Rails/Puma, and it runs migrations on boot -- the default probes start
-    // at t=0 and give up after ~30s, which crash-loops it before it listens.
-    // Compose upstream allows 40s; double that for a cold Ceph volume.
+    // Rails/Puma, and it runs migrations and regenerates its bootsnap cache on
+    // boot -- the default probes start at t=0 and give up after ~30s, which
+    // crash-loops it before it ever listens. Upstream's compose allows 40s.
     probeOptions: {
-      initialDelay: Duration.seconds(90),
+      initialDelay: Duration.seconds(180),
     },
+    // The image bakes a ~88MB bootsnap cache into /rails/tmp/cache, owned by
+    // uid 1000. Running as MEDIA_UID means the entrypoint has to chown -R it,
+    // and on overlayfs changing ownership copies every one of those ~9.4k files
+    // up out of the image layer -- which takes long enough that the kubelet
+    // kills the container mid-chown, forever. Masking the path leaves the chown
+    // walking the four files that remain; Rails just rebuilds the cache, which
+    // costs seconds per start rather than minutes.
+    emptyDirMounts: [{ mountPoint: "/rails/tmp/cache", sizeLimit: Size.gibibytes(1) }],
     // Its own env vars live under the SHELFARR_ prefix, which is exactly the
     // namespace kubelet fills with Docker-link vars for a service named
     // `shelfarr` (SHELFARR_PORT=tcp://... and friends). Nothing here wants
@@ -343,6 +351,7 @@ for (const mediaApp of mediaApps) {
     securityContext: mediaApp.securityContext,
     enableServiceLinks: mediaApp.enableServiceLinks,
     probeOptions: mediaApp.probeOptions,
+    emptyDirMounts: mediaApp.emptyDirMounts,
   });
 }
 

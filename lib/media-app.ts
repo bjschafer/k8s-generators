@@ -67,11 +67,22 @@ export interface MediaAppProps {
     size?: Size;
     mountPath?: string;
   };
-  // Probe timing for the app container. The *arr apps are Go/.NET binaries
-  // that bind their port almost immediately, so the defaults (probe from t=0,
-  // die after 3 failures) suit them; anything slower to boot -- a Rails app
-  // running migrations, say -- needs an explicit grace period or the liveness
-  // probe kills it before it ever listens.
+  // Scratch space mounted over a path the image ships. Chiefly a way to keep a
+  // slow-booting image from paying an overlayfs copy-up: an entrypoint that
+  // chowns a big baked-in cache tree has to copy every file out of the image
+  // layer first, and masking that path with an emptyDir makes the walk trivial.
+  readonly emptyDirMounts?: {
+    mountPoint: string;
+    sizeLimit?: Size;
+  }[];
+  // Probe timing for the app container. The *arr apps are Go/.NET binaries that
+  // bind their port almost immediately, so the defaults (probe from t=0, die
+  // after 3 failures) suit them; anything slower to boot -- a Rails app running
+  // migrations, say -- needs an explicit grace period or the liveness probe
+  // kills it before it ever listens. `initialDelay` deliberately applies to
+  // liveness only: a readiness probe failing while the app boots costs nothing
+  // but a few seconds of endpoint registration, whereas delaying it just delays
+  // the app going live.
   readonly probeOptions?: {
     initialDelay?: Duration;
     period?: Duration;
@@ -141,7 +152,6 @@ export class MediaApp extends Chart {
           },
           readiness: Probe.fromTcpSocket({
             port: props.port,
-            initialDelaySeconds: props.probeOptions?.initialDelay,
             periodSeconds: props.probeOptions?.period,
             failureThreshold: props.probeOptions?.failureThreshold,
           }),
@@ -158,6 +168,15 @@ export class MediaApp extends Chart {
     if (props.configVolume) {
       deploy.addVolume(configVol!);
       deploy.containers[0].mount(props.configVolume.mountPath ?? "/config", configVol!);
+    }
+
+    for (const emptyDirMount of props.emptyDirMounts ?? []) {
+      const id = `${props.name}${emptyDirMount.mountPoint.replaceAll("/", "-")}`;
+      const vol = Volume.fromEmptyDir(this, id, id, {
+        sizeLimit: emptyDirMount.sizeLimit,
+      });
+      deploy.addVolume(vol);
+      deploy.containers[0].mount(emptyDirMount.mountPoint, vol);
     }
 
     const existingVolumes = new Map<string, Volume>();
