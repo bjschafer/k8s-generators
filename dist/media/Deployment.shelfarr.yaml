@@ -31,6 +31,27 @@ spec:
               value: "8675309"
             - name: HTTP_PORT
               value: "5056"
+            - name: SHELFARR_SETTING_OIDC_ENABLED
+              value: "true"
+            - name: SHELFARR_SETTING_OIDC_PROVIDER_NAME
+              value: Authentik
+            - name: SHELFARR_SETTING_OIDC_ISSUER
+              value: https://login.cmdcentral.xyz/application/o/shelfarr/
+            - name: SHELFARR_SETTING_OIDC_CLIENT_ID
+              value: 08ae198e701da5e7b18226e2fd091655939dc5c7
+            - name: SHELFARR_SETTING_OIDC_SCOPES
+              value: openid profile email
+            - name: SHELFARR_SETTING_OIDC_AUTO_REDIRECT
+              value: "true"
+            - name: SHELFARR_SETTING_OIDC_AUTO_CREATE_USERS
+              value: "true"
+            - name: SHELFARR_SETTING_OIDC_DEFAULT_ROLE
+              value: user
+            - name: SHELFARR_SETTING_OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: SHELFARR_SETTING_OIDC_CLIENT_SECRET
+                  name: shelfarr-oidc
           image: ghcr.io/pedro-revez-silva/shelfarr:latest
           imagePullPolicy: Always
           livenessProbe:

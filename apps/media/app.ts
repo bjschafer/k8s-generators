@@ -66,6 +66,17 @@ nfsVols.Add("nfs-media-videos-tvshows", {
   },
 });
 
+// Declared up here rather than alongside the exportarr API-key secrets below,
+// because shelfarr takes it as a typed EnvValue inside the `mediaApps` literal
+// rather than by name the way `existingApiSecretName` does.
+const shelfarrOidc = new BitwardenSecret(app, "shelfarr-oidc", {
+  name: "shelfarr-oidc",
+  namespace: namespace,
+  data: {
+    SHELFARR_SETTING_OIDC_CLIENT_SECRET: "6fd11c24-cf0d-4df9-b08d-b4a50031ca65",
+  },
+});
+
 const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources">[] = [
   {
     name: "sonarr",
@@ -275,6 +286,36 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
       // user first and returns early (so the NFS trees, already MEDIA_UID
       // -owned, are never chowned), and a chown that does fail is only fatal
       // under `always`. TRUST_NFS_UID_SQUASH stays off -- it's for all_squash.
+
+      // Authenticate against Authentik, like navidrome and bookorbit -- the
+      // *arrs next door stay on local auth because only I touch them, whereas
+      // this one is the request front door other people log into. The provider
+      // lives in the tf-authentik repo, not here.
+      //
+      // These are read-only in Admin -> Settings while set, and nothing is
+      // written back to the DB. Trailing slash on the issuer is load-bearing:
+      // omniauth runs discovery and then checks the document's `issuer` against
+      // the configured one, and Authentik reports it with the slash.
+      SHELFARR_SETTING_OIDC_ENABLED: EnvValue.fromValue("true"),
+      SHELFARR_SETTING_OIDC_PROVIDER_NAME: EnvValue.fromValue("Authentik"),
+      SHELFARR_SETTING_OIDC_ISSUER: EnvValue.fromValue(
+        "https://login.cmdcentral.xyz/application/o/shelfarr/",
+      ),
+      SHELFARR_SETTING_OIDC_CLIENT_ID: EnvValue.fromValue(
+        "08ae198e701da5e7b18226e2fd091655939dc5c7",
+      ),
+      SHELFARR_SETTING_OIDC_SCOPES: EnvValue.fromValue("openid profile email"),
+      // Sends the login page straight to Authentik. Note this does not disable
+      // password auth -- sessions_controller gates the redirect on
+      // `params[:local].blank?`, so `?local=1` still reaches the form. It's
+      // moot in practice: an OIDC-created user never gets a password_digest,
+      // and has_secure_password can't authenticate against a nil digest.
+      SHELFARR_SETTING_OIDC_AUTO_REDIRECT: EnvValue.fromValue("true"),
+      SHELFARR_SETTING_OIDC_AUTO_CREATE_USERS: EnvValue.fromValue("true"),
+      // Everyone provisioned from here on is a requester. The very first
+      // account is exempt -- User's before_create makes it admin regardless.
+      SHELFARR_SETTING_OIDC_DEFAULT_ROLE: EnvValue.fromValue("user"),
+      ...shelfarrOidc.toEnvValues(),
     },
     monitoringConfig: {
       // Not an *arr -- no exportarr provider, and it exposes no /metrics.

@@ -16,6 +16,7 @@ resources:
   - ExternalSecret.navidrome-lastfm.yaml
   - ExternalSecret.radarr-api.yaml
   - ExternalSecret.sabnzbd-api.yaml
+  - ExternalSecret.shelfarr-oidc.yaml
   - ExternalSecret.sonarr-api.yaml
   - Ingress.bindery.yaml
   - Ingress.lidarr.yaml
