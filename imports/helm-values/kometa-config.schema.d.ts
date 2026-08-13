@@ -64,6 +64,7 @@ export type KometaDefaultCollectionPath = {
     | "subtitle_language"
     | "sundance"
     | "tautulli"
+    | "tracearr"
     | "tiff"
     | "tmdb"
     | "trakt"
@@ -194,6 +195,7 @@ export interface KometaConfigSchema {
   plex: Plex1;
   tmdb: Tmdb;
   tautulli?: Tautulli;
+  tracearr?: Tracearr;
   webhooks?: Webhooks;
   omdb?: Omdb;
   mdblist?: Mdblist;
@@ -207,6 +209,8 @@ export interface KometaConfigSchema {
   mal?: Mal;
   trakt?: Trakt;
   yamtrack?: Yamtrack;
+  serializd?: Serializd;
+  floppy?: Floppy;
   github?: Github;
   playlist_files?: PlaylistFiles;
   [k: string]: unknown;
@@ -293,6 +297,7 @@ export interface LegacyDefaultCollectionPath {
     | "subtitle_language"
     | "sundance"
     | "tautulli"
+    | "tracearr"
     | "tiff"
     | "tmdb"
     | "trakt"
@@ -871,7 +876,7 @@ export interface TemplateVariables1 {
    */
   pre_text?: string;
   rating_alignment?: "vertical" | "horizontal";
-  rating1?: "critic" | "audience" | "user";
+  rating1?: "critic" | "audience" | "user" | "floppy";
   rating1_image?:
     | "anidb"
     | "imdb"
@@ -891,7 +896,7 @@ export interface TemplateVariables1 {
   rating1_stroke_color?: string;
   rating1_horizontal_offset?: string | number;
   rating1_vertical_offset?: string | number;
-  rating2?: "critic" | "audience" | "user";
+  rating2?: "critic" | "audience" | "user" | "floppy";
   rating2_image?:
     | "anidb"
     | "imdb"
@@ -911,7 +916,7 @@ export interface TemplateVariables1 {
   rating2_stroke_color?: string;
   rating2_horizontal_offset?: string | number;
   rating2_vertical_offset?: string | number;
-  rating3?: "critic" | "audience" | "user";
+  rating3?: "critic" | "audience" | "user" | "floppy";
   rating3_image?:
     | "anidb"
     | "imdb"
@@ -1113,6 +1118,7 @@ export interface LegacyDefaultCollectionPath1 {
     | "subtitle_language"
     | "sundance"
     | "tautulli"
+    | "tracearr"
     | "tiff"
     | "tmdb"
     | "trakt"
@@ -1176,6 +1182,10 @@ export interface Operations {
   update_blank_track_titles?: boolean;
   remove_title_parentheses?: boolean;
   split_duplicates?: boolean;
+  /**
+   * Add episodes watched by the Plex server owner to the authenticated Serializd account. Serializd does not support importing Plex watch dates.
+   */
+  sync_watchlist_to_serializd?: boolean;
   radarr_add_all?: boolean;
   sonarr_add_all?: boolean;
   mass_metadata_update?: {
@@ -1224,6 +1234,9 @@ export interface Operations {
     | (
         | "tmdb"
         | "tvdb"
+        | "serializd"
+        | "serializd_nanogenres"
+        | "serializd_all"
         | "imdb"
         | "omdb"
         | "anidb"
@@ -1243,6 +1256,9 @@ export interface Operations {
         | (
             | "tmdb"
             | "tvdb"
+            | "serializd"
+            | "serializd_nanogenres"
+            | "serializd_all"
             | "imdb"
             | "omdb"
             | "anidb"
@@ -1407,6 +1423,8 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "serializd"
+        | "floppy"
         | "unlock"
       )
     | (
@@ -1440,6 +1458,8 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "serializd"
+            | "floppy"
             | "unlock"
           )
         | number
@@ -1476,6 +1496,8 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "serializd"
+        | "floppy"
         | "unlock"
       )
     | (
@@ -1509,6 +1531,8 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "serializd"
+            | "floppy"
             | "unlock"
           )
         | number
@@ -1545,6 +1569,8 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "serializd"
+        | "floppy"
         | "unlock"
       )
     | (
@@ -1578,6 +1604,8 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "serializd"
+            | "floppy"
             | "unlock"
           )
         | number
@@ -1614,6 +1642,9 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "serializd"
+        | "serializd_user"
+        | "floppy"
         | "unlock"
       )
     | (
@@ -1647,6 +1678,9 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "serializd"
+            | "serializd_user"
+            | "floppy"
             | "unlock"
           )
         | number
@@ -1683,6 +1717,9 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "serializd"
+        | "serializd_user"
+        | "floppy"
         | "unlock"
       )
     | (
@@ -1716,6 +1753,9 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "serializd"
+            | "serializd_user"
+            | "floppy"
             | "unlock"
           )
         | number
@@ -1752,6 +1792,9 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "serializd"
+        | "serializd_user"
+        | "floppy"
         | "unlock"
       )
     | (
@@ -1785,6 +1828,9 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "serializd"
+            | "serializd_user"
+            | "floppy"
             | "unlock"
           )
         | number
@@ -2409,6 +2455,11 @@ export interface Sonarr {
 }
 export interface Tautulli {
   apikey?: string | null;
+  url?: string | null;
+}
+export interface Tracearr {
+  apikey?: string | null;
+  server_id?: string | null;
   url?: string | null;
 }
 export interface TemplateVariables2 {
@@ -3238,13 +3289,21 @@ export interface Mal {
 export interface Trakt {
   client_id?: string | null;
   client_secret?: string | null;
-  pin?: string | null;
   [k: string]: unknown;
 }
 export interface Yamtrack {
   url?: string;
   username?: string;
   password?: string;
+}
+export interface Serializd {
+  email: string;
+  password: string;
+  timeout?: number;
+}
+export interface Floppy {
+  url: string;
+  token?: string | null;
 }
 /**
  * GitHub API credentials. Optional — providing a token raises the rate limit for GitHub requests.
