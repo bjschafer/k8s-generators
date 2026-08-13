@@ -1,5 +1,5 @@
 import { Construct } from "constructs";
-import { Chart, Size } from "cdk8s";
+import { Chart, Duration, Size } from "cdk8s";
 import {
   ContainerResources,
   Cpu,
@@ -67,6 +67,16 @@ export interface MediaAppProps {
     size?: Size;
     mountPath?: string;
   };
+  // Probe timing for the app container. The *arr apps are Go/.NET binaries
+  // that bind their port almost immediately, so the defaults (probe from t=0,
+  // die after 3 failures) suit them; anything slower to boot -- a Rails app
+  // running migrations, say -- needs an explicit grace period or the liveness
+  // probe kills it before it ever listens.
+  readonly probeOptions?: {
+    initialDelay?: Duration;
+    period?: Duration;
+    failureThreshold?: number;
+  };
   readonly monitoringConfig?: {
     enableExportarr: boolean;
     enableServiceMonitor: boolean;
@@ -131,9 +141,15 @@ export class MediaApp extends Chart {
           },
           readiness: Probe.fromTcpSocket({
             port: props.port,
+            initialDelaySeconds: props.probeOptions?.initialDelay,
+            periodSeconds: props.probeOptions?.period,
+            failureThreshold: props.probeOptions?.failureThreshold,
           }),
           liveness: Probe.fromTcpSocket({
             port: props.port,
+            initialDelaySeconds: props.probeOptions?.initialDelay,
+            periodSeconds: props.probeOptions?.period,
+            failureThreshold: props.probeOptions?.failureThreshold,
           }),
         },
       ],

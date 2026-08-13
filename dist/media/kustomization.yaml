@@ -9,6 +9,7 @@ resources:
   - Deployment.radarr.yaml
   - Deployment.resilio-sync.yaml
   - Deployment.sabnzbd.yaml
+  - Deployment.shelfarr.yaml
   - Deployment.sonarr.yaml
   - ExternalSecret.kometa-secrets.yaml
   - ExternalSecret.lidarr-api.yaml
@@ -22,6 +23,7 @@ resources:
   - Ingress.radarr.yaml
   - Ingress.resilio-sync.yaml
   - Ingress.sabnzbd.yaml
+  - Ingress.shelfarr.yaml
   - Ingress.sonarr.yaml
   - IngressRoute.navidrome.yaml
   - PersistentVolume.nfs-media-downloads.yaml
@@ -42,6 +44,7 @@ resources:
   - PersistentVolumeClaim.radarr.yaml
   - PersistentVolumeClaim.resilio-sync.yaml
   - PersistentVolumeClaim.sabnzbd.yaml
+  - PersistentVolumeClaim.shelfarr.yaml
   - PersistentVolumeClaim.sonarr.yaml
   - Service.bindery.yaml
   - Service.lidarr.yaml
@@ -50,6 +53,7 @@ resources:
   - Service.radarr.yaml
   - Service.resilio-sync.yaml
   - Service.sabnzbd.yaml
+  - Service.shelfarr.yaml
   - Service.sonarr.yaml
   - VMPodScrape.navidrome.yaml
   - VMServiceScrape.lidarr.yaml

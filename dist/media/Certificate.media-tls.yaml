@@ -15,6 +15,7 @@ spec:
     - sabnzbd.cmdcentral.xyz
     - prowlarr.cmdcentral.xyz
     - bindery.cmdcentral.xyz
+    - shelfarr.cmdcentral.xyz
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt

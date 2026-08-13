@@ -1,4 +1,4 @@
-import { App, Chart, Size } from "cdk8s";
+import { App, Chart, Duration, Size } from "cdk8s";
 import { Cpu, EnvValue, Secret } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { Certificate } from "../../imports/cert-manager.io";
@@ -6,6 +6,7 @@ import { ArgoAppSource, ArgoUpdaterImageProps, NewArgoApp } from "../../lib/argo
 import {
   CLUSTER_ISSUER,
   DEFAULT_APP_PROPS,
+  DEFAULT_SECURITY_CONTEXT,
   MEDIA_GID,
   MEDIA_UID,
   NONROOT_SECURITY_CONTEXT_UID,
@@ -207,6 +208,67 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
       enableServiceMonitor: false,
     },
   },
+  {
+    // Jellyseerr-for-books: request UI on top of the indexers bindery already
+    // uses, *plus* direct downloads from Anna's Archive, Z-Library and
+    // LibriVox. It complements bindery rather than replacing it -- bindery
+    // monitors authors for future releases, which shelfarr does not do;
+    // shelfarr reaches the shadow-library sources, which bindery deliberately
+    // won't (vavallee/bindery#1017: "stable, documented APIs only, no
+    // scraping").
+    name: "shelfarr",
+    port: 5056,
+    image: "ghcr.io/pedro-revez-silva/shelfarr:latest",
+    // Rails/Puma, and it runs migrations on boot -- the default probes start
+    // at t=0 and give up after ~30s, which crash-loops it before it listens.
+    // Compose upstream allows 40s; double that for a cold Ceph volume.
+    probeOptions: {
+      initialDelay: Duration.seconds(90),
+    },
+    // Its own env vars live under the SHELFARR_ prefix, which is exactly the
+    // namespace kubelet fills with Docker-link vars for a service named
+    // `shelfarr` (SHELFARR_PORT=tcp://... and friends). Nothing here wants
+    // them -- same reasoning as bindery above.
+    enableServiceLinks: false,
+    // LSIO-style entrypoint: starts as root, then steps down to PUID/PGID.
+    // fsGroup covers the Ceph RBD volume, which is root-owned on first attach
+    // and would otherwise be unwritable after the step-down.
+    securityContext: {
+      ...DEFAULT_SECURITY_CONTEXT,
+      fsGroup: Number(MEDIA_GID),
+    },
+    // The SQLite DB, Solid Queue state and the auto-generated RAILS_MASTER_KEY
+    // all live here. Losing this volume means losing the key, and with it every
+    // stored indexer/download-client credential.
+    configVolume: {
+      size: Size.gibibytes(5),
+      mountPath: "/rails/storage",
+    },
+    nfsMounts: [
+      {
+        mountPoint: "/downloads",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
+      },
+      {
+        mountPoint: "/ebooks",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-ebooks"),
+      },
+    ],
+    extraEnv: {
+      // Defaults to 80, which Puma can't bind after dropping to PUID.
+      HTTP_PORT: EnvValue.fromValue("5056"),
+      // The export is root_squashed, so a startup chown against /ebooks or
+      // /downloads is EPERM as root. Nothing needs adjusting anyway: the NFS
+      // trees are already MEDIA_UID-owned, and fsGroup handles the RBD volume.
+      // Leave TRUST_NFS_UID_SQUASH alone -- it's for all_squash exports only.
+      CHOWN_ON_START: EnvValue.fromValue("never"),
+    },
+    monitoringConfig: {
+      // Not an *arr -- no exportarr provider, and it exposes no /metrics.
+      enableExportarr: false,
+      enableServiceMonitor: false,
+    },
+  },
 ];
 
 // exportarr API-key secrets, referenced by name via existingApiSecretName above
@@ -275,6 +337,7 @@ for (const mediaApp of mediaApps) {
     extraEnv: mediaApp.extraEnv,
     securityContext: mediaApp.securityContext,
     enableServiceLinks: mediaApp.enableServiceLinks,
+    probeOptions: mediaApp.probeOptions,
   });
 }
 

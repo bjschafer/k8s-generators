@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+  name: shelfarr
+  namespace: media
+spec:
+  rules:
+    - host: shelfarr.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: shelfarr
+                port:
+                  number: 5056
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - shelfarr.cmdcentral.xyz
+      secretName: media-tls
