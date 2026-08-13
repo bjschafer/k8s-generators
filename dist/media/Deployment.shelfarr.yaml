@@ -31,8 +31,6 @@ spec:
               value: "8675309"
             - name: HTTP_PORT
               value: "5056"
-            - name: CHOWN_ON_START
-              value: never
           image: ghcr.io/pedro-revez-silva/shelfarr:latest
           imagePullPolicy: Always
           livenessProbe:

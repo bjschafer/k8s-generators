@@ -257,11 +257,16 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
     extraEnv: {
       // Defaults to 80, which Puma can't bind after dropping to PUID.
       HTTP_PORT: EnvValue.fromValue("5056"),
-      // The export is root_squashed, so a startup chown against /ebooks or
-      // /downloads is EPERM as root. Nothing needs adjusting anyway: the NFS
-      // trees are already MEDIA_UID-owned, and fsGroup handles the RBD volume.
-      // Leave TRUST_NFS_UID_SQUASH alone -- it's for all_squash exports only.
-      CHOWN_ON_START: EnvValue.fromValue("never"),
+      // Deliberately leaving CHOWN_ON_START at its `auto` default. `never`
+      // looks like the right call for a root_squashed export, but the
+      // entrypoint only ever applies it to /rails/storage and /rails/tmp --
+      // never to the NFS mounts -- and it doesn't merely skip the chown, it
+      // skips it and still hard-fails the writability check that follows. That
+      // crashloops on /rails/tmp, which is image-internal and root-owned.
+      // `auto` is safe here on both counts: it probes writability as the rails
+      // user first and returns early (so the NFS trees, already MEDIA_UID
+      // -owned, are never chowned), and a chown that does fail is only fatal
+      // under `always`. TRUST_NFS_UID_SQUASH stays off -- it's for all_squash.
     },
     monitoringConfig: {
       // Not an *arr -- no exportarr provider, and it exposes no /metrics.
