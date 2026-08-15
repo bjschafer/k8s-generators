@@ -200,14 +200,19 @@ export function addAlerts(scope: Construct, id: string): void {
     rules: [
       {
         alert: "ExternalSecretSyncFailed",
-        expr: `external_secrets_sync_calls_error{status="error"} > 0`,
+        // The Ready condition gauge, not externalsecret_sync_calls_error: that is a
+        // monotonic counter, so `> 0` latches true after the first ever failure and
+        // never clears. Note the ExternalSecret's own namespace is exported_namespace;
+        // plain `namespace` is always the controller's (external-secrets).
+        expr: `externalsecret_status_condition{condition="Ready",status="False"} == 1`,
         for: "15m",
         labels: {
           priority: PRIORITY.NORMAL,
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary: "ExternalSecret {{ $labels.name }} in {{ $labels.namespace }} failed to sync",
+          summary:
+            "ExternalSecret {{ $labels.name }} in {{ $labels.exported_namespace }} failed to sync",
         },
       },
     ],
