@@ -31,6 +31,8 @@ spec:
               value: "8675309"
             - name: HTTP_PORT
               value: "5056"
+            - name: SOLID_QUEUE_IN_PUMA
+              value: "1"
             - name: SHELFARR_SETTING_OIDC_ENABLED
               value: "true"
             - name: SHELFARR_SETTING_OIDC_PROVIDER_NAME

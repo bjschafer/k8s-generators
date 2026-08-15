@@ -314,6 +314,19 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
     extraEnv: {
       // Defaults to 80, which Puma can't bind after dropping to PUID.
       HTTP_PORT: EnvValue.fromValue("5056"),
+      // Without this the image's default command starts Puma and nothing else:
+      // config/puma.rb gates `plugin :solid_queue` on this variable, so every
+      // background job is written into the Solid Queue SQLite DB and never
+      // claimed. It is silent -- the UI works, connection tests pass, the
+      // queue just grows. That covers the BookOrbit library sync, search,
+      // download monitoring, import post-processing and health checks, i.e.
+      // essentially everything the app does after you click a button.
+      // Upstream's docker-compose sets it and the image does not.
+      //
+      // In-Puma rather than a second deployment running `bin/jobs`: the queue
+      // lives in /rails/storage alongside the main DB, and that volume is Ceph
+      // RBD (RWO), so a worker pod could not attach it anyway.
+      SOLID_QUEUE_IN_PUMA: EnvValue.fromValue("1"),
       // Deliberately leaving CHOWN_ON_START at its `auto` default. `never`
       // looks like the right call for a root_squashed export, but the
       // entrypoint only ever applies it to /rails/storage and /rails/tmp --
