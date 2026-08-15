@@ -70,6 +70,31 @@ nfsVols.Add("bookorbit-nfs-books", {
 });
 const books = nfsVols.Get("bookorbit-nfs-books");
 
+// Audiobooks and comics are separate libraries rather than more files in the
+// ebook one. BookOrbit has no library *type*, but per-library scan rules do
+// the same job: an audiobook library wants folder-as-book scanning, square
+// covers and M4B/MP3 at the top of the format priority, and comics want the
+// CBZ/CBR/CB7 reader -- neither of which suits the ebooks library. Kept as
+// their own exports/mounts for the same reason: overlapping library folders
+// make scans and missing-file states ambiguous.
+nfsVols.Add("bookorbit-nfs-audiobooks", {
+  exportPath: "/warp/Media/Audiobooks",
+  storage: Size.tebibytes(1),
+  claimName: "nfs-audiobooks",
+});
+const audiobooks = nfsVols.Get("bookorbit-nfs-audiobooks");
+
+// Note this tree is manga, not western comics, which matters for metadata:
+// ComicVine is BookOrbit's only comics-specific provider and covers manga
+// thinly, so expect to lean on Google Books/Open Library or hand-edit. The
+// reader itself is format-driven and doesn't care either way.
+nfsVols.Add("bookorbit-nfs-comics", {
+  exportPath: "/warp/Media/Comics",
+  storage: Size.tebibytes(1),
+  claimName: "nfs-comics",
+});
+const comics = nfsVols.Get("bookorbit-nfs-comics");
+
 new AppPlus(app, name, {
   name: name,
   namespace: namespace,
@@ -115,9 +140,13 @@ new AppPlus(app, name, {
     // discovery throws "URL resolves to a private or local address" and the
     // provider can't even be saved.
     OIDC_ALLOW_LOCAL_ISSUERS: EnvValue.fromValue("true"),
-    // Roots the library-folder picker at the mount rather than at `/`, so
-    // creating a library means browsing the books and not the container.
-    LIBRARY_BROWSE_ROOT: EnvValue.fromValue("/books"),
+    // Roots the library-folder picker. It takes a single path and the library
+    // roots are siblings, so there is no subtree that covers them all -- `/`
+    // is the only value from which /books, /audiobooks and /comics are all
+    // reachable. The cost is that the picker also lists the container's own
+    // directories, which is noise on the one screen where a library is
+    // created and nowhere else.
+    LIBRARY_BROWSE_ROOT: EnvValue.fromValue("/"),
 
     // The entrypoint starts as root to chown /data, then drops to these.
     // Same ids the rest of the media stack writes as, so the library stays
@@ -143,6 +172,14 @@ new AppPlus(app, name, {
     {
       volume: Volume.fromPersistentVolumeClaim(app, "books-vol", books.pvc),
       mountPath: "/books",
+    },
+    {
+      volume: Volume.fromPersistentVolumeClaim(app, "audiobooks-vol", audiobooks.pvc),
+      mountPath: "/audiobooks",
+    },
+    {
+      volume: Volume.fromPersistentVolumeClaim(app, "comics-vol", comics.pvc),
+      mountPath: "/comics",
     },
   ],
   livenessProbe: Probe.fromHttpGet("/api/v1/health", { port: port }),

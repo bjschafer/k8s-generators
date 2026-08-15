@@ -51,7 +51,7 @@ spec:
             - name: OIDC_ALLOW_LOCAL_ISSUERS
               value: "true"
             - name: LIBRARY_BROWSE_ROOT
-              value: /books
+              value: /
             - name: PUID
               value: "8675309"
             - name: PGID
@@ -117,6 +117,10 @@ spec:
               name: pvc-data
             - mountPath: /books
               name: pvc-nfs-books
+            - mountPath: /audiobooks
+              name: pvc-nfs-audiobooks
+            - mountPath: /comics
+              name: pvc-nfs-comics
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -134,4 +138,12 @@ spec:
         - name: pvc-nfs-books
           persistentVolumeClaim:
             claimName: nfs-books
+            readOnly: false
+        - name: pvc-nfs-audiobooks
+          persistentVolumeClaim:
+            claimName: nfs-audiobooks
+            readOnly: false
+        - name: pvc-nfs-comics
+          persistentVolumeClaim:
+            claimName: nfs-comics
             readOnly: false

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-comics
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1024Gi
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: bookorbit-nfs-comics

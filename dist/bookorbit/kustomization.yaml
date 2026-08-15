@@ -7,7 +7,11 @@ resources:
   - Password.bookorbit-secrets-jwt-secret.yaml
   - Password.bookorbit-secrets-migration-encryption-key.yaml
   - Password.bookorbit-secrets-setup-bootstrap-token.yaml
+  - PersistentVolume.bookorbit-nfs-audiobooks.yaml
   - PersistentVolume.bookorbit-nfs-books.yaml
+  - PersistentVolume.bookorbit-nfs-comics.yaml
   - PersistentVolumeClaim.data.yaml
+  - PersistentVolumeClaim.nfs-audiobooks.yaml
   - PersistentVolumeClaim.nfs-books.yaml
+  - PersistentVolumeClaim.nfs-comics.yaml
   - Service.bookorbit.yaml
