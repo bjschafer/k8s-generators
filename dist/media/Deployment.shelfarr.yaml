@@ -85,6 +85,8 @@ spec:
               name: pvc-nfs-media-downloads
             - mountPath: /ebooks
               name: pvc-nfs-media-ebooks
+            - mountPath: /audiobooks
+              name: pvc-nfs-media-audiobooks
       dnsPolicy: ClusterFirst
       enableServiceLinks: false
       hostNetwork: false
@@ -111,4 +113,8 @@ spec:
         - name: pvc-nfs-media-ebooks
           persistentVolumeClaim:
             claimName: nfs-media-ebooks
+            readOnly: false
+        - name: pvc-nfs-media-audiobooks
+          persistentVolumeClaim:
+            claimName: nfs-media-audiobooks
             readOnly: false

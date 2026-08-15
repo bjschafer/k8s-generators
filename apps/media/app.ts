@@ -33,6 +33,14 @@ nfsVols.Add("nfs-media-downloads", {
     },
   },
 });
+nfsVols.Add("nfs-media-audiobooks", {
+  exportPath: "/warp/Media/Audiobooks",
+  metadata: {
+    labels: {
+      ...mediaLabel,
+    },
+  },
+});
 nfsVols.Add("nfs-media-ebooks", {
   exportPath: "/warp/Media/Ebooks",
   metadata: {
@@ -271,6 +279,16 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
       {
         mountPoint: "/ebooks",
         nfsConcreteVolume: nfsVols.Get("nfs-media-ebooks"),
+      },
+      // Shelfarr handles audiobooks alongside ebooks and keeps a separate
+      // output path for each. Only the mount is declared here -- the path it
+      // actually delivers to is an Admin -> Settings field stored in the
+      // SQLite DB; there is no SHELFARR_SETTING_* override for it (unsupported
+      // ones are ignored with a boot-time warning), so it has to be set once
+      // in the UI to /audiobooks.
+      {
+        mountPoint: "/audiobooks",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-audiobooks"),
       },
     ],
     extraEnv: {
