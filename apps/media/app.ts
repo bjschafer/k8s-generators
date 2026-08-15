@@ -41,6 +41,14 @@ nfsVols.Add("nfs-media-audiobooks", {
     },
   },
 });
+nfsVols.Add("nfs-media-comics", {
+  exportPath: "/warp/Media/Comics",
+  metadata: {
+    labels: {
+      ...mediaLabel,
+    },
+  },
+});
 nfsVols.Add("nfs-media-ebooks", {
   exportPath: "/warp/Media/Ebooks",
   metadata: {
@@ -280,15 +288,27 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
         mountPoint: "/ebooks",
         nfsConcreteVolume: nfsVols.Get("nfs-media-ebooks"),
       },
-      // Shelfarr handles audiobooks alongside ebooks and keeps a separate
-      // output path for each. Only the mount is declared here -- the path it
-      // actually delivers to is an Admin -> Settings field stored in the
-      // SQLite DB; there is no SHELFARR_SETTING_* override for it (unsupported
-      // ones are ignored with a boot-time warning), so it has to be set once
-      // in the UI to /audiobooks.
+      // Shelfarr treats audiobooks and Comics & Manga as content kinds beside
+      // ebooks, each with its own output path, path template and metadata
+      // provider. None of that is in the README -- it lives in
+      // app/services/settings_service.rb and app/models/content_kinds.rb --
+      // but it is real: ContentKinds has BOOK and GRAPHIC, and the settings
+      // registry carries comicbook_output_path, comicbook_path_template and a
+      // Comic Vine provider.
+      //
+      // These mount points are deliberately the shipped defaults for
+      // audiobook_output_path and comicbook_output_path, so delivery works
+      // with no Admin -> Settings edit at all. Worth knowing if either mount
+      // is ever renamed: the settings are stored in the SQLite DB and there is
+      // no SHELFARR_SETTING_* override for them (unsupported ones are ignored
+      // with a boot-time warning), so a rename becomes a manual UI change.
       {
         mountPoint: "/audiobooks",
         nfsConcreteVolume: nfsVols.Get("nfs-media-audiobooks"),
+      },
+      {
+        mountPoint: "/comics",
+        nfsConcreteVolume: nfsVols.Get("nfs-media-comics"),
       },
     ],
     extraEnv: {

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+  name: nfs-media-comics
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 51200Gi
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: nfs-media-comics
