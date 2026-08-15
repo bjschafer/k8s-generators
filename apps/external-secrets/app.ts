@@ -1,6 +1,6 @@
 import { App, Chart } from "cdk8s";
 import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, RELOADER_ENABLED } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { EsoValuesSchema } from "../../imports/helm-values/eso-values.schema";
 import { Certificate, ClusterIssuer, Issuer } from "../../imports/cert-manager.io";
@@ -33,6 +33,11 @@ new HelmApp<EsoValuesSchema>(app, "helm", {
   values: {
     "bitwarden-sdk-server": {
       enabled: true,
+      // The sdk-server reads its TLS keypair once at startup and never reloads it.
+      // When cert-manager rotates bitwarden-tls-certs the pod keeps serving the retired
+      // leaf, so every Bitwarden-backed ExternalSecret fails x509 verification against
+      // the new CA until it is restarted by hand. Let reloader do that restart.
+      deploymentAnnotations: RELOADER_ENABLED,
     },
     openshiftFinalizers: false,
     resources: {
