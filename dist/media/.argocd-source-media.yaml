@@ -7,7 +7,7 @@ kustomize:
   - lscr.io/linuxserver/readarr:latest@dummy
   - ghcr.io/linuxserver/sabnzbd:latest@sha256:b0f9755d795913bd26ae3f3a12805668ab0681ab847a7624568559c573fc7cae
   - ghcr.io/linuxserver/prowlarr:latest@sha256:1295cff29d10b486c0d8324d1559a552140a5932bf8b3d87e398654414f63f92
-  - ghcr.io/vavallee/bindery:latest@sha256:150a9c672f0c1fc6448103d90d09646f5cc292db3cf6c5eba2652d9d2c46bbf5
+  - ghcr.io/vavallee/bindery:latest@sha256:50546e99a2c56c6d226d670b0b01ac65555300a6c26e5d001a7b4596ca5a90a1
   - ghcr.io/linuxserver/resilio-sync:2.8.1@sha256:0c7b72c330e5e70503363a29c3792c471273a160fdb4027521d21b9086139eb1
   - kometateam/kometa:latest@sha256:6c3971a4aaa928b045e5f22514196b6db7f9b2b186158ebfe3239f4b328dfb0a
   - ghcr.io/pedro-revez-silva/shelfarr:latest@sha256:5e331192a8a7b55e3bee055d28403f83fd9d4977f52b6dcb11c86adcdbb70083
