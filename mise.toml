@@ -9,7 +9,7 @@ kubectl = "1.36.3"
 # Must stay on 3.x: cdk8s's HelmApp shells out to this binary and is built
 # against the Helm 3 CLI. Constrained in renovate.json rather than left to a
 # comment.
-helm = "3.21.3"
+helm = "3.21.4"
 # Renders the velero CRDs (`velero install --crds-only`), so the CLI version IS
 # the CRD version -- unlike helm above, which only pulls a chart at a version
 # passed to it. tools/sources.ts pins the same version and hard-fails if the
