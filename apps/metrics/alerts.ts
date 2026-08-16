@@ -397,14 +397,19 @@ export function addAlerts(scope: Construct, id: string): void {
     namespace: namespace,
     rules: [
       {
-        // The leading indicator for the whole cascade. etcd wants WAL fsync p99 well
-        // under 10ms; the all-HDD Ceph pool these VMs boot from floors out around 6ms,
-        // so there is almost no headroom. 25ms means something (almost always a Velero
-        // backup reading the same spindles) is eating the disk. On 2026-08-16 fsync hit
-        // 3.9s, kube-controller-manager lost its lease, and k3s exits on lease loss --
-        // all three servers died inside 90s.
+        // The leading indicator for the whole cascade. On 2026-08-16 fsync hit 3.9s,
+        // kube-controller-manager lost its lease, and k3s exits on lease loss -- all
+        // three servers died inside 90s.
+        //
+        // Threshold is empirical, measured 2026-08-16 right after the VMs moved to
+        // cache=unsafe: p50 0.64ms, p90 3-8ms, p99 30-62ms, and 100% of samples under
+        // 512ms. The p99 tail is host page-cache writeback pressure against the all-HDD
+        // Ceph pool, which cache=unsafe does not remove -- so a textbook 10-25ms etcd
+        // threshold fires here constantly and is useless. 500ms is ~8x the steady-state
+        // p99 (quiet) and well under the 1-4s seen during the incident (still catches
+        // it). Re-measure before tightening this; the tail moves with Ceph load.
         alert: "EtcdHighFsyncDurations",
-        expr: `histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.025`,
+        expr: `histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.5`,
         // 10m so a short snapshot or compaction blip doesn't page, but a backup-driven
         // stall (which runs for many minutes) does.
         for: "10m",
@@ -420,7 +425,8 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         // Backend commit is the other half of the disk story and catches slow reads /
-        // large transactions that fsync latency alone misses.
+        // large transactions that fsync latency alone misses. Measured baseline
+        // 2026-08-16: p99 3.6-4.2ms, so 250ms leaves ~60x headroom.
         alert: "EtcdHighCommitDurations",
         expr: `histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.25`,
         for: "10m",

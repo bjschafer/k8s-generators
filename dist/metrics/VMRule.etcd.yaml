@@ -16,7 +16,7 @@ spec:
                 VALUE = {{ $value }}s
                 LABELS = {{ $labels }}
             summary: etcd WAL fsync p99 above 25ms on {{ $labels.instance }}
-          expr: histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.025
+          expr: histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.5
           for: 10m
           labels:
             namespace: metrics
