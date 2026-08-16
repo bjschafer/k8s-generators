@@ -126,6 +126,37 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
+    // k3s serves embedded-etcd metrics on :2381 over plain HTTP with no auth, which
+    // is why it binds to 127.0.0.1 unless `etcd-expose-metrics: true` is set in
+    // /etc/rancher/k3s/config.yaml on each server -- that flag is a prerequisite for
+    // this scrape and is NOT managed from this repo.
+    //
+    // Without this, etcd_disk_wal_fsync_duration_seconds does not exist anywhere, and
+    // that is the single metric that predicts the failure mode in
+    // ETCDHighFsyncDurations below: Velero backup reads saturate the all-HDD Ceph pool
+    // that the control-plane VM disks live on, WAL fsync blows past 1s, controllers
+    // lose their leases, and k3s exits. On 2026-08-16 that killed all three servers
+    // within 90s and destroyed the weekly backup. We were blind to it at the time.
+    new VmScrapeConfig(this, "etcd", {
+      metadata: {
+        name: "etcd",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: [
+              "k8s-01.cmdcentral.xyz:2381",
+              "k8s-02.cmdcentral.xyz:2381",
+              "k8s-03.cmdcentral.xyz:2381",
+            ],
+            labels: { job: "etcd" },
+          },
+        ],
+        scheme: VmScrapeConfigSpecScheme.HTTP,
+      },
+    });
+
     new VmScrapeConfig(this, "hass", {
       metadata: {
         name: "hass",

@@ -389,6 +389,102 @@ export function addAlerts(scope: Construct, id: string): void {
     ],
   });
 
+  // Requires `etcd-expose-metrics: true` in /etc/rancher/k3s/config.yaml on every
+  // server plus the "etcd" VmScrapeConfig in scrapeconfigs.ts. Until 2026-08-16 none
+  // of this existed, so the failure below was completely invisible in Grafana.
+  new Alert(scope, `${id}-etcd`, {
+    name: "etcd",
+    namespace: namespace,
+    rules: [
+      {
+        // The leading indicator for the whole cascade. etcd wants WAL fsync p99 well
+        // under 10ms; the all-HDD Ceph pool these VMs boot from floors out around 6ms,
+        // so there is almost no headroom. 25ms means something (almost always a Velero
+        // backup reading the same spindles) is eating the disk. On 2026-08-16 fsync hit
+        // 3.9s, kube-controller-manager lost its lease, and k3s exits on lease loss --
+        // all three servers died inside 90s.
+        alert: "EtcdHighFsyncDurations",
+        expr: `histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.025`,
+        // 10m so a short snapshot or compaction blip doesn't page, but a backup-driven
+        // stall (which runs for many minutes) does.
+        for: "10m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "etcd WAL fsync p99 above 25ms on {{ $labels.instance }}",
+          description:
+            "etcd is struggling to fsync its write-ahead log, which starves every leader-elected controller and can make k3s exit.\n  VALUE = {{ $value }}s\n  LABELS = {{ $labels }}",
+        },
+      },
+      {
+        // Backend commit is the other half of the disk story and catches slow reads /
+        // large transactions that fsync latency alone misses.
+        alert: "EtcdHighCommitDurations",
+        expr: `histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.25`,
+        for: "10m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+        },
+        annotations: {
+          summary: "etcd backend commit p99 above 250ms on {{ $labels.instance }}",
+          description:
+            "etcd backend commit latency is high, usually the same Ceph contention that drives EtcdHighFsyncDurations.\n  VALUE = {{ $value }}s\n  LABELS = {{ $labels }}",
+        },
+      },
+      {
+        // Leader churn is the symptom that immediately precedes controllers dropping
+        // their leases. More than two elections in 15m is never normal here.
+        alert: "EtcdFrequentLeaderChanges",
+        expr: `increase(etcd_server_leader_changes_seen_total{job="etcd"}[15m]) > 2`,
+        for: "0m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "etcd leader changed more than twice in 15m",
+          description:
+            "Frequent etcd leader elections indicate the cluster is unstable, typically from disk or network latency.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
+        },
+      },
+      {
+        // Catches the case where a member is up but not part of a healthy quorum, and
+        // (via absent()) the case where the scrape itself has gone away -- which is how
+        // we ended up blind before 2026-08-16.
+        alert: "EtcdMembersDown",
+        expr: `count(up{job="etcd"} == 0) > 0 or absent(up{job="etcd"})`,
+        for: "5m",
+        labels: {
+          priority: PRIORITY.HIGH,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "etcd member down or etcd metrics missing entirely",
+          description:
+            "An etcd member is unreachable, or the etcd scrape has stopped returning data.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
+        },
+      },
+      {
+        // etcd's default quota is 2GiB (quota-backend-bytes in the k3s startup log).
+        // Crossing it puts the cluster into read-only alarm state, which is a very bad
+        // day. Warn with plenty of runway.
+        alert: "EtcdDatabaseQuotaLowSpace",
+        expr: `(etcd_mvcc_db_total_size_in_bytes{job="etcd"} / etcd_server_quota_backend_bytes{job="etcd"}) * 100 > 80`,
+        for: "10m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+        },
+        annotations: {
+          summary: "etcd database is above 80% of its backend quota",
+          description:
+            "etcd will go read-only when it hits the quota.\n  VALUE = {{ $value }}%\n  LABELS = {{ $labels }}",
+        },
+      },
+    ],
+  });
+
   new Alert(scope, `${id}-host`, {
     name: "host",
     namespace: namespace,

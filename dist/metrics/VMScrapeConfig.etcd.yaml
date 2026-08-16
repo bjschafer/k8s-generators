@@ -1,0 +1,14 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: etcd
+  namespace: metrics
+spec:
+  scheme: http
+  staticConfigs:
+    - labels:
+        job: etcd
+      targets:
+        - k8s-01.cmdcentral.xyz:2381
+        - k8s-02.cmdcentral.xyz:2381
+        - k8s-03.cmdcentral.xyz:2381

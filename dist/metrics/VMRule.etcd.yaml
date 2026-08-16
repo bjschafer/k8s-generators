@@ -1,0 +1,74 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: metrics
+  name: etcd
+  namespace: metrics
+spec:
+  groups:
+    - name: etcd
+      rules:
+        - alert: EtcdHighFsyncDurations
+          annotations:
+            description: |-
+              etcd is struggling to fsync its write-ahead log, which starves every leader-elected controller and can make k3s exit.
+                VALUE = {{ $value }}s
+                LABELS = {{ $labels }}
+            summary: etcd WAL fsync p99 above 25ms on {{ $labels.instance }}
+          expr: histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.025
+          for: 10m
+          labels:
+            namespace: metrics
+            priority: "1"
+            push_notify: "true"
+        - alert: EtcdHighCommitDurations
+          annotations:
+            description: |-
+              etcd backend commit latency is high, usually the same Ceph contention that drives EtcdHighFsyncDurations.
+                VALUE = {{ $value }}s
+                LABELS = {{ $labels }}
+            summary: etcd backend commit p99 above 250ms on {{ $labels.instance }}
+          expr: histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.25
+          for: 10m
+          labels:
+            namespace: metrics
+            priority: "0"
+        - alert: EtcdFrequentLeaderChanges
+          annotations:
+            description: |-
+              Frequent etcd leader elections indicate the cluster is unstable, typically from disk or network latency.
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: etcd leader changed more than twice in 15m
+          expr: increase(etcd_server_leader_changes_seen_total{job="etcd"}[15m]) > 2
+          for: 0m
+          labels:
+            namespace: metrics
+            priority: "1"
+            push_notify: "true"
+        - alert: EtcdMembersDown
+          annotations:
+            description: |-
+              An etcd member is unreachable, or the etcd scrape has stopped returning data.
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: etcd member down or etcd metrics missing entirely
+          expr: count(up{job="etcd"} == 0) > 0 or absent(up{job="etcd"})
+          for: 5m
+          labels:
+            namespace: metrics
+            priority: "1"
+            push_notify: "true"
+        - alert: EtcdDatabaseQuotaLowSpace
+          annotations:
+            description: |-
+              etcd will go read-only when it hits the quota.
+                VALUE = {{ $value }}%
+                LABELS = {{ $labels }}
+            summary: etcd database is above 80% of its backend quota
+          expr: (etcd_mvcc_db_total_size_in_bytes{job="etcd"} / etcd_server_quota_backend_bytes{job="etcd"}) * 100 > 80
+          for: 10m
+          labels:
+            namespace: metrics
+            priority: "0"
