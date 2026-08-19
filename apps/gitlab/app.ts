@@ -15,7 +15,7 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 // renovate: datasource=helm depName=gitlab-runner registryUrl=https://charts.gitlab.io
-const version = "0.91.2";
+const version = "0.92.0";
 
 NewArgoApp(name, {
   sync_policy: {
