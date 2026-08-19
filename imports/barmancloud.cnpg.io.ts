@@ -47,7 +47,7 @@ export class ObjectStore extends ApiObject {
   /**
    * Renders the object to Kubernetes JSON.
    */
-  public toJson(): any {
+  public override toJson(): any {
     const resolved = super.toJson();
 
     return {
@@ -75,13 +75,12 @@ export interface ObjectStoreProps {
    * @schema ObjectStore#spec
    */
   readonly spec: ObjectStoreSpec;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreProps' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreProps(obj: ObjectStoreProps | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -91,7 +90,7 @@ export function toJson_ObjectStoreProps(obj: ObjectStoreProps | undefined): Reco
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specification of the desired behavior of the ObjectStore.
@@ -123,13 +122,12 @@ export interface ObjectStoreSpec {
    * @schema ObjectStoreSpec#retentionPolicy
    */
   readonly retentionPolicy?: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpec' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpec(obj: ObjectStoreSpec | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -140,7 +138,7 @@ export function toJson_ObjectStoreSpec(obj: ObjectStoreSpec | undefined): Record
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration for the barman-cloud tool suite
@@ -237,13 +235,12 @@ export interface ObjectStoreSpecConfiguration {
    * @schema ObjectStoreSpecConfiguration#wal
    */
   readonly wal?: ObjectStoreSpecConfigurationWal;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfiguration' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfiguration(obj: ObjectStoreSpecConfiguration | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -262,7 +259,7 @@ export function toJson_ObjectStoreSpecConfiguration(obj: ObjectStoreSpecConfigur
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration for the sidecar that runs in the instance pods
@@ -307,13 +304,12 @@ export interface ObjectStoreSpecInstanceSidecarConfiguration {
    * @schema ObjectStoreSpecInstanceSidecarConfiguration#retentionPolicyIntervalSeconds
    */
   readonly retentionPolicyIntervalSeconds?: number;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfiguration' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfiguration(obj: ObjectStoreSpecInstanceSidecarConfiguration | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -326,7 +322,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfiguration(obj: ObjectSt
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials to use to upload data to Azure Blob Storage
@@ -378,13 +374,12 @@ export interface ObjectStoreSpecConfigurationAzureCredentials {
    * @schema ObjectStoreSpecConfigurationAzureCredentials#useDefaultAzureCredentials
    */
   readonly useDefaultAzureCredentials?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationAzureCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationAzureCredentials(obj: ObjectStoreSpecConfigurationAzureCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -398,7 +393,7 @@ export function toJson_ObjectStoreSpecConfigurationAzureCredentials(obj: ObjectS
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration to be used to backup the data files
@@ -486,13 +481,12 @@ export interface ObjectStoreSpecConfigurationData {
    * @schema ObjectStoreSpecConfigurationData#restoreAdditionalCommandArgs
    */
   readonly restoreAdditionalCommandArgs?: string[];
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationData' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationData(obj: ObjectStoreSpecConfigurationData | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -506,7 +500,7 @@ export function toJson_ObjectStoreSpecConfigurationData(obj: ObjectStoreSpecConf
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EndpointCA store the CA bundle of the barman endpoint.
@@ -529,13 +523,12 @@ export interface ObjectStoreSpecConfigurationEndpointCa {
    * @schema ObjectStoreSpecConfigurationEndpointCa#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationEndpointCa' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationEndpointCa(obj: ObjectStoreSpecConfigurationEndpointCa | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -545,7 +538,7 @@ export function toJson_ObjectStoreSpecConfigurationEndpointCa(obj: ObjectStoreSp
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials to use to upload data to Google Cloud Storage
@@ -567,13 +560,12 @@ export interface ObjectStoreSpecConfigurationGoogleCredentials {
    * @schema ObjectStoreSpecConfigurationGoogleCredentials#gkeEnvironment
    */
   readonly gkeEnvironment?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationGoogleCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationGoogleCredentials(obj: ObjectStoreSpecConfigurationGoogleCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -583,7 +575,7 @@ export function toJson_ObjectStoreSpecConfigurationGoogleCredentials(obj: Object
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The credentials to use to upload data to S3
@@ -625,13 +617,12 @@ export interface ObjectStoreSpecConfigurationS3Credentials {
    * @schema ObjectStoreSpecConfigurationS3Credentials#sessionToken
    */
   readonly sessionToken?: ObjectStoreSpecConfigurationS3CredentialsSessionToken;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationS3Credentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationS3Credentials(obj: ObjectStoreSpecConfigurationS3Credentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -644,7 +635,7 @@ export function toJson_ObjectStoreSpecConfigurationS3Credentials(obj: ObjectStor
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The configuration for the backup of the WAL stream.
@@ -722,13 +713,12 @@ export interface ObjectStoreSpecConfigurationWal {
    * @schema ObjectStoreSpecConfigurationWal#restoreAdditionalCommandArgs
    */
   readonly restoreAdditionalCommandArgs?: string[];
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationWal' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationWal(obj: ObjectStoreSpecConfigurationWal | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -741,7 +731,7 @@ export function toJson_ObjectStoreSpecConfigurationWal(obj: ObjectStoreSpecConfi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * EnvVar represents an environment variable present in a Container.
@@ -779,13 +769,12 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnv {
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnv#valueFrom
    */
   readonly valueFrom?: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationEnv' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnv(obj: ObjectStoreSpecInstanceSidecarConfigurationEnv | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -796,7 +785,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnv(obj: Objec
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The log level for PostgreSQL instances. Valid values are: `error`, `warning`, `info` (default), `debug`, `trace`
@@ -852,13 +841,12 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationResources {
    * @schema ObjectStoreSpecInstanceSidecarConfigurationResources#requests
    */
   readonly requests?: { [key: string]: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests };
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationResources' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfigurationResources(obj: ObjectStoreSpecInstanceSidecarConfigurationResources | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -869,7 +857,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationResources(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The connection string to be used
@@ -890,13 +878,12 @@ export interface ObjectStoreSpecConfigurationAzureCredentialsConnectionString {
    * @schema ObjectStoreSpecConfigurationAzureCredentialsConnectionString#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationAzureCredentialsConnectionString' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationAzureCredentialsConnectionString(obj: ObjectStoreSpecConfigurationAzureCredentialsConnectionString | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -906,7 +893,7 @@ export function toJson_ObjectStoreSpecConfigurationAzureCredentialsConnectionStr
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The storage account where to upload data
@@ -927,13 +914,12 @@ export interface ObjectStoreSpecConfigurationAzureCredentialsStorageAccount {
    * @schema ObjectStoreSpecConfigurationAzureCredentialsStorageAccount#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationAzureCredentialsStorageAccount' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageAccount(obj: ObjectStoreSpecConfigurationAzureCredentialsStorageAccount | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -943,7 +929,7 @@ export function toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageAccoun
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The storage account key to be used in conjunction
@@ -965,13 +951,12 @@ export interface ObjectStoreSpecConfigurationAzureCredentialsStorageKey {
    * @schema ObjectStoreSpecConfigurationAzureCredentialsStorageKey#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationAzureCredentialsStorageKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageKey(obj: ObjectStoreSpecConfigurationAzureCredentialsStorageKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -981,7 +966,7 @@ export function toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageKey(ob
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * A shared-access-signature to be used in conjunction with
@@ -1003,13 +988,12 @@ export interface ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken {
    * @schema ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken(obj: ObjectStoreSpecConfigurationAzureCredentialsStorageSasToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1019,7 +1003,7 @@ export function toJson_ObjectStoreSpecConfigurationAzureCredentialsStorageSasTok
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Compress a backup file (a tar file per tablespace) while streaming it
@@ -1073,13 +1057,12 @@ export interface ObjectStoreSpecConfigurationGoogleCredentialsApplicationCredent
    * @schema ObjectStoreSpecConfigurationGoogleCredentialsApplicationCredentials#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationGoogleCredentialsApplicationCredentials' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationGoogleCredentialsApplicationCredentials(obj: ObjectStoreSpecConfigurationGoogleCredentialsApplicationCredentials | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1089,7 +1072,7 @@ export function toJson_ObjectStoreSpecConfigurationGoogleCredentialsApplicationC
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the access key id
@@ -1110,13 +1093,12 @@ export interface ObjectStoreSpecConfigurationS3CredentialsAccessKeyId {
    * @schema ObjectStoreSpecConfigurationS3CredentialsAccessKeyId#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationS3CredentialsAccessKeyId' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationS3CredentialsAccessKeyId(obj: ObjectStoreSpecConfigurationS3CredentialsAccessKeyId | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1126,7 +1108,7 @@ export function toJson_ObjectStoreSpecConfigurationS3CredentialsAccessKeyId(obj:
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the secret containing the region name
@@ -1147,13 +1129,12 @@ export interface ObjectStoreSpecConfigurationS3CredentialsRegion {
    * @schema ObjectStoreSpecConfigurationS3CredentialsRegion#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationS3CredentialsRegion' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationS3CredentialsRegion(obj: ObjectStoreSpecConfigurationS3CredentialsRegion | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1163,7 +1144,7 @@ export function toJson_ObjectStoreSpecConfigurationS3CredentialsRegion(obj: Obje
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The reference to the secret access key
@@ -1184,13 +1165,12 @@ export interface ObjectStoreSpecConfigurationS3CredentialsSecretAccessKey {
    * @schema ObjectStoreSpecConfigurationS3CredentialsSecretAccessKey#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationS3CredentialsSecretAccessKey' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationS3CredentialsSecretAccessKey(obj: ObjectStoreSpecConfigurationS3CredentialsSecretAccessKey | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1200,7 +1180,7 @@ export function toJson_ObjectStoreSpecConfigurationS3CredentialsSecretAccessKey(
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * The references to the session key
@@ -1221,13 +1201,12 @@ export interface ObjectStoreSpecConfigurationS3CredentialsSessionToken {
    * @schema ObjectStoreSpecConfigurationS3CredentialsSessionToken#name
    */
   readonly name: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecConfigurationS3CredentialsSessionToken' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecConfigurationS3CredentialsSessionToken(obj: ObjectStoreSpecConfigurationS3CredentialsSessionToken | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1237,7 +1216,7 @@ export function toJson_ObjectStoreSpecConfigurationS3CredentialsSessionToken(obj
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Compress a WAL file before sending it to the object store. Available
@@ -1319,13 +1298,12 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom {
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom#secretKeyRef
    */
   readonly secretKeyRef?: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKeyRef;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom(obj: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1338,7 +1316,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFrom(o
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * ResourceClaim references one entry in PodSpec.ResourceClaims.
@@ -1363,13 +1341,12 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationResourcesClaims {
    * @schema ObjectStoreSpecInstanceSidecarConfigurationResourcesClaims#request
    */
   readonly request?: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationResourcesClaims' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfigurationResourcesClaims(obj: ObjectStoreSpecInstanceSidecarConfigurationResourcesClaims | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1379,7 +1356,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationResourcesClaim
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * @schema ObjectStoreSpecInstanceSidecarConfigurationResourcesLimits
@@ -1439,13 +1416,12 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromConfigMa
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromConfigMapKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromConfigMapKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromConfigMapKeyRef(obj: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromConfigMapKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1456,7 +1432,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromCo
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a field of the pod: supports metadata.name, metadata.namespace, `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`,
@@ -1478,13 +1454,12 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFieldRef
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFieldRef#fieldPath
    */
   readonly fieldPath: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFieldRef(obj: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1494,7 +1469,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * FileKeyRef selects a key of the env file.
@@ -1539,13 +1514,12 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyR
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef#volumeName
    */
   readonly volumeName: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef(obj: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFileKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1557,7 +1531,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromFi
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a resource of the container: only resources limits and requests
@@ -1586,13 +1560,12 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromResource
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromResourceFieldRef#resource
    */
   readonly resource: string;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromResourceFieldRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromResourceFieldRef(obj: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromResourceFieldRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1603,7 +1576,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromRe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Selects a key of a secret in the pod's namespace
@@ -1635,13 +1608,12 @@ export interface ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKe
    * @schema ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKeyRef#optional
    */
   readonly optional?: boolean;
-
 }
 
 /**
  * Converts an object of type 'ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKeyRef' to JSON representation.
  */
-/* eslint-disable max-len, quote-props */
+/* eslint-disable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKeyRef(obj: ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSecretKeyRef | undefined): Record<string, any> | undefined {
   if (obj === undefined) { return undefined; }
   const result = {
@@ -1652,7 +1624,7 @@ export function toJson_ObjectStoreSpecInstanceSidecarConfigurationEnvValueFromSe
   // filter undefined values
   return Object.entries(result).reduce((r, i) => (i[1] === undefined) ? r : ({ ...r, [i[0]]: i[1] }), {});
 }
-/* eslint-enable max-len, quote-props */
+/* eslint-enable max-len, @stylistic/max-len, quote-props, @stylistic/quote-props */
 
 /**
  * Specifies the output format of the exposed resources, defaults to "1"
