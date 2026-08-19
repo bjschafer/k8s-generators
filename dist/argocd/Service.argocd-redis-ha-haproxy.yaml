@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: redis-ha
+    chart: redis-ha-4.38.0
+    component: haproxy
+    heritage: Helm
+    release: argocd
+  name: argocd-redis-ha-haproxy
+  namespace: argocd
+spec:
+  ports:
+    - name: tcp-haproxy
+      port: 6379
+      protocol: TCP
+      targetPort: redis
+    - name: http-exporter-port
+      port: 9101
+      protocol: TCP
+      targetPort: metrics-port
+  selector:
+    app: redis-ha-haproxy
+    release: argocd
+  type: ClusterIP

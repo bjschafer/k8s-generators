@@ -5,10 +5,11 @@ metadata:
   namespace: metrics
 spec:
   endpoints:
-    - port: metrics
+    - port: http-metrics
   namespaceSelector:
     matchNames:
       - argocd
   selector:
     matchLabels:
-      app.kubernetes.io/name: argocd-repo-server
+      app.kubernetes.io/component: repo-server
+      app.kubernetes.io/part-of: argocd

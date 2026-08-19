@@ -395,16 +395,29 @@ export class ScrapeConfigs extends Chart {
 
     // --- services
 
+    // ArgoCD moved from hand-applied upstream manifests to the argo-cd Helm
+    // chart (apps/argocd), which names things differently: every metrics port
+    // became `http-metrics` rather than `metrics`, and the chart reuses the
+    // label `app.kubernetes.io/name: argocd-metrics` across the application-,
+    // applicationset- and notifications-controller Services -- so that label
+    // can no longer identify one component. Select on `component` instead,
+    // which is unique per Service and stable across chart versions.
+    //
+    // Getting this wrong fails silently: the scrape simply matches nothing, and
+    // the only symptom is the ArgoCDAppNotSynced alert below quietly going blind
+    // and resources/Dashboard/K8S/argocd.json rendering empty.
     [
-      { name: "argocd", serviceName: "metrics" },
-      { name: "server", serviceName: "server-metrics" },
-      { name: "repo-server", serviceName: "repo-server" },
-      {
-        name: "applicationset-controller",
-        serviceName: "applicationset-controller",
-      },
-    ].forEach((obj: { name: string; serviceName: string }) => {
-      const name = obj.name === "argocd" ? `${obj.name}-metrics` : `argocd-${obj.name}-metrics`;
+      "application-controller",
+      "server",
+      "repo-server",
+      "applicationset-controller",
+      "notifications-controller",
+      // dex-server is new here. It is the component whose silent death (dex
+      // exits, its wrapper does not) caused repeated ArgoCD login outages, so
+      // it is the one that most needs a scrapeable up{} series.
+      "dex-server",
+    ].forEach((component: string) => {
+      const name = `argocd-${component}-metrics`;
       new VmServiceScrape(this, name, {
         metadata: {
           name: name,
@@ -414,10 +427,11 @@ export class ScrapeConfigs extends Chart {
           namespaceSelector: {
             matchNames: ["argocd"],
           },
-          endpoints: [{ port: "metrics" }],
+          endpoints: [{ port: "http-metrics" }],
           selector: {
             matchLabels: {
-              "app.kubernetes.io/name": `argocd-${obj.serviceName}`,
+              "app.kubernetes.io/part-of": "argocd",
+              "app.kubernetes.io/component": component,
             },
           },
         },

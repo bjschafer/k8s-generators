@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: redis-ha
+    chart: redis-ha-4.38.0
+    heritage: Helm
+    release: argocd
+  name: argocd-redis-ha-announce-2
+  namespace: argocd
+spec:
+  ports:
+    - name: tcp-server
+      port: 6379
+      protocol: TCP
+      targetPort: redis
+    - name: tcp-sentinel
+      port: 26379
+      protocol: TCP
+      targetPort: sentinel
+  publishNotReadyAddresses: true
+  selector:
+    app: redis-ha
+    release: argocd
+    statefulset.kubernetes.io/pod-name: argocd-redis-ha-server-2
+  type: ClusterIP
