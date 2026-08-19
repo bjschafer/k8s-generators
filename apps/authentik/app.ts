@@ -9,7 +9,6 @@ import {
   KubeService,
 } from "../../imports/k8s";
 import {
-  VmRule,
   VmServiceScrape,
   VmServiceScrapeSpecEndpointsScheme,
 } from "../../imports/operator.victoriametrics.com";
@@ -18,7 +17,7 @@ import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
-import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
+import { CmdcentralServiceMonitor, MonitoringRule } from "../../lib/monitoring/victoriametrics";
 import { BitwardenSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
@@ -339,34 +338,31 @@ class AuthentikMonitoring extends Chart {
       },
     });
 
-    // VictoriaMetrics Rules
-    new VmRule(this, "vm-rule", {
-      metadata: {
-        name: "authentik",
-        namespace: namespace,
-      },
-      spec: {
-        groups: [
-          {
-            name: "authentik",
-            rules: [
-              {
-                alert: "AuthentikOutpostDown",
-                expr: 'up{job="authentik-outpost"} == 0',
-                for: "5m",
-                labels: {
-                  severity: "warning",
-                },
-                annotations: {
-                  summary: "Authentik outpost is down",
-                  description:
-                    "Authentik outpost {{ $labels.instance }} has been down for more than 5 minutes.",
-                },
+    // VictoriaMetrics Rules -- MonitoringRule injects the `alerts.cmdcentral.xyz/kind: metrics`
+    // label so the VMAlert instance in the metrics namespace selects this rule.
+    new MonitoringRule(this, "vm-rule", {
+      name: "authentik",
+      namespace: namespace,
+      ruleGroups: [
+        {
+          name: "authentik",
+          rules: [
+            {
+              alert: "AuthentikOutpostDown",
+              expr: 'up{job="authentik-outpost"} == 0',
+              for: "5m",
+              labels: {
+                severity: "warning",
               },
-            ],
-          },
-        ],
-      },
+              annotations: {
+                summary: "Authentik outpost is down",
+                description:
+                  "Authentik outpost {{ $labels.instance }} has been down for more than 5 minutes.",
+              },
+            },
+          ],
+        },
+      ],
     });
   }
 }

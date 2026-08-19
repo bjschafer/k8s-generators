@@ -73,6 +73,15 @@ export interface MonitoringRuleProps {
   name: string;
   namespace: string;
   ruleGroups: VmRuleSpecGroups[];
+  /**
+   * Extra labels for the VMRule. `MonitoringRule` always injects
+   * `alerts.cmdcentral.xyz/kind: metrics` so the VMAlert instance in the
+   * metrics namespace selects the rule -- without it vmalert's ruleSelector
+   * never picks the rule up, the operator never marks it operational, and
+   * ArgoCD's VM operator health check sits on "Progressing" forever. Caller
+   * labels are merged on top and win on key collision.
+   */
+  labels?: { [key: string]: string };
 }
 
 export class MonitoringRule extends Chart {
@@ -83,6 +92,10 @@ export class MonitoringRule extends Chart {
       metadata: {
         name: props.name,
         namespace: props.namespace,
+        labels: {
+          "alerts.cmdcentral.xyz/kind": "metrics",
+          ...props.labels,
+        },
       },
       spec: {
         groups: props.ruleGroups,
