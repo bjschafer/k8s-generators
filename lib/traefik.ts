@@ -5,7 +5,7 @@ import {
   IngressRouteSpecRoutesKind,
   IngressRouteSpecRoutesServicesKind,
   IngressRouteSpecRoutesServicesPort,
-} from "../imports/traefik.containo.us";
+} from "../imports/traefik.io";
 import { IntOrString } from "../imports/k8s";
 import { Certificate } from "../imports/cert-manager.io";
 import { CLUSTER_ISSUER } from "./consts";
