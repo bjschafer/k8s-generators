@@ -281,7 +281,7 @@ export const sources: CrdSource[] = [
     // the same list, so the `v` prefix is what separates controller releases
     // from those -- don't loosen it.
     // renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets extractVersion=^v(?<version>.*)$
-    version: { kind: "literal", value: "0.38.4" },
+    version: { kind: "literal", value: "0.39.0" },
     outputDir: "apps/sealed-secrets/crds",
     crdOnly: false,
     filenameKind: true,
