@@ -38,6 +38,12 @@
       "automerge": true
     },
     {
+      "description": "The argo-cd chart controls ArgoCD itself, and this cluster runs ArgoCD in manual-sync mode on purpose -- an automerged bump lands on main and Argo notices the new manifest, which fires a sync alert for a change nobody asked to deploy yet. Keep the bump controllable end-to-end by a human: Renovate opens the PR and CI regenerates dist/, but the merge (and therefore the deploy trigger) waits for the same person who is going to actually sync it. Sits below the custom.regex automerge rule so it wins on conflict, matching how the vectorchord and k3s entries opt out of that same blanket.",
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["argo-cd"],
+      "automerge": false
+    },
+    {
       "description": "k3s cluster upgrades roll every node and change the Kubernetes API surface. Renovate can open the PR and push the regenerated dist/, but a human must schedule the outage and read the release notes before Argo applies it -- never automerge.",
       "matchDatasources": ["custom.k3s"],
       "matchDepNames": ["k3s"],
