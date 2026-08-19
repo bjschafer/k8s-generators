@@ -338,11 +338,10 @@ class AuthentikMonitoring extends Chart {
       },
     });
 
-    // VictoriaMetrics Rules -- MonitoringRule injects the `alerts.cmdcentral.xyz/kind: metrics`
-    // label so the VMAlert instance in the metrics namespace selects this rule.
+    // VictoriaMetrics Rules -- MonitoringRule places the VMRule in the metrics
+    // namespace and labels it so the VMAlert instance there selects it.
     new MonitoringRule(this, "vm-rule", {
       name: "authentik",
-      namespace: namespace,
       ruleGroups: [
         {
           name: "authentik",

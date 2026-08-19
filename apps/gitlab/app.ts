@@ -134,8 +134,8 @@ class Runner extends Chart {
 new Runner(app, "gl-runner");
 
 new MonitoringRule(app, "recording-rules", {
-  name: "recording-rules",
-  namespace: namespace,
+  // Lives in the shared metrics namespace, so the name has to be app-qualified.
+  name: "gitlab-recording-rules",
   ruleGroups: [
     {
       name: "GitLab",

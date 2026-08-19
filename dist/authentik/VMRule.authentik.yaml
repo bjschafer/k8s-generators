@@ -4,7 +4,7 @@ metadata:
   labels:
     alerts.cmdcentral.xyz/kind: metrics
   name: authentik
-  namespace: authentik
+  namespace: metrics
 spec:
   groups:
     - name: authentik

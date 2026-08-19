@@ -71,18 +71,27 @@ export class CmdcentralPodMonitor extends Chart {
 
 export interface MonitoringRuleProps {
   name: string;
-  namespace: string;
   ruleGroups: VmRuleSpecGroups[];
   /**
-   * Extra labels for the VMRule. `MonitoringRule` always injects
-   * `alerts.cmdcentral.xyz/kind: metrics` so the VMAlert instance in the
-   * metrics namespace selects the rule -- without it vmalert's ruleSelector
-   * never picks the rule up, the operator never marks it operational, and
-   * ArgoCD's VM operator health check sits on "Progressing" forever. Caller
-   * labels are merged on top and win on key collision.
+   * Extra labels for the VMRule. Merged on top of the defaults, winning on key
+   * collision.
    */
   labels?: { [key: string]: string };
 }
+
+/**
+ * Namespace that every VMRule must live in to be evaluated.
+ *
+ * The `metrics` VMAlert sets `ruleSelector` but leaves `ruleNamespaceSelector`
+ * nil. In the VM operator's selector logic `selectAllByDefault: true` only
+ * means "all namespaces" when *both* selectors are nil -- once `ruleSelector`
+ * is set, the nil namespace selector falls back to its default meaning of "the
+ * VMAlert's own namespace". So a VMRule outside `metrics` is never selected by
+ * any VMAlert, the operator leaves `.status.updateStatus` unset (or marks it
+ * `ignored`), and ArgoCD's VM operator health check parks the whole app on
+ * "Progressing" forever.
+ */
+const RULE_NAMESPACE = "metrics";
 
 export class MonitoringRule extends Chart {
   constructor(scope: Construct, id: string, props: MonitoringRuleProps) {
@@ -91,8 +100,9 @@ export class MonitoringRule extends Chart {
     new VmRule(this, "rule", {
       metadata: {
         name: props.name,
-        namespace: props.namespace,
+        namespace: RULE_NAMESPACE,
         labels: {
+          // Matches the `metrics` VMAlert's ruleSelector.
           "alerts.cmdcentral.xyz/kind": "metrics",
           ...props.labels,
         },

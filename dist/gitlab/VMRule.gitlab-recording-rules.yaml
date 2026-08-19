@@ -3,8 +3,8 @@ kind: VMRule
 metadata:
   labels:
     alerts.cmdcentral.xyz/kind: metrics
-  name: recording-rules
-  namespace: gitlab
+  name: gitlab-recording-rules
+  namespace: metrics
 spec:
   groups:
     - name: GitLab
