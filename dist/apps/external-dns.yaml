@@ -34,7 +34,7 @@ spec:
         - alias: external-dns
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: registry.k8s.io/external-dns/external-dns
+          imageName: registry.k8s.io/external-dns/external-dns:v0.21.x
         - alias: external-dns-unifi-webhook
           commonUpdateSettings:
             updateStrategy: semver

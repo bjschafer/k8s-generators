@@ -1,4 +1,4 @@
 kustomize:
   images:
-  - registry.k8s.io/external-dns/external-dns:v0.22.0
+  - registry.k8s.io/external-dns/external-dns:v0.21.0
   - ghcr.io/home-operations/external-dns-unifi-webhook:0.10.11

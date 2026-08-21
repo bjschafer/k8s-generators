@@ -36,8 +36,12 @@ NewArgoApp(name, {
   autoUpdate: {
     images: [
       {
+        // pinned to v0.21.x: v0.22.0 silently drops LoadBalancer Services from
+        // the service source and only takes the first Host() out of a Traefik
+        // `Host(`a`) || Host(`b`)` match, so it deletes live records on startup.
         image: "registry.k8s.io/external-dns/external-dns",
         strategy: "semver",
+        versionConstraint: "v0.21.x",
       },
       {
         image: "ghcr.io/home-operations/external-dns-unifi-webhook",
