@@ -29,6 +29,7 @@ spec:
             - --source=ingress
             - --source=traefik-proxy
             - --interval=30s
+            - --policy=sync
             - --provider=pdns
             - --pdns-server=http://10.0.10.100:8081
             - --pdns-api-key=$(PDNS_API_KEY)

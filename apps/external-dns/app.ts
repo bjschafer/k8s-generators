@@ -25,6 +25,7 @@ const COMMON_ARGS = [
   "--source=ingress",
   "--source=traefik-proxy",
   "--interval=30s",
+  "--policy=sync",
 ];
 
 NewArgoApp(name, {

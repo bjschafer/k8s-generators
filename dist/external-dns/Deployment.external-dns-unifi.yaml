@@ -25,6 +25,7 @@ spec:
             - --source=ingress
             - --source=traefik-proxy
             - --interval=30s
+            - --policy=sync
             - --provider=webhook
             - --webhook-provider-url=http://localhost:8888
             - --txt-owner-id=prod-k8s-unifi
