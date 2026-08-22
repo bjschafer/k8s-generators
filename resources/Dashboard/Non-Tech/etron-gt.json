@@ -252,14 +252,15 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "hass_sensor_power_kw{entity=\"sensor.charger_cph50_power_output\"}",
+            "expr": "(hass_sensor_power_kw{entity=\"sensor.charger_cph50_power_output\"} and on() (${ours})) or vector(0)",
             "legendFormat": "Charger output",
             "range": true,
             "refId": "A"
           }
         ],
         "title": "Charging now",
-        "type": "stat"
+        "type": "stat",
+        "description": "Live output from the ChargePoint, counted only while the e-tron is the car plugged in. Reads 0 when someone else is charging."
       },
       {
         "datasource": {
@@ -369,7 +370,7 @@
                 "options": {
                   "0": {
                     "index": 0,
-                    "text": "\u2014"
+                    "text": "—"
                   }
                 },
                 "type": "value"
@@ -514,7 +515,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "The ChargePoint is the source of truth \u2014 the car only refreshes its own charging-power reading every few minutes.",
+        "description": "The ChargePoint is the source of truth — the car only refreshes its own charging-power reading every few minutes. The charger line is gated on the e-tron being plugged in, so guest sessions show as gaps.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -600,7 +601,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "hass_sensor_power_kw{entity=\"sensor.charger_cph50_power_output\"}",
+            "expr": "hass_sensor_power_kw{entity=\"sensor.charger_cph50_power_output\"} and on() (${ours})",
             "legendFormat": "Charger output",
             "range": true,
             "refId": "A"
@@ -771,7 +772,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "The ChargePoint resets this counter at the start of each session, so every sawtooth tooth is one charging session.",
+        "description": "The ChargePoint resets this counter at the start of each session, so every sawtooth tooth is one charging session. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -857,7 +858,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"}",
+            "expr": "hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"} and on() (${ours})",
             "legendFormat": "Session energy",
             "range": true,
             "refId": "A"
@@ -871,7 +872,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Rolling 24-hour totals. increase() is reset-aware, so it sums correctly across the ChargePoint's per-session counters.",
+        "description": "Rolling 24-hour totals. increase() is reset-aware, so it sums correctly across the ChargePoint's per-session counters. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -978,7 +979,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(increase(hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"}[24h]))",
+            "expr": "sum(increase((hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"} and on() (${ours}))[24h:1m]))",
             "legendFormat": "Energy (24 h)",
             "range": true,
             "refId": "A"
@@ -989,7 +990,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(increase(hass_sensor_monetary_u0x24{entity=\"sensor.charger_cph50_charge_cost\"}[24h]))",
+            "expr": "sum(increase((hass_sensor_monetary_u0x24{entity=\"sensor.charger_cph50_charge_cost\"} and on() (${ours}))[24h:1m]))",
             "legendFormat": "Cost (24 h)",
             "range": true,
             "refId": "B"
@@ -1003,7 +1004,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "How fast range is being replenished. The ChargePoint's mi/h is an estimate and tends to run optimistic versus real-world consumption.",
+        "description": "How fast range is being replenished. The ChargePoint's mi/h is an estimate and tends to run optimistic versus real-world consumption. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1110,7 +1111,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "hass_sensor_unit_mph{entity=\"sensor.charger_cph50_miles_hour_added\"}",
+            "expr": "hass_sensor_unit_mph{entity=\"sensor.charger_cph50_miles_hour_added\"} and on() (${ours})",
             "legendFormat": "Charger mi/h added",
             "range": true,
             "refId": "A"
@@ -1148,7 +1149,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Total energy pulled from the wall over the selected time range.",
+        "description": "Total energy pulled from the wall over the selected time range. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1202,7 +1203,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(increase(hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"}[$__range]))",
+            "expr": "sum(increase((hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"} and on() (${ours}))[$__range:1m]))",
             "instant": true,
             "legendFormat": "Energy",
             "range": false,
@@ -1217,7 +1218,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Charging cost over the selected time range, as reported by ChargePoint.",
+        "description": "Charging cost over the selected time range, as reported by ChargePoint. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1271,7 +1272,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(increase(hass_sensor_monetary_u0x24{entity=\"sensor.charger_cph50_charge_cost\"}[$__range]))",
+            "expr": "sum(increase((hass_sensor_monetary_u0x24{entity=\"sensor.charger_cph50_charge_cost\"} and on() (${ours}))[$__range:1m]))",
             "instant": true,
             "legendFormat": "Cost",
             "range": false,
@@ -1355,7 +1356,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Miles driven \u00f7 energy taken from the wall. This is wall-to-wheel, so it includes charging losses and is lower than the car's own trip-computer efficiency. Only meaningful over ranges long enough to contain both driving and charging.",
+        "description": "Miles driven ÷ energy taken from the wall. This is wall-to-wheel, so it includes charging losses and is lower than the car's own trip-computer efficiency. Only meaningful over ranges long enough to contain both driving and charging. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1416,7 +1417,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(increase(hass_sensor_distance_mi{entity=\"sensor.e_tron_r_gt_mileage\"}[$__range])) / sum(increase(hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"}[$__range]))",
+            "expr": "sum(increase(hass_sensor_distance_mi{entity=\"sensor.e_tron_r_gt_mileage\"}[$__range])) / sum(increase((hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"} and on() (${ours}))[$__range:1m]))",
             "instant": true,
             "legendFormat": "Efficiency",
             "range": false,
@@ -1431,7 +1432,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Charging cost \u00f7 miles driven over the selected range.",
+        "description": "Charging cost ÷ miles driven over the selected range. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1485,7 +1486,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(increase(hass_sensor_monetary_u0x24{entity=\"sensor.charger_cph50_charge_cost\"}[$__range])) / sum(increase(hass_sensor_distance_mi{entity=\"sensor.e_tron_r_gt_mileage\"}[$__range]))",
+            "expr": "sum(increase((hass_sensor_monetary_u0x24{entity=\"sensor.charger_cph50_charge_cost\"} and on() (${ours}))[$__range:1m])) / sum(increase(hass_sensor_distance_mi{entity=\"sensor.e_tron_r_gt_mileage\"}[$__range]))",
             "instant": true,
             "legendFormat": "Cost per mile",
             "range": false,
@@ -1500,7 +1501,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Total time the ChargePoint spent actively charging over the selected range.",
+        "description": "Total time the ChargePoint spent actively charging over the selected range. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1553,7 +1554,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(increase(hass_sensor_unit_s{entity=\"sensor.charger_cph50_charging_time\"}[$__range]))",
+            "expr": "sum(increase((hass_sensor_unit_s{entity=\"sensor.charger_cph50_charging_time\"} and on() (${ours}))[$__range:1m]))",
             "instant": true,
             "legendFormat": "Charging time",
             "range": false,
@@ -1568,7 +1569,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Range added by the charger versus miles actually driven, both as rolling 24-hour totals. A persistent gap means the charger's mi/kWh assumption is optimistic for how you actually drive.",
+        "description": "Range added by the charger versus miles actually driven, both as rolling 24-hour totals. A persistent gap means the charger's mi/kWh assumption is optimistic for how you actually drive. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1665,7 +1666,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(increase(hass_sensor_unit_miles{entity=\"sensor.charger_cph50_miles_added\"}[24h]))",
+            "expr": "sum(increase((hass_sensor_unit_miles{entity=\"sensor.charger_cph50_miles_added\"} and on() (${ours}))[24h:1m]))",
             "legendFormat": "Range added by charger (24 h)",
             "range": true,
             "refId": "B"
@@ -1679,7 +1680,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Rolling 7-day wall-to-wheel efficiency. Smoother than the range-scoped stat above and useful for spotting seasonal drop-off.",
+        "description": "Rolling 7-day wall-to-wheel efficiency. Smoother than the range-scoped stat above and useful for spotting seasonal drop-off. Excludes sessions where the e-tron was not plugged in, so guest charging on the same ChargePoint is not counted.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1768,7 +1769,7 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum(increase(hass_sensor_distance_mi{entity=\"sensor.e_tron_r_gt_mileage\"}[7d])) / sum(increase(hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"}[7d]))",
+            "expr": "sum(increase(hass_sensor_distance_mi{entity=\"sensor.e_tron_r_gt_mileage\"}[7d])) / sum(increase((hass_sensor_energy_kwh{entity=\"sensor.charger_cph50_energy_output\"} and on() (${ours}))[7d:1m]))",
             "legendFormat": "Efficiency (7 d)",
             "range": true,
             "refId": "A"
@@ -1795,7 +1796,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Doors, windows, hood and trunk. 1 means open \u2014 the aggregate Doors and Windows sensors roll up the individual ones.",
+        "description": "Doors, windows, hood and trunk. 1 means open — the aggregate Doors and Windows sensors roll up the individual ones.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -1997,7 +1998,7 @@
           "type": "victoriametrics-metrics-datasource",
           "uid": "${datasource}"
         },
-        "description": "Plain on/off states \u2014 1 means active. Unlike the locks these are informational rather than a warning: a connected plug or a moving car is not a fault condition. Glass Surface Heating is deliberately excluded: it reads 1 for 100% of its history including while parked and while climatisation was idle, so it is a climatisation setting rather than a live state, and the integration documents no such sensor.",
+        "description": "Plain on/off states — 1 means active. Unlike the locks these are informational rather than a warning: a connected plug or a moving car is not a fault condition. Glass Surface Heating is deliberately excluded: it reads 1 for 100% of its history including while parked and while climatisation was idle, so it is a climatisation setting rather than a live state, and the integration documents no such sensor.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -2405,6 +2406,18 @@
           "refresh": 1,
           "regex": "",
           "type": "datasource"
+        },
+        {
+          "current": {
+            "text": "hass_binary_sensor_state{entity=\"binary_sensor.e_tron_r_gt_plug_state\"} == 1",
+            "value": "hass_binary_sensor_state{entity=\"binary_sensor.e_tron_r_gt_plug_state\"} == 1"
+          },
+          "description": "PromQL predicate that is true only while the e-tron is the vehicle plugged into the ChargePoint. Used to keep guest charging out of the charger-side panels.",
+          "hide": 2,
+          "name": "ours",
+          "query": "hass_binary_sensor_state{entity=\"binary_sensor.e_tron_r_gt_plug_state\"} == 1",
+          "skipUrlSync": true,
+          "type": "constant"
         }
       ]
     },
