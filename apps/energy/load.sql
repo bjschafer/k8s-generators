@@ -140,8 +140,20 @@ SELECT account, meter, local_date, tier_tou, rate_plan, kwh FROM stg_daily
  WHERE (daily_usage.kwh, daily_usage.rate_plan)
         IS DISTINCT FROM (EXCLUDED.kwh, EXCLUDED.rate_plan);
 
+-- DISTINCT ON, not a bare SELECT: a duplicate period in the staging table makes
+-- the upsert below fail with "ON CONFLICT DO UPDATE command cannot affect row a
+-- second time", which aborts this transaction and so discards the hourly and
+-- daily series too -- a whole day of data lost to one bad billing row. The
+-- fetcher already drops the stub row that caused that, so this is the backstop
+-- for the next shape of duplicate. Ordering picks the real period over a stub:
+-- longest span first, then largest consumption.
 INSERT INTO billing_period (account, meter, period_start, period_end, tier_tou, rate_plan, kwh, amount_usd)
-SELECT account, meter, period_start, period_end, tier_tou, rate_plan, kwh, amount_usd FROM stg_billing
+SELECT account, meter, period_start, period_end, tier_tou, rate_plan, kwh, amount_usd
+  FROM (
+    SELECT DISTINCT ON (account, meter, period_start, tier_tou) *
+      FROM stg_billing
+     ORDER BY account, meter, period_start, tier_tou, period_end DESC, kwh DESC
+  ) s
     ON CONFLICT (account, meter, period_start, tier_tou) DO UPDATE
    SET period_end = EXCLUDED.period_end, kwh = EXCLUDED.kwh,
        amount_usd = EXCLUDED.amount_usd, rate_plan = EXCLUDED.rate_plan, updated_at = now()

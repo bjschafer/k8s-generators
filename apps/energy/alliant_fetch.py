@@ -200,30 +200,43 @@ def collect(auth: dict[str, str], account: str, meter: str, start: str, end: str
         tier, plan = tou(r)
         daily[(r["readDate"][:10], tier)] = (float(r["consumption"]), plan)
 
-    billing = []
+    # Keyed like hourly and daily rather than accumulated into a list: a period
+    # that comes back twice would otherwise reach the loader as two rows with
+    # the same primary key, and since the load is one transaction that failure
+    # takes the hourly and daily series down with it.
+    billing: dict[tuple[str, str], dict] = {}
     for r in usage(auth, account, meter, start, end, "MO"):
         # Monthly rows are keyed by billing period; anything without a real
         # period is a placeholder row the portal ignores too.
         if not r.get("readingFrom", "").startswith("2"):
             continue
+        period_start, period_end = r["readingFrom"][:10], r["readingTo"][:10]
+        # Once a bill is issued Alliant emits a second, zero-length row for the
+        # same period: readingTo == readingFrom, 0 kWh, but carrying the closed
+        # period's amount. Dropping it is not just deduplication -- it collides
+        # with the real row's key, and letting it win would be worse than the
+        # crash it caused, since a period with 0 kWh prices at a NULL rate and
+        # spans no days, silently erasing the newest bill from the tariff model.
+        if period_end <= period_start:
+            continue
         tier, plan = tou(r)
-        billing.append(
-            {
-                "period_start": r["readingFrom"][:10],
-                "period_end": r["readingTo"][:10],
-                "tier_tou": tier,
-                "rate_plan": plan,
-                "kwh": float(r["consumption"]),
-                "amount_usd": float(r["amount"] or 0),
-            }
-        )
+        billing[(period_start, tier)] = {
+            "period_start": period_start,
+            "period_end": period_end,
+            "tier_tou": tier,
+            "rate_plan": plan,
+            "kwh": float(r["consumption"]),
+            "amount_usd": float(r["amount"] or 0),
+        }
 
-    tiers = sorted({k[2] for k in hourly} | {k[1] for k in daily} | {b["tier_tou"] for b in billing})
+    tiers = sorted(
+        {k[2] for k in hourly} | {k[1] for k in daily} | {b["tier_tou"] for b in billing.values()}
+    )
     log(
         f"  meter {meter}: {len(hourly)} hourly ({dupes} dupes dropped), "
         f"{len(daily)} daily, {len(billing)} billing | tou tiers seen: {tiers or ['(none)']}"
     )
-    return hourly, daily, billing
+    return hourly, daily, [billing[k] for k in sorted(billing)]
 
 
 def emit_freshness(newest_day: str) -> None:
