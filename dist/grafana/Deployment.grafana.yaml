@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: grafana
     app.kubernetes.io/name: grafana
     app.kubernetes.io/version: 13.2.0
-    helm.sh/chart: grafana-12.11.1
+    helm.sh/chart: grafana-12.11.2
   name: grafana
   namespace: grafana
 spec:
@@ -27,7 +27,7 @@ spec:
         app.kubernetes.io/instance: grafana
         app.kubernetes.io/name: grafana
         app.kubernetes.io/version: 13.2.0
-        helm.sh/chart: grafana-12.11.1
+        helm.sh/chart: grafana-12.11.2
     spec:
       automountServiceAccountToken: true
       containers:
@@ -76,10 +76,7 @@ spec:
             - name: GF_UNIFIED_STORAGE_INDEX_PATH
               value: /var/lib/grafana-search/bleve
             - name: GOMEMLIMIT
-              valueFrom:
-                resourceFieldRef:
-                  divisor: "1"
-                  resource: limits.memory
+              value: 921MiB
             - name: GF_DATABASE_HOST
               value: prod-pg17-pooler-rw.postgres.svc.cluster.local:5432
             - name: GF_DATABASE_NAME
