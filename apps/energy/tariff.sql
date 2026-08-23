@@ -9,10 +9,12 @@
 -- so the plans can be compared against the same real usage, which is the only
 -- honest way to judge whether the switch was worth it.
 --
--- IMPORTANT: while Alliant has not actually moved billing over yet (tier_tou is
--- still empty in the feed), everything here is a *projection*. Once real tiers
--- start arriving, billing_period stays the source of truth for what was charged
--- and this stays the model of what should have been.
+-- IMPORTANT: billing moved to RD1 with the 2026-07-23..2026-08-21 bill, which
+-- is tiered (585 High / 774 Regular / 1,543 Low kWh). The *feed* has not caught
+-- up: tier_tou is still empty and the monthly endpoint still returns one
+-- untiered total, so this model remains the only per-hour tier breakdown there
+-- is. Validated against that bill -- the window definitions below reproduce its
+-- split to within 0.7 points on every tier.
 
 CREATE TABLE IF NOT EXISTS tou_plan (
   plan                 text PRIMARY KEY,
@@ -36,12 +38,27 @@ ON CONFLICT (plan) DO UPDATE
 CREATE TABLE IF NOT EXISTS tou_price (
   plan        text NOT NULL REFERENCES tou_plan(plan),
   period      text NOT NULL,               -- low | regular | high | flat
-  usd_per_kwh numeric(10,4) NOT NULL,
+  usd_per_kwh numeric(10,5) NOT NULL,
   PRIMARY KEY (plan, period)
 );
 
+-- Migration: Alliant quotes to five decimals ($0.08514), which numeric(10,4)
+-- silently rounded off. Guarded so the table is rewritten once, not every run.
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM information_schema.columns
+              WHERE table_name = 'tou_price' AND column_name = 'usd_per_kwh'
+                AND numeric_scale < 5) THEN
+    ALTER TABLE tou_price ALTER COLUMN usd_per_kwh TYPE numeric(10,5);
+  END IF;
+END
+$$;
+
+-- RD1 is transcribed from the 2026-07-23..2026-08-21 bill, so it is exact.
+-- RG5 and RG1 remain rate-sheet estimates: they exist only to compare against
+-- RD1 on the same usage, and no bill has ever been issued on them.
 INSERT INTO tou_price (plan, period, usd_per_kwh) VALUES
-  ('RD1', 'low', 0.09), ('RD1', 'regular', 0.18), ('RD1', 'high', 0.26),
+  ('RD1', 'low', 0.08514), ('RD1', 'regular', 0.17914), ('RD1', 'high', 0.25914),
   ('RG5', 'low', 0.10), ('RG5', 'regular', 0.21), ('RG5', 'high', 0.30),
   ('RG1', 'flat', 0.17)
 ON CONFLICT (plan, period) DO UPDATE SET usd_per_kwh = EXCLUDED.usd_per_kwh;
@@ -197,9 +214,17 @@ ANALYZE hourly_usage_priced;
 -- Demand charge basis: the single highest hour on nonholiday weekdays between
 -- 10:00 and 20:00, per billing period.
 --
--- APPROXIMATE, and biased low. Utilities meter demand over 15- or 30-minute
--- intervals; averaging a whole hour flattens exactly the short spikes a demand
--- charge is meant to catch. Treat this as a floor on the real charge.
+-- KNOWN WRONG, and biased *high* -- pending confirmation against the rate sheet.
+-- The 2026-07-23 bill charged 5.704 kW of on-peak demand; this window yields
+-- 10.393. The whole gap is hour_start 19 (19:00-20:00): every window ending at
+-- 18 reproduces the billed figure exactly, on that period and the one before.
+-- Alliant's own hourly feed is what the demand register reports (the bill's
+-- off-peak demand, 11.239 kW, is exactly the period's peak hour), so this is a
+-- window definition problem, not a metering-interval one -- the earlier note
+-- here blamed 15-minute metering, which the exact match rules out.
+--
+-- Not corrected yet because the rate sheet says the demand window runs to 8pm
+-- while the data says it closes at 7pm; resolve that before touching this.
 CREATE MATERIALIZED VIEW demand_estimate AS
 SELECT b.account, b.meter, b.period_start, b.period_end,
        max(h.kwh) AS peak_kw_est

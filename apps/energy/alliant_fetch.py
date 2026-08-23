@@ -146,14 +146,23 @@ def usage(auth: dict[str, str], account: str, meter: str, frm: str, to: str, per
 def hour_start(read_date: str) -> tuple[str, int]:
     """Map an hour-*ending* label to (local_date, hour-beginning 0-23).
 
-    Alliant labels each interval by the hour it ends: 01:00 is midnight->1am, and
-    24:00 is written as 00:00 on the *same* date. Storing by period start is both
-    what Grafana bar charts read naturally and what Home Assistant statistics
-    expect, so shift back one hour here.
+    Alliant labels each interval by the hour it ends: 01:00 is midnight->1am.
+    Storing by period start is both what Grafana bar charts read naturally and
+    what Home Assistant statistics expect, so shift back one hour here.
+
+    Midnight is the trap. 24:00 arrives as 00:00 of the *following* date, so it
+    closes the previous day rather than opening this one -- the date has to roll
+    back with the hour. Getting this wrong is nearly invisible: every day still
+    has 24 rows and the yearly total still balances, because each day simply
+    borrows its 23:00 hour from the day before. It shows up only when a day's
+    hours are summed and compared against the daily series, which disagreed by
+    up to 6 kWh before this rolled the date back.
     """
     day, clock = read_date[:10], read_date[11:13]
     hour = int(clock)
-    return day, (hour - 1) if hour >= 1 else 23
+    if hour >= 1:
+        return day, hour - 1
+    return (date.fromisoformat(day) - timedelta(days=1)).isoformat(), 23
 
 
 def tou(row: dict) -> tuple[str, str]:
