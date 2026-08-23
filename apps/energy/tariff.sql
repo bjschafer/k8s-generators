@@ -48,20 +48,37 @@ CREATE TABLE IF NOT EXISTS tou_plan (
   plan                 text PRIMARY KEY,
   description          text          NOT NULL,
   is_flat              boolean       NOT NULL,
-  monthly_customer_usd numeric(10,2) NOT NULL,
+  -- Per *day*, which is how all three schedules actually state it. Modelling it
+  -- as a flat monthly figure quietly mispriced every period, because Alliant
+  -- bills read-to-read: these run 27 to 34 days, so a "monthly" charge is never
+  -- the same twice.
+  customer_usd_per_day numeric(10,5) NOT NULL DEFAULT 0,
   -- Charged on the highest demand seen in the window, not on energy. Only RD1
   -- has one, and it is the main reason RD1's per-kWh prices undercut RG5's.
-  demand_usd_per_kw    numeric(10,2) NOT NULL DEFAULT 0
+  demand_usd_per_kw    numeric(10,2) NOT NULL DEFAULT 0,
+  -- RD1's Energy Limiter Provision: on-peak demand charges "will not exceed an
+  -- effective rate of $0.08100 per kWh". 0 means no limiter. It caps the one
+  -- charge with no ceiling of its own, so it matters most in exactly the case
+  -- that makes RD1 look worst -- a low-usage month with one bad spike.
+  demand_limiter_usd_per_kwh numeric(10,5) NOT NULL DEFAULT 0
 );
 
-INSERT INTO tou_plan (plan, description, is_flat, monthly_customer_usd, demand_usd_per_kw) VALUES
-  ('RD1', 'Peak Nights and Weekends (Residential Demand Service) -- current plan', false, 10.00, 5.88),
-  ('RG5', 'Nights and Weekends (Residential Service Electric TOD)',                false, 15.00, 0.00),
-  ('RG1', 'Residential Electric Service (flat)',                                   true,  15.00, 0.00)
+-- Migration off the flat monthly charge. Safe to drop outright: bill_estimate
+-- was the only reader and is dropped at the top of this script.
+ALTER TABLE tou_plan ADD COLUMN IF NOT EXISTS customer_usd_per_day       numeric(10,5) NOT NULL DEFAULT 0;
+ALTER TABLE tou_plan ADD COLUMN IF NOT EXISTS demand_limiter_usd_per_kwh numeric(10,5) NOT NULL DEFAULT 0;
+ALTER TABLE tou_plan DROP COLUMN IF EXISTS monthly_customer_usd;
+
+INSERT INTO tou_plan (plan, description, is_flat, customer_usd_per_day, demand_usd_per_kw,
+                      demand_limiter_usd_per_kwh) VALUES
+  ('RD1', 'Peak Nights and Weekends (Residential Demand Service) -- current plan', false, 0.3616, 5.88, 0.08100),
+  ('RG5', 'Nights and Weekends (Residential Service Electric TOD)',                false, 0.5260, 0.00, 0),
+  ('RG1', 'Residential Electric Service (flat)',                                   true,  0.5260, 0.00, 0)
 ON CONFLICT (plan) DO UPDATE
    SET description = EXCLUDED.description, is_flat = EXCLUDED.is_flat,
-       monthly_customer_usd = EXCLUDED.monthly_customer_usd,
-       demand_usd_per_kw = EXCLUDED.demand_usd_per_kw;
+       customer_usd_per_day = EXCLUDED.customer_usd_per_day,
+       demand_usd_per_kw = EXCLUDED.demand_usd_per_kw,
+       demand_limiter_usd_per_kwh = EXCLUDED.demand_limiter_usd_per_kwh;
 
 CREATE TABLE IF NOT EXISTS tou_price (
   plan        text NOT NULL REFERENCES tou_plan(plan),
@@ -270,22 +287,38 @@ SELECT b.account, b.meter, b.period_start, b.period_end, d.day::date AS local_da
   JOIN LATERAL generate_series(b.period_start + 1, b.period_end, interval '1 day') d(day) ON true
  WHERE b.tier_tou = '';
 
+-- Billed days come from the period itself, not from the rows present: usage
+-- lags ~4 days, so counting days with data would shrink the customer charge on
+-- the newest period and make it creep upward as the tail arrives.
+--
+-- The demand charge is the lesser of the demand rate and the Energy Limiter,
+-- which is why it is computed once in a sub-select rather than inline -- the
+-- expression appears in both demand_usd and total_usd, and the two silently
+-- disagreeing is exactly the sort of thing nobody notices in a dashboard.
 CREATE MATERIALIZED VIEW bill_estimate AS
-SELECT p.account, p.meter, bd.period_start, bd.period_end, p.plan,
-       sum(p.energy_cost_usd)                                      AS energy_usd,
-       coalesce(max(d.peak_kw_est), 0) * max(pl.demand_usd_per_kw)  AS demand_usd,
-       max(pl.monthly_customer_usd)                                AS customer_usd,
-       sum(p.energy_cost_usd)
-         + coalesce(max(d.peak_kw_est), 0) * max(pl.demand_usd_per_kw)
-         + max(pl.monthly_customer_usd)                            AS total_usd,
-       sum(p.kwh)                                                  AS kwh
-  FROM hourly_usage_priced p
-  JOIN billing_day bd
-    ON bd.account = p.account AND bd.meter = p.meter AND bd.local_date = p.local_date
-  JOIN tou_plan pl ON pl.plan = p.plan
-  LEFT JOIN demand_estimate d
-    ON d.account = p.account AND d.meter = p.meter AND d.period_start = bd.period_start
- GROUP BY 1, 2, 3, 4, 5;
+SELECT account, meter, period_start, period_end, plan,
+       energy_usd,
+       CASE WHEN limiter > 0 THEN least(demand_gross, limiter * kwh) ELSE demand_gross END AS demand_usd,
+       customer_usd,
+       energy_usd
+         + CASE WHEN limiter > 0 THEN least(demand_gross, limiter * kwh) ELSE demand_gross END
+         + customer_usd                                            AS total_usd,
+       kwh
+  FROM (
+    SELECT p.account, p.meter, bd.period_start, bd.period_end, p.plan,
+           sum(p.energy_cost_usd)                                       AS energy_usd,
+           coalesce(max(d.peak_kw_est), 0) * max(pl.demand_usd_per_kw)  AS demand_gross,
+           max(pl.demand_limiter_usd_per_kwh)                           AS limiter,
+           max(pl.customer_usd_per_day) * (bd.period_end - bd.period_start) AS customer_usd,
+           sum(p.kwh)                                                   AS kwh
+      FROM hourly_usage_priced p
+      JOIN billing_day bd
+        ON bd.account = p.account AND bd.meter = p.meter AND bd.local_date = p.local_date
+      JOIN tou_plan pl ON pl.plan = p.plan
+      LEFT JOIN demand_estimate d
+        ON d.account = p.account AND d.meter = p.meter AND d.period_start = bd.period_start
+     GROUP BY 1, 2, 3, 4, 5
+  ) x;
 ANALYZE bill_estimate;
 
 -- Grafana reads these through grafanareader; the grant block in load.sql runs
