@@ -16,6 +16,34 @@
 -- is. Validated against that bill -- the window definitions below reproduce its
 -- split to within 0.7 points on every tier.
 
+-- Drops a view or materialized view by name whichever it currently is. Needed
+-- because DROP VIEW and DROP MATERIALIZED VIEW each raise if the name exists as
+-- the other kind -- precisely what happens on a deploy that converts one to the
+-- other, which would wedge the load for everyone after.
+CREATE OR REPLACE FUNCTION drop_relation_any_kind(p_name text)
+RETURNS void LANGUAGE plpgsql AS $fn$
+DECLARE k "char";
+BEGIN
+  SELECT relkind INTO k FROM pg_class
+   WHERE relname = p_name AND relnamespace = 'public'::regnamespace;
+  IF    k = 'v' THEN EXECUTE format('DROP VIEW %I', p_name);
+  ELSIF k = 'm' THEN EXECUTE format('DROP MATERIALIZED VIEW %I', p_name);
+  END IF;
+END
+$fn$;
+
+-- Dropped up front, not just before each CREATE below. A migration that alters
+-- a base-table column fails outright while a view still depends on it -- which
+-- is exactly how the numeric(10,5) widening below wedged the load once: it
+-- passed on an empty database, where the column is simply created at the right
+-- precision and the migration never runs, and failed on the real one. Dropping
+-- the derived objects first makes column migrations safe by construction.
+-- Everything here is rebuilt further down, and holds no data of its own.
+SELECT drop_relation_any_kind('bill_estimate');
+SELECT drop_relation_any_kind('billing_day');
+SELECT drop_relation_any_kind('demand_estimate');
+SELECT drop_relation_any_kind('hourly_usage_priced');
+
 CREATE TABLE IF NOT EXISTS tou_plan (
   plan                 text PRIMARY KEY,
   description          text          NOT NULL,
@@ -153,22 +181,6 @@ LANGUAGE sql IMMUTABLE AS $$
   END;
 $$;
 
--- Drops a view or materialized view by name whichever it currently is. Needed
--- because DROP VIEW and DROP MATERIALIZED VIEW each raise if the name exists as
--- the other kind -- precisely what happens on a deploy that converts one to the
--- other, which would wedge the load for everyone after.
-CREATE OR REPLACE FUNCTION drop_relation_any_kind(p_name text)
-RETURNS void LANGUAGE plpgsql AS $fn$
-DECLARE k "char";
-BEGIN
-  SELECT relkind INTO k FROM pg_class
-   WHERE relname = p_name AND relnamespace = 'public'::regnamespace;
-  IF    k = 'v' THEN EXECUTE format('DROP VIEW %I', p_name);
-  ELSIF k = 'm' THEN EXECUTE format('DROP MATERIALIZED VIEW %I', p_name);
-  END IF;
-END
-$fn$;
-
 -- Every hour of usage priced under every plan. One row per (hour, plan), which
 -- is what makes a like-for-like plan comparison a plain GROUP BY.
 --
@@ -177,10 +189,6 @@ $fn$;
 -- table it is ~37k rows built once a day and every dashboard query is instant.
 -- The data only changes when the collector runs, so there is nothing to gain
 -- from computing it per query.
-SELECT drop_relation_any_kind('bill_estimate');
-SELECT drop_relation_any_kind('billing_day');
-SELECT drop_relation_any_kind('demand_estimate');
-SELECT drop_relation_any_kind('hourly_usage_priced');
 CREATE MATERIALIZED VIEW hourly_usage_priced AS
 SELECT h.account, h.meter, h.ts, h.local_date, h.hour_start, h.kwh,
        pl.plan,
