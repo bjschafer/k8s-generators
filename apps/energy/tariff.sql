@@ -82,22 +82,23 @@ BEGIN
 END
 $$;
 
--- RD1 is transcribed from the 2026-07-23..2026-08-21 bill, so it is exact.
--- RG5 and RG1 remain rate-sheet estimates: they exist only to compare against
--- RD1 on the same usage, and no bill has ever been issued on them.
+-- All three transcribed from the PSCW-filed tariff (Docket 6680-UR-125,
+-- effective 2026-01-01), so every plan in the comparison is now exact rather
+-- than rounded off a summary sheet. RD1 additionally agrees with the
+-- 2026-07-23..2026-08-21 bill to the cent.
 INSERT INTO tou_price (plan, period, usd_per_kwh) VALUES
   ('RD1', 'low', 0.08514), ('RD1', 'regular', 0.17914), ('RD1', 'high', 0.25914),
-  ('RG5', 'low', 0.10), ('RG5', 'regular', 0.21), ('RG5', 'high', 0.30),
-  ('RG1', 'flat', 0.17)
+  ('RG5', 'low', 0.09514), ('RG5', 'regular', 0.21014), ('RG5', 'high', 0.29914),
+  ('RG1', 'flat', 0.17011)
 ON CONFLICT (plan, period) DO UPDATE SET usd_per_kwh = EXCLUDED.usd_per_kwh;
 
 -- Weekends AND holidays bill at the low rate all day, so the holiday list is
 -- rate-affecting, not decoration. Only holidays landing on a weekday actually
 -- change anything -- a weekend is already low.
 --
--- ASSUMPTION: the six holidays Alliant's residential TOD rate normally lists.
--- The footnote on the rate sheet was not legible, so this is worth confirming;
--- getting it wrong misprices at most a handful of days a year.
+-- CONFIRMED against the filed tariff, which names exactly these six: New Year's
+-- Day, Memorial Day, Independence Day, Labor Day, Thanksgiving Day, Christmas
+-- Day. Rd-1 names the same six again for demand, so one list serves both.
 CREATE TABLE IF NOT EXISTS tou_holiday (
   day         date PRIMARY KEY,
   name        text NOT NULL,
@@ -231,8 +232,17 @@ ANALYZE hourly_usage_priced;
 -- window definition problem, not a metering-interval one -- the earlier note
 -- here blamed 15-minute metering, which the exact match rules out.
 --
--- Not corrected yet because the rate sheet says the demand window runs to 8pm
--- while the data says it closes at 7pm; resolve that before touching this.
+-- Deliberately left matching the tariff, which is unambiguous: "the Measured
+-- Maximum Demand which occurs during weekdays (Monday through Friday) between
+-- 10 a.m. to 8 p.m." That is hour_start 10..19, what this computes. Alliant's
+-- own bill disagrees with Alliant's own tariff -- it billed as though the
+-- window closed at 7pm, skipping a 5.775 kW hour at 19:00-20:00 on Fri
+-- 2026-08-07 to charge a 5.704 kW hour instead, $27.57 in our favour.
+--
+-- So this reads high against the *bill* and correct against the *contract*, and
+-- one bill is not enough to tell a billing bug from a rule we have misread.
+-- Revisit once a second RD1 bill lands; if it repeats, model what Alliant
+-- actually does and keep this note for when they fix it.
 CREATE MATERIALIZED VIEW demand_estimate AS
 SELECT b.account, b.meter, b.period_start, b.period_end,
        max(h.kwh) AS peak_kw_est
