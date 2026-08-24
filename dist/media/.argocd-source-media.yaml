@@ -10,4 +10,4 @@ kustomize:
   - ghcr.io/vavallee/bindery:latest@sha256:d0d3ad1675424e09a64c75da13d60f556c7626c4ee0aefced572d0ebc91274a9
   - ghcr.io/linuxserver/resilio-sync:2.8.1@sha256:0c7b72c330e5e70503363a29c3792c471273a160fdb4027521d21b9086139eb1
   - kometateam/kometa:latest@sha256:6c3971a4aaa928b045e5f22514196b6db7f9b2b186158ebfe3239f4b328dfb0a
-  - ghcr.io/pedro-revez-silva/shelfarr:latest@sha256:5e331192a8a7b55e3bee055d28403f83fd9d4977f52b6dcb11c86adcdbb70083
+  - ghcr.io/pedro-revez-silva/shelfarr:latest@sha256:c72d50c7f0f30ef2e2ee953239085bc037ca792ae0b9b490011af026179e3aaa
