@@ -9,6 +9,11 @@ export interface ReloaderValuesSchema {
   reloader?: {
     reloadStrategy?: "default" | "env-vars" | "annotations";
     service?: {
+      ipFamilyPolicy?: "SingleStack" | "PreferDualStack" | "RequireDualStack";
+      /**
+       * @maxItems 2
+       */
+      ipFamilies?: [] | [string] | [string, string];
       [k: string]: unknown;
     };
     [k: string]: unknown;

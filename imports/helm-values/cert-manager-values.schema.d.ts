@@ -45,7 +45,7 @@ export type HelmValuesAcmesolverRuntimeClassName = string;
  * List of signer names that cert-manager will approve by default. CertificateRequests referencing these signer names will be auto-approved by cert-manager. Defaults to just approving the cert-manager.io Issuer and ClusterIssuer issuers. When set to an empty array, ALL issuers will be auto-approved by cert-manager. To disable the auto-approval, because, e.g., you are using approver-policy, you can enable 'disableAutoApproval'.
  * ref: https://cert-manager.io/docs/concepts/certificaterequest/#approval
  */
-export type HelmValues2 = unknown[];
+export type HelmValuesApproveSignerNames = unknown[];
 /**
  * Automounting API credentials for a particular pod.
  */
@@ -65,7 +65,7 @@ export type HelmValuesCainjectorEnabled = boolean;
 /**
  * Additional command line flags to pass to cert-manager cainjector binary. To see all available flags run `docker run quay.io/jetstack/cert-manager-cainjector:<version> --help`.
  */
-export type HelmValuesCainjector4 = unknown[];
+export type HelmValuesCainjectorExtraArgs = unknown[];
 /**
  * Additional environment variables to pass to cert-manager cainjector binary.
  * For example:
@@ -73,7 +73,7 @@ export type HelmValuesCainjector4 = unknown[];
  * - name: SOME_VAR
  *   value: 'some value'
  */
-export type HelmValuesCainjector5 = unknown[];
+export type HelmValuesCainjectorExtraEnv = unknown[];
 /**
  * Comma separated list of feature gates that should be enabled on the cainjector pod.
  */
@@ -110,7 +110,7 @@ export type HelmValuesCainjectorImageTag = string;
 /**
  * Egress rule for the cainjector network policy. By default, it allows all outbound traffic to ports 80 and 443, as well as DNS ports.
  */
-export type HelmValuesCainjectorNetworkPolicy = unknown[];
+export type HelmValuesCainjectorNetworkPolicyEgress = unknown[];
 /**
  * Create network policies for the cainjector.
  */
@@ -120,7 +120,7 @@ export type HelmValuesCainjectorNetworkPolicyEnabled = boolean;
  * By default all pods are allowed access to:
  *   http-metrics port
  */
-export type HelmValuesCainjectorNetworkPolicy1 = unknown[];
+export type HelmValuesCainjectorNetworkPolicyIngress = unknown[];
 /**
  * Enable or disable the PodDisruptionBudget resource.
  *
@@ -172,7 +172,7 @@ export type HelmValuesCainjectorServiceAccountName = string;
  *   value: master
  *   effect: NoSchedule
  */
-export type HelmValuesCainjector18 = unknown[];
+export type HelmValuesCainjectorTolerations = unknown[];
 /**
  * A list of Kubernetes TopologySpreadConstraints, if required. For more information, see [Topology spread constraint v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core).
  *
@@ -186,15 +186,15 @@ export type HelmValuesCainjector18 = unknown[];
  *       app.kubernetes.io/instance: cert-manager
  *       app.kubernetes.io/component: controller
  */
-export type HelmValuesCainjector19 = unknown[];
+export type HelmValuesCainjectorTopologySpreadConstraints = unknown[];
 /**
  * Additional volume mounts to add to the cert-manager controller container.
  */
-export type HelmValuesCainjector20 = unknown[];
+export type HelmValuesCainjectorVolumeMounts = unknown[];
 /**
  * Additional volumes to add to the cert-manager controller pod.
  */
-export type HelmValuesCainjector21 = unknown[];
+export type HelmValuesCainjectorVolumes = unknown[];
 /**
  * Override the namespace used to store DNS provider credentials etc. for ClusterIssuer resources. By default, the same namespace as cert-manager is deployed within is used. This namespace will not be automatically created by the Helm chart.
  */
@@ -245,7 +245,7 @@ export type HelmValuesEnabled = boolean;
  * extraArgs:
  *   - --controllers=*,-certificaterequests-approver
  */
-export type HelmValues8 = unknown[];
+export type HelmValuesExtraArgs = unknown[];
 /**
  * Extra containers to add to the pod spec in the deployment of the cert-manager controller. For example, to deploy the [aws_signing_helper](https://github.com/aws/rolesanywhere-credential-helper) (replacing the ARNs as relevant):
  * extraEnv:
@@ -276,7 +276,7 @@ export type HelmValues8 = unknown[];
  *     secret:
  *       secretName: cert
  */
-export type HelmValues9 = unknown[];
+export type HelmValuesExtraContainers = unknown[];
 /**
  * Additional environment variables to pass to cert-manager controller binary.
  * For example:
@@ -284,7 +284,7 @@ export type HelmValues9 = unknown[];
  * - name: SOME_VAR
  *   value: 'some value'
  */
-export type HelmValues10 = unknown[];
+export type HelmValuesExtraEnv = unknown[];
 /**
  * Create dynamic manifests via values.
  *
@@ -296,7 +296,7 @@ export type HelmValues10 = unknown[];
  *     metadata:
  *       name: '{{ template "cert-manager.fullname" . }}-extra-configmap'
  */
-export type HelmValues11 = unknown[];
+export type HelmValuesExtraObjects = unknown[];
 /**
  * A comma-separated list of feature gates that should be enabled on the controller pod.
  */
@@ -324,7 +324,7 @@ export type HelmValuesGlobalHostUsers = boolean;
  * imagePullSecrets:
  *   - name: "image-pull-secret"
  */
-export type HelmValuesGlobal1 = unknown[];
+export type HelmValuesGlobalImagePullSecrets = unknown[];
 /**
  * The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate.
  */
@@ -381,7 +381,7 @@ export type HelmValuesGlobalRuntimeClassName = string;
 /**
  * Optional hostAliases for cert-manager-controller pods. May be useful when performing ACME DNS-01 self checks.
  */
-export type HelmValues13 = unknown[];
+export type HelmValuesHostAliases = unknown[];
 /**
  * Configures the HTTP_PROXY environment variable where a HTTP proxy is required.
  */
@@ -463,7 +463,7 @@ export type HelmValuesNamespace = string;
 /**
  * Egress rule for the cert-manager network policy. By default, it allows all outbound traffic to ports 80 and 443, as well as DNS ports.
  */
-export type HelmValuesNetworkPolicy = unknown[];
+export type HelmValuesNetworkPolicyEgress = unknown[];
 /**
  * Create network policies for cert-manager.
  */
@@ -473,7 +473,7 @@ export type HelmValuesNetworkPolicyEnabled = boolean;
  * By default all pods are allowed access to:
  *   http-metrics and http-healthz ports
  */
-export type HelmValuesNetworkPolicy1 = unknown[];
+export type HelmValuesNetworkPolicyIngress = unknown[];
 /**
  * Configures the NO_PROXY environment variable where a HTTP proxy is required, but certain domains should be excluded.
  */
@@ -581,7 +581,7 @@ export type HelmValuesServiceAccountName = string;
 /**
  * Optionally set the IP families for the controller Service that should be supported, in the order in which they should be applied to ClusterIP. Can be IPv4 and/or IPv6.
  */
-export type HelmValues28 = unknown[];
+export type HelmValuesServiceIPFamilies = unknown[];
 /**
  * Optionally set the IP family policy for the controller Service to configure dual-stack; see [Configure dual-stack](https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services).
  */
@@ -607,7 +607,7 @@ export type HelmValuesStartupapicheckEnabled = boolean;
  *
  * Verbose logging is enabled by default so that if startupapicheck fails, you can know what exactly caused the failure. Verbose logs include details of the webhook URL, IP address and TCP connect errors for example.
  */
-export type HelmValuesStartupapicheck2 = unknown[];
+export type HelmValuesStartupapicheckExtraArgs = unknown[];
 /**
  * Additional environment variables to pass to cert-manager startupapicheck binary.
  * For example:
@@ -615,7 +615,7 @@ export type HelmValuesStartupapicheck2 = unknown[];
  * - name: SOME_VAR
  *   value: 'some value'
  */
-export type HelmValuesStartupapicheck3 = unknown[];
+export type HelmValuesStartupapicheckExtraEnv = unknown[];
 /**
  * Setting a digest pins the image. If a tag is also set, the rendered reference will include both ("image:tag@digest"), though only the digest will be used for pulling.
  */
@@ -679,15 +679,15 @@ export type HelmValuesStartupapicheckTimeout = string;
  *   value: master
  *   effect: NoSchedule
  */
-export type HelmValuesStartupapicheck13 = unknown[];
+export type HelmValuesStartupapicheckTolerations = unknown[];
 /**
  * Additional volume mounts to add to the cert-manager controller container.
  */
-export type HelmValuesStartupapicheck14 = unknown[];
+export type HelmValuesStartupapicheckVolumeMounts = unknown[];
 /**
  * Additional volumes to add to the cert-manager controller pod.
  */
-export type HelmValuesStartupapicheck15 = unknown[];
+export type HelmValuesStartupapicheckVolumes = unknown[];
 /**
  * A list of Kubernetes Tolerations, if required. For more information, see [Toleration v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#toleration-v1-core).
  *
@@ -698,7 +698,7 @@ export type HelmValuesStartupapicheck15 = unknown[];
  *   value: master
  *   effect: NoSchedule
  */
-export type HelmValues32 = unknown[];
+export type HelmValuesTolerations = unknown[];
 /**
  * A list of Kubernetes TopologySpreadConstraints, if required. For more information, see [Topology spread constraint v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core
  *
@@ -712,15 +712,15 @@ export type HelmValues32 = unknown[];
  *       app.kubernetes.io/instance: cert-manager
  *       app.kubernetes.io/component: controller
  */
-export type HelmValues33 = unknown[];
+export type HelmValuesTopologySpreadConstraints = unknown[];
 /**
  * Additional volume mounts to add to the cert-manager controller container.
  */
-export type HelmValues34 = unknown[];
+export type HelmValuesVolumeMounts = unknown[];
 /**
  * Additional volumes to add to the cert-manager controller pod.
  */
-export type HelmValues35 = unknown[];
+export type HelmValuesVolumes = unknown[];
 /**
  * Subject names to verify for the client certificate. Multiple values may be supplied as a comma-separated list.
  */
@@ -744,7 +744,7 @@ export type HelmValuesWebhookEnableServiceLinks = boolean;
 /**
  * Additional command line flags to pass to cert-manager webhook binary. To see all available flags run `docker run quay.io/jetstack/cert-manager-webhook:<version> --help`.
  */
-export type HelmValuesWebhook4 = unknown[];
+export type HelmValuesWebhookExtraArgs = unknown[];
 /**
  * Additional environment variables to pass to cert-manager webhook binary.
  * For example:
@@ -752,7 +752,7 @@ export type HelmValuesWebhook4 = unknown[];
  * - name: SOME_VAR
  *   value: 'some value'
  */
-export type HelmValuesWebhook5 = unknown[];
+export type HelmValuesWebhookExtraEnv = unknown[];
 /**
  * Comma separated list of feature gates that should be enabled on the webhook pod.
  */
@@ -801,7 +801,7 @@ export type HelmValuesWebhookLoadBalancerIP = string;
 /**
  * Egress rule for the webhook network policy. By default, it allows all outbound traffic to ports 80 and 443, as well as DNS ports.
  */
-export type HelmValuesWebhookNetworkPolicy = unknown[];
+export type HelmValuesWebhookNetworkPolicyEgress = unknown[];
 /**
  * Create network policies for the webhooks.
  */
@@ -811,7 +811,7 @@ export type HelmValuesWebhookNetworkPolicyEnabled = boolean;
  * By default all pods are allowed access to:
  *   https, http-metrics, and http-healthz ports
  */
-export type HelmValuesWebhookNetworkPolicy1 = unknown[];
+export type HelmValuesWebhookNetworkPolicyIngress = unknown[];
 /**
  * Enable or disable the PodDisruptionBudget resource.
  *
@@ -858,7 +858,7 @@ export type HelmValuesWebhookServiceAccountName = string;
 /**
  * Optionally set the IP families for the controller Service that should be supported, in the order in which they should be applied to ClusterIP. Can be IPv4 and/or IPv6.
  */
-export type HelmValuesWebhook20 = unknown[];
+export type HelmValuesWebhookServiceIPFamilies = unknown[];
 /**
  * Optionally set the IP family policy for the controller Service to configure dual-stack; see [Configure dual-stack](https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services).
  */
@@ -884,7 +884,7 @@ export type HelmValuesWebhookTimeoutSeconds = number;
  *   value: master
  *   effect: NoSchedule
  */
-export type HelmValuesWebhook23 = unknown[];
+export type HelmValuesWebhookTolerations = unknown[];
 /**
  * A list of Kubernetes TopologySpreadConstraints, if required. For more information, see [Topology spread constraint v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#topologyspreadconstraint-v1-core).
  *
@@ -898,84 +898,84 @@ export type HelmValuesWebhook23 = unknown[];
  *       app.kubernetes.io/instance: cert-manager
  *       app.kubernetes.io/component: controller
  */
-export type HelmValuesWebhook24 = unknown[];
+export type HelmValuesWebhookTopologySpreadConstraints = unknown[];
 /**
  * Additional volume mounts to add to the cert-manager controller container.
  */
-export type HelmValuesWebhook28 = unknown[];
+export type HelmValuesWebhookVolumeMounts = unknown[];
 /**
  * Additional volumes to add to the cert-manager controller pod.
  */
-export type HelmValuesWebhook29 = unknown[];
+export type HelmValuesWebhookVolumes = unknown[];
 
 export interface CertManagerValuesSchema {
-  acmesolver?: HelmValues;
-  affinity?: HelmValues1;
-  approveSignerNames?: HelmValues2;
+  acmesolver?: HelmValuesAcmesolver;
+  affinity?: HelmValuesAffinity;
+  approveSignerNames?: HelmValuesApproveSignerNames;
   automountServiceAccountToken?: HelmValuesAutomountServiceAccountToken;
-  cainjector?: HelmValues3;
+  cainjector?: HelmValuesCainjector;
   clusterResourceNamespace?: HelmValuesClusterResourceNamespace;
-  config?: HelmValues4;
-  containerSecurityContext?: HelmValues5;
-  crds?: HelmValues6;
+  config?: HelmValuesConfig;
+  containerSecurityContext?: HelmValuesContainerSecurityContext;
+  crds?: HelmValuesCrds;
   creator?: HelmValuesCreator;
-  deploymentAnnotations?: HelmValues7;
+  deploymentAnnotations?: HelmValuesDeploymentAnnotations;
   disableAutoApproval?: HelmValuesDisableAutoApproval;
   dns01RecursiveNameservers?: HelmValuesDns01RecursiveNameservers;
   dns01RecursiveNameserversOnly?: HelmValuesDns01RecursiveNameserversOnly;
   enableCertificateOwnerRef?: HelmValuesEnableCertificateOwnerRef;
   enableServiceLinks?: HelmValuesEnableServiceLinks;
   enabled?: HelmValuesEnabled;
-  extraArgs?: HelmValues8;
-  extraContainers?: HelmValues9;
-  extraEnv?: HelmValues10;
-  extraObjects?: HelmValues11;
+  extraArgs?: HelmValuesExtraArgs;
+  extraContainers?: HelmValuesExtraContainers;
+  extraEnv?: HelmValuesExtraEnv;
+  extraObjects?: HelmValuesExtraObjects;
   featureGates?: HelmValuesFeatureGates;
   fullnameOverride?: HelmValuesFullnameOverride;
-  global?: HelmValues12;
-  hostAliases?: HelmValues13;
+  global?: HelmValuesGlobal;
+  hostAliases?: HelmValuesHostAliases;
   http_proxy?: HelmValuesHttpProxy;
   https_proxy?: HelmValuesHttpsProxy;
-  image?: HelmValues14;
+  image?: HelmValuesImage;
   imageNamespace?: HelmValuesImageNamespace;
   imageRegistry?: HelmValuesImageRegistry1;
-  ingressShim?: HelmValues15;
+  ingressShim?: HelmValuesIngressShim;
   installCRDs?: HelmValuesInstallCRDs;
-  livenessProbe?: HelmValues16;
+  livenessProbe?: HelmValuesLivenessProbe;
   maxConcurrentChallenges?: HelmValuesMaxConcurrentChallenges;
   nameOverride?: HelmValuesNameOverride;
   namespace?: HelmValuesNamespace;
-  networkPolicy?: HelmValues17;
+  networkPolicy?: HelmValuesNetworkPolicy;
   no_proxy?: HelmValuesNoProxy;
-  nodeSelector?: HelmValues18;
-  podAnnotations?: HelmValues19;
-  podDisruptionBudget?: HelmValues20;
-  podDnsConfig?: HelmValues21;
+  nodeSelector?: HelmValuesNodeSelector;
+  podAnnotations?: HelmValuesPodAnnotations;
+  podDisruptionBudget?: HelmValuesPodDisruptionBudget;
+  podDnsConfig?: HelmValuesPodDnsConfig;
   podDnsPolicy?: HelmValuesPodDnsPolicy;
-  podLabels?: HelmValues22;
-  prometheus?: HelmValues23;
+  podLabels?: HelmValuesPodLabels;
+  prometheus?: HelmValuesPrometheus;
   replicaCount?: HelmValuesReplicaCount;
-  resources?: HelmValues24;
+  resources?: HelmValuesResources;
   runtimeClassName?: HelmValuesRuntimeClassName;
-  securityContext?: HelmValues25;
-  serviceAccount?: HelmValues26;
-  serviceAnnotations?: HelmValues27;
-  serviceIPFamilies?: HelmValues28;
+  securityContext?: HelmValuesSecurityContext;
+  serviceAccount?: HelmValuesServiceAccount;
+  serviceAnnotations?: HelmValuesServiceAnnotations;
+  serviceIPFamilies?: HelmValuesServiceIPFamilies;
   serviceIPFamilyPolicy?: HelmValuesServiceIPFamilyPolicy;
-  serviceLabels?: HelmValues29;
-  startupapicheck?: HelmValues30;
-  strategy?: HelmValues31;
-  tolerations?: HelmValues32;
-  topologySpreadConstraints?: HelmValues33;
-  volumeMounts?: HelmValues34;
-  volumes?: HelmValues35;
-  webhook?: HelmValues36;
-}
-export interface HelmValues {
-  image?: HelmValuesAcmesolver;
-  runtimeClassName?: HelmValuesAcmesolverRuntimeClassName;
+  serviceLabels?: HelmValuesServiceLabels;
+  startupapicheck?: HelmValuesStartupapicheck;
+  strategy?: HelmValuesStrategy;
+  tolerations?: HelmValuesTolerations;
+  topologySpreadConstraints?: HelmValuesTopologySpreadConstraints;
+  volumeMounts?: HelmValuesVolumeMounts;
+  volumes?: HelmValuesVolumes;
+  webhook?: HelmValuesWebhook;
 }
 export interface HelmValuesAcmesolver {
+  image?: HelmValuesAcmesolverImage;
+  runtimeClassName?: HelmValuesAcmesolverRuntimeClassName;
+}
+export interface HelmValuesAcmesolverImage {
   digest?: HelmValuesAcmesolverImageDigest;
   name?: HelmValuesAcmesolverImageName;
   pullPolicy?: HelmValuesAcmesolverImagePullPolicy;
@@ -997,38 +997,38 @@ export interface HelmValuesAcmesolver {
  *          values:
  *          - master
  */
-export interface HelmValues1 {
+export interface HelmValuesAffinity {
   [k: string]: unknown;
 }
-export interface HelmValues3 {
-  affinity?: HelmValuesCainjector;
+export interface HelmValuesCainjector {
+  affinity?: HelmValuesCainjectorAffinity;
   automountServiceAccountToken?: HelmValuesCainjectorAutomountServiceAccountToken;
-  config?: HelmValuesCainjector1;
-  containerSecurityContext?: HelmValuesCainjector2;
-  deploymentAnnotations?: HelmValuesCainjector3;
+  config?: HelmValuesCainjectorConfig;
+  containerSecurityContext?: HelmValuesCainjectorContainerSecurityContext;
+  deploymentAnnotations?: HelmValuesCainjectorDeploymentAnnotations;
   enableServiceLinks?: HelmValuesCainjectorEnableServiceLinks;
   enabled?: HelmValuesCainjectorEnabled;
-  extraArgs?: HelmValuesCainjector4;
-  extraEnv?: HelmValuesCainjector5;
+  extraArgs?: HelmValuesCainjectorExtraArgs;
+  extraEnv?: HelmValuesCainjectorExtraEnv;
   featureGates?: HelmValuesCainjectorFeatureGates;
-  image?: HelmValuesCainjector6;
-  networkPolicy?: HelmValuesCainjector7;
-  nodeSelector?: HelmValuesCainjector8;
-  podAnnotations?: HelmValuesCainjector9;
-  podDisruptionBudget?: HelmValuesCainjector10;
-  podLabels?: HelmValuesCainjector11;
+  image?: HelmValuesCainjectorImage;
+  networkPolicy?: HelmValuesCainjectorNetworkPolicy;
+  nodeSelector?: HelmValuesCainjectorNodeSelector;
+  podAnnotations?: HelmValuesCainjectorPodAnnotations;
+  podDisruptionBudget?: HelmValuesCainjectorPodDisruptionBudget;
+  podLabels?: HelmValuesCainjectorPodLabels;
   replicaCount?: HelmValuesCainjectorReplicaCount;
-  resources?: HelmValuesCainjector12;
+  resources?: HelmValuesCainjectorResources;
   runtimeClassName?: HelmValuesCainjectorRuntimeClassName;
-  securityContext?: HelmValuesCainjector13;
-  serviceAccount?: HelmValuesCainjector14;
-  serviceAnnotations?: HelmValuesCainjector15;
-  serviceLabels?: HelmValuesCainjector16;
-  strategy?: HelmValuesCainjector17;
-  tolerations?: HelmValuesCainjector18;
-  topologySpreadConstraints?: HelmValuesCainjector19;
-  volumeMounts?: HelmValuesCainjector20;
-  volumes?: HelmValuesCainjector21;
+  securityContext?: HelmValuesCainjectorSecurityContext;
+  serviceAccount?: HelmValuesCainjectorServiceAccount;
+  serviceAnnotations?: HelmValuesCainjectorServiceAnnotations;
+  serviceLabels?: HelmValuesCainjectorServiceLabels;
+  strategy?: HelmValuesCainjectorStrategy;
+  tolerations?: HelmValuesCainjectorTolerations;
+  topologySpreadConstraints?: HelmValuesCainjectorTopologySpreadConstraints;
+  volumeMounts?: HelmValuesCainjectorVolumeMounts;
+  volumes?: HelmValuesCainjectorVolumes;
 }
 /**
  * A Kubernetes Affinity, if required. For more information, see [Affinity v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core).
@@ -1044,7 +1044,7 @@ export interface HelmValues3 {
  *          values:
  *          - master
  */
-export interface HelmValuesCainjector {
+export interface HelmValuesCainjectorAffinity {
   [k: string]: unknown;
 }
 /**
@@ -1069,22 +1069,22 @@ export interface HelmValuesCainjector {
  *     dnsNames:
  *     - cert-manager-metrics
  */
-export interface HelmValuesCainjector1 {
+export interface HelmValuesCainjectorConfig {
   [k: string]: unknown;
 }
 /**
  * Container Security Context to be set on the cainjector component container. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
  */
-export interface HelmValuesCainjector2 {
+export interface HelmValuesCainjectorContainerSecurityContext {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the cainjector Deployment.
  */
-export interface HelmValuesCainjector3 {
+export interface HelmValuesCainjectorDeploymentAnnotations {
   [k: string]: unknown;
 }
-export interface HelmValuesCainjector6 {
+export interface HelmValuesCainjectorImage {
   digest?: HelmValuesCainjectorImageDigest;
   name?: HelmValuesCainjectorImageName;
   pullPolicy?: HelmValuesCainjectorImagePullPolicy;
@@ -1092,26 +1092,26 @@ export interface HelmValuesCainjector6 {
   repository?: HelmValuesCainjectorImageRepository;
   tag?: HelmValuesCainjectorImageTag;
 }
-export interface HelmValuesCainjector7 {
-  egress?: HelmValuesCainjectorNetworkPolicy;
+export interface HelmValuesCainjectorNetworkPolicy {
+  egress?: HelmValuesCainjectorNetworkPolicyEgress;
   enabled?: HelmValuesCainjectorNetworkPolicyEnabled;
-  ingress?: HelmValuesCainjectorNetworkPolicy1;
+  ingress?: HelmValuesCainjectorNetworkPolicyIngress;
 }
 /**
  * The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with matching labels. For more information, see [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
  *
  * This default ensures that Pods are only scheduled to Linux nodes. It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.
  */
-export interface HelmValuesCainjector8 {
+export interface HelmValuesCainjectorNodeSelector {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the cainjector Pods.
  */
-export interface HelmValuesCainjector9 {
+export interface HelmValuesCainjectorPodAnnotations {
   [k: string]: unknown;
 }
-export interface HelmValuesCainjector10 {
+export interface HelmValuesCainjectorPodDisruptionBudget {
   enabled?: HelmValuesCainjectorPodDisruptionBudgetEnabled;
   maxUnavailable?: HelmValuesCainjectorPodDisruptionBudgetMaxUnavailable;
   minAvailable?: HelmValuesCainjectorPodDisruptionBudgetMinAvailable;
@@ -1136,7 +1136,7 @@ export interface HelmValuesCainjectorPodDisruptionBudgetMinAvailable {
 /**
  * Optional additional labels to add to the CA Injector Pods.
  */
-export interface HelmValuesCainjector11 {
+export interface HelmValuesCainjectorPodLabels {
   [k: string]: unknown;
 }
 /**
@@ -1148,44 +1148,44 @@ export interface HelmValuesCainjector11 {
  *   memory: 32Mi
  * For more information, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
  */
-export interface HelmValuesCainjector12 {
+export interface HelmValuesCainjectorResources {
   [k: string]: unknown;
 }
 /**
  * Pod Security Context to be set on the cainjector component Pod. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
  */
-export interface HelmValuesCainjector13 {
+export interface HelmValuesCainjectorSecurityContext {
   [k: string]: unknown;
 }
-export interface HelmValuesCainjector14 {
-  annotations?: HelmValuesCainjectorServiceAccount;
+export interface HelmValuesCainjectorServiceAccount {
+  annotations?: HelmValuesCainjectorServiceAccountAnnotations;
   automountServiceAccountToken?: HelmValuesCainjectorServiceAccountAutomountServiceAccountToken;
   create?: HelmValuesCainjectorServiceAccountCreate;
-  labels?: HelmValuesCainjectorServiceAccount1;
+  labels?: HelmValuesCainjectorServiceAccountLabels;
   name?: HelmValuesCainjectorServiceAccountName;
 }
 /**
  * Optional additional annotations to add to the cainjector's Service Account.
  */
-export interface HelmValuesCainjectorServiceAccount {
+export interface HelmValuesCainjectorServiceAccountAnnotations {
   [k: string]: unknown;
 }
 /**
  * Optional additional labels to add to the cainjector's Service Account.
  */
-export interface HelmValuesCainjectorServiceAccount1 {
+export interface HelmValuesCainjectorServiceAccountLabels {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the cainjector metrics Service.
  */
-export interface HelmValuesCainjector15 {
+export interface HelmValuesCainjectorServiceAnnotations {
   [k: string]: unknown;
 }
 /**
  * Optional additional labels to add to the CA Injector metrics Service.
  */
-export interface HelmValuesCainjector16 {
+export interface HelmValuesCainjectorServiceLabels {
   [k: string]: unknown;
 }
 /**
@@ -1198,7 +1198,7 @@ export interface HelmValuesCainjector16 {
  *     maxSurge: 0
  *     maxUnavailable: 1
  */
-export interface HelmValuesCainjector17 {
+export interface HelmValuesCainjectorStrategy {
   [k: string]: unknown;
 }
 /**
@@ -1254,38 +1254,38 @@ export interface HelmValuesCainjector17 {
  *   certificateRequestMinimumBackoffDuration: 1h
  *   certificateRequestMaximumBackoffDuration: 32h
  */
-export interface HelmValues4 {
+export interface HelmValuesConfig {
   [k: string]: unknown;
 }
 /**
  * Container Security Context to be set on the controller component container. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
  */
-export interface HelmValues5 {
+export interface HelmValuesContainerSecurityContext {
   [k: string]: unknown;
 }
-export interface HelmValues6 {
+export interface HelmValuesCrds {
   enabled?: HelmValuesCrdsEnabled;
   keep?: HelmValuesCrdsKeep;
 }
 /**
  * Optional additional annotations to add to the controller Deployment.
  */
-export interface HelmValues7 {
+export interface HelmValuesDeploymentAnnotations {
   [k: string]: unknown;
 }
 /**
  * Global values shared across all (sub)charts
  */
-export interface HelmValues12 {
-  commonLabels?: HelmValuesGlobal;
+export interface HelmValuesGlobal {
+  commonLabels?: HelmValuesGlobalCommonLabels;
   hostUsers?: HelmValuesGlobalHostUsers;
-  imagePullSecrets?: HelmValuesGlobal1;
-  leaderElection?: HelmValuesGlobal2;
+  imagePullSecrets?: HelmValuesGlobalImagePullSecrets;
+  leaderElection?: HelmValuesGlobalLeaderElection;
   logLevel?: HelmValuesGlobalLogLevel;
-  nodeSelector?: HelmValuesGlobal3;
-  podSecurityPolicy?: HelmValuesGlobal4;
+  nodeSelector?: HelmValuesGlobalNodeSelector;
+  podSecurityPolicy?: HelmValuesGlobalPodSecurityPolicy;
   priorityClassName?: HelmValuesGlobalPriorityClassName;
-  rbac?: HelmValuesGlobal5;
+  rbac?: HelmValuesGlobalRbac;
   revisionHistoryLimit?: HelmValuesGlobalRevisionHistoryLimit;
   runtimeClassName?: HelmValuesGlobalRuntimeClassName;
   [k: string]: unknown;
@@ -1296,10 +1296,10 @@ export interface HelmValues12 {
  * (pods, services, ingresses, or Gateway API HTTPRoutes).
  * The following ACME identity label keys are reserved and will be silently ignored on dynamically-created resources: acme.cert-manager.io/http-domain, acme.cert-manager.io/http-token, acme.cert-manager.io/http01-solver. For per-Issuer-specific labels, use the HTTP01 ingress solver podTemplate and ingressTemplate fields for pod/ingress resources, or the gatewayHTTPRoute solver labels field for Gateway API HTTPRoute resources.
  */
-export interface HelmValuesGlobal {
+export interface HelmValuesGlobalCommonLabels {
   [k: string]: unknown;
 }
-export interface HelmValuesGlobal2 {
+export interface HelmValuesGlobalLeaderElection {
   leaseDuration?: HelmValuesGlobalLeaderElectionLeaseDuration;
   namespace?: HelmValuesGlobalLeaderElectionNamespace;
   renewDeadline?: HelmValuesGlobalLeaderElectionRenewDeadline;
@@ -1313,20 +1313,20 @@ export interface HelmValuesGlobal2 {
  *
  * If a component-specific nodeSelector is also set, it will be merged and take precedence.
  */
-export interface HelmValuesGlobal3 {
+export interface HelmValuesGlobalNodeSelector {
   [k: string]: unknown;
 }
-export interface HelmValuesGlobal4 {
+export interface HelmValuesGlobalPodSecurityPolicy {
   enabled?: HelmValuesGlobalPodSecurityPolicyEnabled;
   useAppArmor?: HelmValuesGlobalPodSecurityPolicyUseAppArmor;
   [k: string]: unknown;
 }
-export interface HelmValuesGlobal5 {
+export interface HelmValuesGlobalRbac {
   aggregateClusterRoles?: HelmValuesGlobalRbacAggregateClusterRoles;
   create?: HelmValuesGlobalRbacCreate;
   [k: string]: unknown;
 }
-export interface HelmValues14 {
+export interface HelmValuesImage {
   digest?: HelmValuesImageDigest;
   name?: HelmValuesImageName;
   pullPolicy?: HelmValuesImagePullPolicy;
@@ -1334,7 +1334,7 @@ export interface HelmValues14 {
   repository?: HelmValuesImageRepository;
   tag?: HelmValuesImageTag;
 }
-export interface HelmValues15 {
+export interface HelmValuesIngressShim {
   defaultIssuerGroup?: HelmValuesIngressShimDefaultIssuerGroup;
   defaultIssuerKind?: HelmValuesIngressShimDefaultIssuerKind;
   defaultIssuerName?: HelmValuesIngressShimDefaultIssuerName;
@@ -1345,29 +1345,29 @@ export interface HelmValues15 {
  * This is enabled by default, in order to enable the clock-skew liveness probe that restarts the controller in case of a skew between the system clock and the monotonic clock. LivenessProbe durations and thresholds are based on those used for the Kubernetes controller-manager. For more information see the following on the
  * [Kubernetes GitHub repository](https://github.com/kubernetes/kubernetes/blob/806b30170c61a38fedd54cc9ede4cd6275a1ad3b/cmd/kubeadm/app/util/staticpod/utils.go#L241-L245)
  */
-export interface HelmValues16 {
+export interface HelmValuesLivenessProbe {
   [k: string]: unknown;
 }
-export interface HelmValues17 {
-  egress?: HelmValuesNetworkPolicy;
+export interface HelmValuesNetworkPolicy {
+  egress?: HelmValuesNetworkPolicyEgress;
   enabled?: HelmValuesNetworkPolicyEnabled;
-  ingress?: HelmValuesNetworkPolicy1;
+  ingress?: HelmValuesNetworkPolicyIngress;
 }
 /**
  * The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with matching labels. For more information, see [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
  *
  * This default ensures that Pods are only scheduled to Linux nodes. It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.
  */
-export interface HelmValues18 {
+export interface HelmValuesNodeSelector {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the controller Pods.
  */
-export interface HelmValues19 {
+export interface HelmValuesPodAnnotations {
   [k: string]: unknown;
 }
-export interface HelmValues20 {
+export interface HelmValuesPodDisruptionBudget {
   enabled?: HelmValuesPodDisruptionBudgetEnabled;
   maxUnavailable?: HelmValuesPodDisruptionBudgetMaxUnavailable;
   minAvailable?: HelmValuesPodDisruptionBudgetMinAvailable;
@@ -1389,27 +1389,27 @@ export interface HelmValuesPodDisruptionBudgetMinAvailable {
 /**
  * Pod DNS configuration. The podDnsConfig field is optional and can work with any podDnsPolicy settings. However, when a Pod's dnsPolicy is set to "None", the dnsConfig field has to be specified. For more information, see [Pod's DNS Config](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config).
  */
-export interface HelmValues21 {
+export interface HelmValuesPodDnsConfig {
   [k: string]: unknown;
 }
 /**
  * Optional additional labels to add to the controller Pods.
  */
-export interface HelmValues22 {
+export interface HelmValuesPodLabels {
   [k: string]: unknown;
 }
-export interface HelmValues23 {
-  enabled?: HelmValuesPrometheusEnabled;
-  podmonitor?: HelmValuesPrometheus;
-  servicemonitor?: HelmValuesPrometheus1;
-}
 export interface HelmValuesPrometheus {
-  annotations?: HelmValuesPrometheusPodmonitor;
+  enabled?: HelmValuesPrometheusEnabled;
+  podmonitor?: HelmValuesPrometheusPodmonitor;
+  servicemonitor?: HelmValuesPrometheusServicemonitor;
+}
+export interface HelmValuesPrometheusPodmonitor {
+  annotations?: HelmValuesPrometheusPodmonitorAnnotations;
   enabled?: HelmValuesPrometheusPodmonitorEnabled;
-  endpointAdditionalProperties?: HelmValuesPrometheusPodmonitor1;
+  endpointAdditionalProperties?: HelmValuesPrometheusPodmonitorEndpointAdditionalProperties;
   honorLabels?: HelmValuesPrometheusPodmonitorHonorLabels;
   interval?: HelmValuesPrometheusPodmonitorInterval;
-  labels?: HelmValuesPrometheusPodmonitor2;
+  labels?: HelmValuesPrometheusPodmonitorLabels;
   namespace?: HelmValuesPrometheusPodmonitorNamespace;
   prometheusInstance?: HelmValuesPrometheusPodmonitorPrometheusInstance;
   scrapeTimeout?: HelmValuesPrometheusPodmonitorScrapeTimeout;
@@ -1417,7 +1417,7 @@ export interface HelmValuesPrometheus {
 /**
  * Additional annotations to add to the PodMonitor.
  */
-export interface HelmValuesPrometheusPodmonitor {
+export interface HelmValuesPrometheusPodmonitorAnnotations {
   [k: string]: unknown;
 }
 /**
@@ -1440,22 +1440,22 @@ export interface HelmValuesPrometheusPodmonitor {
  *        name: cert-manager-metrics-ca
  *        key: "tls.crt"
  */
-export interface HelmValuesPrometheusPodmonitor1 {
+export interface HelmValuesPrometheusPodmonitorEndpointAdditionalProperties {
   [k: string]: unknown;
 }
 /**
  * Additional labels to add to the PodMonitor.
  */
-export interface HelmValuesPrometheusPodmonitor2 {
+export interface HelmValuesPrometheusPodmonitorLabels {
   [k: string]: unknown;
 }
-export interface HelmValuesPrometheus1 {
-  annotations?: HelmValuesPrometheusServicemonitor;
+export interface HelmValuesPrometheusServicemonitor {
+  annotations?: HelmValuesPrometheusServicemonitorAnnotations;
   enabled?: HelmValuesPrometheusServicemonitorEnabled;
-  endpointAdditionalProperties?: HelmValuesPrometheusServicemonitor1;
+  endpointAdditionalProperties?: HelmValuesPrometheusServicemonitorEndpointAdditionalProperties;
   honorLabels?: HelmValuesPrometheusServicemonitorHonorLabels;
   interval?: HelmValuesPrometheusServicemonitorInterval;
-  labels?: HelmValuesPrometheusServicemonitor2;
+  labels?: HelmValuesPrometheusServicemonitorLabels;
   namespace?: HelmValuesPrometheusServicemonitorNamespace;
   prometheusInstance?: HelmValuesPrometheusServicemonitorPrometheusInstance;
   scrapeTimeout?: HelmValuesPrometheusServicemonitorScrapeTimeout;
@@ -1463,7 +1463,7 @@ export interface HelmValuesPrometheus1 {
 /**
  * Additional annotations to add to the ServiceMonitor.
  */
-export interface HelmValuesPrometheusServicemonitor {
+export interface HelmValuesPrometheusServicemonitorAnnotations {
   [k: string]: unknown;
 }
 /**
@@ -1477,13 +1477,13 @@ export interface HelmValuesPrometheusServicemonitor {
  *    - __meta_kubernetes_pod_node_name
  *    targetLabel: instance
  */
-export interface HelmValuesPrometheusServicemonitor1 {
+export interface HelmValuesPrometheusServicemonitorEndpointAdditionalProperties {
   [k: string]: unknown;
 }
 /**
  * Additional labels to add to the ServiceMonitor.
  */
-export interface HelmValuesPrometheusServicemonitor2 {
+export interface HelmValuesPrometheusServicemonitorLabels {
   [k: string]: unknown;
 }
 /**
@@ -1495,21 +1495,21 @@ export interface HelmValuesPrometheusServicemonitor2 {
  *   memory: 32Mi
  * For more information, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
  */
-export interface HelmValues24 {
+export interface HelmValuesResources {
   [k: string]: unknown;
 }
 /**
  * Pod Security Context.
  * For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
  */
-export interface HelmValues25 {
+export interface HelmValuesSecurityContext {
   [k: string]: unknown;
 }
-export interface HelmValues26 {
-  annotations?: HelmValuesServiceAccount;
+export interface HelmValuesServiceAccount {
+  annotations?: HelmValuesServiceAccountAnnotations;
   automountServiceAccountToken?: HelmValuesServiceAccountAutomountServiceAccountToken;
   create?: HelmValuesServiceAccountCreate;
-  labels?: HelmValuesServiceAccount1;
+  labels?: HelmValuesServiceAccountLabels;
   name?: HelmValuesServiceAccountName;
 }
 /**
@@ -1518,51 +1518,51 @@ export interface HelmValues26 {
  * annotations:
  *   "{{ .Chart.Name }}-helm-chart/version": "{{ .Chart.Version }}"
  */
-export interface HelmValuesServiceAccount {
+export interface HelmValuesServiceAccountAnnotations {
   [k: string]: unknown;
 }
 /**
  * Optional additional labels to add to the controller's Service Account.
  */
-export interface HelmValuesServiceAccount1 {
+export interface HelmValuesServiceAccountLabels {
   [k: string]: unknown;
 }
 /**
  * Optional annotations to add to the controller Service.
  */
-export interface HelmValues27 {
+export interface HelmValuesServiceAnnotations {
   [k: string]: unknown;
 }
 /**
  * Optional additional labels to add to the controller Service.
  */
-export interface HelmValues29 {
+export interface HelmValuesServiceLabels {
   [k: string]: unknown;
 }
-export interface HelmValues30 {
-  affinity?: HelmValuesStartupapicheck;
+export interface HelmValuesStartupapicheck {
+  affinity?: HelmValuesStartupapicheckAffinity;
   automountServiceAccountToken?: HelmValuesStartupapicheckAutomountServiceAccountToken;
   backoffLimit?: HelmValuesStartupapicheckBackoffLimit;
-  containerSecurityContext?: HelmValuesStartupapicheck1;
+  containerSecurityContext?: HelmValuesStartupapicheckContainerSecurityContext;
   enableServiceLinks?: HelmValuesStartupapicheckEnableServiceLinks;
   enabled?: HelmValuesStartupapicheckEnabled;
-  extraArgs?: HelmValuesStartupapicheck2;
-  extraEnv?: HelmValuesStartupapicheck3;
-  image?: HelmValuesStartupapicheck4;
-  jobAnnotations?: HelmValuesStartupapicheck5;
-  nodeSelector?: HelmValuesStartupapicheck6;
-  podAnnotations?: HelmValuesStartupapicheck7;
-  podLabels?: HelmValuesStartupapicheck8;
-  rbac?: HelmValuesStartupapicheck9;
-  resources?: HelmValuesStartupapicheck10;
+  extraArgs?: HelmValuesStartupapicheckExtraArgs;
+  extraEnv?: HelmValuesStartupapicheckExtraEnv;
+  image?: HelmValuesStartupapicheckImage;
+  jobAnnotations?: HelmValuesStartupapicheckJobAnnotations;
+  nodeSelector?: HelmValuesStartupapicheckNodeSelector;
+  podAnnotations?: HelmValuesStartupapicheckPodAnnotations;
+  podLabels?: HelmValuesStartupapicheckPodLabels;
+  rbac?: HelmValuesStartupapicheckRbac;
+  resources?: HelmValuesStartupapicheckResources;
   runtimeClassName?: HelmValuesStartupapicheckRuntimeClassName;
-  securityContext?: HelmValuesStartupapicheck11;
-  serviceAccount?: HelmValuesStartupapicheck12;
+  securityContext?: HelmValuesStartupapicheckSecurityContext;
+  serviceAccount?: HelmValuesStartupapicheckServiceAccount;
   timeout?: HelmValuesStartupapicheckTimeout;
-  tolerations?: HelmValuesStartupapicheck13;
+  tolerations?: HelmValuesStartupapicheckTolerations;
   ttlSecondsAfterFinished?: HelmValuesStartupapicheckTtlSecondsAfterFinished;
-  volumeMounts?: HelmValuesStartupapicheck14;
-  volumes?: HelmValuesStartupapicheck15;
+  volumeMounts?: HelmValuesStartupapicheckVolumeMounts;
+  volumes?: HelmValuesStartupapicheckVolumes;
 }
 /**
  * A Kubernetes Affinity, if required. For more information, see [Affinity v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core).
@@ -1577,16 +1577,16 @@ export interface HelmValues30 {
  *          values:
  *          - master
  */
-export interface HelmValuesStartupapicheck {
+export interface HelmValuesStartupapicheckAffinity {
   [k: string]: unknown;
 }
 /**
  * Container Security Context to be set on the controller component container. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
  */
-export interface HelmValuesStartupapicheck1 {
+export interface HelmValuesStartupapicheckContainerSecurityContext {
   [k: string]: unknown;
 }
-export interface HelmValuesStartupapicheck4 {
+export interface HelmValuesStartupapicheckImage {
   digest?: HelmValuesStartupapicheckImageDigest;
   name?: HelmValuesStartupapicheckImageName;
   pullPolicy?: HelmValuesStartupapicheckImagePullPolicy;
@@ -1597,7 +1597,7 @@ export interface HelmValuesStartupapicheck4 {
 /**
  * Optional additional annotations to add to the startupapicheck Job.
  */
-export interface HelmValuesStartupapicheck5 {
+export interface HelmValuesStartupapicheckJobAnnotations {
   [k: string]: unknown;
 }
 /**
@@ -1605,28 +1605,28 @@ export interface HelmValuesStartupapicheck5 {
  *
  * This default ensures that Pods are only scheduled to Linux nodes. It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.
  */
-export interface HelmValuesStartupapicheck6 {
+export interface HelmValuesStartupapicheckNodeSelector {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the startupapicheck Pods.
  */
-export interface HelmValuesStartupapicheck7 {
+export interface HelmValuesStartupapicheckPodAnnotations {
   [k: string]: unknown;
 }
 /**
  * Optional additional labels to add to the startupapicheck Pods.
  */
-export interface HelmValuesStartupapicheck8 {
+export interface HelmValuesStartupapicheckPodLabels {
   [k: string]: unknown;
 }
-export interface HelmValuesStartupapicheck9 {
-  annotations?: HelmValuesStartupapicheckRbac;
+export interface HelmValuesStartupapicheckRbac {
+  annotations?: HelmValuesStartupapicheckRbacAnnotations;
 }
 /**
  * annotations for the startup API Check job RBAC and PSP resources.
  */
-export interface HelmValuesStartupapicheckRbac {
+export interface HelmValuesStartupapicheckRbacAnnotations {
   [k: string]: unknown;
 }
 /**
@@ -1638,32 +1638,32 @@ export interface HelmValuesStartupapicheckRbac {
  *   memory: 32Mi
  * For more information, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
  */
-export interface HelmValuesStartupapicheck10 {
+export interface HelmValuesStartupapicheckResources {
   [k: string]: unknown;
 }
 /**
  * Pod Security Context to be set on the startupapicheck component Pod. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
  */
-export interface HelmValuesStartupapicheck11 {
+export interface HelmValuesStartupapicheckSecurityContext {
   [k: string]: unknown;
 }
-export interface HelmValuesStartupapicheck12 {
-  annotations?: HelmValuesStartupapicheckServiceAccount;
+export interface HelmValuesStartupapicheckServiceAccount {
+  annotations?: HelmValuesStartupapicheckServiceAccountAnnotations;
   automountServiceAccountToken?: HelmValuesStartupapicheckServiceAccountAutomountServiceAccountToken;
   create?: HelmValuesStartupapicheckServiceAccountCreate;
-  labels?: HelmValuesStartupapicheckServiceAccount1;
+  labels?: HelmValuesStartupapicheckServiceAccountLabels;
   name?: HelmValuesStartupapicheckServiceAccountName;
 }
 /**
  * Optional additional annotations to add to the Job's Service Account.
  */
-export interface HelmValuesStartupapicheckServiceAccount {
+export interface HelmValuesStartupapicheckServiceAccountAnnotations {
   [k: string]: unknown;
 }
 /**
  * Optional additional labels to add to the startupapicheck's Service Account.
  */
-export interface HelmValuesStartupapicheckServiceAccount1 {
+export interface HelmValuesStartupapicheckServiceAccountLabels {
   [k: string]: unknown;
 }
 /**
@@ -1682,54 +1682,54 @@ export interface HelmValuesStartupapicheckTtlSecondsAfterFinished {
  *     maxSurge: 0
  *     maxUnavailable: 1
  */
-export interface HelmValues31 {
+export interface HelmValuesStrategy {
   [k: string]: unknown;
 }
-export interface HelmValues36 {
-  affinity?: HelmValuesWebhook;
+export interface HelmValuesWebhook {
+  affinity?: HelmValuesWebhookAffinity;
   apiserverClientCertSubjects?: HelmValuesWebhookApiserverClientCertSubjects;
   automountServiceAccountToken?: HelmValuesWebhookAutomountServiceAccountToken;
   clientCAFile?: HelmValuesWebhookClientCAFile;
-  config?: HelmValuesWebhook1;
-  containerSecurityContext?: HelmValuesWebhook2;
-  deploymentAnnotations?: HelmValuesWebhook3;
+  config?: HelmValuesWebhookConfig;
+  containerSecurityContext?: HelmValuesWebhookContainerSecurityContext;
+  deploymentAnnotations?: HelmValuesWebhookDeploymentAnnotations;
   enableClientVerification?: HelmValuesWebhookEnableClientVerification;
   enableServiceLinks?: HelmValuesWebhookEnableServiceLinks;
-  extraArgs?: HelmValuesWebhook4;
-  extraEnv?: HelmValuesWebhook5;
+  extraArgs?: HelmValuesWebhookExtraArgs;
+  extraEnv?: HelmValuesWebhookExtraEnv;
   featureGates?: HelmValuesWebhookFeatureGates;
   hostNetwork?: HelmValuesWebhookHostNetwork;
-  image?: HelmValuesWebhook6;
-  livenessProbe?: HelmValuesWebhook7;
+  image?: HelmValuesWebhookImage;
+  livenessProbe?: HelmValuesWebhookLivenessProbe;
   loadBalancerIP?: HelmValuesWebhookLoadBalancerIP;
-  mutatingWebhookConfiguration?: HelmValuesWebhook8;
-  mutatingWebhookConfigurationAnnotations?: HelmValuesWebhook9;
-  networkPolicy?: HelmValuesWebhook10;
-  nodeSelector?: HelmValuesWebhook11;
-  podAnnotations?: HelmValuesWebhook12;
-  podDisruptionBudget?: HelmValuesWebhook13;
-  podLabels?: HelmValuesWebhook14;
-  readinessProbe?: HelmValuesWebhook15;
+  mutatingWebhookConfiguration?: HelmValuesWebhookMutatingWebhookConfiguration;
+  mutatingWebhookConfigurationAnnotations?: HelmValuesWebhookMutatingWebhookConfigurationAnnotations;
+  networkPolicy?: HelmValuesWebhookNetworkPolicy;
+  nodeSelector?: HelmValuesWebhookNodeSelector;
+  podAnnotations?: HelmValuesWebhookPodAnnotations;
+  podDisruptionBudget?: HelmValuesWebhookPodDisruptionBudget;
+  podLabels?: HelmValuesWebhookPodLabels;
+  readinessProbe?: HelmValuesWebhookReadinessProbe;
   replicaCount?: HelmValuesWebhookReplicaCount;
-  resources?: HelmValuesWebhook16;
+  resources?: HelmValuesWebhookResources;
   runtimeClassName?: HelmValuesWebhookRuntimeClassName;
   securePort?: HelmValuesWebhookSecurePort;
-  securityContext?: HelmValuesWebhook17;
-  serviceAccount?: HelmValuesWebhook18;
-  serviceAnnotations?: HelmValuesWebhook19;
-  serviceIPFamilies?: HelmValuesWebhook20;
+  securityContext?: HelmValuesWebhookSecurityContext;
+  serviceAccount?: HelmValuesWebhookServiceAccount;
+  serviceAnnotations?: HelmValuesWebhookServiceAnnotations;
+  serviceIPFamilies?: HelmValuesWebhookServiceIPFamilies;
   serviceIPFamilyPolicy?: HelmValuesWebhookServiceIPFamilyPolicy;
-  serviceLabels?: HelmValuesWebhook21;
+  serviceLabels?: HelmValuesWebhookServiceLabels;
   serviceType?: HelmValuesWebhookServiceType;
-  strategy?: HelmValuesWebhook22;
+  strategy?: HelmValuesWebhookStrategy;
   timeoutSeconds?: HelmValuesWebhookTimeoutSeconds;
-  tolerations?: HelmValuesWebhook23;
-  topologySpreadConstraints?: HelmValuesWebhook24;
-  url?: HelmValuesWebhook25;
-  validatingWebhookConfiguration?: HelmValuesWebhook26;
-  validatingWebhookConfigurationAnnotations?: HelmValuesWebhook27;
-  volumeMounts?: HelmValuesWebhook28;
-  volumes?: HelmValuesWebhook29;
+  tolerations?: HelmValuesWebhookTolerations;
+  topologySpreadConstraints?: HelmValuesWebhookTopologySpreadConstraints;
+  url?: HelmValuesWebhookUrl;
+  validatingWebhookConfiguration?: HelmValuesWebhookValidatingWebhookConfiguration;
+  validatingWebhookConfigurationAnnotations?: HelmValuesWebhookValidatingWebhookConfigurationAnnotations;
+  volumeMounts?: HelmValuesWebhookVolumeMounts;
+  volumes?: HelmValuesWebhookVolumes;
 }
 /**
  * A Kubernetes Affinity, if required. For more information, see [Affinity v1 core](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#affinity-v1-core).
@@ -1745,7 +1745,7 @@ export interface HelmValues36 {
  *          values:
  *          - master
  */
-export interface HelmValuesWebhook {
+export interface HelmValuesWebhookAffinity {
   [k: string]: unknown;
 }
 /**
@@ -1773,22 +1773,22 @@ export interface HelmValuesWebhook {
  *     dnsNames:
  *     - cert-manager-metrics
  */
-export interface HelmValuesWebhook1 {
+export interface HelmValuesWebhookConfig {
   [k: string]: unknown;
 }
 /**
  * Container Security Context to be set on the webhook component container. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
  */
-export interface HelmValuesWebhook2 {
+export interface HelmValuesWebhookContainerSecurityContext {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the webhook Deployment.
  */
-export interface HelmValuesWebhook3 {
+export interface HelmValuesWebhookDeploymentAnnotations {
   [k: string]: unknown;
 }
-export interface HelmValuesWebhook6 {
+export interface HelmValuesWebhookImage {
   digest?: HelmValuesWebhookImageDigest;
   name?: HelmValuesWebhookImageName;
   pullPolicy?: HelmValuesWebhookImagePullPolicy;
@@ -1800,44 +1800,44 @@ export interface HelmValuesWebhook6 {
  * Liveness probe values.
  * For more information, see [Container probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
  */
-export interface HelmValuesWebhook7 {
+export interface HelmValuesWebhookLivenessProbe {
   [k: string]: unknown;
 }
-export interface HelmValuesWebhook8 {
-  namespaceSelector?: HelmValuesWebhookMutatingWebhookConfiguration;
+export interface HelmValuesWebhookMutatingWebhookConfiguration {
+  namespaceSelector?: HelmValuesWebhookMutatingWebhookConfigurationNamespaceSelector;
 }
 /**
  * Configure spec.namespaceSelector for mutating webhooks.
  */
-export interface HelmValuesWebhookMutatingWebhookConfiguration {
+export interface HelmValuesWebhookMutatingWebhookConfigurationNamespaceSelector {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the webhook MutatingWebhookConfiguration.
  */
-export interface HelmValuesWebhook9 {
+export interface HelmValuesWebhookMutatingWebhookConfigurationAnnotations {
   [k: string]: unknown;
 }
-export interface HelmValuesWebhook10 {
-  egress?: HelmValuesWebhookNetworkPolicy;
+export interface HelmValuesWebhookNetworkPolicy {
+  egress?: HelmValuesWebhookNetworkPolicyEgress;
   enabled?: HelmValuesWebhookNetworkPolicyEnabled;
-  ingress?: HelmValuesWebhookNetworkPolicy1;
+  ingress?: HelmValuesWebhookNetworkPolicyIngress;
 }
 /**
  * The nodeSelector on Pods tells Kubernetes to schedule Pods on the nodes with matching labels. For more information, see [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
  *
  * This default ensures that Pods are only scheduled to Linux nodes. It prevents Pods being scheduled to Windows nodes in a mixed OS cluster.
  */
-export interface HelmValuesWebhook11 {
+export interface HelmValuesWebhookNodeSelector {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the webhook Pods.
  */
-export interface HelmValuesWebhook12 {
+export interface HelmValuesWebhookPodAnnotations {
   [k: string]: unknown;
 }
-export interface HelmValuesWebhook13 {
+export interface HelmValuesWebhookPodDisruptionBudget {
   enabled?: HelmValuesWebhookPodDisruptionBudgetEnabled;
   maxUnavailable?: HelmValuesWebhookPodDisruptionBudgetMaxUnavailable;
   minAvailable?: HelmValuesWebhookPodDisruptionBudgetMinAvailable;
@@ -1860,14 +1860,14 @@ export interface HelmValuesWebhookPodDisruptionBudgetMinAvailable {
 /**
  * Optional additional labels to add to the Webhook Pods.
  */
-export interface HelmValuesWebhook14 {
+export interface HelmValuesWebhookPodLabels {
   [k: string]: unknown;
 }
 /**
  * Readiness probe values.
  * For more information, see [Container probes](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes).
  */
-export interface HelmValuesWebhook15 {
+export interface HelmValuesWebhookReadinessProbe {
   [k: string]: unknown;
 }
 /**
@@ -1879,44 +1879,44 @@ export interface HelmValuesWebhook15 {
  *   memory: 32Mi
  * For more information, see [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
  */
-export interface HelmValuesWebhook16 {
+export interface HelmValuesWebhookResources {
   [k: string]: unknown;
 }
 /**
  * Pod Security Context to be set on the webhook component Pod. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
  */
-export interface HelmValuesWebhook17 {
+export interface HelmValuesWebhookSecurityContext {
   [k: string]: unknown;
 }
-export interface HelmValuesWebhook18 {
-  annotations?: HelmValuesWebhookServiceAccount;
+export interface HelmValuesWebhookServiceAccount {
+  annotations?: HelmValuesWebhookServiceAccountAnnotations;
   automountServiceAccountToken?: HelmValuesWebhookServiceAccountAutomountServiceAccountToken;
   create?: HelmValuesWebhookServiceAccountCreate;
-  labels?: HelmValuesWebhookServiceAccount1;
+  labels?: HelmValuesWebhookServiceAccountLabels;
   name?: HelmValuesWebhookServiceAccountName;
 }
 /**
  * Optional additional annotations to add to the webhook's Service Account.
  */
-export interface HelmValuesWebhookServiceAccount {
+export interface HelmValuesWebhookServiceAccountAnnotations {
   [k: string]: unknown;
 }
 /**
  * Optional additional labels to add to the webhook's Service Account.
  */
-export interface HelmValuesWebhookServiceAccount1 {
+export interface HelmValuesWebhookServiceAccountLabels {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the webhook Service.
  */
-export interface HelmValuesWebhook19 {
+export interface HelmValuesWebhookServiceAnnotations {
   [k: string]: unknown;
 }
 /**
  * Optional additional labels to add to the Webhook Service.
  */
-export interface HelmValuesWebhook21 {
+export interface HelmValuesWebhookServiceLabels {
   [k: string]: unknown;
 }
 /**
@@ -1929,27 +1929,27 @@ export interface HelmValuesWebhook21 {
  *     maxSurge: 0
  *     maxUnavailable: 1
  */
-export interface HelmValuesWebhook22 {
+export interface HelmValuesWebhookStrategy {
   [k: string]: unknown;
 }
 /**
  * Overrides the mutating webhook and validating webhook so they reach the webhook service using the `url` field instead of a service.
  */
-export interface HelmValuesWebhook25 {
+export interface HelmValuesWebhookUrl {
   [k: string]: unknown;
 }
-export interface HelmValuesWebhook26 {
-  namespaceSelector?: HelmValuesWebhookValidatingWebhookConfiguration;
+export interface HelmValuesWebhookValidatingWebhookConfiguration {
+  namespaceSelector?: HelmValuesWebhookValidatingWebhookConfigurationNamespaceSelector;
 }
 /**
  * Configure spec.namespaceSelector for validating webhooks.
  */
-export interface HelmValuesWebhookValidatingWebhookConfiguration {
+export interface HelmValuesWebhookValidatingWebhookConfigurationNamespaceSelector {
   [k: string]: unknown;
 }
 /**
  * Optional additional annotations to add to the webhook ValidatingWebhookConfiguration.
  */
-export interface HelmValuesWebhook27 {
+export interface HelmValuesWebhookValidatingWebhookConfigurationAnnotations {
   [k: string]: unknown;
 }
