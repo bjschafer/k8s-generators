@@ -176,6 +176,12 @@ export interface EsoValuesSchema {
     strategy?: {
       [k: string]: unknown;
     };
+    tls?: {
+      ciphers?: string;
+      curvePreferences?: unknown[];
+      minVersion?: string;
+      [k: string]: unknown;
+    };
     tolerations?: unknown[];
     topologySpreadConstraints?: unknown[];
     [k: string]: unknown;
@@ -468,6 +474,12 @@ export interface EsoValuesSchema {
     [k: string]: unknown;
   };
   systemAuthDelegator?: boolean;
+  tls?: {
+    ciphers?: string;
+    curvePreferences?: unknown[];
+    minVersion?: string;
+    [k: string]: unknown;
+  };
   tolerations?: unknown[];
   topologySpreadConstraints?: unknown[];
   vault?: {
@@ -677,6 +689,12 @@ export interface EsoValuesSchema {
       [k: string]: unknown;
     };
     strategy?: {
+      [k: string]: unknown;
+    };
+    tls?: {
+      ciphers?: string;
+      curvePreferences?: unknown[];
+      minVersion?: string;
       [k: string]: unknown;
     };
     tolerations?: unknown[];
