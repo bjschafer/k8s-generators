@@ -15,7 +15,7 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 // renovate: datasource=helm depName=grafana registryUrl=https://grafana-community.github.io/helm-charts
-const version = "12.11.2";
+const version = "13.0.1";
 
 NewArgoApp(name, {
   namespace: namespace,
