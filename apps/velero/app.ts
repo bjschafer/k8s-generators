@@ -294,16 +294,16 @@ class Velero extends Chart {
       includeClusterResources: true,
     };
 
-    const offsiteNamespaces = [
-      "argocd",
-      "authentik",
-      "immich",
-      "mealie",
-      "media",
-      "netbox",
-      "paperless",
-      "spoolman",
-    ];
+    // Only namespaces that actually own a PVC. A backup carries volume data
+    // and nothing else now, so listing a namespace with no volumes produces an
+    // empty backup that reads like offsite coverage and is not any.
+    //
+    // argocd, authentik and spoolman were here for exactly that reason: they
+    // have no PVCs, and what is worth keeping lives in Postgres. That is
+    // backed up by CNPG to barman ObjectStores, which currently point at
+    // versitygw only -- so those three still have no offsite copy. Removing
+    // them from this list does not create that gap, it stops hiding it.
+    const offsiteNamespaces = ["immich", "mealie", "media", "netbox", "paperless"];
 
     new Schedule(this, "weekly-keep-3-months", {
       metadata: {

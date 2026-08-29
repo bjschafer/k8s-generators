@@ -123,3 +123,75 @@ mise run validate-alerts
 [tasks.setup-hooks]
 description = "Install the git pre-commit hook that runs `mise run pre-commit`"
 run = "mise generate git-pre-commit --write --task=pre-commit"
+
+# Applications nest three deep: `applications` (from k8s-prod) owns
+# `generators`, which owns every per-app Application, and all three run
+# selfHeal. Patching a child on its own reads back clean and is then silently
+# reverted within about a minute, so the only symptom is some unrelated manual
+# change -- a scale, a deleted resource -- bouncing back with nothing pointing
+# at ArgoCD. Hence: parents first, then verify by re-reading.
+[tasks.argo-suspend]
+description = "Pause ArgoCD automated sync (parents + any named apps) for manual cluster surgery"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+
+apps=(applications generators)
+for a in "$@"; do apps+=("$a"); done
+
+for app in "${apps[@]}"; do
+  if ! kubectl -n argocd get application "$app" >/dev/null 2>&1; then
+    echo "no such application: $app" >&2
+    exit 1
+  fi
+done
+
+for app in "${apps[@]}"; do
+  kubectl -n argocd patch application "$app" --type=merge \\
+    -p '{"spec":{"syncPolicy":{"automated":null}}}' >/dev/null
+  echo "suspended $app"
+done
+
+# Don't trust the patch. A parent still mid-reconcile when its child was
+# patched will have healed that child back by the time this check runs.
+sleep 15
+rc=0
+for app in "${apps[@]}"; do
+  auto=$(kubectl -n argocd get application "$app" -o jsonpath='{.spec.syncPolicy.automated}')
+  if [ -n "$auto" ]; then
+    echo "STILL AUTOMATED: $app -> $auto" >&2
+    rc=1
+  fi
+done
+
+if [ "$rc" -ne 0 ]; then
+  echo "suspend did not stick -- do not start making changes" >&2
+  exit 1
+fi
+echo "all suspended; remember 'mise run argo-resume ${*}'"
+"""
+
+[tasks.argo-resume]
+description = "Restore ArgoCD automated sync suspended by `argo-suspend`"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Children first, so resuming a parent can't re-sync a child out from under a
+# restore that is still in progress. The policy set here is the one every app
+# carries in git; the next reconcile corrects it either way.
+apps=()
+for a in "$@"; do apps+=("$a"); done
+apps+=(generators applications)
+
+for app in "${apps[@]}"; do
+  kubectl -n argocd patch application "$app" --type=merge \\
+    -p '{"spec":{"syncPolicy":{"automated":{"prune":true,"selfHeal":true}}}}' >/dev/null
+  echo "resumed $app"
+done
+
+sleep 10
+kubectl -n argocd get applications.argoproj.io \\
+  -o custom-columns='NAME:.metadata.name,SYNC:.status.sync.status,HEALTH:.status.health.status' \\
+  --no-headers | grep -v 'Synced *Healthy' || echo "all applications Synced/Healthy"
+"""

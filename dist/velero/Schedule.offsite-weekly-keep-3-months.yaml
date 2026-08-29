@@ -9,14 +9,11 @@ spec:
     csiSnapshotTimeout: 0s
     includeClusterResources: true
     includedNamespaces:
-      - argocd
-      - authentik
       - immich
       - mealie
       - media
       - netbox
       - paperless
-      - spoolman
     includedResources:
       - persistentvolumeclaims
       - persistentvolumes
