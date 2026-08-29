@@ -66,3 +66,16 @@ spec:
             namespace: metrics
             priority: "0"
             push_notify: "true"
+        - alert: PostgresDumpNotSucceeding
+          annotations:
+            description: |
+              The offsite copy of the databases is going stale. Barman still holds
+              local base backups and WAL, so this is not data loss yet.
+              Check: kubectl logs -n postgres -l job-name=<latest>
+            summary: pg-dump has not completed successfully in over 36 hours
+          expr: time() - kube_cronjob_status_last_successful_time{namespace="postgres", cronjob="pg-dump"} > 36 * 3600
+          for: 1h
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"

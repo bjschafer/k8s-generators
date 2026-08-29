@@ -132,6 +132,8 @@ run = "mise generate git-pre-commit --write --task=pre-commit"
 # at ArgoCD. Hence: parents first, then verify by re-reading.
 [tasks.argo-suspend]
 description = "Pause ArgoCD automated sync (parents + any named apps) for manual cluster surgery"
+# Muscle memory from k8s-prod/scripts/suspend-sync.sh, which this replaces.
+alias = "suspend-sync"
 run = """
 #!/usr/bin/env bash
 set -euo pipefail
@@ -173,6 +175,7 @@ echo "all suspended; remember 'mise run argo-resume ${*}'"
 
 [tasks.argo-resume]
 description = "Restore ArgoCD automated sync suspended by `argo-suspend`"
+alias = "resume-sync"
 run = """
 #!/usr/bin/env bash
 set -euo pipefail

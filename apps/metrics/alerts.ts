@@ -386,6 +386,29 @@ export function addAlerts(scope: Construct, id: string): void {
           summary: "CNPG backup stale for cluster {{ $labels.job }} (no success in 25h)",
         },
       },
+      {
+        // Distinct from the two above, which watch barman. These dumps are the
+        // only copy of the databases that goes offsite encrypted -- barman's
+        // object stores are versitygw-only and server-side encrypted at best.
+        // A quietly failing dump job leaves a PVC of stale files that Velero
+        // keeps dutifully backing up, which reads exactly like working
+        // coverage. 36h so a single missed nightly is not enough to fire.
+        alert: "PostgresDumpNotSucceeding",
+        expr: `time() - kube_cronjob_status_last_successful_time{namespace="postgres", cronjob="pg-dump"} > 36 * 3600`,
+        for: "1h",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "pg-dump has not completed successfully in over 36 hours",
+          description: heredoc`
+            The offsite copy of the databases is going stale. Barman still holds
+            local base backups and WAL, so this is not data loss yet.
+            Check: kubectl logs -n postgres -l job-name=<latest>
+            `,
+        },
+      },
     ],
   });
 

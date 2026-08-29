@@ -31,6 +31,7 @@ import {
 } from "../../lib/consts";
 import { BitwardenSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
+import { PgDump } from "./pg-dump";
 
 const namespace = basename(__dirname);
 
@@ -677,6 +678,16 @@ new VectorPostgres(app, "immich", {
     objectStoreName: "immich-pg16",
     serverName: "immich-pg16",
   },
+});
+
+// Nightly logical dumps onto a Velero-backed PVC. barman-cloud offers only
+// server-side encryption, so the object stores above are readable by whoever
+// holds the bucket; this is how the databases get an offsite copy that is not.
+// It supplements barman rather than replacing it -- barman is still the only
+// PITR here.
+new PgDump(app, "pg-dump", {
+  namespace: namespace,
+  clusters: [prod_pg_17.clusterName, "immich"],
 });
 
 app.synth();

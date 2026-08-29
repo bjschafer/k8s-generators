@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pg-dump-scripts
+  namespace: postgres
+data:
+  pg_dump.sh: |
+    #!/bin/sh
+    # Logical dumps of every CNPG cluster, onto a PVC that Velero backs up.
+    #
+    # This exists because barman-cloud has no client-side encryption -- its
+    # `encryption` field offers only AES256 and aws:kms, both server-side, so
+    # whoever holds the bucket holds the plaintext. Velero's Kopia repos are
+    # encrypted with a password that never leaves Bitwarden, so routing the
+    # databases through a PVC is what gets them an offsite copy nobody else can
+    # read. Barman stays as it is: it is still the only thing here that can do
+    # point-in-time recovery, and it is still the first thing to reach for.
+    #
+    # Only the newest dump is kept on disk. History is Velero's job, and keeping
+    # one copy is what makes the PVC small enough to be cheap to snapshot.
+    set -eu
+
+    : "${CLUSTERS:?}"
+    : "${OUT_DIR:?}"
+    : "${NAMESPACE:?}"
+
+    overall_rc=0
+
+    for cluster in ${CLUSTERS}; do
+      creds="/creds/${cluster}"
+      dest="${OUT_DIR}/${cluster}"
+      mkdir -p "${dest}"
+
+      # Straight at the -rw Service, never the pooler. pg_dump holds one session
+      # open for the length of the dump to keep a consistent snapshot, and
+      # pgbouncer in transaction mode will not give it one.
+      PGHOST="${cluster}-rw.${NAMESPACE}.svc.cluster.local"
+      PGUSER="$(cat "${creds}/username")"
+      PGPASSWORD="$(cat "${creds}/password")"
+      export PGHOST PGUSER PGPASSWORD
+
+      echo "=== ${cluster} (${PGHOST}) ==="
+      cluster_rc=0
+
+      # Roles, and their passwords, live outside any single database, so the
+      # per-database dumps below do not restore without this. It is the reason
+      # this PVC is exactly as sensitive as the databases themselves.
+      tmp="${dest}/globals.sql.tmp"
+      if pg_dumpall --globals-only >"${tmp}"; then
+        mv "${tmp}" "${dest}/globals.sql"
+        echo "  ok: globals"
+      else
+        rm -f "${tmp}"
+        echo "  FAILED: globals" >&2
+        cluster_rc=1
+      fi
+
+      dbs="$(psql -Atqc \
+        "select datname from pg_database where datistemplate = false and datallowconn order by 1")"
+
+      for db in ${dbs}; do
+        tmp="${dest}/${db}.dump.tmp"
+        # Custom format: compressed, and pg_restore can lift a single table out of
+        # it without replaying the whole file.
+        if pg_dump -Fc -f "${tmp}" "${db}"; then
+          # Swap into place only on success, so a run that dies halfway cannot
+          # leave a truncated file standing where yesterday's good dump was.
+          mv "${tmp}" "${dest}/${db}.dump"
+          echo "  ok: ${db}"
+        else
+          rm -f "${tmp}"
+          echo "  FAILED: ${db}" >&2
+          cluster_rc=1
+        fi
+      done
+
+      # Drop dumps of databases that no longer exist, or the PVC accumulates them
+      # forever and a restore has no way to tell a retired database from a current
+      # one that silently stopped dumping.
+      for existing in "${dest}"/*.dump; do
+        [ -e "${existing}" ] || continue
+        name="$(basename "${existing}" .dump)"
+        if ! echo "${dbs}" | grep -qx "${name}"; then
+          echo "  pruning dump of dropped database: ${name}"
+          rm -f "${existing}"
+        fi
+      done
+
+      if [ "${cluster_rc}" -eq 0 ]; then
+        date -u +%Y-%m-%dT%H:%M:%SZ >"${dest}/.completed"
+      else
+        overall_rc=1
+      fi
+    done
+
+    # Fail the Job on any error. A silently-empty dump directory that still looks
+    # like offsite coverage is the failure this whole change exists to avoid.
+    exit "${overall_rc}"
+immutable: false

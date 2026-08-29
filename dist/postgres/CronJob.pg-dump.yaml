@@ -1,0 +1,87 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pg-dump
+  namespace: postgres
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 3600
+      template:
+        metadata:
+          labels:
+            cdk8s.io/metadata.addr: pg-dump-cronjob-c8b63e21
+        spec:
+          automountServiceAccountToken: false
+          containers:
+            - command:
+                - /bin/sh
+                - /scripts/pg_dump.sh
+              env:
+                - name: CLUSTERS
+                  value: prod-pg17 immich
+                - name: OUT_DIR
+                  value: /dumps
+                - name: NAMESPACE
+                  value: postgres
+              image: postgres:17-alpine
+              imagePullPolicy: IfNotPresent
+              name: dump
+              resources:
+                limits:
+                  cpu: 1000m
+                  memory: 512Mi
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                privileged: false
+                readOnlyRootFilesystem: false
+                runAsGroup: 65534
+                runAsNonRoot: true
+                runAsUser: 65534
+              volumeMounts:
+                - mountPath: /scripts
+                  name: configmap-pg-dump-scripts
+                - mountPath: /dumps
+                  name: pvc-pg-dump
+                - mountPath: /creds/prod-pg17
+                  name: secret-prod-pg17-superuser
+                  readOnly: true
+                - mountPath: /creds/immich
+                  name: secret-immich-superuser
+                  readOnly: true
+          dnsPolicy: ClusterFirst
+          hostNetwork: false
+          restartPolicy: OnFailure
+          securityContext:
+            fsGroup: 65534
+            fsGroupChangePolicy: Always
+            runAsGroup: 65534
+            runAsNonRoot: true
+            runAsUser: 65534
+          setHostnameAsFQDN: false
+          shareProcessNamespace: false
+          terminationGracePeriodSeconds: 30
+          volumes:
+            - configMap:
+                defaultMode: 365
+                name: pg-dump-scripts
+              name: configmap-pg-dump-scripts
+            - name: pvc-pg-dump
+              persistentVolumeClaim:
+                claimName: pg-dump
+                readOnly: false
+            - name: secret-prod-pg17-superuser
+              secret:
+                secretName: prod-pg17-superuser
+            - name: secret-immich-superuser
+              secret:
+                secretName: immich-superuser
+  schedule: 0 3 * * *
+  startingDeadlineSeconds: 10
+  successfulJobsHistoryLimit: 3
+  suspend: false

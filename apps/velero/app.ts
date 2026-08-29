@@ -299,11 +299,16 @@ class Velero extends Chart {
     // empty backup that reads like offsite coverage and is not any.
     //
     // argocd, authentik and spoolman were here for exactly that reason: they
-    // have no PVCs, and what is worth keeping lives in Postgres. That is
-    // backed up by CNPG to barman ObjectStores, which currently point at
-    // versitygw only -- so those three still have no offsite copy. Removing
-    // them from this list does not create that gap, it stops hiding it.
-    const offsiteNamespaces = ["immich", "mealie", "media", "netbox", "paperless"];
+    // have no PVCs, and what is worth keeping lives in Postgres. Removing them
+    // did not cost them an offsite copy, it stopped implying one they never
+    // had -- barman's object stores are versitygw-only and server-side
+    // encrypted at best.
+    //
+    // `postgres` closes that: its CNPG data volumes are excluded from backup,
+    // so the only thing this picks up there is the pg-dump PVC, which is the
+    // nightly logical dump of every cluster. That is what actually carries
+    // authentik, spoolman, argocd and the rest offsite now.
+    const offsiteNamespaces = ["immich", "mealie", "media", "netbox", "paperless", "postgres"];
 
     new Schedule(this, "weekly-keep-3-months", {
       metadata: {
