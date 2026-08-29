@@ -10,8 +10,6 @@
  */
 export type MetadataFiles = (string | FilePath | FolderPath | UrlPath | GitPath | RepoPath)[];
 export type KometaDefaultCollectionPath = {
-  [k: string]: unknown;
-} & {
   default:
     | "actor"
     | "anilist"
@@ -215,7 +213,73 @@ export interface KometaConfigSchema {
   playlist_files?: PlaylistFiles;
   [k: string]: unknown;
 }
-export interface Libraries {}
+export interface Libraries {
+  /**
+   * This interface was referenced by `Libraries`'s JSON-Schema definition
+   * via the `patternProperty` "^(?!plex|tmdb|tautulli|webhooks|omdb|mdblist|notifiarr|gotify|ntfy|anidb|radarr|sonarr|trakt|yamtrack|serializd|floppy|mal).+$".
+   *
+   * This interface was referenced by `Libraries`'s JSON-Schema definition
+   * via the `patternProperty` "^schedule_.*$".
+   */
+  [k: string]:
+    | {
+        metadata_files?: MetadataFiles;
+        collection_files?: CollectionFiles;
+        overlay_files?: OverlayFiles;
+        metadata_path?: MetadataPath;
+        overlay_path?: OverlayPath;
+        /**
+         * Used to specify Library Operations to run.
+         */
+        operations?:
+          | Operations
+          | {
+              [k: string]: unknown;
+            }[];
+        /**
+         * Used to specify the Library's name.
+         * Required only when trying to use multiple servers with the same name. Each library that the user wants Kometa to interact with must be documented with a library attribute. A library attribute is represented by the mapping name (i.e. Movies or TV Shows), this must have a unique name that correlates with a library of the same name within the Plex Media Server. In the situation that two servers are being connected to which both have libraries of the same name, the library_name attribute can be utilized to specify the real Library Name, whilst the library attribute's mapping name can be made into a placeholder.
+         */
+        library_name?: string;
+        /**
+         * Location to save the YAML Report file for a library.
+         * The report_path attribute is used to define where to save the YAML Report file. This file is used to store information about what media is added, removed, filtered, and missing from the Plex library compared to what is expected from the Collection, Metadata, Overlay or Playlist file. If your Collection file creates a collection with Movie 1, Movie 2 and Movie 3 but your Plex library only has Movie 1 and Movie 3, then the missing YAML file will be updated to inform the user that Movie 2 was missing from the library.
+         */
+        report_path?: string;
+        settings?: Settings;
+        plex?: Plex;
+        radarr?: Radarr;
+        sonarr?: Sonarr;
+        tautulli?: Tautulli;
+        tracearr?: Tracearr;
+        template_variables?: TemplateVariables2;
+        /**
+         * Used to schedule when a library is run using the schedule options.
+         */
+        schedule?: string;
+        /**
+         * Used to schedule when overlays are run for this library.
+         */
+        schedule_overlays?: string;
+        /**
+         * Used to remove overlays from this library only.
+         * When set to true, this will remove all overlays from your library every run, but will not delete the overlaid images from your system, resulting in image bloat.
+         */
+        remove_overlays?: boolean;
+        /**
+         * Used to reapply overlays from this library only. This will reapply overlays to every item in your library.
+         * When set to true, this will reapply all overlays on each run even if there is no need to do so, which will result in image bloat.
+         */
+        reapply_overlays?: boolean;
+        /**
+         * Used to reset overlays from this library only. This will reset overlays to every item in your library to your source choice. This will use the reset image when overlaying items in your library.
+         * This will reset all posters to the desired source on each run and will reapply all overlays on each run, which will result in image bloat.
+         */
+        reset_overlays?: "tmdb" | "plex";
+        run_order?: ("collections" | "metadata" | "operations" | "overlays")[];
+      }
+    | string;
+}
 export interface FilePath {
   file: string;
   schedule?: string;
@@ -378,21 +442,7 @@ export interface TemplateVariables {
    * Language for collection names and summaries.
    */
   language?:
-    | "default"
-    | "en"
-    | "fr"
-    | "ar"
-    | "da"
-    | "nl"
-    | "de"
-    | "it"
-    | "pt-br"
-    | "nb-no"
-    | "es"
-    | "sv"
-    | "ru"
-    | "bg"
-    | "hu";
+    "default" | "en" | "fr" | "ar" | "da" | "nl" | "de" | "it" | "pt-br" | "nb-no" | "es" | "sv" | "ru" | "bg" | "hu";
   /**
    * Minimum number of items required for any collection in this defaults file to be created.
    */
@@ -611,6 +661,266 @@ export interface TemplateVariables {
    * Changes some Streaming Service lists to regional variants.
    */
   region?: string;
+  /**
+   * Disable a specific collection by key. Set to false to turn off.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^use_(?!all$).+$".
+   *
+   * Override the name of a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^name_.+$".
+   *
+   * Override the summary of a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^summary_.+$".
+   *
+   * Override the sort order of a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^order_.+$".
+   *
+   * Set the schedule for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^schedule_.+$".
+   *
+   * Override minimum_items for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^minimum_items_.+$".
+   *
+   * Override hub_priority for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^hub_priority_.+$".
+   *
+   * Override the poster URL for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^url_poster_.+$".
+   *
+   * Override the poster filepath for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^file_poster_.+$".
+   *
+   * Override the background URL for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^url_background_.+$".
+   *
+   * Override the background filepath for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^file_background_.+$".
+   *
+   * Override Home Tab visibility for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^visible_home_.+$".
+   *
+   * Override Library Tab visibility for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^visible_library_.+$".
+   *
+   * Override Shared Home visibility for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^visible_shared_.+$".
+   *
+   * Override Radarr add_missing for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^radarr_add_missing_.+$".
+   *
+   * Override Radarr root_folder_path for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^radarr_folder_.+$".
+   *
+   * Override Radarr monitor_existing for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^radarr_monitor_existing_.+$".
+   *
+   * Override Radarr search for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^radarr_search_.+$".
+   *
+   * Override Radarr tag for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^radarr_tag_.+$".
+   *
+   * Override Radarr upgrade_existing for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^radarr_upgrade_existing_.+$".
+   *
+   * Override Sonarr add_missing for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^sonarr_add_missing_.+$".
+   *
+   * Override Sonarr root_folder_path for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^sonarr_folder_.+$".
+   *
+   * Override Sonarr monitor_existing for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^sonarr_monitor_existing_.+$".
+   *
+   * Override Sonarr search for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^sonarr_search_.+$".
+   *
+   * Override Sonarr tag for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^sonarr_tag_.+$".
+   *
+   * Override Sonarr upgrade_existing for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^sonarr_upgrade_existing_.+$".
+   *
+   * Override item_radarr_tag for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^item_radarr_tag_.+$".
+   *
+   * Override item_sonarr_tag for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^item_sonarr_tag_.+$".
+   *
+   * Override limit for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^limit_.+$".
+   *
+   * Override the mdblist_list URL for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^mdblist_list_.+$".
+   *
+   * Override the trakt_list URL for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^trakt_list_.+$".
+   *
+   * Override the imdb_list for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^imdb_list_.+$".
+   *
+   * Override the letterboxd_list URL for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^letterboxd_list_.+$".
+   *
+   * Override the Collection Order for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^collection_order_.+$".
+   *
+   * Override the Sync Mode for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^sync_mode_.+$".
+   *
+   * Override how far back the filter looks for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^in_the_last_.+$".
+   *
+   * Override the Smart Filter Sort for a specific collection by key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^sort_by_.+$".
+   *
+   * Overrides the TMDb Watch Provider used for the specified key.
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^discover_with_.+$".
+   */
+  [k: string]:
+    | boolean
+    | string
+    | number
+    | string[]
+    | "sync"
+    | "append"
+    | {
+        starting?: number | string;
+        ending?: number | string;
+        increment?: number;
+        depth?: number;
+        limit?: number;
+      }
+    | "color"
+    | "white"
+    | "bw"
+    | "diiivoy"
+    | "diiivoycolor"
+    | "rainier"
+    | "signature"
+    | "orig"
+    | "transparent"
+    | "default"
+    | "standards"
+    | "hide"
+    | "hide_items"
+    | "show_items"
+    | (number | string)[]
+    | "en"
+    | "fr"
+    | "ar"
+    | "da"
+    | "nl"
+    | "de"
+    | "it"
+    | "pt-br"
+    | "nb-no"
+    | "es"
+    | "sv"
+    | "ru"
+    | "bg"
+    | "hu"
+    | "amethyst"
+    | "aqua"
+    | "blue"
+    | "forest"
+    | "fuchsia"
+    | "gold"
+    | "gray"
+    | "green"
+    | "navy"
+    | "ocean"
+    | "olive"
+    | "orchid"
+    | "pink"
+    | "plum"
+    | "purple"
+    | "red"
+    | "rust"
+    | "salmon"
+    | "sand"
+    | "stb"
+    | "tan"
+    | (string | number)[]
+    | {
+        [k: string]: string | string[];
+      }
+    | undefined;
 }
 export interface FilePathCollectionWithTemplateVariables {
   file: string;
@@ -961,14 +1271,7 @@ export interface TemplateVariables1 {
     | "white";
   text?: string;
   time_window?:
-    | "today"
-    | "yesterday"
-    | "this_week"
-    | "last_week"
-    | "this_month"
-    | "last_month"
-    | "this_year"
-    | "last_year";
+    "today" | "yesterday" | "this_week" | "last_week" | "this_month" | "last_month" | "this_year" | "last_year";
   url?: string;
   use_edition?: boolean;
   use_lowercase?: boolean;
@@ -977,15 +1280,7 @@ export interface TemplateVariables1 {
   vertical_align?: "top" | "center" | "bottom";
   vertical_offset?: string | number;
   vertical_position?:
-    | "top"
-    | "top2"
-    | "top3"
-    | "center"
-    | "center_top"
-    | "center_bottom"
-    | "bottom"
-    | "bottom2"
-    | "bottom3";
+    "top" | "top2" | "top3" | "center" | "center_top" | "center_bottom" | "bottom" | "bottom2" | "bottom3";
   vertical_spacing?: number;
   fresh_rating?: number;
   maximum_rating?: number;
@@ -1002,6 +1297,7 @@ export interface TemplateVariables1 {
   rating3_addon_position?: string;
   rating3_extra?: string;
   rating3_style?: string;
+  [k: string]: unknown;
 }
 export interface KometaDefaultOverlayPath {
   default?:
@@ -2072,14 +2368,7 @@ export interface Settings {
    * Sorts the library Recommendation Hub rows on the Plex home screen and/or library Recommended tab.
    */
   auto_sort_hubs?:
-    | "sort_title"
-    | "sort_title.desc"
-    | "alpha"
-    | "alpha.desc"
-    | "configured"
-    | "configured.desc"
-    | "random"
-    | null;
+    "sort_title" | "sort_title.desc" | "alpha" | "alpha.desc" | "configured" | "configured.desc" | "random" | null;
   /**
    * Used to control the number of minutes to delay running run_again collections.
    * Set the number of minutes to delay running run_again collections after daily run is finished. For example, if a collection adds items to Sonarr/Radarr, the library can automatically re-run 'X' amount of time later so that any downloaded items are processed.
@@ -3394,6 +3683,7 @@ export interface TemplateVariables3 {
   sonarr_add_missing?: boolean;
   sonarr_folder?: string;
   sonarr_tag?: string | unknown[];
+  [k: string]: unknown;
 }
 export interface KometaDefaultPlaylistPath {
   default: "playlist";
