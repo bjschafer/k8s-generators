@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/bookorbit/bookorbit:2.7.0
+  - ghcr.io/bookorbit/bookorbit:2.8.0
