@@ -1,3 +1,0 @@
-kustomize:
-  images:
-  - rclone/rclone:1.75.0

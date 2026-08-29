@@ -302,7 +302,6 @@ class Velero extends Chart {
       "media",
       "netbox",
       "paperless",
-      "rclone",
       "spoolman",
     ];
 

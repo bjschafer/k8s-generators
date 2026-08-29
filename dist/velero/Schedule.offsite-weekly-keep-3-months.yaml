@@ -16,7 +16,6 @@ spec:
       - media
       - netbox
       - paperless
-      - rclone
       - spoolman
     includedResources:
       - persistentvolumeclaims
