@@ -1,9 +1,7 @@
 resources:
-  - ConfigMap.paperless-ai-config.yaml
   - ConfigMap.paperless-web-config.yaml
   - Deployment.ftpserver.yaml
   - Deployment.gotenberg.yaml
-  - Deployment.paperless-ai.yaml
   - Deployment.paperless.yaml
   - Deployment.tika.yaml
   - ExternalSecret.paperless-ai-secrets.yaml
@@ -11,18 +9,15 @@ resources:
   - ExternalSecret.paperless-ftp-credentials.yaml
   - ExternalSecret.paperless-oidc.yaml
   - ExternalSecret.paperless-secret-key.yaml
-  - Ingress.paperless-ai.yaml
   - Ingress.paperless.yaml
   - Password.paperless-ftp-password-generator.yaml
   - Password.paperless-secret-key-generator.yaml
   - PersistentVolumeClaim.data.yaml
   - PersistentVolumeClaim.ftp.yaml
-  - PersistentVolumeClaim.paperless-ai-data.yaml
   - Secret.broker-valkey.yaml
   - Service.broker-valkey-master.yaml
   - Service.ftpserver.yaml
   - Service.gotenberg.yaml
-  - Service.paperless-ai.yaml
   - Service.paperless.yaml
   - Service.tika.yaml
   - StatefulSet.broker-valkey-master.yaml

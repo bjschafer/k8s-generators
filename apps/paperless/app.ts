@@ -57,10 +57,6 @@ NewArgoApp(namespace, {
         versionConstraint: "8-alpine",
         allowTags: "^[v]?[0-9]+\\.[0-9]+\\.[0-9]+$",
       },
-      {
-        image: "clusterzx/paperless-ai",
-        strategy: "digest",
-      },
     ],
   },
 });
@@ -83,13 +79,15 @@ const valkey = new Valkey(app, "valkey", {
   },
 });
 
+// Cloudflare AI Gateway key for the built-in AI features. Named for the retired
+// paperless-ai companion that used to own it; kept under that name so the ESO
+// secret does not churn. Its other two keys (the companion's paperless API token
+// and its own web UI key) went away with the companion.
 const paperlessAiSecrets = new BitwardenSecret(app, "paperless-ai-secrets", {
   name: "paperless-ai-secrets",
   namespace: namespace,
   data: {
-    PAPERLESS_API_TOKEN: "e28143d1-da02-4aaa-b13e-b3fa003d731a",
     CUSTOM_API_KEY: "7f062e0d-213c-4f54-aa03-b3fa003da758",
-    API_KEY: "44f376da-3434-4cf6-8963-b3fa003dd595",
   },
 });
 
@@ -219,9 +217,9 @@ class Paperless extends Chart {
         PAPERLESS_REDIRECT_LOGIN_TO_SSO: "true",
         PAPERLESS_DATA_DIR: "/data/data",
         PAPERLESS_MEDIA_ROOT: "/data/media",
-        // Reuses the same Cloudflare AI Gateway endpoint/model as the paperless-ai
-        // companion below -- built-in suggestions are opt-in per document, so this
-        // complements rather than replaces that automated tagging pipeline.
+        // Built-in AI features, backed by Cloudflare AI Gateway. Since ngx 3.1.0 the
+        // "Apply AI Suggestions" workflow action applies these automatically in bulk,
+        // which is what the retired paperless-ai companion used to do.
         PAPERLESS_AI_ENABLED: "true",
         PAPERLESS_AI_LLM_BACKEND: "openai-like",
         PAPERLESS_AI_LLM_MODEL: "workers-ai/@cf/zai-org/glm-4.7-flash",
@@ -232,43 +230,6 @@ class Paperless extends Chart {
         // Cloudflare AI Gateway credentials rather than needing its own.
         PAPERLESS_AI_LLM_EMBEDDING_BACKEND: "openai-like",
         PAPERLESS_AI_LLM_EMBEDDING_MODEL: "workers-ai/@cf/google/embeddinggemma-300m",
-      },
-    });
-
-    const aiCm = new ConfigMap(this, "paperless-ai-config", {
-      metadata: {
-        name: "paperless-ai-config",
-        namespace: namespace,
-      },
-      data: {
-        PAPERLESS_API_URL: "https://paperless.cmdcentral.xyz/api",
-        PAPERLESS_USERNAME: "bschafer",
-        AI_PROVIDER: "custom",
-        CUSTOM_BASE_URL:
-          "https://gateway.ai.cloudflare.com/v1/5b51f634ca1cf16a0c47a4fcd00a5cf3/cmdcentral/compat",
-        CUSTOM_MODEL: "workers-ai/@cf/zai-org/glm-4.7-flash",
-        SCAN_INTERVAL: "*/30 * * * *",
-        PROCESS_PREDEFINED_DOCUMENTS: "no",
-        TOKEN_LIMIT: "128000",
-        RESPONSE_TOKENS: "1000",
-        ADD_AI_PROCESSED_TAG: "yes",
-        AI_PROCESSED_TAG_NAME: "ai-processed",
-        USE_PROMPT_TAGS: "no",
-        PROMPT_TAGS: "",
-        USE_EXISTING_DATA: "yes",
-        ACTIVATE_TAGGING: "yes",
-        ACTIVATE_CORRESPONDENTS: "yes",
-        ACTIVATE_DOCUMENT_TYPE: "yes",
-        ACTIVATE_TITLE: "yes",
-        ACTIVATE_CUSTOM_FIELDS: "no",
-        CUSTOM_FIELDS: '{"custom_fields":[]}',
-        DISABLE_AUTOMATIC_PROCESSING: "no",
-        RESTRICT_TO_EXISTING_TAGS: "yes",
-        RESTRICT_TO_EXISTING_CORRESPONDENTS: "no",
-        RESTRICT_TO_EXISTING_DOCUMENT_TYPES: "yes",
-        EXTERNAL_API_ENABLED: "no",
-        SYSTEM_PROMPT:
-          'You are a personalized document analyzer. Your task is to analyze documents and extract relevant information.\n\nAnalyze the document content and extract the following information into a structured JSON object:\n\n1. title: Create a concise, meaningful title for the document\n2. correspondent: Identify the sender/institution but do not include addresses\n3. tags: Select up to 4 relevant thematic tags\n4. document_date: Extract the document date (format: YYYY-MM-DD)\n5. document_type: Determine a precise type that classifies the document (e.g. Invoice, Contract, Employer, Information and so on)\n6. language: Determine the document language (e.g. "de" or "en")\n      \nImportant rules for the analysis:\n\nFor tags:\n- FIRST check the existing tags before suggesting new ones\n- Use only relevant categories\n- Maximum 4 tags per document, less if sufficient (at least 1)\n- Avoid generic or too specific tags\n- Use only the most important information for tag creation\n- The output language is the one used in the document! IMPORTANT!\n\nFor the title:\n- Short and concise, NO ADDRESSES\n- Contains the most important identification features\n- For invoices/orders, mention invoice/order number if available\n- The output language is the one used in the document! IMPORTANT!\n\nFor the correspondent:\n- Identify the sender or institution\n- When generating the correspondent, always create the shortest possible form of the company name (e.g. "Amazon" instead of "Amazon EU SARL, German branch")\n\nFor the document date:\n- Extract the date of the document\n- Use the format YYYY-MM-DD\n- If multiple dates are present, use the most relevant one\n\nFor the language:\n- Determine the document language\n- Use language codes like "de" for German or "en" for English\n- If the language is not clear, use "und" as a placeholder\n\n**IMPORTANT**: YOU MUST *ONLY* OUTPUT JSON. NOTHING ELSE.',
       },
     });
 
@@ -458,43 +419,6 @@ class Paperless extends Chart {
     const ftpVolForFtpServer = Volume.fromPersistentVolumeClaim(app, "ftp-vol-ftpserver", ftpPvc);
     ftpserver.Deployment.addVolume(ftpVolForFtpServer);
     ftpserver.Deployment.containers[0].mount("/home/scanner", ftpVolForFtpServer);
-
-    // paperless-ai: AI-powered companion for paperless-ngx
-    new AppPlus(app, "paperless-ai", {
-      name: "paperless-ai",
-      namespace: namespace,
-      image: "clusterzx/paperless-ai:latest",
-      labels: {
-        app: "paperless-ai",
-      },
-      resources: {
-        cpu: {
-          request: Cpu.millis(50),
-          limit: Cpu.millis(500),
-        },
-        memory: {
-          request: Size.mebibytes(512),
-          limit: Size.gibibytes(2),
-        },
-      },
-      ports: [{ number: 3000, name: "http" }],
-      envFrom: [
-        new EnvFrom(aiCm, undefined, undefined),
-        new EnvFrom(undefined, undefined, paperlessAiSecrets.secret),
-      ],
-      enableServiceLinks: false,
-      volumes: [
-        {
-          name: "paperless-ai-data",
-          mountPath: "/app/data",
-          props: {
-            storage: Size.gibibytes(1),
-            storageClassName: StorageClass.CEPH_RBD,
-            accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
-          },
-        },
-      ],
-    });
   }
 }
 
