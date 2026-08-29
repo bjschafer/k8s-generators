@@ -7,8 +7,12 @@ spec:
   schedule: 0 6 * * *
   template:
     csiSnapshotTimeout: 0s
+    includeClusterResources: true
     includedNamespaces:
       - "*"
+    includedResources:
+      - persistentvolumeclaims
+      - persistentvolumes
     itemOperationTimeout: 6h0m0s
     snapshotMoveData: true
     storageLocation: versitygw

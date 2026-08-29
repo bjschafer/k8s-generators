@@ -7,6 +7,7 @@ spec:
   schedule: 33 2 * * 0
   template:
     csiSnapshotTimeout: 0s
+    includeClusterResources: true
     includedNamespaces:
       - argocd
       - authentik
@@ -17,6 +18,9 @@ spec:
       - paperless
       - rclone
       - spoolman
+    includedResources:
+      - persistentvolumeclaims
+      - persistentvolumes
     itemOperationTimeout: 6h0m0s
     snapshotMoveData: true
     storageLocation: wasabi

@@ -246,6 +246,22 @@ class Velero extends Chart {
       itemOperationTimeout: "6h0m0s",
       snapshotMoveData: true,
       storageLocation: "versitygw",
+      // Volume data only, no Kubernetes manifests. Every object Velero
+      // collects lands in a *plaintext* gzipped tarball beside the Kopia repo,
+      // so a full-resource backup writes every Secret in the cluster to the
+      // bucket in the clear -- which is the only reason the offsite copy ever
+      // needed an rclone crypt gateway in front of it. Manifests come from git
+      // and Secrets from Bitwarden, so the tarball was never the part worth
+      // keeping.
+      //
+      // Filtering this far still backs volumes up normally: data movement is
+      // PVC-driven, not pod-driven -- the CSI plugin's BackupItemAction fires
+      // on each PVC it finds and creates the VolumeSnapshot and DataUpload.
+      // includeClusterResources is explicit because it otherwise defaults off
+      // whenever includedNamespaces is anything but "*", which would silently
+      // drop PVs from the offsite schedule alone.
+      includedResources: ["persistentvolumeclaims", "persistentvolumes"],
+      includeClusterResources: true,
     };
 
     const offsiteNamespaces = [
