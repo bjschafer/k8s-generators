@@ -20,7 +20,7 @@ import { Password } from "../../imports/generators.external-secrets.io";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT, RELOADER_ENABLED } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { BitwardenSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
@@ -263,6 +263,9 @@ class Paperless extends Chart {
         app: "paperless",
         component: "web",
       },
+      // The AI settings live in the ConfigMap above and are read from the
+      // environment at startup, so a config change needs a pod restart to land.
+      annotations: RELOADER_ENABLED,
       resources: {
         cpu: {
           request: Cpu.millis(250),
