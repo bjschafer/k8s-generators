@@ -5,13 +5,14 @@ metadata:
   namespace: velero
 spec:
   config:
-    publicUrl: https://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.cmdcentral.xyz
-    region: us-east-1
+    profile: wasabi
+    region: us-central-1
     s3ForcePathStyle: "true"
-    s3Url: http://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.rclone.svc.cluster.local:8042
+    s3Url: https://s3.us-central-1.wasabisys.com
   credential:
     key: config
     name: s3-creds
   objectStorage:
-    bucket: velero
+    bucket: cmdcentral-k8s-backups
+    prefix: velero
   provider: aws

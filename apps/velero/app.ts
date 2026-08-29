@@ -182,6 +182,32 @@ class Velero extends Chart {
       },
     });
 
+    // Kopia encrypts every repository with this password. Velero mints the
+    // secret itself on first use when it is absent -- using the compiled-in
+    // constant `static-passw0rd`, the same value in every Velero install in
+    // the world -- but EnsureCommonRepositoryKey returns early once it exists,
+    // so pre-creating it here is the whole of what makes these repos private.
+    //
+    // It comes from Bitwarden rather than lib's GeneratedSecret because a
+    // password that exists only inside the cluster is worth nothing in the one
+    // situation the offsite copy is for, where the cluster is gone. Changing
+    // it strands every existing repo: Kopia cannot reopen one under a new
+    // password, so a rotation means deleting the BackupRepositories and the
+    // bucket contents both.
+    new BitwardenSecret(this, "repo-credentials", {
+      name: "velero-repo-credentials",
+      namespace: namespace,
+      data: {
+        "repository-password": "51ab5da0-70c2-4611-b1fe-b4b5002e4500",
+      },
+    });
+
+    // Straight to Wasabi, with no rclone crypt gateway in between. The gateway
+    // existed because Velero writes the resources it collects to a plaintext
+    // tarball; now that the schedules carry volume data only and Kopia holds a
+    // real password, everything landing in this bucket is already encrypted
+    // before it leaves the cluster, and the gateway bought nothing but a
+    // single-replica hop in the middle of the offsite path.
     new BackupStorageLocation(this, "wasabi", {
       metadata: {
         name: "wasabi",
@@ -189,14 +215,18 @@ class Velero extends Chart {
       },
       spec: {
         config: {
-          region: "us-east-1",
+          region: "us-central-1",
           s3ForcePathStyle: "true",
-          s3Url:
-            "http://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.rclone.svc.cluster.local:8042",
-          publicUrl: "https://rclone-gateway-crypt-wasabi-cmdcentral-k8s-backups.cmdcentral.xyz",
+          s3Url: "https://s3.us-central-1.wasabisys.com",
+          profile: "wasabi",
         },
         objectStorage: {
-          bucket: "velero",
+          // The gateway presented crypt's contents as a bucket named `velero`;
+          // direct, that is a prefix inside the real bucket. Pre-cutover data
+          // sits beside it under crypt's obscured name for `velero`, and is
+          // unreadable without the rclone config.
+          bucket: "cmdcentral-k8s-backups",
+          prefix: "velero",
         },
         provider: "aws",
         credential: {
