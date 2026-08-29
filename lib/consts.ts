@@ -11,7 +11,7 @@ export const DEFAULT_MEM_LIMIT = Quantity.fromString("256Mi");
 // kubectl pin in step with it; renovate.json disables that pin's own updates
 // precisely so it can only move with this line.
 // renovate: datasource=custom.k3s depName=k3s versioning=loose
-export const K3S_VERSION = "v1.36.3+k3s1";
+export const K3S_VERSION = "v1.36.4+k3s1";
 
 // `v1.36.3+k3s1` -> `v1.36.3`. k3s appends its own build number to the upstream
 // Kubernetes version, and a container tag cannot contain `+`.
