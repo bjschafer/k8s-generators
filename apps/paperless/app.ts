@@ -222,7 +222,14 @@ class Paperless extends Chart {
         // which is what the retired paperless-ai companion used to do.
         PAPERLESS_AI_ENABLED: "true",
         PAPERLESS_AI_LLM_BACKEND: "openai-like",
-        PAPERLESS_AI_LLM_MODEL: "workers-ai/@cf/zai-org/glm-4.7-flash",
+        // glm-4.7-flash is a reasoning model: it buries ~90% of its completion in
+        // reasoning tokens and took 141s/149s on real documents here, blowing the
+        // 120s llm_request_timeout and wedging the (concurrency-1) celery worker.
+        // llama-3.3-70b does the same job in ~6s and, unlike mistral-small, never
+        // invents new tags -- which matters because the workflow action below runs
+        // with create_missing enabled. gpt-oss-120b emits no tool calls through the
+        // gateway's compat layer, so it cannot drive the structured-output path.
+        PAPERLESS_AI_LLM_MODEL: "workers-ai/@cf/meta/llama-3.3-70b-instruct-fp8-fast",
         PAPERLESS_AI_LLM_ENDPOINT:
           "https://gateway.ai.cloudflare.com/v1/5b51f634ca1cf16a0c47a4fcd00a5cf3/cmdcentral/compat",
         // Embedding endpoint/key fall back to the LLM_ENDPOINT/LLM_API_KEY above,
