@@ -114,6 +114,8 @@ data:
         labels: 
           alerts.cmdcentral.xyz/kind: metrics
       groups: 
+        kube-apiserver-slos:
+          enabled: false
         kube-scheduler.rules:
           enabled: false
         kube-state-metrics:

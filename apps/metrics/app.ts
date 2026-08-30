@@ -95,6 +95,24 @@ new HelmApp(app, "stack", {
         "kubernetes-resources": {
           create: false,
         },
+        // Permanently firing since 2026-08-24 and 100% attributable to one benign
+        // client. CNPG's instance manager readiness-probes its own Cluster every 10s
+        // with a hardcoded ~500ms deadline (not .spec.probes.readiness.timeoutSeconds,
+        // which is the kubelet->manager hop); ~6% of those quorum reads now miss it
+        // because dropping cache=unsafe took apiserver->etcd read p99 from ~45ms to
+        // ~1.3s. The client cancels, the handler finishes ~3ms late, and the apiserver
+        // books it as a 500. CNPG catches this and falls back to its cached Cluster
+        // definition, so nothing is degraded -- and the latency is the honest
+        // sync-write floor of these disks, not something software can tune away.
+        //
+        // Excluding that one client leaves *zero* 5xx on the apiserver, so this group
+        // measures nothing else, and our own KubernetesApiServerErrors (fires at 3% of
+        // all requests; currently 0.2%) still catches a genuinely broken apiserver.
+        // Only the alert group goes -- kube-apiserver-{burnrate,availability,histogram}
+        // .rules stay, because the Grafana apiserver dashboards read them.
+        "kube-apiserver-slos": {
+          create: false,
+        },
       },
       labels: {
         "alerts.cmdcentral.xyz/kind": "metrics",
