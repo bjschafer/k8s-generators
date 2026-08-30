@@ -173,7 +173,8 @@ spec:
                 name!="motd-news.service",
                 name!~"sssd.*socket",
                 name!~"fwupd.*service",
-                name!="rpc-svcgssd.service"
+                name!="rpc-svcgssd.service",
+                name!="systemd-networkd-wait-online.service"
             } == 1
           for: 1h
           labels:

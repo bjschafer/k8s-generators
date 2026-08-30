@@ -132,7 +132,12 @@ export function addAlerts(scope: Construct, id: string): void {
       {
         alert: "CephOsdDown",
         expr: `ceph_osd_up == 0`,
-        for: "0m",
+        // for:0m made this the single highest-volume pager in the cluster: 44 pages in
+        // 14 days, median firing duration 3 minutes, arriving in batches of ~8-9 because
+        // a vmhost reboot takes every OSD on it down at once. Ceph rides out a flap of
+        // that length without degrading; 5m drops all of it and still pages within
+        // minutes for an OSD that is actually gone.
+        for: "5m",
         labels: {
           severity: "critical",
           ...SEND_TO_PUSHOVER,
@@ -424,15 +429,20 @@ export function addAlerts(scope: Construct, id: string): void {
         // kube-controller-manager lost its lease, and k3s exits on lease loss -- all
         // three servers died inside 90s.
         //
-        // Threshold is empirical, measured 2026-08-16 right after the VMs moved to
-        // cache=unsafe: p50 0.64ms, p90 3-8ms, p99 30-62ms, and 100% of samples under
-        // 512ms. The p99 tail is host page-cache writeback pressure against the all-HDD
-        // Ceph pool, which cache=unsafe does not remove -- so a textbook 10-25ms etcd
-        // threshold fires here constantly and is useless. 500ms is ~8x the steady-state
-        // p99 (quiet) and well under the 1-4s seen during the incident (still catches
-        // it). Re-measure before tightening this; the tail moves with Ceph load.
+        // The 2026-08-16 baseline this used to cite (fsync p99 30-62ms, commit p99
+        // 3.6-4.2ms) was measured while the VMs ran cache=unsafe, where the guest fsync
+        // returns as soon as the host page cache accepts it -- those numbers were never
+        // real. Moving etcd onto local ZFS zvols with cache=writeback on 2026-08-24 made
+        // the metrics honest and they jumped ~2x for fsync and ~50x for commit with no
+        // change in load (~9 proposals/s, 60MB db). Re-measured over 2026-08-24..08-30:
+        // fsync p99 median 60-125ms, p95 ~0.27s, tail to 1.6s; commit p99 median
+        // 0.10-0.22s, p95 ~0.26s, tail to 1.6s.
+        //
+        // 1.5s is ~6x the p95 and still well inside the 1-4s seen during the incident.
+        // At 0.5s this alert had 1238 firing-minutes in six days; at 1.5s it has 13.
+        // Re-measure before tightening -- the honest floor is HDD-bound, not tunable.
         alert: "EtcdHighFsyncDurations",
-        expr: `histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.5`,
+        expr: `histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 1.5`,
         // 10m so a short snapshot or compaction blip doesn't page, but a backup-driven
         // stall (which runs for many minutes) does.
         for: "10m",
@@ -441,23 +451,26 @@ export function addAlerts(scope: Construct, id: string): void {
           ...SEND_TO_PUSHOVER,
         },
         annotations: {
-          summary: "etcd WAL fsync p99 above 25ms on {{ $labels.instance }}",
+          summary: "etcd WAL fsync p99 above 1.5s on {{ $labels.instance }}",
           description:
             "etcd is struggling to fsync its write-ahead log, which starves every leader-elected controller and can make k3s exit.\n  VALUE = {{ $value }}s\n  LABELS = {{ $labels }}",
         },
       },
       {
         // Backend commit is the other half of the disk story and catches slow reads /
-        // large transactions that fsync latency alone misses. Measured baseline
-        // 2026-08-16: p99 3.6-4.2ms, so 250ms leaves ~60x headroom.
+        // large transactions that fsync latency alone misses. Same recalibration as
+        // EtcdHighFsyncDurations above: the old 250ms came from the fake cache=unsafe
+        // baseline and now sits *below* the honest p95 (~0.26s), so it fired on nearly
+        // every nightly Velero/Kopia window -- 1698 firing-minutes in six days, 21 of
+        // them overnight pages, none actionable. 1.5s gives 30.
         alert: "EtcdHighCommitDurations",
-        expr: `histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.25`,
+        expr: `histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 1.5`,
         for: "10m",
         labels: {
           priority: PRIORITY.NORMAL,
         },
         annotations: {
-          summary: "etcd backend commit p99 above 250ms on {{ $labels.instance }}",
+          summary: "etcd backend commit p99 above 1.5s on {{ $labels.instance }}",
           description:
             "etcd backend commit latency is high, usually the same Ceph contention that drives EtcdHighFsyncDurations.\n  VALUE = {{ $value }}s\n  LABELS = {{ $labels }}",
         },
@@ -698,7 +711,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "HostSystemdServiceCrashed",
-        expr: 'node_systemd_unit_state{\n    state="failed",\n    name!="motd-news.service",\n    name!~"sssd.*socket",\n    name!~"fwupd.*service",\n    name!="rpc-svcgssd.service"\n} == 1',
+        expr: 'node_systemd_unit_state{\n    state="failed",\n    name!="motd-news.service",\n    name!~"sssd.*socket",\n    name!~"fwupd.*service",\n    name!="rpc-svcgssd.service",\n    name!="systemd-networkd-wait-online.service"\n} == 1',
         for: "1h",
         labels: {
           priority: PRIORITY.LOW,
@@ -851,7 +864,11 @@ export function addAlerts(scope: Construct, id: string): void {
       {
         alert: "KubernetesStatefulsetDown",
         expr: "(kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas) != 1",
-        for: "1m",
+        // for:1m fired on any single StatefulSet pod restart -- node reboots, valkey
+        // rollouts, Renovate-driven image bumps. 13 pages in 14 days with a median
+        // firing duration of 1 minute. Anything that recovers inside 10m recovered on
+        // its own; anything that does not is a real outage and still pages.
+        for: "10m",
         labels: {
           priority: PRIORITY.HIGH,
         },
@@ -875,8 +892,15 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "KubernetesPodNotHealthy",
-        expr: 'sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed",pod!~".*maintain-job.*"}) > 0',
-        for: "5m",
+        // Job-owned pods are excluded wholesale rather than by name. Velero's Kopia
+        // repo-maintenance pods were already special-cased, but the same false positives
+        // came from velero backup pods and system-upgrade's apply-*-plan pods, which are
+        // Pending by design while they wait for a node. Joining against kube_pod_owner
+        // covers every Job the cluster grows later without another pod!~ pattern.
+        expr: 'sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed"} * on (namespace, pod) group_left () max by (namespace, pod) (kube_pod_owner{owner_kind!="Job"})) > 0',
+        // was 5m, which never matched the "longer than 15 minutes" the description
+        // promises. 15m is the documented intent and rides out normal scheduling waits.
+        for: "15m",
         labels: {
           priority: PRIORITY.HIGH,
           push_notify: "true",
@@ -971,9 +995,17 @@ export function addAlerts(scope: Construct, id: string): void {
       {
         alert: "KubernetesDaemonsetMisscheduled",
         expr: "kube_daemonset_status_number_misscheduled > 0",
-        for: "1m",
+        // Every kured/system-upgrade node reboot taints the node before its DaemonSet
+        // pods are gone, so all ~7 cluster-wide DaemonSets briefly report a misscheduled
+        // pod at once. At for:1m that was 30 pages in 14 days, 29 of them overnight, and
+        // every single episode had a measured duration of 0-1 minutes -- i.e. it never
+        // once caught anything but a rolling reboot. A genuinely misscheduled pod does
+        // not self-heal, so 15m keeps the real signal and drops all of the reboot noise.
+        for: "15m",
         labels: {
-          priority: PRIORITY.HIGH,
+          // dropped from HIGH: this is a "look at it tomorrow" condition, and HIGH
+          // punches through Pushover quiet hours.
+          priority: PRIORITY.NORMAL,
         },
         annotations: {
           summary: "Kubernetes DaemonSet misscheduled (instance {{ $labels.instance }})",

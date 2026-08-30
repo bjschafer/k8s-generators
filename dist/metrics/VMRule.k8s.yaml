@@ -101,7 +101,7 @@ spec:
                 LABELS = {{ $labels }}
             summary: Kubernetes StatefulSet down (instance {{ $labels.instance }})
           expr: (kube_statefulset_status_replicas_ready / kube_statefulset_status_replicas) != 1
-          for: 1m
+          for: 10m
           labels:
             namespace: metrics
             priority: "1"
@@ -123,8 +123,8 @@ spec:
                 VALUE = {{ $value }}
                 LABELS = {{ $labels }}
             summary: "Kubernetes Pod not healthy (namespace: {{ $labels.namespace }}; pod: {{ $labels.pod }})"
-          expr: sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed",pod!~".*maintain-job.*"}) > 0
-          for: 5m
+          expr: sum by (namespace, pod) (kube_pod_status_phase{phase=~"Pending|Unknown|Failed"} * on (namespace, pod) group_left () max by (namespace, pod) (kube_pod_owner{owner_kind!="Job"})) > 0
+          for: 15m
           labels:
             namespace: metrics
             priority: "1"
@@ -199,10 +199,10 @@ spec:
                 LABELS = {{ $labels }}
             summary: Kubernetes DaemonSet misscheduled (instance {{ $labels.instance }})
           expr: kube_daemonset_status_number_misscheduled > 0
-          for: 1m
+          for: 15m
           labels:
             namespace: metrics
-            priority: "1"
+            priority: "0"
         - alert: KubernetesApiServerErrors
           annotations:
             description: |-

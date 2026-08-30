@@ -15,8 +15,8 @@ spec:
               etcd is struggling to fsync its write-ahead log, which starves every leader-elected controller and can make k3s exit.
                 VALUE = {{ $value }}s
                 LABELS = {{ $labels }}
-            summary: etcd WAL fsync p99 above 25ms on {{ $labels.instance }}
-          expr: histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.5
+            summary: etcd WAL fsync p99 above 1.5s on {{ $labels.instance }}
+          expr: histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 1.5
           for: 10m
           labels:
             namespace: metrics
@@ -28,8 +28,8 @@ spec:
               etcd backend commit latency is high, usually the same Ceph contention that drives EtcdHighFsyncDurations.
                 VALUE = {{ $value }}s
                 LABELS = {{ $labels }}
-            summary: etcd backend commit p99 above 250ms on {{ $labels.instance }}
-          expr: histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 0.25
+            summary: etcd backend commit p99 above 1.5s on {{ $labels.instance }}
+          expr: histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 1.5
           for: 10m
           labels:
             namespace: metrics
