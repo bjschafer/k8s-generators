@@ -55,6 +55,16 @@ new AppPlus(app, `${name}-app`, {
     // SSO is dead while this is set -- log in with a local account.
     // Remove once upstream registers the OIDC route at app-init time.
     OIDC_OAUTH_ENABLED: EnvValue.fromValue("False"),
+
+    // v0.5.1's settings refactor (the 2026-08-30 rebuild of :latest) deleted the
+    // built-in SQLite fallback. default_config.py, configs/docker_config.py and
+    // settings.py all used to default SQLALCHEMY_DATABASE_URI to
+    // 'sqlite:////data/powerdns-admin.db'; all three now leave it unset, and
+    // load_environment() raises 'Database configuration is required' in
+    // create_app() -- so the container dies before gunicorn or `flask db upgrade`
+    // ever run. Set the exact URI the image used to default to, against the same
+    // /data PVC, so the existing database keeps being used.
+    SQLALCHEMY_DATABASE_URI: EnvValue.fromValue("sqlite:////data/powerdns-admin.db"),
   },
   // v0.5.1 rebuilt pda-legacy off docker/common/Dockerfile.app, which dropped
   // the `pda` user entirely -- there is no uid 100 in the image anymore, and

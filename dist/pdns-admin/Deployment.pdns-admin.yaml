@@ -27,6 +27,8 @@ spec:
         - env:
             - name: OIDC_OAUTH_ENABLED
               value: "False"
+            - name: SQLALCHEMY_DATABASE_URI
+              value: sqlite:////data/powerdns-admin.db
           image: powerdnsadmin/pda-legacy:latest
           imagePullPolicy: Always
           livenessProbe:
