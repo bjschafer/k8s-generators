@@ -12,7 +12,7 @@ const labels = {
 };
 const port = 9101;
 
-const klipper_hosts = ["pandora.cmdcentral.xyz:7125"];
+const klipper_hosts = ["pandora.cmdcentral.xyz:7125", "trident.cmdcentral.xyz:7125"];
 
 export class KlipperExporter extends Chart {
   constructor(scope: Construct, id: string) {
