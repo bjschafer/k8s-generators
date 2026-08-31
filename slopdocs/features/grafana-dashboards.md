@@ -37,10 +37,54 @@ Agents: use `grafanactl resources get dashboards` to find UIDs, pull to get the 
 
 ## Folder Support
 
-The provider has `foldersFromFilesStructure: true` but with ConfigMaps the sidecar uses the `grafana_folder` annotation, not file paths. Currently all dashboards land in "General". To add folder support later:
-- Use subdirectories: `resources/Dashboard/<FolderName>/<uid>.json`
-- `loadDashboards()` would need to walk subdirs and add `annotations: { grafana_folder: subdirName }` to each ConfigMap
-- This is a small change, not wired up yet
+Wired up and in use. `loadDashboardsFromDir()` recurses through
+`resources/Dashboard/`, and the folder is the subdirectory path relative to that
+root. The sidecar reads it off the `k8s-sidecar-target-directory` annotation --
+*not* `grafana_folder`, which is what the chart's docs suggest and what this
+section used to claim.
+
+- `resources/Dashboard/<Folder>/<name>.json` -> Grafana folder `<Folder>`
+- Root-level files, and the `General/` subdirectory, emit no annotation and land
+  in Grafana's "General". That is the convention for "no folder".
+- Nested subdirectories produce a slash-joined name; nothing currently uses this.
+
+### Dashboard identity is the uid, not the filename
+
+The uid resolves as `spec.uid ?? metadata.name ?? basename(file)`. In practice
+every dashboard pulled with grafanactl carries `metadata.name`, so **the filename
+does not determine identity**. Consequences worth knowing before reorganising:
+
+- Renaming or moving a JSON file keeps the uid, so Grafana *upserts* the existing
+  dashboard -- new title, new folder, same dashboard, history intact. It does not
+  create a duplicate. This is how `Non-Tech/printers.json` became
+  `Printers/klipper.json`.
+- The ConfigMap name derives from the uid too (`grafana-dashboard-<uid>`), so a
+  move leaves no orphaned ConfigMap for Argo to prune.
+- Conversely, *changing* `metadata.name` forks a new dashboard and abandons the
+  old one. Don't, unless that is the intent.
+
+## v2 schema dashboards are inert
+
+`loadDashboardsFromDir()` skips any file whose `apiVersion` matches `/v2` (added
+in 0b41ed8f). The sidecar's file provisioner only understands the v1 `panels`
+array; v2 replaced it with `elements`/`layout`, and feeding that through produces
+a broken ConfigMap rather than a failure you'd notice.
+
+Currently inert, present in `resources/` as source but deployed by nobody:
+
+- `Printers/filament.json` (v2beta1)
+- `General/home-new.json` (v2alpha1)
+
+These live in Grafana as UI-managed dashboards. **GitOps does not own them**, so
+editing or moving the file changes nothing -- including moving it between folder
+directories, since no ConfigMap is emitted to carry the folder annotation. Move
+them in the UI instead.
+
+There is no cheap way back to v1. `grafanactl resources pull
+dashboards.v1.dashboard.grafana.app/<uid>` is accepted, but Grafana returns
+`v2beta1` with `elements` regardless -- a dashboard stored as v2 is not
+down-converted on read. Recovering one means rebuilding it against the v1 schema
+by hand, or waiting for the sidecar to learn v2.
 
 ## Dashboard Size
 
