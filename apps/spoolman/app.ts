@@ -71,6 +71,11 @@ new AppPlus(app, `${name}-app`, {
     }),
     SPOOLMAN_HOST: EnvValue.fromValue("0.0.0.0"),
     SPOOLMAN_PORT: EnvValue.fromValue("8000"),
+    // Fluidd talks to Spoolman from the browser, so Spoolman must allow the
+    // origins Fluidd is served from (scheme included, or "*" for all).
+    SPOOLMAN_CORS_ORIGIN: EnvValue.fromValue(
+      "https://pandora.cmdcentral.xyz,https://trident.cmdcentral.xyz",
+    ),
     SPOOLMAN_METRICS_ENABLED: EnvValue.fromValue("true"),
     TZ: EnvValue.fromValue("America/Chicago"),
   },

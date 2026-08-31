@@ -48,6 +48,8 @@ spec:
               value: 0.0.0.0
             - name: SPOOLMAN_PORT
               value: "8000"
+            - name: SPOOLMAN_CORS_ORIGIN
+              value: https://pandora.cmdcentral.xyz,https://trident.cmdcentral.xyz
             - name: SPOOLMAN_METRICS_ENABLED
               value: "true"
             - name: TZ
