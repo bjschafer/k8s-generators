@@ -9,6 +9,7 @@ import {
   TZ,
 } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
+import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { WellKnownLabels } from "../../lib/labels";
 import { basename } from "../../lib/util";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
@@ -144,6 +145,22 @@ new AppPlus(app, `${name}-app`, {
       [METALLB_IP_ANNOTATION_KEY]: lbAddress,
       "cmdcentral.xyz/hostname": `${name}-vp.cmdcentral.xyz`,
     },
+  },
+});
+
+new CmdcentralServiceMonitor(app, "sm", {
+  name: name,
+  namespace: namespace,
+  matchLabels: {
+    [WellKnownLabels.Name]: name,
+  },
+  extraConfig: {
+    // Bambuddy serves metrics off the main web port at a non-default path
+    // rather than a dedicated one, so this replaces the construct's endpoint
+    // wholesale instead of just naming a port. Gated behind Settings ->
+    // Prometheus Metrics, which is database state rather than anything this
+    // manifest sets -- if the scrape goes empty, check the toggle first.
+    endpoints: [{ port: "http", path: "/api/v1/metrics" }],
   },
 });
 

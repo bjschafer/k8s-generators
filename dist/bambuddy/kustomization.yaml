@@ -4,3 +4,4 @@ resources:
   - Ingress.bambuddy.yaml
   - PersistentVolumeClaim.bambuddy-data.yaml
   - Service.bambuddy.yaml
+  - VMServiceScrape.bambuddy.yaml
