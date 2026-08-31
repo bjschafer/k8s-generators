@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: bambuddy
+  name: bambuddy
+  namespace: bambuddy
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: bambuddy-app-bambuddy-app-deployment-c8158c48
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: generators
+        app.kubernetes.io/name: bambuddy
+        cdk8s.io/metadata.addr: bambuddy-app-bambuddy-app-deployment-c8158c48
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: BAMBUDDY_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: bambuddy-db-credentials
+            - name: DATABASE_URL
+              value: postgresql://bambuddy:$(BAMBUDDY_DB_PASSWORD)@prod.postgres.svc.cluster.local:5432/bambuddy
+            - name: VIRTUAL_PRINTER_ADVERTISE_ADDRESS
+              value: 10.0.10.85
+            - name: VIRTUAL_PRINTER_PASV_ADDRESS
+              value: 10.0.10.85
+          image: ghcr.io/maziggy/bambuddy:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8000
+          name: bambuddy
+          ports:
+            - containerPort: 8000
+              name: http
+            - containerPort: 3000
+              name: bind
+            - containerPort: 3002
+              name: detect
+            - containerPort: 8883
+              name: mqtt
+            - containerPort: 990
+              name: ftps
+            - containerPort: 6000
+              name: tunnel
+            - containerPort: 322
+              name: rtsp
+            - containerPort: 50000
+              name: ftp-pasv-0
+            - containerPort: 50001
+              name: ftp-pasv-1
+            - containerPort: 50002
+              name: ftp-pasv-2
+            - containerPort: 50003
+              name: ftp-pasv-3
+            - containerPort: 50004
+              name: ftp-pasv-4
+            - containerPort: 50005
+              name: ftp-pasv-5
+            - containerPort: 50006
+              name: ftp-pasv-6
+            - containerPort: 50007
+              name: ftp-pasv-7
+            - containerPort: 50008
+              name: ftp-pasv-8
+            - containerPort: 50009
+              name: ftp-pasv-9
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8000
+          resources:
+            limits:
+              memory: 1024Mi
+            requests:
+              cpu: 50m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              add:
+                - NET_BIND_SERVICE
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 30
+            periodSeconds: 10
+            tcpSocket:
+              port: 8000
+          volumeMounts:
+            - mountPath: /app/data
+              name: pvc-bambuddy-data
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsNonRoot: false
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-bambuddy-data
+          persistentVolumeClaim:
+            claimName: bambuddy-data
+            readOnly: false

@@ -1,0 +1,6 @@
+resources:
+  - Deployment.bambuddy.yaml
+  - ExternalSecret.bambuddy-db-credentials.yaml
+  - Ingress.bambuddy.yaml
+  - PersistentVolumeClaim.bambuddy-data.yaml
+  - Service.bambuddy.yaml

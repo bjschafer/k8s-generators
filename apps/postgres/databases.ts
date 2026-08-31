@@ -160,6 +160,16 @@ export const DATABASES: DatabaseConfig[] = [
   },
 
   {
+    name: "bambuddy",
+    comment: "Bambuddy database owner",
+    appNamespace: "bambuddy",
+    // Bambuddy takes a single postgresql:// URL in DATABASE_URL, so the default
+    // symbol set ("-_$@") would have to survive URL parsing intact. Same
+    // reasoning as `hass` above.
+    passwordGeneration: { length: 40, digits: 8, symbols: 0 },
+  },
+
+  {
     name: "grafanareader",
     comment: "Read-only reporting login used by Grafana datasources",
     // Predates this registry -- created by hand, and the password was never

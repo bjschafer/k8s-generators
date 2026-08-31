@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cmdcentral.xyz/hostname: bambuddy-vp.cmdcentral.xyz
+    metallb.io/loadBalancerIPs: 10.0.10.85
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: bambuddy
+  name: bambuddy
+  namespace: bambuddy
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+    - name: bind
+      port: 3000
+      targetPort: 3000
+    - name: detect
+      port: 3002
+      targetPort: 3002
+    - name: mqtt
+      port: 8883
+      targetPort: 8883
+    - name: ftps
+      port: 990
+      targetPort: 990
+    - name: tunnel
+      port: 6000
+      targetPort: 6000
+    - name: rtsp
+      port: 322
+      targetPort: 322
+    - name: ftp-pasv-0
+      port: 50000
+      targetPort: 50000
+    - name: ftp-pasv-1
+      port: 50001
+      targetPort: 50001
+    - name: ftp-pasv-2
+      port: 50002
+      targetPort: 50002
+    - name: ftp-pasv-3
+      port: 50003
+      targetPort: 50003
+    - name: ftp-pasv-4
+      port: 50004
+      targetPort: 50004
+    - name: ftp-pasv-5
+      port: 50005
+      targetPort: 50005
+    - name: ftp-pasv-6
+      port: 50006
+      targetPort: 50006
+    - name: ftp-pasv-7
+      port: 50007
+      targetPort: 50007
+    - name: ftp-pasv-8
+      port: 50008
+      targetPort: 50008
+    - name: ftp-pasv-9
+      port: 50009
+      targetPort: 50009
+  selector:
+    cdk8s.io/metadata.addr: bambuddy-app-bambuddy-app-deployment-c8158c48
+  type: LoadBalancer

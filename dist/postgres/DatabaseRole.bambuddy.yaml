@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: bambuddy
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: Bambuddy database owner
+  login: true
+  name: bambuddy
+  passwordSecret:
+    name: bambuddy-db-credentials

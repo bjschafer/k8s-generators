@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: bambuddy
+  name: bambuddy-data
+  namespace: bambuddy
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: ceph-rbd
+  volumeMode: Filesystem
