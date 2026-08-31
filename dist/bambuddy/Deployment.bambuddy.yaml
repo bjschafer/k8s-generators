@@ -34,7 +34,7 @@ spec:
                   key: password
                   name: bambuddy-db-credentials
             - name: DATABASE_URL
-              value: postgresql://bambuddy:$(BAMBUDDY_DB_PASSWORD)@prod.postgres.svc.cluster.local:5432/bambuddy
+              value: postgresql+asyncpg://bambuddy:$(BAMBUDDY_DB_PASSWORD)@prod.postgres.svc.cluster.local:5432/bambuddy
             - name: VIRTUAL_PRINTER_ADVERTISE_ADDRESS
               value: 10.0.10.85
             - name: VIRTUAL_PRINTER_PASV_ADDRESS

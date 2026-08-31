@@ -98,8 +98,12 @@ new AppPlus(app, `${name}-app`, {
     // password has to precede the URL that interpolates it. Same pattern as
     // apps/hass.
     BAMBUDDY_DB_PASSWORD: EnvValue.fromSecretValue({ secret: dbCreds.secret, key: "password" }),
+    // The driver half of the scheme is not optional here. Bambuddy builds a
+    // SQLAlchemy *async* engine, and a bare `postgresql://` URL resolves to the
+    // default sync driver -- psycopg2, which the image does not ship. That
+    // fails at import time, so it crashloops rather than degrading.
     DATABASE_URL: EnvValue.fromValue(
-      `postgresql://${name}:$(BAMBUDDY_DB_PASSWORD)@prod.postgres.svc.cluster.local:5432/${name}`,
+      `postgresql+asyncpg://${name}:$(BAMBUDDY_DB_PASSWORD)@prod.postgres.svc.cluster.local:5432/${name}`,
     ),
     // Without these the virtual printer hands the slicer its own pod IP as the
     // upload target. Nothing off the cluster network routes there, so sends
