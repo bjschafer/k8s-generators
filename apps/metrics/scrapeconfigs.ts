@@ -312,7 +312,7 @@ export class ScrapeConfigs extends Chart {
       spec: {
         staticConfigs: [
           {
-            targets: ["pandora.cmdcentral.xyz:9100"],
+            targets: ["pandora.cmdcentral.xyz:9100", "trident.cmdcentral.xyz:9100"],
             labels: { job: "printers" },
           },
         ],
