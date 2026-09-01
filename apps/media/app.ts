@@ -452,7 +452,7 @@ for (const mediaApp of mediaApps) {
 // strategy below follows 2.8.1's digest and can never reach 2.8.2 or 2.9 --
 // this is a full freeze, and Renovate is the only thing that will say so.
 // renovate: datasource=docker depName=ghcr.io/linuxserver/resilio-sync
-const resilioVersion = "2.8.1";
+const resilioVersion = "3.1.2";
 const resilioImage = `ghcr.io/linuxserver/resilio-sync:${resilioVersion}`;
 new MediaApp(app, {
   name: "resilio-sync",
