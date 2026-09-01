@@ -83,7 +83,7 @@ spec:
                   value: statsd-exporter-lb.metrics-exporters.svc.cluster.local
                 - name: STATSD_PORT
                   value: "9125"
-              image: python:3.13-alpine
+              image: python:3.14-alpine
               imagePullPolicy: IfNotPresent
               name: fetch
               resources:
