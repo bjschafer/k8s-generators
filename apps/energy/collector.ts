@@ -38,7 +38,7 @@ const SCHEDULE = Cron.schedule({ minute: "17", hour: "5" });
 // thing that will ever mention a new major. Neither bump is automatic: the psql
 // major is tied to the servers this loads into.
 // renovate: datasource=docker depName=python
-const FETCH_VERSION = "3.13-alpine";
+const FETCH_VERSION = "3.14-alpine";
 // renovate: datasource=docker depName=postgres
 const PSQL_VERSION = "17-alpine";
 const FETCH_IMAGE = `python:${FETCH_VERSION}`;
