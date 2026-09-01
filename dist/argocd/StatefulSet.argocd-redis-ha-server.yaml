@@ -123,7 +123,13 @@ spec:
                   name: argocd-redis
           image: ecr-public.aws.com/docker/library/redis:8.2.3-alpine
           imagePullPolicy: IfNotPresent
-          lifecycle: {}
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - sleep 30; redis-cli -p 26379 sentinel reset argocd
           livenessProbe:
             exec:
               command:
