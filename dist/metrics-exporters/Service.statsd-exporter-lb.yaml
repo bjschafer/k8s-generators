@@ -3,6 +3,7 @@ kind: Service
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: statsd.cmdcentral.xyz
+    external-dns.kubernetes.io/hostname: statsd.cmdcentral.xyz
   name: statsd-exporter-lb
   namespace: metrics-exporters
 spec:

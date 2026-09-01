@@ -2,7 +2,7 @@ import { Chart, Size } from "cdk8s";
 import { Cpu, Protocol, Service, ServiceType } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { AppPlus } from "../../lib/app-plus";
-import { EXTERNAL_DNS_ANNOTATION_KEY, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
+import { externalDnsHostname, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { namespace } from "./app";
 
 const name = "statsd-exporter";
@@ -38,7 +38,7 @@ export class StatsdExporter extends Chart {
         name: `${name}-lb`,
         namespace,
         annotations: {
-          [EXTERNAL_DNS_ANNOTATION_KEY]: "statsd.cmdcentral.xyz",
+          ...externalDnsHostname("statsd.cmdcentral.xyz"),
         },
       },
       type: ServiceType.LOAD_BALANCER,

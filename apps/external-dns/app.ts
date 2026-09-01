@@ -37,14 +37,13 @@ const COMMON_ARGS = [
   "--policy=sync",
   // v0.22.0 flipped the default annotation prefix from
   // `external-dns.alpha.kubernetes.io/` to `external-dns.kubernetes.io/`, and
-  // no version reads both -- it is one prefix or the other. Every annotation
-  // in this repo is still the alpha one (EXTERNAL_DNS_ANNOTATION_KEY, the
-  // traefik HelmChartConfig, and navidrome's target), so without this flag
-  // v0.22.0 finds no hostname on the LoadBalancer Services and no target on
-  // navidrome, and --policy=sync deletes those records. That is the whole of
-  // what af63b1fc hit: the two source regressions it blamed do not exist, and
-  // the traefik host extractor is byte-identical across the two tags. Drop
-  // this flag only after every annotation above has moved to the GA prefix.
+  // no version reads both -- it is one prefix or the other, and a resource
+  // missing the one being read looks like a resource that wants no record, so
+  // --policy=sync deletes it. That is the whole of what af63b1fc hit: the two
+  // source regressions it blamed do not exist, and the traefik host extractor
+  // is byte-identical across the two tags. Every site now carries both
+  // prefixes (externalDnsHostname/externalDnsTarget in lib/consts.ts, plus the
+  // traefik HelmChartConfig), so this flag is safe to point either way.
   "--annotation-prefix=external-dns.alpha.kubernetes.io/",
 ];
 

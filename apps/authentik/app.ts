@@ -14,7 +14,7 @@ import {
 } from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, externalDnsHostname, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor, MonitoringRule } from "../../lib/monitoring/victoriametrics";
@@ -264,7 +264,7 @@ class AuthentikMonitoring extends Chart {
         namespace: namespace,
         annotations: {
           "cmdcentral.xyz/hostname": "ldap.cmdcentral.xyz",
-          "external-dns.alpha.kubernetes.io/hostname": "ldap.cmdcentral.xyz",
+          ...externalDnsHostname("ldap.cmdcentral.xyz"),
           "metallb.io/loadBalancerIPs": "10.0.10.82",
         },
         labels: {

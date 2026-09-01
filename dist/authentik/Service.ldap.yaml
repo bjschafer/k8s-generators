@@ -4,6 +4,7 @@ metadata:
   annotations:
     cmdcentral.xyz/hostname: ldap.cmdcentral.xyz
     external-dns.alpha.kubernetes.io/hostname: ldap.cmdcentral.xyz
+    external-dns.kubernetes.io/hostname: ldap.cmdcentral.xyz
     metallb.io/loadBalancerIPs: 10.0.10.82
   labels:
     app: authentik

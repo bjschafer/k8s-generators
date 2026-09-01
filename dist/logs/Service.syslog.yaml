@@ -3,6 +3,7 @@ kind: Service
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: syslog.cmdcentral.xyz
+    external-dns.kubernetes.io/hostname: syslog.cmdcentral.xyz
   name: syslog
   namespace: logs
 spec:

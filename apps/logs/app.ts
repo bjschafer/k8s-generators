@@ -1,6 +1,6 @@
 import { App, Chart, Helm } from "cdk8s";
 import { basename } from "path";
-import { CLUSTER_ISSUER, DEFAULT_APP_PROPS, EXTERNAL_DNS_ANNOTATION_KEY } from "../../lib/consts";
+import { CLUSTER_ISSUER, DEFAULT_APP_PROPS, externalDnsHostname } from "../../lib/consts";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Construct } from "constructs";
 import { StorageClass } from "../../lib/volume";
@@ -184,7 +184,7 @@ class VMLogs extends Chart {
         name: "syslog",
         namespace: namespace,
         annotations: {
-          [EXTERNAL_DNS_ANNOTATION_KEY]: "syslog.cmdcentral.xyz",
+          ...externalDnsHostname("syslog.cmdcentral.xyz"),
         },
       },
       spec: {

@@ -27,7 +27,7 @@ import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import {
   BACKUP_ANNOTATION_EXCLUDE,
   DEFAULT_APP_PROPS,
-  EXTERNAL_DNS_ANNOTATION_KEY,
+  externalDnsHostname,
 } from "../../lib/consts";
 import { BitwardenSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
@@ -176,7 +176,7 @@ class ProdPostgres extends Chart {
         name: "prod",
         namespace: namespace,
         annotations: {
-          [EXTERNAL_DNS_ANNOTATION_KEY]: "pg-prod.cmdcentral.xyz",
+          ...externalDnsHostname("pg-prod.cmdcentral.xyz"),
         },
       },
       spec: {

@@ -16,7 +16,7 @@ import {
   Secret,
   Volume,
 } from "cdk8s-plus-34";
-import { DEFAULT_SECURITY_CONTEXT, LSIO_ENVVALUE } from "../../lib/consts";
+import { DEFAULT_SECURITY_CONTEXT, externalDnsTarget, LSIO_ENVVALUE } from "../../lib/consts";
 import { StorageClass } from "../../lib/volume";
 import {
   IngressRoute,
@@ -140,7 +140,7 @@ export class Navidrome extends Chart {
         namespace: namespace,
         labels: labels,
         annotations: {
-          "external-dns.alpha.kubernetes.io/target": "10.0.10.80", // ew
+          ...externalDnsTarget("10.0.10.80"), // ew
         },
       },
       spec: {

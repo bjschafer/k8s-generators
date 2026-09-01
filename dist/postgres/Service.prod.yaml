@@ -3,6 +3,7 @@ kind: Service
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: pg-prod.cmdcentral.xyz
+    external-dns.kubernetes.io/hostname: pg-prod.cmdcentral.xyz
   name: prod
   namespace: postgres
 spec:
