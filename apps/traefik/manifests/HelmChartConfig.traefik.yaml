@@ -52,7 +52,6 @@ spec:
     service:
       annotations:
         metallb.io/loadBalancerIPs: 10.0.10.80
-        external-dns.alpha.kubernetes.io/hostname: traefik-k8s.cmdcentral.xyz
         external-dns.kubernetes.io/hostname: traefik-k8s.cmdcentral.xyz
       spec:
         externalTrafficPolicy: Local

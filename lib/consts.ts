@@ -166,17 +166,15 @@ export const RELOADER_ENABLED = {
   "reloader.stakater.com/auto": "true",
 };
 
-// external-dns v0.22.0 moved its default annotation prefix from
-// `external-dns.alpha.kubernetes.io/` to `external-dns.kubernetes.io/`, and it
-// reads exactly one of the two -- whichever --annotation-prefix names (see
-// apps/external-dns/app.ts). Writing both keeps that flag a no-op in either
-// direction: no reconcile can ever see a resource without the prefix it is
-// currently reading, which is what deletes records. Once the flag has named the
-// GA prefix through a full reconcile, the alpha half can come out of this list.
-const EXTERNAL_DNS_PREFIXES = [
-  "external-dns.alpha.kubernetes.io/",
-  "external-dns.kubernetes.io/",
-] as const;
+// external-dns reads exactly one annotation prefix -- whichever
+// --annotation-prefix names (see apps/external-dns/app.ts) -- and a resource
+// missing the one being read looks like a resource that wants no record, which
+// --policy=sync then deletes. That makes changing prefixes a three-step
+// migration rather than an edit: add the new one to this list, flip the flag
+// once every live object is confirmed to carry both, then drop the old one.
+// This list is the seam that keeps steps 1 and 3 to one line each; v0.22.0's
+// alpha -> GA move went through it in dc389b72 / 40df221c / this commit.
+const EXTERNAL_DNS_PREFIXES = ["external-dns.kubernetes.io/"] as const;
 
 function externalDnsAnnotation(suffix: string, value: string): Record<string, string> {
   return Object.fromEntries(EXTERNAL_DNS_PREFIXES.map((prefix) => [`${prefix}${suffix}`, value]));
