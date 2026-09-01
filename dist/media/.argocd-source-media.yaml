@@ -4,7 +4,6 @@ kustomize:
   - ghcr.io/linuxserver/sonarr:latest@sha256:c19aa4ecdf03d73e1d5c901da33744cb7eb4d921f89bafed1ca264601d7fa224
   - ghcr.io/linuxserver/radarr:latest@sha256:119aaa4a4f7349bcd2a136c5373a0d7925b5479915c7dfe0c0ad352db2a6d438
   - ghcr.io/linuxserver/lidarr:latest@sha256:c74c32408fdf6e7926ad62641fc1a5544206ee65c33f2188bb179edb30e28f5a
-  - lscr.io/linuxserver/readarr:latest@dummy
   - ghcr.io/linuxserver/sabnzbd:latest@sha256:13d4404f1242f819e0cc2e294def5858def251a3609eb59404dad303075a564a
   - ghcr.io/linuxserver/prowlarr:latest@sha256:ab91301778251f82a31bbfc87f0497376d59e84439d9a1ceff6a61d594d1e3d7
   - ghcr.io/vavallee/bindery:latest@sha256:e34e37d91f54f5ae5cbdd7a2910f415be0056b0ad7b0265bf8ac56f46de22b63
