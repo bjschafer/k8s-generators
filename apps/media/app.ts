@@ -448,7 +448,12 @@ for (const mediaApp of mediaApps) {
 }
 
 // resilio-sync is special due to subpath mounts
-const resilioImage = "ghcr.io/linuxserver/resilio-sync:2.8.1";
+// The only image here on a fixed tag rather than `:latest`, so the digest
+// strategy below follows 2.8.1's digest and can never reach 2.8.2 or 2.9 --
+// this is a full freeze, and Renovate is the only thing that will say so.
+// renovate: datasource=docker depName=ghcr.io/linuxserver/resilio-sync
+const resilioVersion = "2.8.1";
+const resilioImage = `ghcr.io/linuxserver/resilio-sync:${resilioVersion}`;
 new MediaApp(app, {
   name: "resilio-sync",
   namespace: namespace,

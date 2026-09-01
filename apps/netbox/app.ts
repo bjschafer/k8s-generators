@@ -19,14 +19,18 @@ import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { BitwardenSecret } from "../../lib/secrets";
-import { Valkey } from "../../lib/valkey";
+import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 const port = 8080;
-const image = "netboxcommunity/netbox:v4.6.5";
+// Renovate watches this for v5 only; the updater already moves it within v4
+// (constraint below derives from this same const, so the two cannot disagree).
+// renovate: datasource=docker depName=netboxcommunity/netbox
+const netboxVersion = "v4.6.5";
+const image = `netboxcommunity/netbox:${netboxVersion}`;
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -35,7 +39,7 @@ NewArgoApp(name, {
       {
         image: "netboxcommunity/netbox",
         strategy: "semver",
-        versionConstraint: "v4.x.x",
+        versionConstraint: `${netboxVersion.split(".")[0]}.x.x`,
         // upstream also publishes `vX.Y.Z-a.b.c` (netbox-docker build) and
         // `snapshot`/`feature` tags -- only take plain releases.
         allowTags: "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
@@ -43,7 +47,7 @@ NewArgoApp(name, {
       {
         image: "ghcr.io/valkey-io/valkey",
         strategy: "semver",
-        versionConstraint: "8-alpine",
+        versionConstraint: VALKEY_VERSION,
         allowTags: "^[v]?[0-9]+\\.[0-9]+\\.[0-9]+$",
       },
     ],
@@ -84,7 +88,7 @@ const oidcSecret = new BitwardenSecret(app, "oidc", {
 const valkey = new Valkey(app, "valkey", {
   name: name,
   namespace: namespace,
-  version: "8-alpine",
+  version: VALKEY_VERSION,
   password: "netbox",
   resources: {
     requests: {

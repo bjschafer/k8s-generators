@@ -37,7 +37,7 @@ spec:
           env:
             - name: DISABLE_GOOGLE_CHROME
               value: "1"
-          image: gotenberg/gotenberg:7.8.3
+          image: gotenberg/gotenberg:8.36.0
           imagePullPolicy: Always
           name: gotenberg
           ports:

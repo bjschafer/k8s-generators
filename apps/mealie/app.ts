@@ -11,6 +11,11 @@ import { BitwardenSecret } from "../../lib/secrets";
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
+
+// The major line the updater is allowed to follow. Nothing else in the repo
+// would mention a v4, so Renovate watches this const for it.
+// renovate: datasource=docker depName=ghcr.io/mealie-recipes/mealie
+const majorVersion = "v3";
 const port = 9000;
 
 NewArgoApp(name, {
@@ -20,7 +25,7 @@ NewArgoApp(name, {
       {
         image: "ghcr.io/mealie-recipes/mealie",
         strategy: "semver",
-        versionConstraint: "v3.x.x",
+        versionConstraint: `${majorVersion}.x.x`,
       },
     ],
   },

@@ -77,6 +77,53 @@
       "allowedVersions": "<4"
     },
     {
+      "description": "Images this repo pins to a release *line* rather than to a version. Each has an argocd-image-updater entry that moves it within that line, so the pin is a ceiling, not a version -- and nothing was watching the ceiling. authentik sat at 2026.8.x while a calendar-versioned product shipped a minor a month; resilio-sync's `digest` strategy on a fixed 2.8.1 tag is a total freeze that reads like a pin; and netbox/immich/mealie/atuin/bookorbit/valkey/gotenberg would each go a major behind in silence. These get a PR and a `pinned` label, never an automerge: every one of them is a migration, a schema change, or (external-dns v0.22.0) a known-destructive release the pin exists to hold back. Listed by depName rather than by manager so it survives a pin moving between files.",
+      "matchDatasources": ["docker"],
+      "matchDepNames": [
+        "ghcr.io/atuinsh/atuin",
+        "ghcr.io/bookorbit/bookorbit",
+        "ghcr.io/goauthentik/server",
+        "ghcr.io/immich-app/immich-server",
+        "ghcr.io/linuxserver/resilio-sync",
+        "ghcr.io/mealie-recipes/mealie",
+        "ghcr.io/valkey-io/valkey",
+        "gotenberg/gotenberg",
+        "netboxcommunity/netbox",
+        "registry.k8s.io/external-dns/external-dns"
+      ],
+      "automerge": false,
+      "labels": ["pinned"]
+    },
+    {
+      "description": "Don't restate what argocd-image-updater already does. For the entries above whose constraint is a major line (`v4.x.x`, `8-alpine`, `v3`), the updater takes every minor and patch within it on its own, and a Renovate PR for the same bump is pure noise against a base the updater does not even read -- it writes .argocd-source-<app>.yaml, not the manifest. Leaving these enabled would also let them ride the blanket custom.regex automerge above. Only the major, which the constraint deliberately blocks, is worth a human's attention.",
+      "matchDatasources": ["docker"],
+      "matchDepNames": [
+        "ghcr.io/atuinsh/atuin",
+        "ghcr.io/bookorbit/bookorbit",
+        "ghcr.io/immich-app/immich-server",
+        "ghcr.io/mealie-recipes/mealie",
+        "ghcr.io/valkey-io/valkey",
+        "gotenberg/gotenberg",
+        "netboxcommunity/netbox"
+      ],
+      "matchUpdateTypes": ["minor", "patch"],
+      "enabled": false
+    },
+    {
+      "description": "Same idea, one notch finer: authentik and external-dns are capped at a *minor* line, not a major one, so the patch is what the updater already handles and the minor is the one nobody would otherwise hear about. resilio-sync is deliberately absent from both suppression rules -- its constraint reaches nothing at all, so every update type is news.",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["ghcr.io/goauthentik/server", "registry.k8s.io/external-dns/external-dns"],
+      "matchUpdateTypes": ["patch"],
+      "enabled": false
+    },
+    {
+      "description": "Hand-rolled sidecars with no argocd-image-updater entry at all, so Renovate is the only thing that will ever mention a new version. blackbox-exporter was `:latest` with `imagePullPolicy: Always`, which meant the running version changed on any pod restart and git recorded none of it. The two Postgres client images are pinned to the major of the servers they talk to (both clusters are 17), and python is the energy collector's runtime -- none of these should land unread on green, so no automerge; `postgres` and `python` are scoped to the docker datasource because the bare names are also plausible npm packages.",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["quay.io/prometheus/blackbox-exporter", "postgres", "python"],
+      "automerge": false,
+      "labels": ["pinned"]
+    },
+    {
       "description": "kubectl is only supported within one minor of the apiserver, so this pin belongs to the cluster's k3s release, not to kubectl's own release cadence -- left to float it drifts ahead of the cluster and silently changes KUBE_VERSION, which feeds `helm template`'s .Capabilities and re-renders manifests. It moves by hand alongside K3S_VERSION in lib/consts.ts, in the same PR as the k3s bump that a human already has to review.",
       "matchManagers": ["mise"],
       "matchDepNames": ["kubectl"],
@@ -103,8 +150,8 @@
     },
     {
       "customType": "regex",
-      "description": "Bump chart/release versions pinned in any apps/*/app.ts or lib/*.ts, annotated the same way as the literal versions in tools/sources.ts. Two shapes are matched: a top-level `const <name> = \"...\"` (the common case, and what tools/sources.ts reads back via VersionSource kind 'app-const'), and an inline `version: \"...\"` inside a HelmApp call for the charts that never needed a named const. `registryUrl` is optional and only carried by the `datasource=helm` entries -- the helm datasource has no default registry to fall back on, so a chart without it resolves to nothing and is silently skipped. lib/ is in scope because the shared constructs pin images too (mariadb in lib/mysql.ts, exportarr in lib/media-app.ts, the cluster's k3s release in lib/consts.ts), and those went untracked for as long as the pattern only listed apps/.",
-      "managerFilePatterns": ["/^apps/[^/]+/app\\.ts$/", "/^lib/[^/]+\\.ts$/"],
+      "description": "Bump chart/release versions pinned in any apps/*/*.ts or lib/*.ts, annotated the same way as the literal versions in tools/sources.ts. Two shapes are matched: a top-level `const <name> = \"...\"` (the common case, and what tools/sources.ts reads back via VersionSource kind 'app-const'), and an inline `version: \"...\"` inside a HelmApp call for the charts that never needed a named const. `registryUrl` is optional and only carried by the `datasource=helm` entries -- the helm datasource has no default registry to fall back on, so a chart without it resolves to nothing and is silently skipped. lib/ is in scope because the shared constructs pin images too (mariadb in lib/mysql.ts, exportarr in lib/media-app.ts, valkey in lib/valkey.ts, the cluster's k3s release in lib/consts.ts), and those went untracked for as long as the pattern only listed apps/. Every .ts under an app is in scope, not just app.ts: blackbox-exporter (apps/metrics/blackbox.ts) and the pg-dump image (apps/postgres/pg-dump.ts) both sat completely unwatched behind the narrower pattern, since an app's helper modules are exactly where hand-rolled sidecars end up.",
+      "managerFilePatterns": ["/^apps/[^/]+/.+\\.ts$/", "/^lib/[^/]+\\.ts$/"],
       "matchStrings": [
         "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*(?:export )?const \\w+ = \"(?<currentValue>[^\"]+)\";",
         "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: packageName=(?<packageName>\\S+))?(?: registryUrl=(?<registryUrl>\\S+))?(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*version: \"(?<currentValue>[^\"]+)\","

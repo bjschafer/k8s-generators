@@ -24,11 +24,18 @@ import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT, RELOADER_ENABLED } from ".
 import { NewKustomize } from "../../lib/kustomize";
 import { BitwardenSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
-import { Valkey } from "../../lib/valkey";
+import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
+
+// The kustomize base had sat at 7.8.3 while the updater's override ran 8.36.0,
+// so the manifest in git named a version that has not been deployed in a long
+// time. Derives the updater's constraint too, which is what keeps the two
+// honest; Renovate watches it for the 9 the updater cannot take.
+// renovate: datasource=docker depName=gotenberg/gotenberg
+const gotenbergVersion = "8.36.0";
 
 NewArgoApp(namespace, {
   namespace: namespace,
@@ -49,12 +56,12 @@ NewArgoApp(namespace, {
       {
         image: "gotenberg/gotenberg",
         strategy: "semver",
-        versionConstraint: "8.x.x",
+        versionConstraint: `${gotenbergVersion.split(".")[0]}.x.x`,
       },
       {
         image: "ghcr.io/valkey-io/valkey",
         strategy: "semver",
-        versionConstraint: "8-alpine",
+        versionConstraint: VALKEY_VERSION,
         allowTags: "^[v]?[0-9]+\\.[0-9]+\\.[0-9]+$",
       },
     ],
@@ -65,7 +72,7 @@ NewArgoApp(namespace, {
 const valkey = new Valkey(app, "valkey", {
   name: "broker",
   namespace: namespace,
-  version: "8-alpine",
+  version: VALKEY_VERSION,
   password: "paperless",
   resources: {
     requests: {
@@ -320,7 +327,7 @@ class Paperless extends Chart {
     new AppPlus(app, "gotenberg", {
       name: "gotenberg",
       namespace: namespace,
-      image: "gotenberg/gotenberg:7.8.3",
+      image: `gotenberg/gotenberg:${gotenbergVersion}`,
       labels: {
         app: "paperless",
         component: "gotenberg",

@@ -17,7 +17,16 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
-const EXTERNAL_DNS_IMAGE = "registry.k8s.io/external-dns/external-dns:v0.21.0";
+// The single source of truth for the pin: the tag below and the updater's
+// versionConstraint both derive from it, so the ceiling can never drift from
+// what is deployed. Renovate watches it for the minor the updater is not
+// allowed to take -- as a PR to read, never to automerge (see the comment on
+// the constraint below for why v0.22.0 is not a bump you want).
+// renovate: datasource=docker depName=registry.k8s.io/external-dns/external-dns
+const EXTERNAL_DNS_VERSION = "v0.21.0";
+const EXTERNAL_DNS_IMAGE = `registry.k8s.io/external-dns/external-dns:${EXTERNAL_DNS_VERSION}`;
+// `v0.21.0` -> `v0.21.x`
+const EXTERNAL_DNS_LINE = `${EXTERNAL_DNS_VERSION.split(".").slice(0, 2).join(".")}.x`;
 const UNIFI_WEBHOOK_IMAGE = "ghcr.io/home-operations/external-dns-unifi-webhook:latest";
 
 const COMMON_ARGS = [
@@ -41,7 +50,7 @@ NewArgoApp(name, {
         // `Host(`a`) || Host(`b`)` match, so it deletes live records on startup.
         image: "registry.k8s.io/external-dns/external-dns",
         strategy: "semver",
-        versionConstraint: "v0.21.x",
+        versionConstraint: EXTERNAL_DNS_LINE,
       },
       {
         image: "ghcr.io/home-operations/external-dns-unifi-webhook",

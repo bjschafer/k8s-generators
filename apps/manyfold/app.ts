@@ -8,7 +8,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { NFSVolumeContainer } from "../../lib/nfs";
 import { BitwardenSecret } from "../../lib/secrets";
-import { Valkey } from "../../lib/valkey";
+import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
 
 const namespace = basename(__dirname);
@@ -32,7 +32,7 @@ NewArgoApp(name, {
       // rather than semver so it stays on the alpine variant.
       {
         image: "ghcr.io/valkey-io/valkey",
-        versionConstraint: "8-alpine",
+        versionConstraint: VALKEY_VERSION,
         strategy: "digest",
       },
     ],
@@ -59,7 +59,7 @@ const manyfoldSecrets = new BitwardenSecret(app, "manyfold-secrets", {
 const valkey = new Valkey(app, "valkey", {
   name: name,
   namespace: namespace,
-  version: "8-alpine",
+  version: VALKEY_VERSION,
   resources: {
     requests: {
       cpu: Quantity.fromString("100m"),

@@ -26,7 +26,7 @@ spec:
       containers:
         - args:
             - --config.file=/config/blackbox.yaml
-          image: quay.io/prometheus/blackbox-exporter:latest
+          image: quay.io/prometheus/blackbox-exporter:v0.28.0
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3

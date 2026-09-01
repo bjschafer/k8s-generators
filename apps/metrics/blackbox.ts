@@ -16,6 +16,14 @@ import { Alert, SEND_TO_PUSHOVER } from "../../lib/monitoring/alerts";
 import { namespace } from "./app";
 
 const name = "blackbox-exporter";
+
+// Was `:latest`, which apps/metrics has no argocd-image-updater block to track
+// -- so the running version changed on every pod restart and git recorded none
+// of it. `latest` and `v0.28.0` are the same digest today, so pinning here is a
+// no-op deploy that makes the version reviewable.
+// renovate: datasource=docker depName=quay.io/prometheus/blackbox-exporter
+const version = "v0.28.0";
+const image = `quay.io/prometheus/blackbox-exporter:${version}`;
 const labels = {
   app: name,
 };
@@ -47,7 +55,7 @@ export class BlackboxExporter extends Chart {
       containers: [
         {
           name: name,
-          image: "quay.io/prometheus/blackbox-exporter:latest",
+          image: image,
           imagePullPolicy: ImagePullPolicy.ALWAYS,
           securityContext: DEFAULT_SECURITY_CONTEXT,
           args: ["--config.file=/config/blackbox.yaml"],

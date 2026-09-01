@@ -5,7 +5,18 @@ import { Quantity, ResourceRequirements } from "cdk8s-plus-34/lib/imports/k8s";
 import { Construct } from "constructs";
 import { IntOrString, KubeSecret, KubeService, KubeStatefulSet } from "../imports/k8s";
 
-export type ValkeyVersion = "8" | "8-alpine";
+// Template-literal rather than a hand-listed union: the union had to be edited
+// for every new major, which is exactly the edit a Renovate bump makes -- so a
+// bump would land red on a type error rather than on the review it wants.
+export type ValkeyVersion = `${number}` | `${number}-alpine`;
+
+// Every app that runs a Valkey pins the same major line, so it lives here once
+// rather than in five app.ts files drifting apart. It feeds both the image tag
+// and the argocd-image-updater versionConstraint, so the updater's ceiling can
+// never disagree with what is actually deployed. The updater moves patches
+// within the line; Renovate watches this const for the major it cannot reach.
+// renovate: datasource=docker depName=ghcr.io/valkey-io/valkey
+export const VALKEY_VERSION: ValkeyVersion = "8-alpine";
 
 export interface ValkeyProps {
   name: string;

@@ -23,8 +23,12 @@ const name = "pg-dump";
 const OUT_DIR = "/dumps";
 
 // Same image the energy collector already pulls, so this adds no new thing to
-// keep patched. Client major must match the servers: both clusters are 17.
-const PG_IMAGE = "postgres:17-alpine";
+// keep patched. Client major must match the servers: both clusters are 17, so
+// a Renovate PR moving this to 18 is a signal to check the clusters first, not
+// something to merge on green -- hence no automerge for it in renovate.json.
+// renovate: datasource=docker depName=postgres
+const PG_VERSION = "17-alpine";
+const PG_IMAGE = `postgres:${PG_VERSION}`;
 
 // The image ships `USER root` and we bypass the entrypoint that would normally
 // drop privileges, so pin nobody explicitly rather than have ensureNonRoot

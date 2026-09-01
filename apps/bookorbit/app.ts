@@ -21,6 +21,9 @@ const port = 3000;
 const host = "ebooks.cmdcentral.xyz";
 
 const image = "ghcr.io/bookorbit/bookorbit";
+// The major line the updater is allowed to follow; Renovate watches it for 3.
+// renovate: datasource=docker depName=ghcr.io/bookorbit/bookorbit
+const majorVersion = "2";
 
 NewArgoApp(name, {
   namespace: namespace,
@@ -29,7 +32,7 @@ NewArgoApp(name, {
       {
         image: image,
         strategy: "semver",
-        versionConstraint: "2.x",
+        versionConstraint: `${majorVersion}.x`,
       },
     ],
   },

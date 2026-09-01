@@ -13,6 +13,9 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 const image = "ghcr.io/atuinsh/atuin";
+// The major line the updater is allowed to follow; Renovate watches it for 19.
+// renovate: datasource=docker depName=ghcr.io/atuinsh/atuin
+const majorVersion = "18";
 const port = 8888;
 
 NewArgoApp(name, {
@@ -30,7 +33,7 @@ NewArgoApp(name, {
       {
         image: image,
         strategy: "semver",
-        versionConstraint: "18.x.x",
+        versionConstraint: `${majorVersion}.x.x`,
       },
     ],
   },

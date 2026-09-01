@@ -34,8 +34,15 @@ const SCHEDULE = Cron.schedule({ minute: "17", hour: "5" });
 // two programs together. The fetcher needs only the Python stdlib and the
 // loader needs only psql, so the work splits cleanly across an initContainer
 // and the main container sharing an emptyDir.
-const FETCH_IMAGE = "python:3.13-alpine";
-const PSQL_IMAGE = "postgres:17-alpine";
+// No argocd-image-updater (see apps/energy/app.ts), so Renovate is the only
+// thing that will ever mention a new major. Neither bump is automatic: the psql
+// major is tied to the servers this loads into.
+// renovate: datasource=docker depName=python
+const FETCH_VERSION = "3.13-alpine";
+// renovate: datasource=docker depName=postgres
+const PSQL_VERSION = "17-alpine";
+const FETCH_IMAGE = `python:${FETCH_VERSION}`;
+const PSQL_IMAGE = `postgres:${PSQL_VERSION}`;
 
 // Both images ship `USER root` -- the postgres entrypoint normally drops
 // privileges itself, and we bypass it by invoking psql directly. Neither

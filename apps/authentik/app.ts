@@ -23,6 +23,11 @@ import { BitwardenSecret } from "../../lib/secrets";
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
+// authentik ships a new calendar minor roughly monthly and the updater is
+// capped at this one (the constraint below derives from it), so nothing here
+// would ever mention 2026.9 on its own. Renovate does -- as a PR to read, since
+// an authentik minor runs migrations.
+// renovate: datasource=docker depName=ghcr.io/goauthentik/server
 const version = "2026.8.0";
 
 NewArgoApp(namespace, {

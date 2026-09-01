@@ -10,7 +10,7 @@ import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { NFSVolumeContainer } from "../../lib/nfs";
 import { BitwardenSecret } from "../../lib/secrets";
-import { Valkey } from "../../lib/valkey";
+import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
@@ -28,6 +28,7 @@ const app = new App(DEFAULT_APP_PROPS(namespace));
 // after, at one manifest request per image instead of 25+ paginated tag-list
 // calls. Moving to v4 stays deliberate and manual, which suits an app that
 // runs database migrations on upgrade.
+// renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
 const majorTag = "v3";
 
 const images = {
@@ -51,7 +52,7 @@ NewArgoApp(namespace, {
       // frozen on the digest it first pulled.
       {
         image: "ghcr.io/valkey-io/valkey",
-        versionConstraint: "8-alpine",
+        versionConstraint: VALKEY_VERSION,
         strategy: "digest",
       },
     ],
@@ -74,7 +75,7 @@ const dbCreds = new BitwardenSecret(app, "dbcreds", {
 const valkey = new Valkey(app, "valkey", {
   name: "immich",
   namespace: namespace,
-  version: "8-alpine",
+  version: VALKEY_VERSION,
   resources: {
     requests: {
       cpu: Quantity.fromString("100m"),
