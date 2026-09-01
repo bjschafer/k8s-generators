@@ -26,7 +26,7 @@ spec:
             - --source=traefik-proxy
             - --interval=30s
             - --policy=sync
-            - --annotation-prefix=external-dns.alpha.kubernetes.io/
+            - --annotation-prefix=external-dns.kubernetes.io/
             - --provider=webhook
             - --webhook-provider-url=http://localhost:8888
             - --txt-owner-id=prod-k8s-unifi

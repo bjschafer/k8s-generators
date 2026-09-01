@@ -30,7 +30,7 @@ spec:
             - --source=traefik-proxy
             - --interval=30s
             - --policy=sync
-            - --annotation-prefix=external-dns.alpha.kubernetes.io/
+            - --annotation-prefix=external-dns.kubernetes.io/
             - --provider=pdns
             - --pdns-server=http://10.0.10.100:8081
             - --pdns-api-key=$(PDNS_API_KEY)

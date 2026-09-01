@@ -35,16 +35,15 @@ const COMMON_ARGS = [
   "--source=traefik-proxy",
   "--interval=30s",
   "--policy=sync",
-  // v0.22.0 flipped the default annotation prefix from
-  // `external-dns.alpha.kubernetes.io/` to `external-dns.kubernetes.io/`, and
-  // no version reads both -- it is one prefix or the other, and a resource
-  // missing the one being read looks like a resource that wants no record, so
-  // --policy=sync deletes it. That is the whole of what af63b1fc hit: the two
-  // source regressions it blamed do not exist, and the traefik host extractor
-  // is byte-identical across the two tags. Every site now carries both
-  // prefixes (externalDnsHostname/externalDnsTarget in lib/consts.ts, plus the
-  // traefik HelmChartConfig), so this flag is safe to point either way.
-  "--annotation-prefix=external-dns.alpha.kubernetes.io/",
+  // Named explicitly rather than left to the default. external-dns reads
+  // exactly one prefix, and a resource missing the one being read looks like a
+  // resource that wants no record, which --policy=sync then deletes -- so the
+  // default moving underneath us is a record-deleting event. v0.22.0 did
+  // exactly that (alpha -> GA), and it is the whole of what af63b1fc hit: the
+  // two source regressions its message blamed do not exist, and the traefik
+  // host extractor is byte-identical across the two tags. Pinning the prefix
+  // here makes the next such flip a no-op.
+  "--annotation-prefix=external-dns.kubernetes.io/",
 ];
 
 NewArgoApp(name, {
