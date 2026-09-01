@@ -26,10 +26,11 @@ spec:
             - --source=traefik-proxy
             - --interval=30s
             - --policy=sync
+            - --annotation-prefix=external-dns.alpha.kubernetes.io/
             - --provider=webhook
             - --webhook-provider-url=http://localhost:8888
             - --txt-owner-id=prod-k8s-unifi
-          image: registry.k8s.io/external-dns/external-dns:v0.21.0
+          image: registry.k8s.io/external-dns/external-dns:v0.22.0
           imagePullPolicy: Always
           name: external-dns
           resources:

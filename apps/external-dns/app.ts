@@ -20,12 +20,12 @@ const app = new App(DEFAULT_APP_PROPS(namespace));
 // The single source of truth for the pin: the tag below and the updater's
 // versionConstraint both derive from it, so the ceiling can never drift from
 // what is deployed. Renovate watches it for the minor the updater is not
-// allowed to take -- as a PR to read, never to automerge (see the comment on
-// the constraint below for why v0.22.0 is not a bump you want).
+// allowed to take -- as a PR to read, never to automerge. A minor here has
+// already cost five live records once; see --annotation-prefix below.
 // renovate: datasource=docker depName=registry.k8s.io/external-dns/external-dns
-const EXTERNAL_DNS_VERSION = "v0.21.0";
+const EXTERNAL_DNS_VERSION = "v0.22.0";
 const EXTERNAL_DNS_IMAGE = `registry.k8s.io/external-dns/external-dns:${EXTERNAL_DNS_VERSION}`;
-// `v0.21.0` -> `v0.21.x`
+// `v0.22.0` -> `v0.22.x`
 const EXTERNAL_DNS_LINE = `${EXTERNAL_DNS_VERSION.split(".").slice(0, 2).join(".")}.x`;
 const UNIFI_WEBHOOK_IMAGE = "ghcr.io/home-operations/external-dns-unifi-webhook:latest";
 
@@ -35,6 +35,17 @@ const COMMON_ARGS = [
   "--source=traefik-proxy",
   "--interval=30s",
   "--policy=sync",
+  // v0.22.0 flipped the default annotation prefix from
+  // `external-dns.alpha.kubernetes.io/` to `external-dns.kubernetes.io/`, and
+  // no version reads both -- it is one prefix or the other. Every annotation
+  // in this repo is still the alpha one (EXTERNAL_DNS_ANNOTATION_KEY, the
+  // traefik HelmChartConfig, and navidrome's target), so without this flag
+  // v0.22.0 finds no hostname on the LoadBalancer Services and no target on
+  // navidrome, and --policy=sync deletes those records. That is the whole of
+  // what af63b1fc hit: the two source regressions it blamed do not exist, and
+  // the traefik host extractor is byte-identical across the two tags. Drop
+  // this flag only after every annotation above has moved to the GA prefix.
+  "--annotation-prefix=external-dns.alpha.kubernetes.io/",
 ];
 
 NewArgoApp(name, {
@@ -45,9 +56,10 @@ NewArgoApp(name, {
   autoUpdate: {
     images: [
       {
-        // pinned to v0.21.x: v0.22.0 silently drops LoadBalancer Services from
-        // the service source and only takes the first Host() out of a Traefik
-        // `Host(`a`) || Host(`b`)` match, so it deletes live records on startup.
+        // held to a minor line, not to a major one: v0.22.0 deleted five live
+        // records the last time a minor landed unattended (the annotation
+        // prefix flip, handled in COMMON_ARGS), so the next one gets read by a
+        // human rather than taken by the updater on its 1h pass.
         image: "registry.k8s.io/external-dns/external-dns",
         strategy: "semver",
         versionConstraint: EXTERNAL_DNS_LINE,

@@ -77,7 +77,7 @@
       "allowedVersions": "<4"
     },
     {
-      "description": "Images this repo pins to a release *line* rather than to a version. Each has an argocd-image-updater entry that moves it within that line, so the pin is a ceiling, not a version -- and nothing was watching the ceiling. authentik sat at 2026.8.x while a calendar-versioned product shipped a minor a month; resilio-sync's `digest` strategy on a fixed 2.8.1 tag is a total freeze that reads like a pin; and netbox/immich/mealie/atuin/bookorbit/valkey/gotenberg would each go a major behind in silence. These get a PR and a `pinned` label, never an automerge: every one of them is a migration, a schema change, or (external-dns v0.22.0) a known-destructive release the pin exists to hold back. Listed by depName rather than by manager so it survives a pin moving between files.",
+      "description": "Images this repo pins to a release *line* rather than to a version. Each has an argocd-image-updater entry that moves it within that line, so the pin is a ceiling, not a version -- and nothing was watching the ceiling. authentik sat at 2026.8.x while a calendar-versioned product shipped a minor a month; resilio-sync's `digest` strategy on a fixed 2.8.1 tag is a total freeze that reads like a pin; and netbox/immich/mealie/atuin/bookorbit/valkey/gotenberg would each go a major behind in silence. These get a PR and a `pinned` label, never an automerge: every one of them is a migration, a schema change, or (external-dns) a line whose minors have already deleted live DNS records once. Listed by depName rather than by manager so it survives a pin moving between files.",
       "matchDatasources": ["docker"],
       "matchDepNames": [
         "ghcr.io/atuinsh/atuin",
