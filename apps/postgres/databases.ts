@@ -128,12 +128,18 @@ export const DATABASES: DatabaseConfig[] = [
     appNamespace: "bookorbit",
     // Not on prod: BookOrbit's very first migration declares a `vector(256)`
     // column and an HNSW index, so pgvector has to be there before the app has
-    // ever started. prod-pg17 runs CloudNativePG's `minimal` image, which does
-    // not carry it, and upstream only publishes pgvector *extension images*
-    // for Postgres 18 -- so on 17 the only ways to get it are to re-flavour
-    // prod's image or to use a cluster that already has it. This is the
-    // latter. The cluster is named for immich because immich is what it was
-    // built for; it is a vectorchord image and pgvector comes along with it.
+    // ever started. prod runs CloudNativePG's `minimal` image, which does not
+    // carry it, and when this was placed upstream published pgvector
+    // *extension images* only for Postgres 18 -- so on 17 the only ways to get
+    // it were to re-flavour prod's image or to use a cluster that already had
+    // it. This is the latter. The cluster is named for immich because immich
+    // is what it was built for; it is a vectorchord image and pgvector comes
+    // along with it.
+    //
+    // That constraint is gone as of the prod 17->18 upgrade: the trixie
+    // major-18 catalog entry carries a pgvector extension image, so prod can
+    // host this now. Moving it is a data migration, not a config change, so it
+    // stays here until someone does that deliberately.
     cluster: "immich",
     extensions: ["uuid-ossp", "pg_trgm", "unaccent", "vector"],
   },
