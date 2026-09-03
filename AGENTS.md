@@ -10,6 +10,16 @@ Do not create new documentation files or update the readme without getting confi
 
 This is all managed via GitOps, _do not_ manually apply manifests.
 
+If you genuinely need manual cluster surgery (scaling a workload down around a
+migration, say), pause reconciliation with `mise run suspend-sync <app>` and restore
+it with `mise run argo-resume <app>` — never by patching the app's `syncPolicy` by
+hand. Applications nest three deep (`applications` → `generators` → `<app>`) and all
+three run `selfHeal`, so patching the leaf alone reads back clean and is silently
+reverted within about a minute; the only symptom is your `kubectl scale` bouncing
+back with nothing pointing at ArgoCD. `suspend-sync` patches the parents too and
+verifies the suspend actually stuck. Sibling apps keep syncing normally, which is
+what you want when the surgery is on one app but another still needs to deploy.
+
 # Structure
 
 - Shared code is in `lib/`. Try to keep things DRY and store things likely to be reused here.
