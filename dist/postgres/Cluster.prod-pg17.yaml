@@ -18,7 +18,7 @@ spec:
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ClusterImageCatalog
-    major: 18
+    major: 17
     name: postgresql-minimal-trixie
   inheritedMetadata:
     labels:
@@ -31,7 +31,6 @@ spec:
       name: barman-cloud.cloudnative-pg.io
       parameters:
         barmanObjectName: prod
-        serverName: prod-pg18
   postgresql:
     parameters:
       lc_messages: C

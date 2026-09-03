@@ -75,21 +75,10 @@ class ProdPostgres extends Chart {
       },
       spec: {
         instances: 3,
-        // Bumping this major is an offline in-place `pg_upgrade`, not an image
-        // swap: the operator shuts every instance down, runs pg_upgrade
-        // --link, then destroys and re-clones both replica PVCs. Only ever
-        // move it one major at a time, and only between images of the same OS
-        // family -- CNPG refuses to upgrade across distributions, and this
-        // catalog is trixie top to bottom.
-        //
-        // The cluster is still named `prod-pg17`. In-place upgrades keep the
-        // name, and renaming would mean a full blue/green cutover -- which is
-        // what `immich-pg16` cost. The name is a historical label for the
-        // lineage, not a claim about the running major; `status.image` is.
         imageCatalogRef: {
           apiGroup: "postgresql.cnpg.io",
           kind: "ClusterImageCatalog",
-          major: 18,
+          major: 17,
           name: "postgresql-minimal-trixie",
         },
         monitoring: {
@@ -153,21 +142,6 @@ class ProdPostgres extends Chart {
             isWalArchiver: true,
             parameters: {
               barmanObjectName: "prod",
-              // Pinned rather than defaulted to the cluster name, because it
-              // has to move with every major upgrade. pg_upgrade assigns a new
-              // system identifier and resets the timeline to 1, so an upgraded
-              // cluster archiving under its old server name would write
-              // timeline files that collide with the previous major's and
-              // leave one prefix holding two incompatible lineages. PITR does
-              // not cross a major boundary either way, so there is nothing to
-              // gain by keeping them together.
-              //
-              // Bump this in the same commit as `imageCatalogRef.major`, never
-              // separately: changing it early strands the current lineage's
-              // WAL, and changing it late is the collision above. The old
-              // prefix stays in the same ObjectStore and ages out on its own
-              // 30d retention, recoverable only by a 17 image.
-              serverName: "prod-pg18",
             },
           },
         ],
@@ -230,11 +204,6 @@ class ProdPostgres extends Chart {
         retentionPolicy: "30d",
         configuration: {
           endpointUrl: "https://s3.cmdcentral.xyz",
-          // Named for the lineage that opened the store, and deliberately left
-          // that way across major upgrades: barman keys each server's archive
-          // by `serverName` *under* this path, so one store now holds both
-          // `prod-pg17/` and `prod-pg18/`. Repointing it would orphan the older
-          // lineage instead of letting it expire on the retention policy.
           destinationPath: "s3://postgres/k8s/prod-pg17",
           s3Credentials: {
             accessKeyId: {
