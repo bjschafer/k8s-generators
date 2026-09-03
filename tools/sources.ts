@@ -214,7 +214,7 @@ export const sources: CrdSource[] = [
       "upstream. This is what backs the ObjectStore resources in the postgres namespace, so it has to " +
       "move in lockstep with the operator.",
     // renovate: datasource=github-releases depName=cloudnative-pg/plugin-barman-cloud extractVersion=^v(?<version>.*)$
-    version: { kind: "literal", value: "0.14.0" },
+    version: { kind: "literal", value: "0.15.0" },
     outputDir: "apps/cnpg/crds",
     crdOnly: false,
     filenameKind: true,
