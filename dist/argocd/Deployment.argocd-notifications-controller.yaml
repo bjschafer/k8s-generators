@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-notifications-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.5.2
-    helm.sh/chart: argo-cd-10.6.0
+    helm.sh/chart: argo-cd-10.8.0
   name: argocd-notifications-controller
   namespace: argocd
 spec:
@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cmd-params: f55ea80584f07edb1abfd043204f7c9676ad5ef5966adca56ebb1be32340124d
+        checksum/cmd-params: 8b864ee1f12641c48ab1b1a7dbb11da89da6aae79e8a8490fc724911d4ef09be
       labels:
         app.kubernetes.io/component: notifications-controller
         app.kubernetes.io/instance: argocd
@@ -31,7 +31,7 @@ spec:
         app.kubernetes.io/name: argocd-notifications-controller
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v3.5.2
-        helm.sh/chart: argo-cd-10.6.0
+        helm.sh/chart: argo-cd-10.8.0
     spec:
       affinity:
         podAntiAffinity:
@@ -118,6 +118,7 @@ spec:
       volumes:
         - configMap:
             name: argocd-tls-certs-cm
+            optional: true
           name: tls-certs
         - name: argocd-repo-server-tls
           secret:
