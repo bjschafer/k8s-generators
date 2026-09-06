@@ -2,11 +2,11 @@ kustomize:
   images:
   - ghcr.io/navidrome/navidrome:latest@sha256:9012939114fbb1bb641b81cf96dec5ded15f0aafefe8d47a511d7cb919658e40
   - ghcr.io/linuxserver/sonarr:latest@sha256:4d9df314875e1249ab7d6170c2b9b3dc1d8e6383f168ceb10dc9a5ad9b324739
-  - ghcr.io/linuxserver/radarr:latest@sha256:119aaa4a4f7349bcd2a136c5373a0d7925b5479915c7dfe0c0ad352db2a6d438
+  - ghcr.io/linuxserver/radarr:latest@sha256:95ba0801df4d9d1d79d0d9a3849f656542497dab061d91b87ad4f53a71aff3ef
   - ghcr.io/linuxserver/lidarr:latest@sha256:c74c32408fdf6e7926ad62641fc1a5544206ee65c33f2188bb179edb30e28f5a
   - ghcr.io/linuxserver/sabnzbd:latest@sha256:64c4c2b6ed546237451cbfec33aa8bac1396865c1a266dd247c02b36ffe27c62
   - ghcr.io/linuxserver/prowlarr:latest@sha256:91844fa2c927ad6ede5630127183cc7868b175f6223e83e6a5da1fffea2aa782
-  - ghcr.io/vavallee/bindery:latest@sha256:8292309cd4867a1293802c16571a371f2f71e2371322b9fef4f24333ce081dfe
+  - ghcr.io/vavallee/bindery:latest@sha256:efaec8a1f758cbb1b3a4768a8f4d99e91e86e5337d1b434f7c0ac426cea78ae2
   - ghcr.io/linuxserver/resilio-sync:3.1.2@sha256:d39856fc6fc05a7b3c75a4c137b90027606ce8a216f0f021de2bd3462222e0e8
   - kometateam/kometa:latest@sha256:6c3971a4aaa928b045e5f22514196b6db7f9b2b186158ebfe3239f4b328dfb0a
   - ghcr.io/pedro-revez-silva/shelfarr:latest@sha256:08e06f5b41e94ab9eca37729d6836b3205ec1ef31fc31cd92b5f93b360ad0f0b
