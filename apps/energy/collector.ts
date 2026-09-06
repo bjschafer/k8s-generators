@@ -40,7 +40,7 @@ const SCHEDULE = Cron.schedule({ minute: "17", hour: "5" });
 // renovate: datasource=docker depName=python
 const FETCH_VERSION = "3.14-alpine";
 // renovate: datasource=docker depName=postgres
-const PSQL_VERSION = "17-alpine";
+const PSQL_VERSION = "18-alpine";
 const FETCH_IMAGE = `python:${FETCH_VERSION}`;
 const PSQL_IMAGE = `postgres:${PSQL_VERSION}`;
 
