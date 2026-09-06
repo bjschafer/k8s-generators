@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-metrics
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.5.2
-    helm.sh/chart: argo-cd-10.8.0
+    helm.sh/chart: argo-cd-10.8.1
   name: argocd-application-controller-metrics
   namespace: argocd
 spec:
