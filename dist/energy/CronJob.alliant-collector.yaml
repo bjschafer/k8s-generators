@@ -39,7 +39,7 @@ spec:
                     secretKeyRef:
                       key: password
                       name: energy-db-credentials
-              image: postgres:17-alpine
+              image: postgres:18-alpine
               imagePullPolicy: IfNotPresent
               name: load
               resources:
