@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
-    app.kubernetes.io/version: v0.0.16
-    helm.sh/chart: victoria-metrics-k8s-stack-0.91.2
+    app.kubernetes.io/version: v0.0.17
+    helm.sh/chart: victoria-metrics-k8s-stack-0.92.0
   name: metrics-victoria-metrics-k8s-stack-sync-job-config
   namespace: metrics
 data:
@@ -114,6 +114,14 @@ data:
         labels: 
           alerts.cmdcentral.xyz/kind: metrics
       groups: 
+        alertmanager.rules:
+          labelRewrites:
+            job:
+              match: alertmanager-main
+              value: vmalertmanager-.*
+            namespace:
+              match: alertmanager-main
+              value: metrics
         kube-apiserver-slos:
           enabled: false
         kube-scheduler.rules:
@@ -122,14 +130,18 @@ data:
           enabled: false
         kubernetes-apps:
           enabled: false
-          jobNamespaces:
-            kube-state-metrics: .*
+          labelRewrites:
+            namespace:
+              match: kube-state-metrics
+              value: .*
         kubernetes-resources:
           enabled: false
         kubernetes-storage:
           enabled: false
-          jobNamespaces:
-            kubelet: .*
+          labelRewrites:
+            namespace:
+              match: kubelet
+              value: .*
         kubernetes-system-controller-manager:
           enabled: false
         kubernetes-system-scheduler:
