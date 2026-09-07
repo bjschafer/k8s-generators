@@ -296,7 +296,11 @@ def cmd_check_dash(args):
                     refs.add(v)
                 elif k == "entities" and isinstance(v, list):
                     for it in v:
-                        refs.add(it["entity"] if isinstance(it, dict) else it)
+                        # entities-card rows may be non-entity rows (divider, section, ...)
+                        if isinstance(it, str):
+                            refs.add(it)
+                        elif isinstance(it, dict) and isinstance(it.get("entity"), str):
+                            refs.add(it["entity"])
                 else:
                     walk(v)
         elif isinstance(o, list):
