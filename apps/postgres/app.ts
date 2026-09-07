@@ -342,7 +342,7 @@ class VectorImageCatalog extends Chart {
     // startup and refuses to boot outside `>=0.3.0 <2.0.0`; the bundled
     // pgvector must stay `>=0.7 <0.9`.
     // renovate: datasource=docker depName=vectorchord-pg17 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
-    const vectorchordPg17 = "17.10-1.1.1";
+    const vectorchordPg17 = "17.11-1.1.1";
 
     this.Catalog = new ImageCatalog(this, "catalog", {
       metadata: {
