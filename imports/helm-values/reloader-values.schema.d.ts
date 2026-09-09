@@ -8,6 +8,12 @@
 export interface ReloaderValuesSchema {
   reloader?: {
     reloadStrategy?: "default" | "env-vars" | "annotations";
+    leaderElection?: {
+      leaseDuration?: string;
+      renewDeadline?: string;
+      retryPeriod?: string;
+      [k: string]: unknown;
+    };
     service?: {
       ipFamilyPolicy?: "SingleStack" | "PreferDualStack" | "RequireDualStack";
       /**
