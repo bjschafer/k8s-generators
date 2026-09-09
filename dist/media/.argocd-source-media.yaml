@@ -5,7 +5,7 @@ kustomize:
   - ghcr.io/linuxserver/radarr:latest@sha256:95ba0801df4d9d1d79d0d9a3849f656542497dab061d91b87ad4f53a71aff3ef
   - ghcr.io/linuxserver/lidarr:latest@sha256:8ab0fd370b604ae034d9a9c261a9d8d873bece33d9736852e7ce4f3566e4a35d
   - ghcr.io/linuxserver/sabnzbd:latest@sha256:7f173ced3541b46c57c4eb6854765243095c8c8a7563a878044fa0ccfb1f4004
-  - ghcr.io/linuxserver/prowlarr:latest@sha256:91844fa2c927ad6ede5630127183cc7868b175f6223e83e6a5da1fffea2aa782
+  - ghcr.io/linuxserver/prowlarr:latest@sha256:c7502a75b021d964481c129c84590b9cbc40f83aadd4e553f173871bc0deaa3c
   - ghcr.io/vavallee/bindery:latest@sha256:c4ebfc5470e1eb7e347a4a83f1c38f7ca1d4389f673287831413ba5b900cd936
   - ghcr.io/linuxserver/resilio-sync:3.1.2@sha256:d1f0a11261677c57c596689524d3b6f45f707762a6a48c43ca36127809268dac
   - kometateam/kometa:latest@sha256:6c3971a4aaa928b045e5f22514196b6db7f9b2b186158ebfe3239f4b328dfb0a
