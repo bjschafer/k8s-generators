@@ -29,7 +29,7 @@ new HelmApp(app, "operator", {
   chart: "ceph-csi-operator",
   repo: "https://ceph.github.io/ceph-csi-operator/",
   // renovate: datasource=helm depName=ceph-csi-operator registryUrl=https://ceph.github.io/ceph-csi-operator/
-  version: "1.0.4",
+  version: "1.0.5",
   releaseName: "ceph-csi-operator",
   namespace,
   // Deliberately empty: the chart already defaults its manager image to
