@@ -134,6 +134,16 @@ class Grafana extends Chart {
           feature_toggles: {
             publicDashboards: true,
           },
+          plugins: {
+            // The image bundles the core datasource plugins under
+            // /usr/share/grafana/data/plugins-bundled, which sits on the
+            // read-only root filesystem. On startup Grafana's preinstaller
+            // tries to auto-update them, kills the running plugin process,
+            // then fails the unlink — leaving the plugin unregistered
+            // ("Could not find plugin definition for data source"). Pin them
+            // to the versions baked into the image instead.
+            preinstall_auto_update: false,
+          },
           server: {
             root_url: "https://grafana.cmdcentral.xyz",
           },

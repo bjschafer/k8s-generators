@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 33c9af1e4ca2f6e6480d2595b00136e1f6abc961ece1763f78e5479f80b65fa6
+        checksum/config: 0a66528a41ed28b08308741445bc0f608d51d453d16e60c8dcda24fcca2720ef
         checksum/sc-dashboard-provider-config: e3aca4961a8923a0814f12363c5e5e10511bb1deb6cd4e0cbe138aeee493354f
         kubectl.kubernetes.io/default-container: grafana
       labels:
