@@ -84,7 +84,9 @@ export function addAlerts(scope: Construct, id: string): void {
   // Two conditions, because one Worker outcome doesn't cover both failure
   // modes: an uncaught throw sets Outcome to "exception", but the Worker's
   // own try/catch (src/index.ts) returns a 500 response normally, so that
-  // path only ever shows up as Event.Response.status.
+  // path only ever shows up as Event.Response.Status. Confirmed against a
+  // real payload (two GET /api/me and /api/nonexistent-route-check probes,
+  // 2026-09-12) -- the field is capitalized `Status`, not `status`.
   new Alert(scope, `${id}-ledgermain-api`, {
     name: "ledgermain-api",
     namespace: namespace,
@@ -92,7 +94,7 @@ export function addAlerts(scope: Construct, id: string): void {
     rules: [
       {
         alert: "LedgermainApiWorkerError",
-        expr: `ScriptName:"ledgermain-api" AND (Outcome:"exception" OR Event.Response.status:>=500) | stats count(*) logs_count | filter logs_count:>0`,
+        expr: `ScriptName:"ledgermain-api" AND (Outcome:"exception" OR Event.Response.Status:>=500) | stats count(*) logs_count | filter logs_count:>0`,
         for: "0m",
         labels: {
           priority: PRIORITY.NORMAL,
