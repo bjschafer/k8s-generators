@@ -73,4 +73,36 @@ export function addAlerts(scope: Construct, id: string): void {
       },
     ],
   });
+
+  // ledgermain (bjschafer/ledgermain #176): api.ledgermain.whizkid.dev is a
+  // Workers custom domain, so it has no origin and the account's Cloudflare
+  // notification policy (an *origin* error-rate alert) can never see it 5xx.
+  // tf-cloudflare's `ledgermain_api_trace_events` Logpush job is the
+  // replacement signal -- every invocation of that Worker lands here via the
+  // same VictoriaLogs endpoint the firewall/http_requests jobs already use.
+  //
+  // Two conditions, because one Worker outcome doesn't cover both failure
+  // modes: an uncaught throw sets Outcome to "exception", but the Worker's
+  // own try/catch (src/index.ts) returns a 500 response normally, so that
+  // path only ever shows up as Event.Response.status.
+  new Alert(scope, `${id}-ledgermain-api`, {
+    name: "ledgermain-api",
+    namespace: namespace,
+    logs: true,
+    rules: [
+      {
+        alert: "LedgermainApiWorkerError",
+        expr: `ScriptName:"ledgermain-api" AND (Outcome:"exception" OR Event.Response.status:>=500) | stats count(*) logs_count | filter logs_count:>0`,
+        for: "0m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          severity: "warning",
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "ledgermain-api threw an uncaught exception or returned a 5xx",
+        },
+      },
+    ],
+  });
 }

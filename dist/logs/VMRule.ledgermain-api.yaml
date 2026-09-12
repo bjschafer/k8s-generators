@@ -1,0 +1,22 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: logs
+  name: ledgermain-api
+  namespace: logs
+spec:
+  groups:
+    - name: ledgermain-api
+      rules:
+        - alert: LedgermainApiWorkerError
+          annotations:
+            summary: ledgermain-api threw an uncaught exception or returned a 5xx
+          expr: ScriptName:"ledgermain-api" AND (Outcome:"exception" OR Event.Response.status:>=500) | stats count(*) logs_count | filter logs_count:>0
+          for: 0m
+          labels:
+            namespace: logs
+            priority: "0"
+            push_notify: "true"
+            severity: warning
+      type: vlogs
