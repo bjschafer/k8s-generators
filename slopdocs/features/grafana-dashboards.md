@@ -1,6 +1,6 @@
 ---
 name: grafana-dashboards
-description: How Grafana dashboards are managed — GitOps via ConfigMaps, grafanactl as the sync tool, and the path toward Foundation SDK
+description: How Grafana dashboards are managed — GitOps via ConfigMaps, gcx as the sync tool, and the path toward Foundation SDK
 metadata:
   type: project
 ---
@@ -11,11 +11,13 @@ metadata:
 
 Dashboards are stored as JSON in `resources/Dashboard/*.json` and injected into Grafana via Kubernetes ConfigMaps with the `grafana_dashboard: "1"` label. The Grafana Helm chart runs a k8s-sidecar container that watches for these ConfigMaps and loads them into Grafana's provisioning directory automatically.
 
-`apps/grafana/app.ts` → `loadDashboards()` reads every `.json` from `resources/Dashboard/`, extracts the inner `spec` from the grafanactl wrapper format, and emits one `grafana-dashboard-<uid>` ConfigMap per file. Adding a new dashboard is: drop a JSON in `resources/Dashboard/`, run `mise run build`, commit, push.
+`apps/grafana/app.ts` → `loadDashboards()` reads every `.json` from `resources/Dashboard/`, extracts the inner `spec` from the gcx wrapper format, and emits one `grafana-dashboard-<uid>` ConfigMap per file. Adding a new dashboard is: drop a JSON in `resources/Dashboard/`, run `mise run build`, commit, push.
 
-## The grafanactl Wrapper Format
+## The gcx Wrapper Format
 
-`grafanactl pull` saves dashboards in a Kubernetes-style API object:
+`gcx resources pull` saves dashboards in a Kubernetes-style API object (gcx
+replaced the deprecated `grafanactl` in 2026-09; the format is unchanged and
+still pulls as `v0alpha1` against Grafana 13.2):
 ```json
 {
   "apiVersion": "dashboard.grafana.app/v0alpha1",
@@ -31,9 +33,23 @@ The ConfigMap data needs just the `spec` content — that's what Grafana provisi
 
 `allowUiUpdates: true` is intentionally kept. Grafana allows UI edits but the sidecar resyncs from git on each GitOps cycle, which means:
 - UI edits are ephemeral unless explicitly saved back to git
-- **Save workflow**: edit in Grafana UI → `grafanactl pull dashboards/<uid>` → check `resources/Dashboard/<uid>.json` → `mise run build` → commit
+- **Save workflow**: edit in Grafana UI → `gcx resources pull dashboards/<uid> -p <scratch> --include-managed` → copy the pulled file over `resources/Dashboard/<Folder>/<file>.json`, stripping every annotation except `grafana.app/folder` → `mise run build` → commit
 
-Agents: use `grafanactl resources get dashboards` to find UIDs, pull to get the current spec, edit the JSON in `resources/Dashboard/`, build and commit.
+Two gcx details matter here:
+- **Pull to a scratch dir, never `./resources`.** gcx writes to
+  `<kind>.<version>.<group>/<uid>.json` (e.g.
+  `dashboards.v0alpha1.dashboard.grafana.app/`), not grafanactl's `Dashboard/`.
+  Pulled into `./resources`, that directory would sit outside
+  `resources/Dashboard/` and be ignored.
+- **`--include-managed`.** Sidecar-provisioned dashboards are annotated
+  `grafana.app/managedBy: classic-file-provisioning`; without the flag pull
+  writes nothing and still exits 0.
+- **Strip the provisioning annotations.** Pulls add `managedBy`, `managerId`,
+  `sourcePath`, `sourceChecksum`, `sourceTimestamp`; the last two change on
+  every sync. Verified 2026-09-12 on `HMU4As47z`: with those removed, the pull
+  is semantically identical to the committed file.
+
+Agents: see the `gcx` skill (`.claude/skills/gcx/`).
 
 ## Folder Support
 
@@ -51,7 +67,7 @@ section used to claim.
 ### Dashboard identity is the uid, not the filename
 
 The uid resolves as `spec.uid ?? metadata.name ?? basename(file)`. In practice
-every dashboard pulled with grafanactl carries `metadata.name`, so **the filename
+every dashboard pulled with grafanactl/gcx carries `metadata.name`, so **the filename
 does not determine identity**. Consequences worth knowing before reorganising:
 
 - Renaming or moving a JSON file keeps the uid, so Grafana *upserts* the existing
@@ -80,7 +96,7 @@ editing or moving the file changes nothing -- including moving it between folder
 directories, since no ConfigMap is emitted to carry the folder annotation. Move
 them in the UI instead.
 
-There is no cheap way back to v1. `grafanactl resources pull
+There is no cheap way back to v1. `gcx resources pull
 dashboards.v1.dashboard.grafana.app/<uid>` is accepted, but Grafana returns
 `v2beta1` with `elements` regardless -- a dashboard stored as v2 is not
 down-converted on read. Recovering one means rebuilding it against the v1 schema
@@ -100,9 +116,10 @@ Benefits: type checking on panel config, IDE completion, PromQL expressions as s
 
 **Migration path**: one dashboard as a proof-of-concept TypeScript file. The build output slots right into the existing `loadDashboards()` pattern — no other infra change needed.
 
-## What NOT to use grafanactl for anymore
+## What NOT to use gcx for
 
-`grafanactl push` is no longer the deployment path — GitOps handles that. Use grafanactl only for:
+`gcx resources push` (and `edit`, `dashboards create/update`, `dev serve`, which
+all write to Grafana) is not the deployment path — GitOps handles that. Use gcx only for:
 1. Pulling the current live state of a dashboard back to `resources/Dashboard/` (to capture UI edits)
 2. Inspecting/listing dashboards by UID
 3. Validating dashboard JSON against the live instance before committing

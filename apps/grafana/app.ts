@@ -234,7 +234,7 @@ class Grafana extends Chart {
       const raw = JSON.parse(readFileSync(join(dir, entry.name), "utf-8"));
       // v2+ dashboards are not supported by the file provisioner sidecar
       if (/\/v2/.test(raw.apiVersion ?? "")) continue;
-      // grafanactl wraps dashboards in apiVersion/kind/spec — extract the inner spec
+      // gcx wraps dashboards in apiVersion/kind/spec — extract the inner spec
       const dashboardJson = raw.spec ?? raw;
       const uid: string = dashboardJson.uid ?? raw.metadata?.name ?? basename(entry.name, ".json");
       // Inject uid so Grafana can upsert existing dashboards rather than creating duplicates
