@@ -87,10 +87,10 @@ spec:
               port: 8000
           resources:
             limits:
-              memory: 1024Mi
+              memory: 2048Mi
             requests:
               cpu: 50m
-              memory: 256Mi
+              memory: 512Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

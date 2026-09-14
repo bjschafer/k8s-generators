@@ -63,8 +63,8 @@ new AppPlus(app, `${name}-app`, {
       request: Cpu.millis(50),
     },
     memory: {
-      request: Size.mebibytes(256),
-      limit: Size.gibibytes(1),
+      request: Size.mebibytes(512),
+      limit: Size.gibibytes(2),
     },
   },
   labels: {
