@@ -809,7 +809,10 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "KubernetesContainerOomKilled",
-        expr: 'kube_pod_container_status_last_terminated_reason{reason="OOMKilled"} > 0',
+        // last_terminated_reason sticks for the pod's lifetime, so gate on a recent restart
+        // or a single OOM keeps the alert firing until the pod is replaced. increase() rather
+        // than `offset` so an OOM within 10m of pod creation (e.g. right after a rollout) still counts.
+        expr: 'increase(kube_pod_container_status_restarts_total[10m]) >= 1 and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}[10m]) == 1',
         for: "0m",
         labels: {
           priority: PRIORITY.NORMAL,
