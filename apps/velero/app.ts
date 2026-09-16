@@ -25,7 +25,7 @@ const app = new App(DEFAULT_APP_PROPS(namespace));
 // otherwise land under depName `velero` and get swept into that group, so this
 // one takes a distinct depName and looks the chart up via packageName.
 // renovate: datasource=helm depName=velero-chart packageName=velero registryUrl=https://vmware-tanzu.github.io/helm-charts/
-const chartVersion = "12.1.0";
+const chartVersion = "12.2.0";
 // renovate: datasource=docker depName=velero/velero-plugin-for-aws
 const awsVersion = "1.14.2";
 
