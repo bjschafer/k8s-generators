@@ -23,7 +23,7 @@ const app = new App(DEFAULT_APP_PROPS(namespace));
 // allowed to take -- as a PR to read, never to automerge. A minor here has
 // already cost five live records once; see --annotation-prefix below.
 // renovate: datasource=docker depName=registry.k8s.io/external-dns/external-dns
-const EXTERNAL_DNS_VERSION = "v0.22.0";
+const EXTERNAL_DNS_VERSION = "v0.23.0";
 const EXTERNAL_DNS_IMAGE = `registry.k8s.io/external-dns/external-dns:${EXTERNAL_DNS_VERSION}`;
 // `v0.22.0` -> `v0.22.x`
 const EXTERNAL_DNS_LINE = `${EXTERNAL_DNS_VERSION.split(".").slice(0, 2).join(".")}.x`;
