@@ -43,7 +43,7 @@ spec:
             - name: VM_LOGS_VERSION
               value: v1.52.0
             - name: VM_METRICS_VERSION
-              value: v1.151.0
+              value: v1.152.0
             - name: VM_TRACES_VERSION
               value: v0.10.0
             - name: VM_VMALERTMANAGER_ALERTMANAGERVERSION
