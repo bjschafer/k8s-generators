@@ -1,4 +1,4 @@
 kustomize:
   images:
-  - ghcr.io/rommapp/romm:latest@sha256:3512f2ca455782f90247271bed23116e6bc675bc74e379be2c41696e607ab11e
+  - ghcr.io/rommapp/romm:latest@sha256:dc586cb3a2c7316fcffb3dc273171b1964523f0f409e989295d26d2199df1d4e
   - ghcr.io/valkey-io/valkey:8-alpine@sha256:081c2f5cb575efc901aa80ff9cdbd1ec6a301682fd35e1ebb4b0990a4a4a8507
