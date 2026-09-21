@@ -55,6 +55,9 @@
         "yamtrack": {
             "$ref": "#/definitions/yamtrack-api"
         },
+        "flicklist": {
+            "$ref": "#/definitions/flicklist-api"
+        },
         "serializd": {
             "$ref": "#/definitions/serializd-api"
         },
@@ -1153,6 +1156,17 @@
             },
             "required": [],
             "title": "yamtrack"
+        },
+        "flicklist-api": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "api_key": {
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "flicklist"
         },
         "floppy-api": {
             "type": "object",
@@ -4544,7 +4558,7 @@
             "type": "object",
             "additionalProperties": false,
             "patternProperties": {
-                "^(?!plex|tmdb|tautulli|webhooks|omdb|mdblist|notifiarr|gotify|ntfy|anidb|radarr|sonarr|trakt|yamtrack|serializd|floppy|mal).+$": {
+                "^(?!plex|tmdb|tautulli|webhooks|omdb|mdblist|notifiarr|gotify|ntfy|anidb|radarr|sonarr|trakt|yamtrack|flicklist|serializd|floppy|mal).+$": {
                     "additionalProperties": false,
                     "properties": {
                         "metadata_files": {
@@ -4644,6 +4658,80 @@
                 }
             }
         },
+        "external-path-with-template-variables": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "file": {
+                    "type": "string"
+                },
+                "folder": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^(https?)://"
+                },
+                "git": {
+                    "type": "string"
+                },
+                "repo": {
+                    "type": "string"
+                },
+                "schedule": {
+                    "type": "string"
+                },
+                "asset_directory": {
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
+                },
+                "template_variables": {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            },
+            "required": [
+                "template_variables"
+            ],
+            "oneOf": [
+                {
+                    "required": [
+                        "file"
+                    ]
+                },
+                {
+                    "required": [
+                        "folder"
+                    ]
+                },
+                {
+                    "required": [
+                        "url"
+                    ]
+                },
+                {
+                    "required": [
+                        "git"
+                    ]
+                },
+                {
+                    "required": [
+                        "repo"
+                    ]
+                }
+            ]
+        },
         "metadata-files": {
             "title": "metadata_files",
             "additionalProperties": false,
@@ -4667,6 +4755,9 @@
                     },
                     {
                         "$ref": "#/definitions/repo-path"
+                    },
+                    {
+                        "$ref": "#/definitions/external-path-with-template-variables"
                     }
                 ]
             }
@@ -4713,6 +4804,9 @@
                     },
                     {
                         "$ref": "#/definitions/repo-path-collection-with-template-variables"
+                    },
+                    {
+                        "$ref": "#/definitions/external-path-with-template-variables"
                     }
                 ]
             }
@@ -4759,6 +4853,9 @@
                     },
                     {
                         "$ref": "#/definitions/repo-path-overlay-with-template-variables"
+                    },
+                    {
+                        "$ref": "#/definitions/external-path-with-template-variables"
                     }
                 ]
             }
@@ -4890,6 +4987,9 @@
                     },
                     {
                         "$ref": "#/definitions/repo-path-playlist-with-template-variables"
+                    },
+                    {
+                        "$ref": "#/definitions/external-path-with-template-variables"
                     }
                 ]
             }
@@ -5402,6 +5502,7 @@
                                         "tmdb",
                                         "trakt",
                                         "trakt_user",
+                                        "flicklist_user",
                                         "serializd",
                                         "floppy",
                                         "unlock"
@@ -5443,6 +5544,7 @@
                                                     "tmdb",
                                                     "trakt",
                                                     "trakt_user",
+                                                    "flicklist_user",
                                                     "serializd",
                                                     "floppy",
                                                     "unlock"
@@ -5493,6 +5595,7 @@
                                         "tmdb",
                                         "trakt",
                                         "trakt_user",
+                                        "flicklist_user",
                                         "serializd",
                                         "floppy",
                                         "unlock"
@@ -5534,6 +5637,7 @@
                                                     "tmdb",
                                                     "trakt",
                                                     "trakt_user",
+                                                    "flicklist_user",
                                                     "serializd",
                                                     "floppy",
                                                     "unlock"
@@ -5584,6 +5688,7 @@
                                         "tmdb",
                                         "trakt",
                                         "trakt_user",
+                                        "flicklist_user",
                                         "serializd",
                                         "floppy",
                                         "unlock"
@@ -5625,6 +5730,7 @@
                                                     "tmdb",
                                                     "trakt",
                                                     "trakt_user",
+                                                    "flicklist_user",
                                                     "serializd",
                                                     "floppy",
                                                     "unlock"
@@ -5675,6 +5781,7 @@
                                         "tmdb",
                                         "trakt",
                                         "trakt_user",
+                                        "flicklist_user",
                                         "serializd",
                                         "serializd_user",
                                         "floppy",
@@ -5717,6 +5824,7 @@
                                                     "tmdb",
                                                     "trakt",
                                                     "trakt_user",
+                                                    "flicklist_user",
                                                     "serializd",
                                                     "serializd_user",
                                                     "floppy",
@@ -5768,6 +5876,7 @@
                                         "tmdb",
                                         "trakt",
                                         "trakt_user",
+                                        "flicklist_user",
                                         "serializd",
                                         "serializd_user",
                                         "floppy",
@@ -5810,6 +5919,7 @@
                                                     "tmdb",
                                                     "trakt",
                                                     "trakt_user",
+                                                    "flicklist_user",
                                                     "serializd",
                                                     "serializd_user",
                                                     "floppy",
@@ -5861,6 +5971,7 @@
                                         "tmdb",
                                         "trakt",
                                         "trakt_user",
+                                        "flicklist_user",
                                         "serializd",
                                         "serializd_user",
                                         "floppy",
@@ -5903,6 +6014,7 @@
                                                     "tmdb",
                                                     "trakt",
                                                     "trakt_user",
+                                                    "flicklist_user",
                                                     "serializd",
                                                     "serializd_user",
                                                     "floppy",
@@ -13869,6 +13981,58 @@
             "patternProperties": {
                 "^schedule_.+$": {
                     "type": "string"
+                },
+                "^radarr_add_missing_.+$": {
+                    "description": "Override Radarr add_missing for a specific seasonal collection by key.",
+                    "type": "boolean"
+                },
+                "^radarr_folder_.+$": {
+                    "description": "Override Radarr root_folder_path for a specific seasonal collection by key.",
+                    "type": "string"
+                },
+                "^radarr_monitor_.+$": {
+                    "description": "Override Radarr monitor for a specific seasonal collection by key.",
+                    "type": "boolean"
+                },
+                "^radarr_monitor_existing_.+$": {
+                    "description": "Override Radarr monitor_existing for a specific seasonal collection by key.",
+                    "type": "boolean"
+                },
+                "^radarr_search_.+$": {
+                    "description": "Override Radarr search for a specific seasonal collection by key.",
+                    "type": "boolean"
+                },
+                "^radarr_tag_.+$": {
+                    "description": "Override Radarr tag for a specific seasonal collection by key.",
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
+                },
+                "^radarr_upgrade_existing_.+$": {
+                    "description": "Override Radarr upgrade_existing for a specific seasonal collection by key.",
+                    "type": "boolean"
+                },
+                "^item_radarr_tag_.+$": {
+                    "description": "Override item_radarr_tag for a specific seasonal collection by key.",
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
                 }
             }
         },

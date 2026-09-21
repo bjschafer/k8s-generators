@@ -5,10 +5,27 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type ExternalPathWithTemplateVariables = {
+  file?: string;
+  folder?: string;
+  url?: string;
+  git?: string;
+  repo?: string;
+  schedule?: string;
+  asset_directory?: string | string[];
+  template_variables: {
+    [k: string]: unknown;
+  };
+} & ExternalPathWithTemplateVariables1;
+export type ExternalPathWithTemplateVariables1 = {
+  [k: string]: unknown;
+};
 /**
  * The metadata_files attribute is used to define Metadata Files by specifying the path of the files that will be executed against the parent library.
  */
-export type MetadataFiles = (string | FilePath | FolderPath | UrlPath | GitPath | RepoPath)[];
+export type MetadataFiles = (
+  string | FilePath | FolderPath | UrlPath | GitPath | RepoPath | ExternalPathWithTemplateVariables
+)[];
 export type KometaDefaultCollectionPath = {
   default:
     | "actor"
@@ -92,6 +109,7 @@ export type CollectionFiles = (
   | GitPathCollectionWithTemplateVariables
   | RepoPath
   | RepoPathCollectionWithTemplateVariables
+  | ExternalPathWithTemplateVariables
 )[];
 /**
  * The overlay_files attribute is used to define Overlay Files by specifying the path type and path of the files that will be executed against the parent library.
@@ -109,6 +127,7 @@ export type OverlayFiles = (
   | GitPathOverlayWithTemplateVariables
   | RepoPath
   | RepoPathOverlayWithTemplateVariables
+  | ExternalPathWithTemplateVariables
 )[];
 /**
  * DEPRECATED! Use: metadata_files.
@@ -186,6 +205,7 @@ export type PlaylistFiles = (
   | GitPathPlaylistWithTemplateVariables
   | RepoPath
   | RepoPathPlaylistWithTemplateVariables
+  | ExternalPathWithTemplateVariables
 )[];
 
 export interface KometaConfigSchema {
@@ -207,6 +227,7 @@ export interface KometaConfigSchema {
   mal?: Mal;
   trakt?: Trakt;
   yamtrack?: Yamtrack;
+  flicklist?: Flicklist;
   serializd?: Serializd;
   floppy?: Floppy;
   github?: Github;
@@ -216,7 +237,7 @@ export interface KometaConfigSchema {
 export interface Libraries {
   /**
    * This interface was referenced by `Libraries`'s JSON-Schema definition
-   * via the `patternProperty` "^(?!plex|tmdb|tautulli|webhooks|omdb|mdblist|notifiarr|gotify|ntfy|anidb|radarr|sonarr|trakt|yamtrack|serializd|floppy|mal).+$".
+   * via the `patternProperty` "^(?!plex|tmdb|tautulli|webhooks|omdb|mdblist|notifiarr|gotify|ntfy|anidb|radarr|sonarr|trakt|yamtrack|flicklist|serializd|floppy|mal).+$".
    *
    * This interface was referenced by `Libraries`'s JSON-Schema definition
    * via the `patternProperty` "^schedule_.*$".
@@ -1719,6 +1740,7 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "flicklist_user"
         | "serializd"
         | "floppy"
         | "unlock"
@@ -1754,6 +1776,7 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "flicklist_user"
             | "serializd"
             | "floppy"
             | "unlock"
@@ -1792,6 +1815,7 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "flicklist_user"
         | "serializd"
         | "floppy"
         | "unlock"
@@ -1827,6 +1851,7 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "flicklist_user"
             | "serializd"
             | "floppy"
             | "unlock"
@@ -1865,6 +1890,7 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "flicklist_user"
         | "serializd"
         | "floppy"
         | "unlock"
@@ -1900,6 +1926,7 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "flicklist_user"
             | "serializd"
             | "floppy"
             | "unlock"
@@ -1938,6 +1965,7 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "flicklist_user"
         | "serializd"
         | "serializd_user"
         | "floppy"
@@ -1974,6 +2002,7 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "flicklist_user"
             | "serializd"
             | "serializd_user"
             | "floppy"
@@ -2013,6 +2042,7 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "flicklist_user"
         | "serializd"
         | "serializd_user"
         | "floppy"
@@ -2049,6 +2079,7 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "flicklist_user"
             | "serializd"
             | "serializd_user"
             | "floppy"
@@ -2088,6 +2119,7 @@ export interface Operations {
         | "tmdb"
         | "trakt"
         | "trakt_user"
+        | "flicklist_user"
         | "serializd"
         | "serializd_user"
         | "floppy"
@@ -2124,6 +2156,7 @@ export interface Operations {
             | "tmdb"
             | "trakt"
             | "trakt_user"
+            | "flicklist_user"
             | "serializd"
             | "serializd_user"
             | "floppy"
@@ -3584,6 +3617,9 @@ export interface Yamtrack {
   url?: string;
   username?: string;
   password?: string;
+}
+export interface Flicklist {
+  api_key?: string;
 }
 export interface Serializd {
   email: string;
