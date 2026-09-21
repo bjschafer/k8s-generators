@@ -171,7 +171,7 @@ export const sources: CrdSource[] = [
       "Requires the client version below to match what's actually installed - there's no plain " +
       "CRD-only manifest published upstream.",
     // renovate: datasource=github-releases depName=vmware-tanzu/velero extractVersion=^v(?<version>.*)$
-    version: { kind: "literal", value: "1.18.2" },
+    version: { kind: "literal", value: "1.18.3" },
     outputDir: "apps/velero/crds",
     fetch: {
       kind: "command",
