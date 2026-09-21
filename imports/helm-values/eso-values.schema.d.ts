@@ -268,6 +268,7 @@ export interface EsoValuesSchema {
     extraLabels?: {
       [k: string]: unknown;
     };
+    namespace?: string;
     sidecarLabel?: string;
     sidecarLabelValue?: string;
     [k: string]: unknown;
