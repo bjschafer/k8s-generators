@@ -193,7 +193,7 @@ export const sources: CrdSource[] = [
       "apps/postgres: the operator lives in cnpg-system and owns cluster-scoped CRDs, while the " +
       "databases it manages have their own lifecycle in the postgres namespace.",
     // renovate: datasource=github-releases depName=cloudnative-pg/cloudnative-pg extractVersion=^v(?<version>.*)$
-    version: { kind: "literal", value: "1.30.0" },
+    version: { kind: "literal", value: "1.30.1" },
     outputDir: "apps/cnpg/crds",
     crdOnly: false,
     filenameKind: true,
