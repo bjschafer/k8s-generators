@@ -34,7 +34,7 @@ spec:
         - alias: bookorbit
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: ghcr.io/bookorbit/bookorbit:2.x
+          imageName: ghcr.io/bookorbit/bookorbit:3.x
       namePattern: bookorbit
   writeBackConfig:
     gitConfig:
