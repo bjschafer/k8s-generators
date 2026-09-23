@@ -50,6 +50,8 @@ spec:
               value: "true"
             - name: OIDC_ALLOW_LOCAL_ISSUERS
               value: "true"
+            - name: DISABLE_LOCAL_AUTH
+              value: "true"
             - name: LIBRARY_BROWSE_ROOT
               value: /
             - name: PUID

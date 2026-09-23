@@ -143,6 +143,12 @@ new AppPlus(app, name, {
     // discovery throws "URL resolves to a private or local address" and the
     // provider can't even be saved.
     OIDC_ALLOW_LOCAL_ISSUERS: EnvValue.fromValue("true"),
+    // OIDC only: hides the username/password form and rejects password logins
+    // server-side too. There is no auto-redirect option, so the login page is
+    // left with just the provider button. The app refuses to boot with this
+    // set unless an active superuser is linked to an enabled OIDC provider --
+    // if that link is ever lost, flip this off, relink, then flip it back.
+    DISABLE_LOCAL_AUTH: EnvValue.fromValue("true"),
     // Roots the library-folder picker. It takes a single path and the library
     // roots are siblings, so there is no subtree that covers them all -- `/`
     // is the only value from which /books, /audiobooks and /comics are all
