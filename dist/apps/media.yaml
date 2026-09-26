@@ -63,14 +63,6 @@ spec:
           commonUpdateSettings:
             updateStrategy: digest
           imageName: ghcr.io/linuxserver/prowlarr:latest
-        - alias: bindery
-          commonUpdateSettings:
-            updateStrategy: digest
-          imageName: ghcr.io/vavallee/bindery:latest
-        - alias: shelfarr
-          commonUpdateSettings:
-            updateStrategy: digest
-          imageName: ghcr.io/pedro-revez-silva/shelfarr:latest
       namePattern: media
   writeBackConfig:
     gitConfig:
