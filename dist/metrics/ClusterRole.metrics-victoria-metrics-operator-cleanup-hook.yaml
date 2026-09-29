@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-operator
-    app.kubernetes.io/version: v0.74.1
-    helm.sh/chart: victoria-metrics-operator-0.67.3
+    app.kubernetes.io/version: v0.75.0
+    helm.sh/chart: victoria-metrics-operator-0.68.0
   name: metrics-victoria-metrics-operator-cleanup-hook
   namespace: metrics
 rules:
@@ -86,6 +86,9 @@ rules:
       - vmusers
       - vmusers/finalizers
       - vmusers/status
+      - vtagents
+      - vtagents/finalizers
+      - vtagents/status
       - vtclusters
       - vtclusters/finalizers
       - vtclusters/status
