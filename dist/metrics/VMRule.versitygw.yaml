@@ -15,7 +15,6 @@ spec:
           expr: up{job="statsd-exporter", namespace="metrics-exporters"} == 0
           for: 5m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: VersityGWServerErrors
@@ -29,7 +28,6 @@ spec:
             > 0.01
           for: 5m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: VersityGWHighLatency
@@ -44,5 +42,4 @@ spec:
             ) > 10
           for: 10m
           labels:
-            namespace: metrics
             priority: "0"

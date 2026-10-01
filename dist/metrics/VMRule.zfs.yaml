@@ -26,6 +26,5 @@ spec:
           expr: node_zfs_zpool_state{state!="online"} == 1
           for: 1m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"

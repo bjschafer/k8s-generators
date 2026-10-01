@@ -21,7 +21,6 @@ spec:
           expr: absent(ceph_osd_up)
           for: 15m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: CephHealthCheckError
@@ -33,7 +32,6 @@ spec:
           expr: ceph_health_detail{severity="HEALTH_ERR"} > 0
           for: 5m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: CephHealthCheckWarning
@@ -45,7 +43,6 @@ spec:
           expr: ceph_health_detail{severity="HEALTH_WARN", name!~"DAEMON_OLD_VERSION|OSD_UPGRADE_FINISHED|TELEMETRY_CHANGED"} > 0
           for: 15m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: CephState
@@ -58,7 +55,6 @@ spec:
           expr: (ceph_health_status != 0) unless on () (max(ceph_health_detail) > 0)
           for: 5m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: CephOsdDown
@@ -71,7 +67,6 @@ spec:
           expr: ceph_osd_up == 0
           for: 5m
           labels:
-            namespace: metrics
             push_notify: "true"
             severity: critical
         - alert: CephOsdLowSpace
@@ -92,7 +87,6 @@ spec:
           expr: max(ceph_osd_flag_norebalance) by (instance) > 0
           for: 60m
           labels:
-            namespace: metrics
             push_notify: "true"
             severity: critical
         - alert: CephHighOsdLatency

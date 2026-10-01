@@ -15,7 +15,6 @@ spec:
           expr: probe_dns_query_succeeded < 1
           for: 15m
           labels:
-            namespace: metrics
             push_notify: "true"
             severity: warning
         - alert: BlackboxHTTPNotReturningSuccess
@@ -24,6 +23,5 @@ spec:
           expr: probe_http_status_code != 200
           for: 15m
           labels:
-            namespace: metrics
             push_notify: "true"
             severity: warning

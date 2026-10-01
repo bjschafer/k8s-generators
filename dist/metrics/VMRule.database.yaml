@@ -15,7 +15,6 @@ spec:
           expr: max by(persistentvolumeclaim) (1 - kubelet_volume_stats_available_bytes{namespace="postgres"} / kubelet_volume_stats_capacity_bytes{namespace="postgres"}) > 0.85
           for: 15m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: CNPGMaxConnectionsReached
@@ -24,7 +23,6 @@ spec:
           expr: 100 * sum by (pod) (cnpg_backends_total{namespace="postgres"}) / sum by (pod) (cnpg_pg_settings_setting{name="max_connections", namespace="postgres"}) > 90
           for: 5m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: CNPGClusterNotHealthy
@@ -33,7 +31,6 @@ spec:
           expr: cnpg_cluster_instances_status{status!="ready"} > 0
           for: 5m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: CNPGReplicationLag
@@ -42,7 +39,6 @@ spec:
           expr: cnpg_pg_replication_lag > 60
           for: 5m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: CNPGBackupFailed
@@ -54,7 +50,6 @@ spec:
             max by(job) (barman_cloud_cloudnative_pg_io_last_available_backup_timestamp)
           for: 5m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: CNPGBackupStale
@@ -63,7 +58,6 @@ spec:
           expr: time() - max by(job) (barman_cloud_cloudnative_pg_io_last_available_backup_timestamp) > 90000
           for: 1h
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: PostgresDumpNotSucceeding
@@ -76,6 +70,5 @@ spec:
           expr: time() - kube_cronjob_status_last_successful_time{namespace="postgres", cronjob="pg-dump"} > 36 * 3600
           for: 1h
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"

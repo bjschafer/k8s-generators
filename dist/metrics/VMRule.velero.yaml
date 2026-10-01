@@ -15,7 +15,6 @@ spec:
           expr: sum by (schedule) (increase(velero_backup_partial_failure_total{schedule!=""}[1h])) > 0
           for: 0m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: VeleroBackupFailures
@@ -24,7 +23,6 @@ spec:
           expr: sum by (schedule) (increase(velero_backup_failure_total{schedule!=""}[1h])) > 0
           for: 0m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: VeleroBackupStaleDaily
@@ -33,7 +31,6 @@ spec:
           expr: time() - velero_backup_last_successful_timestamp{schedule!="",schedule!~".*weekly.*"} > 86400 * 2
           for: 1h
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: VeleroBackupStaleWeekly
@@ -42,6 +39,5 @@ spec:
           expr: time() - velero_backup_last_successful_timestamp{schedule=~".*weekly.*"} > 86400 * 8
           for: 1h
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"

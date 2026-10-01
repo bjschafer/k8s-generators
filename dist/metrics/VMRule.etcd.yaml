@@ -19,7 +19,6 @@ spec:
           expr: histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 1.5
           for: 10m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: EtcdHighCommitDurations
@@ -32,7 +31,6 @@ spec:
           expr: histogram_quantile(0.99, sum(rate(etcd_disk_backend_commit_duration_seconds_bucket{job="etcd"}[5m])) by (instance, le)) > 1.5
           for: 10m
           labels:
-            namespace: metrics
             priority: "0"
         - alert: EtcdFrequentLeaderChanges
           annotations:
@@ -44,7 +42,6 @@ spec:
           expr: increase(etcd_server_leader_changes_seen_total{job="etcd"}[15m]) > 2
           for: 0m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: EtcdMembersDown
@@ -57,7 +54,6 @@ spec:
           expr: count(up{job="etcd"} == 0) > 0 or absent(up{job="etcd"})
           for: 5m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: EtcdDatabaseQuotaLowSpace
@@ -70,5 +66,4 @@ spec:
           expr: (etcd_mvcc_db_total_size_in_bytes{job="etcd"} / etcd_server_quota_backend_bytes{job="etcd"}) * 100 > 80
           for: 10m
           labels:
-            namespace: metrics
             priority: "0"

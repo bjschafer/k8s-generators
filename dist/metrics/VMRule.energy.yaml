@@ -18,7 +18,6 @@ spec:
           expr: (time() - alliant_last_data_timestamp_seconds) / 86400 > 8
           for: 6h
           labels:
-            namespace: metrics
             priority: "-1"
             push_notify: "true"
         - alert: AlliantCollectorNotSucceeding
@@ -27,6 +26,5 @@ spec:
           expr: time() - kube_cronjob_status_last_successful_time{namespace="energy", cronjob="alliant-collector"} > 36 * 3600
           for: 1h
           labels:
-            namespace: metrics
             priority: "-1"
             push_notify: "true"

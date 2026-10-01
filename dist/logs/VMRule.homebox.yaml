@@ -15,7 +15,6 @@ spec:
           expr: _time:6h kubernetes.pod_namespace:homebox "to send notifiers" | stats count(*) logs_count | filter logs_count:>0
           for: 0m
           labels:
-            namespace: logs
             priority: "0"
             push_notify: "true"
             severity: warning
@@ -25,7 +24,6 @@ spec:
           expr: _time:26h kubernetes.pod_namespace:homebox "run notifiers" | stats count(*) logs_count | filter logs_count:<1
           for: 10m
           labels:
-            namespace: logs
             priority: "-1"
             push_notify: "true"
             severity: warning

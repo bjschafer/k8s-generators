@@ -111,6 +111,12 @@ export class VmResources extends Chart {
           },
         },
         disableRouteContinueEnforce: true,
+        // Otherwise the operator wraps every VMAlertmanagerConfig route in a
+        // `namespace="<config's namespace>"` matcher, which forced lib/monitoring/alerts.ts
+        // to stamp namespace=metrics over every routed alert -- so a crashlooping pod in
+        // romm paged as namespace=metrics. Only one VMAlertmanagerConfig exists, so there
+        // is no cross-tenant routing for the matcher to protect.
+        disableNamespaceMatcher: true,
         selectAllByDefault: true, // automatically pick up all VmAlertmanagerConfigs
       },
     });

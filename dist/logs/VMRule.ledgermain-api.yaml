@@ -15,7 +15,6 @@ spec:
           expr: ScriptName:"ledgermain-api" AND (Outcome:"exception" OR Event.Response.Status:>=500) | stats count(*) logs_count | filter logs_count:>0
           for: 0m
           labels:
-            namespace: logs
             priority: "0"
             push_notify: "true"
             severity: warning

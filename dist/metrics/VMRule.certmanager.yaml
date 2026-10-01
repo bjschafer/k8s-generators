@@ -15,7 +15,6 @@ spec:
           expr: (certmanager_certificate_expiration_timestamp_seconds - time()) / 86400 < 14
           for: 1h
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"
         - alert: CertificateNotReady
@@ -24,6 +23,5 @@ spec:
           expr: certmanager_certificate_ready_status{condition="False"} == 1
           for: 15m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"

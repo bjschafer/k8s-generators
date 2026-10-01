@@ -15,7 +15,6 @@ spec:
           expr: gitlab_sidekiq_queue_size > 1000
           for: 15m
           labels:
-            namespace: metrics
             priority: "0"
         - alert: GitLabSidekiqJobsFailing
           annotations:
@@ -23,6 +22,5 @@ spec:
           expr: increase(gitlab_sidekiq_jobs_failed_total[5m]) > 0
           for: 15m
           labels:
-            namespace: metrics
             priority: "0"
             push_notify: "true"

@@ -15,7 +15,6 @@ spec:
           expr: nut_status{status='OB'} == 1
           for: 0m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: UpsLowBattery
@@ -24,7 +23,6 @@ spec:
           expr: nut_battery_charge < 0.5
           for: 1m
           labels:
-            namespace: metrics
             priority: "1"
             push_notify: "true"
         - alert: UpsHighLoad
@@ -37,7 +35,6 @@ spec:
           expr: nut_load * 100 > 75
           for: 5m
           labels:
-            namespace: metrics
             priority: "0"
         - alert: UpsBatteryReplacementNeeded
           annotations:
