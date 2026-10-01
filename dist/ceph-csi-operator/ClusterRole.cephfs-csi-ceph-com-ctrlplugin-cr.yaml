@@ -101,6 +101,8 @@ rules:
     verbs:
       - get
       - list
+      - watch
+      - update
   - apiGroups:
       - snapshot.storage.k8s.io
     resources:
