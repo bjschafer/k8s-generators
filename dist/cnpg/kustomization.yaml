@@ -38,6 +38,7 @@ resources:
   - Role.barman-plugin-leader-election-role.yaml
   - RoleBinding.barman-plugin-leader-election-rolebinding.yaml
   - Secret.plugin-barman-cloud-2b4mtt7m69.yaml
+  - Secret.plugin-barman-cloud-5fm982t42b.yaml
   - Secret.plugin-barman-cloud-f998mh5292.yaml
   - Secret.plugin-barman-cloud-m5m67kfh8f.yaml
   - Service.barman-cloud.yaml
