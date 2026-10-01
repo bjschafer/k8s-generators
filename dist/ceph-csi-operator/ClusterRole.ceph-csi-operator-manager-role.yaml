@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: ceph-csi-operator
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: ceph-csi-operator
-    app.kubernetes.io/version: v1.0.5
-    helm.sh/chart: ceph-csi-operator-1.0.5
+    app.kubernetes.io/version: v1.1.0
+    helm.sh/chart: ceph-csi-operator-1.1.0
   name: ceph-csi-operator-manager-role
 rules:
   - apiGroups:
@@ -43,14 +43,6 @@ rules:
       - update
       - watch
   - apiGroups:
-      - cbt.storage.k8s.io
-    resources:
-      - snapshotmetadataservices
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
       - csi.ceph.io
     resources:
       - cephconnections
@@ -64,6 +56,7 @@ rules:
       - csi.ceph.io
     resources:
       - clientprofilemappings
+      - clientprofilereplications
       - clientprofiles
       - drivers
     verbs:
@@ -78,6 +71,7 @@ rules:
       - csi.ceph.io
     resources:
       - clientprofilemappings/finalizers
+      - clientprofilereplications/finalizers
       - clientprofiles/finalizers
       - drivers/finalizers
     verbs:
@@ -86,6 +80,7 @@ rules:
       - csi.ceph.io
     resources:
       - clientprofilemappings/status
+      - clientprofilereplications/status
       - clientprofiles/status
       - drivers/status
     verbs:
@@ -99,6 +94,18 @@ rules:
     verbs:
       - get
       - list
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - networkpolicies
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
       - watch
   - apiGroups:
       - storage.k8s.io
