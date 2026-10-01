@@ -53,9 +53,22 @@ data:
           .log = parse_json(.message) ?? .message
           del(.message)
           if is_object(.log) {
+            if .log.msg == "record" && is_object(.log.record) {
+              inner = .log.record.message || .log.record.msg
+              if inner != null {
+                .log.msg = inner
+              }
+              sev = .log.record.error_severity || .log.record.level
+              if sev != null {
+                .log.level = sev
+              }
+            }
             lvl = .log.level || .log.severity || .log.lvl || .log.loglevel || .log.levelname
             if lvl != null {
               .level = downcase(to_string(lvl) ?? "")
+              if .level == "log" {
+                .level = "info"
+              }
             }
           }
         type: remap

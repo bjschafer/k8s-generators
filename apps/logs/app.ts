@@ -114,9 +114,28 @@ class VMLogs extends Chart {
                   ".log = parse_json(.message) ?? .message",
                   "del(.message)",
                   "if is_object(.log) {",
+                  // CNPG wraps every postgres and pgbouncer line as
+                  // {"level":"info","msg":"record","record":{...}}, so VL-Msg-Field picked up
+                  // the literal word "record" as _msg and word searches over the postgres
+                  // namespace matched nothing. Promote the inner message (postgres: `message`,
+                  // pgbouncer: `msg`) and severity; the full record stays under log.record.
+                  '  if .log.msg == "record" && is_object(.log.record) {',
+                  "    inner = .log.record.message || .log.record.msg",
+                  "    if inner != null {",
+                  "      .log.msg = inner",
+                  "    }",
+                  "    sev = .log.record.error_severity || .log.record.level",
+                  "    if sev != null {",
+                  "      .log.level = sev",
+                  "    }",
+                  "  }",
                   "  lvl = .log.level || .log.severity || .log.lvl || .log.loglevel || .log.levelname",
                   "  if lvl != null {",
                   '    .level = downcase(to_string(lvl) ?? "")',
+                  // postgres' routine severity is LOG; keep `level:info` meaning routine
+                  '    if .level == "log" {',
+                  '      .level = "info"',
+                  "    }",
                   "  }",
                   "}",
                 ].join("\n"),
