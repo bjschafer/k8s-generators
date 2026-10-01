@@ -1,6 +1,6 @@
 import { basename } from "../../lib/util";
 import { DEFAULT_APP_PROPS, DEFAULT_SECURITY_CONTEXT } from "../../lib/consts";
-import { App, Size } from "cdk8s";
+import { App, Duration, Size } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { StorageClass } from "../../lib/volume";
@@ -95,8 +95,21 @@ new AppPlus(app, `${name}-app`, {
       name: "app-config",
     },
   ],
-  livenessProbe: Probe.fromHttpGet("", { port: 80 }),
-  readinessProbe: Probe.fromHttpGet("", { port: 80 }),
+  // `/` answers in ~30ms normally, but it's 4 sync gunicorn workers on SQLite
+  // over Ceph RBD. The 06:00 UTC Velero daily snapshots every PVC at once, Ceph
+  // commit latency climbs past 150ms, and the default 1s timeout x3 tripped
+  // liveness every morning. Each restart re-runs alembic against the same slow
+  // disk, so it looped for ~15 minutes and fired KubernetesPodCrashLooping
+  // nightly. 5s x 6 rides out the window; a genuinely wedged app still dies in 1m.
+  livenessProbe: Probe.fromHttpGet("", {
+    port: 80,
+    timeoutSeconds: Duration.seconds(5),
+    failureThreshold: 6,
+  }),
+  readinessProbe: Probe.fromHttpGet("", {
+    port: 80,
+    timeoutSeconds: Duration.seconds(5),
+  }),
   extraIngressHosts: ["dnsadmin.cmdcentral.xyz"],
   limitToAMD64: true,
 });

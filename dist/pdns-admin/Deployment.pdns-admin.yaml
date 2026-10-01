@@ -32,11 +32,12 @@ spec:
           image: powerdnsadmin/pda-legacy:latest
           imagePullPolicy: Always
           livenessProbe:
-            failureThreshold: 3
+            failureThreshold: 6
             httpGet:
               path: ""
               port: 80
               scheme: HTTP
+            timeoutSeconds: 5
           name: pdns-admin
           ports:
             - containerPort: 80
@@ -46,6 +47,7 @@ spec:
               path: ""
               port: 80
               scheme: HTTP
+            timeoutSeconds: 5
           resources:
             limits:
               memory: 512Mi
