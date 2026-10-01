@@ -6,6 +6,9 @@ resources:
   - ClusterRole.ceph-csi-operator-clientprofile-viewer-role.yaml
   - ClusterRole.ceph-csi-operator-clientprofilemapping-editor-role.yaml
   - ClusterRole.ceph-csi-operator-clientprofilemapping-viewer-role.yaml
+  - ClusterRole.ceph-csi-operator-clientprofilereplication-admin-role.yaml
+  - ClusterRole.ceph-csi-operator-clientprofilereplication-editor-role.yaml
+  - ClusterRole.ceph-csi-operator-clientprofilereplication-viewer-role.yaml
   - ClusterRole.ceph-csi-operator-clientprofiles-editor-role.yaml
   - ClusterRole.ceph-csi-operator-driver-editor-role.yaml
   - ClusterRole.ceph-csi-operator-driver-viewer-role.yaml
@@ -26,6 +29,7 @@ resources:
   - ClusterRoleBinding.rbd-csi-ceph-com-nodeplugin-crb.yaml
   - CustomResourceDefinition.cephconnections.csi.ceph.io.yaml
   - CustomResourceDefinition.clientprofilemappings.csi.ceph.io.yaml
+  - CustomResourceDefinition.clientprofilereplications.csi.ceph.io.yaml
   - CustomResourceDefinition.clientprofiles.csi.ceph.io.yaml
   - CustomResourceDefinition.drivers.csi.ceph.io.yaml
   - CustomResourceDefinition.operatorconfigs.csi.ceph.io.yaml
@@ -33,6 +37,7 @@ resources:
   - Driver.cephfs.csi.ceph.com.yaml
   - Driver.rbd.csi.ceph.com.yaml
   - ExternalSecret.csi-rbd-secret.yaml
+  - NetworkPolicy.ceph-csi-operator-ceph-csi-controller-manager.yaml
   - OperatorConfig.ceph-csi-operator-config.yaml
   - Role.ceph-csi-operator-leader-election-role.yaml
   - Role.cephfs-csi-ceph-com-ctrlplugin-r.yaml

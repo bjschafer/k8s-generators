@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/instance: ceph-csi-operator
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: ceph-csi-operator
-    app.kubernetes.io/version: v1.0.5
-    helm.sh/chart: ceph-csi-operator-1.0.5
+    app.kubernetes.io/version: v1.1.0
+    helm.sh/chart: ceph-csi-operator-1.1.0
   name: clientprofiles.csi.ceph.io
 spec:
   group: csi.ceph.io
@@ -88,6 +88,19 @@ spec:
                               type: string
                           type: object
                           x-kubernetes-map-type: atomic
+                        nodePublishSecret:
+                          description: |-
+                            SecretReference represents a Secret Reference. It has enough information to retrieve secret
+                            in any namespace
+                          properties:
+                            name:
+                              description: name is unique within a namespace to reference a secret resource.
+                              type: string
+                            namespace:
+                              description: namespace defines the space within which the secret name must be unique.
+                              type: string
+                          type: object
+                          x-kubernetes-map-type: atomic
                       type: object
                     fuseMountOptions:
                       additionalProperties:
@@ -130,6 +143,19 @@ spec:
                               type: string
                           type: object
                           x-kubernetes-map-type: atomic
+                        nodePublishSecret:
+                          description: |-
+                            SecretReference represents a Secret Reference. It has enough information to retrieve secret
+                            in any namespace
+                          properties:
+                            name:
+                              description: name is unique within a namespace to reference a secret resource.
+                              type: string
+                            namespace:
+                              description: namespace defines the space within which the secret name must be unique.
+                              type: string
+                          type: object
+                          x-kubernetes-map-type: atomic
                       type: object
                     radosNamespace:
                       type: string
@@ -159,6 +185,19 @@ spec:
                               type: string
                           type: object
                           x-kubernetes-map-type: atomic
+                        nodePublishSecret:
+                          description: |-
+                            SecretReference represents a Secret Reference. It has enough information to retrieve secret
+                            in any namespace
+                          properties:
+                            name:
+                              description: name is unique within a namespace to reference a secret resource.
+                              type: string
+                            namespace:
+                              description: namespace defines the space within which the secret name must be unique.
+                              type: string
+                          type: object
+                          x-kubernetes-map-type: atomic
                       type: object
                     radosNamespace:
                       type: string
@@ -174,6 +213,13 @@ spec:
                 ClientProfileStatus defines the observed state of Ceph CSI
                 configuration for volumes and snapshots configured to use
                 this profile
+              properties:
+                message:
+                  description: Message provides human-readable details about the current phase
+                  type: string
+                phase:
+                  description: Phase indicates the current state of this CR
+                  type: string
               type: object
           type: object
       served: true
