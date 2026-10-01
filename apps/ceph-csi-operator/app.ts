@@ -1,4 +1,5 @@
 import { ApiObject, App, Chart } from "cdk8s";
+import { ConfigMap } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { NewArgoApp, ArgoAppSource, ENABLE_SERVERSIDE_APPLY } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
@@ -161,6 +162,18 @@ class CephConfig extends Chart {
       deletionPolicy: VolumeSnapshotClassDeletionPolicy.DELETE,
     });
 
+    // The operator picks driver images from a table compiled into its binary,
+    // so an operator bump silently bumps cephcsi too. cephcsi >= v3.18 is built
+    // for x86-64-v3 (AVX2) and dies on start with "Fatal glibc error: CPU does
+    // not support x86-64-v3" -- every vmhost is Ivy Bridge (E5-2690 v2), which
+    // has no AVX2, so no Proxmox CPU type can fix it. Pin the plugin image to
+    // the last v3.17 release; sidecars keep following the operator defaults.
+    // Deliberately no renovate annotation: a bump here breaks all CSI pods.
+    const imageSet = new ConfigMap(this, "image-set", {
+      metadata: { name: "ceph-csi-image-set", namespace },
+      data: { plugin: "quay.io/cephcsi/cephcsi:v3.17.1" },
+    });
+
     new ApiObject(this, "operator-config", {
       apiVersion: "csi.ceph.io/v1",
       kind: "OperatorConfig",
@@ -184,6 +197,7 @@ class CephConfig extends Chart {
           fuseMountOptions: {},
           generateOMapInfo: false,
           grpcTimeout: 30,
+          imageSet: { name: imageSet.name },
           kernelMountOptions: {},
           log: {
             rotation: { maxFiles: 7, maxLogSize: "10Gi", periodicity: "daily" },

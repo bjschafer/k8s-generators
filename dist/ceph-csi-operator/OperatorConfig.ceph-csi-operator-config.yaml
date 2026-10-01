@@ -21,6 +21,8 @@ spec:
     fuseMountOptions: {}
     generateOMapInfo: false
     grpcTimeout: 30
+    imageSet:
+      name: ceph-csi-image-set
     kernelMountOptions: {}
     log:
       rotation:

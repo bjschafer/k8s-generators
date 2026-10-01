@@ -27,6 +27,7 @@ resources:
   - ClusterRoleBinding.cephfs-csi-ceph-com-nodeplugin-crb.yaml
   - ClusterRoleBinding.rbd-csi-ceph-com-ctrlplugin-crb.yaml
   - ClusterRoleBinding.rbd-csi-ceph-com-nodeplugin-crb.yaml
+  - ConfigMap.ceph-csi-image-set.yaml
   - CustomResourceDefinition.cephconnections.csi.ceph.io.yaml
   - CustomResourceDefinition.clientprofilemappings.csi.ceph.io.yaml
   - CustomResourceDefinition.clientprofilereplications.csi.ceph.io.yaml
