@@ -142,6 +142,18 @@ spec:
             namespace: metrics
             priority: "0"
             push_notify: "true"
+        - alert: KubernetesPodCrashLoopBackOffSustained
+          annotations:
+            description: |-
+              Container {{ $labels.container }} in pod {{ $labels.pod }} has been in CrashLoopBackOff for over 30 minutes.
+                LABELS = {{ $labels }}
+            summary: "Kubernetes pod stuck in CrashLoopBackOff (namespace: {{ $labels.namespace }}; pod: {{ $labels.pod }})"
+          expr: max without (instance) (max_over_time(kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"}[10m])) == 1
+          for: 30m
+          labels:
+            namespace: metrics
+            priority: "0"
+            push_notify: "true"
         - alert: KubernetesDeploymentGenerationMismatch
           annotations:
             description: |-

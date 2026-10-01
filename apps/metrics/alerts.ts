@@ -943,6 +943,30 @@ export function addAlerts(scope: Construct, id: string): void {
         },
       },
       {
+        alert: "KubernetesPodCrashLoopBackOffSustained",
+        // KubernetesPodCrashLooping above only sees bursts. Once kubelet's backoff saturates at
+        // 5m, a pod restarts at most 3 times per 15m window -- exactly at, never over, its `> 3`
+        // threshold -- so a pod that is down for good goes quiet. KubernetesPodNotHealthy can't
+        // cover it either: a crashlooping pod's phase stays Running. romm sat in
+        // CrashLoopBackOff for 9 days (2026-09-22 → 10-01) with neither firing.
+        //
+        // max_over_time bridges the ~seconds each attempt spends Running between backoffs, which
+        // would otherwise reset `for`. `max without (instance)` for the same KSM-churn reason as
+        // above.
+        expr: 'max without (instance) (max_over_time(kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"}[10m])) == 1',
+        for: "30m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          push_notify: "true",
+        },
+        annotations: {
+          summary:
+            "Kubernetes pod stuck in CrashLoopBackOff (namespace: {{ $labels.namespace }}; pod: {{ $labels.pod }})",
+          description:
+            "Container {{ $labels.container }} in pod {{ $labels.pod }} has been in CrashLoopBackOff for over 30 minutes.\n  LABELS = {{ $labels }}",
+        },
+      },
+      {
         alert: "KubernetesDeploymentGenerationMismatch",
         expr: "kube_deployment_status_observed_generation != kube_deployment_metadata_generation",
         for: "10m",
