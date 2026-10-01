@@ -46,7 +46,7 @@ new HelmApp(app, "drivers", {
   chart: "ceph-csi-drivers",
   repo: "https://ceph.github.io/ceph-csi-operator/",
   // renovate: datasource=helm depName=ceph-csi-drivers registryUrl=https://ceph.github.io/ceph-csi-operator/
-  version: "1.0.5",
+  version: "1.1.0",
   releaseName: "ceph-csi-drivers",
   namespace,
   values: {
