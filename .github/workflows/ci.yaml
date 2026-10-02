@@ -39,7 +39,7 @@ jobs:
       # pint, alertmanager) and exports the derived [env] (KUBE_VERSION) for
       # every subsequent `mise run` invocation below.
       - name: Install mise + pinned tools
-        uses: jdx/mise-action@v4
+        uses: jdx/mise-action@v5
         with:
           install: true
           cache: true
