@@ -22,6 +22,26 @@ export function addAlerts(scope: Construct, id: string): void {
             "Filesystem on host {{ $labels.hostname }} is read-only, probable longhorn issue",
         },
       },
+      {
+        // The vmhosts are Ivy Bridge (no AVX2), so any image rebased onto
+        // EL10/UBI10 dies in the dynamic loader with this line and nothing
+        // else -- from the outside it is just an unexplained crashloop
+        // (cephcsi 3.18, 2026-10). The phrase stops at "x86-64" so a future
+        // v4 baseline is caught too. Renamed because dotted field names are
+        // not valid Prometheus label names.
+        alert: "ContainerCpuArchUnsupported",
+        expr: `"CPU does not support x86-64" | stats by (kubernetes.pod_namespace, kubernetes.container_name) count(*) logs_count | filter logs_count:>0 | rename kubernetes.pod_namespace as namespace, kubernetes.container_name as container`,
+        for: "0m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          severity: "critical",
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "{{ $labels.namespace }}/{{ $labels.container }} image requires a newer x86-64 microarch level than the hosts support -- pin the previous image",
+        },
+      },
     ],
   });
 

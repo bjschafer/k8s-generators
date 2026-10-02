@@ -18,4 +18,13 @@ spec:
             priority: "0"
             push_notify: "true"
             severity: critical
+        - alert: ContainerCpuArchUnsupported
+          annotations:
+            summary: "{{ $labels.namespace }}/{{ $labels.container }} image requires a newer x86-64 microarch level than the hosts support -- pin the previous image"
+          expr: '"CPU does not support x86-64" | stats by (kubernetes.pod_namespace, kubernetes.container_name) count(*) logs_count | filter logs_count:>0 | rename kubernetes.pod_namespace as namespace, kubernetes.container_name as container'
+          for: 0m
+          labels:
+            priority: "0"
+            push_notify: "true"
+            severity: critical
       type: vlogs
