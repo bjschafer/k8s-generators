@@ -187,6 +187,17 @@ class ExternalDnsUnifi extends Chart {
             ...COMMON_ARGS,
             "--provider=webhook",
             "--webhook-provider-url=http://localhost:8888",
+            // The webhook client's timeout is read + write (default 5s + 10s =
+            // 15s), and a client-side timeout on GET /records is a *hard* error
+            // that exits the process -- only a 5xx from the webhook is soft.
+            // The webhook puts no deadline of its own on UniFi calls, so when
+            // the UDM's Network API stalls (it does under memory pressure,
+            // 2026-10-03 onward) it never gets to answer 5xx and every stall
+            // >15s was a restart: 134 in 4 days, all KubernetesPodCrashLooping
+            // noise. 50s + 10s gives a 60s budget that rides out stalls; a
+            // controller that is truly down still crashes us, which is worth
+            // hearing about.
+            "--webhook-provider-read-timeout=50s",
             "--txt-owner-id=prod-k8s-unifi",
           ],
           resources: {

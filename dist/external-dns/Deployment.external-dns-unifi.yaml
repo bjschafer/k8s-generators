@@ -29,6 +29,7 @@ spec:
             - --annotation-prefix=external-dns.kubernetes.io/
             - --provider=webhook
             - --webhook-provider-url=http://localhost:8888
+            - --webhook-provider-read-timeout=50s
             - --txt-owner-id=prod-k8s-unifi
           image: registry.k8s.io/external-dns/external-dns:v0.23.0
           imagePullPolicy: Always
