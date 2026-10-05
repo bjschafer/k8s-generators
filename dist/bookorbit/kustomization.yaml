@@ -12,8 +12,10 @@ resources:
   - PersistentVolume.bookorbit-nfs-audiobooks.yaml
   - PersistentVolume.bookorbit-nfs-books.yaml
   - PersistentVolume.bookorbit-nfs-comics.yaml
+  - PersistentVolume.bookorbit-nfs-downloads.yaml
   - PersistentVolumeClaim.data.yaml
   - PersistentVolumeClaim.nfs-audiobooks.yaml
   - PersistentVolumeClaim.nfs-books.yaml
   - PersistentVolumeClaim.nfs-comics.yaml
+  - PersistentVolumeClaim.nfs-downloads.yaml
   - Service.bookorbit.yaml

@@ -112,6 +112,19 @@ nfsVols.Add("bookorbit-nfs-comics", {
 });
 const comics = nfsVols.Get("bookorbit-nfs-comics");
 
+// SABnzbd's download tree, so book requests can import what it finishes. The
+// whole export rather than a category subPath, mounted at the same /downloads
+// SABnzbd itself uses (apps/media/app.ts): the completed-job paths it reports
+// back over its API then resolve as-is in here, with no remote path mapping to
+// keep in sync. Read-write because importing moves files out and cleans up the
+// job folder afterwards, same as the *arrs.
+nfsVols.Add("bookorbit-nfs-downloads", {
+  exportPath: "/warp/Media/Downloads",
+  storage: Size.tebibytes(1),
+  claimName: "nfs-downloads",
+});
+const downloads = nfsVols.Get("bookorbit-nfs-downloads");
+
 new AppPlus(app, name, {
   name: name,
   namespace: namespace,
@@ -204,6 +217,10 @@ new AppPlus(app, name, {
     {
       volume: Volume.fromPersistentVolumeClaim(app, "comics-vol", comics.pvc),
       mountPath: "/comics",
+    },
+    {
+      volume: Volume.fromPersistentVolumeClaim(app, "downloads-vol", downloads.pvc),
+      mountPath: "/downloads",
     },
   ],
   livenessProbe: Probe.fromHttpGet("/api/v1/health", { port: port }),

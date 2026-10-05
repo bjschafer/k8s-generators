@@ -128,6 +128,8 @@ spec:
               name: pvc-nfs-audiobooks
             - mountPath: /comics
               name: pvc-nfs-comics
+            - mountPath: /downloads
+              name: pvc-nfs-downloads
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -153,4 +155,8 @@ spec:
         - name: pvc-nfs-comics
           persistentVolumeClaim:
             claimName: nfs-comics
+            readOnly: false
+        - name: pvc-nfs-downloads
+          persistentVolumeClaim:
+            claimName: nfs-downloads
             readOnly: false
