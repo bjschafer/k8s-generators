@@ -245,8 +245,7 @@ new Navidrome(app, "navidrome");
 new SeedboxPull(app, "seedbox-pull", {
   downloads: nfsVols.Get("nfs-media-downloads"),
   destDir: "sync",
-  // Dry-run removals until the mirror has been watched for a day.
-  prune: false,
+  prune: true,
 });
 
 NewArgoApp("media", {

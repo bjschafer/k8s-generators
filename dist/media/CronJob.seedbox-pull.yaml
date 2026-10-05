@@ -37,7 +37,7 @@ spec:
                 - name: DEST_DIR
                   value: sync
                 - name: PRUNE
-                  value: "false"
+                  value: "true"
                 - name: RCLONE_SFTP_HOST
                   value: psb52743.seedbox.io
                 - name: RCLONE_SFTP_USER
