@@ -212,10 +212,12 @@ for (const mediaApp of mediaApps) {
 
 // resilio-sync is special due to subpath mounts
 // The only image here on a fixed tag rather than `:latest`, so the digest
-// strategy below follows 2.8.1's digest and can never reach 2.8.2 or 2.9 --
-// this is a full freeze, and Renovate is the only thing that will say so.
+// strategy below follows 2.8.1's digest -- a full freeze, on purpose. 3.x
+// refuses to sync at all until it's given a (free, registration-walled)
+// license, which silently stalled the seedbox pull for a month after the v3
+// bump. renovate.json caps this at <3; the replacement plan is an SFTP pull.
 // renovate: datasource=docker depName=ghcr.io/linuxserver/resilio-sync
-const resilioVersion = "3.1.2";
+const resilioVersion = "2.8.1";
 const resilioImage = `ghcr.io/linuxserver/resilio-sync:${resilioVersion}`;
 new MediaApp(app, {
   name: "resilio-sync",
