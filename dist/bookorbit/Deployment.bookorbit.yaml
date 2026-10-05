@@ -78,6 +78,11 @@ spec:
                 secretKeyRef:
                   key: MIGRATION_ENCRYPTION_KEY
                   name: bookorbit-secrets
+            - name: BOOK_REQUEST_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: BOOK_REQUEST_ENCRYPTION_KEY
+                  name: bookorbit-book-request-secrets
           image: ghcr.io/bookorbit/bookorbit
           imagePullPolicy: Always
           livenessProbe:

@@ -60,6 +60,20 @@ const secrets = new GeneratedSecret(app, "secrets", {
   },
 });
 
+// Encrypts the indexer and download-client credentials saved by book requests;
+// without it the app refuses to store them. Its own ExternalSecret rather than
+// one more key above: with refreshInterval "0", ESO still re-syncs when the
+// spec changes, and a re-sync re-runs every generator in it -- adding a key
+// there would reroll the existing ones and orphan everything encrypted under
+// them. Keys added later belong in a new GeneratedSecret of their own too.
+const bookRequestSecrets = new GeneratedSecret(app, "book-request-secrets", {
+  name: `${name}-book-request-secrets`,
+  namespace: namespace,
+  data: {
+    BOOK_REQUEST_ENCRYPTION_KEY: { hex: true },
+  },
+});
+
 // The ebook library, mounted read-write: BookOrbit's import, file-rename and
 // book-dock features all write into it. Reached over the storage VLAN, which is
 // lib/nfs.ts's default and how the media namespace mounts this same export.
@@ -164,6 +178,7 @@ new AppPlus(app, name, {
     PGID: EnvValue.fromValue(MEDIA_GID),
 
     ...secrets.toEnvValues(),
+    ...bookRequestSecrets.toEnvValues(),
   },
   volumes: [
     {

@@ -1,8 +1,10 @@
 resources:
   - Deployment.bookorbit.yaml
+  - ExternalSecret.bookorbit-book-request-secrets.yaml
   - ExternalSecret.bookorbit-db-credentials.yaml
   - ExternalSecret.bookorbit-secrets.yaml
   - Ingress.bookorbit.yaml
+  - Password.bookorbit-book-request-secrets-book-request-encryption-key.yaml
   - Password.bookorbit-secrets-email-encryption-key.yaml
   - Password.bookorbit-secrets-jwt-secret.yaml
   - Password.bookorbit-secrets-migration-encryption-key.yaml
