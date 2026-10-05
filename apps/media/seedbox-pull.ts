@@ -9,6 +9,8 @@ import {
   RestartPolicy,
   Volume,
 } from "cdk8s-plus-34";
+import { readFileSync } from "fs";
+import { join } from "path";
 import { Construct } from "constructs";
 import { MEDIA_GID, MEDIA_UID, NONROOT_SECURITY_CONTEXT_UID } from "../../lib/consts";
 import { NFSConcreteVolume } from "../../lib/nfs";
@@ -32,64 +34,11 @@ const SEEDBOX_KNOWN_HOSTS =
   "psb52743.seedbox.io ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLw8QPXaNlm+aMT1HwhT2+HsMk+50SQgXTasZktlbteX8HcEHjelbhzs4iomzVjmv7tKjnnjpLqIOot3l424qT0U/0PwrP1dNn0Q6iG+p4r8uuQmMuRGRxk0MJIdS++5MYaSAXR52ML9/VuNkwa1J9FEl6LaQsOiy3mYYHI5Wbwze2He7SOSpKULQO+eMdhvh/Chaai3kjJN7dlhQ5eHqDulQK2eovsgbq5ALZ4wb9onL+3Yh5jZQZeN4lOyqOUozntV7ECtZdav6M9rIDyv4XNwuOA/eWKoy+dIe9/fcSfi9SJJKCN0Qdx1DC3dK/HWhdi1JnM9IDD0wqgkUH9osZ\n";
 
 // rTorrent moves a torrent into done/ only once it has finished, so done/ is
-// all there is to pull. Each top-level item is copied into .incoming/ and
-// renamed into place only once whole -- the *arrs are watching the
-// destination, and a season pack that appears file-by-file gets half-imported.
-// Removals mirror the seedbox, as the Resilio Sync this replaced did: once a
-// torrent is gone from done/ its local copy goes too, otherwise the
-// destination only ever grows.
-const PULL_SCRIPT = `#!/bin/sh
-set -eu
-
-export RCLONE_SFTP_PASS="$(rclone obscure "$SEEDBOX_PASSWORD")"
-remote=":sftp:$SEEDBOX_DONE_PATH"
-staging="$DEST_ROOT/.incoming"
-dest="$DEST_ROOT/$DEST_DIR"
-mkdir -p "$staging" "$dest"
-
-# A failed listing must abort here, before anything below can read an empty
-# listing as "everything was removed".
-listing=$(rclone lsf --max-depth 1 "$remote")
-names=$(printf '%s\\n' "$listing" | sed 's:/$::' | grep -v '^\\.' || true)
-
-failed=0
-while IFS= read -r entry; do
-  [ -n "$entry" ] || continue
-  item=\${entry%/}
-  case "$item" in .*) continue ;; esac
-  [ -e "$dest/$item" ] && continue
-  echo "pulling: $item"
-  if [ "$entry" != "$item" ]; then
-    rclone copy "$remote/$item" "$staging/$item" || { failed=1; continue; }
-  else
-    rclone copyto "$remote/$item" "$staging/$item" || { failed=1; continue; }
-  fi
-  mv "$staging/$item" "$dest/$item"
-done <<EOF
-$listing
-EOF
-
-if [ -z "$names" ] && [ -n "$(ls -A "$dest")" ]; then
-  echo "done/ listed empty but $dest is not; skipping removals" >&2
-  exit "$failed"
-fi
-for dir in "$dest" "$staging"; do
-  ls -A "$dir" | while IFS= read -r item; do
-    case "$item" in .*) continue ;; esac
-    if ! printf '%s\\n' "$names" | grep -Fxq -- "$item"; then
-      if [ "$PRUNE" = "true" ]; then
-        echo "removing (gone from seedbox): $dir/$item"
-        rm -rf -- "$dir/$item"
-      else
-        echo "would remove (gone from seedbox): $dir/$item"
-      fi
-    fi
-  done
-done
-
-exit "$failed"
-`;
-
+// all there is to pull. The *arrs' "remove from client" deletes only their
+// mapped local copy and rTorrent leaves the data behind, so the seedbox only
+// stays under quota if local deletions are mirrored back -- which Resilio's
+// two-way sync did implicitly. The script keeps a manifest to tell those
+// apart from new downloads; see seedbox-pull.sh.
 export interface SeedboxPullProps {
   /** The Downloads export; everything lands under its `seedbox/` subPath. */
   readonly downloads: NFSConcreteVolume;
@@ -99,8 +48,10 @@ export interface SeedboxPullProps {
    */
   readonly destDir: string;
   /**
-   * Actually delete local items that are gone from done/. Off, it only logs
-   * what it would remove -- for checking the mirror before trusting it.
+   * Actually mirror deletions, both ways: items gone from done/ are removed
+   * locally, and items the *arrs removed locally are deleted on the seedbox.
+   * Off, both only log what they would do -- for checking the mirror before
+   * trusting it.
    */
   readonly prune: boolean;
 }
@@ -124,7 +75,7 @@ export class SeedboxPull extends Chart {
         namespace: namespace,
       },
       data: {
-        "pull.sh": PULL_SCRIPT,
+        "pull.sh": readFileSync(join(__dirname, "seedbox-pull.sh"), "utf-8"),
         known_hosts: SEEDBOX_KNOWN_HOSTS,
       },
     });

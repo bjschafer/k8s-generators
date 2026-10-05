@@ -1,0 +1,151 @@
+#!/bin/sh
+# Two-way mirror of the seedbox's done/ directory into $DEST_ROOT/$DEST_DIR,
+# one top-level item (torrent) at a time. See seedbox-pull.ts for the why.
+#
+# $DEST_ROOT/.pulled is the manifest: every item known to have existed on
+# both sides. It is what tells "new on the seedbox" apart from "deleted
+# locally by an *arr", which otherwise look identical (remote yes, local no):
+#
+#   manifest  remote  local
+#   no        yes     no     new download         -> pull it
+#   yes       yes     no     removed locally      -> delete it on the seedbox
+#   yes       no      yes    removed from seedbox -> delete it locally
+#   no        no      yes    never synced         -> leave it alone
+#
+# Deletions in either direction only happen with PRUNE=true; otherwise they
+# are logged as "would ..." and the item is kept in the manifest so it is
+# neither re-pulled nor forgotten.
+set -eu
+
+export RCLONE_SFTP_PASS="$(rclone obscure "$SEEDBOX_PASSWORD")"
+remote=":sftp:$SEEDBOX_DONE_PATH"
+staging="$DEST_ROOT/.incoming"
+dest="$DEST_ROOT/$DEST_DIR"
+manifest="$DEST_ROOT/.pulled"
+mkdir -p "$staging" "$dest"
+touch "$manifest"
+
+# Exact-line membership test against a newline-separated list.
+has() { printf '%s\n' "$2" | grep -Fxq -- "$1"; }
+
+# A failed listing must abort here, before an empty listing can read as
+# "everything was removed from the seedbox".
+listing=$(rclone lsf --max-depth 1 "$remote")
+remote_names=$(printf '%s\n' "$listing" | sed 's:/$::' | grep -v '^\.' || true)
+local_names=$(ls -A "$dest" | grep -v '^\.' || true)
+known=$(grep -v '^$' "$manifest" || true)
+
+# An unmounted or emptied side would otherwise read as "everything was
+# deleted over there" and be mirrored onto the other.
+if [ -n "$known" ] && [ -z "$local_names" ]; then
+  echo "$dest is empty but the manifest is not; refusing to run" >&2
+  exit 1
+fi
+if [ -n "$known" ] && [ -z "$remote_names" ]; then
+  echo "done/ listed empty but the manifest is not; refusing to run" >&2
+  exit 1
+fi
+
+failed=0
+pulled=""
+
+# New on the seedbox: pull through staging so the *arrs only ever see whole
+# items -- a season pack that appears file-by-file gets half-imported.
+while IFS= read -r entry; do
+  [ -n "$entry" ] || continue
+  item=${entry%/}
+  case "$item" in .*) continue ;; esac
+  has "$item" "$local_names" && continue
+  has "$item" "$known" && continue
+  echo "pulling: $item"
+  if [ "$entry" != "$item" ]; then
+    rclone copy "$remote/$item" "$staging/$item" || { failed=1; continue; }
+  else
+    rclone copyto "$remote/$item" "$staging/$item" || { failed=1; continue; }
+  fi
+  mv "$staging/$item" "$dest/$item"
+  pulled="$pulled$item
+"
+done <<EOF
+$listing
+EOF
+
+# Removed locally (the *arrs delete their mapped copy when they drop a
+# finished torrent; rTorrent leaves the data behind) -> delete on the seedbox.
+to_unseed=""
+while IFS= read -r item; do
+  [ -n "$item" ] || continue
+  has "$item" "$remote_names" || continue
+  has "$item" "$local_names" && continue
+  to_unseed="$to_unseed$item
+"
+done <<EOF
+$known
+EOF
+
+# A burst of local deletions is more likely a mistake than a cleanup.
+n_known=$(printf '%s\n' "$known" | grep -c . || true)
+n_unseed=$(printf '%s' "$to_unseed" | grep -c . || true)
+unseed_ok=true
+if [ "$n_unseed" -gt 0 ] && [ $((n_unseed * 4)) -gt "$n_known" ]; then
+  echo "$n_unseed of $n_known known items missing locally; refusing to delete them on the seedbox" >&2
+  unseed_ok=false
+  failed=1
+fi
+
+while IFS= read -r item; do
+  [ -n "$item" ] || continue
+  if [ "$PRUNE" = "true" ] && [ "$unseed_ok" = "true" ]; then
+    echo "deleting on seedbox (removed locally): $item"
+    if has "$item/" "$listing"; then
+      rclone purge "$remote/$item" || failed=1
+    else
+      rclone deletefile "$remote/$item" || failed=1
+    fi
+  else
+    echo "would delete on seedbox (removed locally): $item"
+  fi
+done <<EOF
+$to_unseed
+EOF
+
+# Removed from the seedbox -> delete locally. Staging leftovers of items that
+# vanished mid-pull go too.
+while IFS= read -r item; do
+  [ -n "$item" ] || continue
+  has "$item" "$remote_names" && continue
+  [ -e "$dest/$item" ] || continue
+  if [ "$PRUNE" = "true" ]; then
+    echo "removing locally (gone from seedbox): $item"
+    rm -rf -- "$dest/$item"
+  else
+    echo "would remove locally (gone from seedbox): $item"
+  fi
+done <<EOF
+$known
+EOF
+if [ "$PRUNE" = "true" ]; then
+  ls -A "$staging" | while IFS= read -r item; do
+    has "${item%.*.partial}" "$remote_names" && continue
+    has "$item" "$remote_names" && continue
+    echo "clearing stale staging: $item"
+    rm -rf -- "$staging/$item"
+  done
+fi
+
+# Rewrite the manifest: everything known or just pulled, plus anything both
+# sides already share (adopts what Resilio synced), minus whatever no longer
+# exists on either side.
+remote_now=$(rclone lsf --max-depth 1 "$remote" | sed 's:/$::')
+local_now=$(ls -A "$dest" | grep -v '^\.' || true)
+printf '%s\n%s\n%s\n' "$known" "$pulled" "$remote_names" | grep -v '^$' | sort -u |
+  while IFS= read -r item; do
+    if has "$item" "$local_now"; then
+      if has "$item" "$known" || has "$item" "$remote_now"; then echo "$item"; fi
+    elif has "$item" "$known" && has "$item" "$remote_now"; then
+      echo "$item"
+    fi
+  done >"$manifest.tmp"
+mv "$manifest.tmp" "$manifest"
+
+exit "$failed"
