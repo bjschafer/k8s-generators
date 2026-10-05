@@ -137,6 +137,12 @@ export interface GeneratedSecretProps {
  * these are keys that existing data is encrypted under or existing sessions
  * are signed with, so a silent reroll would be a silent outage. Rotating one
  * is a deliberate act: delete the Secret and let it be reminted.
+ *
+ * Never add, remove or reshape a key in a GeneratedSecret that is already
+ * deployed. `refreshInterval: "0"` only stops *timed* refreshes: ESO still
+ * re-syncs whenever the ExternalSecret's spec changes, and a re-sync re-runs
+ * every generator in it, so touching one key rerolls all of them. Put a new
+ * key in a GeneratedSecret of its own instead.
  */
 export class GeneratedSecret extends Chart {
   public readonly secretName: string;
