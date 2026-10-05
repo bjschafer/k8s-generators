@@ -1,0 +1,105 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+    app.kubernetes.io/name: seedbox-pull
+  name: seedbox-pull
+  namespace: media
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        metadata:
+          labels:
+            cdk8s.io/metadata.addr: seedbox-pull-cronjob-c8934570
+        spec:
+          automountServiceAccountToken: false
+          containers:
+            - command:
+                - /bin/sh
+                - /scripts/pull.sh
+              env:
+                - name: SEEDBOX_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: SEEDBOX_PASSWORD
+                      name: seedbox-pull-secrets
+                - name: HOME
+                  value: /tmp
+                - name: SEEDBOX_DONE_PATH
+                  value: files/done
+                - name: DEST_ROOT
+                  value: /seedbox
+                - name: DEST_DIR
+                  value: sync
+                - name: PRUNE
+                  value: "false"
+                - name: RCLONE_SFTP_HOST
+                  value: psb52743.seedbox.io
+                - name: RCLONE_SFTP_USER
+                  value: psb52743
+                - name: RCLONE_SFTP_KNOWN_HOSTS_FILE
+                  value: /scripts/known_hosts
+                - name: RCLONE_SFTP_SHELL_TYPE
+                  value: none
+                - name: RCLONE_SFTP_DISABLE_HASHCHECK
+                  value: "true"
+                - name: RCLONE_TRANSFERS
+                  value: "4"
+                - name: RCLONE_MULTI_THREAD_STREAMS
+                  value: "4"
+                - name: RCLONE_STATS
+                  value: 1m
+                - name: RCLONE_STATS_ONE_LINE
+                  value: "true"
+                - name: RCLONE_STATS_LOG_LEVEL
+                  value: NOTICE
+              image: ghcr.io/rclone/rclone:latest
+              imagePullPolicy: IfNotPresent
+              name: seedbox-pull
+              resources:
+                limits:
+                  memory: 512Mi
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                privileged: false
+                readOnlyRootFilesystem: false
+                runAsGroup: 8675309
+                runAsNonRoot: true
+                runAsUser: 8675309
+              volumeMounts:
+                - mountPath: /scripts
+                  name: configmap-seedbox-pull
+                - mountPath: /seedbox
+                  name: pvc-nfs-media-downloads
+                  subPath: seedbox
+          dnsPolicy: ClusterFirst
+          hostNetwork: false
+          restartPolicy: Never
+          securityContext:
+            fsGroupChangePolicy: Always
+            runAsGroup: 8675309
+            runAsNonRoot: true
+            runAsUser: 8675309
+          setHostnameAsFQDN: false
+          shareProcessNamespace: false
+          terminationGracePeriodSeconds: 30
+          volumes:
+            - configMap:
+                name: seedbox-pull
+              name: configmap-seedbox-pull
+            - name: pvc-nfs-media-downloads
+              persistentVolumeClaim:
+                claimName: nfs-media-downloads
+                readOnly: false
+  schedule: "*/5 * * * *"
+  startingDeadlineSeconds: 300
+  successfulJobsHistoryLimit: 1
+  suspend: false

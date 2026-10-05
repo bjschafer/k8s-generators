@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: seedbox-pull
+  namespace: media
+data:
+  known_hosts: |
+    psb52743.seedbox.io ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLw8QPXaNlm+aMT1HwhT2+HsMk+50SQgXTasZktlbteX8HcEHjelbhzs4iomzVjmv7tKjnnjpLqIOot3l424qT0U/0PwrP1dNn0Q6iG+p4r8uuQmMuRGRxk0MJIdS++5MYaSAXR52ML9/VuNkwa1J9FEl6LaQsOiy3mYYHI5Wbwze2He7SOSpKULQO+eMdhvh/Chaai3kjJN7dlhQ5eHqDulQK2eovsgbq5ALZ4wb9onL+3Yh5jZQZeN4lOyqOUozntV7ECtZdav6M9rIDyv4XNwuOA/eWKoy+dIe9/fcSfi9SJJKCN0Qdx1DC3dK/HWhdi1JnM9IDD0wqgkUH9osZ
+  pull.sh: |
+    #!/bin/sh
+    set -eu
+
+    export RCLONE_SFTP_PASS="$(rclone obscure "$SEEDBOX_PASSWORD")"
+    remote=":sftp:$SEEDBOX_DONE_PATH"
+    staging="$DEST_ROOT/.incoming"
+    dest="$DEST_ROOT/$DEST_DIR"
+    mkdir -p "$staging" "$dest"
+
+    # A failed listing must abort here, before anything below can read an empty
+    # listing as "everything was removed".
+    listing=$(rclone lsf --max-depth 1 "$remote")
+    names=$(printf '%s\n' "$listing" | sed 's:/$::' | grep -v '^\.' || true)
+
+    failed=0
+    while IFS= read -r entry; do
+      [ -n "$entry" ] || continue
+      item=${entry%/}
+      case "$item" in .*) continue ;; esac
+      [ -e "$dest/$item" ] && continue
+      echo "pulling: $item"
+      if [ "$entry" != "$item" ]; then
+        rclone copy "$remote/$item" "$staging/$item" || { failed=1; continue; }
+      else
+        rclone copyto "$remote/$item" "$staging/$item" || { failed=1; continue; }
+      fi
+      mv "$staging/$item" "$dest/$item"
+    done <<EOF
+    $listing
+    EOF
+
+    if [ -z "$names" ] && [ -n "$(ls -A "$dest")" ]; then
+      echo "done/ listed empty but $dest is not; skipping removals" >&2
+      exit "$failed"
+    fi
+    for dir in "$dest" "$staging"; do
+      ls -A "$dir" | while IFS= read -r item; do
+        case "$item" in .*) continue ;; esac
+        if ! printf '%s\n' "$names" | grep -Fxq -- "$item"; then
+          if [ "$PRUNE" = "true" ]; then
+            echo "removing (gone from seedbox): $dir/$item"
+            rm -rf -- "$dir/$item"
+          else
+            echo "would remove (gone from seedbox): $dir/$item"
+          fi
+        fi
+      done
+    done
+
+    exit "$failed"
+immutable: false

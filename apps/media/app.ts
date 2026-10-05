@@ -11,6 +11,7 @@ import { BitwardenSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
 import { KOMETA_IMAGE, Kometa } from "./kometa";
 import { NAVIDROME_IMAGE, Navidrome } from "./navidrome";
+import { SEEDBOX_PULL_IMAGE, SeedboxPull } from "./seedbox-pull";
 
 export const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -210,55 +211,6 @@ for (const mediaApp of mediaApps) {
   });
 }
 
-// resilio-sync is special due to subpath mounts
-// The only image here on a fixed tag rather than `:latest`, so the digest
-// strategy below follows 2.8.1's digest -- a full freeze, on purpose. 3.x
-// refuses to sync at all until it's given a (free, registration-walled)
-// license, which silently stalled the seedbox pull for a month after the v3
-// bump. renovate.json caps this at <3; the replacement plan is an SFTP pull.
-// renovate: datasource=docker depName=ghcr.io/linuxserver/resilio-sync
-const resilioVersion = "2.8.1";
-const resilioImage = `ghcr.io/linuxserver/resilio-sync:${resilioVersion}`;
-new MediaApp(app, {
-  name: "resilio-sync",
-  namespace: namespace,
-  port: 8888,
-  image: resilioImage,
-  resources: {
-    cpu: {
-      request: Cpu.millis(250),
-    },
-    memory: {
-      request: Size.mebibytes(256),
-    },
-  },
-  nfsMounts: [
-    {
-      mountPoint: "/downloads",
-      nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
-      mountOptions: {
-        subPath: "seedbox/downloads",
-      },
-    },
-    {
-      mountPoint: "/sync",
-      nfsConcreteVolume: nfsVols.Get("nfs-media-downloads"),
-      mountOptions: {
-        subPath: "seedbox/sync",
-      },
-    },
-  ],
-  configVolume: {
-    size: Size.gibibytes(1),
-    mountPath: "/config",
-  },
-  monitoringConfig: {
-    enableExportarr: false,
-    enableServiceMonitor: false,
-  },
-  ingressSecret: ingressSecret,
-});
-
 // create the ingress cert manually, for all the cnames
 class MediaCert extends Chart {
   constructor(scope: Construct, id: string) {
@@ -290,6 +242,12 @@ new MediaCert(app, "certs");
 
 new Kometa(app, "kometa");
 new Navidrome(app, "navidrome");
+new SeedboxPull(app, "seedbox-pull", {
+  downloads: nfsVols.Get("nfs-media-downloads"),
+  destDir: "sync",
+  // Dry-run removals until the mirror has been watched for a day.
+  prune: false,
+});
 
 NewArgoApp("media", {
   sync_policy: {
@@ -303,14 +261,14 @@ NewArgoApp("media", {
   recurse: true,
   autoUpdate: {
     // Derived from every image this app actually deploys, rather than from
-    // `mediaApps` plus a hand-maintained tail. navidrome, resilio-sync and
-    // kometa are each constructed outside that array, and only navidrome was
-    // ever restated here -- so resilio-sync and kometa sat unwatched, kometa
-    // for as long as it has existed.
+    // `mediaApps` plus a hand-maintained tail. navidrome, kometa and
+    // seedbox-pull are each constructed outside that array, and only navidrome
+    // was ever restated here -- so kometa sat unwatched for as long as it has
+    // existed.
     images: [
       NAVIDROME_IMAGE,
-      resilioImage,
       KOMETA_IMAGE,
+      SEEDBOX_PULL_IMAGE,
       ...mediaApps.map((mediaApp) => mediaApp.image),
     ].map(function (image): ArgoUpdaterImageProps {
       return {

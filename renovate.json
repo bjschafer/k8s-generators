@@ -77,14 +77,13 @@
       "allowedVersions": "<4"
     },
     {
-      "description": "Images this repo pins to a release *line* rather than to a version. Each has an argocd-image-updater entry that moves it within that line, so the pin is a ceiling, not a version -- and nothing was watching the ceiling. authentik sat at 2026.8.x while a calendar-versioned product shipped a minor a month; resilio-sync's `digest` strategy on a fixed 2.8.1 tag is a total freeze that reads like a pin; and netbox/immich/mealie/atuin/bookorbit/valkey/gotenberg would each go a major behind in silence. These get a PR and a `pinned` label, never an automerge: every one of them is a migration, a schema change, or (external-dns) a line whose minors have already deleted live DNS records once. Listed by depName rather than by manager so it survives a pin moving between files.",
+      "description": "Images this repo pins to a release *line* rather than to a version. Each has an argocd-image-updater entry that moves it within that line, so the pin is a ceiling, not a version -- and nothing was watching the ceiling. authentik sat at 2026.8.x while a calendar-versioned product shipped a minor a month, and netbox/immich/mealie/atuin/bookorbit/valkey/gotenberg would each go a major behind in silence. These get a PR and a `pinned` label, never an automerge: every one of them is a migration, a schema change, or (external-dns) a line whose minors have already deleted live DNS records once. Listed by depName rather than by manager so it survives a pin moving between files.",
       "matchDatasources": ["docker"],
       "matchDepNames": [
         "ghcr.io/atuinsh/atuin",
         "ghcr.io/bookorbit/bookorbit",
         "ghcr.io/goauthentik/server",
         "ghcr.io/immich-app/immich-server",
-        "ghcr.io/linuxserver/resilio-sync",
         "ghcr.io/mealie-recipes/mealie",
         "ghcr.io/valkey-io/valkey",
         "gotenberg/gotenberg",
@@ -93,12 +92,6 @@
       ],
       "automerge": false,
       "labels": ["pinned"]
-    },
-    {
-      "description": "resilio-sync 3.x won't sync a byte until it's handed a registration-walled license -- the v3 bump (PR #95) left the seedbox pull stopped at 0 peers for a month while the pod read Running/Ready. Held at 2.x until it's replaced with an SFTP pull; don't lift this cap to 'try 3.x again'.",
-      "matchDatasources": ["docker"],
-      "matchDepNames": ["ghcr.io/linuxserver/resilio-sync"],
-      "allowedVersions": "<3"
     },
     {
       "description": "Don't restate what argocd-image-updater already does. For the entries above whose constraint is a major line (`v4.x.x`, `8-alpine`, `v3`), the updater takes every minor and patch within it on its own, and a Renovate PR for the same bump is pure noise against a base the updater does not even read -- it writes .argocd-source-<app>.yaml, not the manifest. Leaving these enabled would also let them ride the blanket custom.regex automerge above. Only the major, which the constraint deliberately blocks, is worth a human's attention.",
@@ -116,7 +109,7 @@
       "enabled": false
     },
     {
-      "description": "Same idea, one notch finer: authentik and external-dns are capped at a *minor* line, not a major one, so the patch is what the updater already handles and the minor is the one nobody would otherwise hear about. resilio-sync is deliberately absent from both suppression rules -- its constraint reaches nothing at all, so every update type is news.",
+      "description": "Same idea, one notch finer: authentik and external-dns are capped at a *minor* line, not a major one, so the patch is what the updater already handles and the minor is the one nobody would otherwise hear about.",
       "matchDatasources": ["docker"],
       "matchDepNames": ["ghcr.io/goauthentik/server", "registry.k8s.io/external-dns/external-dns"],
       "matchUpdateTypes": ["patch"],

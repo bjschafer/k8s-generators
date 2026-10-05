@@ -1,12 +1,13 @@
 resources:
   - Certificate.media-tls.yaml
   - ConfigMap.kometa-config.yaml
+  - ConfigMap.seedbox-pull.yaml
   - CronJob.kometa.yaml
+  - CronJob.seedbox-pull.yaml
   - Deployment.lidarr.yaml
   - Deployment.navidrome.yaml
   - Deployment.prowlarr.yaml
   - Deployment.radarr.yaml
-  - Deployment.resilio-sync.yaml
   - Deployment.sabnzbd.yaml
   - Deployment.sonarr.yaml
   - ExternalSecret.kometa-secrets.yaml
@@ -14,11 +15,11 @@ resources:
   - ExternalSecret.navidrome-lastfm.yaml
   - ExternalSecret.radarr-api.yaml
   - ExternalSecret.sabnzbd-api.yaml
+  - ExternalSecret.seedbox-pull-secrets.yaml
   - ExternalSecret.sonarr-api.yaml
   - Ingress.lidarr.yaml
   - Ingress.prowlarr.yaml
   - Ingress.radarr.yaml
-  - Ingress.resilio-sync.yaml
   - Ingress.sabnzbd.yaml
   - Ingress.sonarr.yaml
   - IngressRoute.navidrome.yaml
@@ -35,14 +36,12 @@ resources:
   - PersistentVolumeClaim.nfs-media-videos-tvshows.yaml
   - PersistentVolumeClaim.prowlarr.yaml
   - PersistentVolumeClaim.radarr.yaml
-  - PersistentVolumeClaim.resilio-sync.yaml
   - PersistentVolumeClaim.sabnzbd.yaml
   - PersistentVolumeClaim.sonarr.yaml
   - Service.lidarr.yaml
   - Service.navidrome.yaml
   - Service.prowlarr.yaml
   - Service.radarr.yaml
-  - Service.resilio-sync.yaml
   - Service.sabnzbd.yaml
   - Service.sonarr.yaml
   - VMPodScrape.navidrome.yaml
