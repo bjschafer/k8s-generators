@@ -390,6 +390,10 @@ export interface EsoValuesSchema {
     aggregateToEdit?: boolean;
     aggregateToView?: boolean;
     create?: boolean;
+    leaderElection?: {
+      create?: boolean;
+      [k: string]: unknown;
+    };
     serviceAccountTokenCreate?: boolean;
     servicebindings?: {
       create?: boolean;
