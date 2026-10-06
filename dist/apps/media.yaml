@@ -43,6 +43,10 @@ spec:
           commonUpdateSettings:
             updateStrategy: digest
           imageName: ghcr.io/rclone/rclone:latest
+        - alias: checkrr
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: docker.io/aetaric/checkrr:latest
         - alias: sonarr
           commonUpdateSettings:
             updateStrategy: digest
@@ -63,6 +67,10 @@ spec:
           commonUpdateSettings:
             updateStrategy: digest
           imageName: ghcr.io/linuxserver/prowlarr:latest
+        - alias: cleanuparr
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/cleanuparr/cleanuparr:latest
       namePattern: media
   writeBackConfig:
     gitConfig:

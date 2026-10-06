@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    reloader.stakater.com/auto: "true"
+  labels:
+    app.kubernetes.io/instance: media
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: checkrr
+  name: checkrr
+  namespace: media
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: checkrr-app-app-deployment-c8e23f75
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: media
+        app.kubernetes.io/name: checkrr
+        cdk8s.io/metadata.addr: checkrr-app-app-deployment-c8e23f75
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - -c
+            - /etc/checkrr/checkrr.yaml
+          env:
+            - name: TZ
+              value: America/Chicago
+          image: docker.io/aetaric/checkrr:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 8585
+          name: checkrr
+          ports:
+            - containerPort: 8585
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8585
+              scheme: HTTP
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsGroup: 8675309
+            runAsNonRoot: true
+            runAsUser: 8675309
+          volumeMounts:
+            - mountPath: /data
+              name: pvc-checkrr
+            - mountPath: /etc/checkrr
+              name: secret-checkrr-config
+            - mountPath: /tv
+              name: pvc-nfs-media-videos-tvshows
+              readOnly: true
+            - mountPath: /movies
+              name: pvc-nfs-media-videos-movies
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroup: 8675309
+        fsGroupChangePolicy: Always
+        runAsGroup: 8675309
+        runAsNonRoot: true
+        runAsUser: 8675309
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-checkrr
+          persistentVolumeClaim:
+            claimName: checkrr
+            readOnly: false
+        - name: secret-checkrr-config
+          secret:
+            secretName: checkrr-config
+        - name: pvc-nfs-media-videos-tvshows
+          persistentVolumeClaim:
+            claimName: nfs-media-videos-tvshows
+            readOnly: true
+        - name: pvc-nfs-media-videos-movies
+          persistentVolumeClaim:
+            claimName: nfs-media-videos-movies
+            readOnly: true

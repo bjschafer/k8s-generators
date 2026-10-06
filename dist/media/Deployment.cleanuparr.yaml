@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+  name: cleanuparr
+  namespace: media
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: cleanuparr-cleanuparr-deployment-c8049ba9
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        cdk8s.io/metadata.addr: cleanuparr-cleanuparr-deployment-c8049ba9
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: PUID
+              value: "8675309"
+            - name: PGID
+              value: "8675309"
+          image: ghcr.io/cleanuparr/cleanuparr:latest
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 11011
+          name: cleanuparr
+          ports:
+            - containerPort: 11011
+              name: http
+          readinessProbe:
+            failureThreshold: 3
+            tcpSocket:
+              port: 11011
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsGroup: 8675309
+            runAsNonRoot: true
+            runAsUser: 8675309
+          volumeMounts:
+            - mountPath: /config
+              name: pvc-cleanuparr
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroup: 8675309
+        fsGroupChangePolicy: Always
+        runAsGroup: 8675309
+        runAsNonRoot: true
+        runAsUser: 8675309
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-cleanuparr
+          persistentVolumeClaim:
+            claimName: cleanuparr
+            readOnly: false

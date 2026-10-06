@@ -1,0 +1,72 @@
+# Rendered twice (see checkrr.ts): the @@NAME@@ placeholders are filled in at
+# synth time from CheckrrProps, then the result becomes an external-secrets
+# template, which fills in the Go-template ones -- the *arr API keys -- from
+# Bitwarden. Comments are rendered too, so never write template braces in one.
+lang: "en-us"
+checkrr:
+  checkpath:
+    - "/tv/"
+    - "/movies/"
+  database: /data/checkrr.db
+  csvfile: /data/badfiles.csv
+  cron: "@@CRON@@"
+  debug: false
+  ignorehidden: true
+  ffprobe: true
+  ffmpeg-quick: false
+  ffmpeg-full: false
+  ignorepaths:
+    # Despecialized's restoration tooling: thousands of C++ sources, every one
+    # an "unknown file".
+    - "/movies/Star Wars Despecialized/"
+  # Anything not recognised as audio/video/image/text is an "unknown file",
+  # which is reported -- and, with reacquire on, sent to the *arr -- on every
+  # run, since only valid media is remembered in the hash database. These are
+  # the benign non-media types actually found in the library.
+  ignoreexts:
+    - .txt
+    - .nfo
+    - .nfo-orig
+    - .nzb
+    - .url
+    - .srr
+    - .idx
+    - .sub
+    - .sup
+    - .db
+    - .sqlite
+    - .xml
+logs:
+  stdout:
+    out: stdout
+    formatter: default
+arr:
+  sonarr:
+    process: @@REACQUIRE@@
+    service: sonarr
+    address: sonarr.media.svc.cluster.local
+    apikey: "{{ .SONARR_APIKEY }}"
+    baseurl: /
+    port: 8989
+    ssl: false
+    mappings:
+      "/tv/": "/tv/"
+  # Report-only, permanently. checkrr's Radarr RemoveFile matches a bad file to
+  # a movie by *folder substring*, then deletes that movie's main file: an
+  # unknown subtitle or extra in "Aliens (1986)/" deletes the movie, and so can
+  # one in any folder whose path merely contains "/movies/Alien". Sonarr's
+  # matches the exact episode file path, so only it gets to reacquire.
+  radarr:
+    process: false
+    service: radarr
+    address: radarr.media.svc.cluster.local
+    apikey: "{{ .RADARR_APIKEY }}"
+    baseurl: /
+    port: 7878
+    ssl: false
+    mappings:
+      "/movies/": "/movies/"
+webserver:
+  port: 8585
+  tls: false
+  baseurl: "/"

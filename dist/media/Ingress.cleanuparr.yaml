@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app.kubernetes.io/instance: media
+  name: cleanuparr
+  namespace: media
+spec:
+  rules:
+    - host: cleanuparr.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: cleanuparr
+                port:
+                  number: 11011
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - cleanuparr.cmdcentral.xyz
+      secretName: media-tls
