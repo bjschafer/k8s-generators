@@ -272,7 +272,7 @@ new Checkrr(app, "checkrr", {
   tv: nfsVols.Get("nfs-media-videos-tvshows"),
   movies: nfsVols.Get("nfs-media-videos-movies"),
   schedule: "0 4 * * *",
-  reacquire: false,
+  reacquire: true,
 });
 new SeedboxPull(app, "seedbox-pull", {
   downloads: nfsVols.Get("nfs-media-downloads"),
