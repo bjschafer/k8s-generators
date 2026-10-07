@@ -5,13 +5,18 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+/**
+ * This interface was referenced by `Libraries`'s JSON-Schema definition
+ * via the `patternProperty` "^schedule_.*$".
+ */
+export type Schedule = string | [string, ...string[]];
 export type ExternalPathWithTemplateVariables = {
   file?: string;
   folder?: string;
   url?: string;
   git?: string;
   repo?: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables: {
     [k: string]: unknown;
@@ -87,7 +92,7 @@ export type KometaDefaultCollectionPath = {
     | "venice"
     | "writer"
     | "year";
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: {
     [k: string]: unknown;
@@ -167,25 +172,25 @@ export type MassMetadataSource = (string | number) | ((string | number) | string
 export type MassMetadataScheduledCollectionMode =
   | ("default" | "hide" | "hide_items" | "show_items")
   | {
-      schedule?: string;
+      schedule?: Schedule;
       mode: "default" | "hide" | "hide_items" | "show_items";
     };
 export type MassMetadataScheduledLabels =
   | ("none" | "mild" | "moderate" | "severe")
   | {
-      schedule?: string;
+      schedule?: Schedule;
       severity: "none" | "mild" | "moderate" | "severe";
     };
 export type MassMetadataScheduledSource =
   | MassMetadataSource
   | {
-      schedule?: string;
+      schedule?: Schedule;
       source?: MassMetadataSource;
     };
 export type MassMetadataImage =
   | string
   | {
-      schedule?: string;
+      schedule?: Schedule;
       source?: string | string[];
       language?: string;
       seasons?: boolean;
@@ -228,19 +233,18 @@ export interface KometaConfigSchema {
   trakt?: Trakt;
   yamtrack?: Yamtrack;
   flicklist?: Flicklist;
+  wetrakr?: Wetrakr;
   serializd?: Serializd;
   floppy?: Floppy;
   github?: Github;
   playlist_files?: PlaylistFiles;
+  simkl?: Simkl;
   [k: string]: unknown;
 }
 export interface Libraries {
   /**
    * This interface was referenced by `Libraries`'s JSON-Schema definition
    * via the `patternProperty` "^(?!plex|tmdb|tautulli|webhooks|omdb|mdblist|notifiarr|gotify|ntfy|anidb|radarr|sonarr|trakt|yamtrack|flicklist|serializd|floppy|mal).+$".
-   *
-   * This interface was referenced by `Libraries`'s JSON-Schema definition
-   * via the `patternProperty` "^schedule_.*$".
    */
   [k: string]:
     | {
@@ -277,11 +281,11 @@ export interface Libraries {
         /**
          * Used to schedule when a library is run using the schedule options.
          */
-        schedule?: string;
+        schedule?: Schedule;
         /**
          * Used to schedule when overlays are run for this library.
          */
-        schedule_overlays?: string;
+        schedule_overlays?: Schedule;
         /**
          * Used to remove overlays from this library only.
          * When set to true, this will remove all overlays from your library every run, but will not delete the overlaid images from your system, resulting in image bloat.
@@ -299,31 +303,31 @@ export interface Libraries {
         reset_overlays?: "tmdb" | "plex";
         run_order?: ("collections" | "metadata" | "operations" | "overlays")[];
       }
-    | string;
+    | Schedule;
 }
 export interface FilePath {
   file: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
 }
 export interface FolderPath {
   folder: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
 }
 export interface UrlPath {
   url: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
 }
 export interface GitPath {
   git: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
 }
 export interface RepoPath {
   repo: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
 }
 /**
@@ -390,7 +394,7 @@ export interface LegacyDefaultCollectionPath {
     | "venice"
     | "writer"
     | "year";
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables;
 }
@@ -503,7 +507,7 @@ export interface TemplateVariables {
   /**
    * Set the schedule for all collections in this defaults file.
    */
-  schedule?: string;
+  schedule?: Schedule;
   /**
    * Override Sonarr add_missing for all collections in this defaults file.
    */
@@ -549,17 +553,17 @@ export interface TemplateVariables {
    */
   use_all?: boolean;
   /**
-   * Controls Home Tab visibility for all collections. true/false or a schedule string.
+   * Controls Home Tab visibility for all collections. true/false or a schedule string/list.
    */
-  visible_home?: boolean | string;
+  visible_home?: boolean | Schedule;
   /**
-   * Controls Library Recommended Tab visibility for all collections. true/false or a schedule string.
+   * Controls Library Recommended Tab visibility for all collections. true/false or a schedule string/list.
    */
-  visible_library?: boolean | string;
+  visible_library?: boolean | Schedule;
   /**
-   * Controls Shared Users' Home Tab visibility for all collections. true/false or a schedule string.
+   * Controls Shared Users' Home Tab visibility for all collections. true/false or a schedule string/list.
    */
-  visible_shared?: boolean | string;
+  visible_shared?: boolean | Schedule;
   /**
    * Limit the number of items for all collections in this defaults file.
    */
@@ -877,6 +881,7 @@ export interface TemplateVariables {
     | boolean
     | string
     | number
+    | Schedule
     | string[]
     | "sync"
     | "append"
@@ -945,25 +950,25 @@ export interface TemplateVariables {
 }
 export interface FilePathCollectionWithTemplateVariables {
   file: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables;
 }
 export interface UrlPathCollectionWithTemplateVariables {
   url: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables;
 }
 export interface GitPathCollectionWithTemplateVariables {
   git: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables;
 }
 export interface RepoPathCollectionWithTemplateVariables {
   repo: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables;
 }
@@ -1001,7 +1006,7 @@ export interface LegacyDefaultOverlayPath {
   reapply_overlays?: boolean;
   reapply_overlay?: boolean;
   reset_overlays?: "tmdb" | "plex";
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables1;
 }
@@ -1207,7 +1212,36 @@ export interface TemplateVariables1 {
    */
   pre_text?: string;
   rating_alignment?: "vertical" | "horizontal";
-  rating1?: "critic" | "audience" | "user" | "floppy";
+  rating1?:
+    | "critic"
+    | "audience"
+    | "user"
+    | "tmdb"
+    | "imdb"
+    | "floppy"
+    | "serializd"
+    | "omdb"
+    | "omdb_imdb"
+    | "omdb_metascore"
+    | "omdb_tomatoes"
+    | "mdb"
+    | "mdb_average"
+    | "mdb_imdb"
+    | "mdb_metacritic"
+    | "mdb_metacriticuser"
+    | "mdb_tomatoes"
+    | "mdb_tomatoesaudience"
+    | "mdb_tmdb"
+    | "mdb_letterboxd"
+    | "mdb_myanimelist"
+    | "anidb"
+    | "anidb_average"
+    | "anidb_score"
+    | "mal"
+    | "plex_imdb"
+    | "plex_tmdb"
+    | "plex_tomatoes"
+    | "plex_tomatoesaudience";
   rating1_image?:
     | "anidb"
     | "imdb"
@@ -1227,7 +1261,36 @@ export interface TemplateVariables1 {
   rating1_stroke_color?: string;
   rating1_horizontal_offset?: string | number;
   rating1_vertical_offset?: string | number;
-  rating2?: "critic" | "audience" | "user" | "floppy";
+  rating2?:
+    | "critic"
+    | "audience"
+    | "user"
+    | "tmdb"
+    | "imdb"
+    | "floppy"
+    | "serializd"
+    | "omdb"
+    | "omdb_imdb"
+    | "omdb_metascore"
+    | "omdb_tomatoes"
+    | "mdb"
+    | "mdb_average"
+    | "mdb_imdb"
+    | "mdb_metacritic"
+    | "mdb_metacriticuser"
+    | "mdb_tomatoes"
+    | "mdb_tomatoesaudience"
+    | "mdb_tmdb"
+    | "mdb_letterboxd"
+    | "mdb_myanimelist"
+    | "anidb"
+    | "anidb_average"
+    | "anidb_score"
+    | "mal"
+    | "plex_imdb"
+    | "plex_tmdb"
+    | "plex_tomatoes"
+    | "plex_tomatoesaudience";
   rating2_image?:
     | "anidb"
     | "imdb"
@@ -1247,7 +1310,36 @@ export interface TemplateVariables1 {
   rating2_stroke_color?: string;
   rating2_horizontal_offset?: string | number;
   rating2_vertical_offset?: string | number;
-  rating3?: "critic" | "audience" | "user" | "floppy";
+  rating3?:
+    | "critic"
+    | "audience"
+    | "user"
+    | "tmdb"
+    | "imdb"
+    | "floppy"
+    | "serializd"
+    | "omdb"
+    | "omdb_imdb"
+    | "omdb_metascore"
+    | "omdb_tomatoes"
+    | "mdb"
+    | "mdb_average"
+    | "mdb_imdb"
+    | "mdb_metacritic"
+    | "mdb_metacriticuser"
+    | "mdb_tomatoes"
+    | "mdb_tomatoesaudience"
+    | "mdb_tmdb"
+    | "mdb_letterboxd"
+    | "mdb_myanimelist"
+    | "anidb"
+    | "anidb_average"
+    | "anidb_score"
+    | "mal"
+    | "plex_imdb"
+    | "plex_tmdb"
+    | "plex_tomatoes"
+    | "plex_tomatoesaudience";
   rating3_image?:
     | "anidb"
     | "imdb"
@@ -1351,31 +1443,31 @@ export interface KometaDefaultOverlayPath {
   reapply_overlays?: boolean;
   reapply_overlay?: boolean;
   reset_overlays?: "tmdb" | "plex";
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables1;
 }
 export interface FilePathOverlayWithTemplateVariables {
   file: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables1;
 }
 export interface UrlPathOverlayWithTemplateVariables {
   url: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables1;
 }
 export interface GitPathOverlayWithTemplateVariables {
   git: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables1;
 }
 export interface RepoPathOverlayWithTemplateVariables {
   repo: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables1;
 }
@@ -1443,7 +1535,7 @@ export interface LegacyDefaultCollectionPath1 {
     | "venice"
     | "writer"
     | "year";
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables;
 }
@@ -1481,7 +1573,7 @@ export interface LegacyDefaultOverlayPath1 {
   reapply_overlays?: boolean;
   reapply_overlay?: boolean;
   reset_overlays?: "tmdb" | "plex";
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables1;
 }
@@ -1509,14 +1601,14 @@ export interface Operations {
     genre?:
       | MassMetadataSource
       | {
-          schedule?: string;
+          schedule?: Schedule;
           source?: MassMetadataSource;
           mappings?: MetadataMapping;
         };
     content_rating?:
       | MassMetadataSource
       | {
-          schedule?: string;
+          schedule?: Schedule;
           source?: MassMetadataSource;
           mappings?: MetadataMapping;
         };
@@ -1527,7 +1619,7 @@ export interface Operations {
     originally_available?: MassMetadataScheduledSource;
     added_at?: MassMetadataScheduledSource;
     ratings?: {
-      schedule?: string;
+      schedule?: Schedule;
       user?: MassMetadataScheduledSource;
       critic?: MassMetadataScheduledSource;
       audience?: MassMetadataScheduledSource;
@@ -1540,7 +1632,7 @@ export interface Operations {
     logo?: MassMetadataImage;
     square_art?: MassMetadataImage;
     backup?: {
-      schedule?: string;
+      schedule?: Schedule;
       path?: string;
       exclude?: string | string[];
       sync_tags?: boolean;
@@ -1593,32 +1685,60 @@ export interface Operations {
           )
         | string[]
       )[];
-  mass_content_rating_update?: ((
-    | (
-        | "mdb"
-        | "mdb_commonsense"
-        | "mdb_commonsense0"
-        | "plex_csm"
-        | "plex_csm0"
-        | "omdb"
-        | "mal"
-        | "lock"
-        | "unlock"
-        | "remove"
-        | "reset"
-      )
-    | {
-        [k: string]: unknown;
-      }
-  ) &
-    string)[];
-  mass_original_title_update?: ((
-    | ("anidb" | "anidb_official" | "mal" | "mal_english" | "mal_japanese" | "lock" | "unlock" | "remove" | "reset")
-    | {
-        [k: string]: unknown;
-      }
-  ) &
-    string)[];
+  mass_content_rating_update?:
+    | ((
+        | (
+            | "mdb"
+            | "mdb_commonsense"
+            | "mdb_commonsense0"
+            | "plex_csm"
+            | "plex_csm0"
+            | "omdb"
+            | "mal"
+            | "lock"
+            | "unlock"
+            | "remove"
+            | "reset"
+          )
+        | {
+            [k: string]: unknown;
+          }
+      ) &
+        string)
+    | ((
+        | (
+            | "mdb"
+            | "mdb_commonsense"
+            | "mdb_commonsense0"
+            | "plex_csm"
+            | "plex_csm0"
+            | "omdb"
+            | "mal"
+            | "lock"
+            | "unlock"
+            | "remove"
+            | "reset"
+          )
+        | {
+            [k: string]: unknown;
+          }
+      ) &
+        string)[];
+  mass_original_title_update?:
+    | ((
+        | ("anidb" | "anidb_official" | "mal" | "mal_english" | "mal_japanese" | "lock" | "unlock" | "remove" | "reset")
+        | {
+            [k: string]: unknown;
+          }
+      ) &
+        string)
+    | ((
+        | ("anidb" | "anidb_official" | "mal" | "mal_english" | "mal_japanese" | "lock" | "unlock" | "remove" | "reset")
+        | {
+            [k: string]: unknown;
+          }
+      ) &
+        string)[];
   mass_studio_update?:
     | ("anidb" | "mal" | "tmdb" | "lock" | "unlock" | "remove" | "reset")
     | (("anidb" | "mal" | "tmdb" | "lock" | "unlock" | "remove" | "reset") | string)[];
@@ -1741,6 +1861,7 @@ export interface Operations {
         | "trakt"
         | "trakt_user"
         | "flicklist_user"
+        | "wetrakr_user"
         | "serializd"
         | "floppy"
         | "unlock"
@@ -1777,6 +1898,7 @@ export interface Operations {
             | "trakt"
             | "trakt_user"
             | "flicklist_user"
+            | "wetrakr_user"
             | "serializd"
             | "floppy"
             | "unlock"
@@ -1816,6 +1938,7 @@ export interface Operations {
         | "trakt"
         | "trakt_user"
         | "flicklist_user"
+        | "wetrakr_user"
         | "serializd"
         | "floppy"
         | "unlock"
@@ -1852,6 +1975,7 @@ export interface Operations {
             | "trakt"
             | "trakt_user"
             | "flicklist_user"
+            | "wetrakr_user"
             | "serializd"
             | "floppy"
             | "unlock"
@@ -1891,6 +2015,7 @@ export interface Operations {
         | "trakt"
         | "trakt_user"
         | "flicklist_user"
+        | "wetrakr_user"
         | "serializd"
         | "floppy"
         | "unlock"
@@ -1927,6 +2052,7 @@ export interface Operations {
             | "trakt"
             | "trakt_user"
             | "flicklist_user"
+            | "wetrakr_user"
             | "serializd"
             | "floppy"
             | "unlock"
@@ -2336,6 +2462,22 @@ export interface Settings {
    * Sets the sync_mode for collections and playlists. Setting the sync_mode directly in a collection or playlist definition will override the sync_mode for that definition.
    */
   sync_mode?: "sync" | "append";
+  /**
+   * Used to control Kometa's shared thread pool for concurrent processing.
+   * Controls the shared thread pool Kometa uses to run some work concurrently instead of one call at a time.
+   */
+  threading?: {
+    /**
+     * Number of worker threads in the shared thread pool.
+     */
+    workers?: number;
+    /**
+     * Defers a sync-enabled collection's "what to remove" lookup, and Plex item-reload batching in the operations and overlay loops, to the thread pool instead of blocking the main collection loop.
+     */
+    prefetch_collection_children?: boolean;
+    tmdb_pages?: string;
+    parallel_sources?: boolean;
+  };
   /**
    * Used to control minimum items requires to build a collection/playlist.
    * Set the minimum number of items that must be found in order to build or update a collection/playlist.
@@ -3621,6 +3763,10 @@ export interface Yamtrack {
 export interface Flicklist {
   api_key?: string;
 }
+export interface Wetrakr {
+  client_id?: string | null;
+  [k: string]: unknown;
+}
 export interface Serializd {
   email: string;
   password: string;
@@ -3644,7 +3790,7 @@ export interface Github {
  */
 export interface LegacyDefaultPlaylistPath {
   pmm: "playlist";
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables3;
 }
@@ -3698,7 +3844,7 @@ export interface TemplateVariables3 {
   /**
    * Set the schedule for all playlists in this defaults file.
    */
-  schedule?: string;
+  schedule?: Schedule;
   /**
    * Delete playlists when not scheduled.
    */
@@ -3723,31 +3869,54 @@ export interface TemplateVariables3 {
 }
 export interface KometaDefaultPlaylistPath {
   default: "playlist";
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables3;
 }
 export interface FilePathPlaylistWithTemplateVariables {
   file: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables3;
 }
 export interface UrlPathPlaylistWithTemplateVariables {
   url: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables3;
 }
 export interface GitPathPlaylistWithTemplateVariables {
   git: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables3;
 }
 export interface RepoPathPlaylistWithTemplateVariables {
   repo: string;
-  schedule?: string;
+  schedule?: Schedule;
   asset_directory?: string | string[];
   template_variables?: TemplateVariables3;
+}
+export interface Simkl {
+  /**
+   * Always refresh the AUTH V2 token before authentication.
+   */
+  force_refresh?: boolean;
+  /**
+   * Simkl AUTH V2 refresh token. Kometa automatically refreshes and saves access-token data.
+   */
+  refresh_token?: string | null;
+  /**
+   * Managed by Kometa; do not set manually.
+   */
+  access_token?: string;
+  token_type?: string;
+  expires_in?: number;
+  access_token_expires_at?: number;
+  refresh_token_expires_at?: number;
+  scope?: string;
+  /**
+   * Obsolete AUTH V1 credential; replace with a new AUTH V2 refresh_token.
+   */
+  user_token?: string;
 }
