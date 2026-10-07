@@ -22,7 +22,7 @@ const name = "blackbox-exporter";
 // of it. `latest` and `v0.28.0` are the same digest today, so pinning here is a
 // no-op deploy that makes the version reviewable.
 // renovate: datasource=docker depName=quay.io/prometheus/blackbox-exporter
-const version = "v0.28.0";
+const version = "v0.29.0";
 const image = `quay.io/prometheus/blackbox-exporter:${version}`;
 const labels = {
   app: name,
