@@ -58,6 +58,9 @@
         "flicklist": {
             "$ref": "#/definitions/flicklist-api"
         },
+        "wetrakr": {
+            "$ref": "#/definitions/wetrakr-api"
+        },
         "serializd": {
             "$ref": "#/definitions/serializd-api"
         },
@@ -69,6 +72,9 @@
         },
         "playlist_files": {
             "$ref": "#/definitions/playlist-path"
+        },
+        "simkl": {
+            "$ref": "#/definitions/simkl-api"
         }
     },
     "required": [
@@ -76,6 +82,20 @@
         "tmdb"
     ],
     "definitions": {
+        "schedule": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
         "mass-metadata-source": {
             "oneOf": [
                 {
@@ -114,7 +134,7 @@
                     "type": "object",
                     "properties": {
                         "schedule": {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         },
                         "source": {
                             "$ref": "#/definitions/mass-metadata-source"
@@ -181,7 +201,7 @@
                     "type": "object",
                     "properties": {
                         "schedule": {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         },
                         "mode": {
                             "type": "string",
@@ -215,7 +235,7 @@
                     "type": "object",
                     "properties": {
                         "schedule": {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         },
                         "severity": {
                             "type": "string",
@@ -255,7 +275,7 @@
                     "type": "object",
                     "properties": {
                         "schedule": {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         },
                         "source": {
                             "oneOf": [
@@ -1168,6 +1188,24 @@
             "required": [],
             "title": "flicklist"
         },
+        "wetrakr-api": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "client_id": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                }
+            },
+            "required": [],
+            "title": "wetrakr"
+        },
         "floppy-api": {
             "type": "object",
             "additionalProperties": false,
@@ -1222,13 +1260,49 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "user_token": {
+                "force_refresh": {
+                    "type": "boolean",
+                    "description": "Always refresh the AUTH V2 token before authentication."
+                },
+                "refresh_token": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Simkl AUTH V2 refresh token. Kometa automatically refreshes and saves access-token data."
+                },
+                "access_token": {
+                    "type": "string",
+                    "description": "Managed by Kometa; do not set manually."
+                },
+                "token_type": {
                     "type": "string"
+                },
+                "expires_in": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "access_token_expires_at": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "refresh_token_expires_at": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "scope": {
+                    "type": "string"
+                },
+                "user_token": {
+                    "type": "string",
+                    "description": "Obsolete AUTH V1 credential; replace with a new AUTH V2 refresh_token."
                 }
             },
-            "required": [
-                "user_token"
-            ],
+            "required": [],
             "title": "simkl"
         },
         "ntfy-api": {
@@ -2007,6 +2081,28 @@
                         "append"
                     ]
                 },
+                "threading": {
+                    "description": "Used to control Kometa's shared thread pool for concurrent processing.\nControls the shared thread pool Kometa uses to run some work concurrently instead of one call at a time.",
+                    "type": "object",
+                    "properties": {
+                        "workers": {
+                            "description": "Number of worker threads in the shared thread pool.",
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "prefetch_collection_children": {
+                            "description": "Defers a sync-enabled collection's \"what to remove\" lookup, and Plex item-reload batching in the operations and overlay loops, to the thread pool instead of blocking the main collection loop.",
+                            "type": "boolean"
+                        },
+                        "tmdb_pages": {
+                            "type": "string"
+                        },
+                        "parallel_sources": {
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false
+                },
                 "minimum_items": {
                     "description": "Used to control minimum items requires to build a collection/playlist.\nSet the minimum number of items that must be found in order to build or update a collection/playlist.",
                     "type": "integer",
@@ -2586,7 +2682,7 @@
                     ]
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -2679,7 +2775,7 @@
                     ]
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -3849,7 +3945,7 @@
                     ]
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -3924,7 +4020,7 @@
                     ]
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -3957,7 +4053,7 @@
                     ]
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -3992,7 +4088,7 @@
                     ]
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4024,7 +4120,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4053,7 +4149,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4085,7 +4181,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4117,7 +4213,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4149,7 +4245,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4180,7 +4276,7 @@
                     "pattern": "^(https?)://"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4211,7 +4307,7 @@
                     "pattern": "^(https?)://"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4245,7 +4341,7 @@
                     "pattern": "^(https?)://"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4279,7 +4375,7 @@
                     "pattern": "^(https?)://"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4311,7 +4407,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4340,7 +4436,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4372,7 +4468,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4404,7 +4500,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4436,7 +4532,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4465,7 +4561,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4497,7 +4593,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4529,7 +4625,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -4616,11 +4712,19 @@
                         },
                         "schedule": {
                             "description": "Used to schedule when a library is run using the schedule options.",
-                            "type": "string"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/schedule"
+                                }
+                            ]
                         },
                         "schedule_overlays": {
                             "description": "Used to schedule when overlays are run for this library.",
-                            "type": "string"
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/schedule"
+                                }
+                            ]
                         },
                         "remove_overlays": {
                             "description": "Used to remove overlays from this library only. \nWhen set to true, this will remove all overlays from your library every run, but will not delete the overlaid images from your system, resulting in image bloat.",
@@ -4654,7 +4758,7 @@
                     }
                 },
                 "^schedule_.*$": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 }
             }
         },
@@ -4680,7 +4784,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "asset_directory": {
                     "oneOf": [
@@ -5056,7 +5160,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "schedule": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/schedule"
                                                 },
                                                 "source": {
                                                     "$ref": "#/definitions/mass-metadata-source"
@@ -5078,7 +5182,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "schedule": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/schedule"
                                                 },
                                                 "source": {
                                                     "$ref": "#/definitions/mass-metadata-source"
@@ -5113,7 +5217,7 @@
                                     "type": "object",
                                     "properties": {
                                         "schedule": {
-                                            "type": "string"
+                                            "$ref": "#/definitions/schedule"
                                         },
                                         "user": {
                                             "$ref": "#/definitions/mass-metadata-scheduled-source"
@@ -5152,7 +5256,7 @@
                                     "type": "object",
                                     "properties": {
                                         "schedule": {
-                                            "type": "string"
+                                            "$ref": "#/definitions/schedule"
                                         },
                                         "path": {
                                             "type": "string"
@@ -5249,54 +5353,106 @@
                             ]
                         },
                         "mass_content_rating_update": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "anyOf": [
-                                    {
-                                        "enum": [
-                                            "mdb",
-                                            "mdb_commonsense",
-                                            "mdb_commonsense0",
-                                            "plex_csm",
-                                            "plex_csm0",
-                                            "omdb",
-                                            "mal",
-                                            "lock",
-                                            "unlock",
-                                            "remove",
-                                            "reset"
+                            "oneOf": [
+                                {
+                                    "type": "string",
+                                    "anyOf": [
+                                        {
+                                            "enum": [
+                                                "mdb",
+                                                "mdb_commonsense",
+                                                "mdb_commonsense0",
+                                                "plex_csm",
+                                                "plex_csm0",
+                                                "omdb",
+                                                "mal",
+                                                "lock",
+                                                "unlock",
+                                                "remove",
+                                                "reset"
+                                            ]
+                                        },
+                                        {
+                                            "pattern": ".*"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "anyOf": [
+                                            {
+                                                "enum": [
+                                                    "mdb",
+                                                    "mdb_commonsense",
+                                                    "mdb_commonsense0",
+                                                    "plex_csm",
+                                                    "plex_csm0",
+                                                    "omdb",
+                                                    "mal",
+                                                    "lock",
+                                                    "unlock",
+                                                    "remove",
+                                                    "reset"
+                                                ]
+                                            },
+                                            {
+                                                "pattern": ".*"
+                                            }
                                         ]
-                                    },
-                                    {
-                                        "pattern": ".*"
                                     }
-                                ]
-                            }
+                                }
+                            ]
                         },
                         "mass_original_title_update": {
-                            "type": "array",
-                            "items": {
-                                "type": "string",
-                                "anyOf": [
-                                    {
-                                        "enum": [
-                                            "anidb",
-                                            "anidb_official",
-                                            "mal",
-                                            "mal_english",
-                                            "mal_japanese",
-                                            "lock",
-                                            "unlock",
-                                            "remove",
-                                            "reset"
+                            "oneOf": [
+                                {
+                                    "type": "string",
+                                    "anyOf": [
+                                        {
+                                            "enum": [
+                                                "anidb",
+                                                "anidb_official",
+                                                "mal",
+                                                "mal_english",
+                                                "mal_japanese",
+                                                "lock",
+                                                "unlock",
+                                                "remove",
+                                                "reset"
+                                            ]
+                                        },
+                                        {
+                                            "pattern": ".*"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "anyOf": [
+                                            {
+                                                "enum": [
+                                                    "anidb",
+                                                    "anidb_official",
+                                                    "mal",
+                                                    "mal_english",
+                                                    "mal_japanese",
+                                                    "lock",
+                                                    "unlock",
+                                                    "remove",
+                                                    "reset"
+                                                ]
+                                            },
+                                            {
+                                                "pattern": ".*"
+                                            }
                                         ]
-                                    },
-                                    {
-                                        "pattern": ".*"
                                     }
-                                ]
-                            }
+                                }
+                            ]
                         },
                         "mass_studio_update": {
                             "anyOf": [
@@ -5503,6 +5659,7 @@
                                         "trakt",
                                         "trakt_user",
                                         "flicklist_user",
+                                        "wetrakr_user",
                                         "serializd",
                                         "floppy",
                                         "unlock"
@@ -5545,6 +5702,7 @@
                                                     "trakt",
                                                     "trakt_user",
                                                     "flicklist_user",
+                                                    "wetrakr_user",
                                                     "serializd",
                                                     "floppy",
                                                     "unlock"
@@ -5596,6 +5754,7 @@
                                         "trakt",
                                         "trakt_user",
                                         "flicklist_user",
+                                        "wetrakr_user",
                                         "serializd",
                                         "floppy",
                                         "unlock"
@@ -5638,6 +5797,7 @@
                                                     "trakt",
                                                     "trakt_user",
                                                     "flicklist_user",
+                                                    "wetrakr_user",
                                                     "serializd",
                                                     "floppy",
                                                     "unlock"
@@ -5689,6 +5849,7 @@
                                         "trakt",
                                         "trakt_user",
                                         "flicklist_user",
+                                        "wetrakr_user",
                                         "serializd",
                                         "floppy",
                                         "unlock"
@@ -5731,6 +5892,7 @@
                                                     "trakt",
                                                     "trakt_user",
                                                     "flicklist_user",
+                                                    "wetrakr_user",
                                                     "serializd",
                                                     "floppy",
                                                     "unlock"
@@ -6801,7 +6963,11 @@
                 },
                 "schedule": {
                     "description": "Set the schedule for all collections in this defaults file.",
-                    "type": "string"
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/schedule"
+                        }
+                    ]
                 },
                 "sonarr_add_missing": {
                     "description": "Override Sonarr add_missing for all collections in this defaults file.",
@@ -6860,35 +7026,35 @@
                     "type": "boolean"
                 },
                 "visible_home": {
-                    "description": "Controls Home Tab visibility for all collections. true/false or a schedule string.",
+                    "description": "Controls Home Tab visibility for all collections. true/false or a schedule string/list.",
                     "oneOf": [
                         {
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
                 "visible_library": {
-                    "description": "Controls Library Recommended Tab visibility for all collections. true/false or a schedule string.",
+                    "description": "Controls Library Recommended Tab visibility for all collections. true/false or a schedule string/list.",
                     "oneOf": [
                         {
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
                 "visible_shared": {
-                    "description": "Controls Shared Users' Home Tab visibility for all collections. true/false or a schedule string.",
+                    "description": "Controls Shared Users' Home Tab visibility for all collections. true/false or a schedule string/list.",
                     "oneOf": [
                         {
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -7166,7 +7332,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -7177,7 +7343,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -7188,7 +7354,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -7370,7 +7536,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -7378,7 +7544,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -7388,7 +7554,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -7398,7 +7564,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -7956,7 +8122,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -7967,7 +8133,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -7978,7 +8144,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -8147,7 +8313,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -8155,7 +8321,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -8165,7 +8331,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -8175,7 +8341,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -8616,7 +8782,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -8627,7 +8793,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -8638,7 +8804,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -8816,7 +8982,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -8824,7 +8990,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -8834,7 +9000,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -8844,7 +9010,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -9237,7 +9403,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -9248,7 +9414,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -9259,7 +9425,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -9436,7 +9602,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -9444,7 +9610,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -9454,7 +9620,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -9464,7 +9630,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -9850,7 +10016,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -9861,7 +10027,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -9872,7 +10038,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -10053,7 +10219,7 @@
                     "type": "boolean"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -10061,7 +10227,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -10071,7 +10237,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -10081,7 +10247,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -10527,7 +10693,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -10538,7 +10704,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -10549,7 +10715,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -10726,7 +10892,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -10734,7 +10900,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -10744,7 +10910,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -10754,7 +10920,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -11224,7 +11390,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -11235,7 +11401,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -11246,7 +11412,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -11415,7 +11581,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -11423,7 +11589,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -11433,7 +11599,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -11443,7 +11609,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -11842,7 +12008,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -11853,7 +12019,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -11864,7 +12030,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -12041,7 +12207,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -12049,7 +12215,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -12059,7 +12225,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -12069,7 +12235,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -12465,7 +12631,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -12476,7 +12642,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -12487,7 +12653,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -12664,7 +12830,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -12672,7 +12838,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -12682,7 +12848,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -12692,7 +12858,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13181,7 +13347,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13192,7 +13358,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13203,7 +13369,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13383,7 +13549,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -13391,7 +13557,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13401,7 +13567,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13411,7 +13577,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13665,7 +13831,7 @@
                     "type": "string"
                 },
                 "schedule": {
-                    "type": "string"
+                    "$ref": "#/definitions/schedule"
                 },
                 "visible_home": {
                     "oneOf": [
@@ -13673,7 +13839,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13683,7 +13849,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13693,7 +13859,7 @@
                             "type": "boolean"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/definitions/schedule"
                         }
                     ]
                 },
@@ -13979,6 +14145,10 @@
             "required": [],
             "dependentRequired": {},
             "patternProperties": {
+                "^use_(?!all$).+$": {
+                    "description": "Disable a specific seasonal collection by key. Set to false to turn off.",
+                    "type": "boolean"
+                },
                 "^schedule_.+$": {
                     "type": "string"
                 },
@@ -14404,7 +14574,32 @@
                         "critic",
                         "audience",
                         "user",
-                        "floppy"
+                        "tmdb",
+                        "imdb",
+                        "floppy",
+                        "serializd",
+                        "omdb",
+                        "omdb_imdb",
+                        "omdb_metascore",
+                        "omdb_tomatoes",
+                        "mdb",
+                        "mdb_average",
+                        "mdb_imdb",
+                        "mdb_metacritic",
+                        "mdb_metacriticuser",
+                        "mdb_tomatoes",
+                        "mdb_tomatoesaudience",
+                        "mdb_tmdb",
+                        "mdb_letterboxd",
+                        "mdb_myanimelist",
+                        "anidb",
+                        "anidb_average",
+                        "anidb_score",
+                        "mal",
+                        "plex_imdb",
+                        "plex_tmdb",
+                        "plex_tomatoes",
+                        "plex_tomatoesaudience"
                     ]
                 },
                 "rating1_image": {
@@ -14460,7 +14655,32 @@
                         "critic",
                         "audience",
                         "user",
-                        "floppy"
+                        "tmdb",
+                        "imdb",
+                        "floppy",
+                        "serializd",
+                        "omdb",
+                        "omdb_imdb",
+                        "omdb_metascore",
+                        "omdb_tomatoes",
+                        "mdb",
+                        "mdb_average",
+                        "mdb_imdb",
+                        "mdb_metacritic",
+                        "mdb_metacriticuser",
+                        "mdb_tomatoes",
+                        "mdb_tomatoesaudience",
+                        "mdb_tmdb",
+                        "mdb_letterboxd",
+                        "mdb_myanimelist",
+                        "anidb",
+                        "anidb_average",
+                        "anidb_score",
+                        "mal",
+                        "plex_imdb",
+                        "plex_tmdb",
+                        "plex_tomatoes",
+                        "plex_tomatoesaudience"
                     ]
                 },
                 "rating2_image": {
@@ -14516,7 +14736,32 @@
                         "critic",
                         "audience",
                         "user",
-                        "floppy"
+                        "tmdb",
+                        "imdb",
+                        "floppy",
+                        "serializd",
+                        "omdb",
+                        "omdb_imdb",
+                        "omdb_metascore",
+                        "omdb_tomatoes",
+                        "mdb",
+                        "mdb_average",
+                        "mdb_imdb",
+                        "mdb_metacritic",
+                        "mdb_metacriticuser",
+                        "mdb_tomatoes",
+                        "mdb_tomatoesaudience",
+                        "mdb_tmdb",
+                        "mdb_letterboxd",
+                        "mdb_myanimelist",
+                        "anidb",
+                        "anidb_average",
+                        "anidb_score",
+                        "mal",
+                        "plex_imdb",
+                        "plex_tmdb",
+                        "plex_tomatoes",
+                        "plex_tomatoesaudience"
                     ]
                 },
                 "rating3_image": {
@@ -15126,7 +15371,11 @@
                 },
                 "schedule": {
                     "description": "Set the schedule for all playlists in this defaults file.",
-                    "type": "string"
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/schedule"
+                        }
+                    ]
                 },
                 "delete_not_scheduled": {
                     "description": "Delete playlists when not scheduled.",
