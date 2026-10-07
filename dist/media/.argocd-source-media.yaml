@@ -12,4 +12,4 @@ kustomize:
   - ghcr.io/pedro-revez-silva/shelfarr:latest@sha256:a7afa12a4c0dd8befb96c83a11a6b7f9f90b95f55f066f6067e7a9d054279864
   - ghcr.io/rclone/rclone:latest@sha256:45401ad7410db1d67ffdb58e19059ad20b0d8e0285a60e38bbec55cc1019c7a5
   - docker.io/aetaric/checkrr:latest@sha256:c817e081e9397c240e5b13b09363fe26c9f94248489d3b4f0279e67495b1f12e
-  - ghcr.io/cleanuparr/cleanuparr:latest@sha256:ec444338a67e429a20f6eef938e1ed771ce357ed4831765026096061a09bbbb7
+  - ghcr.io/cleanuparr/cleanuparr:latest@sha256:cfada3e5721451403a878ef67afb317692bb3afe277328b28ce4470bfba915d0
