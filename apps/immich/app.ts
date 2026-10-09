@@ -171,6 +171,13 @@ new AppPlus(app, "immich-machine-learning", {
   extraEnv: {
     ...commonEnv,
     TRANSFORMERS_CACHE: EnvValue.fromValue("/cache"),
+    // v3.3.0 JIT-compiles an optimized copy of each v1 model on first load,
+    // holding both graphs in memory at once. For the 1.7GB SigLIP2 visual
+    // model that blew through the 4Gi limit on every attempt, so it never
+    // finished and OOMKilled on every smart-search load. v2 models ship
+    // pre-optimized (numerically equivalent, no reindex needed) and are slated
+    // to become the upstream default.
+    MACHINE_LEARNING_MODEL_REVISION: EnvValue.fromValue("v2"),
   },
   ports: [3003],
   livenessProbe: Probe.fromHttpGet("/ping", {
