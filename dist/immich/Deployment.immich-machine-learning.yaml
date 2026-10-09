@@ -66,6 +66,7 @@ spec:
               path: /ping
               port: 3003
               scheme: HTTP
+            timeoutSeconds: 5
           name: immich-machine-learning
           ports:
             - containerPort: 3003
@@ -75,9 +76,10 @@ spec:
               path: /ping
               port: 3003
               scheme: HTTP
+            timeoutSeconds: 5
           resources:
             limits:
-              memory: 4096Mi
+              memory: 8192Mi
             requests:
               cpu: 1500m
               memory: 512Mi

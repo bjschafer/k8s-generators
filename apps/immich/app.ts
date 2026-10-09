@@ -165,7 +165,12 @@ new AppPlus(app, "immich-machine-learning", {
     },
     memory: {
       request: Size.mebibytes(512),
-      limit: Size.gibibytes(4),
+      // v2 models are mmap'd from the cache PVC, so their pages count against
+      // this limit. Prepared SigLIP2 alone is ~3.2G visual + ~3.7G textual;
+      // at 4Gi they evicted each other and re-read from CephFS on every
+      // switch, stalling /ping until liveness killed the pod. Anon memory is
+      // only ~300-600Mi -- the rest is page cache for the full model set.
+      limit: Size.gibibytes(8),
     },
   },
   extraEnv: {
@@ -180,11 +185,15 @@ new AppPlus(app, "immich-machine-learning", {
     MACHINE_LEARNING_MODEL_REVISION: EnvValue.fromValue("v2"),
   },
   ports: [3003],
+  // The default 1s timeout is too tight while a model is being prepared or
+  // paged in; /ping stalls briefly under that load without being unhealthy.
   livenessProbe: Probe.fromHttpGet("/ping", {
     port: 3003,
+    timeoutSeconds: Duration.seconds(5),
   }),
   readinessProbe: Probe.fromHttpGet("/ping", {
     port: 3003,
+    timeoutSeconds: Duration.seconds(5),
   }),
   disableIngress: true,
   volumes: [
