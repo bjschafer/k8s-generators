@@ -194,7 +194,10 @@ new AppPlus(app, "immich-machine-learning", {
       props: {
         storageClassName: StorageClass.CEPHFS,
         accessModes: [PersistentVolumeAccessMode.READ_WRITE_MANY],
-        storage: Size.gibibytes(10),
+        // v2 models live alongside v1 under <model>/v2/, and each model also
+        // gets a JIT-prepared copy under cpu/. SigLIP2 alone is ~5G downloaded
+        // plus its prepared visual graph, which filled the old 10Gi.
+        storage: Size.gibibytes(20),
       },
       labels: {
         [BACKUP_ANNOTATION_EXCLUDE]: "true",
