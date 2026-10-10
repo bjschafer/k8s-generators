@@ -301,6 +301,39 @@ new Alert(app, "alerts", {
         summary: "{{ $labels.job }} has been unable to reach a download client for 15 minutes",
       },
     },
+    {
+      alert: "ArrIndexersUnavailable",
+      // Only the "nothing can search" states. IndexerStatusCheck at warning level
+      // (some indexers backing off) is routine: 100+ episodes per app over 90 days,
+      // most past 15 minutes. Its error level means every indexer is down.
+      expr: `max by (job) (
+        {__name__=~"(sonarr|radarr|lidarr)_system_health_issues", source=~"IndexerRssCheck|IndexerSearchCheck"}
+        or {__name__=~"(sonarr|radarr|lidarr)_system_health_issues", source="IndexerStatusCheck", type="error"}
+      ) == 1`,
+      for: "30m",
+      labels: {
+        priority: PRIORITY.NORMAL,
+        ...SEND_TO_PUSHOVER,
+      },
+      annotations: {
+        summary: "{{ $labels.job }} has had no usable indexers for 30 minutes",
+      },
+    },
+    {
+      alert: "ArrNotificationsFailing",
+      // A Discord/Helmarr/Plex connection is in failure backoff, so the *arr's own
+      // notifications are silently going nowhere. Episodes under an hour are
+      // usually the same WAN blips behind ArrDownloadClientUnavailable.
+      expr: `max by (job) ({__name__=~"(sonarr|radarr|lidarr)_system_health_issues", source="NotificationStatusCheck"}) == 1`,
+      for: "1h",
+      labels: {
+        priority: PRIORITY.LOW,
+        ...SEND_TO_PUSHOVER,
+      },
+      annotations: {
+        summary: "{{ $labels.job }} has had failing notification connections for an hour",
+      },
+    },
   ],
 });
 

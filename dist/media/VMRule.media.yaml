@@ -17,3 +17,23 @@ spec:
           labels:
             priority: "0"
             push_notify: "true"
+        - alert: ArrIndexersUnavailable
+          annotations:
+            summary: "{{ $labels.job }} has had no usable indexers for 30 minutes"
+          expr: |-
+            max by (job) (
+                    {__name__=~"(sonarr|radarr|lidarr)_system_health_issues", source=~"IndexerRssCheck|IndexerSearchCheck"}
+                    or {__name__=~"(sonarr|radarr|lidarr)_system_health_issues", source="IndexerStatusCheck", type="error"}
+                  ) == 1
+          for: 30m
+          labels:
+            priority: "0"
+            push_notify: "true"
+        - alert: ArrNotificationsFailing
+          annotations:
+            summary: "{{ $labels.job }} has had failing notification connections for an hour"
+          expr: max by (job) ({__name__=~"(sonarr|radarr|lidarr)_system_health_issues", source="NotificationStatusCheck"}) == 1
+          for: 1h
+          labels:
+            priority: "-1"
+            push_notify: "true"
