@@ -11,6 +11,7 @@ import {
   NONROOT_SECURITY_CONTEXT_UID,
 } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
+import { Alert, PRIORITY, SEND_TO_PUSHOVER } from "../../lib/monitoring/alerts";
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { NFSVolumeContainer } from "../../lib/nfs";
 import { BitwardenSecret } from "../../lib/secrets";
@@ -278,6 +279,29 @@ new SeedboxPull(app, "seedbox-pull", {
   downloads: nfsVols.Get("nfs-media-downloads"),
   destDir: "sync",
   prune: true,
+});
+
+new Alert(app, "alerts", {
+  name: "media",
+  namespace: namespace,
+  rules: [
+    {
+      alert: "ArrDownloadClientUnavailable",
+      // Replaces the *arrs' own "On Health Issue" notifications, which fire on every
+      // seedbox/WAN blip. Over 30 days every episode cleared within 6 minutes.
+      // Aggregated away from `message`: it embeds the exception text, which changes
+      // mid-outage and would restart the `for` clock.
+      expr: `max by (job) ({__name__=~"(sonarr|radarr|lidarr)_system_health_issues", source="DownloadClientCheck"}) == 1`,
+      for: "15m",
+      labels: {
+        priority: PRIORITY.NORMAL,
+        ...SEND_TO_PUSHOVER,
+      },
+      annotations: {
+        summary: "{{ $labels.job }} has been unable to reach a download client for 15 minutes",
+      },
+    },
+  ],
 });
 
 NewArgoApp("media", {

@@ -54,6 +54,7 @@ resources:
   - Service.sabnzbd.yaml
   - Service.sonarr.yaml
   - VMPodScrape.navidrome.yaml
+  - VMRule.media.yaml
   - VMServiceScrape.lidarr.yaml
   - VMServiceScrape.radarr.yaml
   - VMServiceScrape.sabnzbd.yaml

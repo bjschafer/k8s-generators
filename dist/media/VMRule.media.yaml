@@ -1,0 +1,19 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: metrics
+  name: media
+  namespace: media
+spec:
+  groups:
+    - name: media
+      rules:
+        - alert: ArrDownloadClientUnavailable
+          annotations:
+            summary: "{{ $labels.job }} has been unable to reach a download client for 15 minutes"
+          expr: max by (job) ({__name__=~"(sonarr|radarr|lidarr)_system_health_issues", source="DownloadClientCheck"}) == 1
+          for: 15m
+          labels:
+            priority: "0"
+            push_notify: "true"
