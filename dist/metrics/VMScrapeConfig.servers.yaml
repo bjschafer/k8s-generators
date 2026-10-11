@@ -9,4 +9,5 @@ spec:
         job: servers
       targets:
         - jellyfin.cmdcentral.xyz:9100
+        - openbao.cmdcentral.xyz:9100
         - plex.cmdcentral.xyz:9100

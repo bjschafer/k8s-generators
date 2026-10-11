@@ -327,7 +327,11 @@ export class ScrapeConfigs extends Chart {
       spec: {
         staticConfigs: [
           {
-            targets: ["jellyfin.cmdcentral.xyz:9100", "plex.cmdcentral.xyz:9100"],
+            targets: [
+              "jellyfin.cmdcentral.xyz:9100",
+              "openbao.cmdcentral.xyz:9100",
+              "plex.cmdcentral.xyz:9100",
+            ],
             labels: { job: "servers" },
           },
         ],
@@ -367,6 +371,41 @@ export class ScrapeConfigs extends Chart {
               "vmhost03.cmdcentral.xyz:2025",
             ],
             labels: { job: "vmhost-caddy" },
+          },
+        ],
+      },
+    });
+
+    // OpenBao's own telemetry. Its listener is loopback-only, so Caddy re-exposes
+    // /v1/sys/metrics on the :2025 metrics site under this path (ansible repo,
+    // inventory/host_vars/openbao.yaml) rather than on the public vhost.
+    new VmScrapeConfig(this, "openbao", {
+      metadata: {
+        name: "openbao",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: ["openbao.cmdcentral.xyz:2025"],
+            labels: { job: "openbao" },
+          },
+        ],
+        path: "/openbao/metrics",
+        scheme: VmScrapeConfigSpecScheme.HTTP,
+      },
+    });
+
+    new VmScrapeConfig(this, "openbao-caddy", {
+      metadata: {
+        name: "openbao-caddy",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: ["openbao.cmdcentral.xyz:2025"],
+            labels: { job: "openbao-caddy" },
           },
         ],
       },

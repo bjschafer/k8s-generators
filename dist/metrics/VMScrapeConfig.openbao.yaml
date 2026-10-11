@@ -1,0 +1,13 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: openbao
+  namespace: metrics
+spec:
+  path: /openbao/metrics
+  scheme: http
+  staticConfigs:
+    - labels:
+        job: openbao
+      targets:
+        - openbao.cmdcentral.xyz:2025
