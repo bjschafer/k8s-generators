@@ -5,12 +5,14 @@ import { HelmApp } from "../../lib/helm";
 import { EsoValuesSchema } from "../../imports/helm-values/eso-values.schema";
 import { Certificate, ClusterIssuer, Issuer } from "../../imports/cert-manager.io";
 import { Construct } from "constructs";
+import { ServiceAccount } from "cdk8s-plus-34";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { ENABLE_SERVERSIDE_APPLY, NewArgoApp } from "../../lib/argo";
 import {
   ClusterSecretStore,
   ClusterSecretStoreSpecProviderBitwardensecretsmanagerCaProviderType,
   ClusterSecretStoreSpecProviderKubernetesServerCaProviderType,
+  ClusterSecretStoreSpecProviderVaultVersion,
 } from "../../imports/external-secrets.io";
 
 const namespace = basename(__dirname);
@@ -220,6 +222,43 @@ class EsoConfig extends Chart {
               namespace: namespace,
               name: caSecretName,
               key: "ca.crt",
+            },
+          },
+        },
+      },
+    });
+
+    // OpenBao (openbao.cmdcentral.xyz). ESO mints a short-lived token for this
+    // ServiceAccount and bao validates it against the cluster's signing key, so
+    // the SA needs no RBAC of its own. Its subject and the audience are bound on
+    // the `kubernetes/eso` role in tf-authentik's openbao.tf.
+    const openbaoSa = new ServiceAccount(this, "openbao-auth", {
+      metadata: { name: "openbao-auth", namespace },
+    });
+
+    new ClusterSecretStore(this, "openbao-secret-store", {
+      metadata: {
+        name: "openbao",
+      },
+      spec: {
+        provider: {
+          vault: {
+            server: "https://openbao.cmdcentral.xyz",
+            path: "kv",
+            version: ClusterSecretStoreSpecProviderVaultVersion.V2,
+            auth: {
+              jwt: {
+                path: "kubernetes",
+                role: "eso",
+                kubernetesServiceAccountToken: {
+                  serviceAccountRef: {
+                    name: openbaoSa.name,
+                    namespace,
+                    audiences: ["https://openbao.cmdcentral.xyz"],
+                  },
+                  expirationSeconds: 600,
+                },
+              },
             },
           },
         },
