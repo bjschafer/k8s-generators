@@ -14,7 +14,7 @@ import {
 import { Construct } from "constructs";
 import { KometaConfigSchema } from "../../imports/helm-values/kometa-config.schema";
 import { DEFAULT_SECURITY_CONTEXT } from "../../lib/consts";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
 import { mediaLabel, namespace } from "./app";
 
@@ -149,14 +149,11 @@ export class Kometa extends Chart {
     super(scope, id);
     const labels = { "app.kubernetes.io/name": "navidrome", ...mediaLabel };
 
-    const secrets = new BitwardenSecret(this, "kometa-secrets", {
+    const secrets = new OpenBaoSecret(this, "kometa-secrets", {
       name: "kometa-secrets",
       namespace: namespace,
-      data: {
-        // no underscores allowed
-        KOMETA_PLEXTOKEN: "fef8bb11-81be-4b3b-962f-b3be002860b2",
-        KOMETA_TMDBAPIKEY: "34ea986b-e288-4f8d-968b-b3be0028e8aa",
-      },
+      // no underscores allowed
+      keys: ["KOMETA_PLEXTOKEN", "KOMETA_TMDBAPIKEY"],
     });
 
     const cj = new CronJob(this, "kometa-deploy", {

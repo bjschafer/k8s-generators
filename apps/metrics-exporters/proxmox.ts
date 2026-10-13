@@ -4,7 +4,7 @@ import { Construct } from "constructs";
 import { VmProbe } from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";
 import { DNS_POLICY_NONE, RELOADER_ENABLED } from "../../lib/consts";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { namespace } from "./app";
 
 const name = "proxmox-exporter";
@@ -34,12 +34,10 @@ export class ProxmoxExporter extends Chart {
       },
     });
 
-    const secrets = new BitwardenSecret(this, "proxmox-secrets", {
+    const secrets = new OpenBaoSecret(this, "proxmox-secrets", {
       name: name,
       namespace: namespace,
-      data: {
-        PVE_TOKEN_VALUE: "d1c7fc87-8d90-465e-a004-b3c40166efa3",
-      },
+      keys: ["PVE_TOKEN_VALUE"],
     });
 
     const app = new AppPlus(this, "proxmox-app", {

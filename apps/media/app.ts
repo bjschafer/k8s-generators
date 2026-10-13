@@ -14,7 +14,7 @@ import { NewKustomize } from "../../lib/kustomize";
 import { Alert, PRIORITY, SEND_TO_PUSHOVER } from "../../lib/monitoring/alerts";
 import { MediaApp, MediaAppProps } from "../../lib/media-app";
 import { NFSVolumeContainer } from "../../lib/nfs";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
 import { CHECKRR_IMAGE, Checkrr } from "./checkrr";
 import { KOMETA_IMAGE, Kometa } from "./kometa";
@@ -168,43 +168,32 @@ const mediaApps: Omit<MediaAppProps, "namespace" | "ingressSecret" | "resources"
 ];
 
 // exportarr API-key secrets, referenced by name via existingApiSecretName above
-new BitwardenSecret(app, "sonarr-api", {
+new OpenBaoSecret(app, "sonarr-api", {
   name: "sonarr-api",
   namespace: namespace,
-  data: {
-    APIKEY: "9a5c19fe-540f-4118-b27d-b47e01821945",
-  },
+  keys: ["APIKEY"],
 });
-new BitwardenSecret(app, "radarr-api", {
+new OpenBaoSecret(app, "radarr-api", {
   name: "radarr-api",
   namespace: namespace,
-  data: {
-    APIKEY: "5c46e216-ac6c-4cd0-a268-b47e0182092b",
-  },
+  keys: ["APIKEY"],
 });
-new BitwardenSecret(app, "lidarr-api", {
+new OpenBaoSecret(app, "lidarr-api", {
   name: "lidarr-api",
   namespace: namespace,
-  data: {
-    APIKEY: "dd23efa0-4b21-4ecb-bc79-b47e0182089b",
-  },
+  keys: ["APIKEY"],
 });
-new BitwardenSecret(app, "sabnzbd-api", {
+new OpenBaoSecret(app, "sabnzbd-api", {
   name: "sabnzbd-api",
   namespace: namespace,
-  data: {
-    APIKEY: "37529817-2277-4d51-ad84-b47e018209b4",
-  },
+  keys: ["APIKEY"],
 });
 
 // referenced by name in navidrome.ts
-new BitwardenSecret(app, "navidrome-lastfm", {
+new OpenBaoSecret(app, "navidrome-lastfm", {
   name: "navidrome-lastfm",
   namespace: namespace,
-  data: {
-    ND_LASTFM_APIKEY: "9f043b19-e039-40f6-a09f-b47e018219e4",
-    ND_LASTFM__SECRET: "b7e23cb7-432e-4557-b0bf-b47e01821a13",
-  },
+  keys: ["ND_LASTFM_APIKEY", "ND_LASTFM__SECRET"],
 });
 
 const ingressSecret = Secret.fromSecretName(app, "media-tls", "media-tls");

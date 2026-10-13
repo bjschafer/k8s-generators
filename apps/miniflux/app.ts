@@ -7,7 +7,7 @@ import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT, TZ } from "../../lib/const
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -27,25 +27,23 @@ NewArgoApp(name, {
   },
 });
 
-const dbCreds = new BitwardenSecret(app, "db-creds", {
+const dbCreds = new OpenBaoSecret(app, "db-creds", {
   name: "db-creds",
   namespace: namespace,
-  data: {
-    DATABASE_URL: "ef58402f-7ec0-4252-91f9-b47e01821cc5",
-  },
+  keys: ["DATABASE_URL"],
 });
 
-const oauth = new BitwardenSecret(app, "oauth", {
+const oauth = new OpenBaoSecret(app, "oauth", {
   name: "oauth",
   namespace: namespace,
-  data: {
-    OAUTH2_CLIENT_ID: "be32d910-21cc-40de-96eb-b47e01821d5d",
-    OAUTH2_CLIENT_SECRET: "08f43e00-7539-4d60-9984-b47e01821d92",
-    OAUTH2_OIDC_DISCOVERY_ENDPOINT: "5b4da39e-8cf3-4295-9250-b47e01821f65",
-    OAUTH2_PROVIDER: "f74c58ff-7007-4e3c-abee-b47e01821fca",
-    OAUTH2_REDIRECT_URL: "db2078ec-d502-4cd9-b01e-b47e01821ffc",
-    OAUTH2_USER_CREATION: "7d4f6b91-5a36-418d-a2e2-b47e0182202b",
-  },
+  keys: [
+    "OAUTH2_CLIENT_ID",
+    "OAUTH2_CLIENT_SECRET",
+    "OAUTH2_OIDC_DISCOVERY_ENDPOINT",
+    "OAUTH2_PROVIDER",
+    "OAUTH2_REDIRECT_URL",
+    "OAUTH2_USER_CREATION",
+  ],
 });
 
 new AppPlus(app, `${name}-app`, {

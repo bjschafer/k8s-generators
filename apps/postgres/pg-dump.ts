@@ -57,7 +57,7 @@ export interface PgDumpProps {
  * barman-cloud cannot do that on its own: its `encryption` field takes only
  * AES256 or aws:kms, both server-side, so whoever holds the bucket holds the
  * plaintext. Velero's Kopia repos are encrypted under a password that never
- * leaves Bitwarden, so putting the dumps on a PVC is what buys confidentiality.
+ * leaves OpenBao, so putting the dumps on a PVC is what buys confidentiality.
  *
  * This does not replace barman. Barman is still the only thing here that can
  * do point-in-time recovery, and it is still the first thing to reach for; the

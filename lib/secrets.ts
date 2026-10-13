@@ -14,32 +14,87 @@ import {
 import { Password } from "../imports/generators.external-secrets.io";
 import { EnvValue, ISecret, Secret } from "cdk8s-plus-34";
 
-export interface BitwardenSecretProps {
-  name: string;
-  namespace: string;
+/**
+ * Namespace segment for OpenBao entries read from more than one namespace.
+ */
+export const OPENBAO_SHARED = "_all";
+
+/**
+ * Where one Secret key's value lives in OpenBao: a field of a KV v2 entry on
+ * the `kv` mount, under `kubernetes/`.
+ */
+export interface OpenBaoRef {
   /**
-   * Format is `{ desired secret key: uuid or name of secret in sm}`
+   * Entry path below `kubernetes/`, e.g. `_all/pushover-user-key`.
+   *
+   * @default `<namespace>/<name>` of the Secret being built
    */
-  data: Record<string, string>;
+  readonly path?: string;
+  /**
+   * Field within the entry.
+   *
+   * @default the Secret key
+   */
+  readonly property?: string;
+}
+
+export interface OpenBaoSecretProps {
+  readonly name: string;
+  readonly namespace: string;
+  /**
+   * Keys read from this Secret's own entry, `kubernetes/<namespace>/<name>`,
+   * each from the field of the same name.
+   */
+  readonly keys?: string[];
+  /**
+   * Keys read from anywhere else -- an entry shared under `_all/`, or another
+   * Secret's entry in the same namespace -- as `{ secret key: where }`.
+   */
+  readonly refs?: Record<string, OpenBaoRef>;
   /**
    * Reshapes the synced keys into a differently-typed Secret. Needed when the
    * consumer wants something other than an Opaque key/value map -- an image
    * pull secret, say, which has to be kubernetes.io/dockerconfigjson with the
    * payload under `.dockerconfigjson`.
    */
-  template?: ExternalSecretSpecTargetTemplate;
+  readonly template?: ExternalSecretSpecTargetTemplate;
 }
 
-export class BitwardenSecret extends Chart {
+/**
+ * A Secret synced out of OpenBao by the `openbao` ClusterSecretStore.
+ *
+ * By convention each Secret has its own entry at
+ * `kv/kubernetes/<namespace>/<name>` whose fields are the Secret's keys, so
+ * the common case is just a list of `keys`. Values needed in several
+ * namespaces live once under `kv/kubernetes/_all/` and are pulled in with
+ * `refs`, never copied.
+ *
+ * Keys are listed explicitly rather than extracting the whole entry so that a
+ * field added in bao doesn't silently appear in the Secret, and so
+ * `toEnvValues` knows what it has.
+ */
+export class OpenBaoSecret extends Chart {
   public readonly secretName: string;
   public readonly secret: ISecret;
-  private readonly data: Record<string, string>;
+  private readonly keys: string[];
 
-  constructor(scope: Construct, id: string, props: BitwardenSecretProps) {
+  constructor(scope: Construct, id: string, props: OpenBaoSecretProps) {
     super(scope, id);
     this.secretName = props.name;
     this.secret = Secret.fromSecretName(this, `${id}-isecret`, props.name);
-    this.data = props.data;
+
+    const ownPath = `${props.namespace}/${props.name}`;
+    const refs: Record<string, OpenBaoRef> = { ...props.refs };
+    for (const key of props.keys ?? []) {
+      if (key in refs) {
+        throw new Error(`${ownPath}: key ${key} is in both keys and refs`);
+      }
+      refs[key] = {};
+    }
+    this.keys = Object.keys(refs);
+    if (this.keys.length === 0) {
+      throw new Error(`${ownPath}: no keys or refs`);
+    }
 
     new ExternalSecret(this, "secret", {
       metadata: {
@@ -49,13 +104,14 @@ export class BitwardenSecret extends Chart {
       spec: {
         secretStoreRef: {
           kind: ExternalSecretSpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
-          name: "bitwarden",
+          name: "openbao",
         },
-        data: Object.entries(props.data).map((value: [string, string]): ExternalSecretSpecData => {
+        data: Object.entries(refs).map(([key, ref]): ExternalSecretSpecData => {
           return {
-            secretKey: value[0],
+            secretKey: key,
             remoteRef: {
-              key: value[1],
+              key: `kubernetes/${ref.path ?? ownPath}`,
+              property: ref.property ?? key,
               conversionStrategy: ExternalSecretSpecDataRemoteRefConversionStrategy.DEFAULT,
               decodingStrategy: ExternalSecretSpecDataRemoteRefDecodingStrategy.NONE,
               metadataPolicy: ExternalSecretSpecDataRemoteRefMetadataPolicy.NONE,
@@ -72,7 +128,7 @@ export class BitwardenSecret extends Chart {
 
   public toEnvValues(): { [key: string]: EnvValue } {
     const ret: Record<string, EnvValue> = {};
-    for (const [name] of Object.entries(this.data)) {
+    for (const name of this.keys) {
       ret[name] = EnvValue.fromSecretValue({
         secret: this.secret,
         key: name,
@@ -125,11 +181,11 @@ export interface GeneratedSecretProps {
 
 /**
  * A Secret whose values are minted by external-secrets' Password generator
- * rather than read out of Bitwarden.
+ * rather than read out of OpenBao.
  *
  * For values that only ever have to be *stable*, not *known* -- a JWT signing
  * key, a token-encryption key, a pepper. Nothing outside the cluster needs to
- * see them, so putting them in Bitwarden would only be a second place to keep
+ * see them, so putting them in OpenBao would only be a second place to keep
  * in sync.
  *
  * Each key gets its own generator, so no two values are derivable from one

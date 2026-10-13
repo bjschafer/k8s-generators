@@ -14,7 +14,7 @@ import { join } from "path";
 import { Construct } from "constructs";
 import { MEDIA_GID, MEDIA_UID, NONROOT_SECURITY_CONTEXT_UID } from "../../lib/consts";
 import { NFSConcreteVolume } from "../../lib/nfs";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { mediaLabel, namespace } from "./app";
 
 const name = "seedbox-pull";
@@ -61,12 +61,10 @@ export class SeedboxPull extends Chart {
     super(scope, id);
     const labels = { "app.kubernetes.io/name": name, ...mediaLabel };
 
-    const secrets = new BitwardenSecret(this, "secrets", {
+    const secrets = new OpenBaoSecret(this, "secrets", {
       name: `${name}-secrets`,
       namespace: namespace,
-      data: {
-        SEEDBOX_PASSWORD: "85fe2b80-865a-449f-99bc-b4da0172fb95",
-      },
+      keys: ["SEEDBOX_PASSWORD"],
     });
 
     const config = new ConfigMap(this, "config", {

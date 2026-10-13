@@ -5,10 +5,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { MonitoringRule } from "../../lib/monitoring/victoriametrics";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
-import {
-  ExternalSecret,
-  ExternalSecretSpecSecretStoreRefKind,
-} from "../../imports/external-secrets.io";
+import { OpenBaoSecret } from "../../lib/secrets";
 import heredoc from "tsheredoc";
 
 const namespace = basename(__dirname);
@@ -29,44 +26,23 @@ NewArgoApp(name, {
   recurse: true,
 });
 
-// The legacy SealedSecret also carried an empty `runner-registration-token`
-// key (legacy registration flow; the runner authenticates with `runner-token`
-// only, GitLab 16+ having deprecated registration tokens). Empty values can't
-// be stored in Bitwarden Secrets Manager, so this bypasses the shared
-// BitwardenSecret construct (which only supports remoteRef-sourced keys) to
-// add a static empty placeholder for that key via target.template instead.
-// It's load-bearing: the gitlab-runner Helm chart's projected-secrets volume
-// unconditionally references both keys whenever `runners.secret` is set
-// (see templates/deployment.yaml in the gitlab-runner chart), so the key
-// must exist in the Secret or the kubelet refuses to mount the volume at all
-// -- even though the entrypoint script only conditionally uses its content.
-const runnerRegistrationSecretChart = new Chart(app, "runner-registration-secret");
-new ExternalSecret(runnerRegistrationSecretChart, "runner-registration", {
-  metadata: {
-    name: "runner-registration",
-    namespace: namespace,
-  },
-  spec: {
-    secretStoreRef: {
-      kind: ExternalSecretSpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
-      name: "bitwarden",
-    },
-    data: [
-      {
-        secretKey: "runner-token",
-        remoteRef: {
-          key: "ca54cb8e-30ed-4a08-9b19-b47e018265db",
-        },
-      },
-    ],
-    target: {
-      name: "runner-registration",
-      template: {
-        data: {
-          "runner-token": '{{ index . "runner-token" }}',
-          "runner-registration-token": "",
-        },
-      },
+// The Secret also carries an empty `runner-registration-token` key (legacy
+// registration flow; the runner authenticates with `runner-token` only, GitLab
+// 16+ having deprecated registration tokens), added as a static placeholder via
+// the template rather than stored in bao. It's load-bearing: the gitlab-runner
+// Helm chart's projected-secrets volume unconditionally references both keys
+// whenever `runners.secret` is set (see templates/deployment.yaml in the
+// gitlab-runner chart), so the key must exist in the Secret or the kubelet
+// refuses to mount the volume at all -- even though the entrypoint script only
+// conditionally uses its content.
+new OpenBaoSecret(app, "runner-registration-secret", {
+  name: "runner-registration",
+  namespace: namespace,
+  keys: ["runner-token"],
+  template: {
+    data: {
+      "runner-token": '{{ index . "runner-token" }}',
+      "runner-registration-token": "",
     },
   },
 });

@@ -5,7 +5,7 @@ import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
 import {
   ExternalSecret,
@@ -36,12 +36,10 @@ NewArgoApp(name, {
 // The database and role are defined in apps/postgres/databases.ts
 const dbCreds = createAppDatabaseSecret(app, "homebox");
 
-const secrets = new BitwardenSecret(app, "secrets", {
+const secrets = new OpenBaoSecret(app, "secrets", {
   name: "secrets",
   namespace: namespace,
-  data: {
-    HBOX_OIDC_CLIENT_SECRET: "1d512c7f-865f-4f81-a3b2-b3cf00063f49",
-  },
+  keys: ["HBOX_OIDC_CLIENT_SECRET"],
 });
 
 // Generate a stable pepper for API key signing. Value is unimportant but must be

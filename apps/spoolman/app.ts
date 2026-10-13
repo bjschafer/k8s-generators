@@ -7,7 +7,7 @@ import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { WellKnownLabels } from "../../lib/labels";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -33,12 +33,10 @@ NewArgoApp(name, {
   },
 });
 
-const dbCreds = new BitwardenSecret(app, "spoolman-creds", {
+const dbCreds = new OpenBaoSecret(app, "spoolman-creds", {
   name: "spoolman-creds",
   namespace: namespace,
-  data: {
-    SPOOLMAN_DB_PASSWORD: "3c0f66d2-d948-408f-ac18-b47e01822341",
-  },
+  keys: ["SPOOLMAN_DB_PASSWORD"],
 });
 
 new AppPlus(app, `${name}-app`, {

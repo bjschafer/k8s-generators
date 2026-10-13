@@ -3,7 +3,7 @@ import { basename } from "path";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { addAlerts } from "./alerts";
 import { BlackboxExporter } from "./blackbox";
 import { ScrapeConfigs } from "./scrapeconfigs";
@@ -197,24 +197,20 @@ new HelmApp(app, "stack", {
 });
 
 // referenced by name in vmresources.ts (alertmanager receivers)
-new BitwardenSecret(app, "alertmanager-secrets", {
+new OpenBaoSecret(app, "alertmanager-secrets", {
   name: "alertmanager-secrets",
   namespace: namespace,
-  data: {
-    email_pass: "b4144e49-f4cf-4ce3-bc9b-b47e01821aa9",
-    pushover_token: "e2f31a93-29fb-4984-8634-b47e01821aec",
-    pushover_user_key: "480c76dd-7b5e-4199-becb-b47e01821b15",
-    telegram_bot_token: "2a9a2416-f4ff-4256-8637-b47e01821b48",
+  keys: ["email_pass", "pushover_token", "telegram_bot_token"],
+  refs: {
+    pushover_user_key: { path: "_all/pushover-user-key", property: "value" },
   },
 });
 
 // referenced by name in scrapeconfigs.ts (hass bearer auth)
-new BitwardenSecret(app, "hass-bearer-token", {
+new OpenBaoSecret(app, "hass-bearer-token", {
   name: "hass-bearer-token",
   namespace: namespace,
-  data: {
-    token: "3e00741c-1684-494d-a5f3-b47e01821c2b",
-  },
+  keys: ["token"],
 });
 
 new BlackboxExporter(app, "blackbox");

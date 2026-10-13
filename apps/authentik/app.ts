@@ -18,7 +18,7 @@ import { DEFAULT_APP_PROPS, externalDnsHostname, NONROOT_SECURITY_CONTEXT } from
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor, MonitoringRule } from "../../lib/monitoring/victoriametrics";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -120,13 +120,10 @@ class AuthentikRBAC extends Chart {
 const rbac = new AuthentikRBAC(app, "authentik-rbac");
 
 // Secrets
-const creds = new BitwardenSecret(app, "creds", {
+const creds = new OpenBaoSecret(app, "creds", {
   name: "creds",
   namespace: namespace,
-  data: {
-    AUTHENTIK_SECRET_KEY: "8f697c41-0a3a-44e9-904e-b329003066c0",
-    AUTHENTIK_POSTGRESQL__PASSWORD: "63b39599-c406-4fa1-b6e3-b32900304db5",
-  },
+  keys: ["AUTHENTIK_SECRET_KEY", "AUTHENTIK_POSTGRESQL__PASSWORD"],
 });
 
 // Common environment variables

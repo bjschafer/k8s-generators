@@ -5,7 +5,7 @@ import heredoc from "tsheredoc";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";
 import { DNS_POLICY_NONE, RELOADER_ENABLED } from "../../lib/consts";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { namespace } from "./app";
 
 const name = "unifi-exporter";
@@ -56,12 +56,10 @@ export class UnifiExporter extends Chart {
       },
     });
 
-    const secrets = new BitwardenSecret(this, "unifi-secrets", {
+    const secrets = new OpenBaoSecret(this, "unifi-secrets", {
       name: name,
       namespace: namespace,
-      data: {
-        UP_UNIFI_DEFAULT_PASS: "630a6f72-fe9c-4d32-9273-b3c40165eddf",
-      },
+      keys: ["UP_UNIFI_DEFAULT_PASS"],
     });
 
     new AppPlus(this, "unifi-app", {

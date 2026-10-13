@@ -13,7 +13,7 @@ import {
   TZ,
 } from "../../lib/consts";
 import { NFSConcreteVolume } from "../../lib/nfs";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { mediaLabel, namespace } from "./app";
 
 const name = "checkrr";
@@ -49,15 +49,15 @@ export class Checkrr extends Chart {
       .replaceAll("@@CRON@@", props.schedule)
       .replaceAll("@@REACQUIRE@@", String(props.reacquire));
 
-    // Same Bitwarden entries as the exportarr sidecars' sonarr-api/radarr-api.
+    // Read from the exportarr sidecars' sonarr-api/radarr-api entries.
     // checkrr reads only its YAML file, no env, so the keys have to be
     // rendered into it.
-    const config = new BitwardenSecret(this, "config", {
+    const config = new OpenBaoSecret(this, "config", {
       name: `${name}-config`,
       namespace: namespace,
-      data: {
-        SONARR_APIKEY: "9a5c19fe-540f-4118-b27d-b47e01821945",
-        RADARR_APIKEY: "5c46e216-ac6c-4cd0-a268-b47e0182092b",
+      refs: {
+        SONARR_APIKEY: { path: "media/sonarr-api", property: "APIKEY" },
+        RADARR_APIKEY: { path: "media/radarr-api", property: "APIKEY" },
       },
       template: {
         engineVersion: ExternalSecretSpecTargetTemplateEngineVersion.V2,

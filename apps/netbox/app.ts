@@ -18,7 +18,7 @@ import { DEFAULT_APP_PROPS, RELOADER_ENABLED } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { StorageClass } from "../../lib/volume";
 
@@ -54,30 +54,23 @@ NewArgoApp(name, {
   },
 });
 
-const dbCreds = new BitwardenSecret(app, "db-creds", {
+const dbCreds = new OpenBaoSecret(app, "db-creds", {
   name: "db-creds",
   namespace: namespace,
-  data: {
-    password: "421b33c5-ec6c-40ec-a488-b47e01827cbc",
-  },
+  keys: ["password"],
 });
 
 // Django SECRET_KEY -- signs sessions/CSRF. Regenerating it only forces re-login.
-const netboxSecret = new BitwardenSecret(app, "netbox-secret", {
+const netboxSecret = new OpenBaoSecret(app, "netbox-secret", {
   name: name,
   namespace: namespace,
-  data: {
-    SECRET_KEY: "1131094d-5258-4d6f-bf9d-b47e01827d5c",
-  },
+  keys: ["SECRET_KEY"],
 });
 
-const oidcSecret = new BitwardenSecret(app, "oidc", {
+const oidcSecret = new OpenBaoSecret(app, "oidc", {
   name: "oidc",
   namespace: namespace,
-  data: {
-    SOCIAL_AUTH_OIDC_KEY: "63035698-a60b-4ea0-915d-b47e01827df8",
-    SOCIAL_AUTH_OIDC_SECRET: "ce4cbbd8-3fa5-44da-bdef-b47e01827e30",
-  },
+  keys: ["SOCIAL_AUTH_OIDC_KEY", "SOCIAL_AUTH_OIDC_SECRET"],
 });
 
 // One valkey serves both roles netbox needs: the RQ task queue (database 0) and the

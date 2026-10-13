@@ -7,7 +7,7 @@ import { MysqlInstance } from "../../lib/mysql";
 import { basename } from "../../lib/util";
 import { StorageClass } from "../../lib/volume";
 import { NewKustomize } from "../../lib/kustomize";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -50,12 +50,10 @@ new MysqlInstance(app, "db", {
 });
 
 // Root password for the MysqlInstance above; the app connects as root.
-const dbCreds = new BitwardenSecret(app, "db-creds", {
+const dbCreds = new OpenBaoSecret(app, "db-creds", {
   name: "db-creds",
   namespace: namespace,
-  data: {
-    MARIADB_ROOT_PASSWORD: "a34911fa-e45d-40e6-815b-b47e018222a2",
-  },
+  keys: ["MARIADB_ROOT_PASSWORD"],
 });
 
 new AppPlus(app, "pfwiki", {

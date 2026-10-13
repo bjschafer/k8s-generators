@@ -6,7 +6,7 @@ import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { CmdcentralPodMonitor } from "../../lib/monitoring/victoriametrics";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -27,12 +27,10 @@ NewArgoApp(name, {
   },
 });
 
-const secrets = new BitwardenSecret(app, "cloudflared-secrets", {
+const secrets = new OpenBaoSecret(app, "cloudflared-secrets", {
   name: "cloudflared",
   namespace: namespace,
-  data: {
-    TUNNEL_TOKEN: "b37a5dab-4c1d-415a-a6bd-b3f80133a09e",
-  },
+  keys: ["TUNNEL_TOKEN"],
 });
 
 new AppPlus(app, `${name}-app`, {

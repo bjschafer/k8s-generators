@@ -43,8 +43,6 @@ NewBot(app, {
       limit: Size.mebibytes(128),
     },
   },
-  botTokenSecretId: "206f1cf4-94b9-4b68-96a0-b47e01827a95",
-  registryCredSecretId: "9ec077fd-1b61-4944-80ae-b47f00138826",
   allowClusterView: true,
 });
 

@@ -6,7 +6,7 @@ import { AppPlus } from "../../lib/app-plus";
 import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
 import { StorageClass } from "../../lib/volume";
 import { NewKustomize } from "../../lib/kustomize";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -35,12 +35,10 @@ NewArgoApp(name, {
   },
 });
 
-const secrets = new BitwardenSecret(app, "secrets", {
+const secrets = new OpenBaoSecret(app, "secrets", {
   name: "secrets",
   namespace: namespace,
-  data: {
-    MICROBIN_ADMIN_PASSWORD: "23d81c6d-5676-4102-96bd-b47e01822207",
-  },
+  keys: ["MICROBIN_ADMIN_PASSWORD"],
 });
 
 new AppPlus(app, "paste", {

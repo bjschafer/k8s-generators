@@ -12,12 +12,12 @@ import {
   DatabaseRole,
   DatabaseSpecEnsure,
 } from "../../imports/postgresql.cnpg.io";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OPENBAO_SHARED, OpenBaoSecret } from "../../lib/secrets";
 import { DATABASES } from "./databases";
 
 /**
  * Result from creating app database credentials.
- * Compatible with BitwardenSecret interface for backward compatibility.
+ * Compatible with OpenBaoSecret interface for backward compatibility.
  */
 export interface AppDatabaseSecretResult {
   readonly secretName: string;
@@ -46,7 +46,7 @@ export function createDatabaseRoles(scope: Construct, clusterName: string): Char
         login: true,
         comment: db.comment,
         ...db.roleConfig,
-        // All databases have password secrets (either from Bitwarden or auto-generated)
+        // All databases have password secrets (either from OpenBao or auto-generated)
         passwordSecret: {
           name: `${db.name}-db-credentials`,
         },
@@ -59,7 +59,7 @@ export function createDatabaseRoles(scope: Construct, clusterName: string): Char
 
 /**
  * Creates secrets for database credentials in the postgres namespace.
- * Uses Bitwarden if bitwardenPasswordId is set, otherwise generates passwords.
+ * Uses OpenBao if openBaoPassword is set, otherwise generates passwords.
  * These secrets are referenced by the managed roles.
  */
 export function createPostgresSecrets(scope: Construct): void {
@@ -68,41 +68,23 @@ export function createPostgresSecrets(scope: Construct): void {
   for (const db of DATABASES) {
     const secretName = `${db.name}-db-credentials`;
 
-    if (db.bitwardenPasswordId) {
+    if (db.openBaoPassword) {
       // CNPG managed roles require both username and password keys in the secret.
-      // Username must be a literal matching the role name, password from Bitwarden.
-      new ExternalSecret(chart, `${db.name}-db-secret`, {
-        metadata: {
-          name: secretName,
-          namespace: "postgres",
-        },
-        spec: {
-          secretStoreRef: {
-            kind: ExternalSecretSpecSecretStoreRefKind.CLUSTER_SECRET_STORE,
-            name: "bitwarden",
+      // Username must be a literal matching the role name, password from OpenBao.
+      new OpenBaoSecret(chart, `${db.name}-db-secret`, {
+        name: secretName,
+        namespace: "postgres",
+        refs: { password: { path: `${OPENBAO_SHARED}/${secretName}` } },
+        template: {
+          type: "kubernetes.io/basic-auth",
+          metadata: {
+            labels: {
+              "cnpg.io/reload": "true",
+            },
           },
-          data: [
-            {
-              secretKey: "password",
-              remoteRef: {
-                key: db.bitwardenPasswordId,
-              },
-            },
-          ],
-          target: {
-            name: secretName,
-            template: {
-              type: "kubernetes.io/basic-auth",
-              metadata: {
-                labels: {
-                  "cnpg.io/reload": "true",
-                },
-              },
-              data: {
-                username: db.name,
-                password: "{{ .password }}",
-              },
-            },
+          data: {
+            username: db.name,
+            password: "{{ .password }}",
           },
         },
       });
@@ -205,7 +187,7 @@ export function createDatabases(scope: Construct, clusterName: string): Chart {
  * Helper function to create a copy of database credentials in an app's namespace.
  * Call this from your app if it needs local access to the credentials.
  *
- * For Bitwarden-backed passwords: Creates an ExternalSecret fetching from Bitwarden.
+ * For OpenBao-backed passwords: Creates an ExternalSecret fetching from OpenBao.
  * For generated passwords: Creates an ExternalSecret that copies from postgres namespace.
  *
  * @param scope The scope to create the secret in (typically your app)
@@ -230,18 +212,16 @@ export function createAppDatabaseSecret(
 
   const secretName = `${databaseName}-db-credentials`;
 
-  if (db.bitwardenPasswordId) {
-    // Use Bitwarden to fetch password directly
-    const bwSecret = new BitwardenSecret(scope, "db-credentials", {
+  if (db.openBaoPassword) {
+    // Read the same shared OpenBao entry the postgres-side copy reads
+    const baoSecret = new OpenBaoSecret(scope, "db-credentials", {
       name: secretName,
       namespace: db.appNamespace,
-      data: {
-        password: db.bitwardenPasswordId,
-      },
+      refs: { password: { path: `${OPENBAO_SHARED}/${secretName}` } },
     });
     return {
-      secretName: bwSecret.secretName,
-      secret: bwSecret.secret,
+      secretName: baoSecret.secretName,
+      secret: baoSecret.secret,
     };
   } else {
     // Copy from postgres namespace using kubernetes ClusterSecretStore

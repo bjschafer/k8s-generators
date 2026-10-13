@@ -5,7 +5,7 @@ import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
 
 const namespace = basename(__dirname);
@@ -31,15 +31,13 @@ NewArgoApp(name, {
 // Create a copy of the database credentials in this namespace
 // The database and role are defined in apps/postgres/databases.ts
 const dbCreds = createAppDatabaseSecret(app, "noms");
-const nomsSecrets = new BitwardenSecret(app, "noms-secrets", {
+const nomsSecrets = new OpenBaoSecret(app, "noms-secrets", {
   name: "secrets",
   namespace: namespace,
-  data: {
-    CF_ACCOUNT_ID: "8be44aed-b92e-49dd-9c58-b3c901742785",
-    CF_API_TOKEN: "06b6eb68-a6a9-4715-b2ab-b3c90174460c",
-    BRAVE_API_KEY: "8fe64461-304b-4ea1-9e3d-b3cb0024d794",
-    PUSHOVER_APP_TOKEN: "203996e5-50e2-417f-8b81-b3d80048fa52",
-    PUSHOVER_USER_KEY: "46c60eb3-caaf-406c-974d-b3d800493492",
+  keys: ["CF_API_TOKEN", "BRAVE_API_KEY", "PUSHOVER_APP_TOKEN"],
+  refs: {
+    CF_ACCOUNT_ID: { path: "_all/cloudflare-account-id", property: "value" },
+    PUSHOVER_USER_KEY: { path: "_all/pushover-user-key", property: "value" },
   },
 });
 

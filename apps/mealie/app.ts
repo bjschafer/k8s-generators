@@ -6,7 +6,7 @@ import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS, TZ } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -31,29 +31,22 @@ NewArgoApp(name, {
   },
 });
 
-const dbCreds = new BitwardenSecret(app, "db-creds", {
+const dbCreds = new OpenBaoSecret(app, "db-creds", {
   name: "db-creds",
   namespace: namespace,
-  data: {
-    POSTGRES_PASSWORD: "6ba20123-688f-4926-9ba9-b47e01820757",
-  },
+  keys: ["POSTGRES_PASSWORD"],
 });
 
-const oidcCreds = new BitwardenSecret(app, "oidc-creds", {
+const oidcCreds = new OpenBaoSecret(app, "oidc-creds", {
   name: "oidc-creds",
   namespace: namespace,
-  data: {
-    OIDC_CLIENT_SECRET: "ec54b3ed-071d-42bc-a7fd-b47e0182080d",
-  },
+  keys: ["OIDC_CLIENT_SECRET"],
 });
 
-const aiSecrets = new BitwardenSecret(app, "ai-secrets", {
+const aiSecrets = new OpenBaoSecret(app, "ai-secrets", {
   name: "ai",
   namespace: namespace,
-  data: {
-    OPENAI_BASE_URL: "90a0d4c6-87fc-4636-9be6-b3c90019c136",
-    OPENAI_API_KEY: "8144578e-f1ce-4360-b797-b3c90019d91e",
-  },
+  keys: ["OPENAI_BASE_URL", "OPENAI_API_KEY"],
 });
 
 new AppPlus(app, `${name}-app`, {

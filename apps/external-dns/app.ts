@@ -10,7 +10,7 @@ import {
   NONROOT_SECURITY_CONTEXT,
 } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
 
 const namespace = basename(__dirname);
@@ -119,12 +119,10 @@ class ExternalDnsRBAC extends Chart {
 new ExternalDnsRBAC(app, "rbac");
 
 // pdns provider — manages cmdcentral.xyz records in PowerDNS
-const pdnsSecret = new BitwardenSecret(app, "pdns-secret", {
+const pdnsSecret = new OpenBaoSecret(app, "pdns-secret", {
   name: "external-dns-pdns",
   namespace,
-  data: {
-    "api-key": "0b0d8193-640e-4b27-a093-b46f002363eb",
-  },
+  keys: ["api-key"],
 });
 
 new AppPlus(app, "pdns", {
@@ -157,12 +155,10 @@ new AppPlus(app, "pdns", {
 });
 
 // unifi webhook provider — manages local DNS entries in the Unifi controller
-const unifiSecret = new BitwardenSecret(app, "unifi-secret", {
+const unifiSecret = new OpenBaoSecret(app, "unifi-secret", {
   name: "external-dns-unifi",
   namespace,
-  data: {
-    UNIFI_API_KEY: "4011a6c5-0cd3-4a5f-9b96-b46f002528dc",
-  },
+  keys: ["UNIFI_API_KEY"],
 });
 
 class ExternalDnsUnifi extends Chart {

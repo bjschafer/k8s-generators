@@ -29,7 +29,7 @@ import {
   DEFAULT_APP_PROPS,
   externalDnsHostname,
 } from "../../lib/consts";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
 import { PgDump } from "./pg-dump";
 
@@ -49,13 +49,10 @@ NewArgoApp(namespace, {
   recurse: true,
 });
 
-const s3Creds = new BitwardenSecret(app, "s3-creds", {
+const s3Creds = new OpenBaoSecret(app, "s3-creds", {
   name: "s3-creds",
   namespace: namespace,
-  data: {
-    ACCESS_KEY_ID: "a7b27d51-1545-477a-bc21-b34700071d0c",
-    SECRET_ACCESS_KEY: "8210d5a6-1ab4-4c89-a58b-b34700071d12",
-  },
+  keys: ["ACCESS_KEY_ID", "SECRET_ACCESS_KEY"],
 });
 
 const barmanPluginName = "barman-cloud.cloudnative-pg.io";

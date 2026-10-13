@@ -6,7 +6,7 @@ import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -48,11 +48,11 @@ class SmtpConfig extends Chart {
 }
 new SmtpConfig(app, "smtp-config");
 
-const secrets = new BitwardenSecret(app, `${name}-secrets`, {
+const secrets = new OpenBaoSecret(app, `${name}-secrets`, {
   name,
   namespace,
-  data: {
-    RELAYHOST_PASSWORD: "88c10a6c-268a-412a-b3d0-b4230026ba80",
+  refs: {
+    RELAYHOST_PASSWORD: { path: "_all/cloudflare-smtp-password", property: "value" },
   },
 });
 

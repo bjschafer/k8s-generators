@@ -9,7 +9,7 @@ import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { NFSVolumeContainer } from "../../lib/nfs";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { StorageClass } from "../../lib/volume";
 
@@ -64,12 +64,10 @@ nfsVol.Add("nfs-media-pictures", {
   exportPath: "/warp/Media/Pictures",
 });
 
-const dbCreds = new BitwardenSecret(app, "dbcreds", {
+const dbCreds = new OpenBaoSecret(app, "dbcreds", {
   name: "db-creds",
   namespace: namespace,
-  data: {
-    DB_PASSWORD: "1997c120-dc1b-4de6-8a69-b3120136b812",
-  },
+  keys: ["DB_PASSWORD"],
 });
 
 const valkey = new Valkey(app, "valkey", {

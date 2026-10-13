@@ -22,7 +22,7 @@ import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT, RELOADER_ENABLED } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
 import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { StorageClass } from "../../lib/volume";
@@ -90,28 +90,22 @@ const valkey = new Valkey(app, "valkey", {
 // paperless-ai companion that used to own it; kept under that name so the ESO
 // secret does not churn. Its other two keys (the companion's paperless API token
 // and its own web UI key) went away with the companion.
-const paperlessAiSecrets = new BitwardenSecret(app, "paperless-ai-secrets", {
+const paperlessAiSecrets = new OpenBaoSecret(app, "paperless-ai-secrets", {
   name: "paperless-ai-secrets",
   namespace: namespace,
-  data: {
-    CUSTOM_API_KEY: "7f062e0d-213c-4f54-aa03-b3fa003da758",
-  },
+  keys: ["CUSTOM_API_KEY"],
 });
 
-const paperlessDbCreds = new BitwardenSecret(app, "paperless-db-creds", {
+const paperlessDbCreds = new OpenBaoSecret(app, "paperless-db-creds", {
   name: "paperless-db-creds",
   namespace: namespace,
-  data: {
-    PAPERLESS_DBPASS: "7a3a5a6d-84a8-49a1-a9ea-b47e018220c6",
-  },
+  keys: ["PAPERLESS_DBPASS"],
 });
 
-const paperlessOidc = new BitwardenSecret(app, "paperless-oidc", {
+const paperlessOidc = new OpenBaoSecret(app, "paperless-oidc", {
   name: "paperless-oidc",
   namespace: namespace,
-  data: {
-    PAPERLESS_SOCIALACCOUNT_PROVIDERS: "3234f44e-ccbd-4d8c-8afd-b47e01822174",
-  },
+  keys: ["PAPERLESS_SOCIALACCOUNT_PROVIDERS"],
 });
 
 // Django SECRET_KEY. Upstream hard-fails at startup if this is unset or "change-me".

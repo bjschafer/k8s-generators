@@ -14,7 +14,7 @@ import {
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { AddCRDs } from "../../lib/util";
 
 const namespace = basename(__dirname);
@@ -174,12 +174,10 @@ class Velero extends Chart {
       },
     });
 
-    const creds = new BitwardenSecret(this, "s3-secret", {
+    const creds = new OpenBaoSecret(this, "s3-secret", {
       name: "s3-creds",
       namespace: namespace,
-      data: {
-        config: "4700b15e-20b5-4977-97f0-b3490125e477",
-      },
+      keys: ["config"],
     });
 
     // Kopia encrypts every repository with this password. Velero mints the
@@ -194,12 +192,10 @@ class Velero extends Chart {
     // it strands every existing repo: Kopia cannot reopen one under a new
     // password, so a rotation means deleting the BackupRepositories and the
     // bucket contents both.
-    new BitwardenSecret(this, "repo-credentials", {
+    new OpenBaoSecret(this, "repo-credentials", {
       name: "velero-repo-credentials",
       namespace: namespace,
-      data: {
-        "repository-password": "51ab5da0-70c2-4611-b1fe-b4b5002e4500",
-      },
+      keys: ["repository-password"],
     });
 
     // Straight to Wasabi, with no rclone crypt gateway in between. The gateway

@@ -7,7 +7,7 @@ import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
 import { WellKnownLabels } from "../../lib/labels";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -39,12 +39,10 @@ NewArgoApp(name, {
   },
 });
 
-const dbCreds = new BitwardenSecret(app, "db-creds", {
+const dbCreds = new OpenBaoSecret(app, "db-creds", {
   name: "db-creds",
   namespace: namespace,
-  data: {
-    ATUIN_DB_URI: "69ef5aa3-46f3-4ad6-af17-b47e0182011f",
-  },
+  keys: ["ATUIN_DB_URI"],
 });
 
 new AppPlus(app, "atuin", {

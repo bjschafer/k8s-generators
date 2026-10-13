@@ -7,7 +7,7 @@ import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { NFSVolumeContainer } from "../../lib/nfs";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
 
@@ -48,12 +48,10 @@ nfsVol.Add("nfs-3dprinting", {
 // The database and role are defined in apps/postgres/databases.ts
 const dbCreds = createAppDatabaseSecret(app, "manyfold");
 
-const manyfoldSecrets = new BitwardenSecret(app, "manyfold-secrets", {
+const manyfoldSecrets = new OpenBaoSecret(app, "manyfold-secrets", {
   name: "manyfold-secrets",
   namespace: namespace,
-  data: {
-    SECRET_KEY_BASE: "b8f60e2c-1436-4365-9c04-b3cc001b52fd",
-  },
+  keys: ["SECRET_KEY_BASE"],
 });
 
 const valkey = new Valkey(app, "valkey", {

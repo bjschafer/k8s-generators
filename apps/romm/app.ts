@@ -7,7 +7,7 @@ import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { NFSVolumeContainer } from "../../lib/nfs";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
 
@@ -46,17 +46,17 @@ nfsVol.Add("nfs-media-roms", {
 // The database and role are defined in apps/postgres/databases.ts
 const dbCreds = createAppDatabaseSecret(app, "romm");
 
-const rommSecrets = new BitwardenSecret(app, "romm-secrets", {
+const rommSecrets = new OpenBaoSecret(app, "romm-secrets", {
   name: "romm-secrets",
   namespace: namespace,
-  data: {
-    ROMM_AUTH_SECRET_KEY: "a3aba159-fc66-439f-a5e3-b392004420dc",
-    OIDC_CLIENT_SECRET: "c8455351-69c8-4c7b-a2a8-b3970045bc37",
-    STEAMGRIDDB_API_KEY: "a8eb88f1-883f-4d4b-8a68-b39500311177",
-    IGDB_CLIENT_ID: "dbd8a5ac-244f-45a3-9761-b3950031deac",
-    IGDB_CLIENT_SECRET: "55c730d8-d24b-47eb-9243-b3950031f0d9",
-    RETROACHIEVEMENTS_API_KEY: "e9deabc9-41bd-4771-ba72-b3950032ac28",
-  },
+  keys: [
+    "ROMM_AUTH_SECRET_KEY",
+    "OIDC_CLIENT_SECRET",
+    "STEAMGRIDDB_API_KEY",
+    "IGDB_CLIENT_ID",
+    "IGDB_CLIENT_SECRET",
+    "RETROACHIEVEMENTS_API_KEY",
+  ],
 });
 
 const valkey = new Valkey(app, "valkey", {

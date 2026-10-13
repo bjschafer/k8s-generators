@@ -33,6 +33,11 @@ spec:
                 secretKeyRef:
                   key: CF_ACCOUNT_ID
                   name: secrets
+            - name: PUSHOVER_USER_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: PUSHOVER_USER_KEY
+                  name: secrets
             - name: CF_API_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -47,11 +52,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: PUSHOVER_APP_TOKEN
-                  name: secrets
-            - name: PUSHOVER_USER_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: PUSHOVER_USER_KEY
                   name: secrets
             - name: TZ
               value: America/Chicago

@@ -6,7 +6,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
 import { StorageClass } from "../../lib/volume";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -34,24 +34,16 @@ NewArgoApp(name, {
   },
 });
 
-const secrets = new BitwardenSecret(app, "secrets", {
+const secrets = new OpenBaoSecret(app, "secrets", {
   name: "secrets",
   namespace: namespace,
-  data: {
-    AUTHENTIK_CLIENT_ID: "8d3652ba-848e-49ad-892c-b47e018201bd",
-    AUTHENTIK_CLIENT_SECRET: "8fd03c6e-45e2-4ada-bd01-b47e018201f6",
-    DATABASE_URL: "17ba68a8-d519-498e-aa42-b47e0182034c",
-    NEXTAUTH_SECRET: "691c68d7-a475-4347-88e9-b47e018203ae",
-  },
+  keys: ["AUTHENTIK_CLIENT_ID", "AUTHENTIK_CLIENT_SECRET", "DATABASE_URL", "NEXTAUTH_SECRET"],
 });
 
-const aiSecrets = new BitwardenSecret(app, "ai-secrets", {
+const aiSecrets = new OpenBaoSecret(app, "ai-secrets", {
   name: "ai",
   namespace: namespace,
-  data: {
-    CUSTOM_OPENAI_BASE_URL: "1c3acb68-a107-4d73-8e64-b2e001190c0e",
-    OPENAI_API_KEY: "62c67d3b-b097-4dec-8488-b2e00119148f",
-  },
+  keys: ["CUSTOM_OPENAI_BASE_URL", "OPENAI_API_KEY"],
 });
 
 new AppPlus(app, `${name}-app`, {

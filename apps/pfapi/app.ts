@@ -4,7 +4,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { Cpu, DeploymentStrategy, EnvFrom, EnvValue, PercentOrAbsolute } from "cdk8s-plus-34";
 
 const namespace = basename(__dirname);
@@ -27,17 +27,17 @@ NewArgoApp(name, {
   },
 });
 
-const dbCreds = new BitwardenSecret(app, "db-creds", {
+const dbCreds = new OpenBaoSecret(app, "db-creds", {
   name: "db-creds",
   namespace: namespace,
-  data: {
-    Database_Database: "302c4529-0e67-488a-acce-b47e01827ec2",
-    Database_Host: "98b5df13-e42f-4a38-8b12-b47e01827f0b",
-    Database_Password: "cd9acc1c-c087-44b0-9875-b47e01827f38",
-    Database_Port: "2e96ce16-64f9-46ef-9848-b47e01827f64",
-    Database_Type: "0f88cf46-0ab3-4096-a9ac-b47e01827fb0",
-    Database_Username: "b4ce08bd-6169-4a12-ae62-b47e0182b531",
-  },
+  keys: [
+    "Database_Database",
+    "Database_Host",
+    "Database_Password",
+    "Database_Port",
+    "Database_Type",
+    "Database_Username",
+  ],
 });
 
 new AppPlus(app, `${name}-app`, {

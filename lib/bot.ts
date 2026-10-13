@@ -11,10 +11,10 @@ import {
 import { AppPlus } from "./app-plus";
 import { DNS_POLICY_NONE } from "./consts";
 import { ImageUpdaterRegistryAccess } from "./argo";
-import { BitwardenSecret } from "./secrets";
+import { OpenBaoSecret } from "./secrets";
 
 // Every bot pulls from bjschafer's private GHCR org, so they all share one
-// pull secret name -- one bws entry per namespace, same shape.
+// pull secret name -- one bao entry per namespace, same shape.
 const PULL_SECRET_NAME = "github-registry-cred";
 
 export interface BotProps {
@@ -22,15 +22,6 @@ export interface BotProps {
   readonly namespace: string;
   readonly image: string;
   readonly resources: ContainerResources;
-  /**
-   * bws entry holding the bot's API token. Surfaced to the container as the
-   * whole `bot-token` Secret via envFrom, so the key names live in bws.
-   */
-  readonly botTokenSecretId: string;
-  /**
-   * bws entry holding the GHCR dockerconfigjson for this namespace.
-   */
-  readonly registryCredSecretId: string;
   /**
    * Grants the pod's default ServiceAccount the built-in `view` ClusterRole.
    * Only for bots that actually query the cluster.
@@ -47,24 +38,28 @@ export interface BotProps {
  * the GHCR pull secret, the RBAC letting argocd-image-updater read it, and the
  * bot token -- because a bot missing any one of them fails differently and
  * none of the failures point at the missing piece.
+ *
+ * Expects two bao entries in the bot's namespace: `bot-token` with a
+ * `BOT_TOKEN` field, and `github-registry-cred` with the raw GHCR
+ * dockerconfigjson in a `dockerconfigjson` field.
  */
 export function NewBot(app: App, props: BotProps): void {
-  const registryCred = new BitwardenSecret(app, `${props.name}-registry-cred`, {
+  const registryCred = new OpenBaoSecret(app, `${props.name}-registry-cred`, {
     name: PULL_SECRET_NAME,
     namespace: props.namespace,
-    data: { dockerconfigjson: props.registryCredSecretId },
+    keys: ["dockerconfigjson"],
     // The kubelet only accepts a pull secret of this type with the config under
-    // this exact key; the bws entry just holds the raw JSON.
+    // this exact key; the bao entry just holds the raw JSON.
     template: {
       type: "kubernetes.io/dockerconfigjson",
       data: { ".dockerconfigjson": '{{ index . "dockerconfigjson" }}' },
     },
   });
 
-  const botToken = new BitwardenSecret(app, `${props.name}-bot-token`, {
+  const botToken = new OpenBaoSecret(app, `${props.name}-bot-token`, {
     name: "bot-token",
     namespace: props.namespace,
-    data: { BOT_TOKEN: props.botTokenSecretId },
+    keys: ["BOT_TOKEN"],
   });
 
   new ImageUpdaterRegistryAccess(app, `${props.name}-updater-access`, {

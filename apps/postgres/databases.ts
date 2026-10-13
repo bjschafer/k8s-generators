@@ -4,20 +4,20 @@
  * This is the ONLY file you need to edit when adding a new database.
  * Just add an entry to the DATABASES array below.
  *
- * Example with Bitwarden password:
+ * Example with a password stored in OpenBao:
  * {
  *   name: "myapp",                      // Database and role name
  *   comment: "MyApp database owner",    // Human-readable description
- *   bitwardenPasswordId: "bw-item-id",  // Bitwarden item ID for password
+ *   openBaoPassword: true,              // kv/kubernetes/_all/myapp-db-credentials
  *   appNamespace: "myapp",              // Your app's namespace (optional)
  * }
  *
- * Example with auto-generated password (no Bitwarden required):
+ * Example with auto-generated password (nothing to store in OpenBao):
  * {
  *   name: "myapp",                      // Database and role name
  *   comment: "MyApp database owner",    // Human-readable description
  *   appNamespace: "myapp",              // Your app's namespace (optional)
- *   // Password will be auto-generated when bitwardenPasswordId is omitted
+ *   // Password will be auto-generated when openBaoPassword is omitted
  * }
  */
 
@@ -25,7 +25,7 @@ import { DatabaseRoleSpec } from "../../imports/postgresql.cnpg.io";
 
 /**
  * Password generation configuration for auto-generated passwords.
- * Used when bitwardenPasswordId is not set.
+ * Used when openBaoPassword is not set.
  */
 export interface PasswordGenerationConfig {
   /** Length of password. Default: 32 */
@@ -46,8 +46,12 @@ export interface DatabaseConfig {
   name: string;
   /** Human-readable comment for the role */
   comment: string;
-  /** Bitwarden item ID for the password (or undefined for no password) */
-  bitwardenPasswordId?: string;
+  /**
+   * Read the password from OpenBao rather than generating one: the `password`
+   * field of `kv/kubernetes/_all/<name>-db-credentials`. Shared, since both
+   * the postgres namespace (for the role) and appNamespace read it.
+   */
+  openBaoPassword?: boolean;
   /** Namespace where the app lives (for creating a copy of credentials there) */
   appNamespace?: string;
   /**
@@ -72,7 +76,7 @@ export interface DatabaseConfig {
    * otherwise leave an empty database lying around.
    */
   roleOnly?: boolean;
-  /** Password generation config when not using Bitwarden. Uses defaults if omitted. */
+  /** Password generation config when not using OpenBao. Uses defaults if omitted. */
   passwordGeneration?: PasswordGenerationConfig;
 }
 
@@ -91,28 +95,28 @@ export const DATABASES: DatabaseConfig[] = [
   {
     name: "homebox",
     comment: "Homebox database owner",
-    bitwardenPasswordId: "492205f2-22ec-4d75-8034-b3cf00066695",
+    openBaoPassword: true,
     appNamespace: "homebox",
   },
 
   {
     name: "manyfold",
     comment: "Manyfold database owner",
-    bitwardenPasswordId: "730357ee-1202-496f-ad6e-b3cc001af9a3",
+    openBaoPassword: true,
     appNamespace: "manyfold",
   },
 
   {
     name: "noms",
     comment: "Noms database owner",
-    bitwardenPasswordId: "f0107fac-b3ae-4d80-978b-b3c90172d46b",
+    openBaoPassword: true,
     appNamespace: "noms",
   },
 
   {
     name: "romm",
     comment: "ROMM database owner",
-    bitwardenPasswordId: "efb8a53a-dfd4-4f3a-b2e2-b39200423731",
+    openBaoPassword: true,
     appNamespace: "romm",
   },
 

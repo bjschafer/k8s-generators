@@ -13,17 +13,11 @@ import { Construct } from "constructs";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { NONROOT_SECURITY_CONTEXT_UID } from "../../lib/consts";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
 import { namespace } from "./app";
 
 const name = "alliant-collector";
-
-// Bitwarden Secrets Manager items for the MyAccount login. One item per value --
-// a BitwardenSecret key maps to a whole item, not to a field within one. The
-// username lives here rather than inline because this repo is public.
-const ALLIANT_USERNAME_BW_ID = "8f6137bf-487c-4182-83f8-b4a2000564c9";
-const ALLIANT_PASSWORD_BW_ID = "8d0593c0-a09b-474d-acd3-b4a200058cbd";
 
 // Alliant publishes usage ~4 days in arrears, so there is nothing to gain from
 // running often. Once a day, off-peak, is plenty.
@@ -58,13 +52,12 @@ export class AlliantCollector extends Chart {
 
     const dbCreds = createAppDatabaseSecret(this, "energy");
 
-    const alliantCreds = new BitwardenSecret(this, "alliant-credentials", {
+    // The MyAccount login. The username lives in bao rather than inline
+    // because this repo is public.
+    const alliantCreds = new OpenBaoSecret(this, "alliant-credentials", {
       name: "alliant-credentials",
       namespace: namespace,
-      data: {
-        ALLIANT_USERNAME: ALLIANT_USERNAME_BW_ID,
-        ALLIANT_PASSWORD: ALLIANT_PASSWORD_BW_ID,
-      },
+      keys: ["ALLIANT_USERNAME", "ALLIANT_PASSWORD"],
     });
 
     const scripts = new ConfigMap(this, "scripts", {

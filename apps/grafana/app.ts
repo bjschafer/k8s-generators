@@ -9,7 +9,7 @@ import {
   VmServiceScrape,
   VmServiceScrapeSpecEndpointsScheme,
 } from "../../imports/operator.victoriametrics.com";
-import { BitwardenSecret } from "../../lib/secrets";
+import { OpenBaoSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -23,21 +23,16 @@ NewArgoApp(name, {
 
 // Consumed by the helm chart via envFromSecret (grafana-secrets) and
 // extraSecretMounts (auth-cmdcentral-oauth) below.
-new BitwardenSecret(app, "grafana-secrets", {
+new OpenBaoSecret(app, "grafana-secrets", {
   name: "grafana-secrets",
   namespace: namespace,
-  data: {
-    GF_DATABASE_PASSWORD: "b7950d8e-f11c-4559-9304-b47e018206b9",
-  },
+  keys: ["GF_DATABASE_PASSWORD"],
 });
 
-new BitwardenSecret(app, "auth-cmdcentral-oauth", {
+new OpenBaoSecret(app, "auth-cmdcentral-oauth", {
   name: "auth-cmdcentral-oauth",
   namespace: namespace,
-  data: {
-    client_id: "7e2b3368-e556-4dbf-b6ed-b47e018205f7",
-    client_secret: "63969db0-fe73-40e3-8af6-b47e01820623",
-  },
+  keys: ["client_id", "client_secret"],
 });
 
 class Grafana extends Chart {
