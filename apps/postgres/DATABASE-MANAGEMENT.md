@@ -22,16 +22,24 @@ export const DATABASES: DatabaseConfig[] = [
   {
     name: "romm",
     comment: "ROMM database owner",
-    bitwardenPasswordId: "your-bitwarden-id-here",
+    openBaoPassword: true,
     appNamespace: "romm",
   },
   {
     name: "myapp",  // Add your new database here
     comment: "MyApp database owner",
-    bitwardenPasswordId: "your-bitwarden-item-id",
     appNamespace: "myapp",
   },
 ];
+```
+
+Without `openBaoPassword`, a password is generated in-cluster (see
+`passwordGeneration`). With `openBaoPassword: true`, it is read from the
+`password` field of `kv/kubernetes/_all/<name>-db-credentials` in OpenBao,
+which has to exist before the first sync:
+
+```bash
+bao kv put -mount=kv kubernetes/_all/myapp-db-credentials password=-
 ```
 
 That's it! When you run `mise run build`, it will automatically:
@@ -61,7 +69,7 @@ const dbCreds = createAppDatabaseSecret(app, "myapp");
 - Your app needs credentials in **its own** namespace
 
 ### The Solution
-Both namespaces get an `ExternalSecret` that references the **same Bitwarden item**:
+With `openBaoPassword`, both namespaces get an `ExternalSecret` that reads the **same OpenBao entry**:
 
 **In postgres namespace:**
 ```yaml
@@ -72,9 +80,13 @@ metadata:
   name: myapp-db-credentials
   namespace: postgres  # ← For CNPG to use
 spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: openbao
   data:
     - remoteRef:
-        key: myapp-bitwarden-id  # ← Same Bitwarden item
+        key: kubernetes/_all/myapp-db-credentials  # ← Same OpenBao entry
+        property: password
       secretKey: password
 ```
 
@@ -87,13 +99,19 @@ metadata:
   name: myapp-db-credentials
   namespace: myapp  # ← For your app to use
 spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: openbao
   data:
     - remoteRef:
-        key: myapp-bitwarden-id  # ← Same Bitwarden item
+        key: kubernetes/_all/myapp-db-credentials  # ← Same OpenBao entry
+        property: password
       secretKey: password
 ```
 
-Both secrets sync from the same Bitwarden item, so updating the password in Bitwarden updates both namespaces automatically.
+Both secrets sync from the same entry, so updating the password in OpenBao updates both namespaces automatically.
+
+With a generated password, the postgres-namespace Secret is the source of truth and the app namespace copies it via the `kubernetes` ClusterSecretStore.
 
 ## Generated Resources
 
@@ -161,19 +179,6 @@ postgresql://myapp:${PASSWORD}@prod-pg17-pooler-rw.postgres.svc.cluster.local:54
 
 ## Advanced Configuration
 
-### Databases Without Passwords
-
-For trust-based authentication, omit `bitwardenPasswordId`:
-
-```typescript
-{
-  name: "trustdb",
-  comment: "Trust-based database",
-  // No bitwardenPasswordId
-  appNamespace: "trustapp",
-}
-```
-
 ### Additional Role Options
 
 Add custom role configuration via `roleConfig`:
@@ -182,7 +187,6 @@ Add custom role configuration via `roleConfig`:
 {
   name: "myapp",
   comment: "MyApp database owner",
-  bitwardenPasswordId: "bitwarden-id",
   appNamespace: "myapp",
   roleConfig: {
     connectionLimit: 50,
@@ -217,7 +221,7 @@ Note: You may want to backup the database before removing it!
 - Verify the database name matches the role name
 
 ### Credentials not syncing
-- Check that the Bitwarden item ID is correct
+- With `openBaoPassword`, check `kv/kubernetes/_all/<name>-db-credentials` exists and has a `password` field
 - Verify the ExternalSecret exists in both namespaces (if needed)
 - Check External Secrets Operator logs
 

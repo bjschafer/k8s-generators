@@ -20,11 +20,9 @@ NewArgoApp(name, {
 /**
  * The sealed-secrets controller.
  *
- * Secrets have otherwise moved to Bitwarden + External Secrets, so this exists
- * for one job: External Secrets' own Bitwarden access token can't be managed by
- * External Secrets, so it stays a SealedSecret. Removing this controller would
- * leave that token undecryptable and take ESO -- and therefore every migrated
- * secret in the cluster -- down with it.
+ * Secrets here have otherwise moved to OpenBao + External Secrets. This stays
+ * for the SealedSecrets still owned by the legacy k8s-prod repo (argocd-secret
+ * among them); removing the controller would leave those undecryptable.
  *
  * The keys it decrypts with live in Secrets the controller creates and rotates
  * itself, labelled sealedsecrets.bitnami.com/sealed-secrets-key. They are not

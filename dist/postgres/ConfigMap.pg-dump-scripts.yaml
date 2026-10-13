@@ -11,7 +11,7 @@ data:
     # This exists because barman-cloud has no client-side encryption -- its
     # `encryption` field offers only AES256 and aws:kms, both server-side, so
     # whoever holds the bucket holds the plaintext. Velero's Kopia repos are
-    # encrypted with a password that never leaves Bitwarden, so routing the
+    # encrypted with a password that never leaves OpenBao, so routing the
     # databases through a PVC is what gets them an offsite copy nobody else can
     # read. Barman stays as it is: it is still the only thing here that can do
     # point-in-time recovery, and it is still the first thing to reach for.

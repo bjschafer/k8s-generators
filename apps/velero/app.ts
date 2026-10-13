@@ -186,9 +186,11 @@ class Velero extends Chart {
     // the world -- but EnsureCommonRepositoryKey returns early once it exists,
     // so pre-creating it here is the whole of what makes these repos private.
     //
-    // It comes from Bitwarden rather than lib's GeneratedSecret because a
+    // It comes from OpenBao rather than lib's GeneratedSecret because a
     // password that exists only inside the cluster is worth nothing in the one
-    // situation the offsite copy is for, where the cluster is gone. Changing
+    // situation the offsite copy is for, where the cluster is gone. bao runs
+    // outside the cluster but on the same site, so the value also needs an
+    // off-site copy or losing the site loses the backups with it. Changing
     // it strands every existing repo: Kopia cannot reopen one under a new
     // password, so a rotation means deleting the BackupRepositories and the
     // bucket contents both.
@@ -277,7 +279,7 @@ class Velero extends Chart {
       // so a full-resource backup writes every Secret in the cluster to the
       // bucket in the clear -- which is the only reason the offsite copy ever
       // needed an rclone crypt gateway in front of it. Manifests come from git
-      // and Secrets from Bitwarden, so the tarball was never the part worth
+      // and Secrets from OpenBao, so the tarball was never the part worth
       // keeping.
       //
       // Filtering this far still backs volumes up normally: data movement is

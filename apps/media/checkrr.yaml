@@ -1,7 +1,7 @@
 # Rendered twice (see checkrr.ts): the @@NAME@@ placeholders are filled in at
 # synth time from CheckrrProps, then the result becomes an external-secrets
 # template, which fills in the Go-template ones -- the *arr API keys -- from
-# Bitwarden. Comments are rendered too, so never write template braces in one.
+# OpenBao. Comments are rendered too, so never write template braces in one.
 lang: "en-us"
 checkrr:
   checkpath:
