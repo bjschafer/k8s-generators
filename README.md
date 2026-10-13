@@ -74,25 +74,6 @@ Currently enabled sources are `cert-manager`, `metrics`, and `velero`. The rest 
 
 When refreshing CRDs by hand, run `mise run build` afterwards to regenerate `dist/`, review the diff, and commit the result.
 
-## Migrating secrets to Bitwarden Secrets Manager
-
-`tools/migrate-secret.ts` helps move a live Secret (originally sourced from a SealedSecret in the legacy `k8s-prod` repo) into Bitwarden Secrets Manager, and emits a ready-to-paste `BitwardenSecret` construct snippet for the External Secrets Operator pattern used going forward.
-
-```bash
-# dry run (default): reads the live Secret via kubectl, prints what WOULD be
-# created (key names + masked values only), makes no calls to Bitwarden
-bun run tools/migrate-secret.ts <namespace> <secret-name>
-
-# actually create the bws secrets and emit the real snippet - requires
-# BWS_ACCESS_TOKEN and the `bws` CLI (brew install bitwarden/tap/bws)
-bun run tools/migrate-secret.ts <namespace> <secret-name> --execute
-
-# scan the legacy prod repo for SealedSecrets still left to migrate
-bun run tools/migrate-secret.ts --inventory
-```
-
-`--inventory` reads `spec.encryptedData` key _names_ directly off disk (SealedSecrets can't be decrypted offline, but the key names aren't encrypted, only the values); it defaults to `~/development/k8s/prod`, override with `PROD_REPO_PATH`.
-
 ## CI
 
 `.github/workflows/ci.yaml` runs on every push to `main` and every PR: installs the mise-pinned toolchain, runs `mise run --force build` to regenerate `dist/` from scratch, then fails the build if that produces any diff - i.e. committed `dist/` output must always match what the TypeScript source actually generates. It then runs `mise run typecheck`, `mise run lint`, an `oxfmt --check` formatting pass, and `mise run validate-alerts`.

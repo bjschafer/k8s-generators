@@ -20,7 +20,6 @@ promtool = "latest"
 pint = "latest"
 "aqua:prometheus/alertmanager" = "latest"
 "aqua:grafana/gcx" = "latest"
-bitwarden-secrets-manager = "latest"
 # vlogscli ships bundled with vlagent inside the `vlutils` release archive;
 # pin the exe + asset so the github backend extracts the right binary.
 "github:VictoriaMetrics/VictoriaLogs[exe=vlogscli-prod,matching=vlutils]" = "latest"
