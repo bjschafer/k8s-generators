@@ -39,7 +39,9 @@ const dbCreds = createAppDatabaseSecret(app, "homebox");
 const secrets = new OpenBaoSecret(app, "secrets", {
   name: "secrets",
   namespace: namespace,
-  keys: ["HBOX_OIDC_CLIENT_SECRET"],
+  refs: {
+    HBOX_OIDC_CLIENT_SECRET: { path: `${namespace}/authentik`, property: "client_secret" },
+  },
 });
 
 // Generate a stable pepper for API key signing. Value is unimportant but must be

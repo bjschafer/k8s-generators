@@ -37,13 +37,15 @@ const oauth = new OpenBaoSecret(app, "oauth", {
   name: "oauth",
   namespace: namespace,
   keys: [
-    "OAUTH2_CLIENT_ID",
-    "OAUTH2_CLIENT_SECRET",
     "OAUTH2_OIDC_DISCOVERY_ENDPOINT",
     "OAUTH2_PROVIDER",
     "OAUTH2_REDIRECT_URL",
     "OAUTH2_USER_CREATION",
   ],
+  refs: {
+    OAUTH2_CLIENT_ID: { path: `${namespace}/authentik`, property: "client_id" },
+    OAUTH2_CLIENT_SECRET: { path: `${namespace}/authentik`, property: "client_secret" },
+  },
 });
 
 new AppPlus(app, `${name}-app`, {

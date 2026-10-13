@@ -32,7 +32,10 @@ new OpenBaoSecret(app, "grafana-secrets", {
 new OpenBaoSecret(app, "auth-cmdcentral-oauth", {
   name: "auth-cmdcentral-oauth",
   namespace: namespace,
-  keys: ["client_id", "client_secret"],
+  refs: {
+    client_id: { path: `${namespace}/authentik`, property: "client_id" },
+    client_secret: { path: `${namespace}/authentik`, property: "client_secret" },
+  },
 });
 
 class Grafana extends Chart {

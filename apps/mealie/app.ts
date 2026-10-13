@@ -40,7 +40,9 @@ const dbCreds = new OpenBaoSecret(app, "db-creds", {
 const oidcCreds = new OpenBaoSecret(app, "oidc-creds", {
   name: "oidc-creds",
   namespace: namespace,
-  keys: ["OIDC_CLIENT_SECRET"],
+  refs: {
+    OIDC_CLIENT_SECRET: { path: `${namespace}/authentik`, property: "client_secret" },
+  },
 });
 
 const aiSecrets = new OpenBaoSecret(app, "ai-secrets", {

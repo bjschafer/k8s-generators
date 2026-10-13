@@ -15,6 +15,7 @@ import {
 import {
   ExternalSecret,
   ExternalSecretSpecDataFromSourceRefGeneratorRefKind,
+  ExternalSecretSpecTargetTemplateEngineVersion,
 } from "../../imports/external-secrets.io";
 import { Password } from "../../imports/generators.external-secrets.io";
 import { Quantity } from "../../imports/k8s";
@@ -102,10 +103,38 @@ const paperlessDbCreds = new OpenBaoSecret(app, "paperless-db-creds", {
   keys: ["PAPERLESS_DBPASS"],
 });
 
+// The client credentials are published by the authentik tofu repo; the
+// allauth provider config around them is assembled here. Authentik's generated
+// IDs and secrets are alphanumeric, so they drop into the JSON unescaped.
 const paperlessOidc = new OpenBaoSecret(app, "paperless-oidc", {
   name: "paperless-oidc",
   namespace: namespace,
-  keys: ["PAPERLESS_SOCIALACCOUNT_PROVIDERS"],
+  refs: {
+    client_id: { path: `${namespace}/authentik`, property: "client_id" },
+    client_secret: { path: `${namespace}/authentik`, property: "client_secret" },
+  },
+  template: {
+    engineVersion: ExternalSecretSpecTargetTemplateEngineVersion.V2,
+    data: {
+      PAPERLESS_SOCIALACCOUNT_PROVIDERS: JSON.stringify({
+        openid_connect: {
+          APPS: [
+            {
+              provider_id: "authentik",
+              name: "Authentik",
+              client_id: "{{ .client_id }}",
+              secret: "{{ .client_secret }}",
+              settings: {
+                server_url:
+                  "https://login.cmdcentral.xyz/application/o/paperless/.well-known/openid-configuration",
+              },
+            },
+          ],
+          OAUTH_PKCE_ENABLED: "True",
+        },
+      }),
+    },
+  },
 });
 
 // Django SECRET_KEY. Upstream hard-fails at startup if this is unset or "change-me".

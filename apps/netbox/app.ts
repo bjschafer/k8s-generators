@@ -70,7 +70,10 @@ const netboxSecret = new OpenBaoSecret(app, "netbox-secret", {
 const oidcSecret = new OpenBaoSecret(app, "oidc", {
   name: "oidc",
   namespace: namespace,
-  keys: ["SOCIAL_AUTH_OIDC_KEY", "SOCIAL_AUTH_OIDC_SECRET"],
+  refs: {
+    SOCIAL_AUTH_OIDC_KEY: { path: `${namespace}/authentik`, property: "client_id" },
+    SOCIAL_AUTH_OIDC_SECRET: { path: `${namespace}/authentik`, property: "client_secret" },
+  },
 });
 
 // One valkey serves both roles netbox needs: the RQ task queue (database 0) and the

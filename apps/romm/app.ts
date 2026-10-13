@@ -51,12 +51,14 @@ const rommSecrets = new OpenBaoSecret(app, "romm-secrets", {
   namespace: namespace,
   keys: [
     "ROMM_AUTH_SECRET_KEY",
-    "OIDC_CLIENT_SECRET",
     "STEAMGRIDDB_API_KEY",
     "IGDB_CLIENT_ID",
     "IGDB_CLIENT_SECRET",
     "RETROACHIEVEMENTS_API_KEY",
   ],
+  refs: {
+    OIDC_CLIENT_SECRET: { path: `${namespace}/authentik`, property: "client_secret" },
+  },
 });
 
 const valkey = new Valkey(app, "valkey", {

@@ -37,7 +37,11 @@ NewArgoApp(name, {
 const secrets = new OpenBaoSecret(app, "secrets", {
   name: "secrets",
   namespace: namespace,
-  keys: ["AUTHENTIK_CLIENT_ID", "AUTHENTIK_CLIENT_SECRET", "DATABASE_URL", "NEXTAUTH_SECRET"],
+  keys: ["DATABASE_URL", "NEXTAUTH_SECRET"],
+  refs: {
+    AUTHENTIK_CLIENT_ID: { path: `${namespace}/authentik`, property: "client_id" },
+    AUTHENTIK_CLIENT_SECRET: { path: `${namespace}/authentik`, property: "client_secret" },
+  },
 });
 
 const aiSecrets = new OpenBaoSecret(app, "ai-secrets", {

@@ -69,15 +69,15 @@ spec:
               value: "4"
             - name: TZ
               value: America/Chicago
-            - name: ROMM_AUTH_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: ROMM_AUTH_SECRET_KEY
-                  name: romm-secrets
             - name: OIDC_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   key: OIDC_CLIENT_SECRET
+                  name: romm-secrets
+            - name: ROMM_AUTH_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: ROMM_AUTH_SECRET_KEY
                   name: romm-secrets
             - name: STEAMGRIDDB_API_KEY
               valueFrom:
