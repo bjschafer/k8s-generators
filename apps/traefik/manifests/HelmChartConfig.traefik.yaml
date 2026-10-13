@@ -22,10 +22,14 @@ spec:
           - websecure
     ports:
       web:
-        redirections:
-          entrypoint:
-            to: websecure
-            scheme: https
+        # Must sit under `http:` -- the chart silently ignored the older
+        # top-level `redirections` key, which left every host answering in
+        # plaintext on :80.
+        http:
+          redirections:
+            entryPoint:
+              to: websecure
+              scheme: https
         forwardedHeaders:
           insecure: true
         proxyProtocol:
