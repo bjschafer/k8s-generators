@@ -1,0 +1,7 @@
+resources:
+  - Deployment.vaultwarden.yaml
+  - ExternalSecret.vaultwarden-db-credentials.yaml
+  - ExternalSecret.vaultwarden.yaml
+  - Ingress.vaultwarden.yaml
+  - PersistentVolumeClaim.vaultwarden-data.yaml
+  - Service.vaultwarden.yaml

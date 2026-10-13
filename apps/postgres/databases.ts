@@ -180,6 +180,15 @@ export const DATABASES: DatabaseConfig[] = [
   },
 
   {
+    name: "vaultwarden",
+    comment: "Vaultwarden database owner",
+    appNamespace: "vaultwarden",
+    // Vaultwarden takes a single postgresql:// URL in DATABASE_URL, so keep the
+    // password URL-safe. Same reasoning as `bambuddy` above.
+    passwordGeneration: { length: 40, digits: 8, symbols: 0 },
+  },
+
+  {
     name: "grafanareader",
     comment: "Read-only reporting login used by Grafana datasources",
     // Predates this registry -- created by hand, and the password was never

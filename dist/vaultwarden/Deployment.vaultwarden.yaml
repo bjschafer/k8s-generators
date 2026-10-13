@@ -1,0 +1,152 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: vaultwarden
+  name: vaultwarden
+  namespace: vaultwarden
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: vaultwarden-app-vaultwarden-app-deployment-c82860a9
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: vaultwarden
+        cdk8s.io/metadata.addr: vaultwarden-app-vaultwarden-app-deployment-c82860a9
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: DOMAIN
+              value: https://passwords.cmdcentral.xyz
+            - name: ROCKET_PORT
+              value: "8080"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: vaultwarden-db-credentials
+            - name: DATABASE_URL
+              value: postgresql://vaultwarden:$(DB_PASSWORD)@prod-pg17-pooler-rw.postgres.svc.cluster.local:5432/vaultwarden
+            - name: SIGNUPS_ALLOWED
+              value: "false"
+            - name: INVITATIONS_ALLOWED
+              value: "true"
+            - name: IP_HEADER
+              value: CF-Connecting-IP
+            - name: SSO_ENABLED
+              value: "true"
+            - name: SSO_ONLY
+              value: "false"
+            - name: SSO_AUTHORITY
+              value: https://login.cmdcentral.xyz/application/o/vaultwarden/
+            - name: SSO_SCOPES
+              value: email profile offline_access
+            - name: SSO_SIGNUPS_MATCH_EMAIL
+              value: "true"
+            - name: SMTP_HOST
+              value: smtp.smtp.svc.cluster.local
+            - name: SMTP_PORT
+              value: "25"
+            - name: SMTP_SECURITY
+              value: "off"
+            - name: SMTP_FROM
+              value: passwords@cmdcentral.net
+            - name: SMTP_FROM_NAME
+              value: Vaultwarden
+            - name: PUSH_ENABLED
+              value: "true"
+            - name: SSO_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: SSO_CLIENT_ID
+                  name: vaultwarden
+            - name: SSO_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: SSO_CLIENT_SECRET
+                  name: vaultwarden
+            - name: ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: ADMIN_TOKEN
+                  name: vaultwarden
+            - name: PUSH_INSTALLATION_ID
+              valueFrom:
+                secretKeyRef:
+                  key: PUSH_INSTALLATION_ID
+                  name: vaultwarden
+            - name: PUSH_INSTALLATION_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: PUSH_INSTALLATION_KEY
+                  name: vaultwarden
+          image: vaultwarden/server:1.37.4
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /alive
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 30
+          name: vaultwarden
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /alive
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 20m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /alive
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 5
+          volumeMounts:
+            - mountPath: /data
+              name: pvc-vaultwarden-data
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pvc-vaultwarden-data
+          persistentVolumeClaim:
+            claimName: vaultwarden-data
+            readOnly: false

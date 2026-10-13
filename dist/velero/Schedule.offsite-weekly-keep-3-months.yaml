@@ -15,6 +15,7 @@ spec:
       - netbox
       - paperless
       - postgres
+      - vaultwarden
     includedResources:
       - persistentvolumeclaims
       - persistentvolumes

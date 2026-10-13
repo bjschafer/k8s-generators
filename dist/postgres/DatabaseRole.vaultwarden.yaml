@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: vaultwarden
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: Vaultwarden database owner
+  login: true
+  name: vaultwarden
+  passwordSecret:
+    name: vaultwarden-db-credentials

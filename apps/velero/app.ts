@@ -306,7 +306,15 @@ class Velero extends Chart {
     // so the only thing this picks up there is the pg-dump PVC, which is the
     // nightly logical dump of every cluster. That is what actually carries
     // authentik, spoolman, argocd and the rest offsite now.
-    const offsiteNamespaces = ["immich", "mealie", "media", "netbox", "paperless", "postgres"];
+    const offsiteNamespaces = [
+      "immich",
+      "mealie",
+      "media",
+      "netbox",
+      "paperless",
+      "postgres",
+      "vaultwarden",
+    ];
 
     new Schedule(this, "weekly-keep-3-months", {
       metadata: {
