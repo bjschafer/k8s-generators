@@ -42,6 +42,8 @@ spec:
               value: "false"
             - name: INVITATIONS_ALLOWED
               value: "true"
+            - name: INVITATION_ORG_NAME
+              value: Cmdcentral Passwords
             - name: IP_HEADER
               value: CF-Connecting-IP
             - name: SSO_ENABLED

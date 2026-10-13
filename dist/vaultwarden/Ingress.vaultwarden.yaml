@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: vaultwarden-vaultwarden-hsts@kubernetescrd
   labels:
     app.kubernetes.io/name: vaultwarden
     cmdcentral.xyz/external: "true"

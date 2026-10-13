@@ -3,5 +3,6 @@ resources:
   - ExternalSecret.vaultwarden-db-credentials.yaml
   - ExternalSecret.vaultwarden.yaml
   - Ingress.vaultwarden.yaml
+  - Middleware.vaultwarden-hsts.yaml
   - PersistentVolumeClaim.vaultwarden-data.yaml
   - Service.vaultwarden.yaml

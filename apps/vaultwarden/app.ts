@@ -1,5 +1,6 @@
 import { App, Duration, Size } from "cdk8s";
 import { Cpu, EnvValue, Probe } from "cdk8s-plus-34";
+import { Middleware } from "../../imports/traefik.io";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT, TZ } from "../../lib/consts";
@@ -59,7 +60,7 @@ const secrets = new OpenBaoSecret(app, "secrets", {
   },
 });
 
-new AppPlus(app, `${name}-app`, {
+const vaultwarden = new AppPlus(app, `${name}-app`, {
   name: name,
   namespace: namespace,
   image: `${image}:${version}`,
@@ -124,6 +125,7 @@ new AppPlus(app, `${name}-app`, {
     // Accounts are created by invitation from the admin panel only.
     SIGNUPS_ALLOWED: EnvValue.fromValue("false"),
     INVITATIONS_ALLOWED: EnvValue.fromValue("true"),
+    INVITATION_ORG_NAME: EnvValue.fromValue("Cmdcentral Passwords"),
     // Traffic from the tunnel arrives via cloudflared -> traefik, so X-Real-IP
     // is a pod address. Cloudflare overwrites this header on every request it
     // proxies; LAN traffic doesn't carry it and Vaultwarden falls back to the
@@ -157,6 +159,27 @@ new AppPlus(app, `${name}-app`, {
     ...secrets.toEnvValues(),
   },
 });
+
+// Vaultwarden sends no HSTS header itself and leaves it to the proxy. Set here
+// rather than in Cloudflare so it also covers LAN clients, which resolve these
+// hosts straight to traefik. No includeSubDomains: other *.cmdcentral.xyz
+// hosts aren't all HTTPS-only.
+// Base cdk8s: Middleware is a traefik CRD with no cdk8s-plus equivalent.
+const hsts = new Middleware(vaultwarden, `${name}-hsts`, {
+  metadata: {
+    name: `${name}-hsts`,
+    namespace: namespace,
+  },
+  spec: {
+    headers: {
+      stsSeconds: 31536000,
+    },
+  },
+});
+vaultwarden.Ingress?.metadata.addAnnotation(
+  "traefik.ingress.kubernetes.io/router.middlewares",
+  `${namespace}-${hsts.name}@kubernetescrd`,
+);
 
 app.synth();
 NewKustomize(app.outdir);
