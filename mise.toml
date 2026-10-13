@@ -24,10 +24,13 @@ bitwarden-secrets-manager = "latest"
 # vlogscli ships bundled with vlagent inside the `vlutils` release archive;
 # pin the exe + asset so the github backend extracts the right binary.
 "github:VictoriaMetrics/VictoriaLogs[exe=vlogscli-prod,matching=vlutils]" = "latest"
+openbao = "latest"
 
 [env]
 # Derived from the pinned kubectl above so helm template uses the right .Capabilities.KubeVersion
 KUBE_VERSION = { value = "v{{ tools.kubectl.version }}", tools = true }
+
+BAO_ADDR = "https://openbao.cmdcentral.xyz"
 
 
 [tasks.clean-full]
