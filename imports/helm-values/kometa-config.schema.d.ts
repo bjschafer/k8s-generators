@@ -17,7 +17,15 @@ export type ExternalPathWithTemplateVariables = {
   git?: string;
   repo?: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables: {
     [k: string]: unknown;
   };
@@ -93,7 +101,15 @@ export type KometaDefaultCollectionPath = {
     | "writer"
     | "year";
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: {
     [k: string]: unknown;
   };
@@ -308,27 +324,67 @@ export interface Libraries {
 export interface FilePath {
   file: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
 }
 export interface FolderPath {
   folder: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
 }
 export interface UrlPath {
   url: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
 }
 export interface GitPath {
   git: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
 }
 export interface RepoPath {
   repo: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
 }
 /**
  * @deprecated
@@ -395,7 +451,15 @@ export interface LegacyDefaultCollectionPath {
     | "writer"
     | "year";
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables;
 }
 /**
@@ -951,25 +1015,57 @@ export interface TemplateVariables {
 export interface FilePathCollectionWithTemplateVariables {
   file: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables;
 }
 export interface UrlPathCollectionWithTemplateVariables {
   url: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables;
 }
 export interface GitPathCollectionWithTemplateVariables {
   git: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables;
 }
 export interface RepoPathCollectionWithTemplateVariables {
   repo: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables;
 }
 /**
@@ -1007,7 +1103,15 @@ export interface LegacyDefaultOverlayPath {
   reapply_overlay?: boolean;
   reset_overlays?: "tmdb" | "plex";
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables1;
 }
 export interface TemplateVariables1 {
@@ -1444,31 +1548,71 @@ export interface KometaDefaultOverlayPath {
   reapply_overlay?: boolean;
   reset_overlays?: "tmdb" | "plex";
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables1;
 }
 export interface FilePathOverlayWithTemplateVariables {
   file: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables1;
 }
 export interface UrlPathOverlayWithTemplateVariables {
   url: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables1;
 }
 export interface GitPathOverlayWithTemplateVariables {
   git: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables1;
 }
 export interface RepoPathOverlayWithTemplateVariables {
   repo: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables1;
 }
 /**
@@ -1536,7 +1680,15 @@ export interface LegacyDefaultCollectionPath1 {
     | "writer"
     | "year";
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables;
 }
 /**
@@ -1574,7 +1726,15 @@ export interface LegacyDefaultOverlayPath1 {
   reapply_overlay?: boolean;
   reset_overlays?: "tmdb" | "plex";
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables1;
 }
 export interface Operations {
@@ -2411,7 +2571,16 @@ export interface Settings {
    * Used to define where local assets are located.
    * Specify the directories where assets (posters, backgrounds, etc) are located.
    */
-  asset_directory?: string | string[] | null;
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[]
+    | null;
   /**
    * Used to control the asset directory folder structure.
    * While true, Kometa will search the asset_directory for a dedicated folder per item vs while false will look for an image.
@@ -3791,7 +3960,15 @@ export interface Github {
 export interface LegacyDefaultPlaylistPath {
   pmm: "playlist";
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables3;
 }
 /**
@@ -3870,31 +4047,71 @@ export interface TemplateVariables3 {
 export interface KometaDefaultPlaylistPath {
   default: "playlist";
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables3;
 }
 export interface FilePathPlaylistWithTemplateVariables {
   file: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables3;
 }
 export interface UrlPathPlaylistWithTemplateVariables {
   url: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables3;
 }
 export interface GitPathPlaylistWithTemplateVariables {
   git: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables3;
 }
 export interface RepoPathPlaylistWithTemplateVariables {
   repo: string;
   schedule?: Schedule;
-  asset_directory?: string | string[];
+  asset_directory?:
+    | {
+        movies?: string | string[] | null;
+        shows?: string | string[] | null;
+        music?: string | string[] | null;
+        collections?: string | string[] | null;
+      }
+    | string
+    | string[];
   template_variables?: TemplateVariables3;
 }
 export interface Simkl {
