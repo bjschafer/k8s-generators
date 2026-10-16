@@ -18,7 +18,7 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 // renovate: datasource=helm depName=external-secrets registryUrl=https://charts.external-secrets.io
-const version = "2.12.0";
+const version = "2.13.0";
 
 NewArgoApp(name, {
   namespace: namespace,
