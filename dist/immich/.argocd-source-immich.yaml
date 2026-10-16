@@ -1,5 +1,5 @@
 kustomize:
   images:
   - ghcr.io/immich-app/immich-machine-learning:v3@sha256:513c831cfb010ad319341a0c86b42c575a0d5b688d3e8cae346ee624074a58ed
-  - ghcr.io/immich-app/immich-server:v3@sha256:db996e352359771c6a3db121a0ed8761516b22f727fc092a0f46dcfef82c1bc1
+  - ghcr.io/immich-app/immich-server:v3@sha256:bae7664ff3aa4c2c1fcbdcdd86b40b105643c5f861f3e6a770fc760089f25862
   - ghcr.io/valkey-io/valkey:8-alpine@sha256:081c2f5cb575efc901aa80ff9cdbd1ec6a301682fd35e1ebb4b0990a4a4a8507
