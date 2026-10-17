@@ -1,9 +1,11 @@
-import { Chart, Size } from "cdk8s";
+import { Chart, Duration, Size } from "cdk8s";
 import {
   ContainerResources,
   EnvValue,
+  ImagePullPolicy,
   PersistentVolumeAccessMode,
   PersistentVolumeClaim,
+  Probe,
   Secret,
   Service,
   StatefulSet,
@@ -27,6 +29,17 @@ export interface MysqlInstanceProps {
 const mariadbVersion = "12.3.3-noble";
 const DEFAULT_IMAGE = `ghcr.io/mariadb/mariadb:${mariadbVersion}`;
 
+function pingProbe(opts: { periodSeconds: number; failureThreshold: number }): Probe {
+  return Probe.fromCommand(
+    ["sh", "-c", 'MYSQL_PWD="$MARIADB_ROOT_PASSWORD" mariadb-admin ping -uroot --silent'],
+    {
+      periodSeconds: Duration.seconds(opts.periodSeconds),
+      failureThreshold: opts.failureThreshold,
+      timeoutSeconds: Duration.seconds(5),
+    },
+  );
+}
+
 export class MysqlInstance extends Chart {
   constructor(scope: Construct, name: string, props: MysqlInstanceProps) {
     super(scope, name);
@@ -46,6 +59,7 @@ export class MysqlInstance extends Chart {
             readOnlyRootFilesystem: false,
           },
           image: props.imageOverride ?? DEFAULT_IMAGE,
+          imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
           ports: [
             {
               name: "mysql",
@@ -53,6 +67,13 @@ export class MysqlInstance extends Chart {
             },
           ],
           resources: props.resources,
+          // mysqladmin reads the root password from the environment rather than
+          // putting it on the command line.
+          liveness: pingProbe({ periodSeconds: 20, failureThreshold: 6 }),
+          readiness: pingProbe({ periodSeconds: 10, failureThreshold: 3 }),
+          // a major-version bump runs mariadb-upgrade before the server accepts
+          // connections, so allow up to 10 minutes before liveness applies.
+          startup: pingProbe({ periodSeconds: 10, failureThreshold: 60 }),
         },
       ],
       // defining the service this way lets us give it a sane name

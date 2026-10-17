@@ -27,11 +27,29 @@ spec:
                   key: MARIADB_ROOT_PASSWORD
                   name: db-creds
           image: ghcr.io/mariadb/mariadb:12.3.3-noble
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - MYSQL_PWD="$MARIADB_ROOT_PASSWORD" mariadb-admin ping -uroot --silent
+            failureThreshold: 6
+            periodSeconds: 20
+            timeoutSeconds: 5
           name: main
           ports:
             - containerPort: 3306
               name: mysql
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - MYSQL_PWD="$MARIADB_ROOT_PASSWORD" mariadb-admin ping -uroot --silent
+            failureThreshold: 3
+            periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits:
               memory: 512Mi
@@ -43,6 +61,15 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+          startupProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - MYSQL_PWD="$MARIADB_ROOT_PASSWORD" mariadb-admin ping -uroot --silent
+            failureThreshold: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: db
