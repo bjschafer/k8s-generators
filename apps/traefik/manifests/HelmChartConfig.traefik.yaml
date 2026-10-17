@@ -7,6 +7,13 @@ spec:
   valuesContent: |-
     deployment:
       replicas: 3
+    priorityClassName: system-cluster-critical
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 768Mi
     additionalArguments:
       # these shouldn't be necessary in later versions of traefik
       - --entryPoints.websecure.transport.respondingTimeouts.readTimeout=600s
