@@ -44,7 +44,7 @@ spec:
             - secretRef:
                 name: navidrome-lastfm
           image: ghcr.io/navidrome/navidrome:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

@@ -6,6 +6,7 @@ import {
   Deployment,
   DeploymentStrategy,
   EnvValue,
+  ImagePullPolicy,
   Ingress,
   IngressBackend,
   ISecret,
@@ -139,6 +140,7 @@ export class MediaApp extends Chart {
           name: props.name,
           securityContext: securityContext,
           image: props.image,
+          imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
           ports: [
             {
               name: "http",
@@ -223,6 +225,7 @@ export class MediaApp extends Chart {
         // permissive default for now.
         securityContext: DEFAULT_SECURITY_CONTEXT,
         image: `ghcr.io/onedr0p/exportarr:${exportarrVersion}`,
+        imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
         name: "exportarr",
         args: [props.name],
         portNumber: 9707,
@@ -236,7 +239,7 @@ export class MediaApp extends Chart {
         resources: {
           cpu: {
             request: Cpu.millis(100),
-            limit: Cpu.millis(600),
+            limit: Cpu.millis(2000),
           },
           memory: {
             request: Size.mebibytes(128),

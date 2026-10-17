@@ -30,7 +30,7 @@ spec:
             - name: PGID
               value: "8675309"
           image: ghcr.io/linuxserver/lidarr:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:
@@ -80,7 +80,7 @@ spec:
                   key: APIKEY
                   name: lidarr-api
           image: ghcr.io/onedr0p/exportarr:v2.3.0
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -98,7 +98,7 @@ spec:
               scheme: HTTP
           resources:
             limits:
-              cpu: 600m
+              cpu: 2000m
               memory: 384Mi
             requests:
               cpu: 100m

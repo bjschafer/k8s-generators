@@ -8,6 +8,7 @@ import {
   DeploymentStrategy,
   Env,
   EnvValue,
+  ImagePullPolicy,
   PersistentVolumeAccessMode,
   PersistentVolumeClaim,
   PersistentVolumeMode,
@@ -59,6 +60,7 @@ export class Navidrome extends Chart {
           name: name,
           securityContext: DEFAULT_SECURITY_CONTEXT,
           image: NAVIDROME_IMAGE,
+          imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
           ports: [
             {
               name: "http",
