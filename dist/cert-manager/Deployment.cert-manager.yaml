@@ -67,6 +67,12 @@ spec:
             - containerPort: 9403
               name: http-healthz
               protocol: TCP
+          resources:
+            limits:
+              memory: 384Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -76,6 +82,7 @@ spec:
       enableServiceLinks: false
       nodeSelector:
         kubernetes.io/os: linux
+      priorityClassName: homelab-critical
       securityContext:
         runAsNonRoot: true
         seccompProfile:

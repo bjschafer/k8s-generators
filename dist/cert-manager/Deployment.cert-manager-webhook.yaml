@@ -80,6 +80,12 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 96Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -89,6 +95,7 @@ spec:
       enableServiceLinks: false
       nodeSelector:
         kubernetes.io/os: linux
+      priorityClassName: homelab-critical
       securityContext:
         runAsNonRoot: true
         seccompProfile:

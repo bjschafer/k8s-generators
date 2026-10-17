@@ -1,13 +1,13 @@
 import { App, Chart } from "cdk8s";
 import { basename, join } from "path";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, HOMELAB_CRITICAL_PRIORITY_CLASS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { Construct } from "constructs";
 import { ClusterIssuer } from "../../imports/cert-manager.io";
 import { CertManagerValuesSchema } from "../../imports/helm-values/cert-manager-values.schema";
 import { OpenBaoSecret } from "../../lib/secrets";
-import { AddCRDs } from "../../lib/util";
+import { AddCRDs, infraResources } from "../../lib/util";
 
 export const namespace = basename(__dirname);
 const name = namespace;
@@ -38,6 +38,10 @@ new HelmApp<Partial<CertManagerValuesSchema>>(app, "helm", {
     crds: {
       enabled: true,
     },
+    global: { priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS },
+    resources: infraResources("10m", "128Mi", "384Mi"),
+    cainjector: { resources: infraResources("10m", "128Mi", "384Mi") },
+    webhook: { resources: infraResources("10m", "96Mi", "256Mi") },
     dns01RecursiveNameservers: "1.1.1.1:53,1.0.0.1:53",
     dns01RecursiveNameserversOnly: true,
   },
