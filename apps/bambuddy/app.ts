@@ -1,5 +1,13 @@
 import { App, Duration, Size } from "cdk8s";
-import { ContainerPort, Cpu, EnvValue, Probe, ServiceType, Volume } from "cdk8s-plus-34";
+import {
+  Capability,
+  ContainerPort,
+  Cpu,
+  EnvValue,
+  Probe,
+  ServiceType,
+  Volume,
+} from "cdk8s-plus-34";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import {
@@ -114,10 +122,16 @@ const bambuddy = new AppPlus(app, `${name}-app`, {
   },
   // The entrypoint chowns /app/data and /app/logs and gosus to 1000 when
   // started as root, and execs the app directly otherwise. The virtual printer
-  // binds 322 and 990, which needs no NET_BIND_SERVICE here: the cluster's
-  // ip_unprivileged_port_start is 0.
+  // binds 322 and 990, which works without the capability: the cluster's
+  // ip_unprivileged_port_start is 0. NET_BIND_SERVICE stays in the bounding set
+  // only because the image's python carries it as a file capability, and the
+  // kernel refuses to exec such a binary (EPERM) when the bounding set can't
+  // satisfy it. Non-root under no_new_privs, the process never actually holds it.
   securityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
-  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
+  containerSecurityContext: {
+    ...NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
+    capabilities: { drop: [Capability.ALL], add: [Capability.NET_BIND_SERVICE] },
+  },
   volumes: [
     {
       name: `${name}-data`,
