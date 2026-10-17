@@ -1,5 +1,5 @@
 import { App, Size } from "cdk8s";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT_UID } from "../../lib/consts";
 import { basename } from "../../lib/util";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Cpu, EnvValue, Probe } from "cdk8s-plus-34";
@@ -57,6 +57,10 @@ new AppPlus(app, `${name}-app`, {
     [WellKnownLabels.ManagedBy]: "generators",
   },
   ports: [8000],
+  // The entrypoint gosus to app (1000) when started as root, and skips straight
+  // to uvicorn when it already is that uid.
+  securityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
   extraEnv: {
     SPOOLMAN_DB_TYPE: EnvValue.fromValue("postgres"),
     SPOOLMAN_DB_HOST: EnvValue.fromValue("prod.postgres.svc.cluster.local"),

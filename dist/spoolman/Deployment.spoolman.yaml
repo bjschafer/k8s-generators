@@ -79,9 +79,14 @@ spec:
               memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
             privileged: false
             readOnlyRootFilesystem: false
-            runAsNonRoot: false
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
             seccompProfile:
               type: RuntimeDefault
       dnsPolicy: ClusterFirst
@@ -89,7 +94,9 @@ spec:
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
-        runAsNonRoot: false
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
