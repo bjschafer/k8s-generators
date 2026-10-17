@@ -3,7 +3,7 @@ import { Cpu, PersistentVolumeAccessMode } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS, LSIO_ENVVALUE } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, LSIO_ENVVALUE, NONROOT_SECURITY_CONTEXT_UID } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 
 const namespace = basename(__dirname);
@@ -39,6 +39,12 @@ new AppPlus(app, "tautulli", {
     },
   },
   ports: [port],
+  // The image's start.sh, run as root, usermods/chowns and then gosus to
+  // tautulli (1000); it can't do any of that non-root, so skip it and run what
+  // it would have exec'd. /config is already 1000-owned.
+  command: ["python", "Tautulli.py", "--datadir", "/config"],
+  securityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
   extraIngressHosts: ["plex-dash.cmdcentral.xyz"],
   extraEnv: {
     LSIO_ENVVALUE,
