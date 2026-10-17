@@ -23,4 +23,11 @@ spec:
               port: 5432
             timeoutSeconds: 5
           name: pgbouncer
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 20m
+              memory: 96Mi
+      priorityClassName: homelab-critical
   type: rw

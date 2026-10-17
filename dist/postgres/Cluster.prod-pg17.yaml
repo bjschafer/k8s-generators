@@ -43,6 +43,7 @@ spec:
     pg_hba:
       - host pdns pdns 10.0.10.0/24 scram-sha-256
       - hostssl pdns pdns 10.0.10.0/24 scram-sha-256
+  priorityClassName: homelab-critical
   resources:
     limits:
       cpu: "1"

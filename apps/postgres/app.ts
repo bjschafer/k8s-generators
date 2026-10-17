@@ -29,6 +29,7 @@ import {
   BACKUP_ANNOTATION_EXCLUDE,
   DEFAULT_APP_PROPS,
   externalDnsHostname,
+  HOMELAB_CRITICAL_PRIORITY_CLASS,
 } from "../../lib/consts";
 import { OpenBaoSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
@@ -73,6 +74,7 @@ class ProdPostgres extends Chart {
       },
       spec: {
         instances: 3,
+        priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
         // Bumping this major is an offline in-place `pg_upgrade`, not an image
         // swap: the operator shuts every instance down, runs pg_upgrade
         // --link, then destroys and re-clones both replica PVCs. Only ever
@@ -188,9 +190,17 @@ class ProdPostgres extends Chart {
         // operator merges this container by name into the generated pod.
         template: {
           spec: {
+            priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
             containers: [
               {
                 name: "pgbouncer",
+                resources: {
+                  requests: {
+                    cpu: Quantity.fromString("20m"),
+                    memory: Quantity.fromString("96Mi"),
+                  },
+                  limits: { memory: Quantity.fromString("256Mi") },
+                },
                 livenessProbe: {
                   tcpSocket: {
                     port: PoolerSpecTemplateSpecContainersLivenessProbeTcpSocketPort.fromNumber(
@@ -564,6 +574,7 @@ class VectorPostgres extends Chart {
       },
       spec: {
         instances: 2,
+        priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
         imageCatalogRef: {
           apiGroup: catalog.apiGroup,
           kind: catalog.kind,
