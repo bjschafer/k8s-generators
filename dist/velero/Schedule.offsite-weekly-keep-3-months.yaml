@@ -9,6 +9,8 @@ spec:
     csiSnapshotTimeout: 0s
     includeClusterResources: true
     includedNamespaces:
+      - hass
+      - homebox
       - immich
       - mealie
       - media

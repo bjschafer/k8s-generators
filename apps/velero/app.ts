@@ -1,7 +1,8 @@
 import { App, Chart } from "cdk8s";
+import { ConfigMap } from "cdk8s-plus-34";
 import { Construct } from "constructs";
+import { createHash } from "crypto";
 import { basename, join } from "path";
-import { KubeConfigMap } from "../../imports/k8s";
 import { SchemaForVeleroHelmChart } from "../../imports/helm-values/velero-values.schema";
 import { VmPodScrape, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import {
@@ -16,6 +17,7 @@ import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { OpenBaoSecret } from "../../lib/secrets";
 import { AddCRDs } from "../../lib/util";
+import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -37,6 +39,18 @@ NewArgoApp(name, {
       group: "velero.io",
     },
   ],
+});
+
+const nodeAgentConfig = JSON.stringify({
+  loadConcurrency: {
+    globalConfig: 2,
+  },
+  // The data mover clones each snapshot into a temporary PVC of the
+  // source's StorageClass. ceph-rbd is Retain, so without this every
+  // backup run would strand a Released PV per volume.
+  backupPVC: {
+    [StorageClass.CEPH_RBD]: { storageClass: StorageClass.CEPH_RBD_SCRATCH },
+  },
 });
 
 class Velero extends Chart {
@@ -90,6 +104,12 @@ class Velero extends Chart {
         credentials: {
           useSecret: false,
         },
+        // node-agent only reads its config at startup, so roll it when that
+        // changes. The chart has no node-agent-only pod annotations; the server
+        // rolling along with it is harmless.
+        podAnnotations: {
+          "checksum/node-agent-config": createHash("sha256").update(nodeAgentConfig).digest("hex"),
+        },
         deployNodeAgent: true,
         nodeAgent: {
           podVolumePath: "/var/lib/kubelet/pods",
@@ -115,7 +135,7 @@ class Velero extends Chart {
       },
     });
 
-    new KubeConfigMap(this, "node-agent-config", {
+    new ConfigMap(this, "node-agent-config", {
       metadata: {
         name: "node-agent-config",
         namespace: namespace,
@@ -126,11 +146,7 @@ class Velero extends Chart {
         // fsync latency. At 3 the weekly backup drove k8s-02/03 disk util to
         // ~99%, timing out etcd and flapping every leader-elected controller in
         // the cluster. Drop to 1 if that recurs.
-        "load-concurrency": JSON.stringify({
-          loadConcurrency: {
-            globalConfig: 2,
-          },
-        }),
+        "load-concurrency": nodeAgentConfig,
       },
     });
 
@@ -307,6 +323,8 @@ class Velero extends Chart {
     // nightly logical dump of every cluster. That is what actually carries
     // authentik, spoolman, argocd and the rest offsite now.
     const offsiteNamespaces = [
+      "hass",
+      "homebox",
       "immich",
       "mealie",
       "media",

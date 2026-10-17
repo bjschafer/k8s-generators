@@ -21,6 +21,7 @@ spec:
   template:
     metadata:
       annotations:
+        checksum/node-agent-config: 9e706a265184a8949cf77b7559f6cf44e1b85c2a7c0a58ea16109dd57cad0868
         prometheus.io/path: /metrics
         prometheus.io/port: "8085"
         prometheus.io/scrape: "true"

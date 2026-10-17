@@ -4,4 +4,5 @@ metadata:
   name: node-agent-config
   namespace: velero
 data:
-  load-concurrency: '{"loadConcurrency":{"globalConfig":2}}'
+  load-concurrency: '{"loadConcurrency":{"globalConfig":2},"backupPVC":{"ceph-rbd":{"storageClass":"ceph-rbd-scratch"}}}'
+immutable: false
