@@ -31,13 +31,18 @@ spec:
       containers:
         - args:
             - --delete.enable
+            - --deleteAuthKey=file:///etc/vlogs-auth/ADMIN_AUTH_KEY
             - --envflag.enable
             - --envflag.prefix=VM_
+            - --forceFlushAuthKey=file:///etc/vlogs-auth/ADMIN_AUTH_KEY
+            - --forceMergeAuthKey=file:///etc/vlogs-auth/ADMIN_AUTH_KEY
             - --http.shutdownDelay=15s
             - --httpListenAddr=:9428
+            - --logNewStreamsAuthKey=file:///etc/vlogs-auth/ADMIN_AUTH_KEY
             - --loggerFormat=json
             - --maxConcurrentInserts=32
             - --memory.allowedPercent=80
+            - --partitionManageAuthKey=file:///etc/vlogs-auth/ADMIN_AUTH_KEY
             - --retention.maxDiskSpaceUsageBytes=75GiB
             - --retentionPeriod=3
             - --storageDataPath=/storage
@@ -87,12 +92,19 @@ spec:
           volumeMounts:
             - mountPath: /storage
               name: server-volume
+            - mountPath: /etc/vlogs-auth
+              name: auth-keys
+              readOnly: true
       securityContext:
         fsGroup: 2000
         fsGroupChangePolicy: OnRootMismatch
         runAsNonRoot: true
         runAsUser: 1000
       terminationGracePeriodSeconds: 60
+      volumes:
+        - name: auth-keys
+          secret:
+            secretName: vlogs-auth-keys
   updateStrategy: {}
   volumeClaimTemplates:
     - apiVersion: v1

@@ -7,6 +7,7 @@ import { Construct } from "constructs";
 import { StorageClass } from "../../lib/volume";
 import { VmAlert, VmPodScrape, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { LOGS_RULE } from "../../lib/monitoring/alerts";
+import { GeneratedSecret } from "../../lib/secrets";
 import { addAlerts } from "./alerts";
 
 export const namespace = basename(__dirname);
@@ -32,6 +33,17 @@ class VMLogs extends Chart {
     super(scope, id);
     const hostname = "http://prod-victoria-logs-single-server.logs.svc.cluster.local:9428";
 
+    // Query and insert stay open; deleting logs and the other admin endpoints
+    // take this key. delete.enable is on, so without it anyone on the LAN
+    // could wipe logs.
+    const authKeys = new GeneratedSecret(this, "vlogs-auth-keys", {
+      name: "vlogs-auth-keys",
+      namespace: namespace,
+      data: { ADMIN_AUTH_KEY: {} },
+    });
+    const authKeyDir = "/etc/vlogs-auth";
+    const authKeyFile = `file://${authKeyDir}/ADMIN_AUTH_KEY`;
+
     new Helm(this, "vmlogs", {
       chart: "victoria-logs-single",
       repo: "https://victoriametrics.github.io/helm-charts/",
@@ -47,7 +59,18 @@ class VMLogs extends Chart {
             "syslog.timezone": "America/Chicago",
             "memory.allowedPercent": "80", // https://docs.victoriametrics.com/vmagent/#troubleshooting
             "delete.enable": "true",
+            ...Object.fromEntries(
+              [
+                "deleteAuthKey",
+                "forceMergeAuthKey",
+                "forceFlushAuthKey",
+                "partitionManageAuthKey",
+                "logNewStreamsAuthKey",
+              ].map((flag) => [flag, authKeyFile]),
+            ),
           },
+          extraVolumes: [{ name: "auth-keys", secret: { secretName: authKeys.secretName } }],
+          extraVolumeMounts: [{ name: "auth-keys", mountPath: authKeyDir, readOnly: true }],
           retentionPeriod: "3", // months
           retentionDiskSpaceUsage: "75GiB",
           podSecurityContext: {
