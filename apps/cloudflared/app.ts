@@ -3,7 +3,11 @@ import { Cpu, EnvValue, Probe } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
+import {
+  DEFAULT_APP_PROPS,
+  HOMELAB_CRITICAL_PRIORITY_CLASS,
+  NONROOT_SECURITY_CONTEXT,
+} from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { CmdcentralPodMonitor } from "../../lib/monitoring/victoriametrics";
 import { OpenBaoSecret } from "../../lib/secrets";
@@ -50,6 +54,7 @@ new AppPlus(app, `${name}-app`, {
     },
   },
   replicas: 2,
+  priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
   ports: [{ number: metricsPort, name: "metrics" }],
   // audited safe: image ships USER=65532
   securityContext: NONROOT_SECURITY_CONTEXT,

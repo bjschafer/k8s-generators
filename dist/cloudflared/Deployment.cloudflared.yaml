@@ -75,6 +75,7 @@ spec:
             runAsNonRoot: true
       dnsPolicy: ClusterFirst
       hostNetwork: false
+      priorityClassName: homelab-critical
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
