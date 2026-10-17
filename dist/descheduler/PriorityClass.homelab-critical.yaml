@@ -1,0 +1,6 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: homelab-critical
+description: Shared infrastructure whose outage takes other apps down with it.
+value: 1000000

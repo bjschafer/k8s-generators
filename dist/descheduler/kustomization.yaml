@@ -1,0 +1,7 @@
+resources:
+  - ClusterRole.descheduler.yaml
+  - ClusterRoleBinding.descheduler.yaml
+  - ConfigMap.descheduler.yaml
+  - CronJob.descheduler.yaml
+  - PriorityClass.homelab-critical.yaml
+  - ServiceAccount.descheduler.yaml

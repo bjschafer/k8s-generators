@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: descheduler
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: descheduler
+    app.kubernetes.io/version: 0.37.0
+    helm.sh/chart: descheduler-0.37.0
+  name: descheduler
+  namespace: descheduler
+data:
+  policy.yaml: |
+    apiVersion: "descheduler/v1alpha2"
+    kind: "DeschedulerPolicy"
+    maxNoOfPodsToEvictPerNode: 5
+    maxNoOfPodsToEvictTotal: 15
+    nodeSelector: '!node-role.kubernetes.io/control-plane'
+    profiles:
+    - name: rebalance
+      pluginConfig:
+      - args:
+          nodeFit: true
+          podProtections:
+            defaultDisabled:
+            - PodsWithLocalStorage
+            extraEnabled:
+            - PodsWithPVC
+          priorityThreshold:
+            name: homelab-critical
+        name: DefaultEvictor
+      - name: RemoveDuplicates
+      - args:
+          targetThresholds:
+            cpu: 60
+            memory: 40
+            pods: 40
+          thresholds:
+            cpu: 20
+            memory: 15
+            pods: 15
+        name: LowNodeUtilization
+      plugins:
+        balance:
+          enabled:
+          - RemoveDuplicates
+          - LowNodeUtilization

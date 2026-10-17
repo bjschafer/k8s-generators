@@ -162,6 +162,13 @@ export const IP_CIDRS_V4: { [name: string]: string } = {
   NETWORK_MANAGEMENT: "10.0.99.0/24",
 };
 
+// For workloads whose outage takes others down with it -- ingress, the DB
+// pooler, secrets, auth. Ranks them above ordinary apps for preemption and
+// node-pressure eviction, and is the descheduler's do-not-evict threshold. The
+// PriorityClass itself lives in apps/descheduler. Node-level agents (CSI,
+// metallb) use the built-in system-node-critical instead.
+export const HOMELAB_CRITICAL_PRIORITY_CLASS = "homelab-critical";
+
 export const RELOADER_ENABLED = {
   "reloader.stakater.com/auto": "true",
 };
