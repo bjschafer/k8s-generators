@@ -16,6 +16,7 @@ import {
   VmSingleSpecResourcesLimits,
   VmSingleSpecResourcesRequests,
 } from "../../imports/operator.victoriametrics.com";
+import { GeneratedSecret } from "../../lib/secrets";
 import { AddCRDs } from "../../lib/util";
 import { StorageClass } from "../../lib/volume";
 import { hostname, namespace } from "./app";
@@ -258,6 +259,16 @@ export class VmResources extends Chart {
       },
     });
 
+    // The UI and query/write APIs stay open: every host pushes here and the
+    // CLI tooling queries metrics.cmdcentral.xyz directly. The endpoints that
+    // can destroy or rewrite data take this key instead.
+    const authKeys = new GeneratedSecret(this, "vmsingle-auth-keys", {
+      name: "vmsingle-auth-keys",
+      namespace: namespace,
+      data: { ADMIN_AUTH_KEY: {} },
+    });
+    const authKeyFile = `file:///etc/vm/secrets/${authKeys.secretName}/ADMIN_AUTH_KEY`;
+
     new VmSingle(this, "vmsingle", {
       metadata: {
         name: "metrics",
@@ -266,6 +277,18 @@ export class VmResources extends Chart {
       spec: {
         replicaCount: 1, // This'll set replicas=n on deployment, so you run into PVC multi-attach errors
         retentionPeriod: "90d",
+        secrets: [authKeys.secretName],
+        extraArgs: Object.fromEntries(
+          [
+            "deleteAuthKey",
+            "snapshotAuthKey",
+            "forceMergeAuthKey",
+            "forceFlushAuthKey",
+            "search.resetCacheAuthKey",
+            "metricNamesStatsResetAuthKey",
+            "logNewSeriesAuthKey",
+          ].map((flag) => [flag, authKeyFile]),
+        ),
         storage: {
           storageClassName: StorageClass.CEPH_RBD,
           resources: {
@@ -275,13 +298,14 @@ export class VmResources extends Chart {
           },
         },
         resources: {
+          // Peaked at 97% of a 3Gi limit.
           limits: {
             cpu: VmSingleSpecResourcesLimits.fromString("2000m"),
-            memory: VmSingleSpecResourcesLimits.fromString("3Gi"),
+            memory: VmSingleSpecResourcesLimits.fromString("5Gi"),
           },
           requests: {
             cpu: VmSingleSpecResourcesRequests.fromString("2000m"),
-            memory: VmSingleSpecResourcesRequests.fromString("3Gi"),
+            memory: VmSingleSpecResourcesRequests.fromString("4Gi"),
           },
         },
       },

@@ -4,15 +4,25 @@ metadata:
   name: metrics
   namespace: metrics
 spec:
+  extraArgs:
+    deleteAuthKey: file:///etc/vm/secrets/vmsingle-auth-keys/ADMIN_AUTH_KEY
+    forceFlushAuthKey: file:///etc/vm/secrets/vmsingle-auth-keys/ADMIN_AUTH_KEY
+    forceMergeAuthKey: file:///etc/vm/secrets/vmsingle-auth-keys/ADMIN_AUTH_KEY
+    logNewSeriesAuthKey: file:///etc/vm/secrets/vmsingle-auth-keys/ADMIN_AUTH_KEY
+    metricNamesStatsResetAuthKey: file:///etc/vm/secrets/vmsingle-auth-keys/ADMIN_AUTH_KEY
+    search.resetCacheAuthKey: file:///etc/vm/secrets/vmsingle-auth-keys/ADMIN_AUTH_KEY
+    snapshotAuthKey: file:///etc/vm/secrets/vmsingle-auth-keys/ADMIN_AUTH_KEY
   replicaCount: 1
   resources:
     limits:
       cpu: 2000m
-      memory: 3Gi
+      memory: 5Gi
     requests:
       cpu: 2000m
-      memory: 3Gi
+      memory: 4Gi
   retentionPeriod: 90d
+  secrets:
+    - vmsingle-auth-keys
   storage:
     resources:
       requests:
