@@ -32,7 +32,7 @@ spec:
           name: catbot
           resources:
             limits:
-              cpu: 200m
+              cpu: 600m
               memory: 192Mi
             requests:
               cpu: 50m

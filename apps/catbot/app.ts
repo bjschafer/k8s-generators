@@ -36,7 +36,7 @@ NewBot(app, {
   resources: {
     cpu: {
       request: Cpu.millis(50),
-      limit: Cpu.millis(200),
+      limit: Cpu.millis(600),
     },
     memory: {
       request: Size.mebibytes(64),
