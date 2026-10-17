@@ -2,6 +2,7 @@ import { App } from "cdk8s";
 import { NewArgoApp, ArgoAppSource, ENABLE_SERVERSIDE_APPLY } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
+import { infraResources } from "../../lib/util";
 import { NewKustomize } from "../../lib/kustomize";
 
 const name = "snapshot-controller";
@@ -25,9 +26,11 @@ new HelmApp(app, "helm", {
   values: {
     controller: {
       replicaCount: 2,
+      resources: infraResources("10m", "96Mi", "256Mi"),
     },
     webhook: {
       enabled: true,
+      resources: infraResources("5m", "32Mi", "128Mi"),
       tls: {
         // Use the cluster-wide self-signed ClusterIssuer so cert-manager manages
         // the conversion webhook cert instead of committing a plain-text secret.

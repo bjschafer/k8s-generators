@@ -39,7 +39,12 @@ spec:
             - containerPort: 8443
               name: https
               protocol: TCP
-          resources: {}
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
           securityContext:
             capabilities:
               drop:

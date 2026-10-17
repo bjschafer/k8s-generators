@@ -50,7 +50,12 @@ spec:
               path: /healthz/leader-election
               port: http
               scheme: HTTP
-          resources: {}
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 96Mi
           securityContext:
             capabilities:
               drop:
