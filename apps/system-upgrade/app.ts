@@ -5,7 +5,7 @@ import { basename } from "../../lib/util";
 import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS, K3S_VERSION } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
-import { AddCRDs } from "../../lib/util";
+import { AddCRDs, infraResources } from "../../lib/util";
 import { Plan } from "../../imports/upgrade.cattle.io";
 
 const namespace = basename(__dirname);
@@ -55,6 +55,15 @@ class SystemUpgrade extends Chart {
         effect: "NoExecute",
         operator: "Exists",
       }),
+    );
+
+    // Requests and a memory limit, likewise patched in rather than edited into
+    // the vendored file.
+    controller.addJsonPatch(
+      JsonPatch.add(
+        "/spec/template/spec/containers/0/resources",
+        infraResources("5m", "128Mi", "256Mi"),
+      ),
     );
 
     // Control plane first. Agents refuse to move ahead of it -- see the
