@@ -11,14 +11,12 @@ import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
 import { StorageClass } from "../../lib/volume";
 import {
-  Capability,
   Cpu,
   EnvValue,
   FsGroupChangePolicy,
   PersistentVolume,
   PersistentVolumeAccessMode,
   Probe,
-  SeccompProfileType,
 } from "cdk8s-plus-34";
 
 const namespace = basename(__dirname);
@@ -69,14 +67,7 @@ new AppPlus(app, `${name}-app`, {
     // nothing else writes to it.
     fsGroupChangePolicy: FsGroupChangePolicy.ON_ROOT_MISMATCH,
   },
-  containerSecurityContext: {
-    ...NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
-    // carried over from the hand-written manifests. Not the repo-wide default
-    // (lib/consts.ts) yet, so it has to be spelled out here or the migration
-    // would quietly unharden the container.
-    capabilities: { drop: [Capability.ALL] },
-    seccompProfile: { type: SeccompProfileType.RUNTIME_DEFAULT },
-  },
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
   volumes: [
     {
       name: "config",

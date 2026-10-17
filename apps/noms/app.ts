@@ -3,7 +3,7 @@ import { Cpu, EnvValue, Probe } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT_UID } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { OpenBaoSecret } from "../../lib/secrets";
 import { createAppDatabaseSecret } from "../postgres/database-provisioning";
@@ -46,6 +46,9 @@ new AppPlus(app, name, {
   namespace: namespace,
   image: `${image}:main`,
   ports: [port],
+  // image ships USER bun, uid/gid 1000
+  securityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
   resources: {
     cpu: {
       request: Cpu.millis(100),

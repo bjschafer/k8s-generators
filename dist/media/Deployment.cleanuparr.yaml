@@ -51,6 +51,9 @@ spec:
               memory: 256Mi
           securityContext:
             allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
             privileged: false
             readOnlyRootFilesystem: false
             runAsGroup: 8675309

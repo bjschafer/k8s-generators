@@ -25,6 +25,7 @@ import {
   DEFAULT_SECURITY_CONTEXT,
   GET_SERVICE_URL,
   LSIO_ENVVALUE,
+  NONROOT_SECURITY_CONTEXT_UID,
   RUNTIME_DEFAULT_SECCOMP,
 } from "./consts";
 import { NFSConcreteVolume } from "./nfs";
@@ -222,14 +223,10 @@ export class MediaApp extends Chart {
         };
       }
       deploy.addContainer({
-        // exportarr (ghcr.io/onedr0p/exportarr) ships USER=nonroot, but the
-        // kubelet's runAsNonRoot check is static (image-declared USER only)
-        // and rejects a non-numeric name even though the image genuinely
-        // runs non-root -- confirmed live (CreateContainerConfigError:
-        // "image has non-numeric user (nonroot)"). Needs an explicit
-        // runAsUser (numeric) to actually enable this; reverted to the
-        // permissive default for now.
-        securityContext: DEFAULT_SECURITY_CONTEXT,
+        // exportarr ships USER=nonroot, which the kubelet can't resolve for
+        // runAsNonRoot; it's distroless nonroot, uid/gid 65532 per the image's
+        // /etc/passwd.
+        securityContext: NONROOT_SECURITY_CONTEXT_UID(65532, 65532),
         image: `ghcr.io/onedr0p/exportarr:${exportarrVersion}`,
         imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
         name: "exportarr",

@@ -3,7 +3,7 @@ import { ConfigMap, Cpu, EnvValue, Probe } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { VmProbe } from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";
-import { DNS_POLICY_NONE, RELOADER_ENABLED } from "../../lib/consts";
+import { DNS_POLICY_NONE, NONROOT_SECURITY_CONTEXT_UID, RELOADER_ENABLED } from "../../lib/consts";
 import { OpenBaoSecret } from "../../lib/secrets";
 import { namespace } from "./app";
 
@@ -46,6 +46,9 @@ export class ProxmoxExporter extends Chart {
       labels: labels,
       annotations: RELOADER_ENABLED,
       image: "prompve/prometheus-pve-exporter",
+      // image ships USER prometheus, uid/gid 101
+      securityContext: NONROOT_SECURITY_CONTEXT_UID(101, 101),
+      containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(101, 101),
       ports: [
         {
           name: "metrics",

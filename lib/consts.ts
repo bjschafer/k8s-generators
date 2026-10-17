@@ -1,5 +1,5 @@
 import { AppProps, YamlOutputType } from "cdk8s";
-import { DnsPolicy, EnvValue, SeccompProfileType } from "cdk8s-plus-34";
+import { Capability, DnsPolicy, EnvValue, SeccompProfileType } from "cdk8s-plus-34";
 import { EnvVar, Quantity } from "../imports/k8s";
 
 export const DEFAULT_CPU_LIMIT = Quantity.fromString("250m");
@@ -137,10 +137,14 @@ export const DEFAULT_SECURITY_CONTEXT = {
 // Phase 1 hardening: for images audited as running non-root (either the image
 // ships a non-root USER, or a live pod was confirmed running non-root).
 // Does NOT flip readOnlyRootFilesystem -- that's a later phase.
+// A non-root process holds no effective capabilities anyway, and
+// allowPrivilegeEscalation: false (a cdk8s-plus default) stops file caps from
+// granting any, so dropping the bounding set costs nothing.
 export const NONROOT_SECURITY_CONTEXT = {
   ensureNonRoot: true,
   readOnlyRootFilesystem: false,
   seccompProfile: RUNTIME_DEFAULT_SECCOMP,
+  capabilities: { drop: [Capability.ALL] },
 };
 
 // Same as NONROOT_SECURITY_CONTEXT, but spells out the uid/gid explicitly.

@@ -21,7 +21,12 @@ import { Password } from "../../imports/generators.external-secrets.io";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT, RELOADER_ENABLED } from "../../lib/consts";
+import {
+  DEFAULT_APP_PROPS,
+  NONROOT_SECURITY_CONTEXT,
+  NONROOT_SECURITY_CONTEXT_UID,
+  RELOADER_ENABLED,
+} from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { OpenBaoSecret } from "../../lib/secrets";
 import { basename } from "../../lib/util";
@@ -373,6 +378,9 @@ class Paperless extends Chart {
         component: "gotenberg",
       },
       args: ["gotenberg", "--chromium-disable-routes=true"],
+      // image ships USER gotenberg, uid/gid 1001
+      securityContext: NONROOT_SECURITY_CONTEXT_UID(1001, 1001),
+      containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(1001, 1001),
       resources: {
         cpu: {
           request: Cpu.millis(50),

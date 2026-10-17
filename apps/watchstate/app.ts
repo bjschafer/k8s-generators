@@ -2,8 +2,8 @@ import { App, Chart, Cron, Duration, Size } from "cdk8s";
 import { basename } from "path";
 import {
   DEFAULT_APP_PROPS,
-  DEFAULT_SECURITY_CONTEXT,
   KUBECTL_IMAGE_VERSION,
+  NONROOT_SECURITY_CONTEXT_UID,
 } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
@@ -51,6 +51,9 @@ new AppPlus(app, "watchstate", {
     },
   },
   ports: [port],
+  // image ships USER user, uid/gid 1000
+  securityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
 
   // Startup runs SQLite maintenance over a ~1GB DB on Ceph RBD before Caddy
   // binds :8080 — roughly 45s today and it grows with the DB. Without this the
@@ -161,7 +164,8 @@ new CronJob(pruneChart, "prune-cronjob", {
   // Active job to show for it. A healthy run takes about 10s; anything still
   // going after 30m is wedged, so let it fail and free the next schedule.
   activeDeadline: Duration.minutes(30),
-  securityContext: DEFAULT_SECURITY_CONTEXT,
+  // rancher/kubectl ships USER kubectl, uid/gid 1000
+  securityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
   containers: [
     {
       name: "prune",
@@ -173,7 +177,7 @@ new CronJob(pruneChart, "prune-cronjob", {
       // container, which does have sh.
       image: `rancher/kubectl:${KUBECTL_IMAGE_VERSION}`,
       imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
-      securityContext: DEFAULT_SECURITY_CONTEXT,
+      securityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
       command: ["kubectl"],
       args: [
         "exec",

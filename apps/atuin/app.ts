@@ -2,7 +2,7 @@ import { App, Size } from "cdk8s";
 import { Cpu, EnvValue } from "cdk8s-plus-34";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT_UID } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
 import { CmdcentralServiceMonitor } from "../../lib/monitoring/victoriametrics";
@@ -53,6 +53,9 @@ new AppPlus(app, "atuin", {
     [WellKnownLabels.Instance]: name,
   },
   args: ["start"],
+  // image ships USER atuin, uid/gid 1000
+  securityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
   resources: {
     cpu: {
       request: Cpu.millis(5),
