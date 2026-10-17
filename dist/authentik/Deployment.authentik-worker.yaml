@@ -120,6 +120,7 @@ spec:
             timeoutSeconds: 10
       dnsPolicy: ClusterFirst
       hostNetwork: false
+      priorityClassName: homelab-critical
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always

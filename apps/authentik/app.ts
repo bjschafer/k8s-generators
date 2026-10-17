@@ -17,7 +17,12 @@ import {
 } from "../../imports/operator.victoriametrics.com";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS, externalDnsHostname, NONROOT_SECURITY_CONTEXT } from "../../lib/consts";
+import {
+  DEFAULT_APP_PROPS,
+  externalDnsHostname,
+  HOMELAB_CRITICAL_PRIORITY_CLASS,
+  NONROOT_SECURITY_CONTEXT,
+} from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor, MonitoringRule } from "../../lib/monitoring/victoriametrics";
@@ -165,10 +170,11 @@ const server = new AppPlus(app, "authentik-server", {
     },
     memory: {
       request: Size.mebibytes(512),
-      limit: Size.gibibytes(1),
+      limit: Size.mebibytes(1536),
     },
   },
   replicas: 2,
+  priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
   ports: [9000, 9443],
   args: ["server"],
   // audited safe: image ships USER=1000
@@ -222,6 +228,7 @@ new AppPlus(app, "authentik-worker", {
     },
   },
   replicas: 2,
+  priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
   ports: [9000],
   // audited safe: image ships USER=1000
   securityContext: NONROOT_SECURITY_CONTEXT,
