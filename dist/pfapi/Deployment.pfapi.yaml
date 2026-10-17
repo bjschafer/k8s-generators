@@ -34,7 +34,7 @@ spec:
             - secretRef:
                 name: db-creds
           image: ghcr.io/bjschafer/pfapi:main
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

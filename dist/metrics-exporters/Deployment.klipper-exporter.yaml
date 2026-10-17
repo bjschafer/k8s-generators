@@ -30,7 +30,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - image: ghcr.io/scross01/prometheus-klipper-exporter
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

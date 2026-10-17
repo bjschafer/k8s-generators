@@ -46,7 +46,7 @@ spec:
                   key: UP_UNIFI_DEFAULT_PASS
                   name: unifi-exporter
           image: ghcr.io/unpoller/unpoller:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

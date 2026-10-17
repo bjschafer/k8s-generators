@@ -28,7 +28,7 @@ spec:
             - name: TZ
               value: America/Chicago
           image: ghcr.io/seerr-team/seerr:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

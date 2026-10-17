@@ -35,7 +35,7 @@ spec:
             - name: TZ
               value: America/Chicago
           image: docker.io/aetaric/checkrr:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

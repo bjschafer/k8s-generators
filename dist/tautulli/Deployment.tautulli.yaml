@@ -27,7 +27,7 @@ spec:
         - env:
             - name: LSIO_ENVVALUE
           image: ghcr.io/tautulli/tautulli
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

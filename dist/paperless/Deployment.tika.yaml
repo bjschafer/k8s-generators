@@ -32,7 +32,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - image: docker.io/apache/tika:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

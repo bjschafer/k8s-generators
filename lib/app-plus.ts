@@ -9,6 +9,7 @@ import {
   DeploymentStrategy,
   EnvFrom,
   EnvValue,
+  ImagePullPolicy,
   Ingress,
   IngressBackend,
   ISecret,
@@ -69,6 +70,11 @@ export interface AppPlusProps {
   readonly name: string;
   readonly namespace: string;
   readonly image: string;
+  // Floating tags are kept current by argocd-image-updater rewriting them to a
+  // digest, which changes the image reference, so Always buys nothing but a
+  // registry round-trip on every restart.
+  // @default IfNotPresent
+  readonly imagePullPolicy?: ImagePullPolicy;
   readonly resources: ContainerResources;
   readonly annotations?: { [p: string]: string };
   readonly labels?: { [p: string]: string };
@@ -220,6 +226,7 @@ export class AppPlus extends Chart {
           command: props.command,
           args: props.args,
           image: props.image,
+          imagePullPolicy: props.imagePullPolicy ?? ImagePullPolicy.IF_NOT_PRESENT,
           ports: ports,
           resources: props.resources,
           envFrom: props.envFrom,

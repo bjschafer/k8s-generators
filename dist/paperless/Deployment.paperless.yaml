@@ -53,7 +53,7 @@ spec:
             - secretRef:
                 name: paperless-secret-key
           image: ghcr.io/paperless-ngx/paperless-ngx:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

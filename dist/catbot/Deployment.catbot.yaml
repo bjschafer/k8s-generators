@@ -28,7 +28,7 @@ spec:
             - secretRef:
                 name: bot-token
           image: ghcr.io/bjschafer/catbot:main
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: catbot
           resources:
             limits:

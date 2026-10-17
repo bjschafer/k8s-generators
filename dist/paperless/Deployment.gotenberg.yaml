@@ -38,7 +38,7 @@ spec:
             - name: DISABLE_GOOGLE_CHROME
               value: "1"
           image: gotenberg/gotenberg:8.36.0
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

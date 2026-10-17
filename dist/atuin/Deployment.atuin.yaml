@@ -48,7 +48,7 @@ spec:
             - name: ATUIN_METRICS__HOST
               value: 0.0.0.0
           image: ghcr.io/atuinsh/atuin
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

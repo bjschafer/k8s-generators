@@ -73,7 +73,7 @@ spec:
                   key: HBOX_OIDC_CLIENT_SECRET
                   name: secrets
           image: ghcr.io/sysadminsmedia/homebox
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

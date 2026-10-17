@@ -60,7 +60,7 @@ spec:
                   key: SECRET_KEY_BASE
                   name: manyfold-secrets
           image: ghcr.io/manyfold3d/manyfold
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
             httpGet:

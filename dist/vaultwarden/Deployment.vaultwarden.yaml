@@ -94,7 +94,7 @@ spec:
                   key: PUSH_INSTALLATION_KEY
                   name: vaultwarden
           image: vaultwarden/server:1.37.4
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

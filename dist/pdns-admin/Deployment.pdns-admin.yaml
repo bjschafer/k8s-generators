@@ -30,7 +30,7 @@ spec:
             - name: SQLALCHEMY_DATABASE_URI
               value: sqlite:////data/powerdns-admin.db
           image: powerdnsadmin/pda-legacy:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 6
             httpGet:

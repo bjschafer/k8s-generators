@@ -79,7 +79,7 @@ spec:
             - secretRef:
                 name: oidc-creds
           image: ghcr.io/mealie-recipes/mealie
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 45

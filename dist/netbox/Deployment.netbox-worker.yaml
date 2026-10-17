@@ -54,7 +54,7 @@ spec:
             - secretRef:
                 name: oidc
           image: netboxcommunity/netbox:v4.6.5
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: netbox-worker
           resources:
             limits:

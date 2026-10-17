@@ -40,7 +40,7 @@ spec:
             - name: VIRTUAL_PRINTER_PASV_ADDRESS
               value: 10.0.10.85
           image: ghcr.io/maziggy/bambuddy:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

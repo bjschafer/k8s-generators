@@ -59,7 +59,7 @@ spec:
             - name: MACHINE_LEARNING_MODEL_REVISION
               value: v2
           image: ghcr.io/immich-app/immich-machine-learning
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

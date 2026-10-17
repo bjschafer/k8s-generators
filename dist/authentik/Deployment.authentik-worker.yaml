@@ -77,7 +77,7 @@ spec:
                   key: AUTHENTIK_POSTGRESQL__PASSWORD
                   name: creds
           image: ghcr.io/goauthentik/server:2026.8.0
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
               command:

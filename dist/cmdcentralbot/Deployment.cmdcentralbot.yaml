@@ -28,7 +28,7 @@ spec:
             - secretRef:
                 name: bot-token
           image: ghcr.io/bjschafer/cmdcentralbot:main
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: cmdcentralbot
           resources:
             limits:

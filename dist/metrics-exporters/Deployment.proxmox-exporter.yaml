@@ -42,7 +42,7 @@ spec:
                   key: PVE_TOKEN_VALUE
                   name: proxmox-exporter
           image: prompve/prometheus-pve-exporter
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

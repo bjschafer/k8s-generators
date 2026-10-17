@@ -63,7 +63,7 @@ spec:
             - name: MICROBIN_TITLE
               value: Cmdcentral Paste
           image: danielszabo99/microbin
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

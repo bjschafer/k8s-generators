@@ -59,7 +59,7 @@ spec:
                   key: DB_PASSWORD
                   name: db-creds
           image: ghcr.io/immich-app/immich-server
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

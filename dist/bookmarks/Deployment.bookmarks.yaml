@@ -70,7 +70,7 @@ spec:
                   key: AUTHENTIK_CLIENT_SECRET
                   name: secrets
           image: ghcr.io/linkwarden/linkwarden
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

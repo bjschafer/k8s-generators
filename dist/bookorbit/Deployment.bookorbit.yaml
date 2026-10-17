@@ -84,7 +84,7 @@ spec:
                   key: BOOK_REQUEST_ENCRYPTION_KEY
                   name: bookorbit-book-request-secrets
           image: ghcr.io/bookorbit/bookorbit
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

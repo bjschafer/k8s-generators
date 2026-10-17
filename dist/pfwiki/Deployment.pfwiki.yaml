@@ -43,7 +43,7 @@ spec:
             - name: DB_DATABASE
               value: bookstack
           image: lscr.io/linuxserver/bookstack:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

@@ -42,7 +42,7 @@ spec:
                   key: api-key
                   name: external-dns-pdns
           image: registry.k8s.io/external-dns/external-dns:v0.23.0
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 4
             httpGet:

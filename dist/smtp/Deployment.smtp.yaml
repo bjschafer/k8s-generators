@@ -48,7 +48,7 @@ spec:
             - name: POSTFIX_smtp_header_checks
               value: regexp:/etc/postfix/header_checks
           image: boky/postfix:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
             periodSeconds: 20

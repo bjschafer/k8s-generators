@@ -40,7 +40,7 @@ spec:
                   key: TUNNEL_TOKEN
                   name: cloudflared
           image: cloudflare/cloudflared:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

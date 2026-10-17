@@ -30,7 +30,7 @@ spec:
         - args:
             - --statsd.parse-influxdb-tags
           image: prom/statsd-exporter
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

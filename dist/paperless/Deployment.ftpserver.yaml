@@ -46,7 +46,7 @@ spec:
             - name: PUBLICHOST
               value: 10.0.10.84
           image: stilliard/pure-ftpd:trixie-1.0.50
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             periodSeconds: 20

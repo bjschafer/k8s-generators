@@ -32,7 +32,7 @@ spec:
             - name: WS_CRON_EXPORT_ARGS
               value: (empty)
           image: ghcr.io/arabcoders/watchstate
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

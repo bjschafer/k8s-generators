@@ -35,7 +35,7 @@ spec:
             - name: HASS_DB_URL
               value: postgresql://hass:$(HASS_DB_PASSWORD)@pg-prod.cmdcentral.xyz/hass
           image: ghcr.io/home-assistant/home-assistant
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             tcpSocket:

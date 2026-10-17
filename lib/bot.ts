@@ -5,6 +5,7 @@ import {
   ContainerResources,
   DeploymentStrategy,
   EnvFrom,
+  ImagePullPolicy,
   RoleBinding,
   ServiceAccount,
 } from "cdk8s-plus-34";
@@ -75,6 +76,7 @@ export function NewBot(app: App, props: BotProps): void {
     name: props.name,
     namespace: props.namespace,
     image: props.image,
+    imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
     resources: props.resources,
     envFrom: [new EnvFrom(undefined, undefined, botToken.secret)],
     dockerRegistryAuth: registryCred.secret,

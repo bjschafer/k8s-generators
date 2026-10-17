@@ -100,7 +100,7 @@ spec:
                   key: RETROACHIEVEMENTS_API_KEY
                   name: romm-secrets
           image: ghcr.io/rommapp/romm
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 5
             httpGet:
