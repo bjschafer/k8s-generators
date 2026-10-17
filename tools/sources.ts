@@ -272,27 +272,6 @@ export const sources: CrdSource[] = [
     },
   },
   {
-    name: "sealed-secrets",
-    description:
-      "sealed-secrets controller: CRD, Deployment, Services and RBAC. Deployed by apps/sealed-secrets. " +
-      "The controller's encryption keys live in Secrets it creates itself and are not part of this " +
-      "bundle -- nothing here can touch them.",
-    // The repo also tags its Helm chart releases (helm-v2.19.1 and friends) off
-    // the same list, so the `v` prefix is what separates controller releases
-    // from those -- don't loosen it.
-    // renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets extractVersion=^v(?<version>.*)$
-    version: { kind: "literal", value: "0.40.0" },
-    outputDir: "apps/sealed-secrets/crds",
-    crdOnly: false,
-    filenameKind: true,
-    fetch: {
-      kind: "web",
-      urls: (version) => [
-        `https://github.com/bitnami-labs/sealed-secrets/releases/download/v${version}/controller.yaml`,
-      ],
-    },
-  },
-  {
     name: "system-upgrade-controller",
     description:
       "rancher system-upgrade-controller + its CRD. Deployed by apps/system-upgrade, which pairs these " +

@@ -19,9 +19,7 @@ NewArgoApp(name, {
   namespace: namespace,
 });
 
-// HIGH RISK cutover: consumed by the ACME DNS01 solver on every cert
-// issuance/renewal. Only delete the legacy SealedSecret from the prod repo
-// during a maintenance window and verify issuance immediately afterwards.
+// Consumed by the ACME DNS01 solver on every cert issuance/renewal.
 new OpenBaoSecret(app, "cloudflare-api-token", {
   name: "cloudflare-api-token",
   namespace: namespace,

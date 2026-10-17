@@ -30,9 +30,8 @@ account bschafer does not have token with id <uuid>
 ```
 
 ArgoCD stores the registry of valid token IDs in the `accounts.bschafer.tokens`
-key of the `argocd-secret` Secret. That Secret is owned by a **SealedSecret** in
-the separate `k8s-prod` repo (`argocd/sealedsecret.argocd-secret.yaml`), which
-sealed that exact key to the literal value `null` — so every sealed-secrets
+key of the `argocd-secret` Secret. That Secret was then owned by a
+**SealedSecret** in the `k8s-prod` repo, which sealed that exact key to the literal value `null` — so every sealed-secrets
 reconcile emptied the token list and silently revoked every issued token. It
 read like ordinary expiry, which is what made it take three sessions to spot.
 
@@ -40,6 +39,11 @@ read like ordinary expiry, which is what made it take three sessions to spot.
 key was dropped from `encryptedData` and `sealedsecrets.bitnami.com/patch:
 "true"` added to the template, so the controller patches its own keys instead of
 replacing the whole Secret. API tokens now persist across reconciles.
+
+Since 2026-10-17 `argocd-secret` is an ExternalSecret in `apps/argocd` with
+`creationPolicy: CreateOrMerge`, which writes only the keys it lists -- `tokens`
+is deliberately not one of them. Keep it that way: listing it would bring the
+same bug back.
 
 **This skill still deliberately uses no credential.** kubectl access already
 exists, never expires, needs no rotation, and can't be revoked out from under a

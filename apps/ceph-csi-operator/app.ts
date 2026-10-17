@@ -87,9 +87,7 @@ new HelmApp(app, "drivers", {
 });
 
 // 3. StorageClasses and VolumeSnapshotClasses
-// HIGH RISK cutover: this secret is consumed by the CSI driver at
-// provision/stage time. Only delete the legacy SealedSecret from the prod
-// repo during a maintenance window and verify PVC provisioning immediately.
+// Consumed by the CSI driver at provision/stage time.
 const csiSecret = new OpenBaoSecret(app, "csi-rbd-secret", {
   name: "csi-rbd-secret",
   namespace: namespace,

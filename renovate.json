@@ -141,7 +141,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Bump literal versions pinned in tools/sources.ts (velero, kured, sealed-secrets, system-upgrade-controller, and the still-disabled cnpg entries awaiting that app's migration out of the legacy prod repo), each annotated with a `// renovate: datasource=... depName=...` comment directly above the `value` field.",
+      "description": "Bump literal versions pinned in tools/sources.ts (velero, kured, system-upgrade-controller, and the still-disabled cnpg entries awaiting that app's migration out of the legacy prod repo), each annotated with a `// renovate: datasource=... depName=...` comment directly above the `value` field.",
       "managerFilePatterns": ["/^tools/sources\\.ts$/"],
       "matchStrings": [
         "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\n\\s*version: \\{ kind: \"literal\", value: \"(?<currentValue>[^\"]+)\" \\},"

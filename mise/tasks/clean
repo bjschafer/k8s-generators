@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-#MISE description="Remove generated dist files (preserving ArgoCD sources and sealed secrets)"
+#MISE description="Remove generated dist files (preserving ArgoCD sources)"
 
 set -euo pipefail
 
-find dist -type f ! \( -name '.argocd-source-*.yaml' -o -name 'sealedsecret.*.yaml' \) -delete
+find dist -type f ! -name '.argocd-source-*.yaml' -delete
 find dist -type d -empty -delete
