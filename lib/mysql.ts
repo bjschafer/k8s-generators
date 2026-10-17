@@ -2,6 +2,7 @@ import { Chart, Duration, Size } from "cdk8s";
 import {
   ContainerResources,
   EnvValue,
+  FsGroupChangePolicy,
   ImagePullPolicy,
   PersistentVolumeAccessMode,
   PersistentVolumeClaim,
@@ -12,7 +13,7 @@ import {
   Volume,
 } from "cdk8s-plus-34";
 import { Construct } from "constructs";
-import { RUNTIME_DEFAULT_SECCOMP } from "./consts";
+import { NONROOT_SECURITY_CONTEXT_UID } from "./consts";
 import { StorageClass } from "./volume";
 
 export interface MysqlInstanceProps {
@@ -29,6 +30,8 @@ export interface MysqlInstanceProps {
 // renovate: datasource=docker depName=ghcr.io/mariadb/mariadb
 const mariadbVersion = "12.3.3-noble";
 const DEFAULT_IMAGE = `ghcr.io/mariadb/mariadb:${mariadbVersion}`;
+// the image's mysql user
+const MYSQL_UID = 999;
 
 function pingProbe(opts: { periodSeconds: number; failureThreshold: number }): Probe {
   return Probe.fromCommand(
@@ -50,16 +53,17 @@ export class MysqlInstance extends Chart {
         name: name,
         namespace: props.namespace,
       },
+      // The official entrypoint only chowns the datadir and gosus to mysql (999)
+      // when started as root; started as 999 it goes straight to mariadbd.
+      // fsGroup covers a fresh, root-owned volume on a new instance.
       securityContext: {
-        ensureNonRoot: false,
+        ...NONROOT_SECURITY_CONTEXT_UID(MYSQL_UID, MYSQL_UID),
+        fsGroup: MYSQL_UID,
+        fsGroupChangePolicy: FsGroupChangePolicy.ON_ROOT_MISMATCH,
       },
       containers: [
         {
-          securityContext: {
-            ensureNonRoot: false,
-            readOnlyRootFilesystem: false,
-            seccompProfile: RUNTIME_DEFAULT_SECCOMP,
-          },
+          securityContext: NONROOT_SECURITY_CONTEXT_UID(MYSQL_UID, MYSQL_UID),
           image: props.imageOverride ?? DEFAULT_IMAGE,
           imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
           ports: [
