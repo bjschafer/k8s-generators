@@ -104,10 +104,10 @@ export class VmResources extends Chart {
         externalUrl: "https://alertmanager.cmdcentral.xyz",
         resources: {
           requests: {
-            memory: VmAlertmanagerSpecResourcesRequests.fromString("256Mi"),
+            memory: VmAlertmanagerSpecResourcesRequests.fromString("96Mi"),
           },
           limits: {
-            memory: VmAlertmanagerSpecResourcesLimits.fromString("256Mi"),
+            memory: VmAlertmanagerSpecResourcesLimits.fromString("192Mi"),
           },
         },
         disableRouteContinueEnforce: true,
@@ -217,6 +217,8 @@ export class VmResources extends Chart {
     });
 
     const am_hosts = ["metrics-alerts.cmdcentral.xyz", "alertmanager.cmdcentral.xyz"];
+    // KubeIngress: the backend Service is created by the VM operator, and
+    // cdk8s-plus IngressBackend only accepts a Service construct.
     new KubeIngress(this, "alertmanager-ingress", {
       metadata: {
         name: "alertmanager",
@@ -285,6 +287,7 @@ export class VmResources extends Chart {
       },
     });
 
+    // KubeIngress for the same reason as alertmanager's above.
     new KubeIngress(this, "vmsingle-ingress", {
       metadata: {
         name: "metrics",

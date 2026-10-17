@@ -9,7 +9,7 @@ spec:
   externalURL: https://alertmanager.cmdcentral.xyz
   resources:
     limits:
-      memory: 256Mi
+      memory: 192Mi
     requests:
-      memory: 256Mi
+      memory: 96Mi
   selectAllByDefault: true

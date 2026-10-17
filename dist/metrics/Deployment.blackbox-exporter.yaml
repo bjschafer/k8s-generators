@@ -27,7 +27,7 @@ spec:
         - args:
             - --config.file=/config/blackbox.yaml
           image: quay.io/prometheus/blackbox-exporter:v0.28.0
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
             httpGet:

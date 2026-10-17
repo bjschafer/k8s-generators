@@ -56,7 +56,7 @@ export class BlackboxExporter extends Chart {
         {
           name: name,
           image: image,
-          imagePullPolicy: ImagePullPolicy.ALWAYS,
+          imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
           securityContext: DEFAULT_SECURITY_CONTEXT,
           args: ["--config.file=/config/blackbox.yaml"],
           ports: [
