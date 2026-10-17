@@ -80,7 +80,7 @@ const valkey = new Valkey(app, "valkey", {
       memory: Quantity.fromString("128Mi"),
     },
     limits: {
-      cpu: Quantity.fromString("100m"),
+      cpu: Quantity.fromString("400m"),
       // Baseline is ~15Mi, but immich v3's library-wide reprocessing bursts the
       // BullMQ job queue to ~125Mi+, pinning the old 128Mi limit and OOMKilling
       // valkey in a loop. Can't cap with maxmemory eviction (would drop jobs), so
