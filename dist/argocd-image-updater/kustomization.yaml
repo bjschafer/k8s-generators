@@ -1,0 +1,18 @@
+resources:
+  - ClusterRole.argocd-image-updater-metrics-auth-role.yaml
+  - ClusterRole.argocd-image-updater-metrics-reader.yaml
+  - ClusterRole.argocd-image-updater.yaml
+  - ClusterRoleBinding.argocd-image-updater-metrics-auth-rolebinding.yaml
+  - ClusterRoleBinding.argocd-image-updater-metrics-reader-rolebinding.yaml
+  - ClusterRoleBinding.argocd-image-updater.yaml
+  - ConfigMap.argocd-image-updater-config.yaml
+  - ConfigMap.argocd-image-updater-ssh-config.yaml
+  - CustomResourceDefinition.imageupdaters.argocd-image-updater.argoproj.io.yaml
+  - Deployment.argocd-image-updater-controller.yaml
+  - NetworkPolicy.argocd-image-updater-allow-metrics.yaml
+  - Role.argocd-image-updater-leader-election-role.yaml
+  - Role.argocd-image-updater.yaml
+  - RoleBinding.argocd-image-updater-leader-election-rolebinding.yaml
+  - RoleBinding.argocd-image-updater.yaml
+  - Service.argocd-image-updater-metrics.yaml
+  - ServiceAccount.argocd-image-updater.yaml
