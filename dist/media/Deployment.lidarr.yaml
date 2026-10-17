@@ -44,9 +44,11 @@ spec:
             tcpSocket:
               port: 8686
           resources:
+            limits:
+              memory: 1536Mi
             requests:
               cpu: 250m
-              memory: 256Mi
+              memory: 512Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false

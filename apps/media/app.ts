@@ -198,6 +198,17 @@ new OpenBaoSecret(app, "navidrome-lastfm", {
 
 const ingressSecret = Secret.fromSecretName(app, "media-tls", "media-tls");
 
+// Sized from 7-day peak working set. The .NET apps size their GC heap to the
+// container limit, so a limit also keeps sonarr/lidarr from ballooning.
+const memory: Record<string, { request: Size; limit: Size }> = {
+  sonarr: { request: Size.gibibytes(1), limit: Size.gibibytes(3) },
+  lidarr: { request: Size.mebibytes(512), limit: Size.mebibytes(1536) },
+  radarr: { request: Size.mebibytes(512), limit: Size.gibibytes(1) },
+  prowlarr: { request: Size.mebibytes(256), limit: Size.mebibytes(512) },
+  sabnzbd: { request: Size.mebibytes(384), limit: Size.mebibytes(768) },
+  cleanuparr: { request: Size.mebibytes(256), limit: Size.mebibytes(512) },
+};
+
 for (const mediaApp of mediaApps) {
   new MediaApp(app, {
     name: mediaApp.name,
@@ -208,9 +219,7 @@ for (const mediaApp of mediaApps) {
       cpu: {
         request: Cpu.millis(250),
       },
-      memory: {
-        request: Size.mebibytes(256),
-      },
+      memory: memory[mediaApp.name] ?? { request: Size.mebibytes(256) },
     },
     extraHostnames: mediaApp.extraHostnames,
     nfsMounts: mediaApp.nfsMounts ?? [],

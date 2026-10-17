@@ -44,9 +44,11 @@ spec:
             tcpSocket:
               port: 7878
           resources:
+            limits:
+              memory: 1024Mi
             requests:
               cpu: 250m
-              memory: 256Mi
+              memory: 512Mi
           securityContext:
             allowPrivilegeEscalation: false
             privileged: false
