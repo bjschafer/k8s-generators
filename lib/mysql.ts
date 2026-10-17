@@ -12,6 +12,7 @@ import {
   Volume,
 } from "cdk8s-plus-34";
 import { Construct } from "constructs";
+import { RUNTIME_DEFAULT_SECCOMP } from "./consts";
 import { StorageClass } from "./volume";
 
 export interface MysqlInstanceProps {
@@ -57,6 +58,7 @@ export class MysqlInstance extends Chart {
           securityContext: {
             ensureNonRoot: false,
             readOnlyRootFilesystem: false,
+            seccompProfile: RUNTIME_DEFAULT_SECCOMP,
           },
           image: props.imageOverride ?? DEFAULT_IMAGE,
           imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,

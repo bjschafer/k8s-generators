@@ -88,6 +88,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /cache
               name: pvc-cache

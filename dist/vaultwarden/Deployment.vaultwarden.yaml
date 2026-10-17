@@ -125,6 +125,8 @@ spec:
             runAsGroup: 1000
             runAsNonRoot: true
             runAsUser: 1000
+            seccompProfile:
+              type: RuntimeDefault
           startupProbe:
             failureThreshold: 30
             httpGet:

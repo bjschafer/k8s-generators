@@ -99,6 +99,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /data/data
               name: pvc-data

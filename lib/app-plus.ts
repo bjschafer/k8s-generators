@@ -29,7 +29,7 @@ import {
   Volume,
 } from "cdk8s-plus-34";
 import { Construct } from "constructs";
-import { CLUSTER_ISSUER, DEFAULT_SECURITY_CONTEXT } from "./consts";
+import { CLUSTER_ISSUER, DEFAULT_SECURITY_CONTEXT, RUNTIME_DEFAULT_SECCOMP } from "./consts";
 import { WellKnownLabels } from "./labels";
 import { StorageClass } from "./volume";
 
@@ -223,7 +223,11 @@ export class AppPlus extends Chart {
       containers: [
         {
           name: props.name,
-          securityContext: props.containerSecurityContext ?? DEFAULT_SECURITY_CONTEXT,
+          // an override that doesn't name a seccomp profile still gets RuntimeDefault
+          securityContext: {
+            seccompProfile: RUNTIME_DEFAULT_SECCOMP,
+            ...(props.containerSecurityContext ?? DEFAULT_SECURITY_CONTEXT),
+          },
           command: props.command,
           args: props.args,
           image: props.image,

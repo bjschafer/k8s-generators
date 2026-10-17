@@ -75,6 +75,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /etc/unpoller/up.conf
               name: configmap-unifi-exporter

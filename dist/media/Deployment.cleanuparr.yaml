@@ -56,6 +56,8 @@ spec:
             runAsGroup: 8675309
             runAsNonRoot: true
             runAsUser: 8675309
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /config
               name: pvc-cleanuparr

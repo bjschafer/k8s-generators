@@ -54,6 +54,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /config
               name: pvc-sabnzbd
@@ -108,6 +110,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
           startupProbe:
             failureThreshold: 3
             tcpSocket:

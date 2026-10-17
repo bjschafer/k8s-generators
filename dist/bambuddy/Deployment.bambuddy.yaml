@@ -99,6 +99,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
           startupProbe:
             failureThreshold: 30
             periodSeconds: 10

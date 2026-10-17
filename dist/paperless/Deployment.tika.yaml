@@ -65,6 +65,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           startupProbe:
             failureThreshold: 24
             httpGet:

@@ -1,5 +1,5 @@
 import { AppProps, YamlOutputType } from "cdk8s";
-import { DnsPolicy, EnvValue } from "cdk8s-plus-34";
+import { DnsPolicy, EnvValue, SeccompProfileType } from "cdk8s-plus-34";
 import { EnvVar, Quantity } from "../imports/k8s";
 
 export const DEFAULT_CPU_LIMIT = Quantity.fromString("250m");
@@ -123,9 +123,15 @@ export function GET_COMMON_LABELS(name: string, instance?: string): { [name: str
   };
 }
 
+// The container runtime's default seccomp filter. Applied to every container
+// regardless of uid -- it only blocks syscalls no ordinary workload makes. cdk8s-plus
+// exposes seccompProfile on containers only, so a pod-level context ignores it.
+export const RUNTIME_DEFAULT_SECCOMP = { type: SeccompProfileType.RUNTIME_DEFAULT };
+
 export const DEFAULT_SECURITY_CONTEXT = {
   ensureNonRoot: false,
   readOnlyRootFilesystem: false,
+  seccompProfile: RUNTIME_DEFAULT_SECCOMP,
 };
 
 // Phase 1 hardening: for images audited as running non-root (either the image
@@ -134,6 +140,7 @@ export const DEFAULT_SECURITY_CONTEXT = {
 export const NONROOT_SECURITY_CONTEXT = {
   ensureNonRoot: true,
   readOnlyRootFilesystem: false,
+  seccompProfile: RUNTIME_DEFAULT_SECCOMP,
 };
 
 // Same as NONROOT_SECURITY_CONTEXT, but spells out the uid/gid explicitly.

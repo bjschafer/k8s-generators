@@ -42,6 +42,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
       dnsConfig:
         nameservers:
           - 10.0.10.100

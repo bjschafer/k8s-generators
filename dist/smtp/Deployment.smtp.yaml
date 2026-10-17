@@ -76,6 +76,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /etc/postfix/header_checks
               name: configmap-smtp-header-checks

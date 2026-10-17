@@ -21,7 +21,12 @@ import {
   Volume,
 } from "cdk8s-plus-34";
 import { StorageClass } from "./volume";
-import { DEFAULT_SECURITY_CONTEXT, GET_SERVICE_URL, LSIO_ENVVALUE } from "./consts";
+import {
+  DEFAULT_SECURITY_CONTEXT,
+  GET_SERVICE_URL,
+  LSIO_ENVVALUE,
+  RUNTIME_DEFAULT_SECCOMP,
+} from "./consts";
 import { NFSConcreteVolume } from "./nfs";
 import { VmServiceScrape } from "../imports/operator.victoriametrics.com";
 
@@ -138,7 +143,8 @@ export class MediaApp extends Chart {
       containers: [
         {
           name: props.name,
-          securityContext: securityContext,
+          // an override that doesn't name a seccomp profile still gets RuntimeDefault
+          securityContext: { seccompProfile: RUNTIME_DEFAULT_SECCOMP, ...securityContext },
           image: props.image,
           imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
           ports: [

@@ -90,6 +90,8 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
