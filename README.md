@@ -22,11 +22,16 @@ Editor formatting must agree with oxfmt. If your editor formats TypeScript with 
 
 ## Secrets
 
-Secrets are all handled with [Bitnami Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets). For additional paranoia, all secrets live in the (private)
-[k8s-prod](https://github.com/bjschafer/k8s-prod) repo. These are in the `secrets` folder, with a subfolder per-namespace to keep it organized. The ArgoCD app
-has `.spec.source.directory.recurse=true` to make that work.
+Secrets live in OpenBao and are synced into the cluster by External Secrets, through the `openbao` ClusterSecretStore. This repo is public, so it only ever holds *references* to secrets, never values.
 
-Then, secrets can just be referenced by name in CDK8S.
+By convention each Secret has its own KV v2 entry at `kv/kubernetes/<namespace>/<name>`, whose fields are the Secret's keys. Values needed in more than one namespace live once under `kv/kubernetes/_all/`. OAuth2 client credentials are published by the tf-authentik repo to `kv/kubernetes/<namespace>/authentik`, so they never get copied by hand.
+
+`lib/secrets.ts` has the two constructs to use:
+
+- `OpenBaoSecret` for anything whose value has to be *known*: an upstream API key, a password something outside the cluster also uses.
+- `GeneratedSecret` for values that only need to be *stable*, such as signing or encryption keys. ESO mints these itself and they never go into bao.
+
+Both expose `toEnvValues()` and `secret`, so they can be referenced like any cdk8s-plus Secret.
 
 ## Including CRDs in an app
 
@@ -68,7 +73,7 @@ bun run tools/update-crds.ts metrics --out-dir /tmp/crd-check
 
 `mise run update-crds -- <name|--all>` works the same way.
 
-Currently enabled sources are `cert-manager`, `metrics`, and `velero`. The rest (`cnpg`, `cnpg-barman-cloud`, `cnpg-image-catalogs`, `kured`, `sealed-secrets`, `system-upgrade-controller`) are disabled placeholders for apps still vendored out-of-band in the legacy `prod` repo - `--all` skips them, but naming one explicitly still runs it (with a warning) so it can be smoke-tested ahead of a migration.
+Every source is enabled except `cnpg-image-catalogs`. Its catalogs track upstream `main` and the production database resolves its image through them, so it only refreshes when asked (`mise run update-crds cnpg-image-catalogs`, in its own commit) rather than as a side effect of an unrelated Renovate PR. `--all` skips it; naming it explicitly still runs it, with a warning.
 
 **Renovate keeps the pinned versions current.** `renovate.json` at the repo root defines two `customManagers` that look for a `// renovate: datasource=... depName=...` annotation comment: one targets the `literal` versions in `tools/sources.ts` directly, the other targets the `const version = "..."` lines in `apps/cert-manager/app.ts` and `apps/metrics/app.ts` that the `app-const` sources derive from. Renovate itself only bumps the version string - it doesn't run the fetch - but on a Renovate PR CI does that part, refetching the CRDs and regenerating `dist/` and pushing both back onto the branch. See [CI](#ci) below.
 
