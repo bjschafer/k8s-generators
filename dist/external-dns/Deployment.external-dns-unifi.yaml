@@ -32,8 +32,24 @@ spec:
             - --webhook-provider-read-timeout=50s
             - --txt-owner-id=prod-k8s-unifi
           image: registry.k8s.io/external-dns/external-dns:v0.23.0
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 4
+            httpGet:
+              path: /healthz
+              port: 7979
+              scheme: HTTP
+            periodSeconds: 15
+            timeoutSeconds: 5
           name: external-dns
+          readinessProbe:
+            failureThreshold: 4
+            httpGet:
+              path: /healthz
+              port: 7979
+              scheme: HTTP
+            periodSeconds: 15
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: 100m
@@ -57,11 +73,27 @@ spec:
                   key: UNIFI_API_KEY
                   name: external-dns-unifi
           image: ghcr.io/home-operations/external-dns-unifi-webhook:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 20
+            timeoutSeconds: 5
           name: unifi-webhook
           ports:
             - containerPort: 8888
               name: webhook
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: 100m

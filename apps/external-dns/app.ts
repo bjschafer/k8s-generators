@@ -1,5 +1,13 @@
-import { App, Chart, Size } from "cdk8s";
-import { Cpu, Deployment, DeploymentStrategy, EnvValue, ServiceAccount } from "cdk8s-plus-34";
+import { App, Chart, Duration, Size } from "cdk8s";
+import {
+  Cpu,
+  Deployment,
+  DeploymentStrategy,
+  EnvValue,
+  ImagePullPolicy,
+  Probe,
+  ServiceAccount,
+} from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { KubeClusterRole, KubeClusterRoleBinding } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
@@ -28,6 +36,15 @@ const EXTERNAL_DNS_IMAGE = `registry.k8s.io/external-dns/external-dns:${EXTERNAL
 // `v0.22.0` -> `v0.22.x`
 const EXTERNAL_DNS_LINE = `${EXTERNAL_DNS_VERSION.split(".").slice(0, 2).join(".")}.x`;
 const UNIFI_WEBHOOK_IMAGE = "ghcr.io/home-operations/external-dns-unifi-webhook:latest";
+
+// external-dns serves /healthz on its metrics port (7979 by default).
+const externalDnsHealthProbe = () =>
+  Probe.fromHttpGet("/healthz", {
+    port: 7979,
+    periodSeconds: Duration.seconds(15),
+    timeoutSeconds: Duration.seconds(5),
+    failureThreshold: 4,
+  });
 
 const COMMON_ARGS = [
   "--source=service",
@@ -78,6 +95,8 @@ class ExternalDnsRBAC extends Chart {
       metadata: { name: "external-dns", namespace },
     });
 
+    // Raw rules rather than cdk8s-plus ClusterRole, which wants a typed resource
+    // object per entry and has none for the traefik.io CRDs.
     new KubeClusterRole(this, "cluster-role", {
       metadata: { name: "external-dns" },
       rules: [
@@ -133,7 +152,8 @@ new AppPlus(app, "pdns", {
   automountServiceAccount: true,
   disableIngress: true,
   disableService: true,
-  disableProbes: true,
+  livenessProbe: externalDnsHealthProbe(),
+  readinessProbe: externalDnsHealthProbe(),
   deploymentStrategy: DeploymentStrategy.recreate(),
   resources: {
     cpu: { request: Cpu.millis(25), limit: Cpu.millis(100) },
@@ -178,6 +198,7 @@ class ExternalDnsUnifi extends Chart {
         {
           name: "external-dns",
           image: EXTERNAL_DNS_IMAGE,
+          imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
           securityContext: DEFAULT_SECURITY_CONTEXT,
           args: [
             ...COMMON_ARGS,
@@ -196,6 +217,8 @@ class ExternalDnsUnifi extends Chart {
             "--webhook-provider-read-timeout=50s",
             "--txt-owner-id=prod-k8s-unifi",
           ],
+          liveness: externalDnsHealthProbe(),
+          readiness: externalDnsHealthProbe(),
           resources: {
             cpu: { request: Cpu.millis(25), limit: Cpu.millis(100) },
             memory: { request: Size.mebibytes(64), limit: Size.mebibytes(256) },
@@ -207,6 +230,7 @@ class ExternalDnsUnifi extends Chart {
     deploy.addContainer({
       name: "unifi-webhook",
       image: UNIFI_WEBHOOK_IMAGE,
+      imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
       // audited safe: image ships USER=65532 (unlike the external-dns
       // container above, which is untested and stays on the permissive default)
       securityContext: NONROOT_SECURITY_CONTEXT,
@@ -220,6 +244,18 @@ class ExternalDnsUnifi extends Chart {
         memory: { request: Size.mebibytes(32), limit: Size.mebibytes(64) },
       },
       ports: [{ number: 8888, name: "webhook" }],
+      // The webhook itself listens on localhost only; health is served
+      // separately on 8080.
+      liveness: Probe.fromHttpGet("/healthz", {
+        port: 8080,
+        periodSeconds: Duration.seconds(20),
+        timeoutSeconds: Duration.seconds(5),
+      }),
+      readiness: Probe.fromHttpGet("/readyz", {
+        port: 8080,
+        periodSeconds: Duration.seconds(10),
+        timeoutSeconds: Duration.seconds(5),
+      }),
     });
   }
 }

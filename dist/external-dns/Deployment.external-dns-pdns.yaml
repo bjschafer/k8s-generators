@@ -43,7 +43,23 @@ spec:
                   name: external-dns-pdns
           image: registry.k8s.io/external-dns/external-dns:v0.23.0
           imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 4
+            httpGet:
+              path: /healthz
+              port: 7979
+              scheme: HTTP
+            periodSeconds: 15
+            timeoutSeconds: 5
           name: external-dns-pdns
+          readinessProbe:
+            failureThreshold: 4
+            httpGet:
+              path: /healthz
+              port: 7979
+              scheme: HTTP
+            periodSeconds: 15
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: 100m
