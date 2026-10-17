@@ -11,6 +11,7 @@ import {
   VolumeSnapshotClassDeletionPolicy,
 } from "../../imports/snapshot.storage.k8s.io";
 import { OpenBaoSecret } from "../../lib/secrets";
+import { StorageClass } from "../../lib/volume";
 
 const name = "ceph-csi-operator";
 const namespace = "ceph";
@@ -89,29 +90,49 @@ class CephConfig extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
+    // cdk8s-plus has no StorageClass construct.
+    const rbdParameters = {
+      clusterID,
+      pool: "k8s",
+      imageFeatures: "layering",
+      "csi.storage.k8s.io/provisioner-secret-name": secret,
+      "csi.storage.k8s.io/provisioner-secret-namespace": namespace,
+      "csi.storage.k8s.io/controller-expand-secret-name": secret,
+      "csi.storage.k8s.io/controller-expand-secret-namespace": namespace,
+      "csi.storage.k8s.io/node-stage-secret-name": secret,
+      "csi.storage.k8s.io/node-stage-secret-namespace": namespace,
+      "csi.storage.k8s.io/fstype": "ext4",
+    };
+
+    // Retain, so a pruned namespace or a deleted PVC leaves the RBD image
+    // behind instead of destroying it. Released PVs have to be cleaned up by
+    // hand. reclaimPolicy is immutable: changing it means deleting the
+    // StorageClass and letting Argo recreate it (existing PVs are unaffected).
     new KubeStorageClass(this, "rbd-sc", {
       metadata: {
-        name: "ceph-rbd",
+        name: StorageClass.CEPH_RBD,
         annotations: { "storageclass.kubernetes.io/is-default-class": "true" },
       },
       provisioner: "rbd.csi.ceph.com",
-      parameters: {
-        clusterID,
-        pool: "k8s",
-        imageFeatures: "layering",
-        "csi.storage.k8s.io/provisioner-secret-name": secret,
-        "csi.storage.k8s.io/provisioner-secret-namespace": namespace,
-        "csi.storage.k8s.io/controller-expand-secret-name": secret,
-        "csi.storage.k8s.io/controller-expand-secret-namespace": namespace,
-        "csi.storage.k8s.io/node-stage-secret-name": secret,
-        "csi.storage.k8s.io/node-stage-secret-namespace": namespace,
-        "csi.storage.k8s.io/fstype": "ext4",
-      },
+      parameters: rbdParameters,
+      reclaimPolicy: "Retain",
+      allowVolumeExpansion: true,
+      mountOptions: ["discard"],
+    });
+
+    // For volumes that are disposable by construction, chiefly the PVCs
+    // Velero's data mover clones from snapshots on every backup run. On
+    // Retain those would leave a Released PV behind per volume per night.
+    new KubeStorageClass(this, "rbd-scratch-sc", {
+      metadata: { name: StorageClass.CEPH_RBD_SCRATCH },
+      provisioner: "rbd.csi.ceph.com",
+      parameters: rbdParameters,
       reclaimPolicy: "Delete",
       allowVolumeExpansion: true,
       mountOptions: ["discard"],
     });
 
+    // cdk8s-plus has no StorageClass construct.
     new KubeStorageClass(this, "cephfs-sc", {
       metadata: { name: "cephfs" },
       provisioner: "cephfs.csi.ceph.com",
@@ -169,6 +190,8 @@ class CephConfig extends Chart {
       data: { plugin: "quay.io/cephcsi/cephcsi:v3.17.1" },
     });
 
+    // Untyped on purpose: the generated OperatorConfig class wants enum
+    // wrappers for every field, which buys nothing for a spec this small.
     new ApiObject(this, "operator-config", {
       apiVersion: "csi.ceph.io/v1",
       kind: "OperatorConfig",

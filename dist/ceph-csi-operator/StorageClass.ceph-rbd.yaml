@@ -19,4 +19,4 @@ parameters:
   imageFeatures: layering
   pool: k8s
 provisioner: rbd.csi.ceph.com
-reclaimPolicy: Delete
+reclaimPolicy: Retain

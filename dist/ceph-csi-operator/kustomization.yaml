@@ -55,6 +55,7 @@ resources:
   - ServiceAccount.cephfs-csi-ceph-com-nodeplugin-sa.yaml
   - ServiceAccount.rbd-csi-ceph-com-ctrlplugin-sa.yaml
   - ServiceAccount.rbd-csi-ceph-com-nodeplugin-sa.yaml
+  - StorageClass.ceph-rbd-scratch.yaml
   - StorageClass.ceph-rbd.yaml
   - StorageClass.cephfs.yaml
   - VolumeSnapshotClass.ceph-rbd-snapshot.yaml
