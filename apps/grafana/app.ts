@@ -10,6 +10,7 @@ import {
   VmServiceScrapeSpecEndpointsScheme,
 } from "../../imports/operator.victoriametrics.com";
 import { OpenBaoSecret } from "../../lib/secrets";
+import { infraResources } from "../../lib/util";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -69,7 +70,7 @@ class Grafana extends Chart {
             memory: "512Mi",
           },
           limits: {
-            memory: "1Gi",
+            memory: "1536Mi",
           },
         },
         persistence: {
@@ -156,6 +157,7 @@ class Grafana extends Chart {
           },
         ],
         sidecar: {
+          resources: infraResources("10m", "128Mi", "256Mi"),
           dashboards: {
             enabled: true,
             folderAnnotation: "k8s-sidecar-target-directory",

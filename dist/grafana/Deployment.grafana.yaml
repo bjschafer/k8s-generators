@@ -45,6 +45,12 @@ spec:
           image: quay.io/kiwigrid/k8s-sidecar:2.14.1
           imagePullPolicy: IfNotPresent
           name: grafana-sc-dashboard
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -77,7 +83,7 @@ spec:
             - name: GF_UNIFIED_STORAGE_INDEX_PATH
               value: /var/lib/grafana-search/bleve
             - name: GOMEMLIMIT
-              value: 921MiB
+              value: 1382MiB
             - name: GF_DATABASE_HOST
               value: prod-pg17-pooler-rw.postgres.svc.cluster.local:5432
             - name: GF_DATABASE_NAME
@@ -124,7 +130,7 @@ spec:
               port: grafana
           resources:
             limits:
-              memory: 1Gi
+              memory: 1536Mi
             requests:
               cpu: 100m
               memory: 512Mi
