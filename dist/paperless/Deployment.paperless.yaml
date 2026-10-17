@@ -85,6 +85,13 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: false
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            periodSeconds: 10
           volumeMounts:
             - mountPath: /data
               name: pvc-data

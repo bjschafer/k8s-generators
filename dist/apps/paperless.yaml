@@ -38,7 +38,7 @@ spec:
         - alias: pure-ftpd
           commonUpdateSettings:
             updateStrategy: digest
-          imageName: stilliard/pure-ftpd:latest
+          imageName: stilliard/pure-ftpd:trixie-1.0.50
         - alias: tika
           commonUpdateSettings:
             updateStrategy: digest

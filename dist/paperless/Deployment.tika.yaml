@@ -33,13 +33,29 @@ spec:
       containers:
         - image: docker.io/apache/tika:latest
           imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /tika
+              port: 9998
+              scheme: HTTP
+            periodSeconds: 15
+            timeoutSeconds: 5
           name: tika
           ports:
             - containerPort: 9998
               name: web
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /tika
+              port: 9998
+              scheme: HTTP
+            periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits:
-              cpu: 200m
+              cpu: 800m
               memory: 384Mi
             requests:
               cpu: 50m
@@ -49,6 +65,14 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: true
+          startupProbe:
+            failureThreshold: 24
+            httpGet:
+              path: /tika
+              port: 9998
+              scheme: HTTP
+            periodSeconds: 5
+            timeoutSeconds: 5
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always

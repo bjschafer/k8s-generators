@@ -39,10 +39,26 @@ spec:
               value: "1"
           image: gotenberg/gotenberg:8.36.0
           imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            periodSeconds: 15
+            timeoutSeconds: 5
           name: gotenberg
           ports:
             - containerPort: 3000
               name: web
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            periodSeconds: 10
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: 500m

@@ -45,8 +45,14 @@ spec:
               value: /home/scanner
             - name: PUBLICHOST
               value: 10.0.10.84
-          image: stilliard/pure-ftpd
+          image: stilliard/pure-ftpd:trixie-1.0.50
           imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            periodSeconds: 20
+            tcpSocket:
+              port: 21
+            timeoutSeconds: 5
           name: ftpserver
           ports:
             - containerPort: 21
@@ -61,9 +67,15 @@ spec:
             - containerPort: 30007
             - containerPort: 30008
             - containerPort: 30009
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 10
+            tcpSocket:
+              port: 21
+            timeoutSeconds: 5
           resources:
             limits:
-              cpu: 200m
+              cpu: 1000m
               memory: 128Mi
             requests:
               cpu: 5m

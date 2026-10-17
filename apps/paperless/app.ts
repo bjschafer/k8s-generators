@@ -38,6 +38,12 @@ const app = new App(DEFAULT_APP_PROPS(namespace));
 // renovate: datasource=docker depName=gotenberg/gotenberg
 const gotenbergVersion = "8.36.0";
 
+// Upstream only publishes `<debian>-<pure-ftpd version>` tags, which the
+// updater can't order. It follows this tag's digest for base-image rebuilds;
+// Renovate moves the version.
+// renovate: datasource=docker depName=stilliard/pure-ftpd versioning=regex:^trixie-(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$
+const pureFtpdTag = "trixie-1.0.50";
+
 NewArgoApp(namespace, {
   namespace: namespace,
   autoUpdate: {
@@ -49,6 +55,7 @@ NewArgoApp(namespace, {
       {
         image: "stilliard/pure-ftpd",
         strategy: "digest",
+        versionConstraint: pureFtpdTag,
       },
       {
         image: "docker.io/apache/tika",
@@ -80,7 +87,7 @@ const valkey = new Valkey(app, "valkey", {
       memory: Quantity.fromString("64Mi"),
     },
     limits: {
-      cpu: Quantity.fromString("100m"),
+      cpu: Quantity.fromString("400m"),
       memory: Quantity.fromString("64Mi"),
     },
   },
@@ -304,6 +311,13 @@ class Paperless extends Chart {
         },
       },
       ports: [{ number: 8000, name: "http" }],
+      // Init (migrations, index and LLM-index checks) takes ~35s before the web
+      // server binds, which was enough for liveness to kill it mid-boot.
+      startupProbe: Probe.fromHttpGet("/", {
+        port: 8000,
+        periodSeconds: Duration.seconds(10),
+        failureThreshold: 30,
+      }),
       livenessProbe: Probe.fromHttpGet("/", {
         port: 8000,
         initialDelaySeconds: Duration.seconds(20),
@@ -374,7 +388,16 @@ class Paperless extends Chart {
         DISABLE_GOOGLE_CHROME: EnvValue.fromValue("1"),
       },
       disableIngress: true,
-      disableProbes: true,
+      livenessProbe: Probe.fromHttpGet("/health", {
+        port: 3000,
+        periodSeconds: Duration.seconds(15),
+        timeoutSeconds: Duration.seconds(5),
+      }),
+      readinessProbe: Probe.fromHttpGet("/health", {
+        port: 3000,
+        periodSeconds: Duration.seconds(10),
+        timeoutSeconds: Duration.seconds(5),
+      }),
     });
 
     // Tika deployment
@@ -392,7 +415,7 @@ class Paperless extends Chart {
       resources: {
         cpu: {
           request: Cpu.millis(50),
-          limit: Cpu.millis(200),
+          limit: Cpu.millis(800),
         },
         memory: {
           request: Size.mebibytes(128),
@@ -401,7 +424,23 @@ class Paperless extends Chart {
       },
       ports: [{ number: 9998, name: "web" }],
       disableIngress: true,
-      disableProbes: true,
+      // JVM; give it room to boot before liveness starts counting.
+      startupProbe: Probe.fromHttpGet("/tika", {
+        port: 9998,
+        periodSeconds: Duration.seconds(5),
+        failureThreshold: 24,
+        timeoutSeconds: Duration.seconds(5),
+      }),
+      livenessProbe: Probe.fromHttpGet("/tika", {
+        port: 9998,
+        periodSeconds: Duration.seconds(15),
+        timeoutSeconds: Duration.seconds(5),
+      }),
+      readinessProbe: Probe.fromHttpGet("/tika", {
+        port: 9998,
+        periodSeconds: Duration.seconds(10),
+        timeoutSeconds: Duration.seconds(5),
+      }),
     });
 
     // FTP server deployment - needs special handling for LoadBalancer and many ports
@@ -409,14 +448,14 @@ class Paperless extends Chart {
     const ftpserver = new AppPlus(app, "ftpserver", {
       name: "ftpserver",
       namespace: namespace,
-      image: "stilliard/pure-ftpd",
+      image: `stilliard/pure-ftpd:${pureFtpdTag}`,
       labels: {
         app: "ftpserver",
       },
       resources: {
         cpu: {
           request: Cpu.millis(5),
-          limit: Cpu.millis(200),
+          limit: Cpu.millis(1000),
         },
         memory: {
           request: Size.mebibytes(8),
@@ -449,7 +488,16 @@ class Paperless extends Chart {
       },
       limitToAMD64: true,
       disableIngress: true,
-      disableProbes: true,
+      livenessProbe: Probe.fromTcpSocket({
+        port: 21,
+        periodSeconds: Duration.seconds(20),
+        timeoutSeconds: Duration.seconds(5),
+      }),
+      readinessProbe: Probe.fromTcpSocket({
+        port: 21,
+        periodSeconds: Duration.seconds(10),
+        timeoutSeconds: Duration.seconds(5),
+      }),
       service: {
         type: ServiceType.LOAD_BALANCER,
         annotations: {
