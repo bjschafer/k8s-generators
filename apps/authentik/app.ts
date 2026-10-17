@@ -1,13 +1,16 @@
 import { App, Chart, Duration, Size } from "cdk8s";
-import { Cpu, EnvValue, Probe, ServiceAccount } from "cdk8s-plus-34";
+import {
+  Cpu,
+  EnvValue,
+  Probe,
+  Protocol,
+  Service,
+  ServiceAccount,
+  ServiceType,
+} from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { basename } from "path";
-import {
-  IntOrString,
-  KubeClusterRole,
-  KubeClusterRoleBinding,
-  KubeService,
-} from "../../imports/k8s";
+import { KubeClusterRole, KubeClusterRoleBinding } from "../../imports/k8s";
 import {
   VmServiceScrape,
   VmServiceScrapeSpecEndpointsScheme,
@@ -57,7 +60,8 @@ class AuthentikRBAC extends Chart {
       },
     });
 
-    // Cluster Role
+    // Cluster Role. Raw rules rather than cdk8s-plus ClusterRole, which wants a
+    // typed resource object per entry -- most of these are CRDs it has no type for.
     const clusterRole = new KubeClusterRole(this, "authentik-cluster-role", {
       metadata: {
         name: "authentik",
@@ -225,21 +229,25 @@ new AppPlus(app, "authentik-worker", {
   monitoringConfig: {
     port: 9300,
   },
-  livenessProbe: Probe.fromHttpGet("/-/health/live/", {
-    port: 9000,
-    initialDelaySeconds: Duration.seconds(30),
-    periodSeconds: Duration.seconds(10),
+  // The worker serves no health route on 9000, so use the image's own check.
+  startupProbe: Probe.fromCommand(["ak", "healthcheck"], {
+    periodSeconds: Duration.seconds(5),
+    failureThreshold: 30,
+    timeoutSeconds: Duration.seconds(10),
   }),
-  readinessProbe: Probe.fromHttpGet("/-/health/ready/", {
-    port: 9000,
-    initialDelaySeconds: Duration.seconds(30),
-    periodSeconds: Duration.seconds(10),
+  livenessProbe: Probe.fromCommand(["ak", "healthcheck"], {
+    periodSeconds: Duration.seconds(30),
+    timeoutSeconds: Duration.seconds(10),
+    failureThreshold: 3,
+  }),
+  readinessProbe: Probe.fromCommand(["ak", "healthcheck"], {
+    periodSeconds: Duration.seconds(30),
+    timeoutSeconds: Duration.seconds(10),
   }),
   args: ["worker"],
   serviceAccountName: rbac.serviceAccount.name,
   automountServiceAccount: true,
   disableIngress: true,
-  disableProbes: true, // Workers don't need health checks
   extraEnv: {
     ...commonEnv,
     ...creds.toEnvValues(),
@@ -255,7 +263,7 @@ class AuthentikMonitoring extends Chart {
     super(scope, id);
 
     // LDAP Service (LoadBalancer)
-    new KubeService(this, "ldap-service", {
+    const ldap = new Service(this, "ldap-service", {
       metadata: {
         name: "ldap",
         namespace: namespace,
@@ -271,31 +279,22 @@ class AuthentikMonitoring extends Chart {
           implementation: "kube-vip",
         },
       },
-      spec: {
-        type: "LoadBalancer",
-        selector: {
-          "app.kubernetes.io/managed-by": "goauthentik.io",
-          "app.kubernetes.io/name": "authentik-outpost-ldap",
-          "goauthentik.io/outpost-name": "ldap",
-          "goauthentik.io/outpost-type": "ldap",
-          "goauthentik.io/outpost-uuid": "e081b496b3354364bb3198f42a8875d0",
-        },
-        ports: [
-          {
-            name: "ldap",
-            port: 389,
-            targetPort: IntOrString.fromNumber(3389),
-            protocol: "TCP",
-          },
-          {
-            name: "ldaps",
-            port: 636,
-            targetPort: IntOrString.fromNumber(6636),
-            protocol: "TCP",
-          },
-        ],
-      },
+      type: ServiceType.LOAD_BALANCER,
+      ports: [
+        { name: "ldap", port: 389, targetPort: 3389, protocol: Protocol.TCP },
+        { name: "ldaps", port: 636, targetPort: 6636, protocol: Protocol.TCP },
+      ],
     });
+    // The outpost Deployment is created by authentik itself, not this repo.
+    for (const [key, value] of Object.entries({
+      "app.kubernetes.io/managed-by": "goauthentik.io",
+      "app.kubernetes.io/name": "authentik-outpost-ldap",
+      "goauthentik.io/outpost-name": "ldap",
+      "goauthentik.io/outpost-type": "ldap",
+      "goauthentik.io/outpost-uuid": "e081b496b3354364bb3198f42a8875d0",
+    })) {
+      ldap.selectLabel(key, value);
+    }
 
     // Monitoring
     new CmdcentralServiceMonitor(this, "server-monitoring", {

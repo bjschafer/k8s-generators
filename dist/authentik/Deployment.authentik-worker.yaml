@@ -78,11 +78,27 @@ spec:
                   name: creds
           image: ghcr.io/goauthentik/server:2026.8.0
           imagePullPolicy: Always
+          livenessProbe:
+            exec:
+              command:
+                - ak
+                - healthcheck
+            failureThreshold: 3
+            periodSeconds: 30
+            timeoutSeconds: 10
           name: authentik-worker
           ports:
             - containerPort: 9000
             - containerPort: 9300
               name: metrics
+          readinessProbe:
+            exec:
+              command:
+                - ak
+                - healthcheck
+            failureThreshold: 3
+            periodSeconds: 30
+            timeoutSeconds: 10
           resources:
             limits:
               memory: 2048Mi
@@ -94,6 +110,14 @@ spec:
             privileged: false
             readOnlyRootFilesystem: false
             runAsNonRoot: true
+          startupProbe:
+            exec:
+              command:
+                - ak
+                - healthcheck
+            failureThreshold: 30
+            periodSeconds: 5
+            timeoutSeconds: 10
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always

@@ -13,6 +13,7 @@ metadata:
   name: ldap
   namespace: authentik
 spec:
+  externalIPs: []
   ports:
     - name: ldap
       port: 389
