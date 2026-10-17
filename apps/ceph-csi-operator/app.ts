@@ -2,7 +2,7 @@ import { ApiObject, App, Chart } from "cdk8s";
 import { ConfigMap } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { NewArgoApp, ArgoAppSource, ENABLE_SERVERSIDE_APPLY } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, HOMELAB_CRITICAL_PRIORITY_CLASS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { NewKustomize } from "../../lib/kustomize";
 import { KubeStorageClass } from "../../imports/k8s";
@@ -12,6 +12,7 @@ import {
 } from "../../imports/snapshot.storage.k8s.io";
 import { OpenBaoSecret } from "../../lib/secrets";
 import { StorageClass } from "../../lib/volume";
+import { infraResources } from "../../lib/util";
 
 const name = "ceph-csi-operator";
 const namespace = "ceph";
@@ -39,7 +40,17 @@ new HelmApp(app, "operator", {
   // here only duplicates it -- and then silently stops matching. That is
   // exactly what happened when the chart moved to 1.0.4 and the hardcoded
   // v1.0.3 held the operator back. Let the tag follow the chart.
-  values: {},
+  values: {
+    controllerManager: {
+      manager: {
+        // Chart default CPU limit (500m) kept; only the memory is raised.
+        resources: {
+          limits: { cpu: "500m", memory: "256Mi" },
+          requests: { cpu: "10m", memory: "64Mi" },
+        },
+      },
+    },
+  },
 });
 
 // 2. Driver CRs: CephConnection, ClientProfile, Driver (rbd + cephfs)
@@ -190,6 +201,11 @@ class CephConfig extends Chart {
       data: { plugin: "quay.io/cephcsi/cephcsi:v3.17.1" },
     });
 
+    const pluginResources = infraResources("10m", "192Mi", "512Mi");
+    const sidecarResources = infraResources("5m", "80Mi", "256Mi");
+    const logRotatorResources = infraResources("5m", "16Mi", "64Mi");
+    const smallResources = infraResources("5m", "32Mi", "128Mi");
+
     // Untyped on purpose: the generated OperatorConfig class wants enum
     // wrappers for every field, which buys nothing for a spec this small.
     new ApiObject(this, "operator-config", {
@@ -205,8 +221,20 @@ class CephConfig extends Chart {
             deploymentStrategy: {},
             hostNetwork: false,
             imagePullPolicy: "IfNotPresent",
+            priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
             privileged: false,
             replicas: 1,
+            resources: {
+              plugin: pluginResources,
+              provisioner: sidecarResources,
+              attacher: sidecarResources,
+              resizer: sidecarResources,
+              snapshotter: sidecarResources,
+              logRotator: logRotatorResources,
+              liveness: smallResources,
+              addons: smallResources,
+              omapGenerator: smallResources,
+            },
             tolerations: [],
             volumes: [],
           },
@@ -227,6 +255,14 @@ class CephConfig extends Chart {
             imagePullPolicy: "IfNotPresent",
             kubeletDirPath: "/var/lib/kubelet",
             labels: {},
+            priorityClassName: "system-node-critical",
+            resources: {
+              plugin: pluginResources,
+              registrar: infraResources("5m", "32Mi", "64Mi"),
+              logRotator: logRotatorResources,
+              liveness: smallResources,
+              addons: smallResources,
+            },
             tolerations: [],
             volumes: [],
           },

@@ -12,8 +12,64 @@ spec:
       deploymentStrategy: {}
       hostNetwork: false
       imagePullPolicy: IfNotPresent
+      priorityClassName: homelab-critical
       privileged: false
       replicas: 1
+      resources:
+        addons:
+          limits:
+            memory: 128Mi
+          requests:
+            cpu: 5m
+            memory: 32Mi
+        attacher:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 5m
+            memory: 80Mi
+        liveness:
+          limits:
+            memory: 128Mi
+          requests:
+            cpu: 5m
+            memory: 32Mi
+        logRotator:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 5m
+            memory: 16Mi
+        omapGenerator:
+          limits:
+            memory: 128Mi
+          requests:
+            cpu: 5m
+            memory: 32Mi
+        plugin:
+          limits:
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 192Mi
+        provisioner:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 5m
+            memory: 80Mi
+        resizer:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 5m
+            memory: 80Mi
+        snapshotter:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 5m
+            memory: 80Mi
       tolerations: []
       volumes: []
     deployCsiAddons: false
@@ -36,6 +92,38 @@ spec:
       imagePullPolicy: IfNotPresent
       kubeletDirPath: /var/lib/kubelet
       labels: {}
+      priorityClassName: system-node-critical
+      resources:
+        addons:
+          limits:
+            memory: 128Mi
+          requests:
+            cpu: 5m
+            memory: 32Mi
+        liveness:
+          limits:
+            memory: 128Mi
+          requests:
+            cpu: 5m
+            memory: 32Mi
+        logRotator:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 5m
+            memory: 16Mi
+        plugin:
+          limits:
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 192Mi
+        registrar:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 5m
+            memory: 32Mi
       tolerations: []
       volumes: []
     snapshotPolicy: none
