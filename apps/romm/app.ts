@@ -87,7 +87,8 @@ const server = new AppPlus(app, name, {
       request: Cpu.millis(100),
     },
     memory: {
-      request: Size.mebibytes(256),
+      request: Size.mebibytes(768),
+      limit: Size.gibibytes(2),
     },
   },
   extraIngressHosts: ["roms.cmdcentral.xyz"],
