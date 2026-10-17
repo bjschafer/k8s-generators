@@ -89,10 +89,10 @@ spec:
           resources:
             limits:
               cpu: 200m
-              memory: 512Mi
+              memory: 256Mi
             requests:
               cpu: 10m
-              memory: 512Mi
+              memory: 128Mi
           securityContext: {}
       securityContext:
         runAsNonRoot: true

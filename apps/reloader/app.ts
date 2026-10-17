@@ -32,11 +32,11 @@ new HelmApp<Partial<ReloaderValuesSchema>>(app, "helm", {
         resources: {
           limits: {
             cpu: "200m",
-            memory: "512Mi",
+            memory: "256Mi",
           },
           requests: {
             cpu: "10m",
-            memory: "512Mi",
+            memory: "128Mi",
           },
         },
         pod: {
