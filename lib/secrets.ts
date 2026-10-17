@@ -9,6 +9,7 @@ import {
   ExternalSecretSpecDataRemoteRefDecodingStrategy,
   ExternalSecretSpecDataRemoteRefMetadataPolicy,
   ExternalSecretSpecSecretStoreRefKind,
+  ExternalSecretSpecTargetCreationPolicy,
   ExternalSecretSpecTargetTemplate,
 } from "../imports/external-secrets.io";
 import { Password } from "../imports/generators.external-secrets.io";
@@ -58,6 +59,14 @@ export interface OpenBaoSecretProps {
    * payload under `.dockerconfigjson`.
    */
   readonly template?: ExternalSecretSpecTargetTemplate;
+  /**
+   * How ESO treats the target Secret. Override for a Secret something else
+   * also writes to -- `CreateOrMerge` touches only the listed keys and leaves
+   * the rest alone, where the default `Owner` replaces the whole data map.
+   *
+   * @default Owner
+   */
+  readonly creationPolicy?: ExternalSecretSpecTargetCreationPolicy;
 }
 
 /**
@@ -120,6 +129,7 @@ export class OpenBaoSecret extends Chart {
         }),
         target: {
           name: props.name,
+          creationPolicy: props.creationPolicy,
           template: props.template,
         },
       },

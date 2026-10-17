@@ -5,8 +5,10 @@ import { ENABLE_SERVERSIDE_APPLY, NewArgoApp } from "../../lib/argo";
 import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { infraResources } from "../../lib/util";
+import { OpenBaoSecret } from "../../lib/secrets";
 import { NewKustomize } from "../../lib/kustomize";
 import { Certificate } from "../../imports/cert-manager.io";
+import { ExternalSecretSpecTargetCreationPolicy } from "../../imports/external-secrets.io";
 import {
   IngressRoute,
   IngressRouteSpecRoutesKind,
@@ -119,11 +121,8 @@ new HelmApp(app, "helm", {
       startupProbe: { enabled: true },
     },
     configs: {
-      // The live argocd-secret is a SealedSecret that stays in the k8s-prod
-      // repo -- it holds admin.password, accounts.bschafer.password,
-      // dex.authentik.clientSecret and a tls.crt. This repo is public, so it
-      // must not move here, and the chart must not render a replacement over
-      // the top of it.
+      // argocd-secret comes from OpenBao instead; see below. The chart must not
+      // render a replacement over the top of it.
       secret: {
         createSecret: false,
       },
@@ -174,6 +173,45 @@ new HelmApp(app, "helm", {
         "policy.csv": `g, bschafer, role:admin
 g, wheel, role:admin
 `,
+      },
+    },
+  },
+});
+
+/**
+ * argocd-secret, the one Secret ArgoCD reads its own settings from by name.
+ *
+ * CreateOrMerge rather than the default Owner because ArgoCD writes to this
+ * Secret itself (`argocd account update-password` lands here, and the server
+ * mints server.secretkey if it's missing); Owner would wipe any key not listed.
+ * Note a password changed that way is still reverted to bao's on the next
+ * refresh -- change it in bao.
+ *
+ * server.secretkey signs every session token, so it must never be rerolled.
+ * The dex client secret is the one tf-authentik publishes, so rotating it in
+ * Authentik carries through here on its own.
+ */
+new OpenBaoSecret(app, "argocd-secret", {
+  name: "argocd-secret",
+  namespace: namespace,
+  creationPolicy: ExternalSecretSpecTargetCreationPolicy.CREATE_OR_MERGE,
+  keys: [
+    "server.secretkey",
+    "admin.password",
+    "admin.passwordMtime",
+    "accounts.bschafer.password",
+    "accounts.bschafer.passwordMtime",
+  ],
+  refs: {
+    "dex.authentik.clientSecret": { path: `${namespace}/authentik`, property: "client_secret" },
+  },
+  template: {
+    // Only matters if ESO has to create the Secret from scratch; the chart's
+    // own render would carry these.
+    metadata: {
+      labels: {
+        "app.kubernetes.io/name": "argocd-secret",
+        "app.kubernetes.io/part-of": "argocd",
       },
     },
   },

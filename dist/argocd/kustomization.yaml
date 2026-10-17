@@ -24,6 +24,7 @@ resources:
   - Deployment.argocd-redis-ha-haproxy.yaml
   - Deployment.argocd-repo-server.yaml
   - Deployment.argocd-server.yaml
+  - ExternalSecret.argocd-secret.yaml
   - IngressRoute.argocd-server.yaml
   - Job.argocd-redis-secret-init.yaml
   - NetworkPolicy.argocd-application-controller.yaml
