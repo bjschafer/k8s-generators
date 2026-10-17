@@ -4,6 +4,7 @@ import { NewArgoApp } from "../../lib/argo";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { OpenBaoSecret } from "../../lib/secrets";
+import { infraResources } from "../../lib/util";
 import { addAlerts } from "./alerts";
 import { BlackboxExporter } from "./blackbox";
 import { ScrapeConfigs } from "./scrapeconfigs";
@@ -30,6 +31,7 @@ new HelmApp(app, "stack", {
   values: {
     argocdReleaseOverride: "metrics",
     "victoria-metrics-operator": {
+      resources: infraResources("20m", "192Mi", "512Mi"),
       admissionWebhooks: {
         certManager: {
           enabled: true,
@@ -50,6 +52,7 @@ new HelmApp(app, "stack", {
       },
     },
     "kube-state-metrics": {
+      resources: infraResources("10m", "160Mi", "384Mi"),
       // /livez proxies a call to the apiserver, so an apiserver stall kills KSM
       // even though KSM itself is healthy — and restarting it fixes nothing.
       // 12 x 10s tolerates 2min of apiserver unavailability before a restart.
