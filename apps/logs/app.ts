@@ -1,11 +1,11 @@
 import { App, Chart, Helm } from "cdk8s";
+import { Protocol, Service, ServiceType } from "cdk8s-plus-34";
 import { basename } from "path";
 import { CLUSTER_ISSUER, DEFAULT_APP_PROPS, externalDnsHostname } from "../../lib/consts";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import { Construct } from "constructs";
 import { StorageClass } from "../../lib/volume";
 import { VmAlert, VmPodScrape, VmServiceScrape } from "../../imports/operator.victoriametrics.com";
-import { IntOrString, KubeService } from "../../imports/k8s";
 import { LOGS_RULE } from "../../lib/monitoring/alerts";
 import { addAlerts } from "./alerts";
 
@@ -198,7 +198,7 @@ class VMLogs extends Chart {
       },
     });
 
-    new KubeService(this, "syslog", {
+    const syslog = new Service(this, "syslog", {
       metadata: {
         name: "syslog",
         namespace: namespace,
@@ -206,29 +206,16 @@ class VMLogs extends Chart {
           ...externalDnsHostname("syslog.cmdcentral.xyz"),
         },
       },
-      spec: {
-        type: "LoadBalancer",
-        ports: [
-          {
-            name: "tcp",
-            port: 514,
-            targetPort: IntOrString.fromNumber(1514),
-            protocol: "TCP",
-          },
-          {
-            name: "udp",
-            port: 514,
-            targetPort: IntOrString.fromNumber(1514),
-            protocol: "UDP",
-          },
-        ],
-        selector: {
-          app: "server",
-          "app.kubernetes.io/instance": "prod",
-          "app.kubernetes.io/name": "victoria-logs-single",
-        },
-      },
+      type: ServiceType.LOAD_BALANCER,
+      ports: [
+        { name: "tcp", port: 514, targetPort: 1514, protocol: Protocol.TCP },
+        { name: "udp", port: 514, targetPort: 1514, protocol: Protocol.UDP },
+      ],
     });
+    // The pods belong to the victoria-logs chart, so select them by label.
+    syslog.selectLabel("app", "server");
+    syslog.selectLabel("app.kubernetes.io/instance", "prod");
+    syslog.selectLabel("app.kubernetes.io/name", "victoria-logs-single");
 
     new VmServiceScrape(this, "servicescrape", {
       metadata: {
