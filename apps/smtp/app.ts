@@ -1,5 +1,5 @@
-import { App, Chart, Size } from "cdk8s";
-import { ConfigMap, Cpu, EnvValue } from "cdk8s-plus-34";
+import { App, Chart, Duration, Size } from "cdk8s";
+import { ConfigMap, Cpu, EnvValue, Probe } from "cdk8s-plus-34";
 import { Construct } from "constructs";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
@@ -62,6 +62,20 @@ new AppPlus(app, `${name}-app`, {
   image: "boky/postfix:latest",
   disableIngress: true,
   ports: [port],
+  // The default 1s timeout was getting the pod killed whenever postfix was slow
+  // to answer the banner (exit 143).
+  livenessProbe: Probe.fromTcpSocket({
+    port,
+    periodSeconds: Duration.seconds(20),
+    timeoutSeconds: Duration.seconds(5),
+    failureThreshold: 5,
+  }),
+  readinessProbe: Probe.fromTcpSocket({
+    port,
+    periodSeconds: Duration.seconds(10),
+    timeoutSeconds: Duration.seconds(5),
+    failureThreshold: 3,
+  }),
   configmapMounts: [
     {
       name: `${name}-header-checks`,

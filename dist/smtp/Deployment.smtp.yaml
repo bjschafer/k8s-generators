@@ -50,16 +50,20 @@ spec:
           image: boky/postfix:latest
           imagePullPolicy: Always
           livenessProbe:
-            failureThreshold: 3
+            failureThreshold: 5
+            periodSeconds: 20
             tcpSocket:
               port: 25
+            timeoutSeconds: 5
           name: smtp
           ports:
             - containerPort: 25
           readinessProbe:
             failureThreshold: 3
+            periodSeconds: 10
             tcpSocket:
               port: 25
+            timeoutSeconds: 5
           resources:
             limits:
               cpu: 200m
