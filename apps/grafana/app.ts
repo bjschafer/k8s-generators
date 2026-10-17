@@ -1,8 +1,9 @@
-import { App, Chart, Helm } from "cdk8s";
+import { App, Chart } from "cdk8s";
 import { basename, join, dirname } from "path";
 import { readdirSync, readFileSync } from "fs";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
+import { HelmApp } from "../../lib/helm";
 import { Construct } from "constructs";
 import { ConfigMap } from "cdk8s-plus-34";
 import {
@@ -11,6 +12,8 @@ import {
 } from "../../imports/operator.victoriametrics.com";
 import { OpenBaoSecret } from "../../lib/secrets";
 import { infraResources } from "../../lib/util";
+// json2ts names the type after the schema's $id, which is just the repo URL
+import { HttpsGithubComGrafanaCommunityHelmCharts as GrafanaValues } from "../../imports/helm-values/grafana-values.schema";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -43,7 +46,7 @@ class Grafana extends Chart {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    new Helm(this, "grafana", {
+    new HelmApp<GrafanaValues>(this, "grafana", {
       chart: "grafana",
       repo: "https://grafana-community.github.io/helm-charts",
       version: version,

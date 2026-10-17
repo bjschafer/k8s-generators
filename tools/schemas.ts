@@ -104,6 +104,17 @@ export const schemaSources: SchemaSource[] = [
     },
   },
   {
+    name: "grafana",
+    description: "grafana chart values schema (shipped since chart 14.0.0)",
+    version: { kind: "app-const", appName: "grafana", constName: "version" },
+    outputFile: "schemas/grafana-values.schema.json",
+    fetch: {
+      kind: "helm",
+      chart: "grafana",
+      repo: "https://grafana-community.github.io/helm-charts",
+    },
+  },
+  {
     name: "kometa",
     description:
       "Kometa config-file schema -- not a Helm chart. apps/media/kometa.ts renders a ConfigMap from a " +
