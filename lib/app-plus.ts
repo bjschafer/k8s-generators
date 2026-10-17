@@ -112,6 +112,7 @@ export interface AppPlusProps {
   readonly tlsSecretName?: string;
   readonly disableIngress?: boolean;
   readonly limitToAMD64?: boolean;
+  readonly priorityClassName?: string;
   readonly command?: string[];
   readonly args?: string[];
   readonly monitoringConfig?: {
@@ -250,6 +251,13 @@ export class AppPlus extends Chart {
         JsonPatch.add("/spec/template/spec/nodeSelector", {
           "kubernetes.io/arch": "amd64",
         }),
+      );
+    }
+
+    if (props.priorityClassName) {
+      // cdk8s-plus's Deployment/PodSpec doesn't expose priorityClassName.
+      ApiObject.of(deploy).addJsonPatch(
+        JsonPatch.add("/spec/template/spec/priorityClassName", props.priorityClassName),
       );
     }
 

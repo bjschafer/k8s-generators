@@ -8,6 +8,17 @@ export function basename(path: string): string {
 }
 
 /**
+ * Resource block for infra components: CPU and memory requests plus a memory
+ * limit, deliberately no CPU limit so critical components are never throttled.
+ */
+export function infraResources(cpu: string, memory: string, memoryLimit: string) {
+  return {
+    requests: { cpu, memory },
+    limits: { memory: memoryLimit },
+  };
+}
+
+/**
  * Include all CRD manifests from a directory into the given scope.
  * Using cdk8s Include is appropriate here since CRDs are raw YAML definitions.
  *
