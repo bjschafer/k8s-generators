@@ -38,13 +38,25 @@ spec:
               weight: 1
       containers:
         - args:
+            - --requirepass
+            - $(VALKEY_PASSWORD)
             - --appendonly
             - "yes"
             - --save
             - ""
           command:
             - valkey-server
-          env: []
+          env:
+            - name: VALKEY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: VALKEY_PASSWORD
+                  name: manyfold-valkey-auth
+            - name: REDISCLI_AUTH
+              valueFrom:
+                secretKeyRef:
+                  key: VALKEY_PASSWORD
+                  name: manyfold-valkey-auth
           image: ghcr.io/valkey-io/valkey:8-alpine
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -79,7 +91,15 @@ spec:
               cpu: 100m
               memory: 64Mi
           securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsGroup: 999
+            runAsNonRoot: true
             runAsUser: 999
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /data
               name: valkey-data

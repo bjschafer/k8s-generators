@@ -31,6 +31,13 @@ spec:
       automountServiceAccountToken: false
       containers:
         - env:
+            - name: VALKEY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: VALKEY_PASSWORD
+                  name: broker-valkey-auth
+            - name: PAPERLESS_REDIS
+              value: redis://:$(VALKEY_PASSWORD)@broker-valkey-master:6379
             - name: PAPERLESS_AI_LLM_API_KEY
               valueFrom:
                 secretKeyRef:

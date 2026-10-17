@@ -68,7 +68,6 @@ const valkey = new Valkey(app, "valkey", {
       memory: Quantity.fromString("64Mi"),
     },
   },
-  noAuth: true,
 });
 
 const server = new AppPlus(app, name, {
@@ -96,7 +95,9 @@ const server = new AppPlus(app, name, {
       secret: dbCreds.secret,
       key: "password",
     }),
-    REDIS_URL: EnvValue.fromValue(`redis://${valkey.Service.name}:6379/1`),
+    // Must precede REDIS_URL so the `$(...)` expansion can see it.
+    VALKEY_PASSWORD: valkey.passwordEnv,
+    REDIS_URL: EnvValue.fromValue(`redis://:$(VALKEY_PASSWORD)@${valkey.Service.name}:6379/1`),
     PUID: EnvValue.fromValue("1006"),
     PGID: EnvValue.fromValue("1004"),
     ...manyfoldSecrets.toEnvValues(),

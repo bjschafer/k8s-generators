@@ -2,7 +2,9 @@ resources:
   - Deployment.manyfold.yaml
   - ExternalSecret.manyfold-db-credentials.yaml
   - ExternalSecret.manyfold-secrets.yaml
+  - ExternalSecret.manyfold-valkey-auth.yaml
   - Ingress.manyfold.yaml
+  - Password.manyfold-valkey-auth-valkey-password.yaml
   - PersistentVolume.nfs-3dprinting.yaml
   - PersistentVolumeClaim.nfs-3dprinting.yaml
   - Service.manyfold-valkey-master.yaml

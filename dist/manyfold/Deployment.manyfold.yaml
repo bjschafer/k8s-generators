@@ -43,8 +43,13 @@ spec:
                 secretKeyRef:
                   key: password
                   name: manyfold-db-credentials
+            - name: VALKEY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: VALKEY_PASSWORD
+                  name: manyfold-valkey-auth
             - name: REDIS_URL
-              value: redis://manyfold-valkey-master:6379/1
+              value: redis://:$(VALKEY_PASSWORD)@manyfold-valkey-master:6379/1
             - name: PUID
               value: "1006"
             - name: PGID

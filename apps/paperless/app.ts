@@ -74,7 +74,6 @@ const valkey = new Valkey(app, "valkey", {
   name: "broker",
   namespace: namespace,
   version: VALKEY_VERSION,
-  password: "paperless",
   resources: {
     requests: {
       cpu: Quantity.fromString("100m"),
@@ -234,7 +233,6 @@ class Paperless extends Chart {
         PAPERLESS_DBUSER: "paperless",
         PAPERLESS_OCR_LANGUAGE: "eng",
         PAPERLESS_OCR_USER_ARGS: '{"continue_on_soft_render_error": true}',
-        PAPERLESS_REDIS: `redis://:paperless@${valkey.Service.name}:6379`,
         PAPERLESS_TIKA_ENABLED: "1",
         PAPERLESS_TIKA_GOTENBERG_ENTPOINT: "http://gotenberg:3000",
         PAPERLESS_TIKA_ENDPOINT: "http://tika:9998",
@@ -323,6 +321,11 @@ class Paperless extends Chart {
         new EnvFrom(undefined, undefined, paperlessSecretKey),
       ],
       extraEnv: {
+        // Must precede PAPERLESS_REDIS so the `$(...)` expansion can see it.
+        VALKEY_PASSWORD: valkey.passwordEnv,
+        PAPERLESS_REDIS: EnvValue.fromValue(
+          `redis://:$(VALKEY_PASSWORD)@${valkey.Service.name}:6379`,
+        ),
         PAPERLESS_AI_LLM_API_KEY: EnvValue.fromSecretValue({
           secret: paperlessAiSecrets.secret,
           key: "CUSTOM_API_KEY",

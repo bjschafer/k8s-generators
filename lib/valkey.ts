@@ -1,9 +1,10 @@
 import { Chart } from "cdk8s";
-import { ISecret, Secret } from "cdk8s-plus-34";
+import { EnvValue } from "cdk8s-plus-34";
 import { BACKUP_ANNOTATION_EXCLUDE } from "./consts";
+import { GeneratedSecret } from "./secrets";
 import { Quantity, ResourceRequirements } from "cdk8s-plus-34/lib/imports/k8s";
 import { Construct } from "constructs";
-import { IntOrString, KubeSecret, KubeService, KubeStatefulSet } from "../imports/k8s";
+import { IntOrString, KubeService, KubeStatefulSet } from "../imports/k8s";
 
 // Template-literal rather than a hand-listed union: the union had to be edited
 // for every new major, which is exactly the edit a Renovate bump makes -- so a
@@ -26,14 +27,15 @@ export interface ValkeyProps {
   resources?: ResourceRequirements;
   storageSize?: Quantity;
   storageClass?: string;
-  password?: string;
-  noAuth?: boolean;
 }
 
 export class Valkey extends Chart {
   public readonly Service: KubeService;
-  public readonly Secret?: KubeSecret;
-  public readonly secret?: ISecret; // cdk8s-plus compatible secret reference
+  public readonly passwordSecret: GeneratedSecret;
+  // The password as an env var, for clients that take it on its own. Clients
+  // that only take a URL need it spliced in with `$(VAR)` expansion, which only
+  // sees variables defined earlier in the same container's env.
+  public readonly passwordEnv: EnvValue;
 
   constructor(scope: Construct, id: string, props: ValkeyProps) {
     super(scope, id);
@@ -45,22 +47,17 @@ export class Valkey extends Chart {
       ...props.extraLabels,
     };
 
-    if (!props.noAuth) {
-      this.Secret = new KubeSecret(this, `${id}-secret`, {
-        metadata: {
-          name: `${props.name}-valkey`,
-          namespace: props.namespace,
-          labels: labels,
-        },
-        type: "Opaque",
-        data: {
-          "valkey-password": Buffer.from(props.password || "changeme").toString("base64"),
-        },
-      });
-
-      // Create cdk8s-plus compatible secret reference for use with EnvValue APIs
-      this.secret = Secret.fromSecretName(this, `${id}-isecret`, `${props.name}-valkey`);
-    }
+    this.passwordSecret = new GeneratedSecret(this, `${id}-auth`, {
+      name: `${props.name}-valkey-auth`,
+      namespace: props.namespace,
+      data: { VALKEY_PASSWORD: {} },
+    });
+    this.passwordEnv = this.passwordSecret.toEnvValues().VALKEY_PASSWORD;
+    const passwordRef = {
+      valueFrom: {
+        secretKeyRef: { name: this.passwordSecret.secretName, key: "VALKEY_PASSWORD" },
+      },
+    };
 
     const volumeConfig = props.storageSize
       ? {}
@@ -119,22 +116,13 @@ export class Valkey extends Chart {
                 image: `ghcr.io/valkey-io/valkey:${props.version}`,
                 imagePullPolicy: "IfNotPresent",
                 command: ["valkey-server"],
-                args: props.noAuth
-                  ? ["--appendonly", "yes", "--save", ""]
-                  : ["--requirepass", "$(VALKEY_PASSWORD)", "--appendonly", "yes", "--save", ""],
-                env: props.noAuth
-                  ? []
-                  : [
-                      {
-                        name: "VALKEY_PASSWORD",
-                        valueFrom: {
-                          secretKeyRef: {
-                            name: this.Secret!.name,
-                            key: "valkey-password",
-                          },
-                        },
-                      },
-                    ],
+                args: ["--requirepass", "$(VALKEY_PASSWORD)", "--appendonly", "yes", "--save", ""],
+                env: [
+                  { name: "VALKEY_PASSWORD", ...passwordRef },
+                  // valkey-cli reads this, which keeps the password out of the
+                  // probes' argv.
+                  { name: "REDISCLI_AUTH", ...passwordRef },
+                ],
                 ports: [
                   {
                     name: "valkey",
@@ -147,9 +135,7 @@ export class Valkey extends Chart {
                 },
                 livenessProbe: {
                   exec: {
-                    command: props.noAuth
-                      ? ["valkey-cli", "ping"]
-                      : ["valkey-cli", "--no-auth-warning", "-a", "$(VALKEY_PASSWORD)", "ping"],
+                    command: ["valkey-cli", "ping"],
                   },
                   initialDelaySeconds: 20,
                   periodSeconds: 5,
@@ -159,9 +145,7 @@ export class Valkey extends Chart {
                 },
                 readinessProbe: {
                   exec: {
-                    command: props.noAuth
-                      ? ["valkey-cli", "ping"]
-                      : ["valkey-cli", "--no-auth-warning", "-a", "$(VALKEY_PASSWORD)", "ping"],
+                    command: ["valkey-cli", "ping"],
                   },
                   initialDelaySeconds: 20,
                   periodSeconds: 5,
@@ -171,6 +155,11 @@ export class Valkey extends Chart {
                 },
                 securityContext: {
                   runAsUser: 999,
+                  runAsGroup: 999,
+                  runAsNonRoot: true,
+                  allowPrivilegeEscalation: false,
+                  capabilities: { drop: ["ALL"] },
+                  seccompProfile: { type: "RuntimeDefault" },
                 },
                 volumeMounts: [
                   {

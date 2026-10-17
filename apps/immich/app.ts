@@ -94,10 +94,7 @@ const commonEnv: Record<string, EnvValue> = {
   IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue("http://immich-machine-learning:3003"),
   REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service!.name),
   REDIS_PORT: EnvValue.fromValue("6379"),
-  REDIS_PASSWORD: EnvValue.fromSecretValue({
-    secret: valkey.secret!,
-    key: "valkey-password",
-  }),
+  REDIS_PASSWORD: valkey.passwordEnv,
   DB_DATABASE_NAME: EnvValue.fromValue("immich"),
   DB_HOSTNAME: EnvValue.fromValue("immich-rw.postgres.svc.cluster.local"),
   DB_PORT: EnvValue.fromValue("5432"),

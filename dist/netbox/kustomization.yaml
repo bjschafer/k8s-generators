@@ -4,11 +4,12 @@ resources:
   - Deployment.netbox-worker.yaml
   - Deployment.netbox.yaml
   - ExternalSecret.db-creds.yaml
+  - ExternalSecret.netbox-valkey-auth.yaml
   - ExternalSecret.netbox.yaml
   - ExternalSecret.oidc.yaml
   - Ingress.netbox.yaml
+  - Password.netbox-valkey-auth-valkey-password.yaml
   - PersistentVolumeClaim.data.yaml
-  - Secret.netbox-valkey.yaml
   - Service.netbox-valkey-master.yaml
   - Service.netbox.yaml
   - StatefulSet.netbox-valkey-master.yaml

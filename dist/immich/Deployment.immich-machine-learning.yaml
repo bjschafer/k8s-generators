@@ -39,8 +39,8 @@ spec:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: valkey-password
-                  name: immich-valkey
+                  key: VALKEY_PASSWORD
+                  name: immich-valkey-auth
             - name: DB_DATABASE_NAME
               value: immich
             - name: DB_HOSTNAME

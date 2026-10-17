@@ -117,10 +117,7 @@ const server = new AppPlus(app, name, {
     ROMM_PORT: EnvValue.fromValue(`${port}`), // this seems to be a bug
 
     REDIS_HOST: EnvValue.fromValue(valkey.Service.name),
-    REDIS_PASSWORD: EnvValue.fromSecretValue({
-      secret: valkey.secret!,
-      key: "valkey-password",
-    }),
+    REDIS_PASSWORD: valkey.passwordEnv,
 
     SCAN_WORKERS: EnvValue.fromValue("4"),
 

@@ -50,17 +50,19 @@ spec:
             - name: VALKEY_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: valkey-password
-                  name: netbox-valkey
+                  key: VALKEY_PASSWORD
+                  name: netbox-valkey-auth
+            - name: REDISCLI_AUTH
+              valueFrom:
+                secretKeyRef:
+                  key: VALKEY_PASSWORD
+                  name: netbox-valkey-auth
           image: ghcr.io/valkey-io/valkey:8-alpine
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
               command:
                 - valkey-cli
-                - --no-auth-warning
-                - -a
-                - $(VALKEY_PASSWORD)
                 - ping
             failureThreshold: 5
             initialDelaySeconds: 20
@@ -75,9 +77,6 @@ spec:
             exec:
               command:
                 - valkey-cli
-                - --no-auth-warning
-                - -a
-                - $(VALKEY_PASSWORD)
                 - ping
             failureThreshold: 5
             initialDelaySeconds: 20
@@ -91,7 +90,15 @@ spec:
               cpu: 50m
               memory: 64Mi
           securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsGroup: 999
+            runAsNonRoot: true
             runAsUser: 999
+            seccompProfile:
+              type: RuntimeDefault
           volumeMounts:
             - mountPath: /data
               name: valkey-data

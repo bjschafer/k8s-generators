@@ -4,17 +4,18 @@ resources:
   - Deployment.gotenberg.yaml
   - Deployment.paperless.yaml
   - Deployment.tika.yaml
+  - ExternalSecret.broker-valkey-auth.yaml
   - ExternalSecret.paperless-ai-secrets.yaml
   - ExternalSecret.paperless-db-creds.yaml
   - ExternalSecret.paperless-ftp-credentials.yaml
   - ExternalSecret.paperless-oidc.yaml
   - ExternalSecret.paperless-secret-key.yaml
   - Ingress.paperless.yaml
+  - Password.broker-valkey-auth-valkey-password.yaml
   - Password.paperless-ftp-password-generator.yaml
   - Password.paperless-secret-key-generator.yaml
   - PersistentVolumeClaim.data.yaml
   - PersistentVolumeClaim.ftp.yaml
-  - Secret.broker-valkey.yaml
   - Service.broker-valkey-master.yaml
   - Service.ftpserver.yaml
   - Service.gotenberg.yaml

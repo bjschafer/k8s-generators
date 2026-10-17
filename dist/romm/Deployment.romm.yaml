@@ -63,8 +63,8 @@ spec:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: valkey-password
-                  name: romm-valkey
+                  key: VALKEY_PASSWORD
+                  name: romm-valkey-auth
             - name: SCAN_WORKERS
               value: "4"
             - name: TZ

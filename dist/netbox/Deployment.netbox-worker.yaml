@@ -39,8 +39,8 @@ spec:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: valkey-password
-                  name: netbox-valkey
+                  key: VALKEY_PASSWORD
+                  name: netbox-valkey-auth
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:

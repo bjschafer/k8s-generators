@@ -85,7 +85,6 @@ const valkey = new Valkey(app, "valkey", {
   name: name,
   namespace: namespace,
   version: VALKEY_VERSION,
-  password: "netbox",
   resources: {
     requests: {
       cpu: Quantity.fromString("50m"),
@@ -165,10 +164,7 @@ const sharedEnvFrom = [
 ];
 
 const sharedEnv = {
-  REDIS_PASSWORD: EnvValue.fromSecretValue({
-    secret: valkey.secret!,
-    key: "valkey-password",
-  }),
+  REDIS_PASSWORD: valkey.passwordEnv,
   DB_PASSWORD: EnvValue.fromSecretValue({
     secret: dbCreds.secret,
     key: "password",
