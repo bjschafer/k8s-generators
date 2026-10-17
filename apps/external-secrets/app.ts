@@ -1,6 +1,6 @@
 import { App, Chart } from "cdk8s";
 import { basename } from "path";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, HOMELAB_CRITICAL_PRIORITY_CLASS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { EsoValuesSchema } from "../../imports/helm-values/eso-values.schema";
 import { ClusterIssuer } from "../../imports/cert-manager.io";
@@ -33,6 +33,8 @@ new HelmApp<EsoValuesSchema>(app, "helm", {
   namespace: namespace,
   values: {
     openshiftFinalizers: false,
+    priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
+    certController: { priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS },
     livenessProbe: { enabled: true },
     resources: {
       requests: {
@@ -50,6 +52,7 @@ new HelmApp<EsoValuesSchema>(app, "helm", {
       },
     },
     webhook: {
+      priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
       livenessProbe: { enabled: true },
       certManager: {
         enabled: true,
