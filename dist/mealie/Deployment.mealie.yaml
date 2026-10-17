@@ -104,9 +104,14 @@ spec:
               memory: 512Mi
           securityContext:
             allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
             privileged: false
             readOnlyRootFilesystem: false
-            runAsNonRoot: false
+            runAsGroup: 911
+            runAsNonRoot: true
+            runAsUser: 911
             seccompProfile:
               type: RuntimeDefault
           volumeMounts:
@@ -117,7 +122,9 @@ spec:
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
-        runAsNonRoot: false
+        runAsGroup: 911
+        runAsNonRoot: true
+        runAsUser: 911
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30

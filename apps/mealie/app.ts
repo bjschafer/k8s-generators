@@ -3,7 +3,7 @@ import { Cpu, EnvFrom, EnvValue, Probe } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS, TZ } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT_UID, TZ } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { OpenBaoSecret } from "../../lib/secrets";
@@ -69,6 +69,11 @@ new AppPlus(app, `${name}-app`, {
     },
   },
   ports: [port],
+  // run.sh chowns /app and gosus to 911 when started as root, and does nothing
+  // when it already is 911. Only /app/data is written at runtime, and it's
+  // 911-owned.
+  securityContext: NONROOT_SECURITY_CONTEXT_UID(911, 911),
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(911, 911),
   livenessProbe: Probe.fromTcpSocket({
     port: port,
     initialDelaySeconds: Duration.seconds(45),
