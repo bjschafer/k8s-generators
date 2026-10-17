@@ -352,7 +352,12 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-          resources: {}
+          resources:
+            limits:
+              memory: 3Gi
+            requests:
+              cpu: 100m
+              memory: 2Gi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

@@ -233,7 +233,12 @@ spec:
             - containerPort: 7000
               name: webhook
               protocol: TCP
-          resources: {}
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 96Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

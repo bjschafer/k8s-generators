@@ -81,7 +81,12 @@ spec:
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 15
-          resources: {}
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 20m
+              memory: 64Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -156,7 +161,12 @@ spec:
             periodSeconds: 15
             successThreshold: 3
             timeoutSeconds: 15
-          resources: {}
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 30m
+              memory: 32Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -223,7 +233,12 @@ spec:
             periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 15
-          resources: {}
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              cpu: 10m
+              memory: 16Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

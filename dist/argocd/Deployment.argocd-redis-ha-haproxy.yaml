@@ -73,7 +73,12 @@ spec:
               port: probe
             initialDelaySeconds: 5
             periodSeconds: 3
-          resources: {}
+          resources:
+            limits:
+              memory: 384Mi
+            requests:
+              cpu: 10m
+              memory: 160Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

@@ -4,6 +4,7 @@ import { basename } from "path";
 import { ENABLE_SERVERSIDE_APPLY, NewArgoApp } from "../../lib/argo";
 import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
+import { infraResources } from "../../lib/util";
 import { NewKustomize } from "../../lib/kustomize";
 import { Certificate } from "../../imports/cert-manager.io";
 import {
@@ -63,30 +64,41 @@ new HelmApp(app, "helm", {
     // Matches the deployed topology, which came from manifests/ha/install.yaml.
     "redis-ha": {
       enabled: true,
+      redis: { resources: infraResources("20m", "64Mi", "256Mi") },
+      sentinel: { resources: infraResources("30m", "32Mi", "128Mi") },
+      splitBrainDetection: { resources: infraResources("10m", "16Mi", "64Mi") },
+      haproxy: { resources: infraResources("10m", "160Mi", "384Mi") },
     },
     controller: {
       replicas: 1,
       metrics: { enabled: true },
+      // Peaks near 1.8Gi on a large app set.
+      resources: infraResources("100m", "2Gi", "3Gi"),
     },
     server: {
       replicas: 2,
       metrics: { enabled: true },
+      resources: infraResources("20m", "192Mi", "512Mi"),
     },
     repoServer: {
       replicas: 2,
       metrics: { enabled: true },
+      resources: infraResources("50m", "256Mi", "1Gi"),
     },
     applicationSet: {
       replicas: 1,
       metrics: { enabled: true },
+      resources: infraResources("10m", "96Mi", "256Mi"),
     },
     notifications: {
       enabled: true,
       metrics: { enabled: true },
+      resources: infraResources("10m", "96Mi", "256Mi"),
     },
     dex: {
       enabled: true,
       metrics: { enabled: true },
+      resources: infraResources("10m", "64Mi", "256Mi"),
       // The entire reason this app exists in git.
       //
       // `argocd-dex rundex` runs `dex serve` as a *child* process. Dex treats a

@@ -94,7 +94,12 @@ spec:
             - containerPort: 9001
               name: metrics
               protocol: TCP
-          resources: {}
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 96Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
