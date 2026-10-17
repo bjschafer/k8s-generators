@@ -6,6 +6,7 @@ import { MonitoringRule } from "../../lib/monitoring/victoriametrics";
 import { Construct } from "constructs";
 import { VmServiceScrape } from "../../imports/operator.victoriametrics.com";
 import { OpenBaoSecret } from "../../lib/secrets";
+import { infraResources } from "../../lib/util";
 import heredoc from "tsheredoc";
 
 const namespace = basename(__dirname);
@@ -60,6 +61,7 @@ class Runner extends Chart {
       values: {
         gitlabUrl: "https://gitlab.cmdcentral.xyz",
         concurrent: 6,
+        resources: infraResources("10m", "160Mi", "384Mi"),
         logFormat: "json",
         metrics: {
           enabled: true,
