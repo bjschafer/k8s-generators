@@ -18,6 +18,7 @@ import {
   ImageCatalog,
   Pooler,
   PoolerSpecPgbouncerPoolMode,
+  PoolerSpecTemplateSpecContainersLivenessProbeTcpSocketPort,
   PoolerSpecType,
   ScheduledBackup,
   ScheduledBackupSpecBackupOwnerReference,
@@ -183,6 +184,27 @@ class ProdPostgres extends Chart {
 
         instances: 3,
         type: PoolerSpecType.RW,
+        // CNPG sets a readiness probe on pgbouncer but no liveness probe; the
+        // operator merges this container by name into the generated pod.
+        template: {
+          spec: {
+            containers: [
+              {
+                name: "pgbouncer",
+                livenessProbe: {
+                  tcpSocket: {
+                    port: PoolerSpecTemplateSpecContainersLivenessProbeTcpSocketPort.fromNumber(
+                      5432,
+                    ),
+                  },
+                  periodSeconds: 10,
+                  timeoutSeconds: 5,
+                  failureThreshold: 6,
+                },
+              },
+            ],
+          },
+        },
         pgbouncer: {
           poolMode: PoolerSpecPgbouncerPoolMode.SESSION,
           parameters: {
@@ -194,6 +216,8 @@ class ProdPostgres extends Chart {
       },
     });
 
+    // KubeService because the target is CNPG's *named* pgbouncer port, and
+    // cdk8s-plus ServicePort only takes a number.
     new KubeService(this, "lb-svc", {
       metadata: {
         name: "prod",

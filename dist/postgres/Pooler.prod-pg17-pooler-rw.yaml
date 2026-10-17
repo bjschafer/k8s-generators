@@ -13,4 +13,14 @@ spec:
       max_client_conn: "1000"
       server_idle_timeout: "600"
     poolMode: session
+  template:
+    spec:
+      containers:
+        - livenessProbe:
+            failureThreshold: 6
+            periodSeconds: 10
+            tcpSocket:
+              port: 5432
+            timeoutSeconds: 5
+          name: pgbouncer
   type: rw
