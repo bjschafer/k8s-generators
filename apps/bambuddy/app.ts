@@ -1,11 +1,11 @@
 import { App, Duration, Size } from "cdk8s";
-import { Capability, ContainerPort, Cpu, EnvValue, Probe, ServiceType } from "cdk8s-plus-34";
+import { ContainerPort, Cpu, EnvValue, Probe, ServiceType, Volume } from "cdk8s-plus-34";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
 import {
   DEFAULT_APP_PROPS,
-  DEFAULT_SECURITY_CONTEXT,
   METALLB_IP_ANNOTATION_KEY,
+  NONROOT_SECURITY_CONTEXT_UID,
   TZ,
 } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
@@ -54,7 +54,7 @@ NewArgoApp(name, {
 
 const dbCreds = createAppDatabaseSecret(app, name);
 
-new AppPlus(app, `${name}-app`, {
+const bambuddy = new AppPlus(app, `${name}-app`, {
   name: name,
   namespace: namespace,
   image: "ghcr.io/maziggy/bambuddy:latest",
@@ -112,14 +112,12 @@ new AppPlus(app, `${name}-app`, {
     VIRTUAL_PRINTER_ADVERTISE_ADDRESS: EnvValue.fromValue(lbAddress),
     VIRTUAL_PRINTER_PASV_ADDRESS: EnvValue.fromValue(lbAddress),
   },
-  containerSecurityContext: {
-    ...DEFAULT_SECURITY_CONTEXT,
-    // The virtual printer binds 322 and 990 directly -- both privileged, and
-    // upstream stopped redirecting them from high ports because the iptables
-    // REDIRECT rewrote the destination and misrouted FTP between printers.
-    // Upstream's compose grants the same capability for the same reason.
-    capabilities: { add: [Capability.NET_BIND_SERVICE] },
-  },
+  // The entrypoint chowns /app/data and /app/logs and gosus to 1000 when
+  // started as root, and execs the app directly otherwise. The virtual printer
+  // binds 322 and 990, which needs no NET_BIND_SERVICE here: the cluster's
+  // ip_unprivileged_port_start is 0.
+  securityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
+  containerSecurityContext: NONROOT_SECURITY_CONTEXT_UID(1000, 1000),
   volumes: [
     {
       name: `${name}-data`,
@@ -147,6 +145,12 @@ new AppPlus(app, `${name}-app`, {
     },
   },
 });
+
+// /app/logs is root-owned in the image and only writable because the root
+// entrypoint chowns it; the app writes bambuddy.log there.
+const logsVol = Volume.fromEmptyDir(bambuddy, "logs-vol", "logs");
+bambuddy.Deployment.addVolume(logsVol);
+bambuddy.Deployment.containers[0].mount("/app/logs", logsVol);
 
 new CmdcentralServiceMonitor(app, "sm", {
   name: name,

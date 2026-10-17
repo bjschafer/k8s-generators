@@ -94,11 +94,13 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
-              add:
-                - NET_BIND_SERVICE
+              drop:
+                - ALL
             privileged: false
             readOnlyRootFilesystem: false
-            runAsNonRoot: false
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
             seccompProfile:
               type: RuntimeDefault
           startupProbe:
@@ -109,12 +111,16 @@ spec:
           volumeMounts:
             - mountPath: /app/data
               name: pvc-bambuddy-data
+            - mountPath: /app/logs
+              name: logs
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
-        runAsNonRoot: false
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
@@ -123,3 +129,5 @@ spec:
           persistentVolumeClaim:
             claimName: bambuddy-data
             readOnly: false
+        - emptyDir: {}
+          name: logs
