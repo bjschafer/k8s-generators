@@ -34,6 +34,12 @@ spec:
             - mountPath: /sentinel
               name: sentinel
               readOnly: true
+          resources:
+            requests:
+              cpu: 5m
+              memory: 96Mi
+            limits:
+              memory: 192Mi
       hostPID: true
       restartPolicy: Always
       serviceAccountName: kured
