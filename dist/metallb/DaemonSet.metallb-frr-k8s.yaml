@@ -71,6 +71,12 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 96Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -98,6 +104,12 @@ spec:
               scheme: HTTPS
             periodSeconds: 10
           name: frr
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 96Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -127,6 +139,12 @@ spec:
             - /etc/frr_reloader/frr-reloader.sh
           image: quay.io/frrouting/frr:10.4.3
           name: reloader
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 64Mi
           volumeMounts:
             - mountPath: /var/run/frr
               name: frr-sockets
@@ -144,6 +162,12 @@ spec:
           ports:
             - containerPort: 9141
               name: frrmetricshttps
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 64Mi
           volumeMounts:
             - mountPath: /var/run/frr
               name: frr-sockets
@@ -174,6 +198,12 @@ spec:
                   fieldPath: metadata.name
           image: quay.io/frrouting/frr:10.4.3
           name: frr-status
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 64Mi
           volumeMounts:
             - mountPath: /var/run/frr
               name: frr-sockets
@@ -226,6 +256,7 @@ spec:
               name: frr-status
       nodeSelector:
         kubernetes.io/os: linux
+      priorityClassName: system-node-critical
       serviceAccountName: metallb-frr-k8s-controller
       shareProcessNamespace: true
       terminationGracePeriodSeconds: 0

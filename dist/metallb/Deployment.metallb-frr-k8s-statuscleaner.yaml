@@ -55,6 +55,12 @@ spec:
               scheme: HTTPS
             initialDelaySeconds: 10
             periodSeconds: 10
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 96Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -66,6 +72,7 @@ spec:
               name: cert
               readOnly: true
       hostNetwork: true
+      priorityClassName: system-node-critical
       serviceAccountName: metallb-frr-k8s-controller
       terminationGracePeriodSeconds: 10
       tolerations:

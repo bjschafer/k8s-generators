@@ -1,9 +1,10 @@
 import { App, Chart } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
-import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { DEFAULT_APP_PROPS, HOMELAB_CRITICAL_PRIORITY_CLASS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { Values } from "../../imports/helm-values/metallb-values.schema";
 import { Construct } from "constructs";
+import { infraResources } from "../../lib/util";
 import {
   BgpAdvertisement,
   BgpPeer,
@@ -39,6 +40,8 @@ new HelmApp<Values>(app, "helm", {
     controller: {
       image: {},
       serviceAccount: {},
+      priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
+      resources: infraResources("10m", "160Mi", "384Mi"),
     },
     speaker: {
       frr: {
@@ -47,6 +50,20 @@ new HelmApp<Values>(app, "helm", {
       image: {},
       serviceAccount: {},
       tolerateMaster: true,
+      priorityClassName: "system-node-critical",
+      resources: infraResources("10m", "112Mi", "256Mi"),
+    },
+    "frr-k8s": {
+      frrk8s: {
+        priorityClassName: "system-node-critical",
+        // Shared by the frr-k8s controller container and the statuscleaner
+        // Deployment; the chart has no separate key for the latter.
+        resources: infraResources("10m", "96Mi", "256Mi"),
+        frr: { resources: infraResources("10m", "96Mi", "256Mi") },
+        reloader: { resources: infraResources("5m", "64Mi", "128Mi") },
+        frrMetrics: { resources: infraResources("5m", "64Mi", "128Mi") },
+        frrStatus: { resources: infraResources("5m", "64Mi", "128Mi") },
+      },
     },
   },
 });
