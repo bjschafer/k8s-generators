@@ -33,6 +33,7 @@ new HelmApp<EsoValuesSchema>(app, "helm", {
   namespace: namespace,
   values: {
     openshiftFinalizers: false,
+    livenessProbe: { enabled: true },
     resources: {
       requests: {
         cpu: "50m",
@@ -49,6 +50,7 @@ new HelmApp<EsoValuesSchema>(app, "helm", {
       },
     },
     webhook: {
+      livenessProbe: { enabled: true },
       certManager: {
         enabled: true,
         cert: {
