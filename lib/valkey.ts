@@ -133,12 +133,18 @@ export class Valkey extends Chart {
                   limits: props.resources.limits,
                   requests: props.resources.requests,
                 },
+                // Every exec probe is a runc exec charged to this container's
+                // cgroup, and two of them every 5s cost ~6x what valkey-server
+                // itself uses at idle -- in bursts that blow straight through a
+                // 100m quota and trip CPUThrottlingHigh. Liveness only needs the
+                // socket, so the kubelet checks it without an exec; readiness
+                // keeps a real authenticated PING, just at a slower cadence.
                 livenessProbe: {
-                  exec: {
-                    command: ["valkey-cli", "ping"],
+                  tcpSocket: {
+                    port: IntOrString.fromString("valkey"),
                   },
                   initialDelaySeconds: 20,
-                  periodSeconds: 5,
+                  periodSeconds: 10,
                   timeoutSeconds: 6,
                   failureThreshold: 5,
                   successThreshold: 1,
@@ -148,7 +154,7 @@ export class Valkey extends Chart {
                     command: ["valkey-cli", "ping"],
                   },
                   initialDelaySeconds: 20,
-                  periodSeconds: 5,
+                  periodSeconds: 15,
                   timeoutSeconds: 2,
                   failureThreshold: 5,
                   successThreshold: 1,

@@ -60,14 +60,12 @@ spec:
           image: ghcr.io/valkey-io/valkey:8-alpine
           imagePullPolicy: IfNotPresent
           livenessProbe:
-            exec:
-              command:
-                - valkey-cli
-                - ping
             failureThreshold: 5
             initialDelaySeconds: 20
-            periodSeconds: 5
+            periodSeconds: 10
             successThreshold: 1
+            tcpSocket:
+              port: valkey
             timeoutSeconds: 6
           name: valkey
           ports:
@@ -80,7 +78,7 @@ spec:
                 - ping
             failureThreshold: 5
             initialDelaySeconds: 20
-            periodSeconds: 5
+            periodSeconds: 15
             successThreshold: 1
             timeoutSeconds: 2
           resources:
