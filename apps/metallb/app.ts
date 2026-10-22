@@ -89,7 +89,7 @@ class MetalLBConfig extends Chart {
         // and all ingress timed out after the 2026-10-22 worker reboots until
         // `clear bgp` on the gateway. kube-vip's GoBGP peers, on normal timers,
         // recovered on their own from the same reboots. 90s/30s per RFC 4271.
-        holdTime: "90s",
+        holdTime: "1m30s", // the API normalises "90s" to this; anything else reads OutOfSync forever
         keepaliveTime: "30s",
       },
     });
