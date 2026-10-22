@@ -4,6 +4,8 @@ metadata:
   name: gateway
   namespace: metallb-system
 spec:
+  holdTime: 90s
+  keepaliveTime: 30s
   myASN: 64512
   peerASN: 64512
   peerAddress: 10.0.10.1

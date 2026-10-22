@@ -81,6 +81,16 @@ class MetalLBConfig extends Chart {
         myAsn: 64512,
         peerAsn: 64512,
         peerAddress: "10.0.10.1",
+        // Unset, these defaulted to 0s, which FRR negotiates as "no keepalives,
+        // never time out". A hard-rebooted worker sends no Cease, so the gateway
+        // kept each old session ESTABLISHED forever and rejected the rebooted
+        // speaker's reconnect as a Cease/Connection Collision -- leaving stale
+        // routes to nodes that no longer had a Traefik endpoint (Local policy),
+        // and all ingress timed out after the 2026-10-22 worker reboots until
+        // `clear bgp` on the gateway. kube-vip's GoBGP peers, on normal timers,
+        // recovered on their own from the same reboots. 90s/30s per RFC 4271.
+        holdTime: "90s",
+        keepaliveTime: "30s",
       },
     });
 
