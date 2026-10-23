@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/sysadminsmedia/homebox:latest@sha256:d49f12caf25ce3fa7f44102bb74953f3dff2dfdad38d87bd9057f3f611e797bb
+  - ghcr.io/sysadminsmedia/homebox:latest@sha256:9d0b64776c694f018c0ca06faf52105a33ca376024f46bb58e6ab0e2b728bb61
