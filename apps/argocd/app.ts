@@ -23,7 +23,7 @@ const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
 // renovate: datasource=helm depName=argo-cd registryUrl=https://argoproj.github.io/argo-helm
-const version = "10.11.1";
+const version = "10.11.6";
 
 const hostname = "argo.cmdcentral.xyz";
 const tlsSecretName = "argocd-server";
