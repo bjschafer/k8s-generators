@@ -679,6 +679,29 @@ export interface HttpsGithubComGrafanaCommunityHelmCharts {
     readinessProbe?: {
       [k: string]: unknown;
     };
+    repositories?: {
+      apiNamespace?: string;
+      apiSkipTlsVerify?: boolean;
+      apiTimeout?: number;
+      apiURL?: string;
+      enabled?: boolean;
+      env?: {
+        [k: string]: unknown;
+      };
+      envValueFrom?: {
+        [k: string]: unknown;
+      };
+      extraMounts?: unknown[];
+      healthPort?: number;
+      label?: string;
+      labelValue?: string;
+      resource?: "configmap" | "secret" | "both";
+      resourceName?: string;
+      searchNamespace?: string | unknown[] | null;
+      sizeLimit?: string | number;
+      watchMethod?: "WATCH" | "SLEEP";
+      [k: string]: unknown;
+    };
     resources?: {
       [k: string]: unknown;
     };
