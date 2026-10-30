@@ -114,6 +114,12 @@ const bambuddy = new AppPlus(app, `${name}-app`, {
     DATABASE_URL: EnvValue.fromValue(
       `postgresql+asyncpg://${name}:$(BAMBUDDY_DB_PASSWORD)@prod.postgres.svc.cluster.local:5432/${name}`,
     ),
+    // Upstream's PostgreSQL default is pool_size 20 + max_overflow 60, sized
+    // for printer farms. Print starts burst into the overflow and pin the
+    // pooler's per-user cap (20 x 3 instances = 60), pushing prod-pg17 past
+    // its 90% connection alert. One printer needs nowhere near that.
+    DB_POOL_SIZE: EnvValue.fromValue("5"),
+    DB_MAX_OVERFLOW: EnvValue.fromValue("10"),
     // Without these the virtual printer hands the slicer its own pod IP as the
     // upload target. Nothing off the cluster network routes there, so sends
     // die partway through rather than failing cleanly.
