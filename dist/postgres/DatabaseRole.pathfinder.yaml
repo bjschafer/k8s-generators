@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: pathfinder
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  connectionLimit: 30
+  login: true
+  name: pathfinder

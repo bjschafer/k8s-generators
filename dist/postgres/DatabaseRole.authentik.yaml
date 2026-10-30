@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: authentik
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  connectionLimit: 70
+  login: true
+  name: authentik

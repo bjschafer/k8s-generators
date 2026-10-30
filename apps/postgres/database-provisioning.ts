@@ -13,7 +13,7 @@ import {
   DatabaseSpecEnsure,
 } from "../../imports/postgresql.cnpg.io";
 import { OPENBAO_SHARED, OpenBaoSecret } from "../../lib/secrets";
-import { DATABASES } from "./databases";
+import { DATABASES, DEFAULT_CONNECTION_LIMIT, LEGACY_ROLES } from "./databases";
 
 /**
  * Result from creating app database credentials.
@@ -45,11 +45,28 @@ export function createDatabaseRoles(scope: Construct, clusterName: string): Char
         name: db.name,
         login: true,
         comment: db.comment,
+        connectionLimit: DEFAULT_CONNECTION_LIMIT,
         ...db.roleConfig,
         // All databases have password secrets (either from OpenBao or auto-generated)
         passwordSecret: {
           name: `${db.name}-db-credentials`,
         },
+      },
+    });
+  }
+
+  for (const role of LEGACY_ROLES) {
+    new DatabaseRole(chart, `role-${role.name}`, {
+      metadata: {
+        name: role.name,
+        namespace: "postgres",
+      },
+      spec: {
+        cluster: { name: clusterName },
+        name: role.name,
+        login: true,
+        connectionLimit: role.connectionLimit ?? DEFAULT_CONNECTION_LIMIT,
+        // No passwordSecret: the operator leaves an adopted role's password alone.
       },
     });
   }

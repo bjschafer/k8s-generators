@@ -202,3 +202,46 @@ export const DATABASES: DatabaseConfig[] = [
     // those grants it SELECT itself (see apps/energy/load.sql).
   },
 ];
+
+/**
+ * Concurrent-connection cap for every role in DATABASES and LEGACY_ROLES that
+ * does not set its own. The poolers alone let one role hold 60 server
+ * connections (default_pool_size 20 x 3 instances), so a single app with an
+ * oversized client pool could starve everyone else of max_connections; with a
+ * per-role cap it only fails its own logins. Override with
+ * `roleConfig.connectionLimit` / `connectionLimit`, sized from the role's
+ * observed peak in `cnpg_backends_total`.
+ */
+export const DEFAULT_CONNECTION_LIMIT = 30;
+
+/**
+ * Roles that predate this registry and still carry hand-set passwords, adopted
+ * only so their connection limit lives in git.
+ *
+ * Adoption forces every omitted attribute back to its default, which is
+ * harmless here only because all of these were verified to be plain logins
+ * (inherit, no memberships, no comment, no expiry). No passwordSecret is set,
+ * so the operator never touches the password. Moving one into DATABASES
+ * instead rotates its password, same as `hass` above.
+ *
+ * `app` is left out deliberately: it is the cluster's initdb owner, not an app.
+ */
+export interface LegacyRoleConfig {
+  name: string;
+  connectionLimit?: number;
+}
+
+export const LEGACY_ROLES: LegacyRoleConfig[] = [
+  { name: "atuin" },
+  // Peaks around 55 across server, worker and the pooler's idle connections.
+  { name: "authentik", connectionLimit: 70 },
+  { name: "grafana" },
+  { name: "linkwarden" },
+  { name: "mealie" },
+  { name: "miniflux" },
+  { name: "netbox" },
+  { name: "paperless" },
+  { name: "pathfinder" },
+  { name: "pdns" },
+  { name: "spoolman" },
+];

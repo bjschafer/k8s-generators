@@ -139,7 +139,11 @@ class ProdPostgres extends Chart {
           ],
           parameters: {
             max_slot_wal_keep_size: "1GB",
-            max_connections: "200",
+            // Steady state is ~140. Headroom for bursts on top of the per-role
+            // caps in databases.ts (DEFAULT_CONNECTION_LIMIT); idle backends
+            // cost a few MB each against the 4Gi limit. Changing this restarts
+            // the primary in place (primaryUpdateMethod: restart).
+            max_connections: "300",
             // minimal-trixie image has no locales installed; must use C
             lc_messages: "C",
             lc_monetary: "C",
