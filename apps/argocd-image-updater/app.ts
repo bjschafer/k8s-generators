@@ -14,7 +14,7 @@ const name = basename(__dirname);
 const namespace = "argocd";
 const app = new App(DEFAULT_APP_PROPS(name));
 // renovate: datasource=helm depName=argocd-image-updater registryUrl=https://argoproj.github.io/argo-helm
-const version = "1.3.2";
+const version = "1.4.0";
 
 // apps/metrics' VmPodScrape targets this port. The chart's default is 8443
 // with authn/authz in front of it, which that scrape can't speak.
