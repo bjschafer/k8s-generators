@@ -163,6 +163,12 @@ export interface SchemaForVeleroHelmChart {
       provider: string;
       bucket: string;
       caCert?: string | null;
+      caCertRef?: {
+        name?: string;
+        key?: string;
+        optional?: boolean;
+        [k: string]: unknown;
+      } | null;
       prefix?: string | null;
       default?: boolean | null;
       validationFrequency?: string | null;
