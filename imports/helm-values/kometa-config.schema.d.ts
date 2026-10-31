@@ -243,7 +243,11 @@ export interface KometaConfigSchema {
   ntfy?: Ntfy;
   anidb?: Anidb;
   sonarr?: Sonarr1;
+  seerr?: Seerr1;
   radarr?: Radarr1;
+  lidarr?: Lidarr;
+  lastfm?: Lastfm;
+  ytmusic?: Ytmusic;
   settings?: Settings;
   mal?: Mal;
   trakt?: Trakt;
@@ -260,7 +264,7 @@ export interface KometaConfigSchema {
 export interface Libraries {
   /**
    * This interface was referenced by `Libraries`'s JSON-Schema definition
-   * via the `patternProperty` "^(?!plex|tmdb|tautulli|webhooks|omdb|mdblist|notifiarr|gotify|ntfy|anidb|radarr|sonarr|trakt|yamtrack|flicklist|serializd|floppy|mal).+$".
+   * via the `patternProperty` "^(?!plex|tmdb|tautulli|webhooks|omdb|mdblist|notifiarr|gotify|ntfy|anidb|radarr|sonarr|seerr|lidarr|lastfm|ytmusic|trakt|yamtrack|flicklist|serializd|floppy|mal).+$".
    */
   [k: string]:
     | {
@@ -291,13 +295,20 @@ export interface Libraries {
         plex?: Plex;
         radarr?: Radarr;
         sonarr?: Sonarr;
+        seerr?: Seerr;
+        lidarr?: Lidarr;
         tautulli?: Tautulli;
         tracearr?: Tracearr;
         template_variables?: TemplateVariables2;
         /**
-         * Used to schedule when a library is run using the schedule options.
+         * Used to schedule when a library is run using the schedule options, or to select an item scope with full, added(duration), diff, index(range), or items(ids) modes. Added durations accept a positive integer followed by m, h, or d; no unit means days.
          */
-        schedule?: Schedule;
+        schedule?:
+          | Schedule
+          | {
+              schedule: Schedule & string;
+              mode: string;
+            }[];
         /**
          * Used to schedule when overlays are run for this library.
          */
@@ -544,6 +555,10 @@ export interface TemplateVariables {
    * Changes the name_mapping for all collections. Use <<key_name>> as a placeholder.
    */
   name_mapping?: string;
+  seerr_add_missing?: boolean;
+  seerr_instance?: "standard" | "4k" | "both";
+  seerr_add_existing?: boolean;
+  seerr_overrides?: SeerrOverrides;
   /**
    * Override Radarr add_missing for all collections in this defaults file.
    */
@@ -821,6 +836,15 @@ export interface TemplateVariables {
    * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
    * via the `patternProperty` "^visible_shared_.+$".
    *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^seerr_add_missing_.+$".
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^seerr_instance_.+$".
+   *
+   * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+   * via the `patternProperty` "^seerr_add_existing_.+$".
+   *
    * Override Radarr add_missing for a specific collection by key.
    *
    * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
@@ -946,6 +970,10 @@ export interface TemplateVariables {
     | string
     | number
     | Schedule
+    | "standard"
+    | "4k"
+    | "both"
+    | SeerrOverrides
     | string[]
     | "sync"
     | "append"
@@ -1011,6 +1039,22 @@ export interface TemplateVariables {
         [k: string]: string | string[];
       }
     | undefined;
+}
+/**
+ * This interface was referenced by `TemplateVariables`'s JSON-Schema definition
+ * via the `patternProperty` "^seerr_overrides_.+$".
+ *
+ * This interface was referenced by `TemplateVariables3`'s JSON-Schema definition
+ * via the `patternProperty` "^seerr_overrides_.+$".
+ */
+export interface SeerrOverrides {
+  standard?: SeerrRequestOverrides;
+  "4k"?: SeerrRequestOverrides;
+}
+export interface SeerrRequestOverrides {
+  server_id?: number;
+  quality_profile?: number | string;
+  root_folder?: string;
 }
 export interface FilePathCollectionWithTemplateVariables {
   file: string;
@@ -1738,6 +1782,10 @@ export interface LegacyDefaultOverlayPath1 {
   template_variables?: TemplateVariables1;
 }
 export interface Operations {
+  /**
+   * Maximum number of items per Plex bulk edit batch. Omit or set to null to process all items in one batch.
+   */
+  plex_bulk_edit_batch_size?: number | null;
   assets_for_all?: boolean;
   assets_for_all_collections?: boolean;
   /**
@@ -2452,8 +2500,8 @@ export interface Operations {
       )[];
   mass_poster_update?: {
     source?:
-      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
-      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")[];
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")[];
     language?: string;
     seasons?: boolean;
     episodes?: boolean;
@@ -2462,8 +2510,8 @@ export interface Operations {
   };
   mass_background_update?: {
     source?:
-      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
-      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")[];
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")[];
     language?: string;
     seasons?: boolean;
     episodes?: boolean;
@@ -2472,11 +2520,11 @@ export interface Operations {
   };
   mass_image_update?: {
     poster?:
-      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")
       | {
           source?:
-            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
-            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")[];
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")[];
           language?: string;
           seasons?: boolean;
           episodes?: boolean;
@@ -2484,11 +2532,11 @@ export interface Operations {
           ignore_overlays?: boolean;
         };
     background?:
-      | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
+      | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")
       | {
           source?:
-            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")
-            | ("tmdb" | "trakt" | "tvdb" | "plex" | "lock" | "unlock")[];
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")
+            | ("tmdb" | "trakt" | "tvdb" | "plex" | "ytmusic" | "lock" | "unlock")[];
           language?: string;
           seasons?: boolean;
           episodes?: boolean;
@@ -2515,6 +2563,8 @@ export interface Operations {
   mass_collection_mode?: "default" | "hide" | "hide_items" | "show_items";
   radarr_remove_by_tag?: string[];
   sonarr_remove_by_tag?: string[];
+  lidarr_add_all_existing?: boolean;
+  lidarr_remove_by_tag?: string[];
   delete_collections?: {
     configured?: boolean;
     managed?: boolean;
@@ -3086,6 +3136,27 @@ export interface Sonarr {
   sonarr_path?: string | null;
   plex_path?: string | null;
 }
+export interface Seerr {
+  url?: string;
+  apikey?: string;
+}
+export interface Lidarr {
+  url?: string | null;
+  token?: string | null;
+  add_missing?: boolean;
+  add_existing?: boolean;
+  upgrade_existing?: boolean;
+  monitor_existing?: boolean;
+  ignore_cache?: boolean;
+  root_folder_path?: string | null;
+  monitor?: "all" | "future" | "missing" | "existing" | "first" | "latest" | "none";
+  monitor_new_albums?: "all" | "none" | "new";
+  quality_profile?: string | number | null;
+  tag?: string | string[] | null;
+  search?: boolean;
+  lidarr_path?: string | null;
+  plex_path?: string | null;
+}
 export interface Tautulli {
   apikey?: string | null;
   url?: string | null;
@@ -3179,6 +3250,17 @@ export interface Plex1 {
  * API Information to connect to TMDb; REQUIRED for the script to run
  */
 export interface Tmdb {
+  /**
+   * TMDb v4 API Read Access Token, used only for TMDb list_export
+   */
+  access_token?: string;
+  /**
+   * TMDb user authorization saved after the first TMDb list export
+   */
+  authorization?: {
+    access_token?: string;
+    account_id?: string;
+  };
   /**
    * API Key to connect to TMDb; REQUIRED for the script to run
    */
@@ -3897,6 +3979,10 @@ export interface Sonarr1 {
   plex_path?: string | null;
   sonarr_path?: string | null;
 }
+export interface Seerr1 {
+  url: string;
+  apikey: string;
+}
 export interface Radarr1 {
   url?: string | null;
   token?: string | null;
@@ -3914,6 +4000,10 @@ export interface Radarr1 {
   radarr_path?: string | null;
   plex_path?: string | null;
 }
+export interface Lastfm {
+  apikey?: string | null;
+}
+export interface Ytmusic {}
 export interface Mal {
   client_id?: string | null;
   client_secret?: string | null;
@@ -4036,6 +4126,10 @@ export interface TemplateVariables3 {
   ignore_imdb_ids?: string | unknown[];
   item_radarr_tag?: string | unknown[];
   item_sonarr_tag?: string | unknown[];
+  seerr_add_missing?: boolean;
+  seerr_instance?: "standard" | "4k" | "both";
+  seerr_add_existing?: boolean;
+  seerr_overrides?: SeerrOverrides;
   radarr_add_missing?: boolean;
   radarr_folder?: string;
   radarr_tag?: string | unknown[];
