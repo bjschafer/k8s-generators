@@ -17,7 +17,7 @@ const image = "vaultwarden/server";
 // Tracked by Renovate rather than the Argo image updater, so every version
 // that reaches the password vault is a commit in git.
 // renovate: datasource=docker depName=vaultwarden/server
-const version = "1.37.4";
+const version = "1.37.5";
 // Unprivileged: the image defaults to 80, which a non-root process cannot bind.
 const port = 8080;
 // The canonical URL. Vaultwarden takes exactly one DOMAIN, and builds the SSO
