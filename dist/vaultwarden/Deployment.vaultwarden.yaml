@@ -93,7 +93,7 @@ spec:
                 secretKeyRef:
                   key: PUSH_INSTALLATION_KEY
                   name: vaultwarden
-          image: vaultwarden/server:1.37.4
+          image: vaultwarden/server:1.37.5
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
