@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-logs-single
     app.kubernetes.io/version: v1.53.0
-    helm.sh/chart: victoria-logs-single-0.13.10
+    helm.sh/chart: victoria-logs-single-0.13.11
   name: prod-victoria-logs-single-server
   namespace: logs
 spec:
@@ -58,7 +58,7 @@ spec:
             tcpSocket:
               port: http
             timeoutSeconds: 5
-          name: vlogs
+          name: vlsingle
           ports:
             - containerPort: 9428
               name: http
