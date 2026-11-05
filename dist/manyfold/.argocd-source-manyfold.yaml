@@ -1,4 +1,4 @@
 kustomize:
   images:
-  - ghcr.io/manyfold3d/manyfold:latest@sha256:f69029a8f21b76de0b1558f175de19009324f96e4ecd80143997e97174c08fa4
+  - ghcr.io/manyfold3d/manyfold:latest@sha256:6e2ebd791019c2a5deff9940eac682a87f2058957515c1d987d904a6b6761b1e
   - ghcr.io/valkey-io/valkey:8-alpine@sha256:2602ace2be6569bc2bbb06f873776516ab9089821525be34f4305c67eb9db02a
