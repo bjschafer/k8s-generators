@@ -2,13 +2,24 @@ import { App, Chart, Helm, HelmProps } from "cdk8s";
 import { ARGO_DEFAULT_PROPS, ARGO_DESTINATION_SERVER, ARGO_NAMESPACE, ArgoAppProps } from "./argo";
 import { Construct } from "constructs";
 import { Application } from "../imports/argoproj.io";
+import { KUBERNETES_VERSION } from "./consts";
 
 // Set by mise from the pinned kubectl version; see mise.toml [env]. Checked
 // lazily here (rather than at module load in lib/consts.ts) so importing
 // consts.ts doesn't break tooling that never renders a Helm chart.
+//
+// Also enforces that the kubectl pin matches K3S_VERSION. Renovate bumps both in
+// one PR, but a hand edit to either could otherwise render every chart's
+// .Capabilities against a Kubernetes version the cluster isn't running.
 function getKubeVersion(): string {
-  if (!process.env.KUBE_VERSION) throw new Error("KUBE_VERSION is not set — run via mise");
-  return process.env.KUBE_VERSION;
+  const kubeVersion = process.env.KUBE_VERSION;
+  if (!kubeVersion) throw new Error("KUBE_VERSION is not set — run via mise");
+  if (kubeVersion !== KUBERNETES_VERSION) {
+    throw new Error(
+      `mise.toml kubectl pin (${kubeVersion}) does not match K3S_VERSION in lib/consts.ts (${KUBERNETES_VERSION}) — bump them together`,
+    );
+  }
+  return kubeVersion;
 }
 
 export interface ArgoHelmAppProps {

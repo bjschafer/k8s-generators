@@ -7,9 +7,9 @@ export const DEFAULT_MEM_LIMIT = Quantity.fromString("256Mi");
 
 // The k3s release every node runs. Bumping this is what actually triggers a
 // rolling cluster upgrade (apps/system-upgrade compares it against each node's
-// kubelet version, so it stays inert until the two disagree). Keep the mise.toml
-// kubectl pin in step with it; renovate.json disables that pin's own updates
-// precisely so it can only move with this line.
+// kubelet version, so it stays inert until the two disagree). The mise.toml
+// kubectl pin carries the same Renovate annotation, so both move in one PR, and
+// lib/helm.ts refuses to render if they ever disagree.
 // renovate: datasource=custom.k3s depName=k3s versioning=loose
 export const K3S_VERSION = "v1.37.2+k3s1";
 

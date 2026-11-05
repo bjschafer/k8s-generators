@@ -44,9 +44,10 @@
       "automerge": false
     },
     {
-      "description": "k3s cluster upgrades roll every node and change the Kubernetes API surface. Renovate can open the PR and push the regenerated dist/, but a human must schedule the outage and read the release notes before Argo applies it -- never automerge.",
+      "description": "k3s cluster upgrades roll every node and change the Kubernetes API surface. Renovate can open the PR and push the regenerated dist/, but a human must schedule the outage and read the release notes before Argo applies it -- never automerge. Two lines carry this dependency: K3S_VERSION in lib/consts.ts and the kubectl pin in mise.toml (which sets KUBE_VERSION for `helm template`). groupName keeps them on one branch so CI renders the bump against the matching KUBE_VERSION on its first pass; lib/helm.ts fails the build if they disagree.",
       "matchDatasources": ["custom.k3s"],
       "matchDepNames": ["k3s"],
+      "groupName": "k3s",
       "automerge": false
     },
     {
@@ -123,7 +124,7 @@
       "labels": ["pinned"]
     },
     {
-      "description": "kubectl is only supported within one minor of the apiserver, so this pin belongs to the cluster's k3s release, not to kubectl's own release cadence -- left to float it drifts ahead of the cluster and silently changes KUBE_VERSION, which feeds `helm template`'s .Capabilities and re-renders manifests. It moves by hand alongside K3S_VERSION in lib/consts.ts, in the same PR as the k3s bump that a human already has to review.",
+      "description": "kubectl is only supported within one minor of the apiserver, so this pin belongs to the cluster's k3s release, not to kubectl's own release cadence -- left to float it drifts ahead of the cluster and silently changes KUBE_VERSION, which feeds `helm template`'s .Capabilities and re-renders manifests. Instead the custom.regex mise.toml manager below reads that line as a second copy of the k3s dependency, so it moves in the same PR as K3S_VERSION in lib/consts.ts. This rule stays so the two managers never fight over the line.",
       "matchManagers": ["mise"],
       "matchDepNames": ["kubectl"],
       "enabled": false
@@ -139,6 +140,14 @@
     }
   },
   "customManagers": [
+    {
+      "customType": "regex",
+      "description": "mise.toml tool pins annotated with a `# renovate: datasource=... depName=...` comment on the line above. Currently only the kubectl pin, which tracks the k3s release rather than kubectl's own (see the k3s and kubectl packageRules). extractVersion strips k3s's leading `v` and `+k3sN` suffix so the pin stays a bare upstream version mise can install.",
+      "managerFilePatterns": ["/^mise\\.toml$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\n[^\\n=]+= \"(?<currentValue>[^\"]+)\""
+      ]
+    },
     {
       "customType": "regex",
       "description": "Bump literal versions pinned in tools/sources.ts (velero, kured, system-upgrade-controller, and the still-disabled cnpg entries awaiting that app's migration out of the legacy prod repo), each annotated with a `// renovate: datasource=... depName=...` comment directly above the `value` field.",

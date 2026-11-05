@@ -3,9 +3,13 @@ bun = "latest"
 # Tracks the cluster's k3s release (K3S_VERSION in lib/consts.ts), not kubectl's
 # own latest -- KUBE_VERSION below feeds `helm template`'s .Capabilities, so a
 # kubectl ahead of the apiserver re-renders manifests against an API surface the
-# cluster does not have. Renovate is disabled for this entry so it can only move
-# with a k3s bump; see renovate.json.
-kubectl = "1.36.3"
+# cluster does not have. Renovate reads this line as a second copy of the k3s
+# dependency (custom.regex manager in renovate.json; the native mise kubectl
+# update is disabled), so it lands in the same PR as the K3S_VERSION bump.
+# extractVersion turns `v1.37.2+k3s1` into `1.37.2`. lib/helm.ts fails the build
+# if this and K3S_VERSION ever disagree.
+# renovate: datasource=custom.k3s depName=k3s extractVersion=^v(?<version>[0-9.]+)
+kubectl = "1.37.2"
 # Must stay on 3.x: cdk8s's HelmApp shells out to this binary and is built
 # against the Helm 3 CLI. Constrained in renovate.json rather than left to a
 # comment.
