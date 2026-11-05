@@ -6,11 +6,12 @@ metadata:
     app.kubernetes.io/instance: metallb
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: metallb
-    app.kubernetes.io/version: v0.16.1
-    helm.sh/chart: metallb-0.16.1
+    app.kubernetes.io/version: v0.16.2
+    helm.sh/chart: metallb-0.16.2
   name: metallb-speaker
   namespace: metallb-system
 spec:
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app.kubernetes.io/component: speaker
@@ -26,6 +27,7 @@ spec:
       containers:
         - args:
             - --port=9120
+            - --health-probe-port=17472
             - --log-level=info
           env:
             - name: METALLB_NODE_NAME
@@ -52,7 +54,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-          image: quay.io/metallb/speaker:v0.16.1
+          image: quay.io/metallb/speaker:v0.16.2
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -124,7 +126,7 @@ spec:
             defaultMode: 420
             secretName: metallb-memberlist
         - configMap:
-            defaultMode: 256
+            defaultMode: 292
             name: metallb-excludel2
           name: metallb-excludel2
         - configMap:

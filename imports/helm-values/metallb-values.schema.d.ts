@@ -63,6 +63,9 @@ export interface Values {
       relabelings?: {
         [k: string]: unknown;
       }[];
+      tlsConfig?: {
+        [k: string]: unknown;
+      };
       [k: string]: unknown;
     };
     /**
@@ -115,6 +118,7 @@ export interface Values {
       type: string;
       [k: string]: unknown;
     };
+    revisionHistoryLimit?: number;
     command?: string;
     webhookMode?: string;
     extraContainers?: {
@@ -141,6 +145,7 @@ export interface Values {
       type: string;
       [k: string]: unknown;
     };
+    revisionHistoryLimit?: number;
     runtimeClassName?: string;
     securityContext?: {
       [k: string]: unknown;
@@ -155,6 +160,11 @@ export interface Values {
       metricsPort?: number;
       secureMetricsPort?: number;
       "resources:"?: {
+        [k: string]: unknown;
+      };
+      tiniPath?: string;
+      dockerStartPath?: string;
+      securityContext?: {
         [k: string]: unknown;
       };
       [k: string]: unknown;
