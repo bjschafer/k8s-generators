@@ -21,8 +21,9 @@ pint = "latest"
 "aqua:prometheus/alertmanager" = "latest"
 "aqua:grafana/gcx" = "latest"
 # vlogscli ships bundled with vlagent inside the `vlutils` release archive;
-# pin the exe + asset so the github backend extracts the right binary.
-"github:VictoriaMetrics/VictoriaLogs[exe=vlogscli-prod,matching=vlutils]" = "latest"
+# pick the asset + expose only vlogscli on PATH (`exe` is a ubi option that
+# mise >=2026.11 rejects on the github backend).
+"github:VictoriaMetrics/VictoriaLogs[filter_bins=vlogscli-prod,matching=vlutils]" = "latest"
 openbao = "latest"
 
 [env]
