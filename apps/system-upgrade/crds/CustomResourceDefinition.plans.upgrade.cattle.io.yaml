@@ -1695,7 +1695,7 @@ spec:
                         description: The last time this condition was updated.
                         type: string
                       message:
-                        description: Human-readable message indicating details about last transition
+                        description: Human-readable message indicating details about last transition.
                         type: string
                       reason:
                         description: The reason for the condition's last transition.
@@ -1704,7 +1704,7 @@ spec:
                         description: Status of the condition, one of True, False, Unknown.
                         type: string
                       type:
-                        description: Type of cluster condition.
+                        description: Type of plan condition.
                         type: string
                     required:
                       - status
