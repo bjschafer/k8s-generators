@@ -249,6 +249,9 @@
                             "items": {
                                 "type": "object"
                             }
+                        },
+                        "tlsConfig": {
+                            "type": "object"
                         }
                     }
                 },
@@ -383,6 +386,10 @@
                                 "type"
                             ]
                         },
+                        "revisionHistoryLimit": {
+                            "type": "integer",
+                            "minimum": 0
+                        },
                         "command": {
                             "type": "string"
                         },
@@ -443,7 +450,7 @@
                             "anyOf": [
                                 {
                                     "type": "integer",
-                                    "minimum": 0
+                                    "minimum": 1
                                 },
                                 {
                                     "type": "null"
@@ -460,6 +467,10 @@
                             "required": [
                                 "type"
                             ]
+                        },
+                        "revisionHistoryLimit": {
+                            "type": "integer",
+                            "minimum": 0
                         },
                         "runtimeClassName": {
                             "type": "string"
@@ -487,6 +498,15 @@
                                     "type": "integer"
                                 },
                                 "resources:": {
+                                    "type": "object"
+                                },
+                                "tiniPath": {
+                                    "type": "string"
+                                },
+                                "dockerStartPath": {
+                                    "type": "string"
+                                },
+                                "securityContext": {
                                     "type": "object"
                                 }
                             },
