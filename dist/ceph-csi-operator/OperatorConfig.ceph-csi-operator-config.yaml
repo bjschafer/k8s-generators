@@ -78,7 +78,7 @@ spec:
     generateOMapInfo: false
     grpcTimeout: 30
     imageSet:
-      name: ceph-csi-image-set
+      name: ceph-csi-image-set-v3.18.2-rocky9
     kernelMountOptions: {}
     log:
       rotation:

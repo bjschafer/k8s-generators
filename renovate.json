@@ -124,6 +124,13 @@
       "labels": ["pinned"]
     },
     {
+      "description": "cephcsi plugin image, pinned to upstream's el9 `-rocky9` builds through the ceph-csi-operator OperatorConfig imageSet (apps/ceph-csi-operator/app.ts). The default el10 images need x86-64-v3, which the Ivy Bridge vmhosts don't support, and when that image was picked up it took down CSI cluster-wide for ~50 minutes (#146). The plugin also has to stay compatible with the sidecars the operator chart chooses, so bumps here are reviewed and never automerged.",
+      "matchDatasources": ["docker"],
+      "matchDepNames": ["quay.io/cephcsi/cephcsi"],
+      "automerge": false,
+      "labels": ["pinned"]
+    },
+    {
       "description": "kubectl is only supported within one minor of the apiserver, so this pin belongs to the cluster's k3s release, not to kubectl's own release cadence -- left to float it drifts ahead of the cluster and silently changes KUBE_VERSION, which feeds `helm template`'s .Capabilities and re-renders manifests. Instead the custom.regex mise.toml manager below reads that line as a second copy of the k3s dependency, so it moves in the same PR as K3S_VERSION in lib/consts.ts. This rule stays so the two managers never fight over the line.",
       "matchManagers": ["mise"],
       "matchDepNames": ["kubectl"],

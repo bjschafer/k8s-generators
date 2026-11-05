@@ -27,6 +27,14 @@ NewArgoApp(name, {
 
 const clusterID = "e708730c-9bbe-4567-a37d-6386f6800180";
 
+// cephcsi plugin image, pinned via the OperatorConfig imageSet below. Must stay
+// on the `-rocky9` variant: the default images are Rocky 10 / el10, whose
+// x86-64-v3 baseline the Ivy Bridge vmhosts can't run. Renovate's docker
+// versioning treats `-rocky9` as a compatibility suffix and only proposes tags
+// that carry the same suffix.
+// renovate: datasource=docker depName=quay.io/cephcsi/cephcsi
+const cephcsiTag = "v3.18.2-rocky9";
+
 // 1. The operator manager (controller deployment)
 new HelmApp(app, "operator", {
   chart: "ceph-csi-operator",
@@ -191,12 +199,18 @@ class CephConfig extends Chart {
     // so an operator bump silently bumps cephcsi too. cephcsi >= v3.18 is built
     // for x86-64-v3 (AVX2) and dies on start with "Fatal glibc error: CPU does
     // not support x86-64-v3" -- every vmhost is Ivy Bridge (E5-2690 v2), which
-    // has no AVX2, so no Proxmox CPU type can fix it. Pin the plugin image to
-    // the last v3.17 release; sidecars keep following the operator defaults.
-    // Deliberately no renovate annotation: a bump here breaks all CSI pods.
+    // has no AVX2, so no Proxmox CPU type can fix it. Upstream publishes el9
+    // `-rocky9` builds for these CPUs (ceph/ceph-csi#6612), so pin the plugin
+    // to one of those; the sidecars keep following the operator defaults.
+    //
+    // The tag is in the ConfigMap's name on purpose. The operator never watches
+    // the imageSet ConfigMap. It re-renders the plugin workloads only when
+    // OperatorConfig.spec.driverSpecDefaults changes, so editing the data in
+    // place would leave the old image running until the operator restarted.
+    // Renaming the ConfigMap changes that spec and triggers the reconcile.
     const imageSet = new ConfigMap(this, "image-set", {
-      metadata: { name: "ceph-csi-image-set", namespace },
-      data: { plugin: "quay.io/cephcsi/cephcsi:v3.17.1" },
+      metadata: { name: `ceph-csi-image-set-${cephcsiTag}`, namespace },
+      data: { plugin: `quay.io/cephcsi/cephcsi:${cephcsiTag}` },
     });
 
     const pluginResources = infraResources("10m", "192Mi", "512Mi");
