@@ -53,6 +53,7 @@ resources:
   - RoleBinding.argocd-server.yaml
   - Secret.argocd-notifications-secret.yaml
   - Service.argocd-application-controller-metrics.yaml
+  - Service.argocd-application-controller.yaml
   - Service.argocd-applicationset-controller-metrics.yaml
   - Service.argocd-applicationset-controller.yaml
   - Service.argocd-dex-server.yaml
