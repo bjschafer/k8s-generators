@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: argocd-image-updater
     app.kubernetes.io/version: v1.4.0
     control-plane: argocd-image-updater-controller
-    helm.sh/chart: argocd-image-updater-1.4.0
+    helm.sh/chart: argocd-image-updater-1.4.2
   name: argocd-image-updater-controller
   namespace: argocd
 spec:
@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: ecc7064f25ab5f7732da7d23c6d77435d62505b4874ba035b3ee14fc67da4553
+        checksum/config: addfaee4ba53aefc3c3ebb86a500773cdb011adad23a459a0140995381b1adc1
       labels:
         app.kubernetes.io/instance: argocd-image-updater
         app.kubernetes.io/name: argocd-image-updater
