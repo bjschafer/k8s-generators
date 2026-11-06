@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: argocd-image-updater
     app.kubernetes.io/version: v1.4.0
     control-plane: argocd-image-updater-controller
-    helm.sh/chart: argocd-image-updater-1.4.0
+    helm.sh/chart: argocd-image-updater-1.4.2
   name: argocd-image-updater-leader-election-role
   namespace: argocd
 rules:
