@@ -1345,6 +1345,53 @@ export function addAlerts(scope: Construct, id: string): void {
     ],
   });
 
+  // Nightly raft snapshots from the openbao host (ansible role `openbao`,
+  // tasks/snapshot.yaml), written to node_exporter's textfile collector. This
+  // is bao's only off-site backup that restores without Proxmox, so it is
+  // watched by the age of the last good upload, not by the job's exit status.
+  new Alert(scope, `${id}-openbao`, {
+    name: "openbao",
+    namespace: namespace,
+    rules: [
+      {
+        // Daily timer, so 36h means one missed night plus slack. Keyed on
+        // `offsite`: a local-only success still leaves the site-loss case
+        // uncovered, and that is the case this backup exists for.
+        alert: "OpenBaoSnapshotOffsiteStale",
+        expr: `time() - openbao_snapshot_last_success_timestamp_seconds{stage="offsite"} > 36 * 3600`,
+        for: "1h",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "OpenBao off-site snapshot is {{ $value | humanizeDuration }} old",
+          description: heredoc`
+            The nightly raft snapshot hasn't reached R2 in over 36h. Check
+            on the openbao host: systemctl status openbao-snapshot.service and
+            journalctl -u openbao-snapshot. A newer stage="local" timestamp
+            means the snapshot worked and only the upload failed.
+            `,
+        },
+      },
+      {
+        // The comparison above evaluates to no data, not true, when the series
+        // disappears: the host is down, node_exporter has stopped scraping,
+        // or the .prom file is gone.
+        alert: "OpenBaoSnapshotMetricAbsent",
+        expr: `absent(openbao_snapshot_last_success_timestamp_seconds{stage="offsite"})`,
+        for: "6h",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "No OpenBao off-site snapshot metric, so snapshot staleness can't alert",
+        },
+      },
+    ],
+  });
+
   new Alert(scope, `${id}-versitygw`, {
     name: "versitygw",
     namespace: namespace,

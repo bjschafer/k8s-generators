@@ -1,0 +1,32 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: metrics
+  name: openbao
+  namespace: metrics
+spec:
+  groups:
+    - name: openbao
+      rules:
+        - alert: OpenBaoSnapshotOffsiteStale
+          annotations:
+            description: |
+              The nightly raft snapshot hasn't reached R2 in over 36h. Check
+              on the openbao host: systemctl status openbao-snapshot.service and
+              journalctl -u openbao-snapshot. A newer stage="local" timestamp
+              means the snapshot worked and only the upload failed.
+            summary: OpenBao off-site snapshot is {{ $value | humanizeDuration }} old
+          expr: time() - openbao_snapshot_last_success_timestamp_seconds{stage="offsite"} > 36 * 3600
+          for: 1h
+          labels:
+            priority: "0"
+            push_notify: "true"
+        - alert: OpenBaoSnapshotMetricAbsent
+          annotations:
+            summary: No OpenBao off-site snapshot metric, so snapshot staleness can't alert
+          expr: absent(openbao_snapshot_last_success_timestamp_seconds{stage="offsite"})
+          for: 6h
+          labels:
+            priority: "0"
+            push_notify: "true"
