@@ -27,6 +27,11 @@ spec:
         - env:
             - name: OIDC_OAUTH_ENABLED
               value: "False"
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: SECRET_KEY
+                  name: pdns-admin-secrets
             - name: SQLALCHEMY_DATABASE_URI
               value: sqlite:////data/powerdns-admin.db
           image: powerdnsadmin/pda-legacy:latest

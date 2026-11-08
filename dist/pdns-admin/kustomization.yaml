@@ -1,5 +1,7 @@
 resources:
   - Deployment.pdns-admin.yaml
+  - ExternalSecret.pdns-admin-secrets.yaml
   - Ingress.pdns-admin.yaml
+  - Password.pdns-admin-secrets-secret-key.yaml
   - PersistentVolumeClaim.app-config.yaml
   - Service.pdns-admin.yaml

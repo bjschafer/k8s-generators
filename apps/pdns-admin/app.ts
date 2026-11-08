@@ -6,6 +6,7 @@ import { AppPlus } from "../../lib/app-plus";
 import { StorageClass } from "../../lib/volume";
 import { EnvValue, PersistentVolume, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
 import { NewKustomize } from "../../lib/kustomize";
+import { GeneratedSecret } from "../../lib/secrets";
 
 const namespace = basename(__dirname);
 const name = namespace;
@@ -27,6 +28,22 @@ NewArgoApp(name, {
         strategy: "digest",
       },
     ],
+  },
+});
+
+// Newer :latest builds refuse to start ("Refusing to start because SECRET_KEY is
+// missing, too short, malformed, or still a published default") unless
+// SECRET_KEY is >= 32 chars. It only signs session cookies and email-confirmation
+// links, so a freshly minted value costs nothing but a re-login.
+//
+// SALT is deliberately NOT set here: the image only warns that the current one
+// matches a published salt, and it is the bcrypt salt API keys are hashed with,
+// so changing it would invalidate every existing API key (e.g. pfapi's).
+const secrets = new GeneratedSecret(app, "secrets", {
+  name: `${name}-secrets`,
+  namespace: namespace,
+  data: {
+    SECRET_KEY: { length: 64 },
   },
 });
 
@@ -55,6 +72,7 @@ new AppPlus(app, `${name}-app`, {
     // SSO is dead while this is set -- log in with a local account.
     // Remove once upstream registers the OIDC route at app-init time.
     OIDC_OAUTH_ENABLED: EnvValue.fromValue("False"),
+    ...secrets.toEnvValues(),
 
     // v0.5.1's settings refactor (the 2026-08-30 rebuild of :latest) deleted the
     // built-in SQLite fallback. default_config.py, configs/docker_config.py and
