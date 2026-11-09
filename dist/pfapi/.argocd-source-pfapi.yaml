@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/bjschafer/pfapi:main@sha256:cce4c1879482f2cea920a02d2e8a63e1cc33ad710befa816fdb4bf6a4e59efd6
+  - ghcr.io/bjschafer/pfapi:main@sha256:7a70fcd6b35dc3f0524ce9d46101128f796da72b60fb941f3e284736540df60c
