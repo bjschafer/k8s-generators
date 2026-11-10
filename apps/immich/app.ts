@@ -214,6 +214,12 @@ new AppPlus(app, "immich-machine-learning", {
   },
 });
 
+const METRICS_PORT_CHECK = [
+  "node",
+  "-e",
+  "require('net').connect(8082,'localhost').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))",
+];
+
 const microservices = new AppPlus(app, "immich-microservices", {
   name: "immich-microservices",
   namespace: namespace,
@@ -231,21 +237,28 @@ const microservices = new AppPlus(app, "immich-microservices", {
   monitoringConfig: {
     port: 8082,
   },
-  // Port 8082 only opens once bootstrap finishes. When the schema has drifted
-  // (geodata_places missing its pkey/indexes) every boot re-imports ~80k
-  // geodata rows first, which outlasts the default ~30s liveness window. The
-  // kubelet then SIGTERMs mid-import, the drift never heals, and it loops.
-  // Give startup up to 5 minutes; liveness/readiness only apply after it.
-  startupProbe: Probe.fromTcpSocket({
-    port: 8082,
+  // The microservices worker serves HTTP on a random port (listen(0)), so the
+  // only fixed port is the OpenTelemetry Prometheus exporter on 8082. As of
+  // v3.4.0 that exporter binds to `localhost` only (exporter-prometheus 0.300
+  // defaults host to localhost and immich passes just a port), so a TCP probe
+  // against the pod IP is refused even though the worker is healthy -- the
+  // kubelet killed it every ~5 minutes. Probe from inside the container
+  // instead; this works on both the old (all-interfaces) and new binding.
+  // The port also only opens once bootstrap finishes, and with schema drift
+  // (geodata_places missing its pkey/indexes) bootstrap re-imports ~80k rows
+  // first, so keep the startupProbe's 5 minute window.
+  // NOTE: external Prometheus scrapes of 8082 (monitoringConfig) are broken
+  // on v3.4.0 for the same reason until upstream exposes a host setting.
+  startupProbe: Probe.fromCommand(METRICS_PORT_CHECK, {
     failureThreshold: 30,
     periodSeconds: Duration.seconds(10),
+    timeoutSeconds: Duration.seconds(5),
   }),
-  livenessProbe: Probe.fromTcpSocket({
-    port: 8082,
+  livenessProbe: Probe.fromCommand(METRICS_PORT_CHECK, {
+    timeoutSeconds: Duration.seconds(5),
   }),
-  readinessProbe: Probe.fromTcpSocket({
-    port: 8082,
+  readinessProbe: Probe.fromCommand(METRICS_PORT_CHECK, {
+    timeoutSeconds: Duration.seconds(5),
   }),
   extraEnv: {
     ...commonEnv,

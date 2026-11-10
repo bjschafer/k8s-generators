@@ -61,18 +61,26 @@ spec:
           image: ghcr.io/immich-app/immich-server
           imagePullPolicy: IfNotPresent
           livenessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - require('net').connect(8082,'localhost').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))
             failureThreshold: 3
-            tcpSocket:
-              port: 8082
+            timeoutSeconds: 5
           name: immich-microservices
           ports:
             - containerPort: 3001
             - containerPort: 8082
               name: metrics
           readinessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - require('net').connect(8082,'localhost').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))
             failureThreshold: 3
-            tcpSocket:
-              port: 8082
+            timeoutSeconds: 5
           resources:
             limits:
               memory: 6144Mi
@@ -87,10 +95,14 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           startupProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - require('net').connect(8082,'localhost').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))
             failureThreshold: 30
             periodSeconds: 10
-            tcpSocket:
-              port: 8082
+            timeoutSeconds: 5
           volumeMounts:
             - mountPath: /opt/pictures
               name: pvc-nfs-media-pictures
