@@ -231,6 +231,16 @@ const microservices = new AppPlus(app, "immich-microservices", {
   monitoringConfig: {
     port: 8082,
   },
+  // Port 8082 only opens once bootstrap finishes. When the schema has drifted
+  // (geodata_places missing its pkey/indexes) every boot re-imports ~80k
+  // geodata rows first, which outlasts the default ~30s liveness window. The
+  // kubelet then SIGTERMs mid-import, the drift never heals, and it loops.
+  // Give startup up to 5 minutes; liveness/readiness only apply after it.
+  startupProbe: Probe.fromTcpSocket({
+    port: 8082,
+    failureThreshold: 30,
+    periodSeconds: Duration.seconds(10),
+  }),
   livenessProbe: Probe.fromTcpSocket({
     port: 8082,
   }),

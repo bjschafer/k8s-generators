@@ -86,6 +86,11 @@ spec:
             runAsNonRoot: false
             seccompProfile:
               type: RuntimeDefault
+          startupProbe:
+            failureThreshold: 30
+            periodSeconds: 10
+            tcpSocket:
+              port: 8082
           volumeMounts:
             - mountPath: /opt/pictures
               name: pvc-nfs-media-pictures
