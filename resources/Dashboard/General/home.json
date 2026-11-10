@@ -400,7 +400,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "editorMode": "code",
-            "expr": "nut_load{instance=\"infra2.cmdcentral.xyz:3493\"}",
+            "expr": "network_ups_tools_ups_load{job=\"nut\"} / 100",
             "legendFormat": "{{ups}}",
             "range": true,
             "refId": "A"

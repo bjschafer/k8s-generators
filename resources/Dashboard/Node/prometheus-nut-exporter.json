@@ -121,7 +121,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "nut_status{ups=~\"${ups:pipe}\"}",
+            "expr": "max by (ups) (network_ups_tools_ups_status{flag=\"OL\",ups=~\"${ups:pipe}\"} or network_ups_tools_ups_status{flag=\"OB\",ups=~\"${ups:pipe}\"} * 2 or network_ups_tools_ups_status{flag=\"LB\",ups=~\"${ups:pipe}\"} * 3)",
             "instant": true,
             "interval": "",
             "legendFormat": "{{ups}}",
@@ -185,7 +185,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "nut_input_voltage_volts{ups=~\"${ups:pipe}\"}",
+            "expr": "network_ups_tools_input_voltage{ups=~\"${ups:pipe}\"}",
             "instant": true,
             "interval": "",
             "legendFormat": "{{ups}}",
@@ -260,7 +260,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "nut_load{ups=~\"${ups:pipe}\"}",
+            "expr": "network_ups_tools_ups_load{ups=~\"${ups:pipe}\"} / 100",
             "instant": true,
             "interval": "",
             "legendFormat": "{{ups}}",
@@ -332,7 +332,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "nut_battery_runtime_seconds{ups=~\"${ups:pipe}\"}",
+            "expr": "network_ups_tools_battery_runtime{ups=~\"${ups:pipe}\"}",
             "instant": true,
             "interval": "",
             "legendFormat": "{{ups}}",
@@ -354,22 +354,16 @@
               {
                 "options": {
                   "0": {
-                    "text": "Unknown"
+                    "text": "Beeper disabled"
                   },
                   "1": {
                     "text": "Beeper enabled"
-                  },
-                  "2": {
-                    "text": "Beeper disabled"
-                  },
-                  "3": {
-                    "text": "Beeper muted"
                   }
                 },
                 "type": "value"
               }
             ],
-            "noValue": "0",
+            "noValue": "Unknown",
             "thresholds": {
               "mode": "absolute",
               "steps": [
@@ -426,7 +420,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "nut_beeper_status{ups=~\"${ups:pipe}\"}",
+            "expr": "network_ups_tools_ups_beeper_status{ups=~\"${ups:pipe}\"}",
             "instant": true,
             "interval": "",
             "legendFormat": "{{ups}}",
@@ -532,7 +526,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "100 * avg_over_time(nut_battery_charge{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "expr": "avg_over_time(network_ups_tools_battery_charge{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
             "interval": "",
             "legendFormat": "{{ups}}",
             "refId": "A"
@@ -634,7 +628,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "avg_over_time(nut_battery_runtime_seconds{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "expr": "avg_over_time(network_ups_tools_battery_runtime{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
             "interval": "",
             "legendFormat": "{{ups}}",
             "refId": "A"
@@ -736,7 +730,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "avg_over_time(nut_load{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "expr": "avg_over_time(network_ups_tools_ups_load{ups=~\"${ups:pipe}\"}[$smoothing_interval]) / 100",
             "hide": false,
             "interval": "",
             "legendFormat": "{{ups}}",
@@ -840,7 +834,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "avg_over_time(nut_battery_voltage_volts{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "expr": "avg_over_time(network_ups_tools_battery_voltage{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
             "interval": "",
             "legendFormat": "{{ups}}",
             "refId": "A"
@@ -943,7 +937,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "avg_over_time(nut_input_voltage_volts{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "expr": "avg_over_time(network_ups_tools_input_voltage{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
             "interval": "",
             "legendFormat": "{{ups}}",
             "refId": "A"
@@ -1046,7 +1040,7 @@
               "uid": "fe6cssq0m2v40d"
             },
             "exemplar": true,
-            "expr": "avg_over_time(nut_output_voltage_volts{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
+            "expr": "avg_over_time(network_ups_tools_output_voltage{ups=~\"${ups:pipe}\"}[$smoothing_interval])",
             "interval": "",
             "legendFormat": "{{ups}}",
             "refId": "A"
@@ -1075,7 +1069,7 @@
             "type": "victoriametrics-datasource",
             "uid": "fe6cssq0m2v40d"
           },
-          "definition": "label_values(nut_ups_info,ups)",
+          "definition": "label_values(network_ups_tools_device_info,ups)",
           "includeAll": true,
           "label": "UPS",
           "multi": true,
@@ -1083,7 +1077,7 @@
           "options": [],
           "query": {
             "qryType": 1,
-            "query": "label_values(nut_ups_info,ups)",
+            "query": "label_values(network_ups_tools_device_info,ups)",
             "refId": "VariableQueryEditor-VariableQuery"
           },
           "refresh": 1,

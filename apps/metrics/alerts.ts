@@ -1239,7 +1239,9 @@ export function addAlerts(scope: Construct, id: string): void {
     rules: [
       {
         alert: "UpsOnBattery",
-        expr: "nut_status{status='OB'} == 1",
+        // Until the 2026-11 nut_exporter move this was nut_status{status='OB'}, a
+        // label hon95's nut_status never carried, so it could not fire.
+        expr: "network_ups_tools_ups_status{flag='OB'} == 1",
         for: "0m",
         labels: {
           priority: PRIORITY.HIGH,
@@ -1251,7 +1253,8 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "UpsLowBattery",
-        expr: "nut_battery_charge < 0.5",
+        // battery.charge is a percentage (0-100) from nut_exporter.
+        expr: "network_ups_tools_battery_charge < 50",
         for: "1m",
         labels: {
           priority: PRIORITY.HIGH,
@@ -1263,7 +1266,7 @@ export function addAlerts(scope: Construct, id: string): void {
       },
       {
         alert: "UpsHighLoad",
-        expr: "nut_load * 100 > 75",
+        expr: "network_ups_tools_ups_load > 75",
         for: "5m",
         labels: {
           priority: PRIORITY.NORMAL,
@@ -1275,14 +1278,17 @@ export function addAlerts(scope: Construct, id: string): void {
         },
       },
       {
+        // The UPS's own "replace battery" flag, from its self-test. This was a
+        // 3-year age check on battery.mfr.date, which the Eaton 5Ps do not
+        // report at all ("Variable not supported by UPS"), so it never fired.
         alert: "UpsBatteryReplacementNeeded",
-        expr: "nut_battery_mfr_date_seconds > 0 and (time() - nut_battery_mfr_date_seconds) > (3 * 365 * 24 * 3600)",
-        for: "1d",
+        expr: "network_ups_tools_ups_status{flag='RB'} == 1",
+        for: "1h",
         labels: {
           priority: PRIORITY.LOW,
         },
         annotations: {
-          summary: "UPS {{ $labels.ups }} battery is over 3 years old",
+          summary: "UPS {{ $labels.ups }} reports that its battery needs replacing",
         },
       },
     ],

@@ -269,33 +269,25 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
+    // DRuggeri/nut_exporter on infra2 (ansible roles/nut). It serves one UPS
+    // per scrape, picked by ?ups=, and does not label its series with the UPS
+    // name, so each UPS is its own target and the `ups` label is set here.
     new VmScrapeConfig(this, "nut", {
       metadata: {
         name: "nut",
         namespace: namespace,
       },
       spec: {
-        staticConfigs: [
-          {
-            labels: { job: "nut" },
-            targets: ["infra2.cmdcentral.xyz:3493"], // address of nut server
-          },
-        ],
+        path: "/ups_metrics",
+        staticConfigs: ["a-side", "b-side"].map((ups) => ({
+          labels: { job: "nut", ups },
+          targets: ["infra2.cmdcentral.xyz:9199"],
+        })),
         relabelConfigs: [
           {
             action: "replace",
-            sourceLabels: ["__address__"],
-            targetLabel: "__param_target",
-          },
-          {
-            action: "replace",
-            sourceLabels: ["__param_target"],
-            targetLabel: "instance",
-          },
-          {
-            action: "replace",
-            replacement: "infra2.cmdcentral.xyz:9995", // address of nut exporter
-            targetLabel: "__address__",
+            sourceLabels: ["ups"],
+            targetLabel: "__param_ups",
           },
         ],
       },
@@ -315,11 +307,13 @@ export class ScrapeConfigs extends Chart {
             rules: [
               {
                 record: "ups:power_usage_watts:a_side",
-                expr: 'nut_load{ups="a-side"} * nut_power_nominal_watts{ups="a-side"}',
+                // Same formula as under hon95: load x ups.power.nominal, which is VA,
+                // not W. ups.realpower is the measured watts if this ever moves.
+                expr: 'network_ups_tools_ups_load{ups="a-side"} / 100 * network_ups_tools_ups_power_nominal{ups="a-side"}',
               },
               {
                 record: "ups:power_usage_watts:b_side",
-                expr: 'nut_load{ups="b-side"} * nut_power_nominal_watts{ups="b-side"}',
+                expr: 'network_ups_tools_ups_load{ups="b-side"} / 100 * network_ups_tools_ups_power_nominal{ups="b-side"}',
               },
             ],
           },

@@ -9,7 +9,7 @@ spec:
   groups:
     - name: nut_power_usage_watts
       rules:
-        - expr: nut_load{ups="a-side"} * nut_power_nominal_watts{ups="a-side"}
+        - expr: network_ups_tools_ups_load{ups="a-side"} / 100 * network_ups_tools_ups_power_nominal{ups="a-side"}
           record: ups:power_usage_watts:a_side
-        - expr: nut_load{ups="b-side"} * nut_power_nominal_watts{ups="b-side"}
+        - expr: network_ups_tools_ups_load{ups="b-side"} / 100 * network_ups_tools_ups_power_nominal{ups="b-side"}
           record: ups:power_usage_watts:b_side

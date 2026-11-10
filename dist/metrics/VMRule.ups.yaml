@@ -12,7 +12,7 @@ spec:
         - alert: UpsOnBattery
           annotations:
             summary: UPS {{ $labels.ups }} is running on battery!
-          expr: nut_status{status='OB'} == 1
+          expr: network_ups_tools_ups_status{flag='OB'} == 1
           for: 0m
           labels:
             priority: "1"
@@ -20,7 +20,7 @@ spec:
         - alert: UpsLowBattery
           annotations:
             summary: UPS {{ $labels.ups }} battery is below 50% ({{ $value }})
-          expr: nut_battery_charge < 0.5
+          expr: network_ups_tools_battery_charge < 50
           for: 1m
           labels:
             priority: "1"
@@ -32,14 +32,14 @@ spec:
                 VALUE = {{ $value }}
                 LABELS = {{ $labels }}
             summary: UPS load over 75% on UPS {{ $labels.ups }}
-          expr: nut_load * 100 > 75
+          expr: network_ups_tools_ups_load > 75
           for: 5m
           labels:
             priority: "0"
         - alert: UpsBatteryReplacementNeeded
           annotations:
-            summary: UPS {{ $labels.ups }} battery is over 3 years old
-          expr: nut_battery_mfr_date_seconds > 0 and (time() - nut_battery_mfr_date_seconds) > (3 * 365 * 24 * 3600)
-          for: 1d
+            summary: UPS {{ $labels.ups }} reports that its battery needs replacing
+          expr: network_ups_tools_ups_status{flag='RB'} == 1
+          for: 1h
           labels:
             priority: "-1"

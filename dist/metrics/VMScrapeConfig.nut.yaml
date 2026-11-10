@@ -4,20 +4,20 @@ metadata:
   name: nut
   namespace: metrics
 spec:
+  path: /ups_metrics
   relabelConfigs:
     - action: replace
       sourceLabels:
-        - __address__
-      targetLabel: __param_target
-    - action: replace
-      sourceLabels:
-        - __param_target
-      targetLabel: instance
-    - action: replace
-      replacement: infra2.cmdcentral.xyz:9995
-      targetLabel: __address__
+        - ups
+      targetLabel: __param_ups
   staticConfigs:
     - labels:
         job: nut
+        ups: a-side
       targets:
-        - infra2.cmdcentral.xyz:3493
+        - infra2.cmdcentral.xyz:9199
+    - labels:
+        job: nut
+        ups: b-side
+      targets:
+        - infra2.cmdcentral.xyz:9199

@@ -170,7 +170,7 @@
                       "kind": "victoriametrics-metrics-datasource",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "nut_load",
+                        "expr": "network_ups_tools_ups_load{job=\"nut\"} / 100",
                         "legendFormat": "{{ups}}",
                         "range": true
                       }
