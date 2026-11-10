@@ -248,7 +248,8 @@ const microservices = new AppPlus(app, "immich-microservices", {
   // (geodata_places missing its pkey/indexes) bootstrap re-imports ~80k rows
   // first, so keep the startupProbe's 5 minute window.
   // NOTE: external Prometheus scrapes of 8082 (monitoringConfig) are broken
-  // on v3.4.0 for the same reason until upstream exposes a host setting.
+  // on v3.4.0 for the same reason until upstream exposes a host setting
+  // (https://github.com/immich-app/immich/issues/33173).
   startupProbe: Probe.fromCommand(METRICS_PORT_CHECK, {
     failureThreshold: 30,
     periodSeconds: Duration.seconds(10),
@@ -288,7 +289,7 @@ new CmdcentralServiceMonitor(app, "server-monitoring", {
 });
 
 new CmdcentralServiceMonitor(app, "microservices-monitoring", {
-  name: "immich-server",
+  name: "immich-microservices",
   namespace: namespace,
   matchLabels: {
     [WellKnownLabels.Name]: "immich",

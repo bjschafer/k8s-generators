@@ -11,5 +11,5 @@ spec:
       - immich
   selector:
     matchLabels:
-      app.kubernetes.io/component: microservices
+      app.kubernetes.io/component: server
       app.kubernetes.io/name: immich
