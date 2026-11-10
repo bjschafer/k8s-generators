@@ -59,7 +59,7 @@ Pipes chain: `filter | stats ... | sort ... | limit ...`. Full reference: https:
 
 - `hostname` — `infra1`, `infra2`, `vmhost01`–`03`, `pandora`, `gitlab`, `apt`, …
 - `level` — mapped from journald `PRIORITY` (`error` = PRIORITY 0–3, `warn` = 4, `notice` = 5, `info` = 6, `debug` = 7). Present on every journald record, so `hostname:infra1 level:error` works.
-- `SYSLOG_IDENTIFIER` / `_SYSTEMD_UNIT` — the service (`pdns-recursor`, `caddy`, `pdns_server`, `vector`, `node_exporter`, …). journald streams are keyed on `hostname,_SYSTEMD_UNIT`, so filtering by `_SYSTEMD_UNIT` is index-fast; `SYSLOG_IDENTIFIER` also works for finer matches (e.g. kernel sub-loggers).
+- `SYSLOG_IDENTIFIER` / `_SYSTEMD_UNIT` — the service (`technitium-dns`, `caddy`, `vector`, `node_exporter`, …). journald streams are keyed on `hostname,_SYSTEMD_UNIT`, so filtering by `_SYSTEMD_UNIT` is index-fast; `SYSLOG_IDENTIFIER` also works for finer matches (e.g. kernel sub-loggers).
 
 **Network gear** (CEF): `cef.device_vendor` (`Ubiquiti`), `cef.device_product` (`UniFi Protect`, `UniFi Network`), `cef.device_event_class_id`.
 
