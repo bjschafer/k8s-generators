@@ -1,17 +1,18 @@
 import { basename } from "../../lib/util";
-import { DEFAULT_APP_PROPS, DEFAULT_SECURITY_CONTEXT } from "../../lib/consts";
-import { App, Duration, Size } from "cdk8s";
+import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { App } from "cdk8s";
 import { NewArgoApp } from "../../lib/argo";
-import { AppPlus } from "../../lib/app-plus";
-import { StorageClass } from "../../lib/volume";
-import { EnvValue, PersistentVolume, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
 import { NewKustomize } from "../../lib/kustomize";
-import { GeneratedSecret } from "../../lib/secrets";
 
+// Being retired (2026-11-10): PowerDNS was replaced by Technitium, whose own
+// console (https://dns.cmdcentral.xyz) replaces this UI. Phase 1 of 2 keeps the
+// Application with no resources so Argo prunes the workload; the Application
+// carries no resources finalizer, so deleting it first would orphan everything.
+// Phase 2 deletes this directory. Backup of /data/powerdns-admin.db:
+// vmhost03:/warp/Shared/dump/pdns-cutover-2026-11-10/.
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
-const image = "powerdnsadmin/pda-legacy";
 
 NewArgoApp(name, {
   sync_policy: {
@@ -21,115 +22,6 @@ NewArgoApp(name, {
     },
   },
   namespace: namespace,
-  autoUpdate: {
-    images: [
-      {
-        image: image,
-        strategy: "digest",
-      },
-    ],
-  },
-});
-
-// Newer :latest builds refuse to start ("Refusing to start because SECRET_KEY is
-// missing, too short, malformed, or still a published default") unless
-// SECRET_KEY is >= 32 chars. It only signs session cookies and email-confirmation
-// links, so a freshly minted value costs nothing but a re-login.
-//
-// SALT is deliberately NOT set here: the image only warns that the current one
-// matches a published salt, and it is the bcrypt salt API keys are hashed with,
-// so changing it would invalidate every existing API key (e.g. pfapi's).
-const secrets = new GeneratedSecret(app, "secrets", {
-  name: `${name}-secrets`,
-  namespace: namespace,
-  data: {
-    SECRET_KEY: { length: 64 },
-  },
-});
-
-new AppPlus(app, `${name}-app`, {
-  name: name,
-  namespace: namespace,
-  image: `${image}:latest`,
-  resources: {
-    memory: {
-      request: Size.mebibytes(192),
-      limit: Size.mebibytes(512),
-    },
-  },
-  ports: [80],
-  extraEnv: {
-    // Works around an upstream regression in v0.5.1 (the first pda-legacy
-    // release since v0.4.2, Jan 2024). Flask 3 removed before_app_first_request,
-    // so register_modules() moved to before_app_request -- but Flask sets
-    // _got_first_request before running those hooks, so oidc_oauth()'s
-    // `@current_app.route('/oidc/authorized')` now raises AssertionError on
-    // every request, 500ing / and failing the liveness probe. The run-once
-    // guard is set *after* the raising call, so it never latches.
-    //
-    // Config beats the DB in Setting().get(), so this env var forces
-    // oidc_oauth() to return early regardless of what's stored in /data.
-    // SSO is dead while this is set -- log in with a local account.
-    // Remove once upstream registers the OIDC route at app-init time.
-    OIDC_OAUTH_ENABLED: EnvValue.fromValue("False"),
-    ...secrets.toEnvValues(),
-
-    // v0.5.1's settings refactor (the 2026-08-30 rebuild of :latest) deleted the
-    // built-in SQLite fallback. default_config.py, configs/docker_config.py and
-    // settings.py all used to default SQLALCHEMY_DATABASE_URI to
-    // 'sqlite:////data/powerdns-admin.db'; all three now leave it unset, and
-    // load_environment() raises 'Database configuration is required' in
-    // create_app() -- so the container dies before gunicorn or `flask db upgrade`
-    // ever run. Set the exact URI the image used to default to, against the same
-    // /data PVC, so the existing database keeps being used.
-    SQLALCHEMY_DATABASE_URI: EnvValue.fromValue("sqlite:////data/powerdns-admin.db"),
-  },
-  // v0.5.1 rebuilt pda-legacy off docker/common/Dockerfile.app, which dropped
-  // the `pda` user entirely -- there is no uid 100 in the image anymore, and
-  // /app ships root-owned (the webassets cache is mode 0600), with an
-  // entrypoint that never drops privileges. Pinning uid 100/101 here got us
-  // PermissionError on .webassets-cache and /.gunicorn. Reverts the
-  // 8c2e7014 hardening for this one app until upstream restores a non-root USER.
-  securityContext: DEFAULT_SECURITY_CONTEXT,
-  containerSecurityContext: DEFAULT_SECURITY_CONTEXT,
-  volumes: [
-    {
-      props: {
-        storageClassName: StorageClass.CEPH_RBD,
-        storage: Size.gibibytes(5),
-        accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
-        // Pinned to the volume this app has used since it was hand-applied from
-        // the prod repo. Without this the claim is satisfied by dynamic
-        // provisioning and pdns-admin comes back with an empty database.
-        // A longhorn migration was written here once (37eef77a) but never
-        // deployed -- doing it for real needs a data copy, not a manifest edit.
-        volume: PersistentVolume.fromPersistentVolumeName(
-          app,
-          "pdns-admin-config-pv",
-          "pvc-21ad7eba-9add-477e-a3c4-e1147528c57d",
-        ),
-      },
-      mountPath: "/data",
-      name: "app-config",
-    },
-  ],
-  // `/` answers in ~30ms normally, but it's 4 sync gunicorn workers on SQLite
-  // over Ceph RBD. The 06:00 UTC Velero daily snapshots every PVC at once, Ceph
-  // commit latency climbs past 150ms, and the default 1s timeout x3 tripped
-  // liveness every morning. Each restart re-runs alembic against the same slow
-  // disk, so it looped for ~15 minutes and fired KubernetesPodCrashLooping
-  // nightly. 5s x 6 rides out the window; a genuinely wedged app still dies in 1m.
-  livenessProbe: Probe.fromHttpGet("", {
-    port: 80,
-    timeoutSeconds: Duration.seconds(5),
-    failureThreshold: 6,
-  }),
-  readinessProbe: Probe.fromHttpGet("", {
-    port: 80,
-    timeoutSeconds: Duration.seconds(5),
-  }),
-  extraIngressHosts: ["dnsadmin.cmdcentral.xyz"],
-  limitToAMD64: true,
 });
 
 app.synth();

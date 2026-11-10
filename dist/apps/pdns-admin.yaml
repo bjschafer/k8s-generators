@@ -20,23 +20,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
----
-apiVersion: argocd-image-updater.argoproj.io/v1alpha1
-kind: ImageUpdater
-metadata:
-  labels:
-    app.kubernetes.io/name: pdns-admin
-  name: pdns-admin-updater
-  namespace: argocd
-spec:
-  applicationRefs:
-    - images:
-        - alias: pda-legacy
-          commonUpdateSettings:
-            updateStrategy: digest
-          imageName: powerdnsadmin/pda-legacy:latest
-      namePattern: pdns-admin
-  writeBackConfig:
-    gitConfig:
-      branch: main
-    method: git
