@@ -289,9 +289,10 @@ new HomeConfig(app, `${name}-config`, {
           description: "Ceph storage dashboard",
         },
         {
-          name: "DNS Admin",
-          uri: "https://dnsadmin.cmdcentral.xyz",
-          icon: "powerdns",
+          name: "DNS",
+          uri: "https://dns.cmdcentral.xyz",
+          icon: "technitium",
+          description: "Technitium DNS console (cluster primary)",
         },
         {
           name: "Netbox",
