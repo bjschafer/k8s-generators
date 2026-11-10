@@ -149,18 +149,65 @@ new HelmApp(app, "stack", {
     kubeEtcd: {
       enabled: false,
     },
+    kubeApiServer: {
+      vmScrape: {
+        spec: {
+          // Helm replaces arrays wholesale, so this restates the chart's
+          // default endpoint just to add max_scrape_size.
+          endpoints: [
+            {
+              bearerTokenFile: "/var/run/secrets/kubernetes.io/serviceaccount/token",
+              port: "https",
+              scheme: "https",
+              tlsConfig: {
+                caFile: "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt",
+                serverName: "kubernetes",
+              },
+              // A long-lived apiserver accumulates a series for every
+              // resource/verb/scope combination it has served, and none expire
+              // until a restart. k8s-01 reached ~20MB (130k series) on
+              // 2026-11-10, over vmagent's 16MiB default, and its target went
+              // dark with TargetDown/KubeAPIInstanceUnreachable firing.
+              max_scrape_size: "64MiB",
+            },
+          ],
+        },
+      },
+    },
     kubelet: {
       vmScrape: {
-        metricRelabelConfigs: [
-          {
-            action: "labeldrop",
-            regex: "(plan_upgrade_cattle_io.*)",
-          },
-          {
-            action: "labeldrop",
-            regex: "(beta_kubernetes_io.*)",
-          },
-        ],
+        // These must sit under `spec`; set directly on vmScrape they were
+        // silently ignored. Because the array replaces the chart default, its
+        // three default rules are restated first.
+        spec: {
+          // On k3s servers the kubelet's /metrics is served by the same process
+          // and registry as the embedded apiserver, so it returns the entire
+          // apiserver payload: the same ~20MB that tripped the apiserver
+          // target above.
+          max_scrape_size: "64MiB",
+          metricRelabelConfigs: [
+            { action: "labeldrop", regex: "(uid)" },
+            { action: "labeldrop", regex: "(id|name)" },
+            {
+              action: "drop",
+              source_labels: ["__name__"],
+              regex:
+                "(rest_client_request_duration_seconds_bucket|rest_client_request_duration_seconds_sum|rest_client_request_duration_seconds_count)",
+            },
+            // ...and dropped here, because job="apiserver" already scrapes the
+            // identical series on all three servers. On the servers this is
+            // ~120k of ~130k series per scrape. Agents expose only a few dozen
+            // library-level apiserver_* series, which nothing reads under
+            // job="kubelet".
+            {
+              action: "drop",
+              source_labels: ["__name__"],
+              regex: "(apiserver|etcd)_.*",
+            },
+            { action: "labeldrop", regex: "(plan_upgrade_cattle_io.*)" },
+            { action: "labeldrop", regex: "(beta_kubernetes_io.*)" },
+          ],
+        },
       },
     },
     "prometheus-node-exporter": {
