@@ -242,6 +242,5 @@ export const LEGACY_ROLES: LegacyRoleConfig[] = [
   { name: "netbox" },
   { name: "paperless" },
   { name: "pathfinder" },
-  { name: "pdns" },
   { name: "spoolman" },
 ];

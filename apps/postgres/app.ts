@@ -133,10 +133,6 @@ class ProdPostgres extends Chart {
         },
         enableSuperuserAccess: true,
         postgresql: {
-          pgHba: [
-            "host pdns pdns 10.0.10.0/24 scram-sha-256",
-            "hostssl pdns pdns 10.0.10.0/24 scram-sha-256",
-          ],
           parameters: {
             max_slot_wal_keep_size: "1GB",
             // Steady state is ~140. Headroom for bursts on top of the per-role
