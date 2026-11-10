@@ -31,7 +31,6 @@ spec:
             - --interval=30s
             - --policy=sync
             - --annotation-prefix=external-dns.kubernetes.io/
-            - --dry-run
             - --provider=rfc2136
             - --rfc2136-host=10.0.10.101
             - --rfc2136-port=53

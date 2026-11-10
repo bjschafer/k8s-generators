@@ -203,7 +203,6 @@ new AppPlus(app, "technitium", {
   },
   args: [
     ...COMMON_ARGS,
-    "--dry-run",
     "--provider=rfc2136",
     "--rfc2136-host=10.0.10.101",
     "--rfc2136-port=53",
