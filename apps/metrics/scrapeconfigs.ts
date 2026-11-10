@@ -284,25 +284,6 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
-    new VmScrapeConfig(this, "pdns", {
-      metadata: {
-        name: "pdns",
-        namespace: namespace,
-      },
-      spec: {
-        staticConfigs: [
-          {
-            targets: [
-              "infra1.cmdcentral.xyz:8081",
-              "infra1.cmdcentral.xyz:8082",
-              // infra2 moved to Technitium (2026-11-09), which has no /metrics.
-            ],
-            labels: { job: "pdns" },
-          },
-        ],
-      },
-    });
-
     new VmScrapeConfig(this, "printers", {
       metadata: {
         name: "printers",

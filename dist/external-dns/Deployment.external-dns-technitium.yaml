@@ -32,7 +32,7 @@ spec:
             - --policy=sync
             - --annotation-prefix=external-dns.kubernetes.io/
             - --provider=rfc2136
-            - --rfc2136-host=10.0.10.101
+            - --rfc2136-host=10.0.10.100
             - --rfc2136-port=53
             - --rfc2136-zone=cmdcentral.xyz
             - --domain-filter=cmdcentral.xyz

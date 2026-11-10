@@ -137,49 +137,11 @@ class ExternalDnsRBAC extends Chart {
 
 new ExternalDnsRBAC(app, "rbac");
 
-// pdns provider — manages cmdcentral.xyz records in PowerDNS
-const pdnsSecret = new OpenBaoSecret(app, "pdns-secret", {
-  name: "external-dns-pdns",
-  namespace,
-  keys: ["api-key"],
-});
-
-new AppPlus(app, "pdns", {
-  name: "external-dns-pdns",
-  namespace,
-  image: EXTERNAL_DNS_IMAGE,
-  serviceAccountName: "external-dns",
-  automountServiceAccount: true,
-  disableIngress: true,
-  disableService: true,
-  livenessProbe: externalDnsHealthProbe(),
-  readinessProbe: externalDnsHealthProbe(),
-  deploymentStrategy: DeploymentStrategy.recreate(),
-  resources: {
-    cpu: { request: Cpu.millis(25), limit: Cpu.millis(100) },
-    memory: { request: Size.mebibytes(64), limit: Size.mebibytes(256) },
-  },
-  args: [
-    ...COMMON_ARGS,
-    "--provider=pdns",
-    "--pdns-server=http://10.0.10.100:8081",
-    "--pdns-api-key=$(PDNS_API_KEY)",
-    "--txt-owner-id=prod-k8s-external-dns",
-  ],
-  extraEnv: {
-    PDNS_API_KEY: EnvValue.fromSecretValue({
-      secret: pdnsSecret.secret,
-      key: "api-key",
-    }),
-  },
-});
-
-// rfc2136 provider — manages cmdcentral.xyz records in Technitium, alongside
-// the pdns instance above while the two run in parallel during the PowerDNS ->
-// Technitium cutover (2026-11). Same owner id: the records were imported with
-// their ownership TXT, so it adopts them with zero changes (verified against a
-// shadow server). Points at infra2 until infra1 is cut over and becomes the
-// cluster primary; secondaries do not accept updates.
+// rfc2136 provider — manages cmdcentral.xyz records in Technitium (replaced
+// PowerDNS 2026-11). Writes to the cluster primary, infra1: secondaries REFUSE
+// updates and pick changes up from the primary by NOTIFY (~10s). Same owner id
+// as the pdns instance it replaced, which is how it adopted the imported
+// records with zero changes.
 const technitiumSecret = new OpenBaoSecret(app, "technitium-secret", {
   name: "external-dns-technitium",
   namespace,
@@ -204,7 +166,7 @@ new AppPlus(app, "technitium", {
   args: [
     ...COMMON_ARGS,
     "--provider=rfc2136",
-    "--rfc2136-host=10.0.10.101",
+    "--rfc2136-host=10.0.10.100",
     "--rfc2136-port=53",
     "--rfc2136-zone=cmdcentral.xyz",
     "--domain-filter=cmdcentral.xyz",
