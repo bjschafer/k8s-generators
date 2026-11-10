@@ -19,6 +19,9 @@ NewArgoApp(name, {
     automated: {
       prune: true,
       selfHeal: true,
+      // Automated sync refuses to prune an app down to nothing ("auto-sync
+      // will wipe out all resources") unless this is set. Phase 1 needs it.
+      allowEmpty: true,
     },
   },
   namespace: namespace,
