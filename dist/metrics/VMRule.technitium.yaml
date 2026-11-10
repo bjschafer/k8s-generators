@@ -1,0 +1,35 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMRule
+metadata:
+  labels:
+    alerts.cmdcentral.xyz/kind: metrics
+  name: technitium
+  namespace: metrics
+spec:
+  groups:
+    - name: technitium
+      rules:
+        - alert: TechnitiumScrapeFailing
+          annotations:
+            description: A 401/403 means the bearer token was revoked (the `vmagent` session of the `metrics` user); recreate it and update kv/kubernetes/metrics/technitium-metrics.
+            summary: Technitium metrics scrape failing on {{ $labels.instance }}
+          expr: up{job="technitium"} == 0
+          for: 15m
+          labels:
+            priority: "0"
+            push_notify: "true"
+        - alert: TechnitiumServfailRatioHigh
+          annotations:
+            description: Sustained SERVFAILs usually mean the upstream forwarders are unreachable or DNSSEC validation is failing.
+            summary: Technitium SERVFAIL ratio on {{ $labels.instance }} is {{ $value | humanizePercentage }}
+          expr: |
+            (
+              rate(technitium_server_failure_total{job="technitium"}[10m])
+              /
+              rate(technitium_queries_total{job="technitium"}[10m])
+            ) > 0.05
+            and rate(technitium_queries_total{job="technitium"}[10m]) > 0.2
+          for: 15m
+          labels:
+            priority: "0"
+            push_notify: "true"

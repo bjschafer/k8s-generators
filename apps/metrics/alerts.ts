@@ -1392,6 +1392,53 @@ export function addAlerts(scope: Construct, id: string): void {
     ],
   });
 
+  // Whether DNS answers at all is BlackboxDNSProbesFailing (blackbox.ts); these
+  // cover the scrape itself and answer quality.
+  new Alert(scope, `${id}-technitium`, {
+    name: "technitium",
+    namespace: namespace,
+    rules: [
+      {
+        alert: "TechnitiumScrapeFailing",
+        expr: `up{job="technitium"} == 0`,
+        for: "15m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary: "Technitium metrics scrape failing on {{ $labels.instance }}",
+          description:
+            "A 401/403 means the bearer token was revoked (the `vmagent` session of the `metrics` user); recreate it and update kv/kubernetes/metrics/technitium-metrics.",
+        },
+      },
+      {
+        // SERVFAIL is ~0.15% at baseline (2026-11-10). The rate floor keeps an
+        // idle secondary's few queries from tripping it.
+        alert: "TechnitiumServfailRatioHigh",
+        expr: heredoc`
+          (
+            rate(technitium_server_failure_total{job="technitium"}[10m])
+            /
+            rate(technitium_queries_total{job="technitium"}[10m])
+          ) > 0.05
+          and rate(technitium_queries_total{job="technitium"}[10m]) > 0.2
+          `,
+        for: "15m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          ...SEND_TO_PUSHOVER,
+        },
+        annotations: {
+          summary:
+            "Technitium SERVFAIL ratio on {{ $labels.instance }} is {{ $value | humanizePercentage }}",
+          description:
+            "Sustained SERVFAILs usually mean the upstream forwarders are unreachable or DNSSEC validation is failing.",
+        },
+      },
+    ],
+  });
+
   new Alert(scope, `${id}-versitygw`, {
     name: "versitygw",
     namespace: namespace,

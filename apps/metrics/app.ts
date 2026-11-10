@@ -216,6 +216,15 @@ new OpenBaoSecret(app, "hass-bearer-token", {
   keys: ["token"],
 });
 
+// referenced by name in scrapeconfigs.ts (technitium bearer auth). The token
+// belongs to Technitium's dashboard-view-only `metrics` user; see the ansible
+// repo, roles/technitium/defaults/main.yaml, for how it was made and rotated.
+new OpenBaoSecret(app, "technitium-metrics", {
+  name: "technitium-metrics",
+  namespace: namespace,
+  keys: ["token"],
+});
+
 new BlackboxExporter(app, "blackbox");
 new ScrapeConfigs(app, "scrapes");
 new VmResources(app, "resources");

@@ -196,6 +196,49 @@ export class ScrapeConfigs extends Chart {
       },
     });
 
+    // Technitium's native Prometheus endpoint (15.0+): lifetime counters per
+    // node -- queries, rcodes, authoritative/recursive/cached/blocked/dropped.
+    // Each node counts only what it answered; counters reset on restart.
+    //
+    // :53443 is the HTTPS listener cluster init turns on, with a per-node
+    // self-signed cert (the nodes pin each other via DANE, not a CA), hence
+    // insecureSkipVerify. HTTPS over :5380 so the bearer token is not sent in
+    // the clear. Once infra2 has Caddy, both could move to real certs.
+    //
+    // The names are generic (queries_total, uptime_seconds), so every series
+    // is prefixed technitium_.
+    new VmScrapeConfig(this, "technitium", {
+      metadata: {
+        name: "technitium",
+        namespace: namespace,
+      },
+      spec: {
+        staticConfigs: [
+          {
+            targets: ["infra1.cmdcentral.xyz:53443", "infra2.cmdcentral.xyz:53443"],
+            labels: { job: "technitium" },
+          },
+        ],
+        path: "/api/dashboard/metrics/text",
+        scheme: VmScrapeConfigSpecScheme.HTTPS,
+        tlsConfig: { insecureSkipVerify: true },
+        authorization: {
+          credentials: {
+            name: "technitium-metrics",
+            key: "token",
+          },
+        },
+        metricRelabelConfigs: [
+          {
+            sourceLabels: ["__name__"],
+            regex: "(.+)",
+            targetLabel: "__name__",
+            replacement: "technitium_$1",
+          },
+        ],
+      },
+    });
+
     // new VmScrapeConfig(this, "lakelair-gateway", {
     //   metadata: {
     //     name: "lakelair-gateway",

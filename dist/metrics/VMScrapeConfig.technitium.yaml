@@ -1,0 +1,26 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: technitium
+  namespace: metrics
+spec:
+  authorization:
+    credentials:
+      key: token
+      name: technitium-metrics
+  metricRelabelConfigs:
+    - regex: (.+)
+      replacement: technitium_$1
+      sourceLabels:
+        - __name__
+      targetLabel: __name__
+  path: /api/dashboard/metrics/text
+  scheme: https
+  staticConfigs:
+    - labels:
+        job: technitium
+      targets:
+        - infra1.cmdcentral.xyz:53443
+        - infra2.cmdcentral.xyz:53443
+  tlsConfig:
+    insecureSkipVerify: true
