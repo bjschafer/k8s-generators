@@ -174,6 +174,59 @@ new AppPlus(app, "pdns", {
   },
 });
 
+// rfc2136 provider — manages cmdcentral.xyz records in Technitium, alongside
+// the pdns instance above while the two run in parallel during the PowerDNS ->
+// Technitium cutover (2026-11). Same owner id: the records were imported with
+// their ownership TXT, so it adopts them with zero changes (verified against a
+// shadow server). Points at infra2 until infra1 is cut over and becomes the
+// cluster primary; secondaries do not accept updates.
+const technitiumSecret = new OpenBaoSecret(app, "technitium-secret", {
+  name: "external-dns-technitium",
+  namespace,
+  keys: ["tsig-secret"],
+});
+
+new AppPlus(app, "technitium", {
+  name: "external-dns-technitium",
+  namespace,
+  image: EXTERNAL_DNS_IMAGE,
+  serviceAccountName: "external-dns",
+  automountServiceAccount: true,
+  disableIngress: true,
+  disableService: true,
+  livenessProbe: externalDnsHealthProbe(),
+  readinessProbe: externalDnsHealthProbe(),
+  deploymentStrategy: DeploymentStrategy.recreate(),
+  resources: {
+    cpu: { request: Cpu.millis(25), limit: Cpu.millis(100) },
+    memory: { request: Size.mebibytes(64), limit: Size.mebibytes(256) },
+  },
+  args: [
+    ...COMMON_ARGS,
+    "--dry-run",
+    "--provider=rfc2136",
+    "--rfc2136-host=10.0.10.101",
+    "--rfc2136-port=53",
+    "--rfc2136-zone=cmdcentral.xyz",
+    "--domain-filter=cmdcentral.xyz",
+    "--rfc2136-tsig-keyname=external-dns",
+    "--rfc2136-tsig-secret=$(TSIG_SECRET)",
+    "--rfc2136-tsig-secret-alg=hmac-sha256",
+    // AXFR is how the provider sees what it owns; without it, it never deletes.
+    "--rfc2136-axfr",
+    // Without this, records are written with TTL 0 (the pdns provider defaults
+    // to 300). 300s matches what the imported records already have.
+    "--rfc2136-min-ttl=300s",
+    "--txt-owner-id=prod-k8s-external-dns",
+  ],
+  extraEnv: {
+    TSIG_SECRET: EnvValue.fromSecretValue({
+      secret: technitiumSecret.secret,
+      key: "tsig-secret",
+    }),
+  },
+});
+
 // unifi webhook provider — manages local DNS entries in the Unifi controller
 const unifiSecret = new OpenBaoSecret(app, "unifi-secret", {
   name: "external-dns-unifi",

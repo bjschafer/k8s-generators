@@ -295,8 +295,7 @@ export class ScrapeConfigs extends Chart {
             targets: [
               "infra1.cmdcentral.xyz:8081",
               "infra1.cmdcentral.xyz:8082",
-              "infra2.cmdcentral.xyz:8081",
-              "infra2.cmdcentral.xyz:8082",
+              // infra2 moved to Technitium (2026-11-09), which has no /metrics.
             ],
             labels: { job: "pdns" },
           },
