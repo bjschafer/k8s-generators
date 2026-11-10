@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: metrics
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: victoria-metrics-k8s-stack
-    app.kubernetes.io/version: v0.0.17
-    helm.sh/chart: victoria-metrics-k8s-stack-0.97.1
+    app.kubernetes.io/version: v0.0.18
+    helm.sh/chart: victoria-metrics-k8s-stack-0.98.1
   name: metrics-victoria-metrics-k8s-stack-sync-job-config
   namespace: metrics
 data:
@@ -29,34 +29,60 @@ data:
           enabled: false
         controller-manager:
           enabled: false
+        etcd:
+          variables:
+            k8s_cluster:
+              query: label_values(etcd_server_has_leader, cluster)
         grafana-overview:
           enabled: false
         node-exporter-full:
-          clusterMetric: node_uname_info
+          variables:
+            cluster:
+              query: label_values(node_uname_info, cluster)
         proxy:
           enabled: false
         scheduler:
           enabled: false
         victorialogs-cluster:
-          clusterMetric: vm_app_version
+          variables:
+            k8s_cluster:
+              query: label_values(vm_app_version, cluster)
         victorialogs-single-node:
-          clusterMetric: vm_app_version
+          variables:
+            cluster:
+              query: label_values(vm_app_version, cluster)
         victorialogs-vlagent:
-          clusterMetric: vm_app_version
+          variables:
+            cluster:
+              query: label_values(vm_app_version, cluster)
         victoriametrics-cluster:
-          clusterMetric: vm_app_version
+          variables:
+            cluster:
+              query: label_values(vm_app_version, cluster)
         victoriametrics-operator:
-          clusterMetric: vm_app_version
+          variables:
+            cluster:
+              query: label_values(vm_app_version, cluster)
         victoriametrics-single-node:
-          clusterMetric: vm_app_version
+          variables:
+            cluster:
+              query: label_values(vm_app_version, cluster)
         victoriametrics-vmagent:
-          clusterMetric: vm_app_version
+          variables:
+            cluster:
+              query: label_values(vm_app_version, cluster)
         victoriametrics-vmalert:
-          clusterMetric: vm_app_version
+          variables:
+            cluster:
+              query: label_values(vm_app_version, cluster)
         victoriatraces-cluster:
-          clusterMetric: vm_app_version
+          variables:
+            cluster:
+              query: label_values(vm_app_version, cluster)
         victoriatraces-single-node:
-          clusterMetric: vm_app_version
+          variables:
+            cluster:
+              query: label_values(vm_app_version, cluster)
       sources: 
         - enabled: false
           url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/etcd/dashboards/etcd.json
