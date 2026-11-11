@@ -180,15 +180,6 @@ export const DATABASES: DatabaseConfig[] = [
   },
 
   {
-    name: "stlquest",
-    comment: "STL Quest database owner",
-    appNamespace: "stlquest",
-    // STL Quest takes a single postgresql:// URL in DATABASE_URL, so keep the
-    // password URL-safe. Same reasoning as `bambuddy` above.
-    passwordGeneration: { length: 40, digits: 8, symbols: 0 },
-  },
-
-  {
     name: "vaultwarden",
     comment: "Vaultwarden database owner",
     appNamespace: "vaultwarden",

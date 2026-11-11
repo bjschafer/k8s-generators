@@ -16,27 +16,8 @@ spec:
     targetRevision: main
   syncPolicy:
     automated:
+      allowEmpty: true
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
----
-apiVersion: argocd-image-updater.argoproj.io/v1alpha1
-kind: ImageUpdater
-metadata:
-  labels:
-    app.kubernetes.io/name: stlquest
-  name: stlquest-updater
-  namespace: argocd
-spec:
-  applicationRefs:
-    - images:
-        - alias: stl.quest
-          commonUpdateSettings:
-            updateStrategy: digest
-          imageName: ghcr.io/richardsolomou/stl.quest:latest
-      namePattern: stlquest
-  writeBackConfig:
-    gitConfig:
-      branch: main
-    method: git
