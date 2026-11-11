@@ -1,0 +1,7 @@
+resources:
+  - Deployment.print-dis.yaml
+  - ExternalSecret.authentik.yaml
+  - ExternalSecret.printdis-db-credentials.yaml
+  - ExternalSecret.s3.yaml
+  - Ingress.print-dis.yaml
+  - Service.print-dis.yaml

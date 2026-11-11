@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: print-dis
+  name: print-dis
+  namespace: print-dis
+spec:
+  rules:
+    - host: prints.cmdcentral.xyz
+      http:
+        paths:
+          - backend:
+              service:
+                name: print-dis
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - prints.cmdcentral.xyz
+      secretName: print-dis-tls

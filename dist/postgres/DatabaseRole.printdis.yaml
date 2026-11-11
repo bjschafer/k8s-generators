@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: printdis
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: print-dis database owner
+  connectionLimit: 30
+  login: true
+  name: printdis
+  passwordSecret:
+    name: printdis-db-credentials

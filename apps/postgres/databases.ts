@@ -180,6 +180,15 @@ export const DATABASES: DatabaseConfig[] = [
   },
 
   {
+    name: "printdis",
+    comment: "print-dis database owner",
+    appNamespace: "print-dis",
+    // print-dis takes a single postgres:// URL in DATABASE_URL, so keep the
+    // password URL-safe. Same reasoning as `bambuddy` above.
+    passwordGeneration: { length: 40, digits: 8, symbols: 0 },
+  },
+
+  {
     name: "vaultwarden",
     comment: "Vaultwarden database owner",
     appNamespace: "vaultwarden",

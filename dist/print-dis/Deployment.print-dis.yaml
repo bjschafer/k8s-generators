@@ -1,0 +1,132 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: print-dis
+  name: print-dis
+  namespace: print-dis
+spec:
+  minReadySeconds: 0
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      cdk8s.io/metadata.addr: print-dis-app-print-dis-app-deployment-c8953db2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: generators
+        app.kubernetes.io/name: print-dis
+        cdk8s.io/metadata.addr: print-dis-app-print-dis-app-deployment-c8953db2
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: BASE_URL
+              value: https://prints.cmdcentral.xyz
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: printdis-db-credentials
+            - name: DATABASE_URL
+              value: postgres://printdis:$(DB_PASSWORD)@prod.postgres.svc.cluster.local:5432/printdis
+            - name: OIDC_ISSUER
+              value: https://login.cmdcentral.xyz/application/o/print-dis/
+            - name: OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  key: client_id
+                  name: authentik
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: client_secret
+                  name: authentik
+            - name: ADMIN_GROUP
+              value: print-dis admins
+            - name: SPOOLMAN_URL
+              value: http://spoolman.spoolman.svc.cluster.local:8000
+            - name: PREVIEW_ALLOW_HOSTS
+              value: manyfold.cmdcentral.xyz,models.cmdcentral.xyz
+            - name: FILES_BACKEND
+              value: s3
+            - name: S3_ENDPOINT
+              value: https://s3.cmdcentral.xyz
+            - name: S3_REGION
+              value: us-east-1
+            - name: S3_BUCKET
+              value: print-dis
+            - name: S3_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  key: access_key_id
+                  name: s3
+            - name: S3_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret_access_key
+                  name: s3
+          image: ghcr.io/bjschafer/print-dis:main
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+          name: print-dis
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /readyz
+              port: 8080
+              scheme: HTTP
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 20m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 65532
+            runAsNonRoot: true
+            runAsUser: 65532
+            seccompProfile:
+              type: RuntimeDefault
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 2
+      dnsPolicy: ClusterFirst
+      hostNetwork: false
+      restartPolicy: Always
+      securityContext:
+        fsGroupChangePolicy: Always
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65532
+      setHostnameAsFQDN: false
+      shareProcessNamespace: false
+      terminationGracePeriodSeconds: 30

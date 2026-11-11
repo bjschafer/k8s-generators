@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: generators
+    app.kubernetes.io/name: print-dis
+  name: print-dis
+  namespace: print-dis
+spec:
+  externalIPs: []
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    cdk8s.io/metadata.addr: print-dis-app-print-dis-app-deployment-c8953db2
+  type: ClusterIP
