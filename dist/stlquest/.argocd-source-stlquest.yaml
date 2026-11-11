@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - ghcr.io/richardsolomou/stl.quest:latest@sha256:07fa6125cf0a2748a9d813308206b1750e72b9d570096bf983e54f91c605259e
