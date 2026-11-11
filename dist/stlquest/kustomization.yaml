@@ -1,0 +1,7 @@
+resources:
+  - Deployment.stlquest.yaml
+  - ExternalSecret.stlquest-db-credentials.yaml
+  - Ingress.stlquest.yaml
+  - PersistentVolumeClaim.data.yaml
+  - PersistentVolumeClaim.prints.yaml
+  - Service.stlquest.yaml

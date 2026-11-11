@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: DatabaseRole
+metadata:
+  name: stlquest
+  namespace: postgres
+spec:
+  cluster:
+    name: prod-pg17
+  comment: STL Quest database owner
+  connectionLimit: 30
+  login: true
+  name: stlquest
+  passwordSecret:
+    name: stlquest-db-credentials
