@@ -11,7 +11,9 @@ import { createAppDatabaseSecret } from "../postgres/database-provisioning";
 
 // print-dis: the print request queue (github.com/bjschafer/print-dis).
 // Stateless: requests live in prod Postgres, uploads in the print-dis bucket
-// on versitygw. Internal only -- do not add the cmdcentral.xyz/external label.
+// on versitygw. Reachable from the internet through the cmdcentral tunnel,
+// behind Cloudflare Access (tf/cloudflare); who may sign in is the
+// "print-dis users" group in tf/authentik.
 const namespace = basename(__dirname);
 const name = namespace;
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -76,6 +78,9 @@ new AppPlus(app, `${name}-app`, {
   },
   ports: [{ number: port, name: "http" }],
   ingressHosts: [{ host: host }],
+  ingressLabels: {
+    "cmdcentral.xyz/external": "true",
+  },
   extraEnv: {
     TZ: EnvValue.fromValue(TZ),
     BASE_URL: EnvValue.fromValue(`https://${host}`),

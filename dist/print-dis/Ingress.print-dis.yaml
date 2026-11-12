@@ -6,6 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: generators
     app.kubernetes.io/name: print-dis
+    cmdcentral.xyz/external: "true"
   name: print-dis
   namespace: print-dis
 spec:
