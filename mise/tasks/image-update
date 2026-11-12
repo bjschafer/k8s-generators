@@ -114,8 +114,10 @@ repos_json=$(printf '%s\n' "${repos[@]}" | jq -R . | jq -sc .)
 seen=0
 for _ in $(seq 45); do
   sleep 2
+  # The log mixes JSON with controller-runtime's klog lines (leader election),
+  # and one non-JSON line stops jq dead.
   lines=$(kubectl -n "$ns" logs "$deploy" --since-time="$start" 2>/dev/null |
-    jq -rc --argjson repos "$repos_json" '
+    grep '^{' | jq -rc --argjson repos "$repos_json" '
       select(.webhook_repository? as $r | $r != null and ($repos | index($r)) != null)
       | select(
           (.msg | test("^(Successfully updated|Committing|Processing results: .*images_considered=[1-9])"))
@@ -128,7 +130,22 @@ for _ in $(seq 45); do
     seen=$total
   fi
   done_count=$(grep -c 'Processing results: .*images_considered=[1-9]' <<<"$lines" || true)
-  [ "$done_count" -ge "${#repos[@]}" ] && exit 0
+  if [ "$done_count" -ge "${#repos[@]}" ]; then
+    # Git write-back only lands a commit. Until ArgoCD re-reads the repo
+    # (every ~3m on its own) the pods keep the old digest, and a rerun of this
+    # would see the stale live spec and commit the same update again. So
+    # nudge the refresh, the same thing the UI's Refresh button does.
+    apps=$(sed -nE 's/.*Committing [0-9]+ parameter update\(s\) for application ([^ ]+).*/\1/p' <<<"$lines" | sort -u)
+    if [ -z "$apps" ]; then
+      echo "nothing new; already on the latest image"
+      exit 0
+    fi
+    for a in $apps; do
+      kubectl -n "$ns" annotate application "$a" argocd.argoproj.io/refresh=normal --overwrite >/dev/null
+      echo "-> refreshed Argo app $a; it syncs the new digest now"
+    done
+    exit 0
+  fi
 done
 echo "gave up waiting after 90s; check 'kubectl -n $ns logs $deploy'" >&2
 exit 1
