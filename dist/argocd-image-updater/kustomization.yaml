@@ -9,7 +9,9 @@ resources:
   - ConfigMap.argocd-image-updater-ssh-config.yaml
   - CustomResourceDefinition.imageupdaters.argocd-image-updater.argoproj.io.yaml
   - Deployment.argocd-image-updater-controller.yaml
+  - ExternalSecret.argocd-image-updater-secret.yaml
   - NetworkPolicy.argocd-image-updater-allow-metrics.yaml
+  - Password.argocd-image-updater-secret-webhook.harbor-secret.yaml
   - Role.argocd-image-updater-leader-election-role.yaml
   - Role.argocd-image-updater.yaml
   - RoleBinding.argocd-image-updater-leader-election-rolebinding.yaml

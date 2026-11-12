@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: addfaee4ba53aefc3c3ebb86a500773cdb011adad23a459a0140995381b1adc1
+        checksum/config: 2edac276aa03882ea78a6299bd5134eab8b08f950a04d243a32b0114c175bdad
       labels:
         app.kubernetes.io/instance: argocd-image-updater
         app.kubernetes.io/name: argocd-image-updater

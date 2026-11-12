@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+#MISE description="Make argocd-image-updater check an app's images right now (e.g. after pushing a new print-dis image)"
+#USAGE arg "<target>..." help="Argo app name (e.g. print-dis) or full image name (e.g. ghcr.io/bjschafer/print-dis)"
+#USAGE flag "--no-wait" help="Send the webhook and exit without following the updater's logs"
+
+# Restarting the controller does NOT do this: its first pass after startup is
+# a dry run, and the restart resets its 1h interval clock. This sends
+# image-updater's own webhook instead, which runs a real update for just the
+# matching images. Anything already current no-ops.
+#
+# The webhook has no Service or Ingress, so this goes in over port-forward,
+# which only works with kubectl access to the argocd namespace. The Harbor
+# payload shape is the one upstream handler that takes any registry host. See
+# apps/argocd-image-updater/app.ts.
+
+set -euo pipefail
+
+ns=argocd
+deploy=deploy/argocd-image-updater-controller
+wait=true
+[ "${usage_no_wait:-false}" = "true" ] && wait=false
+
+# mise hands us the variadic arg as one shell-quoted string.
+eval "targets=(${usage_target:?})"
+
+# Resolve each target to image names. Anything with a slash is an image;
+# anything else is an app, looked up through the ImageUpdater CRs that
+# lib/argo.ts's `autoUpdate` generates.
+images=()
+updaters=$(kubectl -n "$ns" get imageupdaters -o json)
+for t in "${targets[@]}"; do
+  if [[ "$t" == */* ]]; then
+    images+=("$t")
+    continue
+  fi
+  found=$(jq -r --arg app "$t" \
+    '.items[].spec.applicationRefs[] | select(.namePattern == $app) | .images[].imageName' \
+    <<<"$updaters")
+  if [ -z "$found" ]; then
+    echo "no ImageUpdater targets app '$t' (is autoUpdate set in apps/$t/app.ts?)" >&2
+    exit 1
+  fi
+  while IFS= read -r i; do images+=("$i"); done <<<"$found"
+done
+
+secret=$(kubectl -n "$ns" get secret argocd-image-updater-secret \
+  -o jsonpath='{.data.webhook\.harbor-secret}' | base64 -d)
+if [ -z "$secret" ]; then
+  echo "argocd-image-updater-secret has no webhook.harbor-secret yet" >&2
+  exit 1
+fi
+
+# Port 0 picks a free local port; read back the one kubectl chose.
+pf_log=$(mktemp)
+kubectl -n "$ns" port-forward --address 127.0.0.1 "$deploy" :8082 >"$pf_log" 2>&1 &
+pf_pid=$!
+trap 'kill "$pf_pid" 2>/dev/null || true; rm -f "$pf_log"' EXIT
+port=""
+for _ in $(seq 50); do
+  port=$(sed -nE 's/^Forwarding from 127\.0\.0\.1:([0-9]+) .*/\1/p' "$pf_log" | head -1)
+  [ -n "$port" ] && break
+  kill -0 "$pf_pid" 2>/dev/null || break
+  sleep 0.2
+done
+if [ -z "$port" ]; then
+  echo "port-forward failed:" >&2
+  cat "$pf_log" >&2
+  exit 1
+fi
+
+start=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+repos=()
+for img in "${images[@]}"; do
+  # Split ghcr.io/owner/name:tag into its parts. As in Docker, a first path
+  # segment counts as a registry host only if it has a dot or a port, or is
+  # localhost. The tag only feeds the payload's required-field check, since
+  # upstream matches on registry + repo alone.
+  ref=$img tag=latest
+  last=${ref##*/}
+  if [[ "$last" == *:* ]]; then
+    tag=${last#*:}
+    ref=${ref%:"$tag"}
+  fi
+  first=${ref%%/*}
+  if [[ "$first" == *.* || "$first" == *:* || "$first" == localhost ]]; then
+    host=$first repo=${ref#*/}
+  else
+    host=docker.io repo=$ref
+  fi
+  repos+=("$repo")
+
+  payload=$(jq -nc --arg host "$host" --arg repo "$repo" --arg tag "$tag" '{
+    type: "PUSH_ARTIFACT",
+    event_data: {
+      resources: [{tag: $tag, resource_url: "\($host)/\($repo):\($tag)"}],
+      repository: {repo_full_name: $repo}
+    }
+  }')
+  code=$(curl -sS -o /dev/null -w '%{http_code}' \
+    -H 'Content-Type: application/json' -H "Authorization: $secret" \
+    --data "$payload" "http://127.0.0.1:$port/webhook?type=harbor") || true
+  if [ "$code" != "200" ]; then
+    echo "webhook for $host/$repo failed: HTTP $code" >&2
+    exit 1
+  fi
+  echo "-> asked for $host/$repo"
+done
+
+$wait || exit 0
+
+# Handling is async: the webhook returns 200 before any work is done. Follow
+# the controller's logs until each image's update pass reports its results.
+repos_json=$(printf '%s\n' "${repos[@]}" | jq -R . | jq -sc .)
+seen=0
+for _ in $(seq 45); do
+  sleep 2
+  lines=$(kubectl -n "$ns" logs "$deploy" --since-time="$start" 2>/dev/null |
+    jq -rc --argjson repos "$repos_json" '
+      select(.webhook_repository? as $r | $r != null and ($repos | index($r)) != null)
+      | select(
+          (.msg | test("^(Successfully updated|Committing|Processing results: .*images_considered=[1-9])"))
+          or .level == "error" or .level == "warning"
+        )
+      | "\(.time) \(.level) \(.msg)"' 2>/dev/null || true)
+  total=$(grep -c . <<<"$lines" || true)
+  if [ "$total" -gt "$seen" ]; then
+    tail -n +"$((seen + 1))" <<<"$lines"
+    seen=$total
+  fi
+  done_count=$(grep -c 'Processing results: .*images_considered=[1-9]' <<<"$lines" || true)
+  [ "$done_count" -ge "${#repos[@]}" ] && exit 0
+done
+echo "gave up waiting after 90s; check 'kubectl -n $ns logs $deploy'" >&2
+exit 1
