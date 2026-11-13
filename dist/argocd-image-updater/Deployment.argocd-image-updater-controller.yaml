@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/instance: argocd-image-updater
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-image-updater
-    app.kubernetes.io/version: v1.4.0
+    app.kubernetes.io/version: v1.5.0
     control-plane: argocd-image-updater-controller
-    helm.sh/chart: argocd-image-updater-1.4.2
+    helm.sh/chart: argocd-image-updater-1.5.0
   name: argocd-image-updater-controller
   namespace: argocd
 spec:
@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 2edac276aa03882ea78a6299bd5134eab8b08f950a04d243a32b0114c175bdad
+        checksum/config: 9bdffd2281a9bf230634057d12df58f7e42aa9fed6de2c9c3b0b3b37c3f44715
       labels:
         app.kubernetes.io/instance: argocd-image-updater
         app.kubernetes.io/name: argocd-image-updater
@@ -182,7 +182,7 @@ spec:
                   key: tls.ciphers
                   name: argocd-image-updater-config
                   optional: true
-          image: quay.io/argoprojlabs/argocd-image-updater:v1.4.0
+          image: quay.io/argoprojlabs/argocd-image-updater:v1.5.0
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
