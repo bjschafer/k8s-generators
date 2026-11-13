@@ -1,3 +1,3 @@
 kustomize:
   images:
-  - ghcr.io/bjschafer/print-dis:main@sha256:9bf57354e0446b306c1cd22536b7564427d016b2bbe72746ac86fba87d20c8f6
+  - ghcr.io/bjschafer/print-dis:main@sha256:cb13c617ddaf6a266c250a4e31b8499f3afba417ddfb2e1ffceeff74b8d7727e
