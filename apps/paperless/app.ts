@@ -41,7 +41,7 @@ const app = new App(DEFAULT_APP_PROPS(namespace));
 // time. Derives the updater's constraint too, which is what keeps the two
 // honest; Renovate watches it for the 9 the updater cannot take.
 // renovate: datasource=docker depName=gotenberg/gotenberg
-const gotenbergVersion = "8.36.0";
+const gotenbergVersion = "9.5.0";
 
 // Upstream only publishes `<debian>-<pure-ftpd version>` tags, which the
 // updater can't order. It follows this tag's digest for base-image rebuilds;
