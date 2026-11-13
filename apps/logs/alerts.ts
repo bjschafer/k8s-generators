@@ -29,8 +29,14 @@ export function addAlerts(scope: Construct, id: string): void {
         // (cephcsi 3.18, 2026-10). The phrase stops at "x86-64" so a future
         // v4 baseline is caught too. Renamed because dotted field names are
         // not valid Prometheus label names.
+        //
+        // Exact-prefix on _msg, not a bare phrase: vmalert logs this rule's
+        // query text verbatim when an evaluation fails (e.g. a DNS blip
+        // resolving VictoriaLogs), and a phrase filter then matches that echo
+        // and fires on the vmalert container. The real line is always the
+        // whole message, so anchoring at the start excludes any quotation.
         alert: "ContainerCpuArchUnsupported",
-        expr: `"CPU does not support x86-64" | stats by (kubernetes.pod_namespace, kubernetes.container_name) count(*) logs_count | filter logs_count:>0 | rename kubernetes.pod_namespace as namespace, kubernetes.container_name as container`,
+        expr: `_msg:="Fatal glibc error: CPU does not support x86-64"* | stats by (kubernetes.pod_namespace, kubernetes.container_name) count(*) logs_count | filter logs_count:>0 | rename kubernetes.pod_namespace as namespace, kubernetes.container_name as container`,
         for: "0m",
         labels: {
           priority: PRIORITY.NORMAL,
