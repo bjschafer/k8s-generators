@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.6.1
-    helm.sh/chart: argo-cd-10.14.0
+    helm.sh/chart: argo-cd-10.18.0
   name: argocd-application-controller
   namespace: argocd
 spec:
@@ -31,7 +31,6 @@ spec:
         app.kubernetes.io/name: argocd-application-controller
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v3.6.1
-        helm.sh/chart: argo-cd-10.14.0
     spec:
       affinity:
         podAntiAffinity:
@@ -424,6 +423,9 @@ spec:
       dnsPolicy: ClusterFirst
       nodeSelector:
         kubernetes.io/os: linux
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       serviceAccountName: argocd-application-controller
       terminationGracePeriodSeconds: 30
       volumes:
