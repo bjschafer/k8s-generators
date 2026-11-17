@@ -107,6 +107,10 @@ new AppPlus(app, `${name}-app`, {
     S3_BUCKET: EnvValue.fromValue("print-dis"),
     S3_ACCESS_KEY_ID: EnvValue.fromSecretValue({ secret: s3.secret, key: "access_key_id" }),
     S3_SECRET_ACCESS_KEY: EnvValue.fromSecretValue({ secret: s3.secret, key: "secret_access_key" }),
+    // Ready / needs-info emails to requesters and new-request emails to
+    // admins, through the in-cluster Postfix (no auth, relays to Cloudflare).
+    SMTP_ADDR: EnvValue.fromValue("smtp.smtp.svc.cluster.local:25"),
+    MAIL_FROM: EnvValue.fromValue("print-dis <prints@cmdcentral.net>"),
   },
   // distroless/static:nonroot runs as 65532 and writes nothing to disk:
   // uploads are streamed straight to S3.

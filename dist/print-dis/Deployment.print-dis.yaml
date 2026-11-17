@@ -76,6 +76,10 @@ spec:
                 secretKeyRef:
                   key: secret_access_key
                   name: s3
+            - name: SMTP_ADDR
+              value: smtp.smtp.svc.cluster.local:25
+            - name: MAIL_FROM
+              value: print-dis <prints@cmdcentral.net>
           image: ghcr.io/bjschafer/print-dis:main
           imagePullPolicy: IfNotPresent
           livenessProbe:
