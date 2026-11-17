@@ -3,6 +3,7 @@ import { Cpu, EnvFrom, EnvValue, Probe } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
+import { BRAND } from "../../lib/branding";
 import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT, TZ } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
@@ -89,7 +90,7 @@ new AppPlus(app, `${name}-app`, {
     TRUSTED_REVERSE_PROXY_NETWORKS: EnvValue.fromValue("127.0.0.1/8,10.42.0.0/16,10.43.0.0/16"),
     AUTH_PROXY_USER_CREATION: EnvValue.fromValue("true"),
     DISABLE_LOCAL_AUTH: EnvValue.fromValue("true"),
-    OAUTH2_OIDC_PROVIDER_NAME: EnvValue.fromValue("Cmdcentral Login"),
+    OAUTH2_OIDC_PROVIDER_NAME: EnvValue.fromValue(BRAND.name),
     RUN_MIGRATIONS: EnvValue.fromValue("1"),
     INTEGRATION_ALLOW_PRIVATE_NETWORKS: EnvValue.fromValue("1"),
   },

@@ -2,6 +2,7 @@ import { App, Duration, Size } from "cdk8s";
 import { Cpu, EnvValue, PersistentVolumeAccessMode, Probe } from "cdk8s-plus-34";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
+import { BRAND } from "../../lib/branding";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { basename } from "../../lib/util";
@@ -83,7 +84,7 @@ new AppPlus(app, `${name}-app`, {
 
     // Authentik SSO
     NEXT_PUBLIC_AUTHENTIK_ENABLED: EnvValue.fromValue("true"),
-    AUTHENTIK_CUSTOM_NAME: EnvValue.fromValue("Cmdcentral Login"),
+    AUTHENTIK_CUSTOM_NAME: EnvValue.fromValue(BRAND.name),
     AUTHENTIK_ISSUER: EnvValue.fromValue("https://login.cmdcentral.xyz/application/o/bookmarks"),
     AUTHENTIK_CLIENT_ID: EnvValue.fromSecretValue({
       secret: secrets.secret,

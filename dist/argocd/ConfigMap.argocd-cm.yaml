@@ -28,7 +28,7 @@ data:
           - profile
           - email
           - groups
-      name: authentik
+      name: cmdcentral
       type: oidc
       id: authentik
   exec.enabled: "false"

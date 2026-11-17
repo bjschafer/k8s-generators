@@ -47,7 +47,7 @@ spec:
             - name: OIDC_ENABLED
               value: "true"
             - name: OIDC_PROVIDER
-              value: authentik
+              value: cmdcentral
             - name: OIDC_CLIENT_ID
               value: fU7QdKmVDx3WeOV0UGAkUbMNAJsMOX2j7gc7ExX5
             - name: OIDC_REDIRECT_URI

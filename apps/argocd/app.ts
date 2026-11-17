@@ -2,6 +2,7 @@ import { App, Chart } from "cdk8s";
 import { Construct } from "constructs";
 import { basename } from "path";
 import { ENABLE_SERVERSIDE_APPLY, NewArgoApp } from "../../lib/argo";
+import { BRAND } from "../../lib/branding";
 import { CLUSTER_ISSUER, DEFAULT_APP_PROPS } from "../../lib/consts";
 import { HelmApp } from "../../lib/helm";
 import { infraResources } from "../../lib/util";
@@ -148,7 +149,7 @@ new HelmApp(app, "helm", {
       - profile
       - email
       - groups
-  name: authentik
+  name: ${BRAND.name}
   type: oidc
   id: authentik
 `,

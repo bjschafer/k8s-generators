@@ -3,6 +3,7 @@ import { Cpu, EnvValue, Secret } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
+import { BRAND } from "../../lib/branding";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { OpenBaoSecret } from "../../lib/secrets";
@@ -113,7 +114,7 @@ new AppPlus(app, name, {
     HBOX_OIDC_ALLOWED_GROUPS: EnvValue.fromValue("Family"),
     HBOX_OIDC_AUTO_REDIRECT: EnvValue.fromValue("true"),
     HBOX_OPTIONS_ALLOW_LOCAL_LOGIN: EnvValue.fromValue("false"),
-    HBOX_OIDC_BUTTON_TEXT: EnvValue.fromValue("Cmdcentral Login"),
+    HBOX_OIDC_BUTTON_TEXT: EnvValue.fromValue(`Sign in with ${BRAND.name}`),
     HBOX_AUTH_API_KEY_PEPPER: EnvValue.fromSecretValue({ secret: pepperSecret, key: "password" }),
     ...secrets.toEnvValues(),
   },

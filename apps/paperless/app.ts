@@ -21,6 +21,7 @@ import { Password } from "../../imports/generators.external-secrets.io";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
+import { BRAND } from "../../lib/branding";
 import {
   DEFAULT_APP_PROPS,
   NONROOT_SECURITY_CONTEXT,
@@ -132,7 +133,7 @@ const paperlessOidc = new OpenBaoSecret(app, "paperless-oidc", {
           APPS: [
             {
               provider_id: "authentik",
-              name: "Authentik",
+              name: BRAND.name,
               client_id: "{{ .client_id }}",
               secret: "{{ .client_secret }}",
               settings: {

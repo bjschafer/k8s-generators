@@ -61,7 +61,7 @@ spec:
             - name: HBOX_OPTIONS_ALLOW_LOCAL_LOGIN
               value: "false"
             - name: HBOX_OIDC_BUTTON_TEXT
-              value: Cmdcentral Login
+              value: Sign in with cmdcentral
             - name: HBOX_AUTH_API_KEY_PEPPER
               valueFrom:
                 secretKeyRef:

@@ -10,6 +10,8 @@ SOCIAL_AUTH_OIDC_KEY = environ.get('SOCIAL_AUTH_OIDC_KEY')
 SOCIAL_AUTH_OIDC_SECRET = environ.get('SOCIAL_AUTH_OIDC_SECRET')
 SOCIAL_AUTH_OIDC_SCOPE = ["openid", "profile", "email", "roles"]
 LOGOUT_REDIRECT_URL = environ.get('LOGOUT_REDIRECT_URL')
+# the login page's button for the OIDC backend: (label, Material icon)
+SOCIAL_AUTH_BACKEND_ATTRS = {'oidc': (environ.get('SSO_DISPLAY_NAME'), 'login')}
 
 SOCIAL_AUTH_PIPELINE = (
   ###################

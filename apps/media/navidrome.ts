@@ -83,6 +83,9 @@ export class Navidrome extends Chart {
             ND_REVERSEPROXYWHITELIST: EnvValue.fromValue("10.0.0.0/8,127.0.0.0/8"),
             ND_REVERSEPROXYUSERHEADER: EnvValue.fromValue("X-authentik-username"),
             ND_ENABLEUSEREDITING: EnvValue.fromValue("false"),
+            // the theme for users who haven't picked one; navidrome ships the
+            // same Catppuccin flavour as lib/branding.ts
+            ND_DEFAULTTHEME: EnvValue.fromValue("Catppuccin Frappé"),
             ...LSIO_ENVVALUE,
           },
           envFrom: [

@@ -2,6 +2,7 @@ import { App, Chart } from "cdk8s";
 import { basename, join, dirname } from "path";
 import { readdirSync, readFileSync } from "fs";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
+import { BRAND } from "../../lib/branding";
 import { NewArgoApp } from "../../lib/argo";
 import { HelmApp } from "../../lib/helm";
 import { Construct } from "constructs";
@@ -119,7 +120,7 @@ class Grafana extends Chart {
             enabled: true,
             client_id: "$__file{/etc/secrets/auth_cmdcentral_oauth/client_id}",
             client_secret: "$__file{/etc/secrets/auth_cmdcentral_oauth/client_secret}",
-            name: "Cmdcentral Login",
+            name: BRAND.name,
             scopes: "openid email profile",
             auth_url: "https://login.cmdcentral.xyz/application/o/authorize/",
             token_url: "https://login.cmdcentral.xyz/application/o/token/",

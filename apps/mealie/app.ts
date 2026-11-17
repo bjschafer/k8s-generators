@@ -3,6 +3,7 @@ import { Cpu, EnvFrom, EnvValue, Probe } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
+import { BRAND, FRAPPE, LATTE } from "../../lib/branding";
 import { DEFAULT_APP_PROPS, NONROOT_SECURITY_CONTEXT_UID, TZ } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
@@ -112,7 +113,23 @@ new AppPlus(app, `${name}-app`, {
     OIDC_REMEMBER_ME: EnvValue.fromValue("true"),
     OIDC_ADMIN_GROUP: EnvValue.fromValue("wheel"),
     OIDC_USER_GROUP: EnvValue.fromValue("Mealie users"),
-    OIDC_PROVIDER_NAME: EnvValue.fromValue("Cmdcentral Login"),
+    OIDC_PROVIDER_NAME: EnvValue.fromValue(BRAND.name),
+    // Catppuccin to match the rest of cmdcentral: Frappé in dark mode, Latte
+    // in light (mealie lets each user pick)
+    ...Object.fromEntries(
+      (["LIGHT", "DARK"] as const).flatMap((mode) => {
+        const c = mode === "DARK" ? FRAPPE : LATTE;
+        return Object.entries({
+          PRIMARY: c.mauve,
+          ACCENT: c.blue,
+          SECONDARY: c.pink,
+          SUCCESS: c.green,
+          INFO: c.sapphire,
+          WARNING: c.peach,
+          ERROR: c.red,
+        }).map(([key, colour]) => [`THEME_${mode}_${key}`, EnvValue.fromValue(colour)]);
+      }),
+    ),
 
     // ai config
     OPENAI_MODEL: EnvValue.fromValue("@cf/meta/llama-4-scout-17b-16e-instruct"),

@@ -34,6 +34,8 @@ spec:
               value: X-authentik-username
             - name: ND_ENABLEUSEREDITING
               value: "false"
+            - name: ND_DEFAULTTHEME
+              value: Catppuccin Frappé
             - name: TZ
               value: America/Chicago
             - name: PUID

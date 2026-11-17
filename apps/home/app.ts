@@ -3,7 +3,7 @@ import { EnvValue, Probe } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
-import { BrandingAssets, FRAPPE } from "../../lib/branding";
+import { BRAND, BrandingAssets, FRAPPE } from "../../lib/branding";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { HomeConfig } from "./config";
@@ -59,10 +59,10 @@ new AppPlus(app, `${name}-app`, {
   }),
   extraIngressHosts: ["cmdcentral.xyz"],
   extraEnv: {
-    TITLE: EnvValue.fromValue("Cmdcentral Home"), // defaults to "My Website", set to TITLE= to hide the title
-    // also the apple-touch-icon, which is why it's set while the header is off
+    TITLE: EnvValue.fromValue(BRAND.name), // the header and the browser tab
+    // the `>_` icon, beside the title in the header and as the apple-touch-icon
     LOGO: EnvValue.fromValue("/logo.png"),
-    HEADER: EnvValue.fromValue("false"), // defaults to true, set to false to hide the title and logo
+    HEADER: EnvValue.fromValue("true"),
     // HEADERLINE=true # defaults to true, set to false to turn off the header border line
     // HEADERTOP=true # defaults to false, set to true to force the header to always stay on top
     // CATEGORIES=small # defaults to normal, set to small for smaller, uppercase category labels

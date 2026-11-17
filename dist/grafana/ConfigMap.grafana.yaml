@@ -22,7 +22,7 @@ data:
     client_id = $__file{/etc/secrets/auth_cmdcentral_oauth/client_id}
     client_secret = $__file{/etc/secrets/auth_cmdcentral_oauth/client_secret}
     enabled = true
-    name = Cmdcentral Login
+    name = cmdcentral
     role_attribute_path = contains(groups[*], 'wheel') && 'Admin' || 'Viewer'
     scopes = openid email profile
     token_url = https://login.cmdcentral.xyz/application/o/token/

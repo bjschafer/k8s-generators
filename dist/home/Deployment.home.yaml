@@ -31,11 +31,11 @@ spec:
       containers:
         - env:
             - name: TITLE
-              value: Cmdcentral Home
+              value: cmdcentral
             - name: LOGO
               value: /logo.png
             - name: HEADER
-              value: "false"
+              value: "true"
             - name: THEME
               value: dark
             - name: BGCOLORDARK

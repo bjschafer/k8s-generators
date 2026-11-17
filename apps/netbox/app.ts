@@ -14,6 +14,7 @@ import { basename, join } from "path";
 import { Quantity } from "../../imports/k8s";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
+import { BRAND } from "../../lib/branding";
 import { DEFAULT_APP_PROPS, RELOADER_ENABLED } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
@@ -130,6 +131,8 @@ class NetboxConfig extends Chart {
         SOCIAL_AUTH_OIDC_OIDC_ENDPOINT: "https://login.cmdcentral.xyz/application/o/netbox/",
         SOCIAL_AUTH_OIDC_SCOPE: '["openid", "profile", "email", "roles"]',
         LOGOUT_REDIRECT_URL: "https://login.cmdcentral.xyz/application/o/netbox/end-session/",
+        // the login button's label, read by config/authentik.py
+        SSO_DISPLAY_NAME: BRAND.name,
 
         LOGIN_PERSISTENCE: "true",
 

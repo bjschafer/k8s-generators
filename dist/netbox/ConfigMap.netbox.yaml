@@ -22,4 +22,5 @@ data:
   REMOTE_AUTH_ENABLED: "true"
   SOCIAL_AUTH_OIDC_OIDC_ENDPOINT: https://login.cmdcentral.xyz/application/o/netbox/
   SOCIAL_AUTH_OIDC_SCOPE: '["openid", "profile", "email", "roles"]'
+  SSO_DISPLAY_NAME: cmdcentral
 immutable: false

@@ -4,6 +4,7 @@ import { Quantity } from "cdk8s-plus-34/lib/imports/k8s";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { NewArgoApp } from "../../lib/argo";
+import { BRAND } from "../../lib/branding";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { NFSVolumeContainer } from "../../lib/nfs";
@@ -107,7 +108,8 @@ const server = new AppPlus(app, name, {
 
     DISABLE_USERPASS_LOGIN: EnvValue.fromValue("true"),
     OIDC_ENABLED: EnvValue.fromValue("true"),
-    OIDC_PROVIDER: EnvValue.fromValue("authentik"),
+    // display only: the login button's label
+    OIDC_PROVIDER: EnvValue.fromValue(BRAND.name),
     OIDC_CLIENT_ID: EnvValue.fromValue("fU7QdKmVDx3WeOV0UGAkUbMNAJsMOX2j7gc7ExX5"),
     OIDC_REDIRECT_URI: EnvValue.fromValue("https://roms.cmdcentral.xyz/api/oauth/openid"),
     OIDC_SERVER_APPLICATION_URL: EnvValue.fromValue(

@@ -60,7 +60,35 @@ spec:
             - name: OIDC_USER_GROUP
               value: Mealie users
             - name: OIDC_PROVIDER_NAME
-              value: Cmdcentral Login
+              value: cmdcentral
+            - name: THEME_LIGHT_PRIMARY
+              value: "#8839ef"
+            - name: THEME_LIGHT_ACCENT
+              value: "#1e66f5"
+            - name: THEME_LIGHT_SECONDARY
+              value: "#ea76cb"
+            - name: THEME_LIGHT_SUCCESS
+              value: "#40a02b"
+            - name: THEME_LIGHT_INFO
+              value: "#209fb5"
+            - name: THEME_LIGHT_WARNING
+              value: "#fe640b"
+            - name: THEME_LIGHT_ERROR
+              value: "#d20f39"
+            - name: THEME_DARK_PRIMARY
+              value: "#ca9ee6"
+            - name: THEME_DARK_ACCENT
+              value: "#8caaee"
+            - name: THEME_DARK_SECONDARY
+              value: "#f4b8e4"
+            - name: THEME_DARK_SUCCESS
+              value: "#a6d189"
+            - name: THEME_DARK_INFO
+              value: "#85c1dc"
+            - name: THEME_DARK_WARNING
+              value: "#ef9f76"
+            - name: THEME_DARK_ERROR
+              value: "#e78284"
             - name: OPENAI_MODEL
               value: "@cf/meta/llama-4-scout-17b-16e-instruct"
             - name: OPENAI_BASE_URL
