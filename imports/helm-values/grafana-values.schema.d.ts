@@ -386,6 +386,17 @@ export interface HttpsGithubComGrafanaCommunityHelmCharts {
      * When true enables the creation of an ingress network policy
      */
     ingress?: boolean;
+    natsCluster?: {
+      /**
+       * Allow the embedded NATS cluster traffic between the Grafana pods of this release. Grafana 13.4+ runs an embedded NATS server in each pod when `[nats] enabled = true` is set in `grafana.ini`. The pods discover each other through the shared database and connect to each other's pod IP on the cluster port, so this is only useful with more than one replica and an external MySQL or PostgreSQL database. When true, an ingress rule (and an egress rule if `networkPolicy.egress.enabled` is true) allows the Grafana pods to reach each other on the NATS cluster port. Without NATS nothing listens there.
+       */
+      enabled?: boolean;
+      /**
+       * NATS cluster port. Set it to `[nats] cluster_port` from `grafana.ini` when that is changed.
+       */
+      port?: number;
+      [k: string]: unknown;
+    };
     [k: string]: unknown;
   };
   nodeSelector?: {
