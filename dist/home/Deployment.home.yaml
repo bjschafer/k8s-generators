@@ -33,9 +33,15 @@ spec:
             - name: TITLE
               value: Cmdcentral Home
             - name: LOGO
-              value: ""
+              value: /logo.png
             - name: HEADER
               value: "false"
+            - name: THEME
+              value: dark
+            - name: BGCOLORDARK
+              value: "#303446"
+            - name: CATEGORYBUBBLECOLORDARK
+              value: "#292c3c"
           image: jordanroher/starbase-80
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -71,6 +77,12 @@ spec:
             - mountPath: /app/src/config/config.json
               name: configmap-home-config
               subPath: config.json
+            - mountPath: /app/public/favicon.ico
+              name: configmap-home-branding
+              subPath: icon.png
+            - mountPath: /app/public/logo.png
+              name: configmap-home-branding
+              subPath: icon.png
       dnsPolicy: ClusterFirst
       hostNetwork: false
       restartPolicy: Always
@@ -84,3 +96,6 @@ spec:
         - configMap:
             name: home-config
           name: configmap-home-config
+        - configMap:
+            name: home-branding
+          name: configmap-home-branding

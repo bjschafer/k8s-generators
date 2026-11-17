@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <!-- Catppuccin Frappé: base fading to crust, surface0 dot grid -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="40%" r="75%">
+      <stop offset="0" stop-color="#303446"/>
+      <stop offset="1" stop-color="#232634"/>
+    </radialGradient>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="16" cy="16" r="1.5" fill="#414559"/>
+    </pattern>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+  <rect width="1920" height="1080" fill="url(#dots)"/>
+</svg>

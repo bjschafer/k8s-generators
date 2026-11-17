@@ -1,8 +1,9 @@
-import { App, Duration, Size } from "cdk8s";
+import { App, Chart, Duration, Size } from "cdk8s";
 import { EnvValue, Probe } from "cdk8s-plus-34";
 import { basename } from "path";
 import { AppPlus } from "../../lib/app-plus";
 import { ArgoAppSource, NewArgoApp } from "../../lib/argo";
+import { BrandingAssets, FRAPPE } from "../../lib/branding";
 import { DEFAULT_APP_PROPS } from "../../lib/consts";
 import { NewKustomize } from "../../lib/kustomize";
 import { HomeConfig } from "./config";
@@ -59,13 +60,16 @@ new AppPlus(app, `${name}-app`, {
   extraIngressHosts: ["cmdcentral.xyz"],
   extraEnv: {
     TITLE: EnvValue.fromValue("Cmdcentral Home"), // defaults to "My Website", set to TITLE= to hide the title
-    LOGO: EnvValue.fromValue(""), // defaults to /logo.png, set to LOGO= to hide the logo
+    // also the apple-touch-icon, which is why it's set while the header is off
+    LOGO: EnvValue.fromValue("/logo.png"),
     HEADER: EnvValue.fromValue("false"), // defaults to true, set to false to hide the title and logo
     // HEADERLINE=true # defaults to true, set to false to turn off the header border line
     // HEADERTOP=true # defaults to false, set to true to force the header to always stay on top
     // CATEGORIES=small # defaults to normal, set to small for smaller, uppercase category labels
-    // BGCOLOR=#fff # defaults to theme(colors.slate.50), set to any hex color or Tailwind color using the theme syntax
-    // BGCOLORDARK=#000 # defaults to theme(colors.gray.950), set to any hex color or Tailwind color using the theme syntax
+    // the shared palette is dark-only, so pin dark mode rather than follow the OS
+    THEME: EnvValue.fromValue("dark"),
+    BGCOLORDARK: EnvValue.fromValue(FRAPPE.base),
+    CATEGORYBUBBLECOLORDARK: EnvValue.fromValue(FRAPPE.mantle),
     // NEWWINDOW=true # defaults to true, set to false to not have links open in a new window
   },
   configmapMounts: [
@@ -74,7 +78,17 @@ new AppPlus(app, `${name}-app`, {
       mountPath: "/app/src/config/config.json",
       subPath: "config.json",
     },
+    // a PNG under the .ico name: browsers sniff favicon content, and
+    // index.html hard-codes /favicon.ico
+    { name: `${name}-branding`, mountPath: "/app/public/favicon.ico", subPath: "icon.png" },
+    { name: `${name}-branding`, mountPath: "/app/public/logo.png", subPath: "icon.png" },
   ],
+});
+
+new BrandingAssets(new Chart(app, `${name}-branding`), "assets", {
+  name: `${name}-branding`,
+  namespace: namespace,
+  assets: ["icon.png"],
 });
 
 new HomeConfig(app, `${name}-config`, {

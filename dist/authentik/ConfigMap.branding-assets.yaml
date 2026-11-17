@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: branding-assets
+  namespace: authentik
+data:
+  background.svg: |
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+      <!-- Catppuccin Frappé: base fading to crust, surface0 dot grid -->
+      <defs>
+        <radialGradient id="glow" cx="50%" cy="40%" r="75%">
+          <stop offset="0" stop-color="#303446"/>
+          <stop offset="1" stop-color="#232634"/>
+        </radialGradient>
+        <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+          <circle cx="16" cy="16" r="1.5" fill="#414559"/>
+        </pattern>
+      </defs>
+      <rect width="1920" height="1080" fill="url(#glow)"/>
+      <rect width="1920" height="1080" fill="url(#dots)"/>
+    </svg>
+  icon.svg: |
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+      <!-- Catppuccin Frappé: crust tile, mauve prompt, text cursor -->
+      <rect width="64" height="64" rx="14" fill="#232634"/>
+      <path d="M17 19 30 32 17 45" fill="none" stroke="#ca9ee6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M35 45h13" stroke="#c6d0f5" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+  logo.svg: |
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 304 56">
+      <!-- Catppuccin Frappé: the icon tile (crust, mauve prompt, blinking text cursor) beside a text wordmark -->
+      <style>
+        .cursor { animation: blink 1.2s steps(1) infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+      </style>
+      <rect width="56" height="56" rx="12" fill="#232634" stroke="#414559" stroke-width="2"/>
+      <path d="M15 17 26 28 15 39" fill="none" stroke="#ca9ee6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="cursor" d="M31 39h11" stroke="#c6d0f5" stroke-width="5" stroke-linecap="round"/>
+      <!-- textLength pins the width: an <img> SVG can't load web fonts, so the system monospace varies -->
+      <text x="72" y="40" font-family="'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="34" font-weight="500" fill="#c6d0f5" textLength="228" lengthAdjust="spacingAndGlyphs">cmdcentral</text>
+    </svg>
+immutable: false

@@ -27,6 +27,7 @@ import { NewKustomize } from "../../lib/kustomize";
 import { WellKnownLabels } from "../../lib/labels";
 import { CmdcentralServiceMonitor, MonitoringRule } from "../../lib/monitoring/victoriametrics";
 import { OpenBaoSecret } from "../../lib/secrets";
+import { AuthentikBranding, BLUEPRINT_MOUNT_PATH, MEDIA_MOUNT_PATH } from "./branding";
 
 const namespace = basename(__dirname);
 const app = new App(DEFAULT_APP_PROPS(namespace));
@@ -135,6 +136,8 @@ const creds = new OpenBaoSecret(app, "creds", {
   keys: ["AUTHENTIK_SECRET_KEY", "AUTHENTIK_POSTGRESQL__PASSWORD"],
 });
 
+const branding = new AuthentikBranding(app, "authentik-branding", { namespace, version });
+
 // Common environment variables
 const commonEnv: Record<string, EnvValue> = {
   AUTHENTIK_AVATARS: EnvValue.fromValue("gravatar"),
@@ -200,6 +203,7 @@ const server = new AppPlus(app, "authentik-server", {
     ...commonEnv,
     ...creds.toEnvValues(),
   },
+  configmapMounts: [{ name: branding.assets.name, mountPath: MEDIA_MOUNT_PATH }],
   extraIngressHosts: ["login.cmdcentral.xyz"],
   labels: {
     [WellKnownLabels.Name]: "authentik",
@@ -259,6 +263,7 @@ new AppPlus(app, "authentik-worker", {
     ...commonEnv,
     ...creds.toEnvValues(),
   },
+  configmapMounts: [{ name: branding.blueprint.name, mountPath: BLUEPRINT_MOUNT_PATH }],
   labels: {
     [WellKnownLabels.Name]: "authentik",
     [WellKnownLabels.Component]: "worker",

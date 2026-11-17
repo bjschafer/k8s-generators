@@ -1,0 +1,146 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: branding-blueprint
+  namespace: authentik
+data:
+  branding.yaml: |
+    version: 1
+    metadata:
+      name: cmdcentral branding
+      labels:
+        blueprints.goauthentik.io/description: cmdcentral brand, theme and flow titles
+        cmdcentral.xyz/authentik-version: 2026.8.0
+    entries:
+      - model: authentik_blueprints.metaapplyblueprint
+        attrs:
+          identifiers:
+            name: Default - Authentication flow
+          required: false
+      - model: authentik_brands.brand
+        identifiers:
+          domain: cmdcentral.xyz
+        attrs:
+          branding_title: cmdcentral
+          branding_logo: branding/logo.svg
+          branding_favicon: branding/icon.svg
+          branding_default_flow_background: branding/background.svg
+          branding_custom_css: |-
+            :host, :host([theme]) {
+              --ak-accent: #ca9ee6;
+              --ak-dark-foreground: #c6d0f5;
+              --ak-dark-background: #292c3c;
+              --ak-dark-background-light: #303446;
+              --ak-dark-background-lighter: #414559;
+              --ak-v2-global--BackgroundColor--100: #303446;
+              --ak-v2-global--Color--100: #c6d0f5;
+              --ak-v2-global--BorderColor--100: #51576d;
+              --ak-v2-global--BorderColor--200: #51576d;
+              --ak-c-login__main--BackgroundColor: #303446;
+              --ak-c-login__main--Color: #c6d0f5;
+              --ak-c-login__footer--Color: #a5adce;
+              --ak-scrollbar-background-color: #292c3c;
+              --ak-scrollbar-thumb-background-color: #51576d;
+
+              --pf-global--BackgroundColor--100: #303446;
+              --pf-global--BackgroundColor--dark-100: #303446;
+              --pf-global--BackgroundColor--light-100: #303446;
+              --pf-global--BackgroundColor--150: #414559;
+              --pf-global--BackgroundColor--200: #292c3c;
+              --pf-global--BackgroundColor--dark-200: #292c3c;
+              --pf-global--BackgroundColor--light-200: #292c3c;
+              --pf-global--BackgroundColor--300: #414559;
+              --pf-global--BackgroundColor--dark-300: #414559;
+              --pf-global--BackgroundColor--light-300: #414559;
+              --pf-global--BackgroundColor--400: #51576d;
+              --pf-global--BackgroundColor--dark-400: #51576d;
+
+              --pf-global--Color--100: #c6d0f5;
+              --pf-global--Color--dark-100: #c6d0f5;
+              --pf-global--Color--light-100: #c6d0f5;
+              --pf-global--Color--200: #a5adce;
+              --pf-global--Color--dark-200: #a5adce;
+              --pf-global--Color--light-200: #a5adce;
+              --pf-global--icon--Color--light: #a5adce;
+              --pf-global--icon--Color--dark: #a5adce;
+
+              --pf-global--BorderColor--100: #51576d;
+              --pf-global--BorderColor--dark-100: #51576d;
+              --pf-global--BorderColor--light-100: #51576d;
+              --pf-global--BorderColor--200: #626880;
+              --pf-global--BorderColor--300: #51576d;
+              --pf-global--BorderColor--400: #838ba7;
+
+              --pf-global--primary-color--100: #ca9ee6;
+              --pf-global--primary-color--dark-100: #ca9ee6;
+              --pf-global--primary-color--light-100: #ca9ee6;
+              --pf-global--primary-color--200: #f4b8e4;
+              --pf-global--primary-color--300: #ca9ee6;
+              --pf-global--active-color--100: #ca9ee6;
+
+              --pf-global--link--Color: #8caaee;
+              --pf-global--link--Color--dark: #8caaee;
+              --pf-global--link--Color--light: #8caaee;
+              --pf-global--link--Color--hover: #babbf1;
+              --pf-global--link--Color--dark--hover: #babbf1;
+              --pf-global--link--Color--light--hover: #babbf1;
+              --pf-global--link--Color--visited: #ca9ee6;
+
+              --pf-global--danger-color--100: #e78284;
+              --pf-global--success-color--100: #a6d189;
+              --pf-global--warning-color--100: #e5c890;
+              --pf-global--info-color--100: #8caaee;
+              --pf-global--disabled-color--100: #737994;
+              --pf-global--disabled-color--200: #51576d;
+
+              /* terminal look: authentik bundles RedHatMono, so no font to fetch */
+              --ak-font-family-sans-serif: var(--ak-generic-monospace);
+              --ak-font-family-heading: var(--ak-generic-monospace);
+              --pf-global--FontFamily--sans-serif: var(--ak-generic-monospace);
+              --pf-global--FontFamily--heading--sans-serif: var(--ak-generic-monospace);
+            }
+
+            /* the document resolves body's font before these variables can reach it */
+            :host {
+              font-family: var(--ak-generic-monospace);
+            }
+
+            /* PatternFly defines the button's colours on the button itself, so they can't
+             * be inherited from :host. The prompt colour is light: text on it goes dark. */
+            .pf-c-button {
+              --pf-c-button--m-primary--Color: #232634;
+              --pf-c-button--m-primary--hover--Color: #232634;
+              --pf-c-button--m-primary--focus--Color: #232634;
+              --pf-c-button--m-primary--active--Color: #232634;
+            }
+
+            :focus-visible {
+              outline-color: #ca9ee6;
+            }
+          attributes:
+            settings:
+              theme:
+                base: dark
+      - model: authentik_flows.flow
+        identifiers:
+          slug: default-authentication-flow
+        attrs:
+          background: branding/background.svg
+          title: cmdcentral login
+      - model: authentik_flows.flow
+        identifiers:
+          slug: default-enrollment-flow
+        attrs:
+          background: branding/background.svg
+          title: Welcome to cmdcentral
+      - model: authentik_flows.flow
+        identifiers:
+          slug: book-club-registration
+        attrs:
+          background: branding/background.svg
+      - model: authentik_flows.flow
+        identifiers:
+          slug: print-dis-registration
+        attrs:
+          background: branding/background.svg
+immutable: false

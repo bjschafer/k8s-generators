@@ -1,4 +1,5 @@
 resources:
+  - ConfigMap.home-branding.yaml
   - ConfigMap.home-config.yaml
   - Deployment.home.yaml
   - Ingress.home.yaml

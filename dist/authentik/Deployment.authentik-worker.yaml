@@ -123,6 +123,9 @@ spec:
             failureThreshold: 30
             periodSeconds: 5
             timeoutSeconds: 10
+          volumeMounts:
+            - mountPath: /blueprints/cmdcentral
+              name: configmap-branding-blueprint
       dnsPolicy: ClusterFirst
       hostNetwork: false
       priorityClassName: homelab-critical
@@ -134,3 +137,7 @@ spec:
       setHostnameAsFQDN: false
       shareProcessNamespace: false
       terminationGracePeriodSeconds: 30
+      volumes:
+        - configMap:
+            name: branding-blueprint
+          name: configmap-branding-blueprint

@@ -1,6 +1,8 @@
 resources:
   - ClusterRole.authentik.yaml
   - ClusterRoleBinding.authentik.yaml
+  - ConfigMap.branding-assets.yaml
+  - ConfigMap.branding-blueprint.yaml
   - Deployment.authentik-server.yaml
   - Deployment.authentik-worker.yaml
   - ExternalSecret.creds.yaml

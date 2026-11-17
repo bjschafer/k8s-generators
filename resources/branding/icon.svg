@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Catppuccin Frappé: crust tile, mauve prompt, text cursor -->
+  <rect width="64" height="64" rx="14" fill="#232634"/>
+  <path d="M17 19 30 32 17 45" fill="none" stroke="#ca9ee6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M35 45h13" stroke="#c6d0f5" stroke-width="6" stroke-linecap="round"/>
+</svg>
