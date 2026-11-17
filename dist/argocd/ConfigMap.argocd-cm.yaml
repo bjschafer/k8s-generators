@@ -90,4 +90,5 @@ data:
   timeout.hard.reconciliation: 0s
   timeout.reconciliation: 120s
   timeout.reconciliation.jitter: 60s
+  ui.cssurl: data:text/css,.login__box_saml%20.argo-button%20%7B%20white-space%3A%20nowrap%3B%20padding-left%3A%2012px%3B%20padding-right%3A%2012px%3B%20%7D
   url: https://argo.cmdcentral.xyz

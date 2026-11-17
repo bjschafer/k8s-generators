@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: fc0a3ff4598a0848886ba6c415a64f38fef065af714863eacf3e121dd8145ac9
+        checksum/cm: 68ae4300bf359e9981c5059664e84e9378640633dab45b779f40d945f4c3866b
         checksum/cmd-params: 8b864ee1f12641c48ab1b1a7dbb11da89da6aae79e8a8490fc724911d4ef09be
       labels:
         app.kubernetes.io/component: dex-server

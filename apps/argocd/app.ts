@@ -29,6 +29,13 @@ const version = "10.14.0";
 const hostname = "argo.cmdcentral.xyz";
 const tlsSecretName = "argocd-server";
 
+// The SSO button sits in a fixed 200px box, so "LOG IN VIA CMDCENTRAL" wraps
+// onto two lines; trimming the padding lets it fit on one. ui.cssurl is just a
+// <link href> the UI adds, and the server's CSP only sets frame-ancestors, so
+// the stylesheet travels as a data: URL rather than a file mounted into
+// argocd-server.
+const uiCss = `.login__box_saml .argo-button { white-space: nowrap; padding-left: 12px; padding-right: 12px; }`;
+
 /**
  * ArgoCD itself, self-managed.
  *
@@ -138,6 +145,7 @@ new HelmApp(app, "helm", {
         "admin.enabled": false,
         "accounts.bschafer": "apiKey, login",
         "oidc.tls.insecure.skip.verify": true,
+        "ui.cssurl": `data:text/css,${encodeURIComponent(uiCss)}`,
         "dex.config": `connectors:
 - config:
     issuer: https://login.cmdcentral.xyz/application/o/argocd/
