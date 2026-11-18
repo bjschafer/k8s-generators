@@ -57,6 +57,9 @@ spec:
           livenessProbe:
             failureThreshold: 3
             httpGet:
+              httpHeaders:
+                - name: Host
+                  value: localhost
               path: /
               port: 8000
               scheme: HTTP
@@ -69,6 +72,9 @@ spec:
           readinessProbe:
             failureThreshold: 3
             httpGet:
+              httpHeaders:
+                - name: Host
+                  value: localhost
               path: /
               port: 8000
               scheme: HTTP
@@ -90,6 +96,9 @@ spec:
           startupProbe:
             failureThreshold: 30
             httpGet:
+              httpHeaders:
+                - name: Host
+                  value: localhost
               path: /
               port: 8000
               scheme: HTTP

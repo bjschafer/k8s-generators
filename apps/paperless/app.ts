@@ -35,6 +35,9 @@ import { Valkey, VALKEY_VERSION } from "../../lib/valkey";
 import { StorageClass } from "../../lib/volume";
 
 const namespace = basename(__dirname);
+
+// Host header for the web probes; see the startupProbe comment below.
+const PROBE_HOST_HEADER = [{ name: "Host", value: "localhost" }];
 const app = new App(DEFAULT_APP_PROPS(namespace));
 
 // The kustomize base had sat at 7.8.3 while the updater's override ran 8.36.0,
@@ -319,18 +322,25 @@ class Paperless extends Chart {
       ports: [{ number: 8000, name: "http" }],
       // Init (migrations, index and LLM-index checks) takes ~35s before the web
       // server binds, which was enough for liveness to kill it mid-boot.
+      //
+      // Since ngx 3.5, setting PAPERLESS_URL narrows ALLOWED_HOSTS to that host
+      // plus "localhost" (no more "*" fallback). The kubelet sends the pod IP as
+      // Host, which Django rejects with a 400, so every probe pins Host instead.
       startupProbe: Probe.fromHttpGet("/", {
         port: 8000,
+        httpHeaders: PROBE_HOST_HEADER,
         periodSeconds: Duration.seconds(10),
         failureThreshold: 30,
       }),
       livenessProbe: Probe.fromHttpGet("/", {
         port: 8000,
+        httpHeaders: PROBE_HOST_HEADER,
         initialDelaySeconds: Duration.seconds(20),
         periodSeconds: Duration.seconds(10),
       }),
       readinessProbe: Probe.fromHttpGet("/", {
         port: 8000,
+        httpHeaders: PROBE_HOST_HEADER,
         initialDelaySeconds: Duration.seconds(20),
         periodSeconds: Duration.seconds(10),
       }),
