@@ -967,6 +967,33 @@ export function addAlerts(scope: Construct, id: string): void {
         },
       },
       {
+        alert: "KubernetesDeploymentReplicasUnavailable",
+        // The restart-based rules above both key off *how* a pod fails, and both have blind
+        // spots. paperless failed its startup probe for ~36h (2026-11-17 → 11-18) and neither
+        // fired: each attempt ran ~5m inside the startup-probe window before being killed, so
+        // it restarted exactly 3 times per 15m (never `> 3`), and the CrashLoopBackOff waiting
+        // state lasted only seconds per cycle, so the 10m max_over_time had gaps that kept
+        // resetting the 30m `for`. KubernetesPodNotHealthy didn't fire either, since the phase
+        // stayed Running. This rule watches the outcome instead: a Deployment that has been
+        // missing replicas for 15m is down, whatever the cause (crashloop, probes, image pull,
+        // unschedulable). Backtested over 7 days, it matched only paperless.
+        //
+        // `max without (instance, pod, container, endpoint)` drops the KSM-identity labels for
+        // the same KSM-churn reason as above.
+        expr: "max without (instance, pod, container, endpoint) (kube_deployment_spec_replicas > kube_deployment_status_replicas_available)",
+        for: "15m",
+        labels: {
+          priority: PRIORITY.NORMAL,
+          push_notify: "true",
+        },
+        annotations: {
+          summary:
+            "Kubernetes Deployment replicas unavailable (namespace: {{ $labels.namespace }}; deployment: {{ $labels.deployment }})",
+          description:
+            "Deployment {{ $labels.namespace }}/{{ $labels.deployment }} has had fewer available replicas than desired for over 15 minutes.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}",
+        },
+      },
+      {
         alert: "KubernetesDeploymentGenerationMismatch",
         expr: "kube_deployment_status_observed_generation != kube_deployment_metadata_generation",
         for: "10m",

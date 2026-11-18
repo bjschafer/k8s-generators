@@ -144,6 +144,18 @@ spec:
           labels:
             priority: "0"
             push_notify: "true"
+        - alert: KubernetesDeploymentReplicasUnavailable
+          annotations:
+            description: |-
+              Deployment {{ $labels.namespace }}/{{ $labels.deployment }} has had fewer available replicas than desired for over 15 minutes.
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: "Kubernetes Deployment replicas unavailable (namespace: {{ $labels.namespace }}; deployment: {{ $labels.deployment }})"
+          expr: max without (instance, pod, container, endpoint) (kube_deployment_spec_replicas > kube_deployment_status_replicas_available)
+          for: 15m
+          labels:
+            priority: "0"
+            push_notify: "true"
         - alert: KubernetesDeploymentGenerationMismatch
           annotations:
             description: |-
