@@ -91,6 +91,13 @@ const valkey = new Valkey(app, "valkey", {
 });
 
 const commonEnv: Record<string, EnvValue> = {
+  // Since v3.4.2 immich passes IMMICH_HOST (default `::`) to the
+  // OpenTelemetry Prometheus exporter, which builds its base URL as
+  // `http://${host}:${port}/` without bracketing IPv6. `http://:::8082/` is
+  // not a valid URL, so every scrape got a 400 and both metrics targets
+  // went down. The cluster is IPv4-only, so bind everything (API and
+  // exporters) to 0.0.0.0, which also yields a parseable base URL.
+  IMMICH_HOST: EnvValue.fromValue("0.0.0.0"),
   IMMICH_MACHINE_LEARNING_URL: EnvValue.fromValue("http://immich-machine-learning:3003"),
   REDIS_HOSTNAME: EnvValue.fromValue(valkey.Service!.name),
   REDIS_PORT: EnvValue.fromValue("6379"),
@@ -238,18 +245,13 @@ const microservices = new AppPlus(app, "immich-microservices", {
     port: 8082,
   },
   // The microservices worker serves HTTP on a random port (listen(0)), so the
-  // only fixed port is the OpenTelemetry Prometheus exporter on 8082. As of
-  // v3.4.0 that exporter binds to `localhost` only (exporter-prometheus 0.300
-  // defaults host to localhost and immich passes just a port), so a TCP probe
-  // against the pod IP is refused even though the worker is healthy -- the
-  // kubelet killed it every ~5 minutes. Probe from inside the container
-  // instead; this works on both the old (all-interfaces) and new binding.
+  // only fixed port is the OpenTelemetry Prometheus exporter on 8082. v3.4.0
+  // bound that exporter to `localhost` only, so a TCP probe against the pod
+  // IP was refused and the kubelet killed the worker every ~5 minutes. Probe
+  // from inside the container instead; it works regardless of bind address.
   // The port also only opens once bootstrap finishes, and with schema drift
   // (geodata_places missing its pkey/indexes) bootstrap re-imports ~80k rows
   // first, so keep the startupProbe's 5 minute window.
-  // NOTE: external Prometheus scrapes of 8082 (monitoringConfig) are broken
-  // on v3.4.0 for the same reason until upstream exposes a host setting
-  // (https://github.com/immich-app/immich/issues/33173).
   startupProbe: Probe.fromCommand(METRICS_PORT_CHECK, {
     failureThreshold: 30,
     periodSeconds: Duration.seconds(10),

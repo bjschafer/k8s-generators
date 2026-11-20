@@ -30,6 +30,8 @@ spec:
       automountServiceAccountToken: false
       containers:
         - env:
+            - name: IMMICH_HOST
+              value: 0.0.0.0
             - name: IMMICH_MACHINE_LEARNING_URL
               value: http://immich-machine-learning:3003
             - name: REDIS_HOSTNAME
