@@ -31,7 +31,7 @@ const OUT_DIR = "/dumps";
 // on its own is a signal to check the clusters first, not something to merge
 // on green -- hence no automerge for it in renovate.json.
 // renovate: datasource=docker depName=postgres
-const PG_VERSION = "18-alpine";
+const PG_VERSION = "19-alpine";
 const PG_IMAGE = `postgres:${PG_VERSION}`;
 
 // The image ships `USER root` and we bypass the entrypoint that would normally
