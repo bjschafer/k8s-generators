@@ -11,6 +11,28 @@ spec:
         - severity="critical"
       target_matchers:
         - severity="warning"
+    - equal:
+        - namespace
+        - pod
+        - container
+      source_matchers:
+        - alertname="KubernetesPodCrashLooping"
+      target_matchers:
+        - alertname="KubernetesPodCrashLoopBackOffSustained"
+    - equal:
+        - namespace
+        - pod
+        - container
+      source_matchers:
+        - alertname=~"KubernetesPodCrashLooping|KubernetesPodCrashLoopBackOffSustained"
+      target_matchers:
+        - alertname="KubernetesPodCpuThrottling"
+    - equal:
+        - namespace
+      source_matchers:
+        - alertname=~"KubernetesPodCrashLooping|KubernetesPodCrashLoopBackOffSustained"
+      target_matchers:
+        - alertname="KubernetesDeploymentReplicasUnavailable"
   receivers:
     - email_configs:
         - auth_password:

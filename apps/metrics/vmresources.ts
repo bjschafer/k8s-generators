@@ -213,6 +213,38 @@ export class VmResources extends Chart {
             targetMatchers: ['severity="warning"'],
             equal: ["alertname"],
           },
+          // One crashlooping pod used to page up to four times (external-secrets webhook,
+          // 2026-11-21): CrashLooping, CrashLoopBackOffSustained, DeploymentReplicasUnavailable,
+          // plus CpuThrottling re-firing on every flap. Keep the most specific alert and let the
+          // others page only when it isn't covering them. Inhibition just defers: a target that
+          // is still firing when its source resolves notifies then.
+          //
+          // Sustained exists for when CrashLooping goes quiet at saturated backoff, so it only
+          // needs to page once CrashLooping stops.
+          {
+            sourceMatchers: ['alertname="KubernetesPodCrashLooping"'],
+            targetMatchers: ['alertname="KubernetesPodCrashLoopBackOffSustained"'],
+            equal: ["namespace", "pod", "container"],
+          },
+          // A container that keeps getting killed mid-startup naturally burns its CPU quota.
+          {
+            sourceMatchers: [
+              'alertname=~"KubernetesPodCrashLooping|KubernetesPodCrashLoopBackOffSustained"',
+            ],
+            targetMatchers: ['alertname="KubernetesPodCpuThrottling"'],
+            equal: ["namespace", "pod", "container"],
+          },
+          // ReplicasUnavailable is the outcome-based catch-all for failures the crash rules
+          // miss. Pod alerts carry no `deployment` label, so this matches on namespace alone: a
+          // second broken Deployment in a namespace that is already paging waits until the
+          // crashloop clears.
+          {
+            sourceMatchers: [
+              'alertname=~"KubernetesPodCrashLooping|KubernetesPodCrashLoopBackOffSustained"',
+            ],
+            targetMatchers: ['alertname="KubernetesDeploymentReplicasUnavailable"'],
+            equal: ["namespace"],
+          },
         ],
       },
     });

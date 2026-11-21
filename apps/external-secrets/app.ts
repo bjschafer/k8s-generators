@@ -69,14 +69,18 @@ new HelmApp<EsoValuesSchema>(app, "helm", {
           enabled: true,
         },
       },
+      // The ~200MB Go binary's file-backed text pages are charged to this cgroup when it's the
+      // first pod on a node to load them. A 64Mi limit left them thrashing in and out of page cache:
+      // startup burned its whole CPU quota on refaults and never got far enough to log, so the
+      // liveness probe killed it every minute. Steady state is ~45Mi.
       resources: {
         requests: {
-          cpu: "100m",
+          cpu: "50m",
           memory: "64Mi",
         },
         limits: {
-          cpu: "100m",
-          memory: "64Mi",
+          cpu: "500m",
+          memory: "256Mi",
         },
       },
     },
