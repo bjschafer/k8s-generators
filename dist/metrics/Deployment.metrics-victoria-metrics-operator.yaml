@@ -41,13 +41,13 @@ spec:
             - name: VM_ANOMALY_VERSION
               value: v1.32.0
             - name: VM_LOGS_VERSION
-              value: v1.53.0
+              value: v1.54.0
             - name: VM_METRICS_VERSION
-              value: v1.156.0
+              value: v1.157.0
             - name: VM_TRACES_VERSION
               value: v0.13.0
             - name: VM_VMALERTMANAGER_ALERTMANAGERVERSION
-              value: v0.34.2
+              value: v0.35.0
             - name: POD_NAME
               valueFrom:
                 fieldRef:
