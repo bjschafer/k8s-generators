@@ -3,7 +3,6 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.5
-  creationTimestamp: null
   labels:
     component: velero
   name: serverstatusrequests.velero.io
@@ -18,7 +17,23 @@ spec:
     singular: serverstatusrequest
   scope: Namespaced
   versions:
-    - name: v1
+    - additionalPrinterColumns:
+        - description: The status of the server status request
+          jsonPath: .status.phase
+          name: Status
+          type: string
+        - description: The Velero server version
+          jsonPath: .status.serverVersion
+          name: Server Version
+          type: string
+        - description: The time the request was processed by the controller
+          jsonPath: .status.processedTimestamp
+          name: Processed
+          type: date
+        - jsonPath: .metadata.creationTimestamp
+          name: Age
+          type: date
+      name: v1
       schema:
         openAPIV3Schema:
           description: >-
@@ -90,3 +105,4 @@ spec:
           type: object
       served: true
       storage: true
+      subresources: {}
