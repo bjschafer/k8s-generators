@@ -1,4 +1,4 @@
 kustomize:
   images:
-  - ghcr.io/home-assistant/home-assistant:2026.11.2
+  - ghcr.io/home-assistant/home-assistant:2026.11.3
   - ghcr.io/matter-js/matterjs-server:stable@sha256:9eb98c839d0b4b07f9230b96ad52de570f7f2a7c286c5992b4c04b6b26c08a3f
