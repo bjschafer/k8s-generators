@@ -36,6 +36,10 @@ spec:
             allowTags: regexp:^[0-9]{4}\.[0-9]{1,2}\.[0-9]*$
             updateStrategy: alphabetical
           imageName: ghcr.io/home-assistant/home-assistant
+        - alias: matterjs-server
+          commonUpdateSettings:
+            updateStrategy: digest
+          imageName: ghcr.io/matter-js/matterjs-server:stable
       namePattern: hass
   writeBackConfig:
     gitConfig:

@@ -3,4 +3,5 @@ resources:
   - ExternalSecret.hass-db-credentials.yaml
   - Ingress.home-assistant.yaml
   - PersistentVolumeClaim.config.yaml
+  - PersistentVolumeClaim.matter-server.yaml
   - Service.home-assistant.yaml

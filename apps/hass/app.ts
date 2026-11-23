@@ -1,6 +1,13 @@
 import { basename } from "../../lib/util";
 import { App, Chart, Duration, Size } from "cdk8s";
-import { DEFAULT_APP_PROPS, DNS_NAMESERVERS, DNS_SEARCH, TZ } from "../../lib/consts";
+import {
+  DEFAULT_APP_PROPS,
+  DEFAULT_SECURITY_CONTEXT,
+  DNS_NAMESERVERS,
+  DNS_SEARCH,
+  NONROOT_SECURITY_CONTEXT,
+  TZ,
+} from "../../lib/consts";
 import { NewArgoApp } from "../../lib/argo";
 import { AppPlus } from "../../lib/app-plus";
 import { NewKustomize } from "../../lib/kustomize";
@@ -11,6 +18,7 @@ import {
   DeploymentStrategy,
   DnsPolicy,
   EnvValue,
+  ImagePullPolicy,
   PersistentVolume,
   PersistentVolumeAccessMode,
   PersistentVolumeClaim,
@@ -24,6 +32,11 @@ const app = new App(DEFAULT_APP_PROPS(namespace));
 const hassImage = "ghcr.io/home-assistant/home-assistant";
 const hassPort = 8123;
 
+// Home Assistant Container has no add-on to supply the Matter integration's
+// controller, so it runs here as a sidecar.
+const matterImage = "ghcr.io/matter-js/matterjs-server";
+const matterPort = 5580;
+
 const hostname = "hass.cmdcentral.xyz";
 const tlsSecretName = `${namespace}-tls`;
 
@@ -36,6 +49,11 @@ NewArgoApp(namespace, {
         strategy: "alphabetical",
         // upstream also publishes dev/beta/rc tags; only take YYYY.M.P releases
         allowTags: "^[0-9]{4}\\.[0-9]{1,2}\\.[0-9]*$",
+      },
+      {
+        image: matterImage,
+        strategy: "digest",
+        versionConstraint: "stable",
       },
     ],
   },
@@ -62,11 +80,23 @@ const configPvc = new PersistentVolumeClaim(shared, "hass-config-pvc", {
   ),
 });
 
+// The Matter server's fabric: its root CA and the operational credentials every
+// commissioned device trusts. Losing it means re-pairing every Matter device.
+const matterPvc = new PersistentVolumeClaim(shared, "matter-server-pvc", {
+  metadata: {
+    name: "matter-server",
+    namespace: namespace,
+  },
+  accessModes: [PersistentVolumeAccessMode.READ_WRITE_ONCE],
+  storage: Size.gibibytes(1),
+  storageClassName: StorageClass.CEPH_RBD,
+});
+
 // Recorder credentials for the `hass` role on prod-pg17, generated and rotated
 // by CNPG via apps/postgres/databases.ts.
 const dbCreds = createAppDatabaseSecret(app, "hass");
 
-new AppPlus(app, "home-assistant-app", {
+const hass = new AppPlus(app, "home-assistant-app", {
   name: "home-assistant",
   namespace: namespace,
   image: hassImage,
@@ -125,6 +155,61 @@ new AppPlus(app, "home-assistant-app", {
   // reasons to recreate apply here: the RWO volume, and hostNetwork -- a surge
   // pod would fail to bind 8123 on a node the old one is still holding.
   deploymentStrategy: DeploymentStrategy.recreate(),
+});
+
+// Sidecar rather than its own Deployment: Matter needs hostNetwork (link-local
+// multicast, plus the RIO-learned routes to Thread border routers), and sharing
+// HA's network namespace lets the websocket API -- which has no auth -- bind
+// loopback only. HA's Matter integration points at ws://127.0.0.1:5580/ws.
+const matterVol = Volume.fromPersistentVolumeClaim(app, "matter-server-vol", matterPvc);
+hass.Deployment.addVolume(matterVol);
+// A fresh RBD volume is root-owned and the image runs as 1000:1000. A pod-level
+// fsGroup would also recursively chown HA's whole config volume, so fix
+// ownership of this one volume only.
+hass.Deployment.addInitContainer({
+  name: "matter-server-chown",
+  image: `${matterImage}:stable`,
+  imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
+  command: ["chown", "-R", "1000:1000", "/data"],
+  securityContext: { ...DEFAULT_SECURITY_CONTEXT, user: 0, group: 0 },
+  volumeMounts: [{ path: "/data", volume: matterVol }],
+  resources: {
+    cpu: { request: Cpu.millis(10) },
+    memory: { request: Size.mebibytes(16), limit: Size.mebibytes(64) },
+  },
+});
+hass.Deployment.addContainer({
+  name: "matter-server",
+  image: `${matterImage}:stable`,
+  imagePullPolicy: ImagePullPolicy.IF_NOT_PRESENT,
+  // audited safe: image ships USER 1000:1000
+  securityContext: NONROOT_SECURITY_CONTEXT,
+  envVariables: {
+    TZ: EnvValue.fromValue(TZ),
+    PORT: EnvValue.fromValue(`${matterPort}`),
+    // IPv4 first: the image's healthcheck probes the first entry.
+    LISTEN_ADDRESS: EnvValue.fromValue("127.0.0.1,::1"),
+    // PRIMARY_INTERFACE stays unset: it only scopes link-local addresses, and
+    // the nodes HA can land on disagree on the LAN NIC's name (ens18 vs eth0).
+  },
+  volumeMounts: [{ path: "/data", volume: matterVol }],
+  resources: {
+    cpu: { request: Cpu.millis(50) },
+    memory: { request: Size.mebibytes(256), limit: Size.gibibytes(1) },
+  },
+  // The websocket is loopback-only, so a kubelet TCP/HTTP probe against the
+  // node IP would fail; the image's own healthcheck honours LISTEN_ADDRESS.
+  liveness: Probe.fromCommand(["/usr/local/bin/healthcheck.sh"], {
+    periodSeconds: Duration.seconds(60),
+    timeoutSeconds: Duration.seconds(10),
+    failureThreshold: 6,
+  }),
+  // First start loads the DCL seed; upstream allows 15 minutes.
+  startup: Probe.fromCommand(["/usr/local/bin/healthcheck.sh"], {
+    periodSeconds: Duration.seconds(5),
+    timeoutSeconds: Duration.seconds(10),
+    failureThreshold: 180,
+  }),
 });
 
 app.synth();

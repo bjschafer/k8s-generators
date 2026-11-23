@@ -68,6 +68,49 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: pvc-config
+        - env:
+            - name: TZ
+              value: America/Chicago
+            - name: PORT
+              value: "5580"
+            - name: LISTEN_ADDRESS
+              value: 127.0.0.1,::1
+          image: ghcr.io/matter-js/matterjs-server:stable
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - /usr/local/bin/healthcheck.sh
+            failureThreshold: 6
+            periodSeconds: 60
+            timeoutSeconds: 10
+          name: matter-server
+          resources:
+            limits:
+              memory: 1024Mi
+            requests:
+              cpu: 50m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          startupProbe:
+            exec:
+              command:
+                - /usr/local/bin/healthcheck.sh
+            failureThreshold: 180
+            periodSeconds: 5
+            timeoutSeconds: 10
+          volumeMounts:
+            - mountPath: /data
+              name: pvc-matter-server
       dnsConfig:
         nameservers:
           - 10.0.10.100
@@ -76,6 +119,33 @@ spec:
           - cmdcentral.xyz
       dnsPolicy: ClusterFirst
       hostNetwork: true
+      initContainers:
+        - command:
+            - chown
+            - -R
+            - 1000:1000
+            - /data
+          image: ghcr.io/matter-js/matterjs-server:stable
+          imagePullPolicy: IfNotPresent
+          name: matter-server-chown
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              cpu: 10m
+              memory: 16Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsGroup: 0
+            runAsNonRoot: false
+            runAsUser: 0
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /data
+              name: pvc-matter-server
       restartPolicy: Always
       securityContext:
         fsGroupChangePolicy: Always
@@ -87,4 +157,8 @@ spec:
         - name: pvc-config
           persistentVolumeClaim:
             claimName: config
+            readOnly: false
+        - name: pvc-matter-server
+          persistentVolumeClaim:
+            claimName: matter-server
             readOnly: false
