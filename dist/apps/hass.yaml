@@ -33,8 +33,8 @@ spec:
     - images:
         - alias: home-assistant
           commonUpdateSettings:
-            allowTags: regexp:^[0-9]{4}\.[0-9]{1,2}\.[0-9]*$
-            updateStrategy: alphabetical
+            allowTags: regexp:^[0-9]{4}\.[0-9]{1,2}\.[0-9]+$
+            updateStrategy: semver
           imageName: ghcr.io/home-assistant/home-assistant
         - alias: matterjs-server
           commonUpdateSettings:

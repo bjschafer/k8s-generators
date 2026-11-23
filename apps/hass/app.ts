@@ -46,9 +46,12 @@ NewArgoApp(namespace, {
     images: [
       {
         image: hassImage,
-        strategy: "alphabetical",
-        // upstream also publishes dev/beta/rc tags; only take YYYY.M.P releases
-        allowTags: "^[0-9]{4}\\.[0-9]{1,2}\\.[0-9]*$",
+        // Calendar versions with an unpadded month: `alphabetical` compares
+        // byte by byte, so "2026.9.4" outranks "2026.10.0" and "2026.11.0" and
+        // the updater silently stays on September. semver compares the fields
+        // numerically. allowTags keeps upstream's dev/beta/rc tags out.
+        strategy: "semver",
+        allowTags: "^[0-9]{4}\\.[0-9]{1,2}\\.[0-9]+$",
       },
       {
         image: matterImage,
