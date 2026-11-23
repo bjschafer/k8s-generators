@@ -28,7 +28,7 @@ export interface MysqlInstanceProps {
 // can see a bare version to bump -- it matches `const <name> = "<version>"`,
 // and a whole `repo:tag` string parses as a version of nothing.
 // renovate: datasource=docker depName=ghcr.io/mariadb/mariadb
-const mariadbVersion = "12.3.3-noble";
+const mariadbVersion = "12.3.4-noble";
 const DEFAULT_IMAGE = `ghcr.io/mariadb/mariadb:${mariadbVersion}`;
 // the image's mysql user
 const MYSQL_UID = 999;
