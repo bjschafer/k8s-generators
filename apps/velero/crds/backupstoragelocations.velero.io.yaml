@@ -3,7 +3,6 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.5
-  creationTimestamp: null
   labels:
     component: velero
   name: backupstoragelocations.velero.io
@@ -19,6 +18,10 @@ spec:
   scope: Namespaced
   versions:
     - additionalPrinterColumns:
+        - description: Provider is the provider of the backup storage
+          jsonPath: .spec.provider
+          name: Provider
+          type: string
         - description: Backup Storage Location status such as Available/Unavailable
           jsonPath: .status.phase
           name: Phase
@@ -28,6 +31,10 @@ spec:
           jsonPath: .status.lastValidationTime
           name: Last Validated
           type: date
+        - description: AccessMode defines the permissions for the backup storage location
+          jsonPath: .spec.accessMode
+          name: Access Mode
+          type: string
         - jsonPath: .metadata.creationTimestamp
           name: Age
           type: date

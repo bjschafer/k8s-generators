@@ -3,7 +3,6 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.5
-  creationTimestamp: null
   labels:
     component: velero
   name: datauploads.velero.io
@@ -13,6 +12,8 @@ spec:
     kind: DataUpload
     listKind: DataUploadList
     plural: datauploads
+    shortNames:
+      - du
     singular: dataupload
   scope: Namespaced
   versions:
@@ -99,6 +100,10 @@ spec:
                     CSI snapshot.
                   nullable: true
                   properties:
+                    cleanUp:
+                      description: CleanUp indicates request to clean up the volume snapshot after the
+                        backup/restore is completed.
+                      type: boolean
                     driver:
                       description: Driver is the driver used by the VolumeSnapshotContent
                       type: string
@@ -112,6 +117,10 @@ spec:
                       type: string
                     volumeSnapshot:
                       description: VolumeSnapshot is the name of the volume snapshot to be backed up
+                      type: string
+                    volumeSnapshotNamespace:
+                      description: VolumeSnapshotNamespace is the namespece of the volume snapshot to
+                        be backed up
                       type: string
                   required:
                     - storageClass
@@ -127,8 +136,8 @@ spec:
                   description: >-
                     DataMover specifies the data mover to be used by the backup.
 
-                    If DataMover is "" or "velero", the built-in data mover will
-                    be used.
+                    If DataMover is "" or "velero", the built-in fs data mover
+                    will be used.
                   type: string
                 operationTimeout:
                   description: >-
@@ -137,8 +146,24 @@ spec:
 
                     before returning error as timeout.
                   type: string
+                parentSnapshot:
+                  description: >-
+                    ParentSnapshot specifies the parent snapshot that current
+                    backup is based on.
+
+                    If its value is "" or "auto", the data mover finds the
+                    recent backup of the same volume as parent.
+
+                    If its value is "none", the data mover will do a full backup
+
+                    If its value is a specific snapshotID, the data mover finds
+                    the specific snapshot as parent.
+                  type: string
                 snapshotType:
                   description: SnapshotType is the type of the snapshot to be backed up.
+                  type: string
+                sourceFSType:
+                  description: SourceFSType is the file system type of the source volume.
                   type: string
                 sourceNamespace:
                   description: >-
@@ -174,6 +199,13 @@ spec:
                   format: date-time
                   nullable: true
                   type: string
+                activities:
+                  description: Activities contains one or more messages about what have been done
+                    for this DataUpload.
+                  items:
+                    type: string
+                  nullable: true
+                  type: array
                 completionTimestamp:
                   description: >-
                     CompletionTimestamp records the time a backup was completed.
@@ -194,13 +226,30 @@ spec:
                     of the DataUpload.
                   nullable: true
                   type: object
+                fallbackFull:
+                  description: FallbackFull indicates whether the incremental backup has fallen
+                    back to full backup
+                  type: boolean
                 incrementalBytes:
-                  description: IncrementalBytes holds the number of bytes new or changed since the
-                    last backup
+                  description: >-
+                    IncrementalBytes holds the number of bytes new or changed
+                    since the last backup.
+
+                    A nil value means the uploader did not report a figure; a
+                    pointer to 0 means it
+
+                    reported zero, i.e. nothing changed and nothing was
+                    transferred. The two are
+
+                    distinct: erasing a measured zero makes a perfect
+                    incremental indistinguishable
+
+                    from a full transfer in every downstream report.
                   format: int64
                   type: integer
                 message:
-                  description: Message is a message about the DataUpload's status.
+                  description: Message is a message describing the DataUpload when it reaches to a
+                    terminal status.
                   type: string
                 node:
                   description: Node is name of the node where the DataUpload is processed.
@@ -248,6 +297,10 @@ spec:
                   description: SnapshotID is the identifier for the snapshot in the backup
                     repository.
                   type: string
+                sourceSize:
+                  description: SourceSize holds the total size of the source volume.
+                  format: int64
+                  type: integer
                 startTimestamp:
                   description: |-
                     StartTimestamp records the time a backup was started.
