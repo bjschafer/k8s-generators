@@ -12,6 +12,7 @@ import { VmPodScrape } from "../../imports/operator.victoriametrics.com";
 import {
   Cluster,
   ClusterSpec,
+  ClusterSpecPlugins,
   ClusterSpecBootstrapInitdbImportType,
   Database,
   DatabaseSpecDatabaseReclaimPolicy,
@@ -136,103 +137,150 @@ const PROD_CLUSTER_SPEC: ClusterSpec = {
   },
 };
 
+// Barman server name for the prod lineage. Pinned rather than defaulted to the
+// cluster name, because it has to move with every major upgrade. pg_upgrade
+// assigns a new system identifier and resets the timeline to 1, so an upgraded
+// cluster archiving under its old server name would write timeline files that
+// collide with the previous major's and leave one prefix holding two
+// incompatible lineages. PITR does not cross a major boundary either way, so
+// there is nothing to gain by keeping them together.
+//
+// Bump this in the same commit as `imageCatalogRef.major`, never separately:
+// changing it early strands the current lineage's WAL, and changing it late is
+// the collision above. The old prefix stays in the same ObjectStore and ages
+// out on its own 30d retention, recoverable only by the previous major's image.
+const PROD_SERVER_NAME = "prod-pg18";
+
+function prodWalArchiver(objectStoreName: string): ClusterSpecPlugins {
+  return {
+    name: barmanPluginName,
+    isWalArchiver: true,
+    parameters: {
+      barmanObjectName: objectStoreName,
+      serverName: PROD_SERVER_NAME,
+    },
+  };
+}
+
+/**
+ * `prod-pg17`, retired by the 2026-11-24 rename to `prod`.
+ *
+ * Hibernated rather than deleted: its PVCs are the rollback path until `prod`
+ * has proven itself, and its `-replication`/`-ca` secrets back the inert
+ * `externalClusters` entry on `prod`.
+ *
+ * Its archive moved to an ObjectStore of its own name so `prod` could take the
+ * `prod` name for a fresh one. Same S3 path as before, so nothing moved in the
+ * bucket. Retention is enforced by a running cluster's sidecar, and this one
+ * has no pods, so the prefix never ages out on its own: purge
+ * `s3://postgres/k8s/prod-pg17/` by hand when this chart goes.
+ */
+class RetiredProdPg17 extends Chart {
+  static readonly NAME = "prod-pg17";
+
+  constructor(scope: Construct, id: string) {
+    super(scope, id);
+
+    const name = RetiredProdPg17.NAME;
+
+    new PostgresObjectStore(scope, `${id}-object-store`, name);
+
+    new Cluster(this, "cluster", {
+      metadata: {
+        namespace: namespace,
+        name: name,
+        annotations: { "cnpg.io/hibernation": "on" },
+      },
+      spec: {
+        ...PROD_CLUSTER_SPEC,
+        plugins: [prodWalArchiver(name)],
+      },
+    });
+
+    // Suspended rather than repointed or deleted: `spec.cluster` is immutable,
+    // and with `backupOwnerReference: self` deleting it garbage-collects every
+    // Backup it ever made. Goes with the cluster.
+    new ScheduledBackup(this, "nightly", {
+      metadata: {
+        name: "nightly",
+        namespace: namespace,
+      },
+      spec: {
+        cluster: {
+          name: name,
+        },
+        suspend: true,
+        schedule: "0 0 1 * * *",
+        backupOwnerReference: ScheduledBackupSpecBackupOwnerReference.SELF,
+        method: ScheduledBackupSpecMethod.PLUGIN,
+        pluginConfiguration: {
+          name: barmanPluginName,
+        },
+      },
+    });
+  }
+}
+
 class ProdPostgres extends Chart {
   readonly Cluster: Cluster;
 
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const name = "prod-pg17";
-    // Pinned rather than defaulted to the cluster name, because it has to
-    // move with every major upgrade. pg_upgrade assigns a new system
-    // identifier and resets the timeline to 1, so an upgraded cluster
-    // archiving under its old server name would write timeline files that
-    // collide with the previous major's and leave one prefix holding two
-    // incompatible lineages. PITR does not cross a major boundary either way,
-    // so there is nothing to gain by keeping them together.
-    //
-    // Bump this in the same commit as `imageCatalogRef.major`, never
-    // separately: changing it early strands the current lineage's WAL, and
-    // changing it late is the collision above. The old prefix stays in the
-    // same ObjectStore and ages out on its own 30d retention, recoverable only
-    // by a 17 image.
-    const serverName = "prod-pg18";
+    const name = "prod";
+    const retired = RetiredProdPg17.NAME;
 
-    this.Cluster = new Cluster(this, "cluster-17", {
+    // Sibling chart, not a child: an ObjectStore outlives the Cluster that
+    // filled it. See PostgresObjectStore.
+    new PostgresObjectStore(scope, `${id}-object-store`, name);
+
+    this.Cluster = new Cluster(this, "cluster", {
       metadata: {
         namespace: namespace,
         name: name,
       },
       spec: {
         ...PROD_CLUSTER_SPEC,
-        plugins: [
-          {
-            name: barmanPluginName,
-            isWalArchiver: true,
-            parameters: {
-              barmanObjectName: "prod",
-              serverName: serverName,
-            },
-          },
-        ],
-      },
-    });
-
-    // Successor to `prod-pg17`, whose name stopped describing the running
-    // major at the first in-place upgrade. Cluster names are immutable, so
-    // the rename is a new cluster and a data move.
-    //
-    // It runs as a standalone replica cluster until cutover: seeded from
-    // prod-pg17's latest base backup, then kept current by streaming from its
-    // primary, falling back to the WAL archive whenever the stream drops.
-    // Cutover is then a promotion (`replica.enabled: false`) once writes have
-    // stopped and replay has caught up, rather than a fresh restore.
-    //
-    // Deliberately no WAL archiver yet. barman refuses to archive into a
-    // non-empty destination, and anything this cluster wrote before promotion
-    // would be a lineage the promoted cluster then collides with. Archiving
-    // to its own store, backups and monitoring land with the cutover.
-    new Cluster(this, "cluster", {
-      metadata: {
-        namespace: namespace,
-        name: "prod",
-      },
-      spec: {
-        ...PROD_CLUSTER_SPEC,
+        // Promoted 2026-11-24 from a standalone replica of prod-pg17: seeded
+        // from its last base backup, kept current by streaming from its
+        // primary, and promoted once prod-pg17 was hibernated and the stream
+        // had delivered its shutdown checkpoint. `bootstrap`, `replica` and
+        // `externalClusters` now only record that lineage and are inert; they
+        // go when prod-pg17 does.
         bootstrap: {
           recovery: {
-            source: name,
+            source: retired,
           },
         },
         replica: {
-          enabled: true,
-          source: name,
+          enabled: false,
+          source: retired,
         },
         externalClusters: [
           {
-            name: name,
-            // Read-only: base backup and archived WAL for bootstrap and
-            // stream fallback.
+            name: retired,
             plugin: {
               name: barmanPluginName,
               parameters: {
-                barmanObjectName: "prod",
-                serverName: serverName,
+                barmanObjectName: retired,
+                serverName: PROD_SERVER_NAME,
               },
             },
-            // Streaming as `streaming_replica` with prod-pg17's own client
-            // cert, which its default pg_hba already accepts for replication.
             connectionParameters: {
-              host: `${name}-rw.${namespace}.svc`,
+              host: `${retired}-rw.${namespace}.svc`,
               user: "streaming_replica",
               sslmode: "verify-full",
               dbname: "postgres",
             },
-            sslKey: { name: `${name}-replication`, key: "tls.key" },
-            sslCert: { name: `${name}-replication`, key: "tls.crt" },
-            sslRootCert: { name: `${name}-ca`, key: "ca.crt" },
+            sslKey: { name: `${retired}-replication`, key: "tls.key" },
+            sslCert: { name: `${retired}-replication`, key: "tls.crt" },
+            sslRootCert: { name: `${retired}-ca`, key: "ca.crt" },
           },
         ],
+        // A fresh lineage in its own store, starting at the promotion
+        // timeline. barman requires the destination to be empty, which is why
+        // nothing was archived before promotion.
+        plugins: [prodWalArchiver(name)],
       },
     });
 
@@ -314,55 +362,9 @@ class ProdPostgres extends Chart {
       },
     });
 
-    new ObjectStore(this, "object-store", {
-      metadata: {
-        name: "prod",
-        namespace: namespace,
-      },
-      spec: {
-        retentionPolicy: "30d",
-        configuration: {
-          endpointUrl: "https://s3.cmdcentral.xyz",
-          // Named for the lineage that opened the store, and deliberately left
-          // that way across major upgrades: barman keys each server's archive
-          // by `serverName` *under* this path, so one store now holds both
-          // `prod-pg17/` and `prod-pg18/`. Repointing it would orphan the older
-          // lineage instead of letting it expire on the retention policy.
-          destinationPath: "s3://postgres/k8s/prod-pg17",
-          s3Credentials: {
-            accessKeyId: {
-              name: s3Creds.secretName,
-              key: "ACCESS_KEY_ID",
-            },
-            secretAccessKey: {
-              name: s3Creds.secretName,
-              key: "SECRET_ACCESS_KEY",
-            },
-          },
-          data: {
-            compression: ObjectStoreSpecConfigurationDataCompression.GZIP,
-          },
-        },
-        instanceSidecarConfiguration: {
-          resources: {
-            requests: {
-              memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
-            },
-            limits: {
-              memory:
-                ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("512Mi"),
-              cpu: ObjectStoreSpecInstanceSidecarConfigurationResourcesRequests.fromString("1"),
-            },
-          },
-        },
-      },
-    });
-
     new ScheduledBackup(this, "nightly", {
       metadata: {
-        name: "nightly",
+        name: `${name}-nightly`,
         namespace: namespace,
       },
       spec: {
@@ -477,20 +479,20 @@ export interface VectorPostgresProps {
 }
 
 /**
- * The barman ObjectStore backing a vectorchord cluster.
+ * A barman ObjectStore at `s3://postgres/k8s/<name>`.
  *
- * Split out of {@link VectorPostgres} because a store's lifetime is not its
- * cluster's. When a cluster is retired its store has to stay behind: it still
- * holds that lineage's base backups until the 30d retention expires, and it is
- * the `externalClusters` target named in whatever successor bootstrapped from
- * it. Deleting the two together would throw away the only copy of the data the
+ * Its own chart because a store's lifetime is not its cluster's. When a
+ * cluster is retired its store has to stay behind: it still holds that
+ * lineage's base backups until the 30d retention expires, and it is the
+ * `externalClusters` target named in whatever successor bootstrapped from it.
+ * Deleting the two together would throw away the only copy of the data the
  * successor was seeded from.
  *
  * Note that a store is single-use in the other direction too -- barman refuses
  * to archive into a non-empty destination, so a rebuilt cluster needs its
  * prefix purged before it will come up.
  */
-class VectorObjectStore extends Chart {
+class PostgresObjectStore extends Chart {
   constructor(scope: Construct, id: string, name: string) {
     super(scope, id);
 
@@ -661,8 +663,8 @@ class VectorPostgres extends Chart {
     });
 
     // Sibling chart, not a child: an ObjectStore outlives the Cluster that
-    // filled it. See VectorObjectStore.
-    new VectorObjectStore(scope, `${id}-object-store`, name);
+    // filled it. See PostgresObjectStore.
+    new PostgresObjectStore(scope, `${id}-object-store`, name);
 
     new ScheduledBackup(this, "nightly", {
       metadata: {
@@ -703,9 +705,11 @@ class VectorPostgres extends Chart {
   }
 }
 
-const prod_pg_17 = new ProdPostgres(app, "prod");
+const prod = new ProdPostgres(app, "prod");
 // Export the ProdPostgres instance so other apps can register databases
-export const PROD_CLUSTER = prod_pg_17;
+export const PROD_CLUSTER = prod;
+
+new RetiredProdPg17(app, "prod-pg17");
 
 // Import database provisioning functions
 import {
@@ -718,10 +722,10 @@ import {
 createPostgresSecrets(app);
 
 // Create a DatabaseRole CR for each configured database owner role
-createDatabaseRoles(app, prod_pg_17.clusterName);
+createDatabaseRoles(app, prod.clusterName);
 
 // Create all Database CRDs
-createDatabases(app, prod_pg_17.clusterName);
+createDatabases(app, prod.clusterName);
 
 const vectorCatalog = new VectorImageCatalog(app, "vectorchord-catalog");
 
@@ -743,7 +747,7 @@ new VectorPostgres(app, "immich", {
 // PITR here.
 new PgDump(app, "pg-dump", {
   namespace: namespace,
-  clusters: [prod_pg_17.clusterName, "immich"],
+  clusters: [prod.clusterName, "immich"],
 });
 
 app.synth();

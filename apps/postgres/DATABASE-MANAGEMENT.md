@@ -127,7 +127,7 @@ For each database in `DATABASES`, the following are created:
      namespace: postgres
    spec:
      cluster:
-       name: prod-pg17
+       name: prod
      name: myapp
      login: true
      comment: "MyApp database owner"
@@ -144,7 +144,7 @@ For each database in `DATABASES`, the following are created:
      namespace: postgres
    spec:
      cluster:
-       name: prod-pg17
+       name: prod
      name: myapp
      owner: myapp
    ```
@@ -160,11 +160,11 @@ Your app can connect using:
 
 ```bash
 # Direct to cluster (not recommended in production)
-Host: prod-pg17-rw.postgres.svc.cluster.local
+Host: prod-rw.postgres.svc.cluster.local
 Port: 5432
 
 # Via PgBouncer pooler (recommended)
-Host: prod-pg17-pooler-rw.postgres.svc.cluster.local
+Host: prod-pooler-rw.postgres.svc.cluster.local
 Port: 5432
 
 # Database name: your database name (e.g., "myapp")
@@ -174,7 +174,7 @@ Port: 5432
 
 Example connection string:
 ```
-postgresql://myapp:${PASSWORD}@prod-pg17-pooler-rw.postgres.svc.cluster.local:5432/myapp
+postgresql://myapp:${PASSWORD}@prod-pooler-rw.postgres.svc.cluster.local:5432/myapp
 ```
 
 ## Advanced Configuration

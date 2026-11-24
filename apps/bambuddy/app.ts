@@ -116,7 +116,7 @@ const bambuddy = new AppPlus(app, `${name}-app`, {
     ),
     // Upstream's PostgreSQL default is pool_size 20 + max_overflow 60, sized
     // for printer farms. Print starts burst into the overflow and pin the
-    // pooler's per-user cap (20 x 3 instances = 60), pushing prod-pg17 past
+    // pooler's per-user cap (20 x 3 instances = 60), pushing prod past
     // its 90% connection alert. One printer needs nowhere near that.
     DB_POOL_SIZE: EnvValue.fromValue("5"),
     DB_MAX_OVERFLOW: EnvValue.fromValue("10"),

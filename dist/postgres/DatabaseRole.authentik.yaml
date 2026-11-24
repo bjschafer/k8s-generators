@@ -5,7 +5,7 @@ metadata:
   namespace: postgres
 spec:
   cluster:
-    name: prod-pg17
+    name: prod
   connectionLimit: 70
   login: true
   name: authentik

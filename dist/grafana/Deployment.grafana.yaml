@@ -84,7 +84,7 @@ spec:
             - name: GOMEMLIMIT
               value: 1382MiB
             - name: GF_DATABASE_HOST
-              value: prod-pg17-pooler-rw.postgres.svc.cluster.local:5432
+              value: prod-pooler-rw.postgres.svc.cluster.local:5432
             - name: GF_DATABASE_NAME
               value: grafana
             - name: GF_DATABASE_SSL_MODE

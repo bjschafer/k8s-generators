@@ -8,4 +8,4 @@ spec:
     - port: metrics
   selector:
     matchLabels:
-      cnpg.io/cluster: prod-pg17
+      cnpg.io/cluster: prod

@@ -120,7 +120,7 @@ const vaultwarden = new AppPlus(app, `${name}-app`, {
     // password has to precede the URL that interpolates it.
     DB_PASSWORD: EnvValue.fromSecretValue({ secret: dbCreds.secret, key: "password" }),
     DATABASE_URL: EnvValue.fromValue(
-      `postgresql://${name}:$(DB_PASSWORD)@prod-pg17-pooler-rw.postgres.svc.cluster.local:5432/${name}`,
+      `postgresql://${name}:$(DB_PASSWORD)@prod-pooler-rw.postgres.svc.cluster.local:5432/${name}`,
     ),
     // Accounts are created by invitation from the admin panel only.
     SIGNUPS_ALLOWED: EnvValue.fromValue("false"),

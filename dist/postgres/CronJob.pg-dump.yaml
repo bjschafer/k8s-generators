@@ -21,7 +21,7 @@ spec:
                 - /scripts/pg_dump.sh
               env:
                 - name: CLUSTERS
-                  value: prod-pg17 immich
+                  value: prod immich
                 - name: OUT_DIR
                   value: /dumps
                 - name: NAMESPACE
@@ -53,8 +53,8 @@ spec:
                   name: configmap-pg-dump-scripts
                 - mountPath: /dumps
                   name: pvc-pg-dump
-                - mountPath: /creds/prod-pg17
-                  name: secret-prod-pg17-superuser
+                - mountPath: /creds/prod
+                  name: secret-prod-superuser
                   readOnly: true
                 - mountPath: /creds/immich
                   name: secret-immich-superuser
@@ -80,9 +80,9 @@ spec:
               persistentVolumeClaim:
                 claimName: pg-dump
                 readOnly: false
-            - name: secret-prod-pg17-superuser
+            - name: secret-prod-superuser
               secret:
-                secretName: prod-pg17-superuser
+                secretName: prod-superuser
             - name: secret-immich-superuser
               secret:
                 secretName: immich-superuser

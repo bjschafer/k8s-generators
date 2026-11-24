@@ -5,7 +5,7 @@ metadata:
   namespace: postgres
 spec:
   cluster:
-    name: prod-pg17
+    name: prod
   comment: Read-only reporting login used by Grafana datasources
   connectionLimit: 30
   login: true

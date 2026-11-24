@@ -5,7 +5,7 @@ metadata:
   namespace: postgres
 spec:
   cluster:
-    name: prod-pg17
+    name: prod
   ensure: present
   name: book-club
   owner: book-club

@@ -229,13 +229,13 @@ export const sources: CrdSource[] = [
     name: "cnpg-image-catalogs",
     description:
       "CNPG postgres-containers ClusterImageCatalogs (bookworm + trixie). Load-bearing, not reference " +
-      "data: postgres/prod-pg17 resolves its running image through the trixie catalog, so editing " +
+      "data: postgres/prod resolves its running image through the trixie catalog, so editing " +
       "these rolls the production database.\n\n" +
       "Deliberately `enabled: false`, which here means 'refresh only when asked' rather than 'not " +
       "migrated yet'. These track upstream `main` with no version of their own, so they are pure " +
       "drift: CI runs `update-crds --all` on every Renovate PR, and if this were enabled, an " +
       "unrelated chart bump would quietly pick up whatever base image upstream published that " +
-      "morning, commit it to the branch, and automerge it -- rolling all three prod-pg17 instances " +
+      "morning, commit it to the branch, and automerge it -- rolling all three prod instances " +
       "as a side effect of a Grafana update. Refresh it on purpose with " +
       "`mise run update-crds cnpg-image-catalogs`, in its own commit, when a Postgres restart is " +
       "acceptable.",

@@ -193,7 +193,7 @@ SELECT h.account, h.meter, h.ts, h.local_date, h.hour_start, h.tier_tou, h.kwh,
    AND h.local_date > b.period_start AND h.local_date <= b.period_end;
 
 -- Grafana reads through the shared hand-made `grafanareader` role against the
--- prod-pg17-ro replica, so it needs SELECT here. Done on every run rather than
+-- prod-ro replica, so it needs SELECT here. Done on every run rather than
 -- once by hand: it is idempotent, and it means a table added later is readable
 -- without anyone remembering to re-grant.
 --

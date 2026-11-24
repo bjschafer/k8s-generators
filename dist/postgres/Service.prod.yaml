@@ -12,5 +12,5 @@ spec:
       protocol: TCP
       targetPort: pgbouncer
   selector:
-    cnpg.io/poolerName: prod-pg17-pooler-rw
+    cnpg.io/poolerName: prod-pooler-rw
   type: LoadBalancer

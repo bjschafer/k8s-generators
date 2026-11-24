@@ -1,6 +1,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
+  annotations:
+    cnpg.io/hibernation: "on"
   name: prod-pg17
   namespace: postgres
 spec:
@@ -30,7 +32,7 @@ spec:
     - isWALArchiver: true
       name: barman-cloud.cloudnative-pg.io
       parameters:
-        barmanObjectName: prod
+        barmanObjectName: prod-pg17
         serverName: prod-pg18
   postgresql:
     parameters:

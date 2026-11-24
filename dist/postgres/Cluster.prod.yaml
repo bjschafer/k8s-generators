@@ -28,7 +28,7 @@ spec:
       plugin:
         name: barman-cloud.cloudnative-pg.io
         parameters:
-          barmanObjectName: prod
+          barmanObjectName: prod-pg17
           serverName: prod-pg18
       sslCert:
         key: tls.crt
@@ -50,6 +50,12 @@ spec:
   instances: 3
   monitoring:
     enablePodMonitor: false
+  plugins:
+    - isWALArchiver: true
+      name: barman-cloud.cloudnative-pg.io
+      parameters:
+        barmanObjectName: prod
+        serverName: prod-pg18
   postgresql:
     parameters:
       lc_messages: C
@@ -60,7 +66,7 @@ spec:
       max_slot_wal_keep_size: 1GB
   priorityClassName: homelab-critical
   replica:
-    enabled: true
+    enabled: false
     source: prod-pg17
   resources:
     limits:

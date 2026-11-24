@@ -37,7 +37,7 @@ spec:
                   key: password
                   name: vaultwarden-db-credentials
             - name: DATABASE_URL
-              value: postgresql://vaultwarden:$(DB_PASSWORD)@prod-pg17-pooler-rw.postgres.svc.cluster.local:5432/vaultwarden
+              value: postgresql://vaultwarden:$(DB_PASSWORD)@prod-pooler-rw.postgres.svc.cluster.local:5432/vaultwarden
             - name: SIGNUPS_ALLOWED
               value: "false"
             - name: INVITATIONS_ALLOWED
