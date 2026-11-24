@@ -408,6 +408,15 @@ class ProdPostgres extends Chart {
   }
 }
 
+// The Postgres major every VectorPostgres cluster runs, and with it the barman
+// serverName those clusters archive under. Derived rather than separately
+// pinned (unlike prod's PROD_SERVER_NAME) so the two cannot drift: bumping
+// this is an offline in-place `pg_upgrade`, which assigns a new system
+// identifier and resets the timeline to 1, and archiving that under the old
+// prefix would collide with the previous major's timeline-1 files. Needs a
+// matching entry in VectorImageCatalog first.
+const VECTOR_PG_MAJOR = 18;
+
 /**
  * The vectorchord image catalog is a namespace singleton -- every
  * VectorPostgres cluster resolves its image through this one object, so it
@@ -438,6 +447,8 @@ class VectorImageCatalog extends Chart {
     // pgvector must stay `>=0.7 <0.9`.
     // renovate: datasource=docker depName=vectorchord-pg17 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
     const vectorchordPg17 = "17.11-1.1.1";
+    // renovate: datasource=docker depName=vectorchord-pg18 packageName=ghcr.io/tensorchord/cloudnative-vectorchord versioning=loose
+    const vectorchordPg18 = "18.6-1.1.1";
 
     this.Catalog = new ImageCatalog(this, "catalog", {
       metadata: {
@@ -445,14 +456,22 @@ class VectorImageCatalog extends Chart {
         name: "vectorchord",
       },
       spec: {
-        // Only major 17. A major-16 entry sat here unselected for the life of
-        // the catalog -- `immich-pg16` was the only candidate and it resolved
-        // 17 -- and went with that cluster. Add a major back only when a
-        // cluster actually asks for it, so every entry stays exercised.
+        // Add a major only when a cluster actually asks for it, so every
+        // entry stays exercised. Both images are debian:bookworm-slim, which
+        // CNPG requires across a major upgrade.
+        //
+        // 17 is no longer selected: immich went 17 -> 18 on 2026-11-24. It
+        // stays as the rollback path -- CNPG recovers a failed pg_upgrade by
+        // reverting `major`, which needs the old image to resolve -- and goes
+        // once immich has proven itself on 18.
         images: [
           {
             image: `${imageBase}:${vectorchordPg17}`,
             major: 17,
+          },
+          {
+            image: `${imageBase}:${vectorchordPg18}`,
+            major: 18,
           },
         ],
       },
@@ -589,7 +608,7 @@ class VectorPostgres extends Chart {
         imageCatalogRef: {
           apiGroup: catalog.apiGroup,
           kind: catalog.kind,
-          major: 17,
+          major: VECTOR_PG_MAJOR,
           name: catalog.name,
         },
         monitoring: {
@@ -629,6 +648,10 @@ class VectorPostgres extends Chart {
               // `name`. These were separately hardcoded before, and agreed
               // only by coincidence.
               barmanObjectName: name,
+              // See VECTOR_PG_MAJOR. Through Postgres 17 this was left to
+              // default to `name`, so that major's archive is under
+              // `<name>/`, not `<name>-pg17/`.
+              serverName: `${name}-pg${VECTOR_PG_MAJOR}`,
             },
           },
         ],

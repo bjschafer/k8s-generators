@@ -26,10 +26,10 @@ const OUT_DIR = "/dumps";
 // keep patched. The client major must be >= every server it dumps: pg_dump
 // refuses to read a server newer than itself, while dumping an older one is
 // supported. So this tracks the *highest* major in the cluster list below and
-// moves in the same commit that upgrades it -- currently 18 for prod, with
-// immich still on 17 and dumped fine by an 18 client. A Renovate PR moving it
-// on its own is a signal to check the clusters first, not something to merge
-// on green -- hence no automerge for it in renovate.json.
+// moves in the same commit that upgrades it -- currently 18, which both prod
+// and immich run. A Renovate PR moving it on its own is a signal to check the
+// clusters first, not something to merge on green -- hence no automerge for it
+// in renovate.json.
 // renovate: datasource=docker depName=postgres
 const PG_VERSION = "18-alpine";
 const PG_IMAGE = `postgres:${PG_VERSION}`;
