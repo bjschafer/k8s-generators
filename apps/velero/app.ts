@@ -29,7 +29,7 @@ const app = new App(DEFAULT_APP_PROPS(namespace));
 // renovate: datasource=helm depName=velero-chart packageName=velero registryUrl=https://vmware-tanzu.github.io/helm-charts/
 const chartVersion = "12.2.5";
 // renovate: datasource=docker depName=velero/velero-plugin-for-aws
-const awsVersion = "1.14.4";
+const awsVersion = "1.15.0";
 
 NewArgoApp(name, {
   namespace: namespace,
