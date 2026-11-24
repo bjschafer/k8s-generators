@@ -4,17 +4,7 @@ metadata:
   name: immich
   namespace: postgres
 spec:
-  bootstrap:
-    recovery:
-      source: immich-pg16
   enableSuperuserAccess: true
-  externalClusters:
-    - name: immich-pg16
-      plugin:
-        name: barman-cloud.cloudnative-pg.io
-        parameters:
-          barmanObjectName: immich-pg16
-          serverName: immich-pg16
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ImageCatalog

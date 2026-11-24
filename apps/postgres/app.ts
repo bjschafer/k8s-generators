@@ -59,6 +59,83 @@ const s3Creds = new OpenBaoSecret(app, "s3-creds", {
 
 const barmanPluginName = "barman-cloud.cloudnative-pg.io";
 
+/**
+ * Spec shared by `prod-pg17` and its successor `prod` while both exist, so the
+ * successor comes up as an exact twin and promotion changes nothing but the
+ * name.
+ */
+const PROD_CLUSTER_SPEC: ClusterSpec = {
+  instances: 3,
+  priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
+  // Bumping this major is an offline in-place `pg_upgrade`, not an image
+  // swap: the operator shuts every instance down, runs pg_upgrade
+  // --link, then destroys and re-clones both replica PVCs. Only ever
+  // move it one major at a time, and only between images of the same OS
+  // family -- CNPG refuses to upgrade across distributions, and this
+  // catalog is trixie top to bottom.
+  imageCatalogRef: {
+    apiGroup: "postgresql.cnpg.io",
+    kind: "ClusterImageCatalog",
+    major: 18,
+    name: "postgresql-minimal-trixie",
+  },
+  monitoring: {
+    enablePodMonitor: false,
+  },
+  // prefer to schedule on non-pis
+  affinity: {
+    nodeAffinity: {
+      preferredDuringSchedulingIgnoredDuringExecution: [
+        {
+          weight: 1,
+          preference: {
+            matchExpressions: [
+              {
+                key: "kubernetes.io/arch",
+                operator: "NotIn",
+                values: ["arm64"],
+              },
+            ],
+          },
+        },
+      ],
+    },
+  },
+  resources: {
+    requests: {
+      cpu: Quantity.fromString("1"),
+      memory: Quantity.fromString("4Gi"),
+    },
+    limits: {
+      cpu: Quantity.fromString("1"),
+      memory: Quantity.fromString("4Gi"),
+    },
+  },
+  inheritedMetadata: {
+    labels: { [BACKUP_ANNOTATION_EXCLUDE]: "true" },
+  },
+  storage: {
+    size: "15Gi",
+    storageClass: StorageClass.CEPH_RBD,
+  },
+  enableSuperuserAccess: true,
+  postgresql: {
+    parameters: {
+      max_slot_wal_keep_size: "1GB",
+      // Steady state is ~140. Headroom for bursts on top of the per-role
+      // caps in databases.ts (DEFAULT_CONNECTION_LIMIT); idle backends
+      // cost a few MB each against the 4Gi limit. Changing this restarts
+      // the primary in place (primaryUpdateMethod: restart).
+      max_connections: "300",
+      // minimal-trixie image has no locales installed; must use C
+      lc_messages: "C",
+      lc_monetary: "C",
+      lc_numeric: "C",
+      lc_time: "C",
+    },
+  },
+};
+
 class ProdPostgres extends Chart {
   readonly Cluster: Cluster;
 
@@ -66,6 +143,20 @@ class ProdPostgres extends Chart {
     super(scope, id);
 
     const name = "prod-pg17";
+    // Pinned rather than defaulted to the cluster name, because it has to
+    // move with every major upgrade. pg_upgrade assigns a new system
+    // identifier and resets the timeline to 1, so an upgraded cluster
+    // archiving under its old server name would write timeline files that
+    // collide with the previous major's and leave one prefix holding two
+    // incompatible lineages. PITR does not cross a major boundary either way,
+    // so there is nothing to gain by keeping them together.
+    //
+    // Bump this in the same commit as `imageCatalogRef.major`, never
+    // separately: changing it early strands the current lineage's WAL, and
+    // changing it late is the collision above. The old prefix stays in the
+    // same ObjectStore and ages out on its own 30d retention, recoverable only
+    // by a 17 image.
+    const serverName = "prod-pg18";
 
     this.Cluster = new Cluster(this, "cluster-17", {
       metadata: {
@@ -73,102 +164,73 @@ class ProdPostgres extends Chart {
         name: name,
       },
       spec: {
-        instances: 3,
-        priorityClassName: HOMELAB_CRITICAL_PRIORITY_CLASS,
-        // Bumping this major is an offline in-place `pg_upgrade`, not an image
-        // swap: the operator shuts every instance down, runs pg_upgrade
-        // --link, then destroys and re-clones both replica PVCs. Only ever
-        // move it one major at a time, and only between images of the same OS
-        // family -- CNPG refuses to upgrade across distributions, and this
-        // catalog is trixie top to bottom.
-        //
-        // The cluster is still named `prod-pg17`. In-place upgrades keep the
-        // name, and renaming would mean a full blue/green cutover -- which is
-        // what `immich-pg16` cost. The name is a historical label for the
-        // lineage, not a claim about the running major; `status.image` is.
-        imageCatalogRef: {
-          apiGroup: "postgresql.cnpg.io",
-          kind: "ClusterImageCatalog",
-          major: 18,
-          name: "postgresql-minimal-trixie",
-        },
-        monitoring: {
-          enablePodMonitor: false,
-        },
-        // prefer to schedule on non-pis
-        affinity: {
-          nodeAffinity: {
-            preferredDuringSchedulingIgnoredDuringExecution: [
-              {
-                weight: 1,
-                preference: {
-                  matchExpressions: [
-                    {
-                      key: "kubernetes.io/arch",
-                      operator: "NotIn",
-                      values: ["arm64"],
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        },
-        resources: {
-          requests: {
-            cpu: Quantity.fromString("1"),
-            memory: Quantity.fromString("4Gi"),
-          },
-          limits: {
-            cpu: Quantity.fromString("1"),
-            memory: Quantity.fromString("4Gi"),
-          },
-        },
-        inheritedMetadata: {
-          labels: { [BACKUP_ANNOTATION_EXCLUDE]: "true" },
-        },
-        storage: {
-          size: "15Gi",
-          storageClass: StorageClass.CEPH_RBD,
-        },
-        enableSuperuserAccess: true,
-        postgresql: {
-          parameters: {
-            max_slot_wal_keep_size: "1GB",
-            // Steady state is ~140. Headroom for bursts on top of the per-role
-            // caps in databases.ts (DEFAULT_CONNECTION_LIMIT); idle backends
-            // cost a few MB each against the 4Gi limit. Changing this restarts
-            // the primary in place (primaryUpdateMethod: restart).
-            max_connections: "300",
-            // minimal-trixie image has no locales installed; must use C
-            lc_messages: "C",
-            lc_monetary: "C",
-            lc_numeric: "C",
-            lc_time: "C",
-          },
-        },
+        ...PROD_CLUSTER_SPEC,
         plugins: [
           {
             name: barmanPluginName,
             isWalArchiver: true,
             parameters: {
               barmanObjectName: "prod",
-              // Pinned rather than defaulted to the cluster name, because it
-              // has to move with every major upgrade. pg_upgrade assigns a new
-              // system identifier and resets the timeline to 1, so an upgraded
-              // cluster archiving under its old server name would write
-              // timeline files that collide with the previous major's and
-              // leave one prefix holding two incompatible lineages. PITR does
-              // not cross a major boundary either way, so there is nothing to
-              // gain by keeping them together.
-              //
-              // Bump this in the same commit as `imageCatalogRef.major`, never
-              // separately: changing it early strands the current lineage's
-              // WAL, and changing it late is the collision above. The old
-              // prefix stays in the same ObjectStore and ages out on its own
-              // 30d retention, recoverable only by a 17 image.
-              serverName: "prod-pg18",
+              serverName: serverName,
             },
+          },
+        ],
+      },
+    });
+
+    // Successor to `prod-pg17`, whose name stopped describing the running
+    // major at the first in-place upgrade. Cluster names are immutable, so
+    // the rename is a new cluster and a data move.
+    //
+    // It runs as a standalone replica cluster until cutover: seeded from
+    // prod-pg17's latest base backup, then kept current by streaming from its
+    // primary, falling back to the WAL archive whenever the stream drops.
+    // Cutover is then a promotion (`replica.enabled: false`) once writes have
+    // stopped and replay has caught up, rather than a fresh restore.
+    //
+    // Deliberately no WAL archiver yet. barman refuses to archive into a
+    // non-empty destination, and anything this cluster wrote before promotion
+    // would be a lineage the promoted cluster then collides with. Archiving
+    // to its own store, backups and monitoring land with the cutover.
+    new Cluster(this, "cluster", {
+      metadata: {
+        namespace: namespace,
+        name: "prod",
+      },
+      spec: {
+        ...PROD_CLUSTER_SPEC,
+        bootstrap: {
+          recovery: {
+            source: name,
+          },
+        },
+        replica: {
+          enabled: true,
+          source: name,
+        },
+        externalClusters: [
+          {
+            name: name,
+            // Read-only: base backup and archived WAL for bootstrap and
+            // stream fallback.
+            plugin: {
+              name: barmanPluginName,
+              parameters: {
+                barmanObjectName: "prod",
+                serverName: serverName,
+              },
+            },
+            // Streaming as `streaming_replica` with prod-pg17's own client
+            // cert, which its default pg_hba already accepts for replication.
+            connectionParameters: {
+              host: `${name}-rw.${namespace}.svc`,
+              user: "streaming_replica",
+              sslmode: "verify-full",
+              dbname: "postgres",
+            },
+            sslKey: { name: `${name}-replication`, key: "tls.key" },
+            sslCert: { name: `${name}-replication`, key: "tls.crt" },
+            sslRootCert: { name: `${name}-ca`, key: "ca.crt" },
           },
         ],
       },
@@ -403,26 +465,6 @@ export interface ImportProps {
   roles: string[];
 }
 
-/**
- * Bootstrap by physically restoring another cluster's barman ObjectStore.
- *
- * Preferred over {@link ImportProps} when the source is a CNPG cluster on the
- * same Postgres major: a base-backup restore carries the extension catalog and
- * the prebuilt vchord indexes across byte for byte. A logical import would
- * instead re-run `CREATE EXTENSION` against whatever the target image ships
- * and rebuild every vector index from the dump -- the one operation in this
- * stack where a version skew between source and target actually bites.
- */
-export interface RecoveryProps {
-  /** ObjectStore holding the source cluster's base backups and WAL. */
-  objectStoreName: string;
-  /**
-   * Barman server name within that store. Defaults to the source cluster's
-   * name, since that is what CNPG writes under unless told otherwise.
-   */
-  serverName: string;
-}
-
 export interface VectorPostgresProps {
   /**
    * Names the Cluster, and by derivation its ObjectStore, scheduled backup,
@@ -430,10 +472,8 @@ export interface VectorPostgresProps {
    */
   name: string;
   catalog: ImageCatalog;
-  /** Logical (pg_dump) import from a live cluster. Mutually exclusive with `recovery`. */
+  /** Logical (pg_dump) import from a live cluster. */
   import?: ImportProps;
-  /** Physical restore from an object store. Mutually exclusive with `import`. */
-  recovery?: RecoveryProps;
 }
 
 /**
@@ -501,40 +541,9 @@ class VectorPostgres extends Chart {
   constructor(scope: Construct, id: string, props: VectorPostgresProps) {
     super(scope, id);
 
-    const { name, catalog, import: importProps, recovery } = props;
-
-    if (importProps && recovery) {
-      throw new Error(`${name}: cannot bootstrap from both an import and a recovery`);
-    }
+    const { name, catalog, import: importProps } = props;
 
     type BootstrapConfig = Pick<ClusterSpec, "externalClusters" | "bootstrap">;
-
-    const recoveryConfig: BootstrapConfig | undefined = recovery
-      ? {
-          bootstrap: {
-            recovery: {
-              source: recovery.serverName,
-            },
-          },
-          externalClusters: [
-            {
-              name: recovery.serverName,
-              plugin: {
-                name: barmanPluginName,
-                // Read-only pointer at the *source* cluster's store. The
-                // cluster's own WAL archiving is the `plugins` stanza below,
-                // which targets its own ObjectStore -- these are deliberately
-                // different objects, so the restore never writes back into the
-                // lineage it was seeded from.
-                parameters: {
-                  barmanObjectName: recovery.objectStoreName,
-                  serverName: recovery.serverName,
-                },
-              },
-            },
-          ],
-        }
-      : undefined;
 
     const importConfig: BootstrapConfig | undefined = importProps
       ? {
@@ -622,7 +631,6 @@ class VectorPostgres extends Chart {
           },
         ],
         ...importConfig,
-        ...recoveryConfig,
       },
     });
 
@@ -717,30 +725,15 @@ createDatabases(app, prod_pg_17.clusterName);
 
 const vectorCatalog = new VectorImageCatalog(app, "vectorchord-catalog");
 
-// Tombstone of the retired `immich-pg16` cluster, whose name lied twice: it
-// ran Postgres 17, and it used VectorChord, not pgvecto.rs. The cluster itself
-// was deleted 2026-08-04, nine days after `immich` below took over serving.
-//
-// Only the store remains, and only because the lineage it holds is not dead
-// yet. It stays read-only -- nothing archives into it anymore -- and it is
-// still the `externalClusters` target of the bootstrap stanza on `immich`.
-// Delete this after 2026-08-25, when the 30d retention on the last backup of
-// the old lineage (`immich-pg16-cutover-final`, 2026-07-26) has expired and
-// `immich` has 30d of its own base backups to fall back on.
-new VectorObjectStore(app, "immich-pg16-object-store", "immich-pg16");
-
-// Physical restore of immich-pg16 under an honest name. Same image, same
-// major, same extensions -- the only thing changing is the string. Bootstrapped
-// once from the old cluster's object store and then archives to its own,
-// deliberately starting a fresh PITR lineage rather than splicing into the
-// old WAL timeline.
+// Originally a physical restore of the retired `immich-pg16` cluster, whose
+// name lied twice: it ran Postgres 17, and it used VectorChord, not
+// pgvecto.rs. Cut over 2026-07-26. That cluster's object store has since been
+// dropped, and the bootstrap stanza pointing at it with it, so this now
+// declares the default initdb bootstrap -- the same as prod. A from-scratch
+// rebuild has to be pointed at the `immich` store by hand.
 new VectorPostgres(app, "immich", {
   name: "immich",
   catalog: vectorCatalog.Catalog,
-  recovery: {
-    objectStoreName: "immich-pg16",
-    serverName: "immich-pg16",
-  },
 });
 
 // Nightly logical dumps onto a Velero-backed PVC. barman-cloud offers only
