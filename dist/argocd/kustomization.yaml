@@ -1,10 +1,8 @@
 resources:
   - Certificate.argocd-server.yaml
   - ClusterRole.argocd-application-controller.yaml
-  - ClusterRole.argocd-notifications-controller.yaml
   - ClusterRole.argocd-server.yaml
   - ClusterRoleBinding.argocd-application-controller.yaml
-  - ClusterRoleBinding.argocd-notifications-controller.yaml
   - ClusterRoleBinding.argocd-server.yaml
   - ConfigMap.argocd-cm.yaml
   - ConfigMap.argocd-cmd-params-cm.yaml
