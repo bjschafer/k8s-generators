@@ -46,7 +46,7 @@ spec:
         - alias: gotenberg
           commonUpdateSettings:
             updateStrategy: semver
-          imageName: gotenberg/gotenberg:8.x.x
+          imageName: gotenberg/gotenberg:9.x.x
         - alias: valkey
           commonUpdateSettings:
             allowTags: regexp:^[v]?[0-9]+\.[0-9]+\.[0-9]+$
